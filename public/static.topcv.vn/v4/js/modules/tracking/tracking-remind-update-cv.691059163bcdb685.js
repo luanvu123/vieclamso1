@@ -1,0 +1,1 @@
+(()=>{"use strict";$(document).ready((function(){$(window).on("load",(function(){$(".remind-update-cv").length>0&&window.trackingTopCV.sendImpressionRemindUpdateCv()})),$(document).on("click",".remind-update-cv a",(function(){$(".remind-update-cv").length>0&&window.trackingTopCV.sendClickRemindUpdateCv()}))}))})();

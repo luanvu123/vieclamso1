@@ -1,0 +1,1 @@
+tns({container:"#related-posts-slider",items:3,controlsContainer:"#related-posts-controls",mouseDrag:!0,navAsThumbnails:!0,speed:400,loop:!1,gutter:16,fixedWidth:218});
