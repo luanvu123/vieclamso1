@@ -53,7 +53,6 @@
                 {!! Form::password('confirm-password', ['placeholder' => 'Confirm Password', 'class' => 'form-control']) !!}
             </div>
         </div>
-
         <div class="col-xs-2 col-sm-2 col-md-2">
             <div class="form-group">
                 <strong>Gender:</strong>
@@ -65,7 +64,7 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Addess:</strong>
+                <strong>Address:</strong>
                 {!! Form::text('address', null, ['placeholder' => 'Address', 'class' => 'form-control']) !!}
             </div>
         </div>
@@ -84,6 +83,60 @@
                 {!! Form::file('avatar', ['class' => 'form-control']) !!}
             </div>
         </div>
+        <div class="col-xs-2 col-sm-2 col-md-2">
+            <div class="form-group">
+                <strong>Date:</strong>
+                {!! Form::date('date', null, ['class' => 'form-control']) !!}
+            </div>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2">
+            <div class="form-group">
+                <strong>Phone:</strong>
+                {!! Form::text('phone', null, ['placeholder' => 'Phone', 'class' => 'form-control']) !!}
+            </div>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2">
+            <div class="form-group">
+                <strong>Language:</strong>
+                {!! Form::text('language', null, ['placeholder' => 'Language', 'class' => 'form-control']) !!}
+            </div>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2">
+            <div class="form-group">
+                <strong>Google:</strong>
+                {!! Form::text('google', null, ['placeholder' => 'Google', 'class' => 'form-control']) !!}
+            </div>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2">
+            <div class="form-group">
+                <strong>Skype:</strong>
+                {!! Form::text('skype', null, ['placeholder' => 'Skype', 'class' => 'form-control']) !!}
+            </div>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2">
+            <div class="form-group">
+                <strong>Slack:</strong>
+                {!! Form::text('slack', null, ['placeholder' => 'Slack', 'class' => 'form-control']) !!}
+            </div>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2">
+            <div class="form-group">
+                <strong>Instagram:</strong>
+                {!! Form::text('instagram', null, ['placeholder' => 'Instagram', 'class' => 'form-control']) !!}
+            </div>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2">
+            <div class="form-group">
+                <strong>Facebook:</strong>
+                {!! Form::text('facebook', null, ['placeholder' => 'Facebook', 'class' => 'form-control']) !!}
+            </div>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2">
+            <div class="form-group">
+                <strong>PayPal:</strong>
+                {!! Form::text('paypal', null, ['placeholder' => 'PayPal', 'class' => 'form-control']) !!}
+            </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Role:</strong>
@@ -95,5 +148,5 @@
         </div>
     </div>
     {!! Form::close() !!}
-
 @endsection
+

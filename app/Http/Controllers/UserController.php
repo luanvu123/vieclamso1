@@ -26,17 +26,16 @@ class UserController extends Controller
      */
     function __construct()
     {
-        // $this->middleware('permission:user-list|role-create|user-edit|user-delete', ['only' => ['index', 'store']]);
-        // $this->middleware('permission:user-create', ['user' => ['create', 'store']]);
-        // $this->middleware('permission:user-edit', ['user' => ['edit', 'update']]);
-        // $this->middleware('permission:user-delete', ['user' => ['destroy']]);
+        $this->middleware('permission:user-list|role-create|user-edit|user-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:user-create', ['user' => ['create', 'store']]);
+        $this->middleware('permission:user-edit', ['user' => ['edit', 'update']]);
+        $this->middleware('permission:user-delete', ['user' => ['destroy']]);
     }
-    public function index(Request $request): View
+     public function index()
     {
-        $data = User::latest()->paginate(5);
+        $users = User::all(); // Lấy danh sách tất cả người dùng
 
-        return view('admin.users.index', compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -67,14 +66,22 @@ class UserController extends Controller
             'gender' => 'nullable|string',
             'address' => 'nullable|string',
             'favorite_color' => 'nullable|string',
-            'status' => 'nullable'
+            'status' => 'nullable',
+            'date'=>'nullable',
+            'phone' => 'nullable|string',
+            'language' => 'nullable|string',
+            'google' => 'nullable|string',
+            'skype' => 'nullable|string',
+            'slack' => 'nullable|string',
+            'instagram' => 'nullable|string',
+            'facebook' => 'nullable|string',
+            'paypal' => 'nullable|string',
         ]);
 
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
 
         // Process and save the avatar file
-
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
             $avatarPath = $avatar->store('avatar', 'public');
@@ -82,7 +89,6 @@ class UserController extends Controller
         }
 
         // Create the user
-
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
@@ -137,7 +143,16 @@ class UserController extends Controller
             'gender' => 'nullable|string',
             'address' => 'nullable|string',
             'favorite_color' => 'nullable|string',
-            'status' => 'nullable'
+            'status' => 'nullable',
+            'date'=> 'nullable',
+            'phone' => 'nullable|string',
+            'language' => 'nullable|string',
+            'google' => 'nullable|string',
+            'skype' => 'nullable|string',
+            'slack' => 'nullable|string',
+            'instagram' => 'nullable|string',
+            'facebook' => 'nullable|string',
+            'paypal' => 'nullable|string',
         ]);
 
         $input = $request->all();
@@ -149,20 +164,15 @@ class UserController extends Controller
 
         $user = User::find($id);
 
-        // Xử lý và lưu file avatar mới (nếu có)
-
-
-
-
-
-        if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
-            Storage::disk('public')->delete($user->avatar);
-        }
-         if ($request->hasFile('avatar')) {
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+                Storage::disk('public')->delete($user->avatar);
+            }
             $avatar = $request->file('avatar');
             $avatarPath = $avatar->store('avatar', 'public');
             $input['avatar'] = $avatarPath;
         }
+
         $user->update($input);
 
         DB::table('model_has_roles')->where('model_id', $id)->delete();
@@ -171,6 +181,7 @@ class UserController extends Controller
         return redirect()->route('users.index')
             ->with('success', 'User updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -192,7 +203,7 @@ class UserController extends Controller
         return redirect()->route('users.index')
             ->with('success', 'User deleted successfully');
     }
-     public function user_choose(Request $request)
+    public function user_choose(Request $request)
     {
         $data = $request->all();
         $user = User::find($data['id']);

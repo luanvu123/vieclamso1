@@ -1,91 +1,120 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Users Management</h2>
+    @if (session('success'))
+        <div class="alert alert-success border-0 bg-grd-success alert-dismissible fade show">
+            <div class="d-flex align-items-center">
+                <div class="font-35 text-white"><span class="material-icons-outlined fs-2">check_circle</span>
+                </div>
+                <div class="ms-3">
+                    <h6 class="mb-0 text-white">Success Alerts</h6>
+                    <div class="text-white">A simple success alert—check it out!</div>
+                </div>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Components</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Users</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row g-3">
+        <div class="col-auto">
+            <div class="d-flex align-items-center gap-2 justify-content-lg-end">
+                <button class="btn btn-filter px-4"><i class="bi bi-box-arrow-right me-2"></i>Export</button>
+                <a href="{{ route('users.create') }}" class="btn btn-primary px-4"><i class="bi bi-plus-lg me-2"></i>Add User</a>
+
             </div>
         </div>
     </div>
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">User List</h5>
+            <table id="user-table" class="display">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($users as $key => $user)
+                        <tr>
+                            <td>{{ $key }}</td>
+                            <td>
+                                <a class="d-flex align-items-center gap-3" href="javascript:;">
+                                    <div class="customer-pic">
+                                        <img src="{{ asset('storage/' . $user->avatar) }}" class="rounded-circle"
+                                            width="40" height="40" alt="">
+                                    </div>
+                                    <p class="mb-0 customer-name fw-bold"> {{ $user->name }}</p>
+                                </a>
+                            </td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                                @if ($user->gender == 'Nam')
+                                    <span class="badge bg-light text-white">Nam</span>
+                                @elseif ($user->gender == 'Nữ')
+                                    <span class="badge bg-grd-voilet">Nữ</span>
+                                @else
+                                    <span class="badge bg-grd-primary">Khác</span>
+                                @endif
+                            </td>
 
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
+                            <td>{{ $user->address }}</td>
+
+
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch"
+                                        id="statusCheckbox_{{ $user->id }}" {{ $user->status == 1 ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="flexSwitchCheckDefault1">On</label>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('.form-check-input').change(function() {
+                                                var trangthai_val = $(this).is(':checked') ? '1' :
+                                                    '0';
+                                                var id = $(this).attr('id').replace('statusCheckbox_',
+                                                    '');
+
+                                                $.ajax({
+                                                    url: "{{ route('user-choose') }}",
+                                                    method: "GET",
+                                                    data: {
+                                                        trangthai_val: trangthai_val,
+                                                        id: id
+                                                    },
+                                                });
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </td>
+
+                            <td>{{ $user->phone }}</td>
+                            <td>
+                                <a class="btn btn-info" href="{{ route('users.show', $user->id) }}">Show</a>
+                                <a class="btn btn-primary" href="{{ route('users.edit', $user->id) }}">Edit</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-    @endif
+    </div>
 
-    <table class="table table-bordered">
-        <tr>
-            <th>No</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Roles</th>
-            <th>Gender</th>
-             <th>Address</th>
-            <th>Favorite Color</th>
-            <th>Avatar</th>
-            <th>Status</th>
-            <th width="280px">Action</th>
-        </tr>
-        @foreach ($data as $key => $user)
-            <tr>
-                <td>{{ ++$i }}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>
-                    @if (!empty($user->getRoleNames()))
-                        @foreach ($user->getRoleNames() as $v)
-                            <label class="badge badge-success">{{ $v }}</label>
-                        @endforeach
-                    @endif
-                </td>
-                <td>{{ $user->gender }}</td>
-                  <td>{{ $user->address }}</td>
-                <td>{{ $user->favorite_color }}<br>
-                    @if ($user->favorite_color)
-                        <span class="color-label"
-                            style="background-color: {{ $user->favorite_color }}; display: inline-block;
-                               padding: 20px 30px;
-                               border-radius: 5px;
-                               color: #fff;
-                               font-weight: bold;">
-                        </span>
-                    @else
-                        Unknown Color
-                    @endif
 
-                </td>
-                <td>
-                    @if ($user->avatar)
-                        <img src="{{ asset('storage/' . $user->avatar) }}" alt="Avatar" width="100px">
-                    @endif
-                </td>
-                <td>
-                    <select id="{{ $user->id }}"class="user_choose">
-                        @if ($user->status == 0)
-                            <option value="1">Hoạt động</option>
-                            <option selected value="0">Ngừng hoạt động</option>
-                        @else
-                            <option selected value="1">Hoạt động</option>
-                            <option value="0">Ngừng hoạt động</option>
-                        @endif
-                    </select>
-                </td>
-
-                <td>
-                    <a class="btn btn-info" href="{{ route('users.show', $user->id) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ route('users.edit', $user->id) }}">Edit</a>
-                    {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'style' => 'display:inline']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
-                </td>
-            </tr>
-        @endforeach
-    </table>
-
-    {!! $data->render() !!}
 @endsection

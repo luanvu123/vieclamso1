@@ -673,20 +673,20 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a href="javascrpt:;" class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
-                        <img src="{{ asset('backend') }}/codervent.com/maxton/demo/vertical-menu/assets//images/avatars/01.png"
+                        <img src="{{ asset('storage/' . Auth::user()->avatar) }}"
                             class="rounded-circle p-1 border" width="45" height="45" alt="">
                     </a>
                     <div class="dropdown-menu dropdown-user dropdown-menu-end shadow">
                         <a class="dropdown-item  gap-2 py-2" href="javascript:;">
                             <div class="text-center">
-                                <img src="{{ asset('backend') }}/codervent.com/maxton/demo/vertical-menu/assets//images/avatars/01.png"
+                                <img src="{{ asset('storage/' . Auth::user()->avatar) }}"
                                     class="rounded-circle p-1 shadow mb-3" width="90" height="90"
                                     alt="">
-                                <h5 class="user-name mb-0 fw-bold">Hello, Jhon</h5>
+                                <h5 class="user-name mb-0 fw-bold">Hello, {{ Auth::user()->name }}</h5>
                             </div>
                         </a>
                         <hr class="dropdown-divider">
-                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i
+                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{ route('users.show', Auth::user()->id) }}"><i
                                 class="material-icons-outlined">person_outline</i>Profile</a>
                         <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i
                                 class="material-icons-outlined">local_bar</i>Setting</a>
@@ -697,8 +697,13 @@
                         <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i
                                 class="material-icons-outlined">cloud_download</i>Downloads</a>
                         <hr class="dropdown-divider">
-                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i
+                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{ route('logout') }}"onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i
                                 class="material-icons-outlined">power_settings_new</i>Logout</a>
+                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                class="d-none">
+                                                @csrf
+                                            </form>
                     </div>
                 </li>
             </ul>
@@ -734,7 +739,8 @@
                     <ul>
                         <li><a href="index.html"><i class="material-icons-outlined">arrow_right</i>Analysis</a>
                         </li>
-                        <li><a href="{{ url('/home') }}"><i class="material-icons-outlined">arrow_right</i>eCommerce</a>
+                        <li><a href="{{ url('/home') }}"><i
+                                    class="material-icons-outlined">arrow_right</i>eCommerce</a>
                         </li>
                     </ul>
                 </li>
@@ -748,8 +754,8 @@
                         <li><a href="{{ route('users.index') }}"><i class="material-icons-outlined">arrow_right</i>
                                 User</a>
                         </li>
-                        <li><a href="ecommerce-products.html"><i
-                                    class="material-icons-outlined">arrow_right</i>Products</a>
+                        <li><a href="{{ route('roles.index') }}"><i
+                                    class="material-icons-outlined">arrow_right</i>Roles</a>
                         </li>
                         <li><a href="ecommerce-customers.html"><i
                                     class="material-icons-outlined">arrow_right</i>Customers</a>
@@ -777,8 +783,11 @@
         </div>
     </aside>
     <!--end sidebar-->
-
-
+    <main class="main-wrapper">
+        <div class="main-content">
+            @yield('content')
+        </div>
+    </main>
 
     <!--start overlay-->
     <div class="overlay btn-toggle"></div>
@@ -931,7 +940,7 @@
     </div>
     <!--end cart-->
 
-    @yield('content')
+
 
     <!--start switcher-->
     <button class="btn btn-grd btn-grd-primary position-fixed bottom-0 end-0 m-3 d-flex align-items-center gap-2"
@@ -1032,6 +1041,16 @@
     <script src="{{ asset('backend') }}/codervent.com/maxton/demo/vertical-menu/assets/js/dashboard2.js"></script>
     <script src="{{ asset('backend') }}/codervent.com/maxton/demo/vertical-menu/assets/js/main.js"></script>
 
+    <!-- Include DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+
+    <!-- Include DataTables JavaScript -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#user-table').DataTable();
+        });
+    </script>
 
 </body>
 

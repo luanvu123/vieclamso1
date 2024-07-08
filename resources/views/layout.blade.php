@@ -1254,12 +1254,12 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-right__item">
-                    <a class="btn btn-outline-primary" href="login.html">
+                    <a class="btn btn-outline-primary" href="{{ route('candidate.login') }}">
                         Đăng nhập
                     </a>
                 </li>
                 <li class="navbar-right__item">
-                    <a class="btn btn-primary" href="sign-up.html">
+                    <a class="btn btn-primary" href="{{ route('candidate.register') }}">
                         Đăng ký
                     </a>
                 </li>
