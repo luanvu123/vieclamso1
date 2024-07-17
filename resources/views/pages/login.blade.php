@@ -359,13 +359,14 @@
                                 <p class="or text-center fz-12px">Hoặc đăng nhập bằng</p>
                             </div>
                             <div class="login-social-list">
-                                <a id="login-width-google" onclick="handleGoogleLogin()"
-                                    class="btn btn-default btn-signin input-block-level h-40 btn-login-social">
-                                    <i class="fa-brands fa-google"></i>
-                                    <span class="ml-2">Google</span>
-                                </a>
+                               <a href="{{ route('candidate.google') }}"
+   class="btn btn-default btn-signin input-block-level h-40 btn-login-social">
+   <i class="fa-brands fa-google"></i>
+   <span class="ml-2">Google</span>
+</a>
+
                                 <div class="d-none" id="login-google-render"></div>
-                                <a href="javascript:loginWithFacebook();" id="login-width-facebook"
+                                <a href="" id="login-width-facebook"
                                     class="btn btn-signin btn-primary input-block-level h-40 btn-login-social">
                                     <i class="fa-brands fa-facebook"></i>
                                     <span class="ml-2">Facebook</span>
@@ -385,21 +386,17 @@
                                     </div>
                                     <p class="mb-0">
                                         <label for="agreement-social-login">
-
                                             Bằng việc đăng nhập bằng tài khoản mạng xã hội, tôi đã đọc và đồng ý với <a
                                                 target="_blank" class="text-success"
-                                                href="terms-of-service.html">Điều
-                                                khoản dịch vụ</a> và <a target="_blank" class="text-success"
-                                                href="dieu-khoan-bao-mat.html">Chính
-                                                sách
-                                                bảo
-                                                mật</a> của TopCV
-
+                                                href="terms-of-service.html">Điều khoản dịch vụ</a> và <a
+                                                target="_blank" class="text-success"
+                                                href="dieu-khoan-bao-mat.html">Chính sách bảo mật</a> của TopCV
                                         </label>
                                     </p>
                                 </div>
                             </div>
                         </form>
+
                         <div class="mt-3 d-flex justify-content-around option-auth">
                             <div>
                                 <span>Bạn chưa có tài khoản?</span>
