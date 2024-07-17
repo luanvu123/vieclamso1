@@ -40,10 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-         'candidate' => [
-        'driver' => 'session',
-        'provider' => 'candidates',
-    ],
+        'candidate' => [
+            'driver' => 'session',
+            'provider' => 'candidates',
+        ],
+        'employer' => [
+            'driver' => 'session',
+            'provider' => 'employers',
+        ],
     ],
 
     /*
@@ -73,10 +77,14 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-          'candidates' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\Candidate::class,
-    ],
+        'candidates' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Candidate::class,
+        ],
+        'employers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Employer::class,
+        ],
     ],
 
     /*

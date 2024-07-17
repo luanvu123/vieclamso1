@@ -29,7 +29,7 @@
         </div>
     @endif
 
-    <table class="table table-bordered">
+    <table class="manage-table resumes responsive-table">
         <tr>
             <th>No</th>
             <th>Name</th>
@@ -44,17 +44,15 @@
                     @can('role-edit')
                         <a class="btn btn-primary" href="{{ route('roles.edit', $role->id) }}">Edit</a>
                     @endcan
-                    @can('role-delete')
+                    {{-- @can('role-delete')
                         {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'style' => 'display:inline']) !!}
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                         {!! Form::close() !!}
-                    @endcan
+                    @endcan --}}
                 </td>
             </tr>
         @endforeach
     </table>
 
     {!! $roles->render() !!}
-
-    <p class="text-center text-primary"><small>Tutorial by LaravelTuts.com</small></p>
 @endsection

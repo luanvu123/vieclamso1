@@ -211,4 +211,28 @@ class UserController extends Controller
         $user->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $user->save();
     }
+
+     public function updatePassword(Request $request, $id)
+    {
+        // Validate dữ liệu đầu vào
+        $request->validate([
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:8|confirmed', // confirmed để kiểm tra trường password_confirmation
+        ]);
+
+        // Tìm người dùng theo ID
+        $user = User::findOrFail($id);
+
+        // Kiểm tra mật khẩu hiện tại
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->with('error', 'Current password is incorrect.');
+        }
+
+        // Cập nhật mật khẩu mới
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        // Điều hướng người dùng sau khi cập nhật thành công
+        return redirect()->route('users.show', $user->id)->with('success', 'Password updated successfully.');
+    }
 }

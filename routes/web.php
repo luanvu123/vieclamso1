@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\JobPostingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -27,13 +29,16 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::get('/recruitment', function () {
+    return view('pages.recruitment');
+})->name('recruitment');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('candidates', CandidateManageController::class);
+    Route::put('/users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
 
     Route::get('/user-choose', [UserController::class, 'user_choose'])->name('user-choose');
 });
@@ -60,4 +65,11 @@ Route::middleware(['candidate'])->group(function () {
     Route::get('/upload-cv', [CVController::class, 'uploadCV_index'])->name('cv.upload');
     Route::post('/cv/update-name', [CVController::class, 'updateCvName'])->name('cv.update.name');
     Route::post('/cv/delete', [CVController::class, 'delete'])->name('cv.delete');
+
+
+    Route::post('applications', [ApplicationController::class, 'store'])->name('applications.store');
+});
+
+Route::middleware(['employer'])->group(function () {
+    Route::resource('job-postings', JobPostingController::class);
 });

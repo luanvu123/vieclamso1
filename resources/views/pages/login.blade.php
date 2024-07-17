@@ -2,8 +2,6 @@
 <html lang="vi">
 
 
-<!-- Mirrored from www.topcv.vn/login by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Jun 2024 05:20:27 GMT -->
-<!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
@@ -359,11 +357,11 @@
                                 <p class="or text-center fz-12px">Hoặc đăng nhập bằng</p>
                             </div>
                             <div class="login-social-list">
-                               <a href="{{ route('candidate.google') }}"
-   class="btn btn-default btn-signin input-block-level h-40 btn-login-social">
-   <i class="fa-brands fa-google"></i>
-   <span class="ml-2">Google</span>
-</a>
+                                <a href="{{ route('candidate.google') }}"
+                                    class="btn btn-default btn-signin input-block-level h-40 btn-login-social">
+                                    <i class="fa-brands fa-google"></i>
+                                    <span class="ml-2">Google</span>
+                                </a>
 
                                 <div class="d-none" id="login-google-render"></div>
                                 <a href="" id="login-width-facebook"

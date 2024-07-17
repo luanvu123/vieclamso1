@@ -1901,7 +1901,7 @@
                         </a>
                     </li>
                     <li class="navbar-right__item">
-                        <a type="button" class="btn btn-dark" href="index-tuyendung.html" target="_blank">
+                        <a type="button" class="btn btn-dark" href="{{ route('recruitment') }}" target="_blank">
                             Đăng tuyển & tìm hồ sơ
                         </a>
                     </li>

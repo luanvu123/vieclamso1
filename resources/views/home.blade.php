@@ -1,45 +1,137 @@
-
-    @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
-    <!--start main wrapper-->
-    <main class="main-wrapper">
-        <div class="main-content">
-            <!--breadcrumb-->
-            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">Dashboard</div>
-                <div class="ps-3">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Home</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="ms-auto">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary">Settings</button>
-                        <button type="button"
-                            class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
-                            data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"> <a class="dropdown-item"
-                                href="javascript:;">Action</a>
-                            <a class="dropdown-item" href="javascript:;">Another action</a>
-                            <a class="dropdown-item" href="javascript:;">Something else here</a>
-                            <div class="dropdown-divider"></div><a class="dropdown-item"
-                                href="javascript:;">Separated link</a>
-                        </div>
-                    </div>
-                </div>
+    <!-- Titlebar -->
+    <div id="titlebar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Howdy, Tom!</h2>
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li>Dashboard</li>
+                    </ul>
+                </nav>
             </div>
-            <!--end breadcrumb-->
-
-
-          
-
         </div>
-    </main>
-    <!--end main wrapper-->
+    </div>
+
+
+    <!-- Content -->
+    <div class="row">
+
+        <!-- Item -->
+        <div class="col-lg-3 col-md-6">
+            <div class="dashboard-stat color-1">
+                <div class="dashboard-stat-content">
+                    <h4 class="counter">3</h4> <span>Active Job Listings</span>
+                </div>
+                <div class="dashboard-stat-icon"><i class="ln ln-icon-File-Link"></i></div>
+            </div>
+        </div>
+
+        <!-- Item -->
+        <div class="col-lg-3 col-md-6">
+            <div class="dashboard-stat color-2">
+                <div class="dashboard-stat-content">
+                    <h4 class="counter">527</h4> <span>Total Job Views</span>
+                </div>
+                <div class="dashboard-stat-icon"><i class="ln ln-icon-Bar-Chart"></i></div>
+            </div>
+        </div>
+
+
+        <!-- Item -->
+        <div class="col-lg-3 col-md-6">
+            <div class="dashboard-stat color-3">
+                <div class="dashboard-stat-content">
+                    <h4 class="counter">17</h4> <span>Total Applications</span>
+                </div>
+                <div class="dashboard-stat-icon"><i class="ln ln-icon-Business-ManWoman"></i></div>
+            </div>
+        </div>
+
+
+        <!-- Item -->
+        <div class="col-lg-3 col-md-6">
+            <div class="dashboard-stat color-4">
+                <div class="dashboard-stat-content">
+                    <h4 class="counter">36</h4> <span>Times Bookmarked</span>
+                </div>
+                <div class="dashboard-stat-icon"><i class="ln ln-icon-Add-UserStar "></i></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <!-- Recent Activity -->
+        <div class="col-lg-6 col-md-12">
+            <div class="dashboard-list-box margin-top-20">
+                <h4>Recent Activities</h4>
+                <ul>
+                    <li>
+                        Your listing <strong><a href="#">Marketing Coordinator - SEO / SEM Experience </a></strong>
+                        has been approved!
+                        <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
+                    </li>
+
+                    <li>
+                        Kathy Brown has sent you <strong><a href="#">private message</a></strong>!
+                        <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
+                    </li>
+
+                    <li>
+                        Someone bookmarked your <strong><a href="#">Restaurant Team Member - Crew</a></strong>!
+                        <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
+                    </li>
+
+                    <li>
+                        You have new application for <strong><a href="#">Power Systems User Experience
+                                Designer</a></strong>!
+                        <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
+                    </li>
+
+                    <li>
+                        Someone bookmarked your <strong><a href="#">Core PHP Developer for Site Maintenance
+                            </a></strong> listing!
+                        <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
+                    </li>
+                    <li>
+                        Your job listing <strong><a href="#">Core PHP Developer for Site Maintenance </a></strong> is
+                        expiring!
+                        <a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <!-- Recent Activity -->
+        <div class="col-lg-6 col-md-12">
+            <div class="dashboard-list-box with-icons margin-top-20">
+                <h4>Your Packages</h4>
+                <ul class="dashboard-packages">
+                    <li>
+                        <i class="list-box-icon fa fa-shopping-cart"></i>
+                        <strong>Basic</strong>
+                        <span>You have 2 listings posted</span>
+                    </li>
+                    <li>
+                        <i class="list-box-icon fa fa-shopping-cart"></i>
+                        <strong>Extended</strong>
+                        <span>You have 2 listings posted</span>
+                    </li>
+                    <li>
+                        <i class="list-box-icon fa fa-shopping-cart"></i>
+                        <strong>Professional</strong>
+                        <span>You have 5 listings posted</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 @endsection
