@@ -6,39 +6,60 @@ use App\Models\Cv;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-
+use Imagick;
 class CVController extends Controller
 {
-    public function index(){
-         $candidate = Auth::guard('candidate')->user();
+    public function index()
+    {
+        $candidate = Auth::guard('candidate')->user();
         $cvs = $candidate->cvs; // Lấy danh sách CV của candidate
         return view('pages.quan-ly-cv', compact('candidate', 'cvs'));
     }
-     public function uploadCV_index()
+    public function uploadCV_index()
     {
-         return view('pages.upload-cv');
+        return view('pages.upload-cv');
     }
-    public function uploadCv(Request $request)
+       public function uploadCv(Request $request)
     {
         $request->validate([
-            'file_upload_cv' => 'required|file|mimes:doc,docx,pdf|max:5120', // 5MB
+            'file_upload_cv' => 'required|file|mimes:pdf|max:5120', // chỉ chấp nhận file PDF và tối đa 5MB
         ]);
 
         $candidate = Auth::guard('candidate')->user();
 
         if ($request->hasFile('file_upload_cv')) {
-            $path = $request->file('file_upload_cv')->store('cvs', 'public');
+            $pdfFile = $request->file('file_upload_cv');
+            $pdfPath = $pdfFile->store('cvs', 'public');
 
+            // Chuyển đổi PDF thành hình ảnh đầu tiên
+            $imagePath = $this->convertPdfToImage($pdfFile);
+
+            // Lưu thông tin CV vào database
             $cv = new Cv();
             $cv->candidate_id = $candidate->id;
-            $cv->cv_path = $path;
+            $cv->cv_path = $pdfPath;
+            $cv->image_path = $imagePath;
             $cv->save();
         }
 
         return redirect()->back()->with('success', 'CV đã được tải lên.');
     }
 
-   public function updateCvName(Request $request)
+    private function convertPdfToImage($pdfFile)
+    {
+        $imagick = new Imagick();
+        $imagick->readImage($pdfFile->getPathname() . '[0]'); // Chỉ lấy trang đầu tiên
+        $imagick->setImageFormat('jpg'); // Đổi định dạng thành JPG
+
+        // Lưu hình ảnh vào thư mục 'thumbnails'
+        $imageName = pathinfo($pdfFile->hashName(), PATHINFO_FILENAME) . '.jpg';
+        $imagePath = 'thumbnails/' . $imageName;
+        Storage::disk('public')->put($imagePath, $imagick->getImageBlob());
+
+        return $imagePath;
+    }
+
+    public function updateCvName(Request $request)
     {
         $request->validate([
             'cv_id' => 'required|exists:cvs,id',

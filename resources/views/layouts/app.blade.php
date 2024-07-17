@@ -757,8 +757,8 @@
                         <li><a href="{{ route('roles.index') }}"><i
                                     class="material-icons-outlined">arrow_right</i>Roles</a>
                         </li>
-                        <li><a href="ecommerce-customers.html"><i
-                                    class="material-icons-outlined">arrow_right</i>Customers</a>
+                        <li><a href="{{ route('candidates.index') }}"><i
+                                    class="material-icons-outlined">arrow_right</i>Candidates</a>
                         </li>
                         <li><a href="ecommerce-customer-details.html"><i
                                     class="material-icons-outlined">arrow_right</i>Customer Details</a>

@@ -23,6 +23,7 @@ class Candidate extends Authenticatable
         'fullname_candidate',
         'avatar_candidate',
         'status',
+        'cv_path'
     ];
 
     /**

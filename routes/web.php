@@ -7,7 +7,9 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\CandidateManageController;
 use App\Http\Controllers\CVController;
+use App\Models\Candidate;
 use Laravel\Socialite\Facades\Socialite;
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+    Route::resource('candidates', CandidateManageController::class);
 
     Route::get('/user-choose', [UserController::class, 'user_choose'])->name('user-choose');
 });
@@ -55,7 +58,6 @@ Route::middleware(['candidate'])->group(function () {
     Route::get('/quan-ly-cv', [CVController::class, 'index'])->name('cv.manage');
     Route::post('/upload-cv', [CVController::class, 'uploadCV'])->name('cv.upload');
     Route::get('/upload-cv', [CVController::class, 'uploadCV_index'])->name('cv.upload');
-   Route::post('/cv/update-name', [CVController::class, 'updateCvName'])->name('cv.update.name');
+    Route::post('/cv/update-name', [CVController::class, 'updateCvName'])->name('cv.update.name');
     Route::post('/cv/delete', [CVController::class, 'delete'])->name('cv.delete');
-
 });
