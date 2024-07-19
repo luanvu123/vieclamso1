@@ -1141,10 +1141,10 @@
                 </div>
                 <div id="login-box" class="flex items-center justify-center">
                   <div class="grid grid-cols-2 gap-[12px]">
-                    <a href="app/login.html"
+                    <a href="{{route('employer.login')}}"
                       class="bg-white border border-primary py-[14px] px-[13px] rounded block  text-primary text-center min-w-[104px]">Đăng
                       nhập</a>
-                    <a href="#" onclick="return taClickRegister();"
+                    <a href="{{route('employer.register')}}"
                       class="bg-primary border border-primary py-[14px] px-[13px] rounded block text-white text-center min-w-[104px]">Đăng
                       ký</a>
                   </div>
@@ -1184,7 +1184,7 @@
             tìm kiếm ứng viên hiệu quả
           </h1>
           <div style="position: relative; margin-top: 5px">
-            <a href="app/register.html" target="_blank"
+            <a href="{{route('job-postings.index')}}" target="_blank"
               class="bg-primary py-2.5 px-4 rounded text-white text-center font-[14px] font-semibold leading-[3rem] btn-post-job-free">
               Đăng tin miễn phí
               <i class="fa-solid fa-arrow-right ml-1"></i>
@@ -1808,7 +1808,7 @@
                 </div>
                 <div class="suggest-post-job">
                   Bạn cần tuyển dụng gấp?
-                  <a href="app/register.html" target="_blank" class="btn-post-job-free">Đăng tin miễn phí ngay</a>
+                  <a href="{{route('job-postings.index')}}" target="_blank" class="btn-post-job-free">Đăng tin miễn phí ngay</a>
                 </div>
               </div>
               <script>
@@ -2829,7 +2829,7 @@
             </div>
             <div class="suggest-post-job">
               Bạn cần tuyển dụng gấp?
-              <a href="app/register.html" target="_blank" class="btn-post-job-free">Đăng tin miễn phí ngay</a>
+              <a href="{{route('job-postings.index')}}" target="_blank" class="btn-post-job-free">Đăng tin miễn phí ngay</a>
             </div>
           </div>
           <script>
@@ -3200,7 +3200,7 @@
         `)
     }
     function taClickRegister() {
-      let registerUrl = 'app/register.html'
+      let registerUrl = '{{route('job-postings.index')}}'
       window.ta?.('ClickRegister')
       window.open(registerUrl, '_self')
     }

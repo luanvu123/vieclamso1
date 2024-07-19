@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\Auth\EmployerLoginController;
+use App\Http\Controllers\EmployerManageController;
 use App\Http\Controllers\JobPostingController;
+use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -10,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CandidateManageController;
+use App\Http\Controllers\Auth\EmployerRegisterController;
 use App\Http\Controllers\CVController;
 use App\Models\Candidate;
 use Laravel\Socialite\Facades\Socialite;
@@ -24,9 +28,8 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+Route::get('/', [SiteController::class, 'index'])->name('/');
+Route::get('job/{slug}', [SiteController::class, 'show'])->name('job.show');
 
 Auth::routes();
 Route::get('/recruitment', function () {
@@ -34,13 +37,18 @@ Route::get('/recruitment', function () {
 })->name('recruitment');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('employer/login', [EmployerLoginController::class, 'showLoginForm'])->name('employer.login');
+Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('employer.login.submit');
+Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
+Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('candidates', CandidateManageController::class);
     Route::put('/users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
-
     Route::get('/user-choose', [UserController::class, 'user_choose'])->name('user-choose');
+    Route::resource('employers', EmployerManageController::class);
 });
 Route::get('/candidate-login-google', [CandidateController::class, 'redirectToGoogle'])->name('candidate.login.google');
 Route::get('candidate/register', [CandidateController::class, 'showRegistrationForm'])->name('candidate.register');
@@ -53,7 +61,7 @@ Route::post('candidate/logout', [CandidateController::class, 'logout'])->name('c
 Route::get('candidate/google', [CandidateController::class, 'redirectToGoogle'])->name('candidate.google');
 Route::get('candidate/google/callback', [CandidateController::class, 'handleGoogleCallback']);
 
-Route::get('/candidate/dashboard', [CandidateController::class, 'dashboard'])->name('candidate.dashboard');
+
 Route::middleware(['candidate'])->group(function () {
 
     Route::get('/cai-dat-thong-tin-ca-nhan', [CandidateController::class, 'showAccount'])->name('candidate.account');
@@ -72,4 +80,9 @@ Route::middleware(['candidate'])->group(function () {
 
 Route::middleware(['employer'])->group(function () {
     Route::resource('job-postings', JobPostingController::class);
+     Route::get('/application-choose', [JobPostingController::class, 'application_choose'])->name('application-choose');
+    Route::get('trang-chu-tuyen-dung', [JobPostingController::class, 'dashboard'])->name('job-postings.dashboard');
+    Route::post('employer/logout', [EmployerLoginController::class, 'logout'])->name('logout-employer');
+     Route::get('employer/profile', [EmployerLoginController::class, 'profile'])->name('employer.profile');
+    Route::post('employer/profile', [EmployerLoginController::class, 'updateProfile'])->name('employer.profile.update');
 });

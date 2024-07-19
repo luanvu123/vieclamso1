@@ -55,39 +55,6 @@
 
 
 
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function() {
-            setInterval(trackingGa, 1000);
-        });
-
-        function trackingGa() {
-            const cookie = getCookie();
-
-            try {
-                const gaTracking = JSON.parse(decodeURIComponent(cookie?.tcv_backend_ga_tracking ?? '{}'));
-                if (gaTracking.event) {
-                    if (window.dataLayer) {
-                        dataLayer.push({
-                            'event': gaTracking.event,
-                            ...gaTracking.payload,
-                        })
-                    }
-                    document.cookie = "tcv_backend_ga_tracking=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/"
-                }
-            } catch (e) {
-                console.error(e);
-            }
-        }
-
-        function getCookie() {
-            return document.cookie.split('; ').reduce((prev, current) => {
-                const [name, ...value] = current.split('=');
-                prev[name] = value.join('=');
-                return prev;
-            }, {});
-        }
-    </script>
-
 </head>
 
 <body>
@@ -101,7 +68,7 @@
                             <div class="text-muted caption">Cùng xây dựng một hồ sơ nổi bật và nhận được các cơ hội sự
                                 nghiệp lý tưởng</div>
                         </div>
-                        <form action="{{ route('candidate.register') }}" method="post" id="form-register">
+                        <form action="{{ route('employer.register') }}" method="post" id="form-register">
                             @csrf
 
                             <div class="form-group mb-3">
@@ -192,17 +159,6 @@
                                     <span class="ml-2">Google</span>
                                 </a>
                                 <div class="d-none" id="login-google-render"></div>
-
-                                <a href="javascript:loginWithFacebook();" id="login-width-facebook"
-                                    class="btn btn-signin btn-primary input-block-level h-40 btn-login-social">
-                                    <i class="fa-brands fa-facebook"></i>
-                                    <span class="ml-2">Facebook</span>
-                                </a>
-                                <a href="" id="login-width-linkedin"
-                                    class="btn btn-default btn-signin btn-signin-linkedin input-block-level h-40 btn-login-social">
-                                    <i class="fa-brands fa-linkedin"></i>
-                                    <span class="ml-2">Linkedin</span>
-                                </a>
                             </div>
                             <div class="d-flex justify-content-center mt-3">
                                 <div class="d-flex align-items-start gap-2">

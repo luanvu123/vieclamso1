@@ -13,7 +13,7 @@
             <p><strong>Email:</strong> {{ $candidate->email }}</p>
             <p><strong>Số điện thoại:</strong> {{ $candidate->phone_number_candidate }}</p>
             <p><strong>Trạng thái:</strong> {{ $candidate->status }}</p>
-            <p><strong>Avatar:</strong> <img src="{{ $candidate->avatar_candidate ? asset('storage/' . $candidate->avatar_candidate) : asset('storage/avatar/avatar-default.jpg') }}" alt="Avatar" width="100"></p>
+            <p><strong>Avatar:</strong> <img src="{{ $candidate->avatar_candidate ? asset('storage/' . $candidate->avatar_candidate) : asset('storage/avatar/avatar-default.jpg') }}" alt="Avatar" style="width: 60px"></p>
         </div>
     </div>
 

@@ -1,6 +1,5 @@
 <?php
 
-// app/Models/JobPosting.php
 
 namespace App\Models;
 
@@ -13,18 +12,40 @@ class JobPosting extends Model
 
     protected $fillable = [
         'employer_id',
+        'email',
         'title',
+        'type',
+        'category',
+        'location',
+        'tags',
         'description',
+        'application_email_url',
+        'closing_date',
+        'company_name',
+        'website',
+        'tagline',
+        'video',
+        'twitter',
+        'logo',
+        'salary',
+        'place',
+        'experience',
+        'rank',
+        'number_of_recruits',
+        'sex',
+        'status',
+        'skills_required',
+        'area',
+        'slug',
+        'status'
     ];
 
     public function employer()
     {
         return $this->belongsTo(Employer::class);
     }
-
     public function applications()
     {
         return $this->hasMany(Application::class);
     }
 }
-

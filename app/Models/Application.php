@@ -14,6 +14,8 @@ class Application extends Model
         'job_posting_id',
         'candidate_id',
         'cv_id',
+        'application_letter',
+        'status'
     ];
 
     public function jobPosting()

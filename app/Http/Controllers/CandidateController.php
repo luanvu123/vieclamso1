@@ -60,7 +60,7 @@ class CandidateController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('candidate')->attempt($credentials)) {
-            return redirect()->route('candidate.dashboard')->with('success', 'Xin chào ' . Auth::guard('candidate')->user()->name);
+            return redirect()->route('/')->with('success', 'Xin chào ' . Auth::guard('candidate')->user()->name);
         } else {
             return redirect()->back()->withInput()->withErrors(['email' => 'Thông tin đăng nhập không chính xác']);
         }

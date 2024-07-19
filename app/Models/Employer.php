@@ -15,6 +15,10 @@ class Employer extends Authenticatable
         'name',
         'email',
         'password',
+        'gender',
+        'phone',
+        'status',
+        'avatar'
     ];
 
     public function jobPostings()
