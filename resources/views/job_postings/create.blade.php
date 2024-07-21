@@ -72,7 +72,6 @@
                                         <option value="Hồ Chí Minh">Hồ Chí Minh</option>
                                         <option value="Đà Nẵng">Đà Nẵng</option>
                                         <option value="Cần Thơ">Cần Thơ</option>
-                                        <!-- Các thành phố khác có thể thêm vào đây -->
                                     </select>
                                 </div>
                             </div>

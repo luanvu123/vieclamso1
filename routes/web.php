@@ -31,7 +31,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', [SiteController::class, 'index'])->name('/');
 Route::get('job/{slug}', [SiteController::class, 'show'])->name('job.show');
-
+Route::get('/jobs/filter', [SiteController::class, 'filter'])->name('job.filter');
 Auth::routes();
 Route::get('/recruitment', function () {
     return view('pages.recruitment');
@@ -91,4 +91,3 @@ Route::middleware(['employer'])->group(function () {
     Route::post('employer/profile', [EmployerLoginController::class, 'updateProfile'])->name('employer.profile.update');
 });
 
-Route::get('/jobs/filter', [JobPostingController::class, 'filter'])->name('job.filter');

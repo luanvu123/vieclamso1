@@ -37,7 +37,8 @@ class JobPosting extends Model
         'skills_required',
         'area',
         'slug',
-        'status'
+        'status',
+        'city'
     ];
 
     public function employer()

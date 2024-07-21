@@ -1,847 +1,126 @@
  @extends('layout')
  @section('content')
      <link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/desktop/search-job.min.5b2166bc3defa96bK.css">
+      <link rel="stylesheet"href="https://static.topcv.vn/v4/css/components/desktop/jobs/job-list-search-result.f3a3504e765512c7K.css">
      <div class="search-job">
          <div class="header">
              <div class="box-search-job">
                  <div class="container">
-                     <form method="GET" action="{{ route('search-jobs') }}">
-                         <div class="group-search">
-                             <div class="item item-search">
-                                 <div class="icon">
-                                     <i class="fa-regular fa-magnifying-glass"></i>
-                                 </div>
-                                 <input class="form-control" name="keyword" placeholder="Vị trí ứng tuyển" id="keyword"
-                                     autocomplete="off">
-                             </div>
-                             <div class="item search-city">
-                                 <div class="icon">
-                                     <i class="fa-regular fa-location-dot"></i>
-                                 </div>
-                                 <select name="city" id="city" class="form-control select2">
-                                     <option value="">Tất cả địa điểm</option>
-                                     <option value="Hà Nội">Hà Nội</option>
-                                     <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                 </select>
-                             </div>
-                             <div class="col-button">
-                                 <button class="btn btn-topcv btn-search-job" type="submit">Tìm kiếm</button>
-                             </div>
+                     <style>
+                         /* CSS cho form */
+                         .search-form {
+                             display: flex;
+                             /* Sử dụng Flexbox để bố trí các phần tử */
+                             align-items: center;
+                             /* Căn chỉnh các phần tử theo chiều dọc */
+                             gap: 10px;
+                             /* Khoảng cách giữa các phần tử */
+                         }
+
+                         /* CSS cho các item bên trong form */
+                         .search-form .item {
+                             flex: 1;
+                             /* Đảm bảo rằng các item có thể mở rộng để lấp đầy không gian */
+                         }
+
+                         /* CSS cho input và select */
+                         .search-form input[type="text"],
+                         .search-form select {
+                             width: 100%;
+                             /* Đảm bảo input và select chiếm hết chiều rộng của item chứa nó */
+                             padding: 8px;
+                             /* Thêm padding cho các input và select */
+                             border: 1px solid #ccc;
+                             /* Đặt viền cho các input và select */
+                             border-radius: 4px;
+                             /* Bo tròn các góc của input và select */
+                         }
+
+                         /* CSS cho button */
+                         .search-form button {
+                             padding: 8px 16px;
+                             /* Thêm padding cho button */
+                             background-color: #19993d;
+                             /* Màu nền cho button */
+                             color: white;
+                             /* Màu chữ trên button */
+                             border: none;
+                             /* Loại bỏ viền mặc định của button */
+                             border-radius: 4px;
+                             /* Bo tròn các góc của button */
+                             cursor: pointer;
+                             /* Hiển thị con trỏ chuột kiểu tay khi di chuột lên button */
+                         }
+
+                         .search-form button:hover {
+                             background-color: #00b342;
+                             /* Thay đổi màu nền khi di chuột lên button */
+                         }
+                     </style>
+                     <form class="search-form" action="/search-jobs" method="GET">
+                         <div class="item item-search">
+                             <input type="text" id="key" name="keyword" placeholder="Nhập từ khóa tìm kiếm...">
+                         </div>
+                         <div class="item item-search">
+                             <select id="city" name="city">
+                                 <option value="">Chọn thành phố</option>
+                                 <option value="Hà Nội">Hà Nội</option>
+                                 <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                 <option value="Đà Nẵng">Đà Nẵng</option>
+                                 <option value="Cần Thơ">Cần Thơ</option>
+                                 <option value="Hải Phòng">Hải Phòng</option>
+                             </select>
+                         </div>
+                         <div class="item item-search">
+                             <button type="submit">Tìm kiếm</button>
                          </div>
                      </form>
+                 </div>
+             </div>
+         </div>
+     <div class="container">
+    <div class="d-flex justify-content-between wrap-seo-breadcrumb align-items-center">
+        <div class="d-flex flex-column">
+            <h1 id="search-job-heading" class="search-job-heading">
+                @if($keyword)
+                    Tuyển dụng {{ $jobCount }} việc làm @if($keyword) "{{ $keyword }}" @endif @if($city) tại {{ $city }} @endif
+                @else
+                    Tuyển dụng {{ $jobCount }} việc làm
+                @endif
+            </h1>
+            <div id="breadcrumb">
+                <div class="custom-breadcrumb">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a href="{{ route('/') }}">Trang chủ</a>
+                        </li>
+                        <i class="fa-solid fa-angle-right"></i>
+                        <li class="nav-item">
+                            <a href="#">Tìm việc làm</a>
+                        </li>
+                        <i class="fa-solid fa-angle-right"></i>
+                        <p class="breadcrumb-heading">
+                            @if($keyword)
+                                Tuyển dụng {{ $jobCount }} việc làm @if($keyword) "{{ $keyword }}" @endif @if($city) tại {{ $city }} @endif
+                            @else
+                                Tuyển dụng {{ $jobCount }} việc làm
+                            @endif
+                        </p>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                     <div class="box-option animated" style="">
-                         <div class="box-option__list" id="search-job-option-list">
-                             <div class="input-group select2-item" style="padding: 0px;">
-                                 <div class="icon">
-                                     <i class="fa-regular fa-cube"></i>
-                                 </div>
-                                 <div class="select-container">
-                                     <select name="" id="company-field-advanced"
-                                         class="select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                         <option value="">Lĩnh vực công ty</option>
-                                         <option value="33">
-                                             Agency (Design/Development)</option>
-                                         <option value="34">
-                                             Agency (Marketing/Advertising)</option>
-                                         <option value="11">
-                                             Bán lẻ - Hàng tiêu dùng - FMCG</option>
-                                         <option value="4">
-                                             Bảo hiểm</option>
-                                         <option value="20">
-                                             Bảo trì / Sửa chữa</option>
-                                         <option value="5">
-                                             Bất động sản</option>
-                                         <option value="13">
-                                             Chứng khoán</option>
-                                         <option value="23">
-                                             Cơ khí</option>
-                                         <option value="30">
-                                             Cơ quan nhà nước</option>
-                                         <option value="31">
-                                             Du lịch</option>
-                                         <option value="6">
-                                             Dược phẩm / Y tế / Công nghệ sinh học</option>
-                                         <option value="21">
-                                             Điện tử / Điện lạnh</option>
-                                         <option value="36">
-                                             Giải trí</option>
-                                         <option value="26">
-                                             Giáo dục / Đào tạo</option>
-                                         <option value="10">
-                                             In ấn / Xuất bản</option>
-                                         <option value="7">
-                                             Internet / Online</option>
-                                         <option value="37">
-                                             IT - Phần cứng</option>
-                                         <option value="1">
-                                             IT - Phần mềm</option>
-                                         <option value="2">
-                                             Kế toán / Kiểm toán</option>
-                                         <option value="10000">
-                                             Khác</option>
-                                         <option value="28">
-                                             Logistics - Vận tải</option>
-                                         <option value="3">
-                                             Luật</option>
-                                         <option value="8">
-                                             Marketing / Truyền thông / Quảng cáo</option>
-                                         <option value="18">
-                                             Môi trường</option>
-                                         <option value="35">
-                                             Năng lượng</option>
-                                         <option value="15">
-                                             Ngân hàng</option>
-                                         <option value="9">
-                                             Nhà hàng / Khách sạn</option>
-                                         <option value="16">
-                                             Nhân sự</option>
-                                         <option value="38">
-                                             Nông Lâm Ngư nghiệp</option>
-                                         <option value="12">
-                                             Sản xuất</option>
-                                         <option value="39">
-                                             Tài chính</option>
-                                         <option value="17">
-                                             Thiết kế / kiến trúc</option>
-                                         <option value="22">
-                                             Thời trang</option>
-                                         <option value="27">
-                                             Thương mại điện tử</option>
-                                         <option value="29">
-                                             Tổ chức phi lợi nhuận</option>
-                                         <option value="32">
-                                             Tự động hóa</option>
-                                         <option value="24">
-                                             Tư vấn</option>
-                                         <option value="25">
-                                             Viễn thông</option>
-                                         <option value="14">
-                                             Xây dựng</option>
-                                         <option value="19">
-                                             Xuất nhập khẩu</option>
-                                     </select><span class="select2 select2-container select2-container--default"
-                                         dir="ltr" style="width: auto;"><span class="selection"><span
-                                                 class="select2-selection select2-selection--single" role="combobox"
-                                                 aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                                 aria-labelledby="select2-company-field-advanced-container"><span
-                                                     class="select2-selection__rendered"
-                                                     id="select2-company-field-advanced-container"
-                                                     title="Lĩnh vực công ty">Lĩnh vực công ty</span><span
-                                                     class="select2-selection__arrow" role="presentation"><b
-                                                         role="presentation"></b></span></span></span><span
-                                             class="dropdown-wrapper" aria-hidden="true"></span></span>
-                                 </div>
-                             </div>
-                             <div class="input-group select2-item" style="padding: 0px;">
-                                 <div class="icon">
-                                     <i class="fa-regular fa-circle-star"></i>
-                                 </div>
-                                 <div class="select-container">
-                                     <select name="exp" id="exp-advanced" class="select2 select2-hidden-accessible"
-                                         tabindex="-1" aria-hidden="true">
-                                         <option value="">Kinh nghiệm</option>
-                                         <option value="1">Chưa có kinh nghiệm</option>
-                                         <option value="2">Dưới 1 năm</option>
-                                         <option value="3">1 năm</option>
-                                         <option value="4">2 năm</option>
-                                         <option value="5">3 năm</option>
-                                         <option value="6">4 năm</option>
-                                         <option value="7">5 năm</option>
-                                         <option value="8">Trên 5 năm</option>
-                                     </select><span class="select2 select2-container select2-container--default"
-                                         dir="ltr" style="width: auto;"><span class="selection"><span
-                                                 class="select2-selection select2-selection--single" role="combobox"
-                                                 aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                                 aria-labelledby="select2-exp-advanced-container"><span
-                                                     class="select2-selection__rendered"
-                                                     id="select2-exp-advanced-container" title="Kinh nghiệm">Kinh
-                                                     nghiệm</span><span class="select2-selection__arrow"
-                                                     role="presentation"><b
-                                                         role="presentation"></b></span></span></span><span
-                                             class="dropdown-wrapper" aria-hidden="true"></span></span>
-                                 </div>
-                             </div>
-                             <div class="input-group select2-item salary-advanced" style="padding: 0px;">
-                                 <div class="icon">
-                                     <i class="fa-regular fa-circle-dollar"></i>
-                                 </div>
-                                 <div class="select-container">
-                                     <select name="salary-advanced" id="salary-advanced"
-                                         class="select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                         <option value="">Mức lương</option>
-                                         <option data-from="0" data-to="10000000" value="1">Dưới 10 triệu</option>
-                                         <option data-from="10000000" data-to="15000000" value="5">10 - 15 triệu
-                                         </option>
-                                         <option data-from="15000000" data-to="20000000" value="7">15 - 20 triệu
-                                         </option>
-                                         <option data-from="20000000" data-to="25000000" value="8">20 - 25 triệu
-                                         </option>
-                                         <option data-from="25000000" data-to="30000000" value="9">25 - 30 triệu
-                                         </option>
-                                         <option data-from="30000000" data-to="50000000" value="10">30 - 50 triệu
-                                         </option>
-                                         <option data-from="50000000" data-to="0" value="11">Trên 50 triệu
-                                         </option>
-                                         <option data-from="0" data-to="0" value="127">Thoả thuận</option>
-                                     </select><span class="select2 select2-container select2-container--default"
-                                         dir="ltr" style="width: auto;"><span class="selection"><span
-                                                 class="select2-selection select2-selection--single" role="combobox"
-                                                 aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                                 aria-labelledby="select2-salary-advanced-container"><span
-                                                     class="select2-selection__rendered"
-                                                     id="select2-salary-advanced-container" title="Mức lương">Mức
-                                                     lương</span><span class="select2-selection__arrow"
-                                                     role="presentation"><b
-                                                         role="presentation"></b></span></span></span><span
-                                             class="dropdown-wrapper" aria-hidden="true"></span></span>
-                                 </div>
-                             </div>
-                             <div class="input-group select2-item" style="padding: 0px;">
-                                 <div class="icon">
-                                     <i class="fa-regular fa-circle-star"></i>
-                                 </div>
-                                 <div class="select-container">
-                                     <select name="" id="position-advanced"
-                                         class="select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                         <option value="">Cấp bậc</option>
-                                         <option value="1">
-                                             &nbsp;Nhân viên</option>
-                                         <option value="2">
-                                             &nbsp;Trưởng nhóm</option>
-                                         <option value="3">
-                                             &nbsp;Trưởng/Phó phòng</option>
-                                         <option value="10">
-                                             &nbsp;Quản lý / Giám sát</option>
-                                         <option value="20">
-                                             &nbsp;Trưởng chi nhánh</option>
-                                         <option value="25">
-                                             &nbsp;Phó giám đốc</option>
-                                         <option value="30">
-                                             &nbsp;Giám đốc</option>
-                                         <option value="50">
-                                             &nbsp;Thực tập sinh</option>
-                                     </select><span class="select2 select2-container select2-container--default"
-                                         dir="ltr" style="width: auto;"><span class="selection"><span
-                                                 class="select2-selection select2-selection--single" role="combobox"
-                                                 aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                                 aria-labelledby="select2-position-advanced-container"><span
-                                                     class="select2-selection__rendered"
-                                                     id="select2-position-advanced-container" title="Cấp bậc">Cấp
-                                                     bậc</span><span class="select2-selection__arrow"
-                                                     role="presentation"><b
-                                                         role="presentation"></b></span></span></span><span
-                                             class="dropdown-wrapper" aria-hidden="true"></span></span>
-                                 </div>
-                             </div>
-                             <div class="input-group select2-item" style="padding: 0px;">
-                                 <div class="icon">
-                                     <i class="fa-regular fa-business-time"></i>
-                                 </div>
-                                 <div class="select-container">
-                                     <select name="" id="type-advanced" class="select2 select2-hidden-accessible"
-                                         tabindex="-1" aria-hidden="true">
-                                         <option value="">Tất cả hình thức</option>
-                                         <option value="1">
-                                             &nbsp;Toàn thời gian</option>
-                                         <option value="3">
-                                             &nbsp;Bán thời gian</option>
-                                         <option value="5">
-                                             &nbsp;Thực tập</option>
-                                     </select><span class="select2 select2-container select2-container--default"
-                                         dir="ltr" style="width: auto;"><span class="selection"><span
-                                                 class="select2-selection select2-selection--single" role="combobox"
-                                                 aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                                 aria-labelledby="select2-type-advanced-container"><span
-                                                     class="select2-selection__rendered"
-                                                     id="select2-type-advanced-container" title="Tất cả hình thức">Tất cả
-                                                     hình thức</span><span class="select2-selection__arrow"
-                                                     role="presentation"><b
-                                                         role="presentation"></b></span></span></span><span
-                                             class="dropdown-wrapper" aria-hidden="true"></span></span>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-             <div class="box-search-sticky" id="box-search-sticky" style="display: none;">
-                 <div class="container">
-                     <div class="box-search-sticky__form">
-                         <div class="input-group">
-                             <input class="form-controlui-autocomplete-input" value="php"
-                                 placeholder="Vị trí tuyển dụng" id="keyword-sticky" autocomplete="off">
-                         </div>
-                         <div class="input-group select-data" style="padding: 0px;">
-                             <select name="cityIds" id="city-sticky"
-                                 class="form-control select2 select2-hidden-accessible" tabindex="-1"
-                                 aria-hidden="true">
-                                 <option value="">Tất cả tỉnh/thành phố</option>
-                                 <option value="1">&nbsp;Hà Nội</option>
-                                 <option value="2" selected="">&nbsp;Hồ Chí Minh</option>
-                                 <option value="3">&nbsp;Bình Dương</option>
-                                 <option value="4">&nbsp;Bắc Ninh</option>
-                                 <option value="5">&nbsp;Đồng Nai</option>
-                                 <option value="6">&nbsp;Hưng Yên</option>
-                                 <option value="7">&nbsp;Hải Dương</option>
-                                 <option value="8">&nbsp;Đà Nẵng</option>
-                                 <option value="9">&nbsp;Hải Phòng</option>
-                                 <option value="10">&nbsp;An Giang</option>
-                                 <option value="11">&nbsp;Bà Rịa-Vũng Tàu</option>
-                                 <option value="12">&nbsp;Bắc Giang</option>
-                                 <option value="13">&nbsp;Bắc Kạn</option>
-                                 <option value="14">&nbsp;Bạc Liêu</option>
-                                 <option value="15">&nbsp;Bến Tre</option>
-                                 <option value="16">&nbsp;Bình Định</option>
-                                 <option value="17">&nbsp;Bình Phước</option>
-                                 <option value="18">&nbsp;Bình Thuận</option>
-                                 <option value="19">&nbsp;Cà Mau</option>
-                                 <option value="20">&nbsp;Cần Thơ</option>
-                                 <option value="21">&nbsp;Cao Bằng</option>
-                                 <option value="22">&nbsp;Cửu Long</option>
-                                 <option value="23">&nbsp;Đắk Lắk</option>
-                                 <option value="24">&nbsp;Đắc Nông</option>
-                                 <option value="25">&nbsp;Điện Biên</option>
-                                 <option value="26">&nbsp;Đồng Tháp</option>
-                                 <option value="27">&nbsp;Gia Lai</option>
-                                 <option value="28">&nbsp;Hà Giang</option>
-                                 <option value="29">&nbsp;Hà Nam</option>
-                                 <option value="30">&nbsp;Hà Tĩnh</option>
-                                 <option value="31">&nbsp;Hậu Giang</option>
-                                 <option value="32">&nbsp;Hoà Bình</option>
-                                 <option value="33">&nbsp;Khánh Hoà</option>
-                                 <option value="34">&nbsp;Kiên Giang</option>
-                                 <option value="35">&nbsp;Kon Tum</option>
-                                 <option value="36">&nbsp;Lai Châu</option>
-                                 <option value="37">&nbsp;Lâm Đồng</option>
-                                 <option value="38">&nbsp;Lạng Sơn</option>
-                                 <option value="39">&nbsp;Lào Cai</option>
-                                 <option value="40">&nbsp;Long An</option>
-                                 <option value="41">&nbsp;Miền Bắc</option>
-                                 <option value="42">&nbsp;Miền Nam</option>
-                                 <option value="43">&nbsp;Miền Trung</option>
-                                 <option value="44">&nbsp;Nam Định</option>
-                                 <option value="45">&nbsp;Nghệ An</option>
-                                 <option value="46">&nbsp;Ninh Bình</option>
-                                 <option value="47">&nbsp;Ninh Thuận</option>
-                                 <option value="48">&nbsp;Phú Thọ</option>
-                                 <option value="49">&nbsp;Phú Yên</option>
-                                 <option value="50">&nbsp;Quảng Bình</option>
-                                 <option value="51">&nbsp;Quảng Nam</option>
-                                 <option value="52">&nbsp;Quảng Ngãi</option>
-                                 <option value="53">&nbsp;Quảng Ninh</option>
-                                 <option value="54">&nbsp;Quảng Trị</option>
-                                 <option value="55">&nbsp;Sóc Trăng</option>
-                                 <option value="56">&nbsp;Sơn La</option>
-                                 <option value="57">&nbsp;Tây Ninh</option>
-                                 <option value="58">&nbsp;Thái Bình</option>
-                                 <option value="59">&nbsp;Thái Nguyên</option>
-                                 <option value="60">&nbsp;Thanh Hoá</option>
-                                 <option value="61">&nbsp;Thừa Thiên Huế</option>
-                                 <option value="62">&nbsp;Tiền Giang</option>
-                                 <option value="63">&nbsp;Toàn Quốc</option>
-                                 <option value="64">&nbsp;Trà Vinh</option>
-                                 <option value="65">&nbsp;Tuyên Quang</option>
-                                 <option value="66">&nbsp;Vĩnh Long</option>
-                                 <option value="67">&nbsp;Vĩnh Phúc</option>
-                                 <option value="68">&nbsp;Yên Bái</option>
-                                 <option value="100">&nbsp;Nước Ngoài</option>
-                             </select><span class="select2 select2-container select2-container--default" dir="ltr"
-                                 style="width: 100px;"><span class="selection"><span
-                                         class="select2-selection select2-selection--single" role="combobox"
-                                         aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                         aria-labelledby="select2-city-sticky-container"><span
-                                             class="select2-selection__rendered" id="select2-city-sticky-container"
-                                             title="&nbsp;Hồ Chí Minh">&nbsp;Hồ Chí Minh</span><span
-                                             class="select2-selection__arrow" role="presentation"><b
-                                                 role="presentation"></b></span></span></span><span
-                                     class="dropdown-wrapper" aria-hidden="true"></span></span>
-                         </div>
-                         <div class="input-group select-data" style="padding: 0px;">
-                             <select name="exp-sticky" id="exp-sticky"
-                                 class="form-control select2 select2-hidden-accessible" tabindex="-1"
-                                 aria-hidden="true">
-                                 <option value="">Tất cả kinh nghiệm</option>
-                                 <option value="1">
-                                     Chưa có kinh nghiệm</option>
-                                 <option value="2">
-                                     Dưới 1 năm</option>
-                                 <option value="3">
-                                     1 năm</option>
-                                 <option value="4">
-                                     2 năm</option>
-                                 <option value="5">
-                                     3 năm</option>
-                                 <option value="6">
-                                     4 năm</option>
-                                 <option value="7">
-                                     5 năm</option>
-                                 <option value="8">
-                                     Trên 5 năm</option>
-                             </select><span class="select2 select2-container select2-container--default" dir="ltr"
-                                 style="width: 100px;"><span class="selection"><span
-                                         class="select2-selection select2-selection--single" role="combobox"
-                                         aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                         aria-labelledby="select2-exp-sticky-container"><span
-                                             class="select2-selection__rendered" id="select2-exp-sticky-container"
-                                             title="Tất cả kinh nghiệm">Tất cả kinh nghiệm</span><span
-                                             class="select2-selection__arrow" role="presentation"><b
-                                                 role="presentation"></b></span></span></span><span
-                                     class="dropdown-wrapper" aria-hidden="true"></span></span>
-                         </div>
-                         <div class="input-group select-data" style="padding: 0px;">
-                             <select name="salary-stickey" id="salary"
-                                 class="form-control select2 select2-hidden-accessible" tabindex="-1"
-                                 aria-hidden="true">
-                                 <option value="">Tất cả mức lương</option>
-                                 <option data-from="0" data-to="10000000" value="1">Dưới 10 triệu</option>
-                                 <option data-from="10000000" data-to="15000000" value="5">10 - 15 triệu</option>
-                                 <option data-from="15000000" data-to="20000000" value="7">15 - 20 triệu</option>
-                                 <option data-from="20000000" data-to="25000000" value="8">20 - 25 triệu</option>
-                                 <option data-from="25000000" data-to="30000000" value="9">25 - 30 triệu</option>
-                                 <option data-from="30000000" data-to="50000000" value="10">30 - 50 triệu</option>
-                                 <option data-from="50000000" data-to="0" value="11">Trên 50 triệu</option>
-                                 <option data-from="0" data-to="0" value="127">Thoả thuận</option>
-                             </select><span class="select2 select2-container select2-container--default" dir="ltr"
-                                 style="width: 100px;"><span class="selection"><span
-                                         class="select2-selection select2-selection--single" role="combobox"
-                                         aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                         aria-labelledby="select2-salary-container"><span
-                                             class="select2-selection__rendered" id="select2-salary-container"
-                                             title="Tất cả mức lương">Tất cả mức lương</span><span
-                                             class="select2-selection__arrow" role="presentation"><b
-                                                 role="presentation"></b></span></span></span><span
-                                     class="dropdown-wrapper" aria-hidden="true"></span></span>
-                         </div>
-                         <div class="input-group select-data" style="padding: 0px;">
-                             <select name="category-sticky" id="category-sticky"
-                                 class="form-control select2 select2-hidden-accessible" tabindex="-1"
-                                 aria-hidden="true">
-                                 <option value="">Tất cả ngành nghề</option>
-                                 <option value="10101">
-                                     An toàn lao động</option>
-                                 <option value="10102">
-                                     Bán hàng kỹ thuật</option>
-                                 <option value="10103">
-                                     Bán lẻ / bán sỉ</option>
-                                 <option value="10004">
-                                     Báo chí / Truyền hình</option>
-                                 <option value="10006">
-                                     Bảo hiểm</option>
-                                 <option value="10104">
-                                     Bảo trì / Sửa chữa</option>
-                                 <option value="10007">
-                                     Bất động sản</option>
-                                 <option value="10003">
-                                     Biên / Phiên dịch</option>
-                                 <option value="10005">
-                                     Bưu chính - Viễn thông</option>
-                                 <option value="10008">
-                                     Chứng khoán / Vàng / Ngoại tệ</option>
-                                 <option value="10010">
-                                     Cơ khí / Chế tạo / Tự động hóa</option>
-                                 <option value="10009">
-                                     Công nghệ cao</option>
-                                 <option value="10052">
-                                     Công nghệ Ô tô</option>
-                                 <option value="10131">
-                                     Công nghệ thông tin</option>
-                                 <option value="10012">
-                                     Dầu khí/Hóa chất</option>
-                                 <option value="10013">
-                                     Dệt may / Da giày</option>
-                                 <option value="10111">
-                                     Địa chất / Khoáng sản</option>
-                                 <option value="10014">
-                                     Dịch vụ khách hàng</option>
-                                 <option value="10016">
-                                     Điện / Điện tử / Điện lạnh</option>
-                                 <option value="10015">
-                                     Điện tử viễn thông</option>
-                                 <option value="10011">
-                                     Du lịch</option>
-                                 <option value="10110">
-                                     Dược phẩm / Công nghệ sinh học</option>
-                                 <option value="10017">
-                                     Giáo dục / Đào tạo</option>
-                                 <option value="10113">
-                                     Hàng cao cấp</option>
-                                 <option value="10020">
-                                     Hàng gia dụng</option>
-                                 <option value="10021">
-                                     Hàng hải</option>
-                                 <option value="10022">
-                                     Hàng không</option>
-                                 <option value="10117">
-                                     Hàng tiêu dùng</option>
-                                 <option value="10023">
-                                     Hành chính / Văn phòng</option>
-                                 <option value="10018">
-                                     Hoá học / Sinh học</option>
-                                 <option value="10019">
-                                     Hoạch định/Dự án</option>
-                                 <option value="10024">
-                                     In ấn / Xuất bản</option>
-                                 <option value="10025">
-                                     IT Phần cứng / Mạng</option>
-                                 <option value="10026">
-                                     IT phần mềm</option>
-                                 <option value="10028">
-                                     Kế toán / Kiểm toán</option>
-                                 <option value="10027">
-                                     Khách sạn / Nhà hàng</option>
-                                 <option value="10120">
-                                     Kiến trúc</option>
-                                 <option value="10001">
-                                     Kinh doanh / Bán hàng</option>
-                                 <option value="10048">
-                                     Logistics</option>
-                                 <option value="10036">
-                                     Luật/Pháp lý</option>
-                                 <option value="10029">
-                                     Marketing / Truyền thông / Quảng cáo</option>
-                                 <option value="10030">
-                                     Môi trường / Xử lý chất thải</option>
-                                 <option value="10031">
-                                     Mỹ phẩm / Trang sức</option>
-                                 <option value="10032">
-                                     Mỹ thuật / Nghệ thuật / Điện ảnh</option>
-                                 <option value="10033">
-                                     Ngân hàng / Tài chính</option>
-                                 <option value="11000">
-                                     Ngành nghề khác</option>
-                                 <option value="10132">
-                                     NGO / Phi chính phủ / Phi lợi nhuận</option>
-                                 <option value="10034">
-                                     Nhân sự</option>
-                                 <option value="10035">
-                                     Nông / Lâm / Ngư nghiệp</option>
-                                 <option value="10124">
-                                     Phi chính phủ / Phi lợi nhuận</option>
-                                 <option value="10037">
-                                     Quản lý chất lượng (QA/QC)</option>
-                                 <option value="10038">
-                                     Quản lý điều hành</option>
-                                 <option value="10125">
-                                     Sản phẩm công nghiệp</option>
-                                 <option value="10126">
-                                     Sản xuất</option>
-                                 <option value="10130">
-                                     Spa / Làm đẹp</option>
-                                 <option value="10127">
-                                     Tài chính / Đầu tư</option>
-                                 <option value="10039">
-                                     Thiết kế đồ họa</option>
-                                 <option value="10128">
-                                     Thiết kế nội thất</option>
-                                 <option value="10042">
-                                     Thời trang</option>
-                                 <option value="10129">
-                                     Thư ký / Trợ lý</option>
-                                 <option value="10043">
-                                     Thực phẩm / Đồ uống</option>
-                                 <option value="10046">
-                                     Tổ chức sự kiện / Quà tặng</option>
-                                 <option value="10045">
-                                     Tư vấn</option>
-                                 <option value="10047">
-                                     Vận tải / Kho vận</option>
-                                 <option value="10050">
-                                     Xây dựng</option>
-                                 <option value="10049">
-                                     Xuất nhập khẩu</option>
-                                 <option value="10051">
-                                     Y tế / Dược</option>
-                             </select><span class="select2 select2-container select2-container--default" dir="ltr"
-                                 style="width: 100px;"><span class="selection"><span
-                                         class="select2-selection select2-selection--single" role="combobox"
-                                         aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                         aria-labelledby="select2-category-sticky-container"><span
-                                             class="select2-selection__rendered" id="select2-category-sticky-container"
-                                             title="Tất cả ngành nghề">Tất cả ngành nghề</span><span
-                                             class="select2-selection__arrow" role="presentation"><b
-                                                 role="presentation"></b></span></span></span><span
-                                     class="dropdown-wrapper" aria-hidden="true"></span></span>
-                         </div>
-                         <div class="input-group select-data" style="padding: 0px;">
-                             <select name="company-field-sticky" id="company-field-sticky"
-                                 class="form-control select2 select2-hidden-accessible" tabindex="-1"
-                                 aria-hidden="true">
-                                 <option value="">Tất cả lĩnh vực</option>
-                                 <option value="33">
-                                     &nbsp;Agency (Design/Development)</option>
-                                 <option value="34">
-                                     &nbsp;Agency (Marketing/Advertising)</option>
-                                 <option value="11">
-                                     &nbsp;Bán lẻ - Hàng tiêu dùng - FMCG</option>
-                                 <option value="4">
-                                     &nbsp;Bảo hiểm</option>
-                                 <option value="20">
-                                     &nbsp;Bảo trì / Sửa chữa</option>
-                                 <option value="5">
-                                     &nbsp;Bất động sản</option>
-                                 <option value="13">
-                                     &nbsp;Chứng khoán</option>
-                                 <option value="23">
-                                     &nbsp;Cơ khí</option>
-                                 <option value="30">
-                                     &nbsp;Cơ quan nhà nước</option>
-                                 <option value="31">
-                                     &nbsp;Du lịch</option>
-                                 <option value="6">
-                                     &nbsp;Dược phẩm / Y tế / Công nghệ sinh học</option>
-                                 <option value="21">
-                                     &nbsp;Điện tử / Điện lạnh</option>
-                                 <option value="36">
-                                     &nbsp;Giải trí</option>
-                                 <option value="26">
-                                     &nbsp;Giáo dục / Đào tạo</option>
-                                 <option value="10">
-                                     &nbsp;In ấn / Xuất bản</option>
-                                 <option value="7">
-                                     &nbsp;Internet / Online</option>
-                                 <option value="37">
-                                     &nbsp;IT - Phần cứng</option>
-                                 <option value="1">
-                                     &nbsp;IT - Phần mềm</option>
-                                 <option value="2">
-                                     &nbsp;Kế toán / Kiểm toán</option>
-                                 <option value="10000">
-                                     &nbsp;Khác</option>
-                                 <option value="28">
-                                     &nbsp;Logistics - Vận tải</option>
-                                 <option value="3">
-                                     &nbsp;Luật</option>
-                                 <option value="8">
-                                     &nbsp;Marketing / Truyền thông / Quảng cáo</option>
-                                 <option value="18">
-                                     &nbsp;Môi trường</option>
-                                 <option value="35">
-                                     &nbsp;Năng lượng</option>
-                                 <option value="15">
-                                     &nbsp;Ngân hàng</option>
-                                 <option value="9">
-                                     &nbsp;Nhà hàng / Khách sạn</option>
-                                 <option value="16">
-                                     &nbsp;Nhân sự</option>
-                                 <option value="38">
-                                     &nbsp;Nông Lâm Ngư nghiệp</option>
-                                 <option value="12">
-                                     &nbsp;Sản xuất</option>
-                                 <option value="39">
-                                     &nbsp;Tài chính</option>
-                                 <option value="17">
-                                     &nbsp;Thiết kế / kiến trúc</option>
-                                 <option value="22">
-                                     &nbsp;Thời trang</option>
-                                 <option value="27">
-                                     &nbsp;Thương mại điện tử</option>
-                                 <option value="29">
-                                     &nbsp;Tổ chức phi lợi nhuận</option>
-                                 <option value="32">
-                                     &nbsp;Tự động hóa</option>
-                                 <option value="24">
-                                     &nbsp;Tư vấn</option>
-                                 <option value="25">
-                                     &nbsp;Viễn thông</option>
-                                 <option value="14">
-                                     &nbsp;Xây dựng</option>
-                                 <option value="19">
-                                     &nbsp;Xuất nhập khẩu</option>
-                             </select><span class="select2 select2-container select2-container--default" dir="ltr"
-                                 style="width: 100px;"><span class="selection"><span
-                                         class="select2-selection select2-selection--single" role="combobox"
-                                         aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                         aria-labelledby="select2-company-field-sticky-container"><span
-                                             class="select2-selection__rendered"
-                                             id="select2-company-field-sticky-container" title="Tất cả lĩnh vực">Tất cả
-                                             lĩnh vực</span><span class="select2-selection__arrow" role="presentation"><b
-                                                 role="presentation"></b></span></span></span><span
-                                     class="dropdown-wrapper" aria-hidden="true"></span></span>
-                         </div>
-                         <div class="input-group select-data" style="padding: 0px;">
-                             <select name="position-sticky" id="position-sticky"
-                                 class="form-control select2 select2-hidden-accessible" tabindex="-1"
-                                 aria-hidden="true">
-                                 <option value="">Tất cả cấp bậc</option>
-                                 <option value="1">
-                                     &nbsp;Nhân viên</option>
-                                 <option value="2">
-                                     &nbsp;Trưởng nhóm</option>
-                                 <option value="3">
-                                     &nbsp;Trưởng/Phó phòng</option>
-                                 <option value="10">
-                                     &nbsp;Quản lý / Giám sát</option>
-                                 <option value="20">
-                                     &nbsp;Trưởng chi nhánh</option>
-                                 <option value="25">
-                                     &nbsp;Phó giám đốc</option>
-                                 <option value="30">
-                                     &nbsp;Giám đốc</option>
-                                 <option value="50">
-                                     &nbsp;Thực tập sinh</option>
-                             </select><span class="select2 select2-container select2-container--default" dir="ltr"
-                                 style="width: 100px;"><span class="selection"><span
-                                         class="select2-selection select2-selection--single" role="combobox"
-                                         aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                         aria-labelledby="select2-position-sticky-container"><span
-                                             class="select2-selection__rendered" id="select2-position-sticky-container"
-                                             title="Tất cả cấp bậc">Tất cả cấp bậc</span><span
-                                             class="select2-selection__arrow" role="presentation"><b
-                                                 role="presentation"></b></span></span></span><span
-                                     class="dropdown-wrapper" aria-hidden="true"></span></span>
-                         </div>
-                         <div class="search-autocomplete autocomplete-of-keyword-sticky"></div>
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <div class="container">
-             <div class="d-flex justify-content-between wrap-seo-breadcrumb align-items-center">
-                 <div class="d-flex flex-column">
-                     <h1 id="search-job-heading" class="search-job-heading">
-                         Tuyển dụng 37 việc làm Php tại Hồ Chí Minh 2024
-                     </h1>
-                     <div id="breadcrumb">
-                         <div class="custom-breadcrumb">
-                             <ul class="nav">
-                                 <li class="nav-item">
-                                     <a href="https://www.topcv.vn/viec-lam">Trang chủ</a>
-                                 </li>
-                                 <i class="fa-solid fa-angle-right"></i>
-                                 <li class="nav-item">
-                                     <a href="https://www.topcv.vn/tim-viec-lam-php">Việc làm php</a>
-                                 </li>
-                                 <i class="fa-solid fa-angle-right"></i>
-                                 <p class="breadcrumb-heading">Tuyển dụng 37 việc làm Php tại Hồ Chí Minh 2024</p>
-                             </ul>
-                         </div>
-                     </div>
-                 </div>
-                 <button data-box="result-search-job" data-referer="job_alert_success_job_search_top"
-                     data-key-tracking="job_alert_click_job_search_top"
-                     class=" btn-show-modal-job-notification-setting btn btn-job-notification-setting">
-                     <i class="fa fa-bell"></i>
-                     <span>Tạo thông báo việc làm</span>
-                 </button>
-             </div>
-         </div>
-         <div class="container">
-             <div id="wrapper-keyword-suggest" style="display: block;">
-                 <div class="content">
-                     <div class="content-block">
-                         <span class="description">Gợi ý địa điểm:</span>
-                     </div>
-                     <div id="list-keyword-suggest-wrap">
-                         <div id="list-keyword-suggest"><label class="keyword-suggest-item district active"
-                                 for="city-item_0">Hồ Chí Minh<input type="radio" name="district-advanced"
-                                     checked="" id="city-item_0" value="0" hidden=""></label><label
-                                 class="keyword-suggest-item district " for="city-item_203">Quận 3<input type="radio"
-                                     name="district-advanced" id="city-item_203" value="203"
-                                     hidden=""></label><label class="keyword-suggest-item district "
-                                 for="city-item_215">Bình Thạnh<input type="radio" name="district-advanced"
-                                     id="city-item_215" value="215" hidden=""></label><label
-                                 class="keyword-suggest-item district " for="city-item_201">Quận 1<input type="radio"
-                                     name="district-advanced" id="city-item_201" value="201"
-                                     hidden=""></label><label class="keyword-suggest-item district "
-                                 for="city-item_211">Quận 11<input type="radio" name="district-advanced"
-                                     id="city-item_211" value="211" hidden=""></label><label
-                                 class="keyword-suggest-item district " for="city-item_212">Quận 12<input type="radio"
-                                     name="district-advanced" id="city-item_212" value="212"
-                                     hidden=""></label><label class="keyword-suggest-item district "
-                                 for="city-item_213">Thủ Đức<input type="radio" name="district-advanced"
-                                     id="city-item_213" value="213" hidden=""></label><label
-                                 class="keyword-suggest-item district " for="city-item_214">Gò Vấp<input type="radio"
-                                     name="district-advanced" id="city-item_214" value="214"
-                                     hidden=""></label><label class="keyword-suggest-item district "
-                                 for="city-item_216">Tân Bình<input type="radio" name="district-advanced"
-                                     id="city-item_216" value="216" hidden=""></label><label
-                                 class="keyword-suggest-item district " for="city-item_218">Phú Nhuận<input
-                                     type="radio" name="district-advanced" id="city-item_218" value="218"
-                                     hidden=""></label>
-                         </div>
-                     </div>
-                     <div class="content-block">
-                         <button class="btn btn-more" style="display: none;"><span><i
-                                     class="fa-regular fa-chevron-up"></i></span></button>
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <div>
-
-             <div class="container">
-                 <div class="none-suitable-job" style="display: none">
-                     <div class="none-suitable-job__content">
-                         <img class="lazy"
-                             data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/job-list/none-result.png"
-                             alt="None suitable job">
-                         <span>Chưa tìm thấy việc làm phù hợp với yêu cầu của bạn</span>
-                     </div>
-                 </div>
-             </div>
              <div class="result-job-search">
                  <div class="container">
                      <div class="list-job">
-                         <div class="job-header">
-                             <div class="box-job-option-flash-suitable" style="display: none;">
-                                 <div class="job-header__count-job-flashes">
-                                     <img loading="lazy"
-                                         src="https://www.topcv.vn/images/count_job_flashes_decorate.png?v=1.0.1">
-                                     <span>
-                                         Tìm thấy <b class="text-highlight count-job-flashes-suitable">37</b>
-                                         tin đăng NTD tương tác thường xuyên trong 24 giờ qua và phù hợp với yêu cầu của
-                                         bạn</span>
-                                     <div class="vertical-separator"></div>
-                                     <a class="remove-filter-job-flashes" id="job-option-remove-job-flash"
-                                         data-toggle="tooltip" title="" data-placement="top" data-container="body"
-                                         data-original-title="Bỏ lọc tin đăng NTD tương tác thường xuyên">
-                                         <span class="text-highlight"><i class="fa-regular fa-filter-slash"></i>Xóa
-                                             lọc</span>
-                                     </a>
-                                 </div>
-                             </div>
-                             <div class="interested-job" style="display: none">
-                                 <p>Việc làm có thể bạn sẽ quan tâm</p>
-                             </div>
-                         </div>
-                         <div class="box-show-important" style="display: block">
-                             <div class="show-important" id="sort-advanced">
-                                 <span class="caption">Ưu tiên hiển thị theo:</span>
-                                 <div class="radio-choose-active">
-                                     <input id="sort-value-top_related" type="radio" name="sort-advanced"
-                                         value="top_related" checked="checked">
-                                     <label for="sort-value-top_related">Search by AI <i data-toggle="tooltip"
-                                             id="tooltip-sort-by-ai" title="" class="fa-regular fa-circle-info"
-                                             data-original-title="<div class=&quot;custom-tooltip-sort-by-ai&quot;><p>Kết quả tìm kiếm được tối ưu và chọn lọc bởi Toppy AI <br> Tiếp lợi thế tìm việc hiệu quả</p></div>"></i>
-                                     </label>
-                                 </div>
-                                 <div class="radio-choose-active">
-                                     <input id="sort-value-new" type="radio" name="sort-advanced" value="new">
-                                     <label for="sort-value-new">Ngày đăng</label>
-                                 </div>
-                                 <div class="radio-choose-active">
-                                     <input id="sort-value-up_top" type="radio" name="sort-advanced" value="up_top">
-                                     <label for="sort-value-up_top">Ngày cập nhật</label>
-                                 </div>
-                                 <div class="radio-choose-active">
-                                     <input id="sort-value-high_salary" type="radio" name="sort-advanced"
-                                         value="high_salary">
-                                     <label for="sort-value-high_salary">Lương cao đến thấp</label>
-                                 </div>
-                                 <div class="radio-choose-active">
-                                     <input id="sort-value-urgent" type="radio" name="sort-advanced" value="urgent">
-                                     <label for="sort-value-urgent">Cần tuyển gấp</label>
-                                 </div>
-                             </div>
-                         </div>
                          <div class="job-body wrapper-main">
                              <div class="col-md-9">
                                  <div class="wrapper-content">
                                      <div class="job-list-main">
                                          <div class="box-job-list">
-                                             <link rel="stylesheet"
-                                                 href="https://static.topcv.vn/v4/css/components/desktop/jobs/job-list-search-result.f3a3504e765512c7K.css">
                                              <div class="job-list-search-result">
                                                  @if ($jobPostings->isEmpty())
                                                      <p>Không tìm thấy công việc nào phù hợp.</p>
@@ -931,112 +210,12 @@
                                              </div>
                                              <script></script>
                                          </div>
-                                         <div id="box-setting-notification-job">
-                                             <div class="box-setting">
-                                                 <div class="box-setting_content">
-                                                     <p class="box-setting_content-title">
-                                                         Nhận thông báo qua email
-                                                     </p>
-                                                     <p class="box-setting_content-description">
-                                                         TopCV có 2.000 việc làm mới mỗi ngày, hãy để TopCV gửi thông báo
-                                                         cho
-                                                         bạn khi có việc làm mới phù hợp
-                                                     </p>
-                                                 </div>
-                                                 <a href="javascript:void(0)" data-keyword=""
-                                                     data-box="result-search-job"
-                                                     data-referer="job_alert_success_job_search_bot"
-                                                     data-key-tracking="job_alert_click_job_search_bot"
-                                                     class="btn btn-setting btn-show-modal-job-notification-setting">
-                                                     <i class="fa-regular fa-bell"></i>
-                                                     Nhận thông báo
-                                                 </a>
-                                             </div>
-                                         </div>
                                          <link rel="stylesheet"
                                              href="https://static.topcv.vn/v4/css/components/box-job-notification-setting.6e3fb86463e68cdfK.css">
-
-                                         <div class="box-survey-search-job lazy" id="box-survey-search-job"
-                                             data-lazy-function="initBoxSurveySearchJob">
-                                             <div class="form-group box-survey-search-job_content">
-                                                 <label for="">Bạn có hài lòng với trải nghiệm tìm việc trên TopCV
-                                                     không? <span class="required">*</span></label>
-                                                 <div class="list-icon">
-                                                     <div class="list-icon_tab status-option verry_bad"
-                                                         data-option="Rất tệ">
-                                                         <lottie-player
-                                                             src="https://www.topcv.vn/v4/image/survey/search-job/animation/verry_bad.json"
-                                                             background="transparent" speed="1" autoplay=""
-                                                             loop=""></lottie-player>
-                                                         <div class="list-icon_tab-title">
-                                                             Rất tệ
-                                                         </div>
-                                                     </div>
-                                                     <div class="list-icon_tab status-option bad" data-option="Tệ">
-                                                         <lottie-player
-                                                             src="https://www.topcv.vn/v4/image/survey/search-job/animation/bad.json"
-                                                             background="transparent" speed="1" autoplay=""
-                                                             loop=""></lottie-player>
-                                                         <div class="list-icon_tab-title">
-                                                             Tệ
-                                                         </div>
-                                                     </div>
-                                                     <div class="list-icon_tab status-option normal"
-                                                         data-option="Bình thường">
-                                                         <lottie-player
-                                                             src="https://www.topcv.vn/v4/image/survey/search-job/animation/normal.json"
-                                                             background="transparent" speed="1" autoplay=""
-                                                             loop=""></lottie-player>
-                                                         <div class="list-icon_tab-title">
-                                                             Bình thường
-                                                         </div>
-                                                     </div>
-                                                     <div class="list-icon_tab status-option good" data-option="Tốt">
-                                                         <lottie-player
-                                                             src="https://www.topcv.vn/v4/image/survey/search-job/animation/good.json"
-                                                             background="transparent" speed="1" autoplay=""
-                                                             loop=""></lottie-player>
-                                                         <div class="list-icon_tab-title">
-                                                             Tốt
-                                                         </div>
-                                                     </div>
-                                                     <div class="list-icon_tab status-option verry_good"
-                                                         data-option="Tuyệt vời">
-                                                         <lottie-player
-                                                             src="https://www.topcv.vn/v4/image/survey/search-job/animation/verry_good.json"
-                                                             background="transparent" speed="1" autoplay=""
-                                                             loop=""></lottie-player>
-                                                         <div class="list-icon_tab-title">
-                                                             Tuyệt vời
-                                                         </div>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                             <div class="form-group box-survey-search-job_content">
-                                                 <label for="">Vui lòng chia sẻ lý do tại sao</label>
-                                                 <textarea class="form-control border-hover" name="reason" id="evaluate_reason" placeholder="Lý do của bạn"
-                                                     cols="30" rows="2"></textarea>
-                                             </div>
-                                             <div class="form-group box-survey-search-job_content text-center">
-                                                 <div class="btn btn-submit-survey disabled">Gửi</div>
-                                             </div>
-                                         </div>
-                                         <div class="box-survey-search-job submit-success"
-                                             id="box-survey-search-job-success" style="display: none">
-                                             <div class="submit-success_content">
-                                                 <div class="icon">
-                                                     <img data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/survey/search-job/check.png"
-                                                         alt="check" class="lazy">
-                                                 </div>
-                                                 <p class="title">
-                                                     Cảm ơn bạn đã chia sẻ
-                                                 </p>
-                                                 <p class="message">Chúc bạn sớm tìm được công việc như ý!</p>
-                                             </div>
-                                         </div>
                                      </div>
                                      <div class="job-list-detail"></div>
                                  </div>
+                                 
                              </div>
                              <div class="col-md-3 right-box box-interested">
                                  <div class="interested">

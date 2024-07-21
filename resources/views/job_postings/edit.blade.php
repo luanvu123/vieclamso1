@@ -67,6 +67,7 @@
                                       @endforeach
                                   </select>
                               </div>
+
                               <!-- Job Type -->
                               <div class="form">
                                   <h5>Job Type</h5>
@@ -221,7 +222,7 @@
                                   <h5>Website <span>(optional)</span></h5>
                                   <input type="text" name="website" value="{{ $jobPosting->website }}">
                               </div>
-                               <!-- Place -->
+                              <!-- Place -->
                               <div class="form">
                                   <h5>Company size <span>(optional)</span></h5>
                                   <input type="text" name="place" value="{{ $jobPosting->place }}">
