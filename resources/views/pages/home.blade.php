@@ -1,5 +1,52 @@
  @extends('layout')
  @section('content')
+     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+     <style>
+         /* Phần CSS để trang trí form */
+         .search-form {
+             display: flex;
+             flex-wrap: wrap;
+             max-width: 600px;
+             margin: auto;
+             padding: 20px;
+             border: 1px solid #ccc;
+             border-radius: 5px;
+             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         }
+
+         .search-form .form-group {
+             flex: 1;
+             margin-right: 10px;
+         }
+
+         .search-form .form-group label {
+             display: block;
+             font-weight: bold;
+             margin-bottom: 5px;
+         }
+
+         .search-form .form-group input[type="text"],
+         .search-form .form-group select {
+             width: 100%;
+             padding: 10px;
+             font-size: 16px;
+             border: 1px solid #ccc;
+             border-radius: 5px;
+         }
+
+         .search-form .form-group button {
+             background-color: #4CAF50;
+             color: white;
+             border: none;
+             padding: 10px 20px;
+             cursor: pointer;
+             border-radius: 5px;
+         }
+
+         .search-form .form-group button:hover {
+             background-color: #45a049;
+         }
+     </style>
      <div id="page-welcome">
          <section id="section-header">
              <div class="container">
@@ -10,164 +57,32 @@
                              <span class="section-title">Định hướng nghề nghiệp</span>
                              dành cho bạn.
                          </h2>
-                         <div class="form-search">
-                             <form id="frm-search-job" method="GET" onsubmit="return false;">
-                                 <div class="group-search">
-                                     <div class="item item-search">
-                                         <div class="icon">
-                                             <i class="fa-regular fa-magnifying-glass"></i>
-                                         </div>
-                                         <input class="form-controlui-autocomplete-input" value
-                                             placeholder="Vị trí ứng tuyển" id="keyword" autocomplete="off">
-                                     </div>
-                                     <div class="item search-city">
-                                         <div class="icon">
-                                             <i class="fa-regular fa-location-dot"></i>
-                                         </div>
-                                         <select name="city" id="city" class="form-control select2">
-                                             <option value>Tất cả địa điểm</option>
-                                             <option value="1">Hà Nội</option>
-                                             <option value="2">Hồ Chí Minh</option>
-                                             <option value="3">Bình Dương</option>
-                                             <option value="4">Bắc Ninh</option>
-                                             <option value="5">Đồng Nai</option>
-                                             <option value="6">Hưng Yên</option>
-                                             <option value="7">Hải Dương</option>
-                                             <option value="8">Đà Nẵng</option>
-                                             <option value="9">Hải Phòng</option>
-                                             <option value="10">An Giang</option>
-                                             <option value="11">Bà Rịa-Vũng Tàu</option>
-                                             <option value="12">Bắc Giang</option>
-                                             <option value="13">Bắc Kạn</option>
-                                             <option value="14">Bạc Liêu</option>
-                                             <option value="15">Bến Tre</option>
-                                             <option value="16">Bình Định</option>
-                                             <option value="17">Bình Phước</option>
-                                             <option value="18">Bình Thuận</option>
-                                             <option value="19">Cà Mau</option>
-                                             <option value="20">Cần Thơ</option>
-                                             <option value="21">Cao Bằng</option>
-                                             <option value="22">Cửu Long</option>
-                                             <option value="23">Đắk Lắk</option>
-                                             <option value="24">Đắc Nông</option>
-                                             <option value="25">Điện Biên</option>
-                                             <option value="26">Đồng Tháp</option>
-                                             <option value="27">Gia Lai</option>
-                                             <option value="28">Hà Giang</option>
-                                             <option value="29">Hà Nam</option>
-                                             <option value="30">Hà Tĩnh</option>
-                                             <option value="31">Hậu Giang</option>
-                                             <option value="32">Hoà Bình</option>
-                                             <option value="33">Khánh Hoà</option>
-                                             <option value="34">Kiên Giang</option>
-                                             <option value="35">Kon Tum</option>
-                                             <option value="36">Lai Châu</option>
-                                             <option value="37">Lâm Đồng</option>
-                                             <option value="38">Lạng Sơn</option>
-                                             <option value="39">Lào Cai</option>
-                                             <option value="40">Long An</option>
-                                             <option value="41">Miền Bắc</option>
-                                             <option value="42">Miền Nam</option>
-                                             <option value="43">Miền Trung</option>
-                                             <option value="44">Nam Định</option>
-                                             <option value="45">Nghệ An</option>
-                                             <option value="46">Ninh Bình</option>
-                                             <option value="47">Ninh Thuận</option>
-                                             <option value="48">Phú Thọ</option>
-                                             <option value="49">Phú Yên</option>
-                                             <option value="50">Quảng Bình</option>
-                                             <option value="51">Quảng Nam</option>
-                                             <option value="52">Quảng Ngãi</option>
-                                             <option value="53">Quảng Ninh</option>
-                                             <option value="54">Quảng Trị</option>
-                                             <option value="55">Sóc Trăng</option>
-                                             <option value="56">Sơn La</option>
-                                             <option value="57">Tây Ninh</option>
-                                             <option value="58">Thái Bình</option>
-                                             <option value="59">Thái Nguyên</option>
-                                             <option value="60">Thanh Hoá</option>
-                                             <option value="61">Thừa Thiên Huế</option>
-                                             <option value="62">Tiền Giang</option>
-                                             <option value="63">Toàn Quốc</option>
-                                             <option value="64">Trà Vinh</option>
-                                             <option value="65">Tuyên Quang</option>
-                                             <option value="66">Vĩnh Long</option>
-                                             <option value="67">Vĩnh Phúc</option>
-                                             <option value="68">Yên Bái</option>
-                                             <option value="100">Nước Ngoài</option>
-                                         </select>
-                                     </div>
-                                     <div class="col-button">
-                                         <button class="btn btn-topcv btn-search-job">Tìm kiếm</button>
-                                     </div>
-                                 </div>
-                             </form>
-                         </div>
+                         <form class="search-form" action="/search-jobs" method="GET">
+                             <div class="form-group">
+                                 <input type="text" id="key" name="keyword" placeholder="Nhập từ khóa tìm kiếm...">
+                             </div>
+                             <div class="form-group">
+                                 <select id="city" name="city">
+                                     <option value="">Chọn thành phố</option>
+                                     <option value="Hà Nội">Hà Nội</option>
+                                     <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                     <option value="Đà Nẵng">Đà Nẵng</option>
+                                     <option value="Cần Thơ">Cần Thơ</option>
+                                     <option value="Hải Phòng">Hải Phòng</option>
+
+                                 </select>
+                             </div>
+                             <div class="form-group">
+                                 <button type="submit">Tìm kiếm</button>
+                             </div>
+                         </form>
+                     </div>
+                     <div class="col">
                          <button class="btn-show-video">
                              <img class="img-responsive"
                                  src="../cdn-new.topcv.vn/unsafe/800x/https_/static.topcv.vn/v4/image/welcome/section-header/banner.png"
                                  alt>
                          </button>
-                     </div>
-                     <div class="col">
-                         <div class="box-demand-job">
-                             <div class="box-demand-job_work-market">
-                                 <div class="work-market_header">
-                                     <span>
-                                         <img src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/welcome/section-header/work_market_star.png"
-                                             alt>
-                                         Thị trường việc làm hôm nay:
-                                     </span>
-                                     <span class="date">12/06/2024</span>
-                                 </div>
-                                 <div class="work-market_content">
-                                     <div class="job-hiring">
-                                         <span>Việc làm đang tuyển</span>
-                                         <span class="quantity" name="quantity_job_recruitment">
-                                             0
-                                         </span>
-                                         <div class="status">
-                                             <i class="fa-solid fa-arrow-trend-up"></i>
-                                         </div>
-                                     </div>
-                                     <div class="job-hiring">
-                                         <span>Việc làm mới hôm nay</span>
-                                         <span class="quantity" name="quantity_job_new_today">
-                                             0
-                                         </span>
-                                     </div>
-                                 </div>
-                             </div>
-                             <div class="header">
-                                 <div class="header-title">
-                                     <img src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/welcome/section-header/trend-hr-chart.png"
-                                         alt>
-                                     <span class="caption">
-                                         Nhu cầu tuyển dụng theo
-                                     </span>
-                                 </div>
-                                 <div class="box-select">
-                                     <select name="demand-job-select" id="demand-job-select"
-                                         class="form-control select2">
-                                         <option value="2">
-                                             Ngành nghề</option>
-                                         <option value="4">
-                                             Mức lương</option>
-                                     </select>
-                                 </div>
-                             </div>
-                             <img class="img-responsive loading-chart"
-                                 src="https://static.topcv.vn/v4/image/welcome/section-header/loading-chart.svg" />
-                             <div class="box-chart">
-                                 <div style="height: 105px">
-                                     <canvas id="myChartDemandJobHomePage"></canvas>
-                                 </div>
-                                 <div id="htmlLegendDemandJobHomePage"></div>
-                             </div>
-                             <div class="box-load-more">
-                                 <a>Xem thêm <i class="fa-regular fa-chevrons-down"></i></a>
-                             </div>
-                         </div>
                      </div>
                  </div>
              </div>
@@ -206,45 +121,9 @@
                      </div>
                      <div class="box-filter">
                          <div class="input">
-                             <div class="input-group" id="filter-feature-job-container">
-                                 <div class="input-group-prepend">
-                                     <span class="input-group-text">
-                                         <i class="fa-solid fa-bars-filter"></i>
-                                         Lọc theo:
-                                     </span>
-                                 </div>
-                                 <select id="filter-feature-job" class="form-control js-option-filter">
-                                     <option value="cities">Địa điểm</option>
-                                     <option value="salary">Mức lương</option>
-                                     <option value="experience">Kinh nghiệm</option>
-                                     <option value="categories">Ngành nghề</option>
-                                 </select>
-                             </div>
                          </div>
-                         <div vue-cloak="" class="box-smart-filter box-smart-feature-jobs">
-                             <div class="box-smart-location">
-                                 <div class="prev-location btn-slick-arrow"><i class="fa-solid fa-angle-left"></i>
-                                 </div>
-                                 <div class="box-smart-list-location">
-                                     <div data-city_id="0" class="box-smart-item active">
-                                         Ngẫu Nhiên
-                                     </div>
-                                     <div data-city_id="1" class="box-smart-item">
-                                         Hà Nội
-                                     </div>
-                                     <div data-city_id="2" class="box-smart-item">
-                                         Thành phố Hồ Chí Minh
-                                     </div>
-                                     <div data-city_id="41" class="box-smart-item">
-                                         Miền Bắc
-                                     </div>
-                                     <div data-city_id="42" class="box-smart-item">
-                                         Miền Nam
-                                     </div>
-                                 </div>
-                                 <div class="next-location btn-slick-arrow"><i class="fa-solid fa-angle-right"></i>
-                                 </div>
-                             </div>
+                         <div class="box-smart-filter box-smart-feature-jobs">
+
                          </div>
                      </div>
                      <div class="text-guide-quick-view guide-box-feature active">
@@ -274,18 +153,17 @@
                                                          </a>
                                                          <div class="col-title cvo-flex-grow">
                                                              <h3>
-                                                                 <a href="{{ route('job-postings.show', $jobPosting->slug) }}"
+                                                                 <a href="{{ route('job.show', $jobPosting->slug) }}"
                                                                      target="_blank"
                                                                      class="title quickview-job text_ellipsis">
                                                                      @if ($jobPosting->is_urgent)
-                                                                         <span
-                                                                             class="label label-warning urgent">Gấp</span>
+                                                                         <span class="label label-warning urgent">Gấp</span>
                                                                      @endif
                                                                      <strong
                                                                          class="job_title ">{{ $jobPosting->title }}</strong>
                                                                  </a>
                                                              </h3>
-                                                             <a href="{{ route('employers.show', $jobPosting->employer->id) }}"
+                                                             <a href="{{ route('job.show', $jobPosting->slug) }}"
                                                                  target="_blank"
                                                                  class="text-silver company text_ellipsis company_name">
                                                                  {{ $jobPosting->company_name }}
@@ -326,6 +204,7 @@
                                          class="fa-solid fa-chevron-right"></i></span>
                              </div>
                          </div>
+                     </div>
                  </section>
              </div>
          </section>
@@ -919,8 +798,7 @@
                                                  data-original-title="Hà Nội">Hà Nội</p>
                                          </div>
                                      </div>
-                                     <div class="job-item active animated zoomIn" data-index="item-20"
-                                         data-id="1367610">
+                                     <div class="job-item active animated zoomIn" data-index="item-20" data-id="1367610">
                                          <a class="job-item__link" target="_blank"
                                              href="https://www.topcv.vn/viec-lam/chuyen-vien-nhan-su/1367610.html?ta_source=DashboardJob_LinkDetail">
                                              <img class="job-item__logo"
@@ -943,8 +821,7 @@
                                                  data-original-title="Hồ Chí Minh">Hồ Chí Minh</p>
                                          </div>
                                      </div>
-                                     <div class="job-item active animated zoomIn" data-index="item-21"
-                                         data-id="1367552">
+                                     <div class="job-item active animated zoomIn" data-index="item-21" data-id="1367552">
                                          <a class="job-item__link" target="_blank"
                                              href="https://www.topcv.vn/viec-lam/nhan-vien-kinh-doanh-tu-van-sale-thu-nhap-tu-15-35-trieu-tai-ha-noi/1367552.html?ta_source=DashboardJob_LinkDetail">
                                              <img class="job-item__logo"
@@ -971,8 +848,7 @@
                                                  data-original-title="Hà Nội">Hà Nội</p>
                                          </div>
                                      </div>
-                                     <div class="job-item active animated zoomIn" data-index="item-22"
-                                         data-id="1367488">
+                                     <div class="job-item active animated zoomIn" data-index="item-22" data-id="1367488">
                                          <a class="job-item__link" target="_blank"
                                              href="https://www.topcv.vn/viec-lam/truong-phong-mua-hang/1367488.html?ta_source=DashboardJob_LinkDetail">
                                              <img class="job-item__logo"
@@ -996,8 +872,7 @@
                                                  data-original-title="Hải Phòng">Hải Phòng</p>
                                          </div>
                                      </div>
-                                     <div class="job-item active animated zoomIn" data-index="item-23"
-                                         data-id="1367483">
+                                     <div class="job-item active animated zoomIn" data-index="item-23" data-id="1367483">
                                          <a class="job-item__link" target="_blank"
                                              href="https://www.topcv.vn/viec-lam/giam-doc-kinh-doanh-asm-khu-vuc-tay-bac-lang-son-cao-bang-bac-kan/1367483.html?ta_source=DashboardJob_LinkDetail">
                                              <img class="job-item__logo"
@@ -1023,8 +898,7 @@
                                                  data-original-title="Miền Bắc">Miền Bắc</p>
                                          </div>
                                      </div>
-                                     <div class="job-item active animated zoomIn" data-index="item-24"
-                                         data-id="1367476">
+                                     <div class="job-item active animated zoomIn" data-index="item-24" data-id="1367476">
                                          <a class="job-item__link" target="_blank"
                                              href="https://www.topcv.vn/viec-lam/giam-sat-kinh-doanh-luong-cung-tu-15-20-trieu-thu-nhap-tong-tu-30-trieu-thang/1367476.html?ta_source=DashboardJob_LinkDetail">
                                              <img class="job-item__logo"
@@ -1050,8 +924,7 @@
                                              </p>
                                          </div>
                                      </div>
-                                     <div class="job-item active animated zoomIn" data-index="item-25"
-                                         data-id="1367462">
+                                     <div class="job-item active animated zoomIn" data-index="item-25" data-id="1367462">
                                          <a class="job-item__link" target="_blank"
                                              href="https://www.topcv.vn/viec-lam/quan-ly-livestream-thu-nhap-len-den-20-trieu-tai-ha-noi/1367462.html?ta_source=DashboardJob_LinkDetail">
                                              <img class="job-item__logo"
@@ -1076,8 +949,7 @@
                                                  data-original-title="Hà Nội">Hà Nội</p>
                                          </div>
                                      </div>
-                                     <div class="job-item active animated zoomIn" data-index="item-26"
-                                         data-id="1367171">
+                                     <div class="job-item active animated zoomIn" data-index="item-26" data-id="1367171">
                                          <a class="job-item__link" target="_blank"
                                              href="https://www.topcv.vn/viec-lam/ke-toan-truong-cau-giay-thu-nhap-15-25-trieu/1367171.html?ta_source=DashboardJob_LinkDetail">
                                              <img class="job-item__logo"
@@ -3479,18 +3351,18 @@
                              </style>
                              <g>
                                  <path class="st0" d="M968.5,492c0,31.2-3.1,62.4-9.2,93c-6.1,30.6-15.2,60.6-27.2,89.4c-23.9,57.6-59.3,110.4-103.5,154.4
-              c-44.1,44.1-96.9,79.4-154.5,103.2c-28.8,11.9-58.8,21-89.3,27c-30.6,6-61.7,9-92.9,9c-31.1,0-62.3-3.1-92.8-9.2
-              c-30.5-6.1-60.5-15.2-89.2-27.1c-57.5-23.9-110.2-59.3-154.2-103.3c-44-44.1-79.3-96.8-103-154.3c-11.9-28.8-20.9-58.7-26.9-89.2
-              c-6-30.5-9-61.6-9-92.7c0-31.1,3.1-62.2,9.1-92.7C32,368.8,41,338.9,53,310.2c23.8-57.5,59.2-110.1,103.2-154
-              c44-43.9,96.7-79.2,154.1-102.9c28.7-11.9,58.6-20.9,89.1-26.9c30.5-6,61.6-9,92.6-9c31.1,0,62.1,3.1,92.6,9.1
-              c30.5,6.1,60.3,15.1,89,27c57.4,23.8,109.9,59.1,153.8,103.1c43.9,43.9,79.1,96.5,102.8,153.9c11.9,28.7,20.9,58.5,26.9,89
-              c6,30.4,9,61.5,9,92.5H968.5z M966,492c0-31-3.1-62-9.1-92.5c-6-30.4-15.1-60.2-27-88.9c-23.8-57.3-59-109.8-102.9-153.6
-              c-43.9-43.8-96.4-79-153.7-102.6c-28.6-11.8-58.5-20.9-88.9-26.8c-30.4-6-61.4-9-92.4-9c-31,0-62,3.1-92.4,9.1
-              c-30.4,6-60.2,15.1-88.8,27c-57.2,23.7-109.6,58.9-153.4,102.8C113.7,201.3,78.6,253.8,55,311c-11.8,28.6-20.8,58.4-26.8,88.7
-              c-6,30.4-9,61.3-8.9,92.3c0,30.9,3.1,61.9,9.1,92.2c6,30.3,15.1,60.1,26.9,88.7C79,730,114.2,782.4,157.9,826.1
-              c43.8,43.7,96.1,78.8,153.3,102.4c28.6,11.8,58.3,20.8,88.6,26.8c30.3,6,61.2,8.9,92.1,8.9c30.9,0,61.8-3.1,92.1-9.1
-              c30.3-6,60-15,88.5-26.9c57.1-23.7,109.3-58.8,153-102.5c43.7-43.7,78.6-96,102.2-153.1c11.8-28.5,20.8-58.2,26.7-88.5
-              c6-30.3,8.9-61.2,8.9-92H966z" />
+                                  c-44.1,44.1-96.9,79.4-154.5,103.2c-28.8,11.9-58.8,21-89.3,27c-30.6,6-61.7,9-92.9,9c-31.1,0-62.3-3.1-92.8-9.2
+                                  c-30.5-6.1-60.5-15.2-89.2-27.1c-57.5-23.9-110.2-59.3-154.2-103.3c-44-44.1-79.3-96.8-103-154.3c-11.9-28.8-20.9-58.7-26.9-89.2
+                                  c-6-30.5-9-61.6-9-92.7c0-31.1,3.1-62.2,9.1-92.7C32,368.8,41,338.9,53,310.2c23.8-57.5,59.2-110.1,103.2-154
+                                  c44-43.9,96.7-79.2,154.1-102.9c28.7-11.9,58.6-20.9,89.1-26.9c30.5-6,61.6-9,92.6-9c31.1,0,62.1,3.1,92.6,9.1
+                                  c30.5,6.1,60.3,15.1,89,27c57.4,23.8,109.9,59.1,153.8,103.1c43.9,43.9,79.1,96.5,102.8,153.9c11.9,28.7,20.9,58.5,26.9,89
+                                  c6,30.4,9,61.5,9,92.5H968.5z M966,492c0-31-3.1-62-9.1-92.5c-6-30.4-15.1-60.2-27-88.9c-23.8-57.3-59-109.8-102.9-153.6
+                                  c-43.9-43.8-96.4-79-153.7-102.6c-28.6-11.8-58.5-20.9-88.9-26.8c-30.4-6-61.4-9-92.4-9c-31,0-62,3.1-92.4,9.1
+                                  c-30.4,6-60.2,15.1-88.8,27c-57.2,23.7-109.6,58.9-153.4,102.8C113.7,201.3,78.6,253.8,55,311c-11.8,28.6-20.8,58.4-26.8,88.7
+                                  c-6,30.4-9,61.3-8.9,92.3c0,30.9,3.1,61.9,9.1,92.2c6,30.3,15.1,60.1,26.9,88.7C79,730,114.2,782.4,157.9,826.1
+                                  c43.8,43.7,96.1,78.8,153.3,102.4c28.6,11.8,58.3,20.8,88.6,26.8c30.3,6,61.2,8.9,92.1,8.9c30.9,0,61.8-3.1,92.1-9.1
+                                  c30.3-6,60-15,88.5-26.9c57.1-23.7,109.3-58.8,153-102.5c43.7-43.7,78.6-96,102.2-153.1c11.8-28.5,20.8-58.2,26.7-88.5
+                                  c6-30.3,8.9-61.2,8.9-92H966z" />
                              </g>
                          </svg>
                      </div>

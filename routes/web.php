@@ -4,6 +4,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Auth\EmployerLoginController;
 use App\Http\Controllers\EmployerManageController;
 use App\Http\Controllers\JobPostingController;
+use App\Http\Controllers\JobsManageController;
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -35,20 +36,23 @@ Auth::routes();
 Route::get('/recruitment', function () {
     return view('pages.recruitment');
 })->name('recruitment');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::get('/search-jobs', [SiteController::class, 'searchJobs'])->name('search-jobs');
 Route::get('employer/login', [EmployerLoginController::class, 'showLoginForm'])->name('employer.login');
 Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('employer.login.submit');
 Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('candidates', CandidateManageController::class);
     Route::put('/users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
     Route::get('/user-choose', [UserController::class, 'user_choose'])->name('user-choose');
     Route::resource('employers', EmployerManageController::class);
+    Route::resource('job-postings-manage', JobsManageController::class);
+    Route::get('/jobPosting-choose', [JobsManageController::class, 'jobPosting_choose'])->name('jobPosting-choose');
 });
 Route::get('/candidate-login-google', [CandidateController::class, 'redirectToGoogle'])->name('candidate.login.google');
 Route::get('candidate/register', [CandidateController::class, 'showRegistrationForm'])->name('candidate.register');
@@ -80,9 +84,11 @@ Route::middleware(['candidate'])->group(function () {
 
 Route::middleware(['employer'])->group(function () {
     Route::resource('job-postings', JobPostingController::class);
-     Route::get('/application-choose', [JobPostingController::class, 'application_choose'])->name('application-choose');
+    Route::get('/application-choose', [JobPostingController::class, 'application_choose'])->name('application-choose');
     Route::get('trang-chu-tuyen-dung', [JobPostingController::class, 'dashboard'])->name('job-postings.dashboard');
     Route::post('employer/logout', [EmployerLoginController::class, 'logout'])->name('logout-employer');
-     Route::get('employer/profile', [EmployerLoginController::class, 'profile'])->name('employer.profile');
+    Route::get('employer/profile', [EmployerLoginController::class, 'profile'])->name('employer.profile');
     Route::post('employer/profile', [EmployerLoginController::class, 'updateProfile'])->name('employer.profile.update');
 });
+
+Route::get('/jobs/filter', [JobPostingController::class, 'filter'])->name('job.filter');

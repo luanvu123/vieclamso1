@@ -462,7 +462,10 @@
                                      </div>
                                      <div class="job-detail__info--section-content">
                                          <div class="job-detail__info--section-content-title">Địa điểm</div>
-                                         <div class="job-detail__info--section-content-value">{{ $jobPosting->place }}
+                                        <div class="job-detail__info--section-content-value">
+    {{ implode(', ', json_decode($jobPosting->city)) }}
+
+
                                          </div>
                                      </div>
                                  </div>
@@ -485,88 +488,90 @@
                                      </div>
                                  </div>
                              </div>
-@if (!$isExpired)
-    <div class="job-detail__info--flex">
-        <div class="job-detail__info--deadline">
-            <span class="job-detail__info--deadline--icon">
-                <i class="fa-solid fa-clock"></i>
-            </span>
-            Hạn nộp hồ sơ: {{ $closingDate->format('d/m/Y') }}
-        </div>
-    </div>
-    <div class="job-detail__info--actions box-apply-current">
-        @auth('candidate')
-            @if (Auth::guard('candidate')->check())
-                @if ($applied)
-                    {{-- Ứng tuyển thành công --}}
-                    <div class="job-detail__info--actions box-apply-success">
-                        <a class="job-detail__info--actions-button button-primary open-apply-modal"
-                            href="#" data-toggle="modal">
-                            <span class="button-icon">
-                                <i class="fa-solid fa-arrow-rotate-right"></i>
-                            </span>
-                            Ứng tuyển lại
-                        </a>
-                        <a class="job-detail__info--actions-button button-white" target="_blank"
-                            href="http://candidate.topcvconnect.com/conversations/new/667298">
-                            <span class="button-icon">
-                                <i class="fa-solid fa-comments"></i>
-                            </span>
-                            Nhắn tin
-                        </a>
-                        <p style="margin-bottom: 0">
-                            Bạn đã gửi CV cho vị trí này vào ngày:
-                            <span class="date">{{ $appliedDate }}</span>.
-                            <a href="#" target="_blank" type="button"
-                                class="text-highlight show-applied-cv" style="margin-left: 5px">Xem CV đã nộp</a>
-                        </p>
-                    </div>
-                @else
-                    <a href="#"
-                        class="job-detail__info--actions-button button-primary open-apply-modal btn-apply-job"
-                        data-toggle="modal" data-target="#applyModal">
-                        <span class="button-icon">
-                            <i class="fa-light fa-paper-plane"></i>
-                        </span>
-                        Ứng tuyển ngay
-                    </a>
-                @endif
-            @endif
-        @else
-            <a href="{{ route('job-postings.show', $jobPosting->slug) }}"
-                class="job-detail__info--actions-button button-primary btn-apply-job">
-                <span class="button-icon">
-                    <i class="fa-light fa-paper-plane"></i>
-                </span>
-                Ứng tuyển ngay
-            </a>
-        @endauth
-        <a class="job-detail__info--actions-button button-white" href="#">
-            <span class="button-icon">
-                <i class="fa-regular fa-heart"></i>
-            </span>
-            Lưu tin
-        </a>
-    </div>
-@else
-    {{-- Nếu hết hạn ứng tuyển --}}
-    <div class="job-detail__info--actions box-apply-current">
-        <div class="job-detail__expired">
-            <span class="job-detail__info--deadline--icon is-expired">
-                <i class="fa-solid fa-brake-warning"></i>
-            </span>
-            Hết hạn ứng tuyển
-        </div>
-        <a href="#tab-job"
-            class="job-detail__info--actions-button button-primary btn-view-job-similar"
-            id="btn-view-job-similar">
-            Xem việc làm liên quan
-            <span class="button-icon">
-                <i class="fa-solid fa-angles-down"></i>
-            </span>
-        </a>
-    </div>
-@endif
+                             @if (!$isExpired)
+                                 <div class="job-detail__info--flex">
+                                     <div class="job-detail__info--deadline">
+                                         <span class="job-detail__info--deadline--icon">
+                                             <i class="fa-solid fa-clock"></i>
+                                         </span>
+                                         Hạn nộp hồ sơ: {{ $closingDate->format('d/m/Y') }}
+                                     </div>
+                                 </div>
+                                 <div class="job-detail__info--actions box-apply-current">
+                                     @auth('candidate')
+                                         @if (Auth::guard('candidate')->check())
+                                             @if ($applied)
+                                                 {{-- Ứng tuyển thành công --}}
+                                                 <div class="job-detail__info--actions box-apply-success">
+                                                     <a class="job-detail__info--actions-button button-primary open-apply-modal"
+                                                         href="#" data-toggle="modal">
+                                                         <span class="button-icon">
+                                                             <i class="fa-solid fa-arrow-rotate-right"></i>
+                                                         </span>
+                                                         Ứng tuyển lại
+                                                     </a>
+                                                     <a class="job-detail__info--actions-button button-white" target="_blank"
+                                                         href="http://candidate.topcvconnect.com/conversations/new/667298">
+                                                         <span class="button-icon">
+                                                             <i class="fa-solid fa-comments"></i>
+                                                         </span>
+                                                         Nhắn tin
+                                                     </a>
+                                                     <p style="margin-bottom: 0">
+                                                         Bạn đã gửi CV cho vị trí này vào ngày:
+                                                         <span class="date">{{ $appliedDate }}</span>.
+                                                         <a href="#" target="_blank" type="button"
+                                                             class="text-highlight show-applied-cv"
+                                                             style="margin-left: 5px">Xem CV đã nộp</a>
+                                                     </p>
+                                                 </div>
+                                             @else
+                                                 <a href="#"
+                                                     class="job-detail__info--actions-button button-primary open-apply-modal btn-apply-job"
+                                                     data-toggle="modal" data-target="#applyModal">
+                                                     <span class="button-icon">
+                                                         <i class="fa-light fa-paper-plane"></i>
+                                                     </span>
+                                                     Ứng tuyển ngay
+                                                 </a>
+                                             @endif
+                                         @endif
+                                     @else
+                                          <a href="#"
+                                                     class="job-detail__info--actions-button button-primary open-apply-modal btn-apply-job"
+                                                     data-toggle="modal" data-target="#applyModal">
+                                                     <span class="button-icon">
+                                                         <i class="fa-light fa-paper-plane"></i>
+                                                     </span>
+                                                     Ứng tuyển ngay
+                                                 </a>
+                                     @endauth
+                                     <a class="job-detail__info--actions-button button-white" href="#">
+                                         <span class="button-icon">
+                                             <i class="fa-regular fa-heart"></i>
+                                         </span>
+                                         Lưu tin
+                                     </a>
+                                 </div>
+                             @else
+                                 {{-- Nếu hết hạn ứng tuyển --}}
+                                 <div class="job-detail__info--actions box-apply-current">
+                                     <div class="job-detail__expired">
+                                         <span class="job-detail__info--deadline--icon is-expired">
+                                             <i class="fa-solid fa-brake-warning"></i>
+                                         </span>
+                                         Hết hạn ứng tuyển
+                                     </div>
+                                     <a href="#tab-job"
+                                         class="job-detail__info--actions-button button-primary btn-view-job-similar"
+                                         id="btn-view-job-similar">
+                                         Xem việc làm liên quan
+                                         <span class="button-icon">
+                                             <i class="fa-solid fa-angles-down"></i>
+                                         </span>
+                                     </a>
+                                 </div>
+                             @endif
 
 
                          </div>
@@ -3421,6 +3426,7 @@
                      <div class="job-detail__body-right">
                          <div class="job-detail__box--right job-detail__company">
                              <div class="job-detail__company--information">
+
                                  <div class="job-detail__company--information-item company-name">
                                      <a rel="nofollow" class="company-logo" href="{{ $jobPosting->website }}"
                                          target="_blank" data-toggle="tooltip" title="" data-placement="top"
@@ -3437,7 +3443,27 @@
                                          </div>
                                      </h2>
                                  </div>
-
+                                 <div class="job-detail__company--information-item company-scale">
+                                     <div class="company-title">
+                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             viewBox="0 0 16 16" fill="none">
+                                             <path
+                                                 d="M5.99998 1.33334C4.25331 1.33334 2.83331 2.75334 2.83331 4.5C2.83331 6.21334 4.17331 7.6 5.91998 7.66C5.97331 7.65334 6.02665 7.65334 6.06665 7.66C6.07998 7.66 6.08665 7.66 6.09998 7.66C6.10665 7.66 6.10665 7.66 6.11331 7.66C7.81998 7.6 9.15998 6.21334 9.16665 4.5C9.16665 2.75334 7.74665 1.33334 5.99998 1.33334Z"
+                                                 fill="#7F878F"></path>
+                                             <path
+                                                 d="M9.38664 9.43333C7.52664 8.19333 4.49331 8.19333 2.61997 9.43333C1.77331 10 1.30664 10.7667 1.30664 11.5867C1.30664 12.4067 1.77331 13.1667 2.61331 13.7267C3.54664 14.3533 4.77331 14.6667 5.99997 14.6667C7.22664 14.6667 8.45331 14.3533 9.38664 13.7267C10.2266 13.16 10.6933 12.4 10.6933 11.5733C10.6866 10.7533 10.2266 9.99333 9.38664 9.43333Z"
+                                                 fill="#7F878F"></path>
+                                             <path
+                                                 d="M13.3267 4.89333C13.4333 6.18667 12.5133 7.32 11.24 7.47333C11.2333 7.47333 11.2333 7.47333 11.2267 7.47333H11.2067C11.1667 7.47333 11.1267 7.47333 11.0933 7.48667C10.4467 7.52 9.85334 7.31333 9.40668 6.93333C10.0933 6.32 10.4867 5.4 10.4067 4.4C10.36 3.86 10.1733 3.36667 9.89334 2.94667C10.1467 2.82 10.44 2.74 10.74 2.71333C12.0467 2.6 13.2133 3.57333 13.3267 4.89333Z"
+                                                 fill="#7F878F"></path>
+                                             <path
+                                                 d="M14.66 11.06C14.6067 11.7067 14.1933 12.2667 13.5 12.6467C12.8333 13.0133 11.9933 13.1867 11.16 13.1667C11.64 12.7333 11.92 12.1933 11.9733 11.62C12.04 10.7933 11.6467 10 10.86 9.36667C10.4133 9.01333 9.89333 8.73333 9.32666 8.52667C10.8 8.1 12.6533 8.38667 13.7933 9.30667C14.4067 9.8 14.72 10.42 14.66 11.06Z"
+                                                 fill="#7F878F"></path>
+                                         </svg>
+                                         Quy mô:
+                                     </div>
+                                     <div class="company-value">{{ $jobPosting->place }}</div>
+                                 </div>
                                  <div class="job-detail__company--information-item company-address">
                                      <div class="company-title">
                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

@@ -1145,7 +1145,7 @@
     </div>
     <nav class="cvo-flex cvo-items-center cvo-justify-between" id="navbar-mobile">
         <h1>
-            <a href="index944d.html?ref=you" class="cvo-flex cvo-items-center">
+            <a href="{{route('/')}}" class="cvo-flex cvo-items-center">
                 <img src="../static.topcv.vn/v4/image/logo/topcv-logo-6.png" alt="TopCV tuyen dung tai TopCV"
                     title="TopCV tuyển dụng tại TopCV" class="logo">
             </a>
@@ -1542,7 +1542,7 @@
         <div class="container-fluid px-30">
             <div class="navbar-header">
                 <h1 style="margin: 0">
-                    <a class="navbar-brand" href="index944d.html?ref=you">
+                    <a class="navbar-brand" href="{{route('/')}}">
                         <img src="../static.topcv.vn/v4/image/logo/topcv-logo-6.png" alt="TopCV tuyen dung tai TopCV"
                             title="TopCV tuyển dụng tại TopCV" class>
                     </a>
@@ -1799,7 +1799,7 @@
                     <li class="navbar-right__item group py16">
                         <div class="title">
                             <a href="javascript:void(0)">
-                                <img src="{{ Auth::guard('candidate')->user()->avatar_candicate ?? asset('storage/avatar/avatar-default.jpg') }}"
+                                <img src="{{asset('storage/'.Auth::guard('candidate')->user()->avatar_candicate) ?? asset('storage/avatar/avatar-default.jpg') }}"
                                     alt="Avatar"
                                     onerror="this.src='{{ asset('storage/avatar/avatar-default.jpg') }}'"
                                     alt="{{ Auth::guard('candidate')->user()->fullname_candicate }}">

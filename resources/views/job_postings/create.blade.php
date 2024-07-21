@@ -44,13 +44,14 @@
                             <!-- Title -->
                             <div class="form">
                                 <h5>Job Title</h5>
-                                <input class="search-field" type="text" name="title" placeholder="" value=""id="slug" onkeyup="ChangeToSlug()">
+                                <input class="search-field" type="text" name="title" placeholder=""
+                                    value=""id="slug" onkeyup="ChangeToSlug()">
                             </div>
-                              <!-- Title -->
+                            <!-- Title -->
                             <div class="form">
                                 <h5>Slug</h5>
                                 <input class="search-field" type="text" name="slug" placeholder="Đường dẫn"
-                                        id="convert_slug">
+                                    id="convert_slug">
                             </div>
                             <!-- Job Type -->
                             <div class="form">
@@ -62,6 +63,20 @@
                                     <option value="Freelance">Freelance</option>
                                 </select>
                             </div>
+                            <!-- Choose City -->
+                            <div class="form">
+                                <div class="select">
+                                    <h5>City</h5>
+                                    <select name="city[]" data-placeholder="Choose Cities" class="chosen-select" multiple>
+                                        <option value="Hà Nội">Hà Nội</option>
+                                        <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                        <option value="Đà Nẵng">Đà Nẵng</option>
+                                        <option value="Cần Thơ">Cần Thơ</option>
+                                        <!-- Các thành phố khác có thể thêm vào đây -->
+                                    </select>
+                                </div>
+                            </div>
+
                             <!-- Choose Category -->
                             <div class="form">
                                 <div class="select">
@@ -91,11 +106,7 @@
                                 <h5>Salary <span>(optional)</span></h5>
                                 <input type="text" name="salary" placeholder="Enter salary">
                             </div>
-                            <!-- Place -->
-                            <div class="form">
-                                <h5>Place <span>(optional)</span></h5>
-                                <input type="text" name="place" placeholder="Enter place">
-                            </div>
+
                             <!-- Experience -->
                             <div class="form">
                                 <h5>Experience <span>(optional)</span></h5>
@@ -120,14 +131,7 @@
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
-                            <!-- Status -->
-                            <div class="form">
-                                <h5>Status</h5>
-                                <select name="status" class="chosen-select-no-single">
-                                    <option value="1">Visible</option>
-                                    <option value="0">Hidden</option>
-                                </select>
-                            </div>
+
                             <!-- Skills required -->
                             <div class="form">
                                 <h5>Skills required <span>(optional)</span></h5>
@@ -181,7 +185,13 @@
                                 <h5>Website <span>(optional)</span></h5>
                                 <input type="text" name="website" placeholder="http://">
                             </div>
+                            <!-- Place -->
+                            <div class="form">
+                                <h5>Company size <span>(optional)</span></h5>
+                                <input type="text" name="place" placeholder="Enter place">
+                            </div>
                             <!-- Tagline -->
+
                             <div class="form">
                                 <h5>Tagline <span>(optional)</span></h5>
                                 <input type="text" name="tagline" placeholder="Briefly describe your company">

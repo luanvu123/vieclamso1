@@ -5,7 +5,7 @@
     <div id="titlebar">
         <div class="row">
             <div class="col-md-12">
-                <h2>Howdy, Tom!</h2>
+                <h2>Hello, {{ Auth::user()->name }}</h2>
                 <!-- Breadcrumbs -->
                 <nav id="breadcrumbs">
                     <ul>
@@ -25,7 +25,7 @@
         <div class="col-lg-3 col-md-6">
             <div class="dashboard-stat color-1">
                 <div class="dashboard-stat-content">
-                    <h4 class="counter">3</h4> <span>Active Job Listings</span>
+                    <h4 class="counter">{{ $activeJobListingsCount }}</h4> <span>Active Job Listings</span>
                 </div>
                 <div class="dashboard-stat-icon"><i class="ln ln-icon-File-Link"></i></div>
             </div>
@@ -35,47 +35,32 @@
         <div class="col-lg-3 col-md-6">
             <div class="dashboard-stat color-2">
                 <div class="dashboard-stat-content">
-                    <h4 class="counter">527</h4> <span>Total Job Views</span>
+                    <h4 class="counter">{{ $totalJobCount }}</h4> <span>Total Job</span>
                 </div>
                 <div class="dashboard-stat-icon"><i class="ln ln-icon-Bar-Chart"></i></div>
             </div>
         </div>
 
-
         <!-- Item -->
         <div class="col-lg-3 col-md-6">
             <div class="dashboard-stat color-3">
                 <div class="dashboard-stat-content">
-                    <h4 class="counter">17</h4> <span>Total Applications</span>
+                    <h4 class="counter">{{ $totalEmployerCount }}</h4> <span>Total Employer</span>
                 </div>
                 <div class="dashboard-stat-icon"><i class="ln ln-icon-Business-ManWoman"></i></div>
             </div>
         </div>
 
-
         <!-- Item -->
         <div class="col-lg-3 col-md-6">
             <div class="dashboard-stat color-4">
                 <div class="dashboard-stat-content">
-                    <h4 class="counter">36</h4> <span>Times Bookmarked</span>
+                    <h4 class="counter">{{ $totalCandidateCount }}</h4> <span>Total Candidate</span>
                 </div>
-                <div class="dashboard-stat-icon"><i class="ln ln-icon-Add-UserStar "></i></div>
+                <div class="dashboard-stat-icon"><i class="ln ln-icon-Add-UserStar"></i></div>
             </div>
         </div>
-
     </div>
-
-
     <div class="row">
-
-        <!-- Recent Activity -->
-        <div class="col-lg-6 col-md-12">
-            <div class="dashboard-list-box margin-top-20">
-                <h4>Recent Activities</h4>
-            </div>
-        </div>
-
-
-        <!-- Recent Activity -->
     </div>
 @endsection

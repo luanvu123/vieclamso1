@@ -31,8 +31,9 @@
 
                     <!-- Logo -->
                     <div id="logo">
-                     <h1><a href="{{ route('/') }}"><img src="{{ asset('static.topcv.vn/v4/image/logo/topcv-logo-6.png') }}" style="width: 206px"
-                                    alt="Work Scout" /></a></h1>
+                        <h1><a href="{{ route('/') }}"><img
+                                    src="{{ asset('static.topcv.vn/v4/image/logo/topcv-logo-6.png') }}"
+                                    style="width: 206px" alt="Work Scout" /></a></h1>
                     </div>
                 </div>
             </div>
@@ -58,7 +59,6 @@
 
                     <ul data-submenu-title="Start">
                         <li class="active"><a href="{{ route('home') }}">Dashboard</a></li>
-                        <li><a href="dashboard-messages.html">Messages <span class="nav-tag">2</span></a></li>
                     </ul>
 
                     <ul data-submenu-title="Management">
@@ -73,14 +73,18 @@
 
                         <li><a>Candidates</a>
                             <ul>
-                                <li><a href="{{route('candidates.index')}}">Manage Candidates <span
+                                <li><a href="{{ route('candidates.index') }}">Manage Candidates <span
                                             class="nav-tag">2</span></a></li>
                             </ul>
                         </li>
 
-                         <li><a>Employers</a>
+                        <li><a>Employers</a>
                             <ul>
-                                <li><a href="{{route('employers.index')}}">Manage Emplyers <span
+                                <li><a href="{{ route('employers.index') }}">Manage Emplyers <span
+                                            class="nav-tag">2</span></a></li>
+                            </ul>
+                            <ul>
+                                <li><a href="{{ route('job-postings-manage.index') }}">Manage Jobs <span
                                             class="nav-tag">2</span></a></li>
                             </ul>
                         </li>
@@ -89,10 +93,9 @@
                         <li><a href="{{ route('users.edit', auth()->user()) }}">My Profile</a></li>
                         <li><a href="{{ route('logout') }}"onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Logout</a></li>
-                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                class="d-none">
-                                                @csrf
-                                            </form>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </ul>
 
                 </div>
@@ -102,9 +105,9 @@
 
             <!-- Content
  ================================================== -->
- <div class="dashboard-content">
-            @yield('content')
- </div>
+            <div class="dashboard-content">
+                @yield('content')
+            </div>
             <!-- Content / End -->
 
 
@@ -143,7 +146,23 @@
             $('#user-table').DataTable();
         });
     </script>
-
+    <script>
+        $('.jobPosting_choose').change(function() {
+            var trangthai_val = $(this).val();
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('jobPosting-choose') }}",
+                method: "GET",
+                data: {
+                    trangthai_val: trangthai_val,
+                    id: id
+                },
+                success: function(data) {
+                    alert('Thay đổi thành công!');
+                }
+            });
+        })
+    </script>
     <script>
         $('.user_choose').change(function() {
             var trangthai_val = $(this).val();

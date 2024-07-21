@@ -55,6 +55,7 @@ class JobPostingController extends Controller
             'skills_required' => 'nullable|string|max:255',
             'area' => 'nullable|string|max:255',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'city' => 'required|array',
         ], [
             'title.required' => 'Job title is required.',
             'type.required' => 'Job type is required.',
@@ -64,6 +65,7 @@ class JobPostingController extends Controller
             'company_name.required' => 'Company name is required.',
             'email.required' => 'Your email is required.',
             'email.email' => 'Please enter a valid email address.',
+            'city.required' => 'At least one city is required.',
         ]);
 
         $jobPosting = new JobPosting();
@@ -89,10 +91,12 @@ class JobPostingController extends Controller
         $jobPosting->rank = $request->rank;
         $jobPosting->number_of_recruits = $request->number_of_recruits;
         $jobPosting->sex = $request->sex;
-        $jobPosting->status = $request->status;
+        $jobPosting->status = 1;
         $jobPosting->skills_required = $request->skills_required;
         $jobPosting->area = $request->area;
-
+        $jobPosting->city = $request->city;
+        // Chuyển đổi mảng thành chuỗi JSON và lưu vào trường city
+        $jobPosting->city = $request->city ? json_encode($request->city) : null;
         // Xử lý logo
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
@@ -129,7 +133,14 @@ class JobPostingController extends Controller
     public function edit($id)
     {
         $jobPosting = JobPosting::findOrFail($id);
-        return view('job_postings.edit', compact('jobPosting'));
+        // Lấy danh sách thành phố đã chọn của công việc
+        $selectedCities = json_decode($jobPosting->city);
+
+        // Lấy danh sách tất cả các thành phố
+        $cities = [
+            'Hà Nội', 'Hồ Chí Minh', 'Đà Nẵng', 'Cần Thơ', 'Hải Phòng', 'Huế', // và các thành phố khác
+        ];
+        return view('job_postings.edit', compact('jobPosting', 'selectedCities', 'cities'));
     }
 
     public function update(Request $request, $id)
@@ -152,6 +163,7 @@ class JobPostingController extends Controller
             'skills_required' => 'nullable|string|max:255',
             'area' => 'nullable|string|max:255',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'city' => 'required|array',
         ], [
             'title.required' => 'Job title is required.',
             'type.required' => 'Job type is required.',
@@ -161,6 +173,7 @@ class JobPostingController extends Controller
             'company_name.required' => 'Company name is required.',
             'email.required' => 'Your email is required.',
             'email.email' => 'Please enter a valid email address.',
+            'city.required' => 'At least one city is required.',
         ]);
 
         $jobPosting = JobPosting::findOrFail($id);
@@ -173,6 +186,7 @@ class JobPostingController extends Controller
         $jobPosting->email = $request->email;
         $jobPosting->title = $request->title;
         $jobPosting->slug = $request->slug;
+        $jobPosting->city = $request->city;
         $jobPosting->type = $request->type;
         $jobPosting->category = implode(', ', $request->category);
         $jobPosting->location = $request->location;
@@ -191,24 +205,27 @@ class JobPostingController extends Controller
         $jobPosting->rank = $request->rank;
         $jobPosting->number_of_recruits = $request->number_of_recruits;
         $jobPosting->sex = $request->sex;
-        $jobPosting->status = $request->status;
         $jobPosting->skills_required = $request->skills_required;
         $jobPosting->area = $request->area;
-
+// Chỉ cập nhật status nếu nó có trong yêu cầu
+    if ($request->has('status')) {
+        $jobPosting->status = $request->status;
+    }
         // Xử lý logo
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
             $logoPath = $logo->store('logo_company', 'public');
             $jobPosting->logo = $logoPath;
         }
-
+        // Chuyển đổi mảng thành chuỗi JSON và lưu vào trường city
+        $jobPosting->city = $request->city ? json_encode($request->city) : null;
         // Save the job posting
         $jobPosting->save();
 
         // Redirect with success message
         return redirect()->route('job-postings.index')->with('success', 'Job posting updated successfully!');
     }
-      public function application_choose(Request $request)
+    public function application_choose(Request $request)
     {
         $data = $request->all();
         $application = Application::find($data['id']);

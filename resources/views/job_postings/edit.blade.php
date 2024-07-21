@@ -55,6 +55,18 @@
                                   <input class="search-field" type="text" name="slug"
                                       value="{{ $jobPosting->slug }}"id="convert_slug">
                               </div>
+                              <!-- Chọn thành phố -->
+                              <div class="form">
+                                  <h5>City</h5>
+                                  <select name="city[]" id="city" data-placeholder="Choose Cities"
+                                      class="chosen-select" multiple>
+                                      @foreach ($cities as $city)
+                                          <option value="{{ $city }}"
+                                              {{ in_array($city, $selectedCities) ? 'selected' : '' }}>{{ $city }}
+                                          </option>
+                                      @endforeach
+                                  </select>
+                              </div>
                               <!-- Job Type -->
                               <div class="form">
                                   <h5>Job Type</h5>
@@ -116,11 +128,6 @@
                                   <h5>Salary <span>(optional)</span></h5>
                                   <input type="text" name="salary" value="{{ $jobPosting->salary }}">
                               </div>
-                              <!-- Place -->
-                              <div class="form">
-                                  <h5>Place <span>(optional)</span></h5>
-                                  <input type="text" name="place" value="{{ $jobPosting->place }}">
-                              </div>
                               <!-- Experience -->
                               <div class="form">
                                   <h5>Experience <span>(optional)</span></h5>
@@ -152,13 +159,14 @@
                               <!-- Status -->
                               <div class="form">
                                   <h5>Status</h5>
-                                  <select name="status" class="chosen-select-no-single">
-                                      <option value="1" {{ $jobPosting->status == '1' ? 'selected' : '' }}>Visible
+                                  <select name="status" class="chosen-select-no-single" disabled>
+                                      <option value="1" {{ $jobPosting->status == 1 ? 'selected' : '' }}>Visible
                                       </option>
-                                      <option value="0" {{ $jobPosting->status == '0' ? 'selected' : '' }}>Hidden
+                                      <option value="2" {{ $jobPosting->status == 2 ? 'selected' : '' }}>No Visible
                                       </option>
                                   </select>
                               </div>
+
                               <!-- Skills required -->
                               <div class="form">
                                   <h5>Skills required <span>(optional)</span></h5>
@@ -212,6 +220,11 @@
                               <div class="form">
                                   <h5>Website <span>(optional)</span></h5>
                                   <input type="text" name="website" value="{{ $jobPosting->website }}">
+                              </div>
+                               <!-- Place -->
+                              <div class="form">
+                                  <h5>Company size <span>(optional)</span></h5>
+                                  <input type="text" name="place" value="{{ $jobPosting->place }}">
                               </div>
                               <!-- Tagline -->
                               <div class="form">
