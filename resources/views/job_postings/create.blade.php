@@ -45,7 +45,7 @@
                             <div class="form">
                                 <h5>Job Title</h5>
                                 <input class="search-field" type="text" name="title" placeholder=""
-                                    value=""id="slug" onkeyup="ChangeToSlug()">
+                                    value=""id="slug" onkeyup="ChangeToSlug()"> 
                             </div>
                             <!-- Title -->
                             <div class="form">
@@ -77,7 +77,7 @@
                             </div>
 
                             <!-- Choose Category -->
-                            <div class="form">
+                            {{-- <div class="form">
                                 <div class="select">
                                     <h5>Category</h5>
                                     <select name="category[]" data-placeholder="Choose Categories" class="chosen-select"
@@ -92,7 +92,23 @@
                                         <option value="Accountants & Consultants">Accountants & Consultants</option>
                                     </select>
                                 </div>
+                            </div> --}}
+                            <!-- Choose Category -->
+                            <div class="form">
+                                <div class="select">
+                                    <h5>Category</h5>
+                                    <select name="category[]" data-placeholder="Choose Categories" class="chosen-select"
+                                        multiple>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}"
+                                                {{ in_array($category->id, $selectedCategories ?? []) ? 'selected' : '' }}>
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
+
                             <!-- Location -->
                             <div class="form">
                                 <h5>Location <span>(optional)</span></h5>

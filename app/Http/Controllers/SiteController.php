@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\JobPosting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,7 +13,10 @@ class SiteController extends Controller
     public function index()
     {
         $jobPostings = JobPosting::with('employer')->where('status', 0)->paginate(12);
-        return view('pages.home', compact('jobPostings'));
+        $categories = Category::withCount('jobPostings')
+            ->where('status', 1)
+            ->get();
+        return view('pages.home', compact('jobPostings', 'categories'));
     }
     public function filter(Request $request)
     {
@@ -71,28 +75,40 @@ class SiteController extends Controller
         return view('pages.job', compact('jobPosting', 'closingDate', 'isExpired', 'candidate', 'applied', 'appliedDate', 'relatedJobs'));
     }
 
-   public function searchJobs(Request $request)
-{
-    $query = JobPosting::query()->where('status', 0);
+    public function searchJobs(Request $request)
+    {
+        $query = JobPosting::query()->where('status', 0);
 
-    if ($request->filled('keyword')) {
-        $query->where('title', 'like', '%' . $request->keyword . '%');
-        $keyword = $request->keyword; // Lưu từ khóa tìm kiếm
-    } else {
-        $keyword = null;
+        if ($request->filled('keyword')) {
+            $query->where('title', 'like', '%' . $request->keyword . '%');
+            $keyword = $request->keyword; // Lưu từ khóa tìm kiếm
+        } else {
+            $keyword = null;
+        }
+
+        if ($request->filled('city')) {
+            $query->where('city', $request->city);
+            $city = $request->city; // Lưu thành phố tìm kiếm
+        } else {
+            $city = null;
+        }
+
+        $jobPostings = $query->get();
+        $jobCount = $jobPostings->count(); // Số lượng công việc tìm thấy
+
+        return view('pages.tim-kiem', compact('jobPostings', 'keyword', 'city', 'jobCount'));
     }
 
-    if ($request->filled('city')) {
-        $query->where('city', $request->city);
-        $city = $request->city; // Lưu thành phố tìm kiếm
-    } else {
-        $city = null;
+    public function showCategory($slug)
+    {
+        // Lấy danh mục theo slug
+        $category = Category::where('slug', $slug)->firstOrFail();
+
+        // Lấy các công việc thuộc danh mục với trạng thái = 0
+        $jobPostings = JobPosting::whereHas('categories', function ($query) use ($category) {
+            $query->where('category_id', $category->id);
+        })->where('status', 0)->paginate(12);
+
+        return view('pages.category', compact('category', 'jobPostings'));
     }
-
-    $jobPostings = $query->get();
-    $jobCount = $jobPostings->count(); // Số lượng công việc tìm thấy
-
-    return view('pages.tim-kiem', compact('jobPostings', 'keyword', 'city', 'jobCount'));
-}
-
 }

@@ -83,15 +83,7 @@
              <div class="d-flex justify-content-between wrap-seo-breadcrumb align-items-center">
                  <div class="d-flex flex-column">
                      <h1 id="search-job-heading" class="search-job-heading">
-                         @if ($keyword)
-                             Tuyển dụng {{ $jobCount }} việc làm @if ($keyword)
-                                 "{{ $keyword }}"
-                                 @endif @if ($city)
-                                     tại {{ $city }}
-                                 @endif
-                             @else
-                                 Tuyển dụng {{ $jobCount }} việc làm
-                             @endif
+                         Công việc trong danh mục: {{ $category->name }}
                      </h1>
                      <div id="breadcrumb">
                          <div class="custom-breadcrumb">
@@ -105,15 +97,7 @@
                                  </li>
                                  <i class="fa-solid fa-angle-right"></i>
                                  <p class="breadcrumb-heading">
-                                     @if ($keyword)
-                                         Tuyển dụng {{ $jobCount }} việc làm @if ($keyword)
-                                             "{{ $keyword }}"
-                                             @endif @if ($city)
-                                                 tại {{ $city }}
-                                             @endif
-                                         @else
-                                             Tuyển dụng {{ $jobCount }} việc làm
-                                         @endif
+                                     Công việc trong danh mục: {{ $category->name }}
                                  </p>
                              </ul>
                          </div>
@@ -132,7 +116,7 @@
                                      <div class="box-job-list">
                                          <div class="job-list-search-result">
                                              @if ($jobPostings->isEmpty())
-                                                 <p>Không tìm thấy công việc nào phù hợp.</p>
+                                                 <p>Không tìm thấy công việc nào trong danh mục này.</p>
                                              @else
                                                  <div class="job-list">
                                                      @foreach ($jobPostings as $jobPosting)
@@ -142,7 +126,7 @@
                                                              <div class="avatar">
                                                                  <a target="_blank"
                                                                      href="{{ route('job.show', $jobPosting->slug) }}"
-                                                                     rel="nooppener noreferrer">
+                                                                     rel="noopener noreferrer">
                                                                      <img src="{{ $jobPosting->logo ? asset('storage/' . $jobPosting->logo) : asset('storage/avatar/avatar-default.jpg') }}"
                                                                          class="w-100 lazy"
                                                                          alt="{{ $jobPosting->company_name }}"
@@ -153,12 +137,12 @@
                                                                  <div class="body-content">
                                                                      <div class="title-block">
                                                                          <div>
-                                                                             <h3 class="title ">
+                                                                             <h3 class="title">
                                                                                  <div class="box-label-top">
                                                                                  </div>
                                                                                  <a target="_blank"
                                                                                      href="{{ route('job.show', $jobPosting->slug) }}"
-                                                                                     rel="nooppener noreferrer">
+                                                                                     rel="noopener noreferrer">
                                                                                      <span data-toggle="tooltip"
                                                                                          data-container="body"
                                                                                          data-placement="top" title=""
@@ -171,7 +155,7 @@
                                                                                  href="{{ route('job.show', $jobPosting->slug) }}"
                                                                                  data-toggle="tooltip" title=""
                                                                                  data-placement="top" target="_blank"
-                                                                                 rel="nooppener noreferrer"
+                                                                                 rel="noopener noreferrer"
                                                                                  data-original-title="{{ $jobPosting->company_name }}">
                                                                                  {{ $jobPosting->company_name }}
                                                                              </a>
@@ -214,7 +198,6 @@
                                                      @endforeach
                                                  </div>
                                              @endif
-
                                          </div>
                                          <script></script>
                                      </div>
@@ -222,7 +205,10 @@
                                          href="https://static.topcv.vn/v4/css/components/box-job-notification-setting.6e3fb86463e68cdfK.css">
                                  </div>
                                  <div class="job-list-detail"></div>
+                                 <!-- Phân trang -->
+                                 {{ $jobPostings->links() }}
                              </div>
+
 
                          </div>
                          <div class="col-md-3 right-box box-interested">

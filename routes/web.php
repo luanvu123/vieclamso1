@@ -15,6 +15,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CandidateManageController;
 use App\Http\Controllers\Auth\EmployerRegisterController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CVController;
 use App\Models\Candidate;
 use Laravel\Socialite\Facades\Socialite;
@@ -32,6 +33,9 @@ use Laravel\Socialite\Facades\Socialite;
 Route::get('/', [SiteController::class, 'index'])->name('/');
 Route::get('job/{slug}', [SiteController::class, 'show'])->name('job.show');
 Route::get('/jobs/filter', [SiteController::class, 'filter'])->name('job.filter');
+Route::get('/categoriehomes/{slug}', [SiteController::class, 'showCategory'])->name('categoriehomes.show');
+
+
 Auth::routes();
 Route::get('/recruitment', function () {
     return view('pages.recruitment');
@@ -43,6 +47,8 @@ Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('
 Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
+    Route::resource('categories', CategoryController::class);
+
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::resource('roles', RoleController::class);
@@ -50,6 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('candidates', CandidateManageController::class);
     Route::put('/users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
     Route::get('/user-choose', [UserController::class, 'user_choose'])->name('user-choose');
+    Route::get('/category-choose', [CategoryController::class, 'category_choose'])->name('category-choose');
     Route::resource('employers', EmployerManageController::class);
     Route::resource('job-postings-manage', JobsManageController::class);
     Route::get('/jobPosting-choose', [JobsManageController::class, 'jobPosting_choose'])->name('jobPosting-choose');

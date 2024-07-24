@@ -57,7 +57,16 @@
                                 <td class="action">
                                     <a href="{{ route('job-postings.edit', $jobPosting->id) }}"><i class="fa fa-pencil"></i>
                                         Edit</a>
-                                    <a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
+                                    <form action="{{ route('job-postings.destroy', $jobPosting->id) }}" method="POST"
+                                        style="display:inline;"
+                                        onsubmit="return confirm('Are you sure you want to delete this job posting?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="delete-button"
+                                            style="background: none; border: none; color: red; cursor: pointer;">
+                                            <i class="fa fa-remove"></i> Delete
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

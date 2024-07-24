@@ -49,4 +49,8 @@ class JobPosting extends Model
     {
         return $this->hasMany(Application::class);
     }
+     public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_job_posting');
+    }
 }

@@ -86,34 +86,14 @@
                               <div class="form">
                                   <div class="select">
                                       <h5>Category</h5>
-                                      <select name="category[]" class="chosen-select" multiple>
-                                          @php
-                                              $selectedCategories = explode(', ', $jobPosting->category);
-                                          @endphp
-                                          <option value="Web Developers"
-                                              {{ in_array('Web Developers', $selectedCategories) ? 'selected' : '' }}>Web
-                                              Developers</option>
-                                          <option value="Mobile Developers"
-                                              {{ in_array('Mobile Developers', $selectedCategories) ? 'selected' : '' }}>
-                                              Mobile Developers</option>
-                                          <option value="Designers & Creatives"
-                                              {{ in_array('Designers & Creatives', $selectedCategories) ? 'selected' : '' }}>
-                                              Designers & Creatives</option>
-                                          <option value="Writers"
-                                              {{ in_array('Writers', $selectedCategories) ? 'selected' : '' }}>Writers
-                                          </option>
-                                          <option value="Virtual Assistants"
-                                              {{ in_array('Virtual Assistants', $selectedCategories) ? 'selected' : '' }}>
-                                              Virtual Assistants</option>
-                                          <option value="Customer Service Agents"
-                                              {{ in_array('Customer Service Agents', $selectedCategories) ? 'selected' : '' }}>
-                                              Customer Service Agents</option>
-                                          <option value="Sales & Marketing Experts"
-                                              {{ in_array('Sales & Marketing Experts', $selectedCategories) ? 'selected' : '' }}>
-                                              Sales & Marketing Experts</option>
-                                          <option value="Accountants & Consultants"
-                                              {{ in_array('Accountants & Consultants', $selectedCategories) ? 'selected' : '' }}>
-                                              Accountants & Consultants</option>
+                                      <select name="category[]" data-placeholder="Choose Categories" class="chosen-select"
+                                          multiple>
+                                          @foreach ($categories as $category)
+                                              <option value="{{ $category->id }}"
+                                                  {{ in_array($category->id, $selectedCategories) ? 'selected' : '' }}>
+                                                  {{ $category->name }}
+                                              </option>
+                                          @endforeach
                                       </select>
                                   </div>
                               </div>
@@ -250,6 +230,10 @@
                                       <i class="fa fa-upload"></i> Browse
                                   </label>
                                   <span class="fake-input">No file selected</span>
+                                  @if ($jobPosting->logo)
+                                      <img src=" {{ $jobPosting->logo ? asset('storage/' . $jobPosting->logo) : asset('storage/avatar/avatar-default.jpg') }}"
+                                          alt="Avatar" style="width: 60px" alt="Avatar">
+                                  @endif
                               </div>
                           </div>
                       </div>
