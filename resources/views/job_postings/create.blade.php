@@ -45,7 +45,7 @@
                             <div class="form">
                                 <h5>Job Title</h5>
                                 <input class="search-field" type="text" name="title" placeholder=""
-                                    value=""id="slug" onkeyup="ChangeToSlug()"> 
+                                    value=""id="slug" onkeyup="ChangeToSlug()">
                             </div>
                             <!-- Title -->
                             <div class="form">
@@ -75,25 +75,6 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <!-- Choose Category -->
-                            {{-- <div class="form">
-                                <div class="select">
-                                    <h5>Category</h5>
-                                    <select name="category[]" data-placeholder="Choose Categories" class="chosen-select"
-                                        multiple>
-                                        <option value="Web Developers">Web Developers</option>
-                                        <option value="Mobile Developers">Mobile Developers</option>
-                                        <option value="Designers & Creatives">Designers & Creatives</option>
-                                        <option value="Writers">Writers</option>
-                                        <option value="Virtual Assistants">Virtual Assistants</option>
-                                        <option value="Customer Service Agents">Customer Service Agents</option>
-                                        <option value="Sales & Marketing Experts">Sales & Marketing Experts</option>
-                                        <option value="Accountants & Consultants">Accountants & Consultants</option>
-                                    </select>
-                                </div>
-                            </div> --}}
-                            <!-- Choose Category -->
                             <div class="form">
                                 <div class="select">
                                     <h5>Category</h5>

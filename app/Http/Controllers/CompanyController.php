@@ -10,13 +10,15 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        $companies = Company::all();
+        $employer = Auth::guard('employer')->user();
+        $companies = $employer->companies; // Assuming a relationship exists
         return view('companies.index', compact('companies'));
     }
 
     public function create()
     {
-        return view('companies.create');
+        $employer = Auth::guard('employer')->user();
+        return view('companies.create', compact('employer'));
     }
 
     public function store(Request $request)
@@ -43,17 +45,17 @@ class CompanyController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imagePath = $image->store('companies', 'public');
+            $imagePath = $image->store('logo_company', 'public');
             $companyData['image'] = $imagePath;
         }
 
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
-            $logoPath = $logo->store('companies', 'public');
+            $logoPath = $logo->store('logo_company', 'public');
             $companyData['logo'] = $logoPath;
         }
 
-        $companyData['employer_id'] = Auth::id(); // Set employer_id
+        $companyData['employer_id'] = Auth::guard('employer')->id(); // Set employer_id
 
         Company::create($companyData);
 
@@ -98,13 +100,13 @@ class CompanyController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imagePath = $image->store('companies', 'public');
+            $imagePath = $image->store('logo_company', 'public');
             $companyData['image'] = $imagePath;
         }
 
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
-            $logoPath = $logo->store('companies', 'public');
+            $logoPath = $logo->store('logo_company', 'public');
             $companyData['logo'] = $logoPath;
         }
 
