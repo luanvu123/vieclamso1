@@ -80,6 +80,13 @@
                                 </li>
                             </ul>
                         </li>
+                        <li><a>Posts</a>
+                            <ul>
+                                <li><a href="{{ route('posts.index') }}">Manage Posts</a></li>
+                                <li><a href="{{ route('genre-posts.index') }}">Manage Genres</a></li>
+                            </ul>
+                        </li>
+
 
                         <li><a>Candidates</a>
                             <ul>

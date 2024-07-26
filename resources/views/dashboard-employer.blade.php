@@ -56,6 +56,8 @@
                     <ul data-submenu-title="Management">
                         <li><a href="{{ route('job-postings.index') }}">Job</a>
                         </li>
+                         <li><a href="{{ route('companies.index') }}">Company</a>
+                        </li>
                         <li><a href="{{ route('job-postings.create') }}">Add Job</a>
                         </li>
                     </ul>

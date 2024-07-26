@@ -20,7 +20,7 @@
 
             <div class="form-group">
                 <h5>Slug</h5>
-                <input class="form-control" type="text" name="slug" placeholder="Đường dẫn" id="convert_slug">
+                <input class="form-control" type="text" name="slug" placeholder="Đường dẫn" id="convert_slug"  required>
             </div>
             <div class="form-group">
                 <label for="image">Category Image (optional)</label>

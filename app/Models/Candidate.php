@@ -53,4 +53,9 @@ class Candidate extends Authenticatable
     {
         return $this->hasMany(Application::class);
     }
+
+     public function followedCompanies()
+    {
+        return $this->belongsToMany(Company::class, 'company_follower');
+    }
 }

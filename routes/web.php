@@ -23,6 +23,9 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\SlugController;
 use App\Models\Candidate;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\GenrePostController;
+use App\Http\Controllers\CompanyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,6 +59,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('ecosystems', EcosystemController::class);
     Route::resource('medias', MediaController::class);
     Route::resource('slugs', SlugController::class);
+    Route::resource('posts', PostController::class);
+    Route::resource('genre-posts', GenrePostController::class);
+
 
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -105,4 +111,6 @@ Route::middleware(['employer'])->group(function () {
     Route::post('employer/logout', [EmployerLoginController::class, 'logout'])->name('logout-employer');
     Route::get('employer/profile', [EmployerLoginController::class, 'profile'])->name('employer.profile');
     Route::post('employer/profile', [EmployerLoginController::class, 'updateProfile'])->name('employer.profile.update');
+
+    Route::resource('companies', CompanyController::class);
 });
