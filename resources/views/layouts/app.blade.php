@@ -68,7 +68,15 @@
                                 </li>
                                 <li><a href="{{ route('roles.index') }}">Manage Roles</a>
                                 </li>
-                                 <li><a href="{{ route('categories.index') }}">Manage Categories</a>
+                                <li><a href="{{ route('categories.index') }}">Manage Categories</a>
+                                </li>
+                                <li><a href="{{ route('awards.index') }}">Manage Awards</a>
+                                </li>
+                                <li><a href="{{ route('ecosystems.index') }}">Manage Ecosystems</a>
+                                </li>
+                                <li><a href="{{ route('medias.index') }}">Manage Medias</a>
+                                </li>
+                                <li><a href="{{ route('slugs.index') }}">Manage Slugs</a>
                                 </li>
                             </ul>
                         </li>
@@ -199,7 +207,7 @@
             });
         })
     </script>
-     <script>
+    <script>
         function ChangeToSlug() {
 
             var slug;

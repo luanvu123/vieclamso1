@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Auth\EmployerLoginController;
+use App\Http\Controllers\EcosystemController;
 use App\Http\Controllers\EmployerManageController;
 use App\Http\Controllers\JobPostingController;
 use App\Http\Controllers\JobsManageController;
@@ -15,8 +16,11 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CandidateManageController;
 use App\Http\Controllers\Auth\EmployerRegisterController;
+use App\Http\Controllers\AwardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CVController;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\SlugController;
 use App\Models\Candidate;
 use Laravel\Socialite\Facades\Socialite;
 /*
@@ -48,6 +52,11 @@ Route::get('employer/register', [EmployerRegisterController::class, 'showRegistr
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('categories', CategoryController::class);
+    Route::resource('awards', AwardController::class);
+    Route::resource('ecosystems', EcosystemController::class);
+    Route::resource('medias', MediaController::class);
+    Route::resource('slugs', SlugController::class);
+
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -97,4 +106,3 @@ Route::middleware(['employer'])->group(function () {
     Route::get('employer/profile', [EmployerLoginController::class, 'profile'])->name('employer.profile');
     Route::post('employer/profile', [EmployerLoginController::class, 'updateProfile'])->name('employer.profile.update');
 });
-
