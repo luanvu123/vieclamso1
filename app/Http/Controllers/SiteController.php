@@ -12,7 +12,7 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $jobPostings = JobPosting::with('employer')->where('status', 0)->paginate(12);
+        $jobPostings = JobPosting::with('employer', 'company')->where('status', 0)->paginate(12);
         $categories = Category::withCount('jobPostings')
             ->where('status', 1)
             ->get();
@@ -20,10 +20,11 @@ class SiteController extends Controller
     }
     public function filter(Request $request)
     {
+        $query = JobPosting::with('employer','company')->where('status', 0);
 
-        $query = JobPosting::with('employer')->where('status', 0);
-
-
+        $categories = Category::withCount('jobPostings')
+            ->where('status', 1)
+            ->get();
         if ($request->filled('city')) {
             $query->where('city', 'like', '%' . $request->input('city') . '%');
         }
@@ -43,12 +44,12 @@ class SiteController extends Controller
             $query->where('category', 'like', '%' . $request->input('category') . '%');
         }
         $jobPostings = $query->paginate(12);
-        return view('pages.home', compact('jobPostings'));
+        return view('pages.home', compact('jobPostings', 'categories'));
     }
 
     public function show($slug)
     {
-        $jobPosting = JobPosting::where('slug', $slug)->where('status', 0)->firstOrFail();
+        $jobPosting = JobPosting::with('company')->where('slug', $slug)->where('status', 0)->firstOrFail();
         $closingDate = Carbon::parse($jobPosting->closing_date);
         $isExpired = $closingDate->isPast();
         $candidate = Auth::guard('candidate')->user();
@@ -62,7 +63,7 @@ class SiteController extends Controller
             }
         }
         // Lấy các công việc liên quan
-        $relatedJobs = JobPosting::where('category', $jobPosting->category)
+        $relatedJobs = JobPosting::with('company')->where('category', $jobPosting->category)
             ->orWhere('city', 'like', '%' . $jobPosting->city . '%')
             ->where('id', '!=', $jobPosting->id)
             ->where('status', 0)

@@ -21,12 +21,6 @@ class JobPosting extends Model
         'description',
         'application_email_url',
         'closing_date',
-        'company_name',
-        'website',
-        'tagline',
-        'video',
-        'twitter',
-        'logo',
         'salary',
         'place',
         'experience',
@@ -53,4 +47,10 @@ class JobPosting extends Model
     {
         return $this->belongsToMany(Category::class, 'category_job_posting');
     }
+
+public function company()
+{
+    return $this->belongsTo(Company::class);
+}
+
 }

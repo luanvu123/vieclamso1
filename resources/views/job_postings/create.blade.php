@@ -38,25 +38,22 @@
 
                             <div class="form">
                                 <h5>Your Email</h5>
-                                <input class="search-field" type="text" name="email" value="{{ $email }}"
-                                    readonly>
+                                <input class="search-field" type="text" name="email" value="{{ $email }}" readonly>
                             </div>
-                            <!-- Title -->
+                            <!-- Job Title -->
                             <div class="form">
                                 <h5>Job Title</h5>
-                                <input class="search-field" type="text" name="title" placeholder=""
-                                    value=""id="slug" onkeyup="ChangeToSlug()">
+                                <input class="search-field" type="text" name="title" id="slug" onkeyup="ChangeToSlug()" placeholder="">
                             </div>
-                            <!-- Title -->
+                            <!-- Slug -->
                             <div class="form">
                                 <h5>Slug</h5>
-                                <input class="search-field" type="text" name="slug" placeholder="Đường dẫn"
-                                    id="convert_slug">
+                                <input class="search-field" type="text" name="slug" id="convert_slug" placeholder="Đường dẫn">
                             </div>
                             <!-- Job Type -->
                             <div class="form">
                                 <h5>Job Type</h5>
-                                <select name="type" data-placeholder="Full-Time" class="chosen-select-no-single">
+                                <select name="type" class="chosen-select-no-single">
                                     <option value="Full-Time">Full-Time</option>
                                     <option value="Part-Time">Part-Time</option>
                                     <option value="Internship">Internship</option>
@@ -67,7 +64,7 @@
                             <div class="form">
                                 <div class="select">
                                     <h5>City</h5>
-                                    <select name="city[]" data-placeholder="Choose Cities" class="chosen-select" multiple>
+                                    <select name="city[]" class="chosen-select" multiple>
                                         <option value="Hà Nội">Hà Nội</option>
                                         <option value="Hồ Chí Minh">Hồ Chí Minh</option>
                                         <option value="Đà Nẵng">Đà Nẵng</option>
@@ -75,26 +72,21 @@
                                     </select>
                                 </div>
                             </div>
+                            <!-- Categories -->
                             <div class="form">
                                 <div class="select">
                                     <h5>Category</h5>
-                                    <select name="category[]" data-placeholder="Choose Categories" class="chosen-select"
-                                        multiple>
+                                    <select name="category[]" class="chosen-select" multiple>
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}"
-                                                {{ in_array($category->id, $selectedCategories ?? []) ? 'selected' : '' }}>
-                                                {{ $category->name }}
-                                            </option>
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-
                             <!-- Location -->
                             <div class="form">
                                 <h5>Location <span>(optional)</span></h5>
-                                <input class="search-field" type="text" name="location" placeholder="e.g. London"
-                                    value="">
+                                <input class="search-field" type="text" name="location" placeholder="e.g. London">
                                 <p class="note">Leave this blank if the location is not important</p>
                             </div>
                             <!-- Salary -->
@@ -102,7 +94,6 @@
                                 <h5>Salary <span>(optional)</span></h5>
                                 <input type="text" name="salary" placeholder="Enter salary">
                             </div>
-
                             <!-- Experience -->
                             <div class="form">
                                 <h5>Experience <span>(optional)</span></h5>
@@ -127,7 +118,6 @@
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
-
                             <!-- Skills required -->
                             <div class="form">
                                 <h5>Skills required <span>(optional)</span></h5>
@@ -141,12 +131,9 @@
                             <!-- Tags -->
                             <div class="form">
                                 <h5>Job Tags <span>(optional)</span></h5>
-                                <input class="search-field" type="text" name="tags"
-                                    placeholder="e.g. PHP, Social Media, Management" value="">
-                                <p class="note">Comma separate tags, such as required skills or technologies, for this
-                                    job.</p>
+                                <input class="search-field" type="text" name="tags" placeholder="e.g. PHP, Social Media, Management">
+                                <p class="note">Comma separate tags, such as required skills or technologies, for this job.</p>
                             </div>
-
                             <!-- Description -->
                             <div class="form" style="width: 100%;">
                                 <h5>Description</h5>
@@ -155,8 +142,7 @@
                             <!-- Application email/url -->
                             <div class="form">
                                 <h5>Application email / URL</h5>
-                                <input type="text" name="application_email_url"
-                                    placeholder="Enter an email address or website URL">
+                                <input type="text" name="application_email_url" placeholder="Enter an email address or website URL">
                             </div>
                             <!-- Closing Date -->
                             <div class="form">
@@ -168,55 +154,18 @@
                     </div>
                 </div>
                 <div class="dashboard-list-box margin-top-30">
-                    <h4>Company Details</h4>
-                    <div class="dashboard-list-box-content">
-                        <div class="submit-page">
-                            <!-- Company Name -->
-                            <div class="form">
-                                <h5>Company Name</h5>
-                                <input type="text" name="company_name" placeholder="Enter the name of the company">
-                            </div>
-                            <!-- Website -->
-                            <div class="form">
-                                <h5>Website <span>(optional)</span></h5>
-                                <input type="text" name="website" placeholder="http://">
-                            </div>
-                            <!-- Place -->
-                            <div class="form">
-                                <h5>Company size <span>(optional)</span></h5>
-                                <input type="text" name="place" placeholder="Enter place">
-                            </div>
-                            <!-- Tagline -->
-
-                            <div class="form">
-                                <h5>Tagline <span>(optional)</span></h5>
-                                <input type="text" name="tagline" placeholder="Briefly describe your company">
-                            </div>
-                            <!-- Video -->
-                            <div class="form">
-                                <h5>Video <span>(optional)</span></h5>
-                                <input type="text" name="video" placeholder="A link to a video about your company">
-                            </div>
-                            <!-- Twitter -->
-                            <div class="form">
-                                <h5>Twitter Username <span>(optional)</span></h5>
-                                <input type="text" name="twitter" placeholder="@yourcompany">
-                            </div>
-                            <!-- Logo -->
-                            <div class="form">
-                                <h5>Logo <span>(optional)</span></h5>
-                                <label class="upload-btn">
-                                    <input type="file" name="logo" multiple>
-                                    <i class="fa fa-upload"></i> Browse
-                                </label>
-                                <span class="fake-input">No file selected</span>
-                            </div>
-                        </div>
+                    <h4>Choose Your Company</h4>
+                    <div class="form">
+                        <select name="company_id" class="chosen-select">
+                            @foreach ($companies as $company)
+                                <option value="{{ $company->id }}">{{ $company->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
-                <button type="submit" class="button margin-top-30">Submit <i
-                        class="fa fa-arrow-circle-right"></i></button>
+                <button type="submit" class="button margin-top-30">Submit <i class="fa fa-arrow-circle-right"></i></button>
             </form>
         </div>
     </div>
 @endsection
+

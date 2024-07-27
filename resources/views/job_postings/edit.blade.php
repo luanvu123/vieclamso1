@@ -19,8 +19,6 @@
       </div>
 
       <div class="row">
-
-
           <div class="col-lg-12 col-md-12">
               <form action="{{ route('job-postings.update', $jobPosting->id) }}" method="POST" enctype="multipart/form-data">
                   @csrf
@@ -189,54 +187,18 @@
                       </div>
                   </div>
                   <div class="dashboard-list-box margin-top-30">
-                      <h4>Company Details</h4>
-                      <div class="dashboard-list-box-content">
-                          <div class="submit-page">
-                              <!-- Company Name -->
-                              <div class="form">
-                                  <h5>Company Name</h5>
-                                  <input type="text" name="company_name" value="{{ $jobPosting->company_name }}">
-                              </div>
-                              <!-- Website -->
-                              <div class="form">
-                                  <h5>Website <span>(optional)</span></h5>
-                                  <input type="text" name="website" value="{{ $jobPosting->website }}">
-                              </div>
-                              <!-- Place -->
-                              <div class="form">
-                                  <h5>Company size <span>(optional)</span></h5>
-                                  <input type="text" name="place" value="{{ $jobPosting->place }}">
-                              </div>
-                              <!-- Tagline -->
-                              <div class="form">
-                                  <h5>Tagline <span>(optional)</span></h5>
-                                  <input type="text" name="tagline" value="{{ $jobPosting->tagline }}">
-                              </div>
-                              <!-- Video -->
-                              <div class="form">
-                                  <h5>Video <span>(optional)</span></h5>
-                                  <input type="text" name="video" value="{{ $jobPosting->video }}">
-                              </div>
-                              <!-- Twitter -->
-                              <div class="form">
-                                  <h5>Twitter Username <span>(optional)</span></h5>
-                                  <input type="text" name="twitter" value="{{ $jobPosting->twitter }}">
-                              </div>
-                              <!-- Logo -->
-                              <div class="form">
-                                  <h5>Logo <span>(optional)</span></h5>
-                                  <label class="upload-btn">
-                                      <input type="file" name="logo">
-                                      <i class="fa fa-upload"></i> Browse
-                                  </label>
-                                  <span class="fake-input">No file selected</span>
-                                  @if ($jobPosting->logo)
-                                      <img src=" {{ $jobPosting->logo ? asset('storage/' . $jobPosting->logo) : asset('storage/avatar/avatar-default.jpg') }}"
-                                          alt="Avatar" style="width: 60px" alt="Avatar">
-                                  @endif
-                              </div>
-                          </div>
+                      <div class="form">
+                          <h5>Choose Your Company</h5>
+                          <select name="company_id" class="chosen-select-no-single">
+                              @foreach ($companies as $company)
+                                  <option value="{{ $company->id }}"
+                                      {{ $jobPosting->company_id == $company->id ? 'selected' : '' }}>
+                                      {{ $company->name }}
+                                  </option>
+                              @endforeach
+                          </select>
                       </div>
+
                   </div>
                   <button type="submit" class="button margin-top-30">Save Changes <i
                           class="fa fa-arrow-circle-right"></i></button>

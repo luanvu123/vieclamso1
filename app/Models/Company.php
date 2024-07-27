@@ -24,6 +24,7 @@ class Company extends Model
         'facebook',
         'twitter',
         'linkedin',
+        'featured',
     ];
 
     public function employer()
