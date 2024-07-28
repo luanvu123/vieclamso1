@@ -26,6 +26,8 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\GenrePostController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CompanyFollowerController;
+use App\Http\Controllers\CourseController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +43,10 @@ Route::get('/', [SiteController::class, 'index'])->name('/');
 Route::get('job/{slug}', [SiteController::class, 'show'])->name('job.show');
 Route::get('/jobs/filter', [SiteController::class, 'filter'])->name('job.filter');
 Route::get('/categoriehomes/{slug}', [SiteController::class, 'showCategory'])->name('categoriehomes.show');
+Route::get('/cong-ty', [SiteController::class, 'allCompany'])->name('all.company');
+Route::get('/search-company', [SiteController::class, 'searchCompany'])->name('search-company');
+Route::get('/cong-ty/{slug}', [SiteController::class, 'showCompany'])->name('company-home.show');
+Route::get('cam-nang-nghe-nghiep/{slug}', [SiteController::class, 'showPost'])->name('genrepost.showPost');
 
 
 Auth::routes();
@@ -61,9 +67,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('slugs', SlugController::class);
     Route::resource('posts', PostController::class);
     Route::resource('genre-posts', GenrePostController::class);
+    Route::resource('courses', CourseController::class);
 
 
-
+    Route::get('/admin/companies', [EmployerManageController::class, 'indexCompany'])->name('admin.companies.index');
+    Route::get('/admin/companies/{id}', [EmployerManageController::class, 'showCompany'])->name('admin.companies.show');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::resource('roles', RoleController::class);
@@ -72,6 +80,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
     Route::get('/user-choose', [UserController::class, 'user_choose'])->name('user-choose');
     Route::get('/category-choose', [CategoryController::class, 'category_choose'])->name('category-choose');
+    Route::get('/company-choose', [EmployerManageController::class, 'company_choose'])->name('company-choose');
+    Route::get('/top-choose', [EmployerManageController::class, 'top_choose'])->name('top-choose');
+    Route::get('/top-home-choose', [EmployerManageController::class, 'top_home_choose'])->name('top-home-choose');
+    Route::get('/featured-choose', [EmployerManageController::class, 'featured_choose'])->name('featured-choose');
+     Route::get('/post-choose', [PostController::class, 'post_choose'])->name('post-choose');
+       Route::get('/slug-choose', [SlugController::class, 'slug_choose'])->name('slug-choose');
+       Route::get('/media-choose', [MediaController::class, 'media_choose'])->name('media-choose');
     Route::resource('employers', EmployerManageController::class);
     Route::resource('job-postings-manage', JobsManageController::class);
     Route::get('/jobPosting-choose', [JobsManageController::class, 'jobPosting_choose'])->name('jobPosting-choose');
@@ -100,7 +115,8 @@ Route::middleware(['candidate'])->group(function () {
     Route::post('/cv/update-name', [CVController::class, 'updateCvName'])->name('cv.update.name');
     Route::post('/cv/delete', [CVController::class, 'delete'])->name('cv.delete');
 
-
+    Route::post('company/{id}/follow', [CompanyFollowerController::class, 'follow'])->name('company.follow');
+    Route::post('company/{id}/unfollow', [CompanyFollowerController::class, 'unfollow'])->name('company.unfollow');
     Route::post('applications', [ApplicationController::class, 'store'])->name('applications.store');
 });
 

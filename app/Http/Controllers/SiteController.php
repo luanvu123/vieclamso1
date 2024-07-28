@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Award;
 use App\Models\Category;
+use App\Models\Company;
+use App\Models\Ecosystem;
+use App\Models\GenrePost;
 use App\Models\JobPosting;
+use App\Models\Media;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,11 +21,15 @@ class SiteController extends Controller
         $categories = Category::withCount('jobPostings')
             ->where('status', 1)
             ->get();
-        return view('pages.home', compact('jobPostings', 'categories'));
+        $companies = Company::select('name', 'logo')->take(12)->get();
+        $awards = Award::where('status', 1)->take(5)->get();
+        $ecosystems = Ecosystem::where('status', 1)->take(4)->get();
+        $medias = Media::where('status', 1)->take(6)->get();
+        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias'));
     }
     public function filter(Request $request)
     {
-        $query = JobPosting::with('employer','company')->where('status', 0);
+        $query = JobPosting::with('employer', 'company')->where('status', 0);
 
         $categories = Category::withCount('jobPostings')
             ->where('status', 1)
@@ -44,7 +53,11 @@ class SiteController extends Controller
             $query->where('category', 'like', '%' . $request->input('category') . '%');
         }
         $jobPostings = $query->paginate(12);
-        return view('pages.home', compact('jobPostings', 'categories'));
+        $companies = Company::select('name', 'logo')->take(12)->get();
+        $awards = Award::where('status', 1)->take(5)->get();
+        $ecosystems = Ecosystem::where('status', 1)->take(4)->get();
+        $medias = Media::where('status', 1)->take(6)->get();
+        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias'));
     }
 
     public function show($slug)
@@ -111,5 +124,36 @@ class SiteController extends Controller
         })->where('status', 0)->paginate(12);
 
         return view('pages.category', compact('category', 'jobPostings'));
+    }
+
+    public function allCompany()
+    {
+        $companies = Company::where('top', 1)
+            ->where('status', 1)
+            ->take(20)
+            ->get(); // Lấy tối đa 20 công ty có top = 1 và status = 1
+        return view('pages.company', compact('companies'));
+    }
+    public function searchCompany(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $companies = Company::where('name', 'like', '%' . $keyword . '%')
+            ->where('status', 1)
+            ->where('top', 1)
+            ->take(20)
+            ->get();
+        return view('pages.company', compact('companies'));
+    }
+    public function showCompany($slug)
+    {
+        $company = Company::where('slug', $slug)->firstOrFail();
+        $jobPostings = $company->jobPostings()->where('status', 0)->get(); // Lấy các job postings của company có status = 1
+        return view('pages.company-show', compact('company', 'jobPostings'));
+    }
+     public function showPost($slug)
+    {
+        $genrePost = GenrePost::where('slug', $slug)->with('posts')->firstOrFail();
+        $featuredPosts = $genrePost->posts()->where('featured', 1)->take(1)->get();
+        return view('pages.blog', compact('genrePost', 'featuredPosts'));
     }
 }

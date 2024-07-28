@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('dashboard-employer')
 
 @section('content')
     <div class="container">
@@ -7,8 +7,7 @@
                 <h1>All Companies</h1>
 
                 <a href="{{ route('companies.create') }}" class="btn btn-primary mb-3">Create New Company</a>
-
-                <table class="table table-bordered" id="user-table">
+                <table  id="user-table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -17,7 +16,6 @@
                             <th>Logo</th>
                             <th>Scale</th>
                             <th>Address</th>
-                            <th>Map</th>
                             <th>Status</th>
                             <th>Website</th>
                             <th>Facebook</th>
@@ -27,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($companies as $company)
+                        @foreach ($companies as $company)
                             <tr>
                                 <td>{{ $company->id }}</td>
                                 <td>{{ $company->name }}</td>
@@ -49,7 +47,6 @@
                                 </td>
                                 <td>{{ $company->scale }}</td>
                                 <td>{{ $company->address }}</td>
-                                <td>{{ $company->map }}</td>
                                 <td>{{ $company->status ? 'Active' : 'Inactive' }}</td>
                                 <td>{{ $company->website }}</td>
                                 <td>
@@ -81,14 +78,12 @@
                                     </form>
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="13">No companies available.</td>
-                            </tr>
-                        @endforelse
+
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
 @endsection

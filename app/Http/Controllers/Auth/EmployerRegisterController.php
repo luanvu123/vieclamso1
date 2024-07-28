@@ -25,7 +25,7 @@ class EmployerRegisterController extends Controller
  public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'fullname' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:candidates',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -40,7 +40,7 @@ class EmployerRegisterController extends Controller
             'password' => Hash::make($request->input('password')),
         ]);
 
-        return redirect()->route('candidate.dashboard')->with('success', 'Registration successful.');
+        return redirect()->route('job-postings.dashboard')->with('success', 'Registration successful.');
     }
 }
 

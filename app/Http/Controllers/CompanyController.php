@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CompanyController extends Controller
 {
@@ -56,7 +58,8 @@ class CompanyController extends Controller
         }
 
         $companyData['employer_id'] = Auth::guard('employer')->id(); // Set employer_id
-
+        $companyData['slug'] = Str::slug($request->name); // Tạo slug từ tên công ty
+        $companyData['top'] = 0; // Đặt giá trị mặc định cho cột top
         Company::create($companyData);
 
         return redirect()->route('companies.index')->with('success', 'Company created successfully.');
@@ -82,7 +85,7 @@ class CompanyController extends Controller
             'logo' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
             'scale' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:255',
-            'map' => 'nullable|string|max:255',
+            'map' => 'nullable',
             'detail' => 'nullable|string',
             'status' => 'boolean',
             'url' => 'nullable|url',
@@ -109,7 +112,7 @@ class CompanyController extends Controller
             $logoPath = $logo->store('logo_company', 'public');
             $companyData['logo'] = $logoPath;
         }
-
+        $companyData['slug'] = Str::slug($request->name);
         $company->update($companyData);
 
         return redirect()->route('companies.index')->with('success', 'Company updated successfully.');
@@ -121,4 +124,5 @@ class CompanyController extends Controller
         $company->delete();
         return redirect()->route('companies.index')->with('success', 'Company deleted successfully.');
     }
+    
 }

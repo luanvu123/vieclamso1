@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Media;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -110,5 +111,13 @@ class MediaController extends Controller
     {
         $media = Media::findOrFail($id);
         return view('admin.medias.show', compact('media'));
+    }
+      public function media_choose(Request $request)
+    {
+        $data = $request->all();
+        $media =Media::find($data['id']);
+        $media->status = $data['trangthai_val'];
+        $media->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $media->save();
     }
 }

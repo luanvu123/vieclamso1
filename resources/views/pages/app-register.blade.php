@@ -77,7 +77,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
                                 </div>
-                                <input type="text" name="fullname" class="form-control" placeholder="Nhập họ tên" aria-label="Nhập họ tên" value="{{ old('fullname') }}">
+                                <input type="text" name="name" class="form-control" placeholder="Nhập họ tên" aria-label="Nhập họ tên" value="{{ old('fullname') }}">
                             </div>
                         </div>
 

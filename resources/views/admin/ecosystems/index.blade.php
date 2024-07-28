@@ -17,7 +17,7 @@
                     <th>Name</th>
                     <th>Detail</th>
                     <th>Website</th>
-                    <th>Name Link Website</th>
+                    <th>Color</th>
                     <th>Status</th>
                     <th>Image</th>
                     <th>Footer Image</th>

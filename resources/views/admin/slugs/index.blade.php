@@ -22,7 +22,17 @@
                         <td>{{ $slug->id }}</td>
                         <td>{{ $slug->name }}</td>
                         <td>{{ $slug->website }}</td>
-                        <td>{{ $slug->status ? 'Active' : 'Inactive' }}</td>
+                       <td>
+                            <select id="{{ $slug->id }}" class="slug_choose">
+                                @if ($slug->status == 0)
+                                    <option value="1">Show</option>
+                                    <option selected value="0">Hidden</option>
+                                @else
+                                    <option selected value="1">Show</option>
+                                    <option value="0">Hidden</option>
+                                @endif
+                            </select>
+                        </td>
                         <td>
                             <a href="{{ route('slugs.show', $slug) }}" class="btn btn-info">View</a>
                             <a href="{{ route('slugs.edit', $slug) }}" class="btn btn-warning">Edit</a>

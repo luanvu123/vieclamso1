@@ -29,7 +29,17 @@
                             @endif
                         </td>
                         <td>{{ $media->website }}</td>
-                        <td>{{ $media->status ? 'Active' : 'Inactive' }}</td>
+                       <td>
+                            <select id="{{ $media->id }}" class="media_choose">
+                                @if ($media->status == 0)
+                                    <option value="1">Show</option>
+                                    <option selected value="0">Hidden</option>
+                                @else
+                                    <option selected value="1">Show</option>
+                                    <option value="0">Hidden</option>
+                                @endif
+                            </select>
+                        </td>
                         <td>
                             <a href="{{ route('medias.edit', $media) }}" class="btn btn-warning">Edit</a>
                             <form action="{{ route('medias.destroy', $media) }}" method="POST" style="display:inline;">

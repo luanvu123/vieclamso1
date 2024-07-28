@@ -76,14 +76,17 @@
                                 </li>
                                 <li><a href="{{ route('medias.index') }}">Manage Medias</a>
                                 </li>
-                                <li><a href="{{ route('slugs.index') }}">Manage Slugs</a>
-                                </li>
+
                             </ul>
                         </li>
                         <li><a>Posts</a>
                             <ul>
                                 <li><a href="{{ route('posts.index') }}">Manage Posts</a></li>
                                 <li><a href="{{ route('genre-posts.index') }}">Manage Genres</a></li>
+                                 <li><a href="{{ route('slugs.index') }}">Manage Slugs</a>
+                                </li>
+                                 <li><a href="{{ route('courses.index') }}">Manage Courses</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -97,11 +100,15 @@
 
                         <li><a>Employers</a>
                             <ul>
-                                <li><a href="{{ route('employers.index') }}">Manage Emplyers <span
+                                <li><a href="{{ route('employers.index') }}">Manage Employers <span
                                             class="nav-tag">2</span></a></li>
                             </ul>
                             <ul>
                                 <li><a href="{{ route('job-postings-manage.index') }}">Manage Jobs <span
+                                            class="nav-tag">2</span></a></li>
+                            </ul>
+                            <ul>
+                                <li><a href="{{ route('admin.companies.index') }}">Manage Company <span
                                             class="nav-tag">2</span></a></li>
                             </ul>
                         </li>
@@ -198,6 +205,51 @@
         })
     </script>
     <script>
+         $('.media_choose').change(function() {
+            var trangthai_val = $(this).val();
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('media-choose') }}",
+                method: "GET",
+                data: {
+                    trangthai_val: trangthai_val,
+                    id: id
+                },
+                success: function(data) {
+                    alert('Thay đổi trạng thái media thành công!');
+                }
+            });
+        })
+ $('.slug_choose').change(function() {
+            var trangthai_val = $(this).val();
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('slug-choose') }}",
+                method: "GET",
+                data: {
+                    trangthai_val: trangthai_val,
+                    id: id
+                },
+                success: function(data) {
+                    alert('Thay đổi trạng thái tag thành công!');
+                }
+            });
+        })
+         $('.post_choose').change(function() {
+            var trangthai_val = $(this).val();
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('post-choose') }}",
+                method: "GET",
+                data: {
+                    trangthai_val: trangthai_val,
+                    id: id
+                },
+                success: function(data) {
+                    alert('Thay đổi trạng thái bài viết thành công!');
+                }
+            });
+        })
         $('.category_choose').change(function() {
             var trangthai_val = $(this).val();
             var id = $(this).attr('id');
@@ -210,6 +262,67 @@
                 },
                 success: function(data) {
                     alert('Thay đổi trạng thái thể loại thành công!');
+                }
+            });
+        })
+        $('.company_choose').change(function() {
+            var trangthai_val = $(this).val();
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('company-choose') }}",
+                method: "GET",
+                data: {
+                    trangthai_val: trangthai_val,
+                    id: id
+                },
+                success: function(data) {
+                    alert('Thay đổi trạng thái công ty thành công!');
+                }
+            });
+        })
+        $('.top_choose').change(function() {
+            var trangthai_val = $(this).val();
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('top-choose') }}",
+                method: "GET",
+                data: {
+                    trangthai_val: trangthai_val,
+                    id: id
+                },
+                success: function(data) {
+                    alert('Thay đổi trạng thái top thành công!');
+                }
+            });
+        })
+        $('.top_home_choose').change(function() {
+            var trangthai_val = $(this).val();
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('top-home-choose') }}",
+                method: "GET",
+                data: {
+                    trangthai_val: trangthai_val,
+                    id: id
+                },
+                success: function(data) {
+                    alert('Thay đổi trạng thái top home thành công!');
+                }
+            });
+        })
+        $('.featured_choose').change(function() {
+            var trangthai_val = $(this).val();
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('featured-choose') }}",
+                method: "GET",
+                data: {
+                    trangthai_val: trangthai_val,
+                    id: id
+                },
+                success: function(data) {
+                    alert(
+                        'Thay đổi trạng thái nổi bật thành công!');
                 }
             });
         })

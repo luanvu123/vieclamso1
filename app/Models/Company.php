@@ -25,6 +25,9 @@ class Company extends Model
         'twitter',
         'linkedin',
         'featured',
+        'slug', // Thêm cột slug
+        'top',  // Thêm cột top
+        'top-home'
     ];
 
     public function employer()

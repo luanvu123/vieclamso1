@@ -16,7 +16,7 @@
             <strong>Website:</strong> <a href="{{ $ecosystem->website }}" target="_blank">{{ $ecosystem->website }}</a>
         </div>
         <div class="mb-3">
-            <strong>Name Link Website:</strong> {{ $ecosystem->name_link_website }}
+            <strong>Name Link Color:</strong> {{ $ecosystem->name_link_website }}
         </div>
         <div class="mb-3">
             <strong>Status:</strong> {{ $ecosystem->status ? 'Active' : 'Inactive' }}

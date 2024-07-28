@@ -39,12 +39,13 @@
     <link rel="preload" as="image" fetchpriority="high"
         href="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/bg_header.webp"
         type="image/webp">
-
-
-
+    <link rel="stylesheet" href="../static.topcv.vn/v4/css/components/desktop/app-page.min.540613ab89f44167G.css">
+    <link rel="stylesheet" href="../../static.topcv.vn/v4/css/pages/blog-page/blog-desktop.d6b67a34ec167762G.css">
+    <link rel="stylesheet" href="../static.topcv.vn/v4/css/components/desktop/company/detail.min.b7fffc86741bf76cG.css">
     <link rel="stylesheet" href="../static.topcv.vn/v4/cdn/plugins/bootstrap/bootstrap-3.3.4.min.css">
     <link rel="stylesheet" href="../static.topcv.vn/v4/css/app.min.644b242d2ff872f5G.css">
     <link rel="stylesheet" href="../vieclamso1/v3/css/toastr.min.css">
+    <link rel="stylesheet" href="../static.topcv.vn/v4/css/components/desktop/company.min.2c1c6ef49abb59bfG.css">
     <link rel="stylesheet"
         href="https://static.topcv.vn/v4/css/components/desktop/suggest-job-setting/setting.92bab7ad30839efeK.css">
     <link rel="stylesheet"
@@ -54,6 +55,16 @@
     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/style.d8c1fe08632e5e88K.css">
     <link rel="stylesheet" href="https://www.topcv.vn/v3/css/notification.css?v=1.0.10">
     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/app.min.fa6e35ed40ac0f6cK.css">
+
+    <!-- Slick CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css" />
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Slick JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
     <link rel="preload" as="style" onload="this.rel='stylesheet'"
         href="https://www.topcv.vn/v3/plugins/slick/slick.css?v=1.0.0">
     <link rel="preload" as="style" onload="this.rel='stylesheet'"
@@ -1145,7 +1156,7 @@
     </div>
     <nav class="cvo-flex cvo-items-center cvo-justify-between" id="navbar-mobile">
         <h1>
-            <a href="{{route('/')}}" class="cvo-flex cvo-items-center">
+            <a href="{{ route('/') }}" class="cvo-flex cvo-items-center">
                 <img src="../static.topcv.vn/v4/image/logo/topcv-logo-6.png" alt="TopCV tuyen dung tai TopCV"
                     title="TopCV tuyển dụng tại TopCV" class="logo">
             </a>
@@ -1324,7 +1335,8 @@
                 <div class="cvo-flex cvo-items-center item-child">
                     <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
                             class="fa-regular fa-buildings"></i></span>
-                    <a href="cong-ty.html" class="cvo-flex cvo-items-center
+                    <a href="{{ route('all.company') }}"
+                        class="cvo-flex cvo-items-center
                                 ">
                         Danh sách công ty
                     </a>
@@ -1470,8 +1482,7 @@
             <div class="box-item-child cvo-hidden" id="menu-item-blog">
                 <div class="cvo-flex cvo-items-center item-child tag-border">
                     <i class="fa-solid fa-newspaper"></i>
-                    <a href="blog.html" class="cvo-flex cvo-items-center
-                                   ">
+                    <a href="blog.html" class="cvo-flex cvo-items-center">
                         Trang chủ cẩm nang nghề nghiệp
                     </a>
                 </div>
@@ -1542,7 +1553,7 @@
         <div class="container-fluid px-30">
             <div class="navbar-header">
                 <h1 style="margin: 0">
-                    <a class="navbar-brand" href="{{route('/')}}">
+                    <a class="navbar-brand" href="{{ route('/') }}">
                         <img src="../static.topcv.vn/v4/image/logo/topcv-logo-6.png" alt="TopCV tuyen dung tai TopCV"
                             title="TopCV tuyển dụng tại TopCV" class>
                     </a>
@@ -1635,13 +1646,13 @@
                     </div>
                 </li>
                 <li class="navbar-left__item group">
-                    <a href="cong-ty.html" title="Công ty">
+                    <a href="{{ route('all.company') }}" title="Công ty">
                         Công ty
                     </a>
                     <div class="group-hover:menu navbar__item__dropdown-menu">
                         <ul class="nav navbar-menu">
                             <li class="navbar-menu__item ">
-                                <a href="cong-ty.html" class="text-sm">
+                                <a href="{{ route('all.company') }}" class="text-sm">
                                     <i class="icon fa-regular fa-buildings"></i>
                                     Danh sách công ty
                                 </a>
@@ -1734,49 +1745,21 @@
                         </ul>
                     </div>
                 </li>
-                <li class="navbar-left__item group
-                        ">
+                <li class="navbar-left__item group">
                     <a href="blog.html" title="Blog">
                         Cẩm nang nghề nghiệp
                     </a>
                     <div class="group-hover:menu navbar__item__dropdown-menu">
                         <ul class="nav navbar-menu">
-                            <li class="navbar-menu__item ">
-                                <a href="blog/huong-nghiep.html" class="text-sm">
-                                    <i class="icon fa-regular fa-compass"></i>
-                                    Định hướng nghề nghiệp
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item ">
-                                <a href="blog/bi-kip-tim-viec.html" class="text-sm">
-                                    <i class="icon fa-regular fa-folder-magnifying-glass"></i>
-                                    Bí kíp tìm việc
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item ">
-                                <a href="blog/che-do-luong-thuong.html" class="text-sm">
-                                    <i class="icon fa-regular fa-money-check-dollar-pen"></i>
-                                    Chế độ lương thưởng
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item ">
-                                <a href="blog/kien-thuc-nganh.html" class="text-sm">
-                                    <i class="icon fa-regular fa-folder-bookmark"></i>
-                                    Kiến thức chuyên ngành
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item ">
-                                <a href="blog/hanh-trang-nghe-nghiep.html" class="text-sm">
-                                    <i class="icon fa-regular fa-briefcase"></i>
-                                    Hành trang nghề nghiệp
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item ">
-                                <a href="blog/xu-huong.html" class="text-sm">
-                                    <i class="icon fa-regular fa-chart-pyramid"></i>
-                                    Thị trường và xu hướng tuyển dụng
-                                </a>
-                            </li>
+                            @foreach ($genrepost_layout as $genrepost)
+                                <li class="navbar-menu__item ">
+                                    <a href="{{ route('genrepost.showPost', ['slug' => $genrepost->slug]) }}"
+                                        class="text-sm">
+                                        <i class="{{ $genrepost->icon }}"></i>
+                                        {{ $genrepost->title }}
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </li>
@@ -1786,7 +1769,7 @@
                     <li class="navbar-right__item">
                         <div class="block-for-employer">
                             <p>Bạn là nhà tuyển dụng?</p>
-                            <a type="button" target="_blank" href="{{route('recruitment')}}">
+                            <a type="button" target="_blank" href="{{ route('recruitment') }}">
                                 <span>Đăng tuyển ngay</span>
                                 <span class="icon"><i class="fa-solid fa-chevrons-right"></i></span>
                             </a>
@@ -1799,7 +1782,7 @@
                     <li class="navbar-right__item group py16">
                         <div class="title">
                             <a href="javascript:void(0)">
-                                <img src="{{asset('storage/'.Auth::guard('candidate')->user()->avatar_candicate) ?? asset('storage/avatar/avatar-default.jpg') }}"
+                                <img src="{{ asset('storage/' . Auth::guard('candidate')->user()->avatar_candicate) ?? asset('storage/avatar/avatar-default.jpg') }}"
                                     alt="Avatar"
                                     onerror="this.src='{{ asset('storage/avatar/avatar-default.jpg') }}'"
                                     alt="{{ Auth::guard('candidate')->user()->fullname_candicate }}">
@@ -1817,7 +1800,8 @@
                                         <p class="name">{{ Auth::guard('candidate')->user()->fullname_candicate }}
                                         </p>
                                         <p class="description">Email: <span
-                                                class="code">{{ Auth::guard('candidate')->user()->email }}</span></p>
+                                                class="code">{{ Auth::guard('candidate')->user()->email }}</span>
+                                        </p>
                                     </div>
                                 </div>
                                 <li class="navbar-menu__item">
@@ -1916,102 +1900,9 @@
     <footer id="footer-desktop">
         <div class="footer-common-search-keywords">
             <div class="container keyword-seo">
-                <a target="_blank" href="cv-la-gi.html">cv là gì</a>
-                <a target="_blank" href="mau-cv.html">Mẫu CV</a>
-                <a target="_blank" href="mau-cv.html">mẫu cv tiếng việt</a>
-                <a target="_blank" href="tai-mau-so-yeu-ly-lich-chuan-mien-phi.html">Sơ
-                    yếu lý lịch</a>
-                <a target="_blank" href="tong-hop-cv-tham-khao-cac-nhom-nganh.html">CV
-                    tham khảo</a>
-                <a target="_blank" href="tong-hop-cv-tham-khao-cho-lap-trinh-vien.html">tổng hợp CV
-                    tham khảo cho lập trình viên</a>
-                <a target="_blank" href="giay-to-thu-tuc-ho-so-xin-viec.html">giấy tờ
-                    thủ tục hồ sơ xin việc</a>
-                <a target="_blank" href="cach-viet-email-xin-viec-bang-tieng-anh.html">Email xin việc
-                    bằng tiếng anh</a>
-                <a target="_blank" href="mau-don-xin-viec.html">Mẫu đơn xin việc</a>
-                <a target="_blank" href="mau-don-xin-nghi-viec.html">mẫu đơn xin nghỉ
-                    việc</a>
-                <a target="_blank" href="mau-don-xin-nghi-phep.html">Cách viết đơn xin
-                    nghỉ phép</a>
-                <a target="_blank" href="viet-cv-the-nao-cho-chuan.html">Cách viết CV
-                    xin việc</a>
-                <a target="_blank" href="viet-cv-nganh-kinh-doanh-ban-hang-nhu-the-nao.html">cách viết
-                    CV Ngành Kinh doanh/Bán hàng</a>
-                <a target="_blank" href="cach-viet-cv-nganh-ke-toan-kiem-toan.html">cách
-                    viết CV Ngành Kế Toán/Kiểm Toán</a>
-                <a target="_blank" href="cach-viet-cv-nganh-nhan-su.html">cách viết CV
-                    Ngành Nhân Sự</a>
-                <a target="_blank" href="huong-dan-viet-cv-xin-hoc-bong.html">cách
-                    viết CV xin Học bổng</a>
-                <a target="_blank" href="huong-dan-viet-cv-xin-viec-tieng-anh.html">cách
-                    viết CV Tiếng Anh</a>
-                <a target="_blank" href="huong-dan-viet-cv-tieng-nhat.html">cách viết
-                    CV Tiếng Nhật</a>
-                <a target="_blank" href="huong-dan-viet-cv-tieng-trung.html">cách viết
-                    CV Tiếng Trung</a>
-                <a target="_blank" href="huong-dan-viet-cv-tieng-han.html">cách viết
-                    CV Tiếng Hàn</a>
-                <a target="_blank" href="cam-nang-nam-nhat-danh-cho-sinh-vien.html">cẩm
-                    nang năm nhất cho sinh viên</a>
-                <a target="_blank" href="mau-don-xin-thuc-tap-chuan-cho-sinh-vien.html">Mẫu đơn xin
-                    thực tập</a>
-                <a target="_blank" href="huong-dan-sua-loi-go-tieng-viet-unikey.html">Hướng
-                    dẫn sửa lỗi gõ tiếng Việt</a>
-                <a target="_blank" href="nganh-du-lich-lam-nhung-cong-viec-gi.html">Ngành
-                    du lịch làm việc gì</a>
-                <a target="_blank" href="cam-nang-xin-viec-nganh-nhan-su.html">Cẩm
-                    nang xin việc ngành nhân sự</a>
-                <a target="_blank" href="xin-viec-nganh-cong-nghe-thong-tin.html">Xin
-                    việc ngành công nghệ thông tin</a>
-                <a target="_blank" href="cam-nang-xin-viec-nganh-marketing.html">Cẩm
-                    nang xin việc ngành marketing</a>
-                <a target="_blank" href="xin-viec-nganh-ke-toan-kiem-toan.html">Cẩm
-                    nang xin việc ngành kế toán kiểm toán </a>
-                <a target="_blank" href="xin-viec-nganh-cong-nghe-thuc-pham.html">Cẩm
-                    nang xin việc ngành công nghệ thực phẩm</a>
-                <a target="_blank" href="cam-nang-xin-viec-nganh-tai-chinh-ngan-hang.html">Cẩm nang
-                    xin việc ngành tài chính ngân hàng</a>
-                <a target="_blank" href="xin-viec-nganh-luat.html">Cẩm nang xin việc
-                    ngành luật</a>
-                <a target="_blank" href="xin-viec-nganh-xay-dung-dia-oc.html">Cẩm nang
-                    xin việc ngành xây dựng - địa ốc</a>
-                <a target="_blank" href="trac-nghiem-tinh-cach-mbti.html">Trắc nghiệm
-                    tính cách MBTI</a>
-                <a target="_blank" href="viec-lam-remote-la-gi.html">Việc làm online tại
-                    nhà</a>
-                <a target="_blank" href="tim-viec-lam-moi-nhat-tai-ho-chi-minh-l2.html">Tìm việc làm
-                    tại TP. HCM</a>
-                <a target="_blank" href="mau-cover-letter-thu-xin-viec.html">Cách viết
-                    cover letter xin việc</a>
-                <a target="_blank" href="huong-dan-viet-cv-xin-viec-tieng-anh.html">CV
-                    xin việc bằng tiếng Anh</a>
-                <a target="_blank" href="cv-cho-sinh-vien-chua-tot-nghiep.html">CV cho
-                    sinh viên chưa tốt nghiệp</a>
-                <a target="_blank" href="tim-viec-lam-hanh-chinh-nhan-su.html">Việc
-                    làm hành chính nhân sự</a>
-                <a target="_blank" href="huong-dan-viet-cv-tieng-trung.html">Thư xin
-                    việc bằng tiếng Anh</a>
-                <a target="_blank" href="cong-viec-nganh-logistic.html">Ngành logistic
-                    là gì</a>
-                <a target="_blank" href="tim-viec-lam-moi-nhat-tai-hai-phong-l9.html">Việc
-                    làm Hải Phòng</a>
-                <a target="_blank" href="tim-viec-lam-moi-nhat-tai-binh-dinh-l16.html">Việc làm Bình
-                    Định</a>
-                <a target="_blank" href="tim-viec-lam-content-marketing.html">Tuyển
-                    dụng Content Marketing</a>
-                <a target="_blank" href="tim-viec-lam-lap-trinh-vien-php.html">Tuyển
-                    lập trình viên PHP</a>
-                <a target="_blank" href="tim-viec-lam-lap-trinh-vien-java.html">Tuyển
-                    lập trình viên Java</a>
-                <a target="_blank" href="tim-viec-lam-lap-trinh-vien-net.html">Tuyển
-                    lập trình viên .Net</a>
-                <a target="_blank" href="tim-viec-lam-nhan-vien-kinh-doanh.html">Tuyển
-                    dụng nhân viên kinh doanh</a>
-                <a target="_blank" href="tim-viec-lam-nhan-vien-marketing.html">Tuyển
-                    dụng nhân viên marketing</a>
-                <a target="_blank" href="tim-viec-lam-nhan-vien-ke-toan.html">Tìm việc
-                    kế toán</a>
+                @foreach ($slugs_layout as $slug_layout)
+                    <a target="_blank" href="{{ $slug_layout->website }}">{{ $slug_layout->name }}</a>
+                @endforeach
             </div>
         </div>
         <div class="footer-main">
@@ -2217,35 +2108,16 @@
                                     Hệ sinh thái HR Tech của TopCV
                                 </div>
                                 <div class="box-image-app">
-                                    <a href="index.html" class="box-image-app__item bg-topcv">
-                                        <img src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/footer/topcv-logo.png"
-                                            class="img-logo-ecosystem img-responsive"
-                                            alt="TopCV tuyen dung tai TopCV" title="TopCV tuyển dụng tại TopCV">
-                                        <span>
-                                            Nền tảng công nghệ tuyển dụng thông minh TopCV.vn
-                                        </span>
-                                    </a>
-                                    <a href="https://happytime.vn/" class="box-image-app__item bg-happytime">
-                                        <img src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/footer/happy_time.png"
-                                            class="img-logo-ecosystem img-responsive img-padding">
-                                        <span>
-                                            Nền tảng quản lý & gia tăng trải nghiệm nhân viên HappyTime.vn
-                                        </span>
-                                    </a>
-                                    <a href="https://www.testcenter.vn/" class="box-image-app__item bg-testcenter">
-                                        <img src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/footer/testcenter.png"
-                                            class="img-logo-ecosystem img-responsive img-padding">
-                                        <span>
-                                            Nền tảng thiết lập và đánh giá năng lực nhân viên TestCenter.vn
-                                        </span>
-                                    </a>
-                                    <a href="https://www.shiring.ai/" class="box-image-app__item bg-shiring">
-                                        <img src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/footer/SHiring.png"
-                                            class="img-logo-ecosystem img-responsive img-padding">
-                                        <span>
-                                            Giải pháp quản trị tuyển dụng hiệu suất cao SHiring.ai
-                                        </span>
-                                    </a>
+                                    @foreach ($ecosystems_layout as $ecosystem_layout)
+                                        <a
+                                            href="{{ $ecosystem_layout->website }}"class="{{ $ecosystem_layout->name_link_website }}">
+                                            <img src="{{ asset('storage/' . $ecosystem_layout->image_footer) }}"
+                                                class="img-logo-ecosystem img-responsive"
+                                                alt="{{ $ecosystem_layout->name }}"
+                                                title="{{ $ecosystem_layout->name }}">
+                                            <span>{{ $ecosystem_layout->detail }}</span>
+                                        </a>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -3946,7 +3818,8 @@
             }
         })();
     </script>
+    <script>
+        < /body>
 
-</body>
-
-</html>
+        <
+        /html>

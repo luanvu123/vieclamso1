@@ -45,7 +45,17 @@
                                     <td class="detail">{{ $post->title }}</td>
                                     <td class="detail">{{ $post->detail }}</td>
                                     <td class="detail">{{ $post->website }}</td>
-                                    <td class="detail">{{ $post->status ? 'Active' : 'Inactive' }}</td>
+                                   <td>
+                            <select id="{{ $post->id }}" class="post_choose">
+                                @if ($post->status == 0)
+                                    <option value="1">Show</option>
+                                    <option selected value="0">Hidden</option>
+                                @else
+                                    <option selected value="1">Show</option>
+                                    <option value="0">Hidden</option>
+                                @endif
+                            </select>
+                        </td>
                                     <td>{{ $post->featured ? 'Yes' : 'No' }}</td>
                                     <td class="detail">{{ $post->genrePost->title ?? 'N/A' }}</td>
                                     <td>

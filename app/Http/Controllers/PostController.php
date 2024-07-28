@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\GenrePost;
 use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -93,5 +94,13 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->delete();
         return redirect()->route('posts.index');
+    }
+     public function post_choose(Request $request)
+    {
+        $data = $request->all();
+        $post =Post::find($data['id']);
+        $post->status = $data['trangthai_val'];
+        $post->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $post->save();
     }
 }

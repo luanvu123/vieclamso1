@@ -43,7 +43,7 @@
                 @enderror
             </div>
 <div class="form-group">
-    <label for="name_link_website">Name Link Website (optional)</label>
+    <label for="name_link_website">Color (optional)</label>
     <input type="text" name="name_link_website" class="form-control" value="{{ old('name_link_website', $ecosystem->name_link_website ?? '') }}">
     @error('name_link_website')
         <div class="alert alert-danger mt-2">{{ $message }}</div>

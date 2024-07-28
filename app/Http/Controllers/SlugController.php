@@ -5,6 +5,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Slug;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -80,5 +81,13 @@ class SlugController extends Controller
         $slug->delete();
 
         return redirect()->route('slugs.index')->with('success', 'Slug deleted successfully!');
+    }
+       public function slug_choose(Request $request)
+    {
+        $data = $request->all();
+        $slug =Slug::find($data['id']);
+        $slug->status = $data['trangthai_val'];
+        $slug->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $slug->save();
     }
 }
