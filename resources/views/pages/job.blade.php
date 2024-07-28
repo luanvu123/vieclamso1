@@ -174,7 +174,7 @@
                                                  {{-- Ứng tuyển thành công --}}
                                                  <div class="job-detail__info--actions box-apply-success">
                                                      <a class="job-detail__info--actions-button button-primary open-apply-modal"
-                                                         href="#" data-toggle="modal">
+                                                         href="#" data-target="#applyModal" data-toggle="modal">
                                                          <span class="button-icon">
                                                              <i class="fa-solid fa-arrow-rotate-right"></i>
                                                          </span>
@@ -216,7 +216,8 @@
                                              Ứng tuyển ngay
                                          </a>
                                      @endauth
-                                     <a class="job-detail__info--actions-button button-white" href="#">
+                                     <a class="job-detail__info--actions-button button-white" href="#"
+                                         onclick="saveJob({{ $jobPosting->id }})">
                                          <span class="button-icon">
                                              <i class="fa-regular fa-heart"></i>
                                          </span>
@@ -743,7 +744,7 @@
                                                                      </button>
                                                                      <div class="box-save-job">
                                                                          <a data-id="{{ $relatedJob->id }}"
-                                                                             href=""
+                                                                             href=""onclick="saveJob({{ $relatedJob->id }})"
                                                                              class="save box-save-job-hover"
                                                                              data-toggle="tooltip"
                                                                              title="Bạn phải đăng nhập để lưu tin"><i
@@ -870,7 +871,8 @@
                                  </div>
                              </div>
                              <div class="job-detail__company--link">
-                                 <a rel="nofollow" href="{{ route('company-home.show', $jobPosting->company->slug) }}" target="_blank">Xem trang
+                                 <a rel="nofollow" href="{{ route('company-home.show', $jobPosting->company->slug) }}"
+                                     target="_blank">Xem trang
                                      công ty</a>
                                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
                              </div>
@@ -1166,49 +1168,57 @@
                          <div class="box-maybe-interested">
                              <h3 class="box-maybe-interested__title">Có thể bạn quan tâm</h3>
                              <div class="box-maybe-interested__company">
-            <div class="box-maybe-interested__company--image">
-                <a rel="nofollow" href="{{ $company_random->url }}">
-                    <img src="{{ asset('storage/' . $company_random->image) }}"
-                         alt="{{ $company_random->name }}"
-                         class="spotlight-cover">
-                </a>
-            </div>
-            <div class="box-maybe-interested__company--content company">
-                <div class="company__info">
-                    <div class="company__info--logo">
-                        <a rel="nofollow" href="{{ route('company-home.show', $company_random->slug) }}">
-                            <img src="{{ asset('storage/' . $company_random->logo) }}" alt="{{ $company_random->name }}">
-                        </a>
-                    </div>
-                    <div class="company__info--name">
-                        <a rel="nofollow" href="{{ $company_random->url }}">{{ $company_random->name }}</a>
-                        <img src="https://static.topcv.vn/v4/image/maybe-interested/spotlight.png?v=1.2" alt="">
-                    </div>
-                </div>
-                <div class="company__job">
-                    @foreach($jobPosting_random as $jobPosting)
-                        <div class="job job-ta" data-job-id="{{ $jobPosting->id }}" data-box="SpotlightCompany">
-                            <a href="{{ $jobPosting->application_email_url }}" target="_blank" data-toggle="tooltip" title="" data-placement="top" class="job__name">{{ $jobPosting->title }}</a>
-                            <div class="job__info">
-                                <div class="job__info--salary">
-                                    <i class="fa-solid fa-circle-dollar"></i>
-                                    <span>{{ $jobPosting->salary }}</span>
-                                </div>
-                                <div class="job__info--address">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span data-toggle="tooltip" data-html="true" title="" data-placement="top">
-                                        {{ $jobPosting->location }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="company__link">
-                    <a rel="nofollow" href="{{ $company_random->url }}" target="_blank">Tìm hiểu ngay</a>
-                </div>
-            </div>
-        </div>
+                                 <div class="box-maybe-interested__company--image">
+                                     <a rel="nofollow" href="{{ $company_random->url }}">
+                                         <img src="{{ asset('storage/' . $company_random->image) }}"
+                                             alt="{{ $company_random->name }}" class="spotlight-cover">
+                                     </a>
+                                 </div>
+                                 <div class="box-maybe-interested__company--content company">
+                                     <div class="company__info">
+                                         <div class="company__info--logo">
+                                             <a rel="nofollow"
+                                                 href="{{ route('company-home.show', $company_random->slug) }}">
+                                                 <img src="{{ asset('storage/' . $company_random->logo) }}"
+                                                     alt="{{ $company_random->name }}">
+                                             </a>
+                                         </div>
+                                         <div class="company__info--name">
+                                             <a rel="nofollow"
+                                                 href="{{ $company_random->url }}">{{ $company_random->name }}</a>
+                                             <img src="https://static.topcv.vn/v4/image/maybe-interested/spotlight.png?v=1.2"
+                                                 alt="">
+                                         </div>
+                                     </div>
+                                     <div class="company__job">
+                                         @foreach ($jobPosting_random as $jobPosting)
+                                             <div class="job job-ta" data-job-id="{{ $jobPosting->id }}"
+                                                 data-box="SpotlightCompany">
+                                                 <a href="{{ $jobPosting->application_email_url }}" target="_blank"
+                                                     data-toggle="tooltip" title="" data-placement="top"
+                                                     class="job__name">{{ $jobPosting->title }}</a>
+                                                 <div class="job__info">
+                                                     <div class="job__info--salary">
+                                                         <i class="fa-solid fa-circle-dollar"></i>
+                                                         <span>{{ $jobPosting->salary }}</span>
+                                                     </div>
+                                                     <div class="job__info--address">
+                                                         <i class="fa-solid fa-location-dot"></i>
+                                                         <span data-toggle="tooltip" data-html="true" title=""
+                                                             data-placement="top">
+                                                             {{ $jobPosting->location }}
+                                                         </span>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         @endforeach
+                                     </div>
+                                     <div class="company__link">
+                                         <a rel="nofollow" href="{{ $company_random->url }}" target="_blank">Tìm hiểu
+                                             ngay</a>
+                                     </div>
+                                 </div>
+                             </div>
                          </div>
                          <div class="box-easy-apply job-detail__body-right--item">
                              <div class="image">

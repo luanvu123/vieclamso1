@@ -39,7 +39,9 @@
     <link rel="preload" as="image" fetchpriority="high"
         href="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/bg_header.webp"
         type="image/webp">
-        <link rel="stylesheet" href="https://static.topcv.vn/v4/components/desktop/history-apply.fe7877ceeda62d0fK.css">
+
+<link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/desktop/job-save.min.d88c8255578e7d64K.css">
+    <link rel="stylesheet" href="https://static.topcv.vn/v4/components/desktop/history-apply.fe7877ceeda62d0fK.css">
     <link rel="stylesheet" href="../static.topcv.vn/v4/css/components/desktop/app-page.min.540613ab89f44167G.css">
     <link rel="stylesheet" href="../../static.topcv.vn/v4/css/pages/blog-page/blog-desktop.d6b67a34ec167762G.css">
     <link rel="stylesheet" href="../static.topcv.vn/v4/css/components/desktop/company/detail.min.b7fffc86741bf76cG.css">
@@ -1217,7 +1219,7 @@
                     <span class="cvo-flex cvo-items-center cvo-justify-content icon-child">
                         <i class="fa-regular fa-magnifying-glass"></i>
                     </span>
-                    <a href="{{route('applications.showAppliedJobs')}}" class="
+                    <a href="{{ route('applications.showAppliedJobs') }}" class="
                                 ">
                         Việc làm đã ứng tuyển
                     </a>
@@ -1568,27 +1570,15 @@
                     <div class="group-hover:menu navbar__item__dropdown-menu">
                         <ul class="nav navbar-menu">
                             <li class="navbar-menu__item  tag-border">
-                                <a href="{{route('applications.showAppliedJobs')}}" class="text-sm">
+                                <a href="{{ route('applications.showAppliedJobs') }}" class="text-sm">
                                     <i class="icon fa-regular fa-magnifying-glass"></i>
-                                   Việc làm đã ứng tuyển
+                                    Việc làm đã ứng tuyển
                                 </a>
                             </li>
                             <li class="navbar-menu__item ">
-                                <a href="login.html" class="text-sm">
+                                <a href="{{route('saved-jobs')}}" class="text-sm">
                                     <i class="icon fa-regular fa-check-to-slot"></i>
-                                    Việc làm phù hợp
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item ">
-                                <a href="viec-lam-it.html" class="text-sm">
-                                    <i class="fa-regular fa-laptop-code icon"></i>
-                                    Việc làm IT
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item ">
-                                <a href="viec-lam-senior.html" class="text-sm">
-                                    <i class="icon fa-regular fa-medal"></i>
-                                    Việc làm Senior
+                                    Việc làm đã lưu
                                 </a>
                             </li>
                         </ul>
@@ -1604,43 +1594,6 @@
                                 <a href="{{ route('cv.manage') }}" class="text-sm">
                                     <i class="icon fa-regular fa-file-user"></i>
                                     Quản lý CV
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item ">
-                                <a href="mau-cv.html" class="text-sm">
-                                    <i class="icon fa-regular fa-file-user"></i>
-                                    Mẫu CV
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item  tag-border">
-                                <a href="mau-cover-letter-thu-xin-viec.html" class="text-sm">
-                                    <i class="icon fa-regular fa-file-lines"></i>
-                                    Mẫu Cover Letter
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item">
-                                <a href="https://reviewcv.topcv.vn/" target="_blank" class="text-sm">
-                                    <i class="icon fa-regular fa-file-user"></i>
-                                    Dịch vụ tư vấn CV
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item ">
-                                <a href="huong-dan-viet-cv-chi-tiet-theo-nganh.html" target="_blank" class="text-sm">
-                                    <i class="icon fa-regular fa-file-pen"></i>
-                                    Hướng dẫn viết CV theo ngành nghề
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item  tag-border">
-                                <a href="mau-cv-theo-nganh-nghe.html" class="text-sm">
-                                    <i class="icon fa-regular fa-file-check"></i>
-                                    Thư viện CV theo ngành nghề
-                                    <span class="badge badge__new">Mới</span>
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item ">
-                                <a href="profileab80.html?ta_source=ViewProfileInMenubar" class="text-sm">
-                                    <i class="icon fa-regular fa-square-user"></i>
-                                    TopCV Profile
                                 </a>
                             </li>
                         </ul>
@@ -1669,13 +1622,13 @@
                     <div class="group-hover:menu navbar__item__dropdown-menu">
                         <ul class="nav navbar-menu">
                             <li class="navbar-menu__item  tag-border">
-                                <a href="{{route('site.courses')}}" class="text-sm">
+                                <a href="{{ route('site.courses') }}" class="text-sm">
                                     <i class="icon fa-regular fa-graduation-cap"></i>
                                     Khóa học
                                 </a>
                             </li>
                             <li class="navbar-menu__item ">
-                                <a href="{{route('site.app')}}" class="text-sm">
+                                <a href="{{ route('site.app') }}" class="text-sm">
                                     <i class="icon fa-regular fa-mobile"></i>
                                     Mobile App TopCV
                                 </a>
@@ -1748,54 +1701,12 @@
                                         Cài đặt thông tin cá nhân
                                     </a>
                                 </li>
-                                <li class="navbar-menu__item">
-                                    <a href="#" class="text-sm">
-                                        <i class="icon fa-regular fa-circle-up"></i>
-                                        Nâng cấp tài khoản VIP
-                                    </a>
-                                </li>
                                 <li class="navbar-menu__item tag-border">
-                                    <a href="#" class="text-sm">
-                                        <i class="icon fa-regular fa-gift-card"></i>
-                                        Kích hoạt quà tặng
-                                    </a>
-                                </li>
-                                <li class="navbar-menu__item">
-                                    <a href="#" class="text-sm">
-                                        <i class="icon fa-regular fa-eye"></i>
-                                        Nhà tuyển dụng xem hồ sơ
-                                    </a>
-                                </li>
-                                <li class="navbar-menu__item">
-                                    <a href="#" class="text-sm">
-                                        <i class="icon fa-regular fa-gear"></i>
-                                        Cài đặt gợi ý việc làm
-                                    </a>
-                                </li>
-                                <li class="navbar-menu__item">
-                                    <a href="#" class="text-sm">
-                                        <i class="icon fa-regular fa-bell"></i>
-                                        Cài đặt thông báo việc làm
-                                    </a>
-                                </li>
-                                <li class="navbar-menu__item tag-border">
-                                    <a href="#" class="text-sm">
-                                        <i class="icon fa-regular fa-envelope-dot"></i>
-                                        Cài đặt nhận email
-                                    </a>
-                                </li>
-                                <li class="navbar-menu__item">
-                                    <a href="#" class="text-sm">
-                                        <i class="icon fa-regular fa-shield-check"></i>
-                                        Cài đặt bảo mật
-                                    </a>
-                                </li>
-                                <li class="navbar-menu__item tag-border">
-                                    <a href="#" class="text-sm">
-                                        <i class="icon fa-regular fa-lock"></i>
-                                        Đổi mật khẩu
-                                    </a>
-                                </li>
+    <a href="{{ route('change-password.form') }}" class="text-sm">
+        <i class="icon fa-regular fa-lock"></i>
+        Đổi mật khẩu
+    </a>
+</li>
                                 <li class="navbar-menu__item logout">
                                     <a href="javascript:void(0)"
                                         onclick="document.getElementById('candidate-logout-form').submit();"
@@ -3757,7 +3668,22 @@
         })();
     </script>
     <script>
-        < /body>
+        function saveJob(jobPostingId) {
+            fetch('{{ route('save-job') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        job_posting_id: jobPostingId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
 
-        <
-        /html>
+</html>

@@ -58,4 +58,9 @@ class Candidate extends Authenticatable
     {
         return $this->belongsToMany(Company::class, 'company_follower');
     }
+    public function savedJobs()
+{
+    return $this->hasMany(SavedJob::class);
+}
+
 }

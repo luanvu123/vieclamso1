@@ -13,22 +13,26 @@ class ApplicationController extends Controller
 {
     public function store(Request $request)
     {
+        // Xóa ứng tuyển hiện tại nếu tồn tại
         $existingApplication = Application::where('job_posting_id', $request->job_posting_id)
             ->where('candidate_id', Auth::guard('candidate')->id())
-            ->exists();
+            ->first();
 
         if ($existingApplication) {
-            return redirect()->back()->with('error', 'Bạn đã ứng tuyển cho vị trí này trước đó.');
+            $existingApplication->delete();
         }
+
+        // Tạo ứng tuyển mới
         $application = new Application();
         $application->job_posting_id = $request->job_posting_id;
         $application->candidate_id = Auth::guard('candidate')->id();
         $application->cv_id = $request->cv_id;
         $application->application_letter = $request->application_letter;
         $application->save();
+
         $message = 'Ứng tuyển thành công!';
         session()->flash('success', $message);
-         return redirect()->back();
+        return redirect()->back();
     }
 
     public function showAppliedJobs()

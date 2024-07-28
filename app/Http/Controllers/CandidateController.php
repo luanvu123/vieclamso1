@@ -153,4 +153,26 @@ class CandidateController extends Controller
 
         return redirect()->back()->with('success', 'Ảnh đại diện đã được cập nhật.');
     }
+   public function showChangePasswordForm()
+    {
+        return view('pages.change-password');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'currentPassword' => 'required',
+            'newPassword' => 'required|min:6|confirmed',
+        ]);
+
+        $user = Auth::guard('candidate')->user();
+        if (!Hash::check($request->currentPassword, $user->password)) {
+            return back()->withErrors(['currentPassword' => 'Mật khẩu hiện tại không đúng']);
+        }
+
+        $user->password = Hash::make($request->newPassword);
+        $user->save();
+
+        return back()->with('success', 'Mật khẩu đã được thay đổi thành công');
+    }
 }

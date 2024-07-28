@@ -28,6 +28,8 @@ use App\Http\Controllers\GenrePostController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyFollowerController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\SavedJobController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -85,9 +87,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/top-choose', [EmployerManageController::class, 'top_choose'])->name('top-choose');
     Route::get('/top-home-choose', [EmployerManageController::class, 'top_home_choose'])->name('top-home-choose');
     Route::get('/featured-choose', [EmployerManageController::class, 'featured_choose'])->name('featured-choose');
-     Route::get('/post-choose', [PostController::class, 'post_choose'])->name('post-choose');
-       Route::get('/slug-choose', [SlugController::class, 'slug_choose'])->name('slug-choose');
-       Route::get('/media-choose', [MediaController::class, 'media_choose'])->name('media-choose');
+    Route::get('/post-choose', [PostController::class, 'post_choose'])->name('post-choose');
+    Route::get('/slug-choose', [SlugController::class, 'slug_choose'])->name('slug-choose');
+    Route::get('/media-choose', [MediaController::class, 'media_choose'])->name('media-choose');
     Route::resource('employers', EmployerManageController::class);
     Route::resource('job-postings-manage', JobsManageController::class);
     Route::get('/jobPosting-choose', [JobsManageController::class, 'jobPosting_choose'])->name('jobPosting-choose');
@@ -108,6 +110,9 @@ Route::middleware(['candidate'])->group(function () {
 
     Route::get('/cai-dat-thong-tin-ca-nhan', [CandidateController::class, 'showAccount'])->name('candidate.account');
     Route::post('/cai-dat-thong-tin-ca-nhan', [CandidateController::class, 'updateAccount'])->name('candidate.update.account');
+   Route::get('/change-password', [CandidateController::class, 'showChangePasswordForm'])->name('change-password.form');
+Route::post('/change-password', [CandidateController::class, 'changePassword'])->name('change-password');
+
 
     Route::post('/candidate/update-avatar', [CandidateController::class, 'updateAvatar'])->name('candidate.update.avatar');
     Route::get('/quan-ly-cv', [CVController::class, 'index'])->name('cv.manage');
@@ -119,8 +124,14 @@ Route::middleware(['candidate'])->group(function () {
     Route::post('company/{id}/follow', [CompanyFollowerController::class, 'follow'])->name('company.follow');
     Route::post('company/{id}/unfollow', [CompanyFollowerController::class, 'unfollow'])->name('company.unfollow');
     Route::post('applications', [ApplicationController::class, 'store'])->name('applications.store');
+    Route::post('save-job', [SavedJobController::class, 'store'])->name('save-job');
+    Route::get('saved-jobs', [SavedJobController::class, 'index'])->name('saved-jobs');
+    Route::post('unsave-job', [SavedJobController::class, 'unsave'])->name('unsave-job');
+
+
 
     Route::get('applied-jobs', [ApplicationController::class, 'showAppliedJobs'])->name('applications.showAppliedJobs');
+
 });
 
 Route::middleware(['employer'])->group(function () {

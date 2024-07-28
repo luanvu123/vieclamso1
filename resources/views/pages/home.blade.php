@@ -1200,7 +1200,7 @@
                                          khả
                                          năng vượt qua vòng lọc CV.
                                      </p>
-                                     <a class="btn btn-success btn-growth" href="mau-cv.html">
+                                     <a class="btn btn-success btn-growth" href="{{route('cv.upload')}}">
                                          Tạo CV ngay
                                          <i class="fa-light fa-arrow-right"></i>
                                      </a>
@@ -1213,58 +1213,7 @@
                              </div>
                          </div>
                      </div>
-                     <div class="col-sm-12 self-growth__item">
-                         <h2 class="self-growth__title">Thấu hiểu bản thân - Nâng tầm giá trị</h2>
-                         <div class="self-growth__content">
-                             <div class="self-growth__content--item">
-                                 <div class="content">
-                                     <h3>
-                                         Trắc nghiệm tính cách MBTI
-                                     </h3>
-                                     <p>
-                                         Kết quả trắc nghiệm MBTI chỉ ra cách bạn nhận thức thế giới xung quanh và ra
-                                         quyết định
-                                         trong cuộc sống, từ đó, giúp bạn có thêm thông tin để lựa chọn nghề nghiệp chính
-                                         xác
-                                         hơn.
-                                     </p>
-                                     <a class="btn btn-success btn-growth" href="trac-nghiem-tinh-cach-mbti.html"
-                                         target="_blank">
-                                         Khám phá ngay
-                                         <i class="fa-light fa-arrow-right"></i>
-                                     </a>
-                                 </div>
-                                 <div class="box-image">
-                                     <img class="lazy"
-                                         data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/sel-growth/mbti-desktop.png"
-                                         alt="arnh">
-                                 </div>
-                             </div>
-                             <div class="self-growth__content--item">
-                                 <div class="content">
-                                     <h3>
-                                         Trắc nghiệm đa trí thông minh MI
-                                     </h3>
-                                     <p>
-                                         Trả lời cho câu hỏi “Bạn có trí thông minh nổi trội trong lĩnh vực nào?”, từ đó
-                                         bạn có
-                                         thể hiểu bản thân mình hơn và đưa ra các quyết định nghề nghiệp phù hợp.
-                                     </p>
-                                     <a class="btn btn-success btn-growth"
-                                         href="trac-nghiem-da-tri-thong-minh-multiple-intelligences-test.html"
-                                         target="_blank">
-                                         Khám phá ngay
-                                         <i class="fa-light fa-arrow-right"></i>
-                                     </a>
-                                 </div>
-                                 <div class="box-image">
-                                     <img class="lazy"
-                                         data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/sel-growth/mi-desktop.png"
-                                         alt="arnh">
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
+                     
                  </div>
              </div>
          </section>
@@ -1273,86 +1222,28 @@
                  <h2>Công cụ vượt trội!</h2>
                  <div class="superior-tool__content">
                      <div class="content__session">
-                         <a class="item" href="tinh-luong-gross-net.html" target="_blank">
+                         <a class="item" href="{{route('site.courses')}}" target="_blank">
                              <div class="icon">
                                  <img class="lazy"
                                      data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/superior-tool/gross-net.png"
                                      alt>
                              </div>
                              <div class="title">
-                                 <h3>Tính lương GROSS - NET</h3>
+                                 <h3>Khóa học</h3>
                                  <span>
                                      Khám phá ngay
                                      <i class="fa-solid fa-arrow-right"></i>
                                  </span>
                              </div>
                          </a>
-                         <a class="item" href="tinh-lai-kep.html" target="_blank">
+                         <a class="item" href="{{route('site.app')}}" target="_blank">
                              <div class="icon">
                                  <img class="lazy"
                                      data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/superior-tool/lai-suat-kep.png"
                                      alt>
                              </div>
                              <div class="title">
-                                 <h3>Tính lãi suất kép</h3>
-                                 <span>
-                                     Khám phá ngay
-                                     <i class="fa-solid fa-arrow-right"></i>
-                                 </span>
-                             </div>
-                         </a>
-                         <a class="item" href="tinh-thue-thu-nhap-ca-nhan.html" target="_blank">
-                             <div class="icon">
-                                 <img class="lazy"
-                                     data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/superior-tool/thu-nhap-ca-nhan.png"
-                                     alt>
-                             </div>
-                             <div class="title">
-                                 <h3>Tính thuế thu nhập cá nhân</h3>
-                                 <span>
-                                     Khám phá ngay
-                                     <i class="fa-solid fa-arrow-right"></i>
-                                 </span>
-                             </div>
-                         </a>
-                     </div>
-                     <div class="content__session">
-                         <a class="item" href="cong-cu-tinh-muc-huong-bao-hiem-that-nghiep.html" target="_blank">
-                             <div class="icon">
-                                 <img class="lazy"
-                                     data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/superior-tool/bao-hiem-that-nghiep.png"
-                                     alt>
-                             </div>
-                             <div class="title">
-                                 <h3>Tính Bảo hiểm thất nghiệp</h3>
-                                 <span>
-                                     Khám phá ngay
-                                     <i class="fa-solid fa-arrow-right"></i>
-                                 </span>
-                             </div>
-                         </a>
-                         <a class="item" href="lap-ke-hoach-tiet-kiem.html" target="_blank">
-                             <div class="icon">
-                                 <img class="lazy"
-                                     data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/superior-tool/ke-hoach-tiet-kiem.png"
-                                     alt>
-                             </div>
-                             <div class="title">
-                                 <h3>Lập kế hoạch tiết kiệm</h3>
-                                 <span>
-                                     Khám phá ngay
-                                     <i class="fa-solid fa-arrow-right"></i>
-                                 </span>
-                             </div>
-                         </a>
-                         <a class="item" href="tinh-bao-hiem-xa-hoi-mot-lan.html" target="_blank">
-                             <div class="icon">
-                                 <img class="lazy"
-                                     data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/superior-tool/bao-hiem-xa-hoi-mot-lan.png"
-                                     alt>
-                             </div>
-                             <div class="title">
-                                 <h3>Tính bảo hiểm xã hội một lần</h3>
+                                 <h3>App</h3>
                                  <span>
                                      Khám phá ngay
                                      <i class="fa-solid fa-arrow-right"></i>
