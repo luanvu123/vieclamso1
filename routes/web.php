@@ -47,7 +47,8 @@ Route::get('/cong-ty', [SiteController::class, 'allCompany'])->name('all.company
 Route::get('/search-company', [SiteController::class, 'searchCompany'])->name('search-company');
 Route::get('/cong-ty/{slug}', [SiteController::class, 'showCompany'])->name('company-home.show');
 Route::get('cam-nang-nghe-nghiep/{slug}', [SiteController::class, 'showPost'])->name('genrepost.showPost');
-
+Route::get('/khoa-hoc', [SiteController::class, 'showCourse'])->name('site.courses');
+Route::get('/ung-dung', [SiteController::class, 'showApp'])->name('site.app');
 
 Auth::routes();
 Route::get('/recruitment', function () {
@@ -118,6 +119,8 @@ Route::middleware(['candidate'])->group(function () {
     Route::post('company/{id}/follow', [CompanyFollowerController::class, 'follow'])->name('company.follow');
     Route::post('company/{id}/unfollow', [CompanyFollowerController::class, 'unfollow'])->name('company.unfollow');
     Route::post('applications', [ApplicationController::class, 'store'])->name('applications.store');
+
+    Route::get('applied-jobs', [ApplicationController::class, 'showAppliedJobs'])->name('applications.showAppliedJobs');
 });
 
 Route::middleware(['employer'])->group(function () {

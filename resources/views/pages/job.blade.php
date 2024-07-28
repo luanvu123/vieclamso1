@@ -4,7 +4,7 @@
      <link
          rel="stylesheet"href="https://static.topcv.vn/v4/css/components/desktop/jobs/job-list-default.40710d157e4df9feK.css">
      <div id="main" style="margin-top: 0px;">
-          <div class="header">
+         <div class="header">
              <div class="box-search-job">
                  <div class="container">
                      <style>
@@ -764,384 +764,44 @@
                                              <h2 class="suggestion-courses-title"><i
                                                      class="fa-solid fa-graduation-cap"></i>Khóa học dành cho bạn</h2>
                                              <div class="suggestion-courses-body">
-                                                 <div>
+                                                 @foreach ($courses->chunk(3) as $chunk)
                                                      <div>
-                                                         <div
-                                                             class="row suggestion-courses slick-initialized slick-slider">
-                                                             <button class="slick-prev slick-arrow" aria-label="Previous"
-                                                                 type="button" style="display: block;">Previous</button>
-                                                             <div class="slick-list draggable">
-                                                                 <div class="slick-track"
-                                                                     style="opacity: 1; width: 3198px; transform: translate3d(-984px, 0px, 0px);">
-                                                                     <div class="col-sm-6 col-md-3 col-xs-12 slick-slide slick-cloned"
-                                                                         data-slick-index="-3" aria-hidden="true"
-                                                                         style="width: 246px;" tabindex="-1">
-                                                                         <div class="course-item">
-                                                                             <div class="course-thumbnail"><img
-                                                                                     src="https://static.topcv.vn/partner/gitiho/courses/3.png"
-                                                                                     alt="EXG01 - Tuyệt đỉnh Excel - Trở thành bậc thầy Excel trong 16 giờ"
-                                                                                     class="img-responsive "></div>
-                                                                             <div class="course-body">
-                                                                                 <h3 class="course-title"><a
-                                                                                         data-toggle="tooltip"
-                                                                                         title="EXG01 - Tuyệt đỉnh Excel - Trở thành bậc thầy Excel trong 16 giờ"
-                                                                                         data-placement="top"
-                                                                                         data-container="body"
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/exg01-tuyet-dinh-excel-tro-thanh-bac-thay-excel-trong-16-gio?utm_source=topcv&amp;utm_medium=EXG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         tabindex="-1">EXG01 - Tuyệt đỉnh
-                                                                                         Excel - Trở thành bậc thầy Excel
-                                                                                         trong 16 giờ</a></h3>
-                                                                                 <div class="text-right"><a
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/exg01-tuyet-dinh-excel-tro-thanh-bac-thay-excel-trong-16-gio?utm_source=topcv&amp;utm_medium=EXG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         class="btn btn-default btn-sm"
-                                                                                         tabindex="-1">Tìm hiểu ngay</a>
-                                                                                 </div>
-                                                                             </div>
+                                                         @foreach ($chunk as $course)
+                                                             <div class="col-md-4 col-xs-12">
+                                                                 <div class="box-course box-white clearfix">
+                                                                     <a class="img_a" target="_blank"
+                                                                         href="{{ $course->website }}">
+                                                                         @if ($course->image)
+                                                                             <img src="{{ asset('storage/' . $course->image) }}"
+                                                                                 alt="{{ $course->name }}"
+                                                                                 style="width: 100%; height: 190px;background:linear-gradient(to right, #f12711, #f5af19)"
+                                                                                 class="color-me" rel="nofollow">
+                                                                         @else
+                                                                             <img src="default-image.jpg"
+                                                                                 alt="{{ $course->name }}"
+                                                                                 style="width: 100%; height: 190px;background:linear-gradient(to right, #f12711, #f5af19)"
+                                                                                 class="color-me" rel="nofollow">
+                                                                         @endif
+                                                                     </a>
+                                                                     <div class="course-meta">
+                                                                         <div class="title">
+                                                                             <a target="_blank"
+                                                                                 href="{{ $course->website }}"
+                                                                                 rel="nofollow"
+                                                                                 title="{{ $course->name }}">{{ $course->name }}</a>
                                                                          </div>
-                                                                     </div>
-                                                                     <div class="col-sm-6 col-md-3 col-xs-12 slick-slide slick-cloned"
-                                                                         data-slick-index="-2" aria-hidden="true"
-                                                                         style="width: 246px;" tabindex="-1">
-                                                                         <div class="course-item">
-                                                                             <div class="course-thumbnail"><img
-                                                                                     src="https://static.topcv.vn/partner/gitiho/courses/6.png"
-                                                                                     alt="WOG01 - Tuyệt đỉnh Microsoft Word - Chuyên gia soạn thảo văn bản"
-                                                                                     class="img-responsive "></div>
-                                                                             <div class="course-body">
-                                                                                 <h3 class="course-title"><a
-                                                                                         data-toggle="tooltip"
-                                                                                         title="WOG01 - Tuyệt đỉnh Microsoft Word - Chuyên gia soạn thảo văn bản"
-                                                                                         data-placement="top"
-                                                                                         data-container="body"
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/wog01-tuyet-dinh-microsoft-word-chuyen-gia-soan-thao-van-ban?utm_source=topcv&amp;utm_medium=WOG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         tabindex="-1">WOG01 - Tuyệt đỉnh
-                                                                                         Microsoft Word - Chuyên gia soạn
-                                                                                         thảo văn bản</a></h3>
-                                                                                 <div class="text-right"><a
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/wog01-tuyet-dinh-microsoft-word-chuyen-gia-soan-thao-van-ban?utm_source=topcv&amp;utm_medium=WOG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         class="btn btn-default btn-sm"
-                                                                                         tabindex="-1">Tìm hiểu ngay</a>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </div>
-                                                                     </div>
-                                                                     <div class="col-sm-6 col-md-3 col-xs-12 slick-slide slick-cloned"
-                                                                         data-slick-index="-1" aria-hidden="true"
-                                                                         style="width: 246px;" tabindex="-1">
-                                                                         <div class="course-item">
-                                                                             <div class="course-thumbnail"><img
-                                                                                     src="https://static.topcv.vn/partner/gitiho/courses/4.png"
-                                                                                     alt="PPG01 - Tuyệt đỉnh PowerPoint - Chinh phục mọi ánh nhìn trong 9 bước"
-                                                                                     class="img-responsive "></div>
-                                                                             <div class="course-body">
-                                                                                 <h3 class="course-title"><a
-                                                                                         data-toggle="tooltip"
-                                                                                         title="PPG01 - Tuyệt đỉnh PowerPoint - Chinh phục mọi ánh nhìn trong 9 bước"
-                                                                                         data-placement="top"
-                                                                                         data-container="body"
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/ppg01-tuyet-dinh-powerpoint-truc-quan-hoa-moi-slide-trong-9-buoc?utm_source=topcv&amp;utm_medium=PPG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         tabindex="-1">PPG01 - Tuyệt đỉnh
-                                                                                         PowerPoint - Chinh phục mọi ánh
-                                                                                         nhìn trong 9 bước</a></h3>
-                                                                                 <div class="text-right"><a
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/ppg01-tuyet-dinh-powerpoint-truc-quan-hoa-moi-slide-trong-9-buoc?utm_source=topcv&amp;utm_medium=PPG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         class="btn btn-default btn-sm"
-                                                                                         tabindex="-1">Tìm hiểu ngay</a>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </div>
-                                                                     </div>
-                                                                     <div class="col-sm-6 col-md-3 col-xs-12 slick-slide"
-                                                                         data-slick-index="0" aria-hidden="true"
-                                                                         style="width: 246px;" tabindex="-1">
-                                                                         <div class="course-item">
-                                                                             <div class="course-thumbnail"><img
-                                                                                     src="/v3/images/funix-course/D10.jpg"
-                                                                                     alt="Dễ dàng học 1 ngôn ngữ lập trình bất kỳ theo nhu cầu của bạn"
-                                                                                     class="img-responsive "></div>
-                                                                             <div class="course-body">
-                                                                                 <h3 class="course-title"><a
-                                                                                         data-toggle="tooltip"
-                                                                                         title="Dễ dàng học 1 ngôn ngữ lập trình bất kỳ theo nhu cầu của bạn"
-                                                                                         data-placement="top"
-                                                                                         data-container="body"
-                                                                                         target="_blank"
-                                                                                         href="https://funix.edu.vn/khoa-hoc-language-of-future-200615/?utm_source=TopCV"
-                                                                                         tabindex="-1">Dễ dàng học 1 ngôn
-                                                                                         ngữ lập trình bất kỳ theo nhu cầu
-                                                                                         của bạn</a></h3>
-                                                                                 <div class="text-right"><a
-                                                                                         target="_blank"
-                                                                                         href="https://funix.edu.vn/khoa-hoc-language-of-future-200615/?utm_source=TopCV"
-                                                                                         class="btn btn-default btn-sm"
-                                                                                         tabindex="-1">Tìm hiểu ngay</a>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </div>
-                                                                     </div>
-                                                                     <div class="col-sm-6 col-md-3 col-xs-12 slick-slide slick-current slick-active"
-                                                                         data-slick-index="1" aria-hidden="false"
-                                                                         style="width: 246px;" tabindex="0">
-                                                                         <div class="course-item">
-                                                                             <div class="course-thumbnail"><img
-                                                                                     src="https://static.topcv.vn/partner/gitiho/courses/11.png"
-                                                                                     alt="Google Data Studio cho người mới bắt đầu"
-                                                                                     class="img-responsive "></div>
-                                                                             <div class="course-body">
-                                                                                 <h3 class="course-title"><a
-                                                                                         data-toggle="tooltip"
-                                                                                         title="Google Data Studio cho người mới bắt đầu"
-                                                                                         data-placement="top"
-                                                                                         data-container="body"
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/data-analysis/google-studio-course?utm_source=topcv&amp;utm_medium=GDSG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         tabindex="0">Google Data Studio
-                                                                                         cho người mới bắt đầu</a></h3>
-                                                                                 <div class="text-right"><a
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/data-analysis/google-studio-course?utm_source=topcv&amp;utm_medium=GDSG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         class="btn btn-default btn-sm"
-                                                                                         tabindex="0">Tìm hiểu ngay</a>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </div>
-                                                                     </div>
-                                                                     <div class="col-sm-6 col-md-3 col-xs-12 slick-slide slick-active"
-                                                                         data-slick-index="2" aria-hidden="false"
-                                                                         style="width: 246px;" tabindex="0">
-                                                                         <div class="course-item">
-                                                                             <div class="course-thumbnail"><img
-                                                                                     src="https://static.topcv.vn/partner/gitiho/courses/3.png"
-                                                                                     alt="EXG01 - Tuyệt đỉnh Excel - Trở thành bậc thầy Excel trong 16 giờ"
-                                                                                     class="img-responsive "></div>
-                                                                             <div class="course-body">
-                                                                                 <h3 class="course-title"><a
-                                                                                         data-toggle="tooltip"
-                                                                                         title="EXG01 - Tuyệt đỉnh Excel - Trở thành bậc thầy Excel trong 16 giờ"
-                                                                                         data-placement="top"
-                                                                                         data-container="body"
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/exg01-tuyet-dinh-excel-tro-thanh-bac-thay-excel-trong-16-gio?utm_source=topcv&amp;utm_medium=EXG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         tabindex="0">EXG01 - Tuyệt đỉnh
-                                                                                         Excel - Trở thành bậc thầy Excel
-                                                                                         trong 16 giờ</a></h3>
-                                                                                 <div class="text-right"><a
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/exg01-tuyet-dinh-excel-tro-thanh-bac-thay-excel-trong-16-gio?utm_source=topcv&amp;utm_medium=EXG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         class="btn btn-default btn-sm"
-                                                                                         tabindex="0">Tìm hiểu ngay</a>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </div>
-                                                                     </div>
-                                                                     <div class="col-sm-6 col-md-3 col-xs-12 slick-slide slick-active"
-                                                                         data-slick-index="3" aria-hidden="false"
-                                                                         style="width: 246px;" tabindex="0">
-                                                                         <div class="course-item">
-                                                                             <div class="course-thumbnail"><img
-                                                                                     src="https://static.topcv.vn/partner/gitiho/courses/6.png"
-                                                                                     alt="WOG01 - Tuyệt đỉnh Microsoft Word - Chuyên gia soạn thảo văn bản"
-                                                                                     class="img-responsive "></div>
-                                                                             <div class="course-body">
-                                                                                 <h3 class="course-title"><a
-                                                                                         data-toggle="tooltip"
-                                                                                         title="WOG01 - Tuyệt đỉnh Microsoft Word - Chuyên gia soạn thảo văn bản"
-                                                                                         data-placement="top"
-                                                                                         data-container="body"
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/wog01-tuyet-dinh-microsoft-word-chuyen-gia-soan-thao-van-ban?utm_source=topcv&amp;utm_medium=WOG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         tabindex="0">WOG01 - Tuyệt đỉnh
-                                                                                         Microsoft Word - Chuyên gia soạn
-                                                                                         thảo văn bản</a></h3>
-                                                                                 <div class="text-right"><a
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/wog01-tuyet-dinh-microsoft-word-chuyen-gia-soan-thao-van-ban?utm_source=topcv&amp;utm_medium=WOG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         class="btn btn-default btn-sm"
-                                                                                         tabindex="0">Tìm hiểu ngay</a>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </div>
-                                                                     </div>
-                                                                     <div class="col-sm-6 col-md-3 col-xs-12 slick-slide"
-                                                                         data-slick-index="4" aria-hidden="true"
-                                                                         style="width: 246px;" tabindex="-1">
-                                                                         <div class="course-item">
-                                                                             <div class="course-thumbnail"><img
-                                                                                     src="https://static.topcv.vn/partner/gitiho/courses/4.png"
-                                                                                     alt="PPG01 - Tuyệt đỉnh PowerPoint - Chinh phục mọi ánh nhìn trong 9 bước"
-                                                                                     class="img-responsive "></div>
-                                                                             <div class="course-body">
-                                                                                 <h3 class="course-title"><a
-                                                                                         data-toggle="tooltip"
-                                                                                         title="PPG01 - Tuyệt đỉnh PowerPoint - Chinh phục mọi ánh nhìn trong 9 bước"
-                                                                                         data-placement="top"
-                                                                                         data-container="body"
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/ppg01-tuyet-dinh-powerpoint-truc-quan-hoa-moi-slide-trong-9-buoc?utm_source=topcv&amp;utm_medium=PPG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         tabindex="-1">PPG01 - Tuyệt đỉnh
-                                                                                         PowerPoint - Chinh phục mọi ánh
-                                                                                         nhìn trong 9 bước</a></h3>
-                                                                                 <div class="text-right"><a
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/ppg01-tuyet-dinh-powerpoint-truc-quan-hoa-moi-slide-trong-9-buoc?utm_source=topcv&amp;utm_medium=PPG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         class="btn btn-default btn-sm"
-                                                                                         tabindex="-1">Tìm hiểu ngay</a>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </div>
-                                                                     </div>
-                                                                     <div class="col-sm-6 col-md-3 col-xs-12 slick-slide slick-cloned"
-                                                                         data-slick-index="5" aria-hidden="true"
-                                                                         style="width: 246px;" tabindex="-1">
-                                                                         <div class="course-item">
-                                                                             <div class="course-thumbnail"><img
-                                                                                     src="/v3/images/funix-course/D10.jpg"
-                                                                                     alt="Dễ dàng học 1 ngôn ngữ lập trình bất kỳ theo nhu cầu của bạn"
-                                                                                     class="img-responsive "></div>
-                                                                             <div class="course-body">
-                                                                                 <h3 class="course-title"><a
-                                                                                         data-toggle="tooltip"
-                                                                                         title="Dễ dàng học 1 ngôn ngữ lập trình bất kỳ theo nhu cầu của bạn"
-                                                                                         data-placement="top"
-                                                                                         data-container="body"
-                                                                                         target="_blank"
-                                                                                         href="https://funix.edu.vn/khoa-hoc-language-of-future-200615/?utm_source=TopCV"
-                                                                                         tabindex="-1">Dễ dàng học 1 ngôn
-                                                                                         ngữ lập trình bất kỳ theo nhu cầu
-                                                                                         của bạn</a></h3>
-                                                                                 <div class="text-right"><a
-                                                                                         target="_blank"
-                                                                                         href="https://funix.edu.vn/khoa-hoc-language-of-future-200615/?utm_source=TopCV"
-                                                                                         class="btn btn-default btn-sm"
-                                                                                         tabindex="-1">Tìm hiểu ngay</a>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </div>
-                                                                     </div>
-                                                                     <div class="col-sm-6 col-md-3 col-xs-12 slick-slide slick-cloned"
-                                                                         data-slick-index="6" aria-hidden="true"
-                                                                         style="width: 246px;" tabindex="-1">
-                                                                         <div class="course-item">
-                                                                             <div class="course-thumbnail"><img
-                                                                                     src="https://static.topcv.vn/partner/gitiho/courses/11.png"
-                                                                                     alt="Google Data Studio cho người mới bắt đầu"
-                                                                                     class="img-responsive "></div>
-                                                                             <div class="course-body">
-                                                                                 <h3 class="course-title"><a
-                                                                                         data-toggle="tooltip"
-                                                                                         title="Google Data Studio cho người mới bắt đầu"
-                                                                                         data-placement="top"
-                                                                                         data-container="body"
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/data-analysis/google-studio-course?utm_source=topcv&amp;utm_medium=GDSG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         tabindex="-1">Google Data Studio
-                                                                                         cho người mới bắt đầu</a></h3>
-                                                                                 <div class="text-right"><a
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/data-analysis/google-studio-course?utm_source=topcv&amp;utm_medium=GDSG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         class="btn btn-default btn-sm"
-                                                                                         tabindex="-1">Tìm hiểu ngay</a>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </div>
-                                                                     </div>
-                                                                     <div class="col-sm-6 col-md-3 col-xs-12 slick-slide slick-cloned"
-                                                                         data-slick-index="7" aria-hidden="true"
-                                                                         style="width: 246px;" tabindex="-1">
-                                                                         <div class="course-item">
-                                                                             <div class="course-thumbnail"><img
-                                                                                     src="https://static.topcv.vn/partner/gitiho/courses/3.png"
-                                                                                     alt="EXG01 - Tuyệt đỉnh Excel - Trở thành bậc thầy Excel trong 16 giờ"
-                                                                                     class="img-responsive "></div>
-                                                                             <div class="course-body">
-                                                                                 <h3 class="course-title"><a
-                                                                                         data-toggle="tooltip"
-                                                                                         title="EXG01 - Tuyệt đỉnh Excel - Trở thành bậc thầy Excel trong 16 giờ"
-                                                                                         data-placement="top"
-                                                                                         data-container="body"
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/exg01-tuyet-dinh-excel-tro-thanh-bac-thay-excel-trong-16-gio?utm_source=topcv&amp;utm_medium=EXG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         tabindex="-1">EXG01 - Tuyệt đỉnh
-                                                                                         Excel - Trở thành bậc thầy Excel
-                                                                                         trong 16 giờ</a></h3>
-                                                                                 <div class="text-right"><a
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/exg01-tuyet-dinh-excel-tro-thanh-bac-thay-excel-trong-16-gio?utm_source=topcv&amp;utm_medium=EXG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         class="btn btn-default btn-sm"
-                                                                                         tabindex="-1">Tìm hiểu ngay</a>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </div>
-                                                                     </div>
-                                                                     <div class="col-sm-6 col-md-3 col-xs-12 slick-slide slick-cloned"
-                                                                         data-slick-index="8" aria-hidden="true"
-                                                                         style="width: 246px;" tabindex="-1">
-                                                                         <div class="course-item">
-                                                                             <div class="course-thumbnail"><img
-                                                                                     src="https://static.topcv.vn/partner/gitiho/courses/6.png"
-                                                                                     alt="WOG01 - Tuyệt đỉnh Microsoft Word - Chuyên gia soạn thảo văn bản"
-                                                                                     class="img-responsive "></div>
-                                                                             <div class="course-body">
-                                                                                 <h3 class="course-title"><a
-                                                                                         data-toggle="tooltip"
-                                                                                         title="WOG01 - Tuyệt đỉnh Microsoft Word - Chuyên gia soạn thảo văn bản"
-                                                                                         data-placement="top"
-                                                                                         data-container="body"
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/wog01-tuyet-dinh-microsoft-word-chuyen-gia-soan-thao-van-ban?utm_source=topcv&amp;utm_medium=WOG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         tabindex="-1">WOG01 - Tuyệt đỉnh
-                                                                                         Microsoft Word - Chuyên gia soạn
-                                                                                         thảo văn bản</a></h3>
-                                                                                 <div class="text-right"><a
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/wog01-tuyet-dinh-microsoft-word-chuyen-gia-soan-thao-van-ban?utm_source=topcv&amp;utm_medium=WOG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         class="btn btn-default btn-sm"
-                                                                                         tabindex="-1">Tìm hiểu ngay</a>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </div>
-                                                                     </div>
-                                                                     <div class="col-sm-6 col-md-3 col-xs-12 slick-slide slick-cloned"
-                                                                         data-slick-index="9" aria-hidden="true"
-                                                                         style="width: 246px;" tabindex="-1">
-                                                                         <div class="course-item">
-                                                                             <div class="course-thumbnail"><img
-                                                                                     src="https://static.topcv.vn/partner/gitiho/courses/4.png"
-                                                                                     alt="PPG01 - Tuyệt đỉnh PowerPoint - Chinh phục mọi ánh nhìn trong 9 bước"
-                                                                                     class="img-responsive "></div>
-                                                                             <div class="course-body">
-                                                                                 <h3 class="course-title"><a
-                                                                                         data-toggle="tooltip"
-                                                                                         title="PPG01 - Tuyệt đỉnh PowerPoint - Chinh phục mọi ánh nhìn trong 9 bước"
-                                                                                         data-placement="top"
-                                                                                         data-container="body"
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/ppg01-tuyet-dinh-powerpoint-truc-quan-hoa-moi-slide-trong-9-buoc?utm_source=topcv&amp;utm_medium=PPG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         tabindex="-1">PPG01 - Tuyệt đỉnh
-                                                                                         PowerPoint - Chinh phục mọi ánh
-                                                                                         nhìn trong 9 bước</a></h3>
-                                                                                 <div class="text-right"><a
-                                                                                         target="_blank"
-                                                                                         href="https://gitiho.com/khoa-hoc/tin-hoc-van-phong/ppg01-tuyet-dinh-powerpoint-truc-quan-hoa-moi-slide-trong-9-buoc?utm_source=topcv&amp;utm_medium=PPG01_topcv_Referral_01_01_01&amp;utm_campaign=Trangchu&amp;utm_content=1"
-                                                                                         class="btn btn-default btn-sm"
-                                                                                         tabindex="-1">Tìm hiểu ngay</a>
-                                                                                 </div>
-                                                                             </div>
+                                                                         <div class="text-center"
+                                                                             style="margin-bottom: 20px">
+                                                                             <a class="btn btn-danger" target="_blank"
+                                                                                 href="{{ $course->website }}"
+                                                                                 rel="nofollow">Đăng ký học</a>
                                                                          </div>
                                                                      </div>
                                                                  </div>
-                                                             </div><button class="slick-next slick-arrow"
-                                                                 aria-label="Next" type="button"
-                                                                 style="display: block;">Next</button>
-                                                         </div>
+                                                             </div>
+                                                         @endforeach
                                                      </div>
-                                                 </div>
+                                                 @endforeach
                                              </div>
                                          </div>
                                      </div>
@@ -1151,49 +811,70 @@
                      </div>
                      <div class="job-detail__body-right">
                          <div class="job-detail__box--right job-detail__company">
-    <div class="job-detail__company--information">
-        <div class="job-detail__company--information-item company-name">
-            <a rel="nofollow" class="company-logo" href="{{ $jobPosting->company->website }}" target="_blank" data-toggle="tooltip" title="" data-placement="top" data-original-title="{{ $jobPosting->company->name }}">
-                <img src="{{ $jobPosting->company->logo ? asset('storage/' . $jobPosting->company->logo) : asset('storage/avatar/avatar-default.jpg') }}" alt="Avatar" style="width: 60px" class="img-responsive">
-            </a>
-            <h2 class="company-name-label">
-                <a rel="nofollow" class="name" href="{{ $jobPosting->company->website }}" target="_blank" data-toggle="tooltip" title="" data-placement="top" data-original-title="{{ $jobPosting->company->name }}">
-                    {{ $jobPosting->company->name }}
-                </a>
-                <div class="company-subdetail-label">
-                </div>
-            </h2>
-        </div>
-        <div class="job-detail__company--information-item company-scale">
-            <div class="company-title">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M5.99998 1.33334C4.25331 1.33334 2.83331 2.75334 2.83331 4.5C2.83331 6.21334 4.17331 7.6 5.91998 7.66C5.97331 7.65334 6.02665 7.65334 6.06665 7.66C6.07998 7.66 6.08665 7.66 6.09998 7.66C6.10665 7.66 6.10665 7.66 6.11331 7.66C7.81998 7.6 9.15998 6.21334 9.16665 4.5C9.16665 2.75334 7.74665 1.33334 5.99998 1.33334Z" fill="#7F878F"></path>
-                    <path d="M9.38664 9.43333C7.52664 8.19333 4.49331 8.19333 2.61997 9.43333C1.77331 10 1.30664 10.7667 1.30664 11.5867C1.30664 12.4067 1.77331 13.1667 2.61331 13.7267C3.54664 14.3533 4.77331 14.6667 5.99997 14.6667C7.22664 14.6667 8.45331 14.3533 9.38664 13.7267C10.2266 13.16 10.6933 12.4 10.6933 11.5733C10.6866 10.7533 10.2266 9.99333 9.38664 9.43333Z" fill="#7F878F"></path>
-                    <path d="M13.3267 4.89333C13.4333 6.18667 12.5133 7.32 11.24 7.47333C11.2333 7.47333 11.2333 7.47333 11.2267 7.47333H11.2067C11.1667 7.47333 11.1267 7.47333 11.0933 7.48667C10.4467 7.52 9.85334 7.31333 9.40668 6.93333C10.0933 6.32 10.4867 5.4 10.4067 4.4C10.36 3.86 10.1733 3.36667 9.89334 2.94667C10.1467 2.82 10.44 2.74 10.74 2.71333C12.0467 2.6 13.2133 3.57333 13.3267 4.89333Z" fill="#7F878F"></path>
-                    <path d="M14.66 11.06C14.6067 11.7067 14.1933 12.2667 13.5 12.6467C12.8333 13.0133 11.9933 13.1867 11.16 13.1667C11.64 12.7333 11.92 12.1933 11.9733 11.62C12.04 10.7933 11.6467 10 10.86 9.36667C10.4133 9.01333 9.89333 8.73333 9.32666 8.52667C10.8 8.1 12.6533 8.38667 13.7933 9.30667C14.4067 9.8 14.72 10.42 14.66 11.06Z" fill="#7F878F"></path>
-                </svg>
-                Quy mô:
-            </div>
-            <div class="company-value">{{ $jobPosting->company->scale }} Nhân viên</div>
-        </div>
-        <div class="job-detail__company--information-item company-address">
-            <div class="company-title">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M13.7467 5.63334C13.0467 2.55334 10.36 1.16667 8 1.16667C8 1.16667 8 1.16667 7.99334 1.16667C5.64 1.16667 2.94667 2.54667 2.24667 5.62667C1.46667 9.06667 3.57334 11.98 5.48 13.8133C6.18667 14.4933 7.09334 14.8333 8 14.8333C8.90667 14.8333 9.81334 14.4933 10.5133 13.8133C12.42 11.98 14.5267 9.07334 13.7467 5.63334ZM8 8.97334C6.84 8.97334 5.9 8.03334 5.9 6.87334C5.9 5.71334 6.84 4.77334 8 4.77334C9.16 4.77334 10.1 5.71334 10.1 6.87334C10.1 8.03334 9.16 8.97334 8 8.97334Z" fill="#7F878F"></path>
-                    <path d="M14.66 11.06C14.6067 11.7067 14.1933 12.2667 13.5 12.6467C12.8333 13.0133 11.9933 13.1867 11.16 13.1667C11.64 12.7333 11.92 12.1933 11.9733 11.62C12.04 10.7933 11.6467 10 10.86 9.36667C10.4133 9.01333 9.89333 8.73333 9.32666 8.52667C10.8 8.1 12.6533 8.38667 13.7933 9.30667C14.4067 9.8 14.72 10.42 14.66 11.06Z" fill="#7F878F"></path>
-                </svg>
-                Địa điểm:
-            </div>
-            <div class="company-value" data-toggle="tooltip" title="" data-placement="top" data-original-title="{{ $jobPosting->company->address }}">
-                {{ $jobPosting->company->address }}
-            </div>
-        </div>
-    </div>
-    <div class="job-detail__company--link">
-        <a rel="nofollow" href="{{ $jobPosting->company->website }}" target="_blank">Xem trang công ty</a>
-        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-    </div>
-</div>
+                             <div class="job-detail__company--information">
+                                 <div class="job-detail__company--information-item company-name">
+                                     <a rel="nofollow" class="company-logo" href="{{ $jobPosting->company->website }}"
+                                         target="_blank" data-toggle="tooltip" title="" data-placement="top"
+                                         data-original-title="{{ $jobPosting->company->name }}">
+                                         <img src="{{ $jobPosting->company->logo ? asset('storage/' . $jobPosting->company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
+                                             alt="Avatar" style="width: 60px" class="img-responsive">
+                                     </a>
+                                     <h2 class="company-name-label">
+                                         <a rel="nofollow" class="name" href="{{ $jobPosting->company->website }}"
+                                             target="_blank" data-toggle="tooltip" title="" data-placement="top"
+                                             data-original-title="{{ $jobPosting->company->name }}">
+                                             {{ $jobPosting->company->name }}
+                                         </a>
+                                         <div class="company-subdetail-label">
+                                         </div>
+                                     </h2>
+                                 </div>
+                                 <div class="job-detail__company--information-item company-scale">
+                                     <div class="company-title">
+                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             viewBox="0 0 16 16" fill="none">
+                                             <path
+                                                 d="M5.99998 1.33334C4.25331 1.33334 2.83331 2.75334 2.83331 4.5C2.83331 6.21334 4.17331 7.6 5.91998 7.66C5.97331 7.65334 6.02665 7.65334 6.06665 7.66C6.07998 7.66 6.08665 7.66 6.09998 7.66C6.10665 7.66 6.10665 7.66 6.11331 7.66C7.81998 7.6 9.15998 6.21334 9.16665 4.5C9.16665 2.75334 7.74665 1.33334 5.99998 1.33334Z"
+                                                 fill="#7F878F"></path>
+                                             <path
+                                                 d="M9.38664 9.43333C7.52664 8.19333 4.49331 8.19333 2.61997 9.43333C1.77331 10 1.30664 10.7667 1.30664 11.5867C1.30664 12.4067 1.77331 13.1667 2.61331 13.7267C3.54664 14.3533 4.77331 14.6667 5.99997 14.6667C7.22664 14.6667 8.45331 14.3533 9.38664 13.7267C10.2266 13.16 10.6933 12.4 10.6933 11.5733C10.6866 10.7533 10.2266 9.99333 9.38664 9.43333Z"
+                                                 fill="#7F878F"></path>
+                                             <path
+                                                 d="M13.3267 4.89333C13.4333 6.18667 12.5133 7.32 11.24 7.47333C11.2333 7.47333 11.2333 7.47333 11.2267 7.47333H11.2067C11.1667 7.47333 11.1267 7.47333 11.0933 7.48667C10.4467 7.52 9.85334 7.31333 9.40668 6.93333C10.0933 6.32 10.4867 5.4 10.4067 4.4C10.36 3.86 10.1733 3.36667 9.89334 2.94667C10.1467 2.82 10.44 2.74 10.74 2.71333C12.0467 2.6 13.2133 3.57333 13.3267 4.89333Z"
+                                                 fill="#7F878F"></path>
+                                             <path
+                                                 d="M14.66 11.06C14.6067 11.7067 14.1933 12.2667 13.5 12.6467C12.8333 13.0133 11.9933 13.1867 11.16 13.1667C11.64 12.7333 11.92 12.1933 11.9733 11.62C12.04 10.7933 11.6467 10 10.86 9.36667C10.4133 9.01333 9.89333 8.73333 9.32666 8.52667C10.8 8.1 12.6533 8.38667 13.7933 9.30667C14.4067 9.8 14.72 10.42 14.66 11.06Z"
+                                                 fill="#7F878F"></path>
+                                         </svg>
+                                         Quy mô:
+                                     </div>
+                                     <div class="company-value">{{ $jobPosting->company->scale }} Nhân viên</div>
+                                 </div>
+                                 <div class="job-detail__company--information-item company-address">
+                                     <div class="company-title">
+                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             viewBox="0 0 16 16" fill="none">
+                                             <path
+                                                 d="M13.7467 5.63334C13.0467 2.55334 10.36 1.16667 8 1.16667C8 1.16667 8 1.16667 7.99334 1.16667C5.64 1.16667 2.94667 2.54667 2.24667 5.62667C1.46667 9.06667 3.57334 11.98 5.48 13.8133C6.18667 14.4933 7.09334 14.8333 8 14.8333C8.90667 14.8333 9.81334 14.4933 10.5133 13.8133C12.42 11.98 14.5267 9.07334 13.7467 5.63334ZM8 8.97334C6.84 8.97334 5.9 8.03334 5.9 6.87334C5.9 5.71334 6.84 4.77334 8 4.77334C9.16 4.77334 10.1 5.71334 10.1 6.87334C10.1 8.03334 9.16 8.97334 8 8.97334Z"
+                                                 fill="#7F878F"></path>
+                                             <path
+                                                 d="M14.66 11.06C14.6067 11.7067 14.1933 12.2667 13.5 12.6467C12.8333 13.0133 11.9933 13.1867 11.16 13.1667C11.64 12.7333 11.92 12.1933 11.9733 11.62C12.04 10.7933 11.6467 10 10.86 9.36667C10.4133 9.01333 9.89333 8.73333 9.32666 8.52667C10.8 8.1 12.6533 8.38667 13.7933 9.30667C14.4067 9.8 14.72 10.42 14.66 11.06Z"
+                                                 fill="#7F878F"></path>
+                                         </svg>
+                                         Địa điểm:
+                                     </div>
+                                     <div class="company-value" data-toggle="tooltip" title=""
+                                         data-placement="top" data-original-title="{{ $jobPosting->company->address }}">
+                                         {{ $jobPosting->company->address }}
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="job-detail__company--link">
+                                 <a rel="nofollow" href="{{ route('company-home.show', $jobPosting->company->slug) }}" target="_blank">Xem trang
+                                     công ty</a>
+                                 <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                             </div>
+                         </div>
 
                          <div
                              class="job-detail__box--right job-detail__body-right--item job-detail__body-right--box-general">
@@ -1485,109 +1166,55 @@
                          <div class="box-maybe-interested">
                              <h3 class="box-maybe-interested__title">Có thể bạn quan tâm</h3>
                              <div class="box-maybe-interested__company">
-                                 <div class="box-maybe-interested__company--image">
-                                     <a rel="nofollow"
-                                         href="https://www.topcv.vn/cong-ty/cong-ty-cho-thue-tai-chinh-tnhh-mtv-quoc-te-chailease/27583.html">
-                                         <img src="https://cdn-new.topcv.vn/unsafe/500x/https://static.topcv.vn/company_covers/gWUh7odIskHo6RtZ1xT7.jpg"
-                                             data-src="https://cdn-new.topcv.vn/unsafe/500x/https://static.topcv.vn/company_covers/gWUh7odIskHo6RtZ1xT7.jpg"
-                                             alt="Công ty Cho thuê tài chính TNHH MTV Quốc tế Chailease"
-                                             class="spotlight-cover">
-                                     </a>
-                                 </div>
-                                 <div class="box-maybe-interested__company--content company">
-                                     <div class="company__info">
-                                         <div class="company__info--logo">
-                                             <a rel="nofollow"
-                                                 href="https://www.topcv.vn/cong-ty/cong-ty-cho-thue-tai-chinh-tnhh-mtv-quoc-te-chailease/27583.html">
-                                                 <img src="https://static.topcv.vn/company_logos/cong-ty-cho-thue-tai-chinh-tnhh-mtv-quoc-te-chailease-5dc39f3d07275.jpg"
-                                                     alt="">
-                                             </a>
-                                         </div>
-                                         <div class="company__info--name">
-                                             <a rel="nofollow"
-                                                 href="https://www.topcv.vn/cong-ty/cong-ty-cho-thue-tai-chinh-tnhh-mtv-quoc-te-chailease/27583.html">Công
-                                                 ty Cho thuê tài chính TNHH MTV Quốc tế Chailease</a>
-                                             <img src="https://static.topcv.vn/v4/image/maybe-interested/spotlight.png?v=1.2"
-                                                 alt="">
-                                         </div>
-                                     </div>
-                                     <div class="company__job">
-                                         <div class="job job-ta" data-job-id="1340983" data-box="SpotlightCompany">
-                                             <a href="https://www.topcv.vn/viec-lam/credit-officer/1340983.html?ta_source=SpotlightCompanyInJobDetail_LinkDetail"
-                                                 target="_blank" data-toggle="tooltip" title=""
-                                                 data-placement="top" class="job__name"
-                                                 data-original-title="Credit Officer">Credit Officer</a>
-                                             <div class="job__info">
-                                                 <div class="job__info--salary">
-                                                     <i class="fa-solid fa-circle-dollar"></i>
-                                                     <span>Thoả thuận</span>
-                                                 </div>
-                                                 <div class="job__info--address">
-                                                     <i class="fa-solid fa-location-dot"></i>
-                                                     <span data-toggle="tooltip" data-html="true" title=""
-                                                         data-placement="top"
-                                                         data-original-title="<p style='text-align: left'>Hồ Chí Minh: Quận 1</p>">
-                                                         Hồ Chí Minh
-                                                     </span>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <div class="job job-ta" data-job-id="1357786" data-box="SpotlightCompany">
-                                             <a href="https://www.topcv.vn/viec-lam/brand-marketing/1357786.html?ta_source=SpotlightCompanyInJobDetail_LinkDetail"
-                                                 target="_blank" data-toggle="tooltip" title=""
-                                                 data-placement="top" class="job__name"
-                                                 data-original-title="Brand Marketing">Brand Marketing</a>
-                                             <div class="job__info">
-                                                 <div class="job__info--salary">
-                                                     <i class="fa-solid fa-circle-dollar"></i>
-                                                     <span>Thoả thuận</span>
-                                                 </div>
-                                                 <div class="job__info--address">
-                                                     <i class="fa-solid fa-location-dot"></i>
-                                                     <span data-toggle="tooltip" data-html="true" title=""
-                                                         data-placement="top"
-                                                         data-original-title="<p style='text-align: left'>Hồ Chí Minh: Quận 1</p>">
-                                                         Hồ Chí Minh
-                                                     </span>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <div class="job job-ta" data-job-id="1213268" data-box="SpotlightCompany">
-                                             <a href="https://www.topcv.vn/viec-lam/thuc-tap-sinh-quan-he-khach-hang-doanh-nghiep/1213268.html?ta_source=SpotlightCompanyInJobDetail_LinkDetail"
-                                                 target="_blank" data-toggle="tooltip" title=""
-                                                 data-placement="top" class="job__name"
-                                                 data-original-title="Thực Tập Sinh Quan Hệ Khách Hàng Doanh Nghiệp">Thực
-                                                 Tập Sinh Quan Hệ Khách Hàng Doanh Nghiệp</a>
-                                             <div class="job__info">
-                                                 <div class="job__info--salary">
-                                                     <i class="fa-solid fa-circle-dollar"></i>
-                                                     <span>3 - 3.5 triệu</span>
-                                                 </div>
-                                                 <div class="job__info--address">
-                                                     <i class="fa-solid fa-location-dot"></i>
-                                                     <span data-toggle="tooltip" data-html="true" title=""
-                                                         data-placement="top"
-                                                         data-original-title="<p style='text-align: left'>Hồ Chí Minh: Quận 1<br/>Bình Dương: Thủ Dầu Một</p>">
-                                                         Hồ Chí Minh, Bình Dương
-                                                     </span>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="company__link">
-                                         <a rel="nofollow"
-                                             href="https://www.topcv.vn/cong-ty/cong-ty-cho-thue-tai-chinh-tnhh-mtv-quoc-te-chailease/27583.html"
-                                             target="_blank">Tìm hiểu ngay</a>
-                                     </div>
-                                 </div>
-                             </div>
+            <div class="box-maybe-interested__company--image">
+                <a rel="nofollow" href="{{ $company_random->url }}">
+                    <img src="{{ asset('storage/' . $company_random->image) }}"
+                         alt="{{ $company_random->name }}"
+                         class="spotlight-cover">
+                </a>
+            </div>
+            <div class="box-maybe-interested__company--content company">
+                <div class="company__info">
+                    <div class="company__info--logo">
+                        <a rel="nofollow" href="{{ route('company-home.show', $company_random->slug) }}">
+                            <img src="{{ asset('storage/' . $company_random->logo) }}" alt="{{ $company_random->name }}">
+                        </a>
+                    </div>
+                    <div class="company__info--name">
+                        <a rel="nofollow" href="{{ $company_random->url }}">{{ $company_random->name }}</a>
+                        <img src="https://static.topcv.vn/v4/image/maybe-interested/spotlight.png?v=1.2" alt="">
+                    </div>
+                </div>
+                <div class="company__job">
+                    @foreach($jobPosting_random as $jobPosting)
+                        <div class="job job-ta" data-job-id="{{ $jobPosting->id }}" data-box="SpotlightCompany">
+                            <a href="{{ $jobPosting->application_email_url }}" target="_blank" data-toggle="tooltip" title="" data-placement="top" class="job__name">{{ $jobPosting->title }}</a>
+                            <div class="job__info">
+                                <div class="job__info--salary">
+                                    <i class="fa-solid fa-circle-dollar"></i>
+                                    <span>{{ $jobPosting->salary }}</span>
+                                </div>
+                                <div class="job__info--address">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <span data-toggle="tooltip" data-html="true" title="" data-placement="top">
+                                        {{ $jobPosting->location }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="company__link">
+                    <a rel="nofollow" href="{{ $company_random->url }}" target="_blank">Tìm hiểu ngay</a>
+                </div>
+            </div>
+        </div>
                          </div>
                          <div class="box-easy-apply job-detail__body-right--item">
                              <div class="image">
                                  <a target="_blank" href="https://www.topcv.vn/mau-cv">
                                      <img data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/job-detail/easy-apply.png"
-                                         alt="Apply việc gì cũng dễ" class="w-100 entered loaded"
-                                         data-ll-status="loaded"
+                                         alt="Apply việc gì cũng dễ" class="w-100 entered loaded" data-ll-status="loaded"
                                          src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/job-detail/easy-apply.png">
                                  </a>
                              </div>
@@ -1652,8 +1279,8 @@
                                      tại Hà Nội</strong></a>, <a target="_blank" rel="noopener noreferrer"
                                  href="https://www.topcv.vn/tim-viec-lam-moi-nhat-tai-ho-chi-minh-l2"><strong>việc làm mới
                                      nhất tại TP.HCM</strong></a> ở TopCV, bạn sẽ tìm thấy những <a target="_blank"
-                                 rel="noopener noreferrer"
-                                 href="https://www.topcv.vn/tim-viec-lam-moi-nhat"><strong>việc làm mới nhất</strong></a>
+                                 rel="noopener noreferrer" href="https://www.topcv.vn/tim-viec-lam-moi-nhat"><strong>việc
+                                     làm mới nhất</strong></a>
                              với mức lương tốt nhất!</p>
                      </div>
                  </div>
@@ -1786,8 +1413,7 @@
      <link rel="stylesheet"
          href="https://static.topcv.vn/v4/css/components/desktop/simple-search-job.min.a9523861ff7518f5K.css">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/job-list-image-company.b29f61ea3112b9d5K.css">
+     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/job-list-image-company.b29f61ea3112b9d5K.css">
      <link rel="stylesheet"
          href="https://static.topcv.vn/v4/css/components/desktop/jobs/batch-apply.8a4a0ab47640f636K.css">
      <link rel="stylesheet" href="https://www.topcv.vn/chartjs/dist/Chart.min.css">

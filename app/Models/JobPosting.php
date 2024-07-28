@@ -43,14 +43,12 @@ class JobPosting extends Model
     {
         return $this->hasMany(Application::class);
     }
-     public function categories()
+    public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_job_posting');
     }
-
-public function company()
-{
-    return $this->belongsTo(Company::class);
-}
-
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }

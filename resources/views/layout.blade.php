@@ -39,6 +39,7 @@
     <link rel="preload" as="image" fetchpriority="high"
         href="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/bg_header.webp"
         type="image/webp">
+        <link rel="stylesheet" href="https://static.topcv.vn/v4/components/desktop/history-apply.fe7877ceeda62d0fK.css">
     <link rel="stylesheet" href="../static.topcv.vn/v4/css/components/desktop/app-page.min.540613ab89f44167G.css">
     <link rel="stylesheet" href="../../static.topcv.vn/v4/css/pages/blog-page/blog-desktop.d6b67a34ec167762G.css">
     <link rel="stylesheet" href="../static.topcv.vn/v4/css/components/desktop/company/detail.min.b7fffc86741bf76cG.css">
@@ -1216,9 +1217,9 @@
                     <span class="cvo-flex cvo-items-center cvo-justify-content icon-child">
                         <i class="fa-regular fa-magnifying-glass"></i>
                     </span>
-                    <a href="viec-lam.html" class="
+                    <a href="{{route('applications.showAppliedJobs')}}" class="
                                 ">
-                        Tìm việc làm
+                        Việc làm đã ứng tuyển
                     </a>
                 </div>
                 <div class="cvo-flex cvo-items-center item-child">
@@ -1561,15 +1562,15 @@
             </div>
             <ul class="nav navbar-nav navbar-left">
                 <li class="navbar-left__item group">
-                    <a href="viec-lam.html">
+                    <a href="">
                         Việc làm
                     </a>
                     <div class="group-hover:menu navbar__item__dropdown-menu">
                         <ul class="nav navbar-menu">
                             <li class="navbar-menu__item  tag-border">
-                                <a href="viec-lam.html" class="text-sm">
+                                <a href="{{route('applications.showAppliedJobs')}}" class="text-sm">
                                     <i class="icon fa-regular fa-magnifying-glass"></i>
-                                    Tìm việc làm
+                                   Việc làm đã ứng tuyển
                                 </a>
                             </li>
                             <li class="navbar-menu__item ">
@@ -1657,89 +1658,26 @@
                                     Danh sách công ty
                                 </a>
                             </li>
-                            <li class="navbar-menu__item ">
-                                <a href="top-cong-ty.html" class="text-sm">
-                                    <i class="icon fa-regular fa-stars"></i>
-                                    Top công ty
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </li>
                 <li class="navbar-left__item group
                                 ">
-                    <a href="javascript:void(0)">
+                    <a href="">
                         Công cụ
                     </a>
                     <div class="group-hover:menu navbar__item__dropdown-menu">
                         <ul class="nav navbar-menu">
-                            <li class="navbar-menu__item ">
-                                <a href="trac-nghiem-tinh-cach-mbti.html" class="text-sm">
-                                    <i class="icon fa-regular fa-chart-user"></i>
-                                    Trắc nghiệm tính cách MBTI
-                                </a>
-                            </li>
                             <li class="navbar-menu__item  tag-border">
-                                <a href="trac-nghiem-da-tri-thong-minh-multiple-intelligences-test.html"
-                                    class="text-sm">
-                                    <i class="icon fa-regular fa-chart-user"></i>
-                                    Trắc nghiệm MI
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item  tag-border">
-                                <a href="danh-gia-nang-luc.html" class="text-sm">
-                                    <i class="icon fa-regular fa-pencil"></i>
-                                    TopCV Skills
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item  tag-border">
-                                <a href="khoa-hoc.html" class="text-sm">
+                                <a href="{{route('site.courses')}}" class="text-sm">
                                     <i class="icon fa-regular fa-graduation-cap"></i>
                                     Khóa học
                                 </a>
                             </li>
                             <li class="navbar-menu__item ">
-                                <a href="app.html" class="text-sm">
+                                <a href="{{route('site.app')}}" class="text-sm">
                                     <i class="icon fa-regular fa-mobile"></i>
                                     Mobile App TopCV
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-menu">
-                            <li class="navbar-menu__item ">
-                                <a href="tinh-luong-gross-net.html" class="text-sm ">
-                                    <i class="icon fa-regular fa-scale-balanced"></i>
-                                    Tính lương GROSS - NET
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item  tag-border">
-                                <a href="tinh-thue-thu-nhap-ca-nhan.html" class="text-sm ">
-                                    <i class="icon fa-regular fa-chart-mixed"></i>
-                                    Tính thuế thu nhập cá nhân
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item ">
-                                <a href="cong-cu-tinh-muc-huong-bao-hiem-that-nghiep.html" class="text-sm">
-                                    <i class="icon fa-regular fa-shield-xmark"></i>
-                                    Tính Bảo hiểm thất nghiệp
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item  tag-border">
-                                <a href="tinh-bao-hiem-xa-hoi-mot-lan.html" class="text-sm">
-                                    <i class="icon fa-regular fa-shield-check"></i>
-                                    Tính bảo hiểm xã hội một lần
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item ">
-                                <a href="tinh-lai-kep.html" class="text-sm ">
-                                    <i class="icon fa-regular fa-coins"></i>
-                                    Tính lãi suất kép
-                                </a>
-                            </li>
-                            <li class="navbar-menu__item ">
-                                <a href="lap-ke-hoach-tiet-kiem.html" class="text-sm ">
-                                    <i class="icon fa-regular fa-sack-dollar"></i>
-                                    Lập kế hoạch tiết kiệm
                                 </a>
                             </li>
                         </ul>
