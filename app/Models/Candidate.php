@@ -62,5 +62,8 @@ class Candidate extends Authenticatable
 {
     return $this->hasMany(SavedJob::class);
 }
-
+public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }

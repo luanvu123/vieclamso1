@@ -28,6 +28,7 @@ use App\Http\Controllers\GenrePostController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyFollowerController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SavedJobController;
 
 /*
@@ -107,11 +108,14 @@ Route::get('candidate/google/callback', [CandidateController::class, 'handleGoog
 
 
 Route::middleware(['candidate'])->group(function () {
-
+    Route::get('/candidate/messages', [MessageController::class, 'receiveCandidateMessages'])->name('messages.receive.candidate');
+    Route::get('/candidate/messages/{employer}', [MessageController::class, 'showCandidateMessages'])->name('messages.show.candidate');
+    Route::post('/candidate/messages/{employer}/reply', [MessageController::class, 'sendCandidateReply'])->name('messages.reply.candidate');
+    Route::post('/messages/send', [MessageController::class, 'sendMessage'])->name('messages.send');
     Route::get('/cai-dat-thong-tin-ca-nhan', [CandidateController::class, 'showAccount'])->name('candidate.account');
     Route::post('/cai-dat-thong-tin-ca-nhan', [CandidateController::class, 'updateAccount'])->name('candidate.update.account');
-   Route::get('/change-password', [CandidateController::class, 'showChangePasswordForm'])->name('change-password.form');
-Route::post('/change-password', [CandidateController::class, 'changePassword'])->name('change-password');
+    Route::get('/change-password', [CandidateController::class, 'showChangePasswordForm'])->name('change-password.form');
+    Route::post('/change-password', [CandidateController::class, 'changePassword'])->name('change-password');
 
 
     Route::post('/candidate/update-avatar', [CandidateController::class, 'updateAvatar'])->name('candidate.update.avatar');
@@ -127,14 +131,16 @@ Route::post('/change-password', [CandidateController::class, 'changePassword'])-
     Route::post('save-job', [SavedJobController::class, 'store'])->name('save-job');
     Route::get('saved-jobs', [SavedJobController::class, 'index'])->name('saved-jobs');
     Route::post('unsave-job', [SavedJobController::class, 'unsave'])->name('unsave-job');
-
-
-
     Route::get('applied-jobs', [ApplicationController::class, 'showAppliedJobs'])->name('applications.showAppliedJobs');
-
 });
 
 Route::middleware(['employer'])->group(function () {
+
+    // web.php
+    Route::get('/employer/messages', [MessageController::class, 'receiveMessages'])->name('messages.receive');
+    Route::get('/employer/messages/{candidate}', [MessageController::class, 'showMessages'])->name('messages.show');
+    Route::post('/employer/messages/{candidate}/reply', [MessageController::class, 'sendReply'])->name('messages.reply');
+
     Route::resource('job-postings', JobPostingController::class);
     Route::get('/application-choose', [JobPostingController::class, 'application_choose'])->name('application-choose');
     Route::get('trang-chu-tuyen-dung', [JobPostingController::class, 'dashboard'])->name('job-postings.dashboard');

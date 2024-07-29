@@ -1679,22 +1679,22 @@
                     <li class="navbar-right__item group py16">
                         <div class="title">
                             <a href="javascript:void(0)">
-                                <img src="{{ asset('storage/' . Auth::guard('candidate')->user()->avatar_candicate) ?? asset('storage/avatar/avatar-default.jpg') }}"
+                                <img src="{{ asset('storage/' . Auth::guard('candidate')->user()->avatar_candidate) ?? asset('storage/avatar/avatar-default.jpg') }}"
                                     alt="Avatar"
                                     onerror="this.src='{{ asset('storage/avatar/avatar-default.jpg') }}'"
-                                    alt="{{ Auth::guard('candidate')->user()->fullname_candicate }}">
+                                    alt="{{ Auth::guard('candidate')->user()->fullname_candidate }}">
                             </a>
-                            <span>{{ Auth::guard('candidate')->user()->fullname_candicate }}</span>
+
                         </div>
                         <div class="group-hover:menu navbar__item__dropdown-menu">
                             <ul class="nav navbar-menu">
                                 <div class="dropdown-menu__info tag-border">
-                                    <img src="{{ Auth::guard('candidate')->user()->avatar_candicate ?? asset('storage/avatar/avatar-default.jpg') }}"
+                                    <img src="{{ asset('storage/' . Auth::guard('candidate')->user()->avatar_candidate) ?? asset('storage/avatar/avatar-default.jpg') }}"
                                         alt="Avatar"
                                         onerror="this.src='{{ asset('storage/avatar/avatar-default.jpg') }}'"
-                                        alt="{{ Auth::guard('candidate')->user()->fullname_candicate }}">
+                                        alt="{{ Auth::guard('candidate')->user()->fullname_candidate }}">
                                     <div class="caption">
-                                        <p class="name">{{ Auth::guard('candidate')->user()->fullname_candicate }}
+                                        <p class="name">{{ Auth::guard('candidate')->user()->fullname_candidate }}
                                         </p>
                                         <p class="description">Email: <span
                                                 class="code">{{ Auth::guard('candidate')->user()->email }}</span>
@@ -1710,7 +1710,13 @@
                                 <li class="navbar-menu__item tag-border">
                                     <a href="{{ route('change-password.form') }}" class="text-sm">
                                         <i class="icon fa-regular fa-lock"></i>
-                                        Đổi mật khẩu
+                                        Đổi mật khẩu 
+                                    </a>
+                                </li>
+                                  <li class="navbar-menu__item tag-border">
+                                    <a href="{{ route('messages.receive.candidate') }}" class="text-sm">
+                                        <i class="icon fa-regular fa-lock"></i>
+                                        Tin nhắn
                                     </a>
                                 </li>
                                 <li class="navbar-menu__item logout">

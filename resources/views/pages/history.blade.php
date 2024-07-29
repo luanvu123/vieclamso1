@@ -11,14 +11,16 @@
                                     Công việc đã ứng tuyển
                                 </div>
                             </div>
+
+
                             <div class="box-group-body">
                                 <div class="feed-jobs">
                                     @foreach ($applications as $application)
                                         <div class="job-item job-ta">
                                             <div class="d-flex">
                                                 <div class="company-logo">
-                                                    <img
-                                                        src="{{ $application->jobPosting->company->logo ? asset('storage/' . $application->jobPosting->company->logo) : asset('storage/avatar/avatar-default.jpg') }}"style="max-height: 100%;">
+                                                    <img src="{{ $application->jobPosting->company->logo ? asset('storage/' . $application->jobPosting->company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
+                                                        style="max-height: 100%;">
                                                 </div>
                                                 <div class="company-info">
                                                     <div class="title-block">
@@ -55,7 +57,8 @@
                                                         <div class="action-job">
                                                             <div class="job-applies-meta">
                                                                 <div>
-                                                                    <a href="" class="btn-sm btn-topcv-primary">
+                                                                    <a href="#" class="btn-sm btn-topcv-primary"
+                                                                        onclick="document.getElementById('messageForm-{{ $application->jobPosting->company->id }}').style.display = 'block'">
                                                                         <i class="fa-solid fa-message"></i> Nhắn tin
                                                                     </a>
                                                                     <a target="_blank"
@@ -84,19 +87,32 @@
                                                                 @endif
                                                             </span>
                                                         </div>
-
                                                         <div class="cv-apply-status-time">
                                                             Vào lúc: {{ $application->created_at->format('d-m-Y H:i A') }}
                                                         </div>
                                                     </div>
+                                                    <div id="messageForm-{{ $application->jobPosting->company->id }}"
+                                                        style="display: none;">
+                                                        <form action="{{ route('messages.send') }}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="employer_id"
+                                                                value="{{ $application->jobPosting->company->employer->id }}">
+                                                            <div class="form-group">
+                                                                <label for="message">Tin nhắn</label>
+                                                                <textarea name="message" class="form-control" rows="3" required></textarea>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary">Gửi</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="active-candidate">
-                                            </div>
+                                            <div class="active-candidate"></div>
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
                 </div>

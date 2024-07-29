@@ -26,8 +26,11 @@ class Employer extends Authenticatable
         return $this->hasMany(JobPosting::class);
     }
     public function companies()
-{
-    return $this->hasMany(Company::class);
+    {
+        return $this->hasMany(Company::class);
+    }
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'employer_id');
+    }
 }
-}
-
