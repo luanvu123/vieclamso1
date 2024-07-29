@@ -180,13 +180,13 @@
                                                          </span>
                                                          Ứng tuyển lại
                                                      </a>
-                                                     <a class="job-detail__info--actions-button button-white" target="_blank"
+                                                     {{-- <a class="job-detail__info--actions-button button-white" target="_blank"
                                                          href="http://candidate.topcvconnect.com/conversations/new/667298">
                                                          <span class="button-icon">
                                                              <i class="fa-solid fa-comments"></i>
                                                          </span>
                                                          Nhắn tin
-                                                     </a>
+                                                     </a> --}}
                                                      <p style="margin-bottom: 0">
                                                          Bạn đã gửi CV cho vị trí này vào ngày:
                                                          <span class="date">{{ $appliedDate }}</span>.
@@ -278,13 +278,13 @@
                                              </span>
                                              Ứng tuyển lại
                                          </a>
-                                         <a class="job-detail__info--actions-button button-white" target="_blank"
+                                         {{-- <a class="job-detail__info--actions-button button-white" target="_blank"
                                              href="">
                                              <span class="button-icon">
                                                  <i class="fa-solid fa-comments"></i>
                                              </span>
                                              Nhắn tin
-                                         </a>
+                                         </a> --}}
                                      </div>
                                      <div class="job-detail__information-detail--actions-label">
                                          Hạn nộp hồ sơ: {{ $closingDate->format('d/m/Y') }}

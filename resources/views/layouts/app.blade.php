@@ -58,60 +58,87 @@
                 <div class="dashboard-nav-inner">
 
                     <ul data-submenu-title="Start">
-                        <li class="active"><a href="{{ route('home') }}">Dashboard</a></li>
+                        <li class="{{ Route::is('home') ? 'active' : '' }}">
+                            <a href="{{ route('home') }}">Dashboard</a>
+                        </li>
                     </ul>
 
                     <ul data-submenu-title="Management">
-                        <li><a>General Management</a>
+                        <li
+                            class="{{ Route::is('users.index') || Route::is('roles.index') || Route::is('categories.index') || Route::is('awards.index') || Route::is('ecosystems.index') || Route::is('medias.index') ? 'active-submenu' : '' }}">
+                            <a href="#">General Management</a>
                             <ul>
-                                <li><a href="{{ route('users.index') }}">Manage Users <span class="nav-tag">5</span></a>
+                                <li class="{{ Route::is('users.index') ? 'active' : '' }}">
+                                    <a href="{{ route('users.index') }}">Manage Users <span class="nav-tag">5</span></a>
                                 </li>
-                                <li><a href="{{ route('roles.index') }}">Manage Roles</a>
+                                <li class="{{ Route::is('roles.index') ? 'active' : '' }}">
+                                    <a href="{{ route('roles.index') }}">Manage Roles</a>
                                 </li>
-                                <li><a href="{{ route('categories.index') }}">Manage Categories</a>
+                                <li class="{{ Route::is('categories.index') ? 'active' : '' }}">
+                                    <a href="{{ route('categories.index') }}">Manage Categories</a>
                                 </li>
-                                <li><a href="{{ route('awards.index') }}">Manage Awards</a>
+                                <li class="{{ Route::is('awards.index') ? 'active' : '' }}">
+                                    <a href="{{ route('awards.index') }}">Manage Awards</a>
                                 </li>
-                                <li><a href="{{ route('ecosystems.index') }}">Manage Ecosystems</a>
+                                <li class="{{ Route::is('ecosystems.index') ? 'active' : '' }}">
+                                    <a href="{{ route('ecosystems.index') }}">Manage Ecosystems</a>
                                 </li>
-                                <li><a href="{{ route('medias.index') }}">Manage Medias</a>
-                                </li>
-
-                            </ul>
-                        </li>
-                        <li><a>Posts</a>
-                            <ul>
-                                <li><a href="{{ route('posts.index') }}">Manage Posts</a></li>
-                                <li><a href="{{ route('genre-posts.index') }}">Manage Genres</a></li>
-                                 <li><a href="{{ route('slugs.index') }}">Manage Slugs</a>
-                                </li>
-                                 <li><a href="{{ route('courses.index') }}">Manage Courses</a>
+                                <li class="{{ Route::is('medias.index') ? 'active' : '' }}">
+                                    <a href="{{ route('medias.index') }}">Manage Medias</a>
                                 </li>
                             </ul>
                         </li>
 
-
-                        <li><a>Candidates</a>
+                        <li
+                            class="{{ Route::is('posts.index') || Route::is('genre-posts.index') || Route::is('slugs.index') || Route::is('courses.index') ? 'active-submenu' : '' }}">
+                            <a href="#">Posts</a>
                             <ul>
-                                <li><a href="{{ route('candidates.index') }}">Manage Candidates <span
-                                            class="nav-tag">2</span></a></li>
+                                <li class="{{ Route::is('posts.index') ? 'active' : '' }}">
+                                    <a href="{{ route('posts.index') }}">Manage Posts</a>
+                                </li>
+                                <li class="{{ Route::is('genre-posts.index') ? 'active' : '' }}">
+                                    <a href="{{ route('genre-posts.index') }}">Manage Genres</a>
+                                </li>
+                                <li class="{{ Route::is('slugs.index') ? 'active' : '' }}">
+                                    <a href="{{ route('slugs.index') }}">Manage Slugs</a>
+                                </li>
+                                <li class="{{ Route::is('courses.index') ? 'active' : '' }}">
+                                    <a href="{{ route('courses.index') }}">Manage Courses</a>
+                                </li>
                             </ul>
                         </li>
 
-                        <li><a>Employers</a>
+                        <li class="{{ Route::is('candidates.index') ? 'active-submenu' : '' }}">
+                            <a href="#">Candidates</a>
                             <ul>
-                                <li><a href="{{ route('employers.index') }}">Manage Employers <span
-                                            class="nav-tag">2</span></a></li>
-                            </ul>
-                            <ul>
-                                <li><a href="{{ route('job-postings-manage.index') }}">Manage Jobs <span
-                                            class="nav-tag">2</span></a></li>
-                            </ul>
-                            <ul>
-                                <li><a href="{{ route('admin.companies.index') }}">Manage Company <span
-                                            class="nav-tag">2</span></a></li>
+                                <li class="{{ Route::is('candidates.index') ? 'active' : '' }}">
+                                    <a href="{{ route('candidates.index') }}">Manage Candidates <span
+                                            class="nav-tag">2</span></a>
+                                </li>
                             </ul>
                         </li>
+
+                        <li
+                            class="{{ Route::is('employers.index') || Route::is('job-postings-manage.index') || Route::is('admin.companies.index') ? 'active-submenu' : '' }}">
+                            <a href="#">Employers</a>
+                            <ul>
+                                <li class="{{ Route::is('employers.index') ? 'active' : '' }}">
+                                    <a href="{{ route('employers.index') }}">Manage Employers <span
+                                            class="nav-tag">2</span></a>
+                                </li>
+                                <li class="{{ Route::is('job-postings-manage.index') ? 'active' : '' }}">
+                                    <a href="{{ route('job-postings-manage.index') }}">Manage Jobs <span
+                                            class="nav-tag">2</span></a>
+                                </li>
+                                <li class="{{ Route::is('admin.companies.index') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.companies.index') }}">Manage Company <span
+                                            class="nav-tag">2</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+
                     </ul>
                     <ul data-submenu-title="Account">
                         <li><a href="{{ route('users.edit', auth()->user()) }}">My Profile</a></li>
@@ -205,7 +232,7 @@
         })
     </script>
     <script>
-         $('.media_choose').change(function() {
+        $('.media_choose').change(function() {
             var trangthai_val = $(this).val();
             var id = $(this).attr('id');
             $.ajax({
@@ -220,7 +247,7 @@
                 }
             });
         })
- $('.slug_choose').change(function() {
+        $('.slug_choose').change(function() {
             var trangthai_val = $(this).val();
             var id = $(this).attr('id');
             $.ajax({
@@ -235,7 +262,7 @@
                 }
             });
         })
-         $('.post_choose').change(function() {
+        $('.post_choose').change(function() {
             var trangthai_val = $(this).val();
             var id = $(this).attr('id');
             $.ajax({

@@ -40,7 +40,7 @@
         href="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/bg_header.webp"
         type="image/webp">
 
-<link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/desktop/job-save.min.d88c8255578e7d64K.css">
+    <link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/desktop/job-save.min.d88c8255578e7d64K.css">
     <link rel="stylesheet" href="https://static.topcv.vn/v4/components/desktop/history-apply.fe7877ceeda62d0fK.css">
     <link rel="stylesheet" href="../static.topcv.vn/v4/css/components/desktop/app-page.min.540613ab89f44167G.css">
     <link rel="stylesheet" href="../../static.topcv.vn/v4/css/pages/blog-page/blog-desktop.d6b67a34ec167762G.css">
@@ -1563,20 +1563,22 @@
                 </h1>
             </div>
             <ul class="nav navbar-nav navbar-left">
-                <li class="navbar-left__item group">
-                    <a href="">
+                <li
+                    class="navbar-left__item group
+    {{ Route::currentRouteName() == 'applications.showAppliedJobs' || Route::currentRouteName() == 'saved-jobs' ? 'active' : '' }}">
+                    <a href="#">
                         Việc làm
                     </a>
                     <div class="group-hover:menu navbar__item__dropdown-menu">
                         <ul class="nav navbar-menu">
-                            <li class="navbar-menu__item  tag-border">
+                            <li class="navbar-menu__item tag-border">
                                 <a href="{{ route('applications.showAppliedJobs') }}" class="text-sm">
                                     <i class="icon fa-regular fa-magnifying-glass"></i>
                                     Việc làm đã ứng tuyển
                                 </a>
                             </li>
-                            <li class="navbar-menu__item ">
-                                <a href="{{route('saved-jobs')}}" class="text-sm">
+                            <li class="navbar-menu__item">
+                                <a href="{{ route('saved-jobs') }}" class="text-sm">
                                     <i class="icon fa-regular fa-check-to-slot"></i>
                                     Việc làm đã lưu
                                 </a>
@@ -1584,8 +1586,9 @@
                         </ul>
                     </div>
                 </li>
-                <li class="navbar-left__item group">
-                    <a href="mau-cv.html" title="Hồ sơ & CV">
+
+                <li class="navbar-left__item group {{ Route::currentRouteName() == 'cv.manage' ? 'active' : '' }}">
+                    <a href="{{ route('cv.manage') }}" title="Hồ sơ & CV">
                         Hồ sơ & CV
                     </a>
                     <div class="group-hover:menu navbar__item__dropdown-menu">
@@ -1599,7 +1602,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="navbar-left__item group">
+                <li class="navbar-left__item group {{ Route::currentRouteName() == 'all.company' ? 'active' : '' }}">
                     <a href="{{ route('all.company') }}" title="Công ty">
                         Công ty
                     </a>
@@ -1614,8 +1617,8 @@
                         </ul>
                     </div>
                 </li>
-                <li class="navbar-left__item group
-                                ">
+                <li
+                    class="navbar-left__item group {{ Route::currentRouteName() == 'site.courses' || Route::currentRouteName() == 'site.app' ? 'active' : '' }}">
                     <a href="">
                         Công cụ
                     </a>
@@ -1636,14 +1639,16 @@
                         </ul>
                     </div>
                 </li>
-                <li class="navbar-left__item group">
+                <li
+                    class="navbar-left__item group
+    {{ Str::startsWith(Route::currentRouteName(), 'genrepost.showPost') ? 'active' : '' }}">
                     <a href="blog.html" title="Blog">
                         Cẩm nang nghề nghiệp
                     </a>
                     <div class="group-hover:menu navbar__item__dropdown-menu">
                         <ul class="nav navbar-menu">
                             @foreach ($genrepost_layout as $genrepost)
-                                <li class="navbar-menu__item ">
+                                <li class="navbar-menu__item">
                                     <a href="{{ route('genrepost.showPost', ['slug' => $genrepost->slug]) }}"
                                         class="text-sm">
                                         <i class="{{ $genrepost->icon }}"></i>
@@ -1654,6 +1659,7 @@
                         </ul>
                     </div>
                 </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guard('candidate')->check())
@@ -1702,11 +1708,11 @@
                                     </a>
                                 </li>
                                 <li class="navbar-menu__item tag-border">
-    <a href="{{ route('change-password.form') }}" class="text-sm">
-        <i class="icon fa-regular fa-lock"></i>
-        Đổi mật khẩu
-    </a>
-</li>
+                                    <a href="{{ route('change-password.form') }}" class="text-sm">
+                                        <i class="icon fa-regular fa-lock"></i>
+                                        Đổi mật khẩu
+                                    </a>
+                                </li>
                                 <li class="navbar-menu__item logout">
                                     <a href="javascript:void(0)"
                                         onclick="document.getElementById('candidate-logout-form').submit();"
@@ -1994,13 +2000,12 @@
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="register-tab" data-bs-toggle="tab"
-                                data-bs-target="#register" type="button" role="tab"
-                                aria-controls="register" aria-selected="false">Đăng Ký
+                                data-bs-target="#register" type="button" role="tab" aria-controls="register"
+                                aria-selected="false">Đăng Ký
                             </button>
                         </li>
                     </ul>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div id="auth_page" class="g-recaptcha" data-size="invisible"
@@ -2013,8 +2018,7 @@
                                     <label for="email" class="mb-1">Email</label>
                                     <div class="input-group border-hover">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text"><i
-                                                    class="fa-light fa-envelope"></i></span>
+                                            <span class="input-group-text"><i class="fa-light fa-envelope"></i></span>
                                         </div>
                                         <input type="email" name="email" class="form-control"
                                             placeholder="Nhập email của bạn" aria-label="Nhập email của bạn" value>
@@ -2027,9 +2031,8 @@
                                             <span class="input-group-text"><i
                                                     class="fa-light fa-shield-keyhole"></i></span>
                                         </div>
-                                        <input type="password" id="password" name="password"
-                                            class="form-control" placeholder="Nhập mật khẩu"
-                                            aria-label="Nhập mật khẩu">
+                                        <input type="password" id="password" name="password" class="form-control"
+                                            placeholder="Nhập mật khẩu" aria-label="Nhập mật khẩu">
                                         <div class="input-group-prepend">
                                             <button type="button" tabindex="-1" data-input-target="#password"
                                                 class="input-group-text toggle-password"></button>
