@@ -11,6 +11,7 @@ class Message extends Model
     protected $fillable = [
         'candidate_id',
         'employer_id',
+        'company_id',
         'message',
         'sender_type',
     ];
@@ -23,5 +24,9 @@ class Message extends Model
     public function employer()
     {
         return $this->belongsTo(Employer::class);
+    }
+     public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 }

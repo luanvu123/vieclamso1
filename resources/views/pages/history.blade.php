@@ -97,6 +97,9 @@
                                                             @csrf
                                                             <input type="hidden" name="employer_id"
                                                                 value="{{ $application->jobPosting->company->employer->id }}">
+                                                            <input type="hidden" name="company_id"
+                                                                value="{{ $application->jobPosting->company->id }}">
+                                                            <!-- Thêm company_id -->
                                                             <div class="form-group">
                                                                 <label for="message">Tin nhắn</label>
                                                                 <textarea name="message" class="form-control" rows="3" required></textarea>
@@ -104,6 +107,7 @@
                                                             <button type="submit" class="btn btn-primary">Gửi</button>
                                                         </form>
                                                     </div>
+
                                                 </div>
                                             </div>
                                             <div class="active-candidate"></div>
@@ -111,8 +115,6 @@
                                     @endforeach
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>

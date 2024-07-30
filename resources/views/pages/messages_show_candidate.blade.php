@@ -182,7 +182,7 @@ footer p {
         </main>
 
         <footer>
-            <p>&copy; {{ date('Y') }} Your Company</p>
+            <p>&copy; {{ date('Y') }} Vieclamso1</p>
         </footer>
     </div>
 </body>

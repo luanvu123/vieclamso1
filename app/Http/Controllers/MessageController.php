@@ -15,12 +15,14 @@ class MessageController extends Controller
     {
         $request->validate([
             'employer_id' => 'required|exists:employers,id',
+            'company_id' => 'required|exists:companies,id',
             'message' => 'required|string',
         ]);
 
         $message = new Message();
         $message->candidate_id = Auth::guard('candidate')->id();
         $message->employer_id = $request->employer_id;
+        $message->company_id = $request->company_id;
         $message->message = $request->message;
         $message->sender_type = 'candidate';
         $message->save();

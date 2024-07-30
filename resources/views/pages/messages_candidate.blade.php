@@ -8,7 +8,7 @@
                         <div class="box-group">
                             <div class="box-group-header-applied box-group-header">
                                 <div class="box-group-title">
-                                    Công việc đã ứng tuyển
+                                    Tin nhắn đã gửi
                                 </div>
                             </div>
 
