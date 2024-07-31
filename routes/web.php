@@ -131,15 +131,17 @@ Route::middleware(['candidate'])->group(function () {
     Route::post('/ho-so', [CandidateController::class, 'updatePersonalProfile'])->name('update.personal.profile.account');
     Route::resource('experience', ExperienceController::class);
     Route::resource('education', EducationController::class);
-     Route::resource('skills', SkillController::class);
-      Route::resource('certificates', CertificateController::class);
-Route::resource('projects', ProjectController::class);
- Route::resource('activities', ActivityController::class);
- Route::resource('hobbies', HobbyController::class);
-  Route::resource('advisers', AdviserController::class);
-   Route::resource('prizes', PrizeController::class);
+    Route::resource('skills', SkillController::class);
+    Route::resource('certificates', CertificateController::class);
+    Route::resource('projects', ProjectController::class);
+    Route::resource('activities', ActivityController::class);
+    Route::resource('hobbies', HobbyController::class);
+    Route::resource('advisers', AdviserController::class);
+    Route::resource('prizes', PrizeController::class);
 
 
+
+    Route::get('/overview', [CandidateController::class, 'overview'])->name('cv.overview');
 
     Route::post('/candidate/update-avatar', [CandidateController::class, 'updateAvatar'])->name('candidate.update.avatar');
     Route::get('/quan-ly-cv', [CVController::class, 'index'])->name('cv.manage');

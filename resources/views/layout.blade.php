@@ -1725,6 +1725,12 @@
                                         Tin nhắn
                                     </a>
                                 </li>
+                                <li class="navbar-menu__item tag-border">
+                                    <a href="{{ route('cv.overview') }}" class="text-sm">
+                                        <i class="icon fa-regular fa-lock"></i>
+                                       Hồ sơ
+                                    </a>
+                                </li>
                                 <li class="navbar-menu__item logout">
                                     <a href="javascript:void(0)"
                                         onclick="document.getElementById('candidate-logout-form').submit();"

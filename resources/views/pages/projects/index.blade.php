@@ -67,15 +67,29 @@
                     <div class="col-lg-3 col-md-4 col-sm-12">
                         <div class="box-nav-tabs nav-tavs-profile mb-5">
                             <ul class="nav" role="tablist">
-                                <li><a class="btn btn-border aboutus-icon mb-20"
-                                        href="https://vieclam.topgialai.vn/account/settings">Thông tin tài khoản</a>
+                               <li><a class="btn btn-border aboutus-icon mb-20"
+                                        href="{{ route('personal.profile.account') }}">Thông tin tài khoản</a>
                                 </li>
-                                <li><a class="btn btn-border recruitment-icon mb-20"
-                                        href="https://vieclam.topgialai.vn/account/overview">Tổng quan</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20 active"
-                                        href="https://vieclam.topgialai.vn/account/experiences">Kinh nghiệm</a></li>
+                                        href="{{route('cv.overview')}}">Tổng quan</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('experience.index') }}">Kinh nghiệm</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20 "
                                         href="{{ route('education.index') }}">Giáo dục</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20" href="{{ route('skills.index') }}">Kĩ
+                                        năng</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('certificates.index') }}">Chứng chỉ</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20 active"
+                                        href="{{ route('projects.index') }}">Project</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('activities.index') }}">Hoạt động</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20" href="{{ route('hobbies.index') }}">Sở
+                                        thích</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('advisers.index') }}">Người tham chiếu</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('prizes.index') }}">Giải thưởng</a></li>
                             </ul>
                         </div>
                     </div>

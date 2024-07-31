@@ -67,15 +67,29 @@
                     <div class="col-lg-3 col-md-4 col-sm-12">
                         <div class="box-nav-tabs nav-tavs-profile mb-5">
                             <ul class="nav" role="tablist">
-                                <li><a class="btn btn-border aboutus-icon mb-20"
-                                        href="https://vieclam.topgialai.vn/account/settings">Thông tin tài khoản</a>
+                                 <li><a class="btn btn-border aboutus-icon mb-20"
+                                        href="{{ route('personal.profile.account') }}">Thông tin tài khoản</a>
                                 </li>
-                                <li><a class="btn btn-border recruitment-icon mb-20"
-                                        href="https://vieclam.topgialai.vn/account/overview">Tổng quan</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20 active"
-                                        href="https://vieclam.topgialai.vn/account/experiences">Kinh nghiệm</a></li>
+                                        href="{{route('cv.overview')}}">Tổng quan</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20"
-                                        href="https://vieclam.topgialai.vn/account/educations">Giáo dục</a></li>
+                                        href="{{ route('experience.index') }}">Kinh nghiệm</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20  active"
+                                        href="{{ route('education.index') }}">Giáo dục</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20" href="{{ route('skills.index') }}">Kĩ
+                                        năng</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('certificates.index') }}">Chứng chỉ</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('projects.index') }}">Project</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('activities.index') }}">Hoạt động</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20" href="{{ route('hobbies.index') }}">Sở
+                                        thích</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('advisers.index') }}">Người tham chiếu</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('prizes.index') }}">Giải thưởng</a></li>
                             </ul>
                         </div>
                     </div>
@@ -83,44 +97,48 @@
                         <div class="content-single">
                             <div class="tab-content">
                                 <div class="col-lg-12">
-        <div class="mb-3 mt-10">
-            <a href="{{ route('education.create') }}" class="btn btn-default btn-brand icon-tick">Thêm học vấn</a>
-        </div>
-    </div>
+                                    <div class="mb-3 mt-10">
+                                        <a href="{{ route('education.create') }}"
+                                            class="btn btn-default btn-brand icon-tick">Thêm học vấn</a>
+                                    </div>
+                                </div>
 
-    <div class="box-timeline mt-50">
-        @forelse ($educations as $education)
-            <div class="item-timeline">
-                <div class="timeline-year">
-                    <span>
-                         {{ \Carbon\Carbon::parse($education->start_date)->format('Y') }} -
+                                <div class="box-timeline mt-50">
+                                    @forelse ($educations as $education)
+                                        <div class="item-timeline">
+                                            <div class="timeline-year">
+                                                <span>
+                                                    {{ \Carbon\Carbon::parse($education->start_date)->format('Y') }} -
                                                     {{ $education->end_date ? \Carbon\Carbon::parse($education->end_date)->format('Y') : 'Hiện tại' }}
-                    </span>
-                </div>
-                <div class="timeline-info">
-                    <h5 class="color-brand-1 mb-20">
-                        {{ $education->institution }}
-                        <span class="ml-5 text-muted">
-                            ({{ $education->degree }})
-                        </span>
-                    </h5>
-                    <p class="color-text-paragraph-2 mb-15">
-                        {{ $education->description }}
-                    </p>
-                </div>
-                <div class="timeline-actions">
-                    <a href="{{ route('education.edit', $education) }}" class="btn btn-editor"></a>
-                    <form method="post" action="{{ route('education.destroy', $education) }}" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button onclick="return confirm('Bạn có chắc muốn xóa mục này?');" class="btn btn-remove" type="submit"></button>
-                    </form>
-                </div>
-            </div>
-        @empty
-            <p>Chưa có dữ liệu học vấn.</p>
-        @endforelse
-    </div>
+                                                </span>
+                                            </div>
+                                            <div class="timeline-info">
+                                                <h5 class="color-brand-1 mb-20">
+                                                    {{ $education->institution }}
+                                                    <span class="ml-5 text-muted">
+                                                        ({{ $education->degree }})
+                                                    </span>
+                                                </h5>
+                                                <p class="color-text-paragraph-2 mb-15">
+                                                    {{ $education->description }}
+                                                </p>
+                                            </div>
+                                            <div class="timeline-actions">
+                                                <a href="{{ route('education.edit', $education) }}"
+                                                    class="btn btn-editor"></a>
+                                                <form method="post" action="{{ route('education.destroy', $education) }}"
+                                                    style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button onclick="return confirm('Bạn có chắc muốn xóa mục này?');"
+                                                        class="btn btn-remove" type="submit"></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @empty
+                                        <p>Chưa có dữ liệu học vấn.</p>
+                                    @endforelse
+                                </div>
                             </div>
                         </div>
 

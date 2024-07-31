@@ -230,4 +230,33 @@ class CandidateController extends Controller
 
         return redirect()->route('personal.profile.account')->with('success', 'Hồ sơ cá nhân đã được cập nhật.');
     }
+
+
+ public function overview()
+    {
+        $candidate = Auth::guard('candidate')->user();
+
+        $educations = $candidate->educations;
+        $experiences = $candidate->experiences;
+        $skills = $candidate->skills;
+        $certificates = $candidate->certificates;
+        $projects = $candidate->projects;
+        $activities = $candidate->activities;
+        $hobbies = $candidate->hobbies;
+        $advisers = $candidate->advisers;
+        $prizes = $candidate->prizes;
+
+        return view('pages.overview', compact(
+            'candidate',
+            'educations',
+            'experiences',
+            'skills',
+            'certificates',
+            'projects',
+            'activities',
+            'hobbies',
+            'advisers',
+            'prizes'
+        ));
+    }
 }

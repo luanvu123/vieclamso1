@@ -68,14 +68,28 @@
                         <div class="box-nav-tabs nav-tavs-profile mb-5">
                             <ul class="nav" role="tablist">
                                 <li><a class="btn btn-border aboutus-icon mb-20"
-                                        href="https://vieclam.topgialai.vn/account/settings">Thông tin tài khoản</a>
+                                        href="{{ route('personal.profile.account') }}">Thông tin tài khoản</a>
                                 </li>
-                                <li><a class="btn btn-border recruitment-icon mb-20"
-                                        href="https://vieclam.topgialai.vn/account/overview">Tổng quan</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20 active"
-                                        href="https://vieclam.topgialai.vn/account/experiences">Kinh nghiệm</a></li>
+                                        href="{{route('cv.overview')}}">Tổng quan</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('experience.index') }}">Kinh nghiệm</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20 "
                                         href="{{ route('education.index') }}">Giáo dục</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20" href="{{ route('skills.index') }}">Kĩ
+                                        năng</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20  active"
+                                        href="{{ route('certificates.index') }}">Chứng chỉ</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('projects.index') }}">Project</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('activities.index') }}">Hoạt động</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20" href="{{ route('hobbies.index') }}">Sở
+                                        thích</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('advisers.index') }}">Người tham chiếu</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('prizes.index') }}">Giải thưởng</a></li>
                             </ul>
                         </div>
                     </div>
@@ -85,38 +99,43 @@
 
 
 
-<h2>Sửa Chứng Chỉ</h2>
+                                <h2>Sửa Chứng Chỉ</h2>
 
-<form method="POST" action="{{ route('certificates.update', $certificate->id) }}">
-    @csrf
-    @method('PUT')
+                                <form method="POST" action="{{ route('certificates.update', $certificate->id) }}">
+                                    @csrf
+                                    @method('PUT')
 
-    <div class="mb-3">
-        <label class="form-label" for="name">Tên chứng chỉ *</label>
-        <input class="form-control" id="name" type="text" name="name" value="{{ $certificate->name }}" required>
-    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="name">Tên chứng chỉ *</label>
+                                        <input class="form-control" id="name" type="text" name="name"
+                                            value="{{ $certificate->name }}" required>
+                                    </div>
 
-    <div class="mb-3">
-        <label class="form-label" for="issuer">Tổ chức cấp *</label>
-        <input class="form-control" id="issuer" type="text" name="issuer" value="{{ $certificate->issuer }}" required>
-    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="issuer">Tổ chức cấp *</label>
+                                        <input class="form-control" id="issuer" type="text" name="issuer"
+                                            value="{{ $certificate->issuer }}" required>
+                                    </div>
 
-    <div class="mb-3">
-        <label class="form-label" for="issue_date">Ngày cấp *</label>
-        <input class="form-control" id="issue_date" type="date" name="issue_date" value="{{ \Carbon\Carbon::parse($certificate->issue_date)->format('Y-m-d') }}" required>
-    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="issue_date">Ngày cấp *</label>
+                                        <input class="form-control" id="issue_date" type="date" name="issue_date"
+                                            value="{{ \Carbon\Carbon::parse($certificate->issue_date)->format('Y-m-d') }}"
+                                            required>
+                                    </div>
 
-    <div class="mb-3">
-        <label class="form-label" for="expiry_date">Ngày hết hạn</label>
-        <input class="form-control" id="expiry_date" type="date" name="expiry_date" value="{{ \Carbon\Carbon::parse($certificate->expiry_date) ? \Carbon\Carbon::parse($certificate->expiry_date)->format('Y-m-d') : '' }}">
-    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="expiry_date">Ngày hết hạn</label>
+                                        <input class="form-control" id="expiry_date" type="date" name="expiry_date"
+                                            value="{{ \Carbon\Carbon::parse($certificate->expiry_date) ? \Carbon\Carbon::parse($certificate->expiry_date)->format('Y-m-d') : '' }}">
+                                    </div>
 
-    <div class="mb-3">
-        <button class="btn btn-primary" type="submit">Cập nhật</button>
-    </div>
-</form>
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary" type="submit">Cập nhật</button>
+                                    </div>
+                                </form>
 
-</div>
+                            </div>
                         </div>
                     </div>
 
