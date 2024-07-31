@@ -1,9 +1,14 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\AdviserController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Auth\EmployerLoginController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\EcosystemController;
+use App\Http\Controllers\EducationController;
 use App\Http\Controllers\EmployerManageController;
+use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\JobPostingController;
 use App\Http\Controllers\JobsManageController;
 use App\Http\Controllers\SiteController;
@@ -28,8 +33,12 @@ use App\Http\Controllers\GenrePostController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyFollowerController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\HobbyController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\PrizeController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SavedJobController;
+use App\Http\Controllers\SkillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,6 +125,20 @@ Route::middleware(['candidate'])->group(function () {
     Route::post('/cai-dat-thong-tin-ca-nhan', [CandidateController::class, 'updateAccount'])->name('candidate.update.account');
     Route::get('/change-password', [CandidateController::class, 'showChangePasswordForm'])->name('change-password.form');
     Route::post('/change-password', [CandidateController::class, 'changePassword'])->name('change-password');
+
+
+    Route::get('/ho-so', [CandidateController::class, 'showPersonalProfile'])->name('personal.profile.account');
+    Route::post('/ho-so', [CandidateController::class, 'updatePersonalProfile'])->name('update.personal.profile.account');
+    Route::resource('experience', ExperienceController::class);
+    Route::resource('education', EducationController::class);
+     Route::resource('skills', SkillController::class);
+      Route::resource('certificates', CertificateController::class);
+Route::resource('projects', ProjectController::class);
+ Route::resource('activities', ActivityController::class);
+ Route::resource('hobbies', HobbyController::class);
+  Route::resource('advisers', AdviserController::class);
+   Route::resource('prizes', PrizeController::class);
+
 
 
     Route::post('/candidate/update-avatar', [CandidateController::class, 'updateAvatar'])->name('candidate.update.avatar');

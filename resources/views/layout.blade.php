@@ -1599,6 +1599,12 @@
                                     Quản lý CV
                                 </a>
                             </li>
+                             <li class="navbar-menu__item ">
+                                <a href="{{ route('cv.upload') }}" class="text-sm">
+                                    <i class="icon fa-regular fa-file-user"></i>
+                                    Tải Cv lên
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -1710,7 +1716,7 @@
                                 <li class="navbar-menu__item tag-border">
                                     <a href="{{ route('change-password.form') }}" class="text-sm">
                                         <i class="icon fa-regular fa-lock"></i>
-                                        Đổi mật khẩu 
+                                        Đổi mật khẩu
                                     </a>
                                 </li>
                                   <li class="navbar-menu__item tag-border">

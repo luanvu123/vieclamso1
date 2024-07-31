@@ -255,7 +255,7 @@
                                              Khởi tạo TopCV Profile để gia tăng 300% cơ hội việc làm tốt
                                          </span>
                                      </p>
-                                     <a href="https://www.topcv.vn/profile" class="btn btn-create-profile btn-sm">Tạo
+                                     <a href="{{route('personal.profile.account')}}" class="btn btn-create-profile btn-sm">Tạo
                                          TopCV
                                          Profile</a>
                                  </div>

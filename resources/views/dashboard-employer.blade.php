@@ -49,43 +49,46 @@
             <div class="dashboard-nav">
                 <div class="dashboard-nav-inner">
 
-               <ul data-submenu-title="Start">
-    <li class="{{ Route::is('recruitment') ? 'active' : '' }}">
-        <a href="{{ route('recruitment') }}">Dashboard</a>
-    </li>
-</ul>
+                    <ul data-submenu-title="Start">
+                        <li class="{{ Route::is('recruitment') ? 'active' : '' }}">
+                            <a href="{{ route('recruitment') }}">Dashboard</a>
+                        </li>
+                    </ul>
 
-<ul data-submenu-title="Management">
-    <li class="{{ Route::is('job-postings.index') || Route::is('companies.index') || Route::is('job-postings.create') ? 'active-submenu' : '' }}">
-        <a href="#">Job</a>
-        <ul>
-            <li class="{{ Route::is('job-postings.index') ? 'active' : '' }}">
-                <a href="{{ route('job-postings.index') }}">Job</a>
-            </li>
-            <li class="{{ Route::is('companies.index') ? 'active' : '' }}">
-                <a href="{{ route('companies.index') }}">Company</a>
-            </li>
-            <li class="{{ Route::is('job-postings.create') ? 'active' : '' }}">
-                <a href="{{ route('job-postings.create') }}">Add Job</a>
-            </li>
-            <li class="{{ Route::is('job-postings.create') ? 'active' : '' }}">
-                <a href="{{ route('messages.receive') }}">Message</a>
-            </li>
-        </ul>
-    </li>
-</ul>
+                    <ul data-submenu-title="Management">
+                        <li
+                            class="{{ Route::is('job-postings.index') || Route::is('companies.index') || Route::is('job-postings.create') ? 'active-submenu' : '' }}">
+                            <a href="#">Job</a>
+                            <ul>
+                                <li class="{{ Route::is('job-postings.index') ? 'active' : '' }}">
+                                    <a href="{{ route('job-postings.index') }}">Job</a>
+                                </li>
+                                <li class="{{ Route::is('companies.index') ? 'active' : '' }}">
+                                    <a href="{{ route('companies.index') }}">Company</a>
+                                </li>
+                                <li class="{{ Route::is('job-postings.create') ? 'active' : '' }}">
+                                    <a href="{{ route('job-postings.create') }}">Add Job</a>
+                                </li>
+                                <li class="{{ Route::is('job-postings.create') ? 'active' : '' }}">
+                                    <a href="{{ route('messages.receive') }}">Message</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
 
-<ul data-submenu-title="Account">
-    <li class="{{ Route::is('employer.profile') ? 'active' : '' }}">
-        <a href="{{ route('employer.profile') }}">My Profile</a>
-    </li>
-    <li>
-        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-        <form id="logout-form" action="{{ route('logout-employer') }}" method="POST" class="d-none">
-            @csrf
-        </form>
-    </li>
-</ul>
+                    <ul data-submenu-title="Account">
+                        <li class="{{ Route::is('employer.profile') ? 'active' : '' }}">
+                            <a href="{{ route('employer.profile') }}">My Profile</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('logout-employer') }}" method="POST"
+                                class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
 
 
                 </div>
@@ -193,3 +196,4 @@
 </body>
 
 </html>
+

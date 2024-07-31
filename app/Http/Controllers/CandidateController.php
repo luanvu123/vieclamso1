@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Candidate;
+use App\Models\Experience;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -65,7 +66,6 @@ class CandidateController extends Controller
             return redirect()->back()->withInput()->withErrors(['email' => 'Thông tin đăng nhập không chính xác']);
         }
     }
-
     public function dashboard()
     {
         return view('pages.home');
@@ -128,32 +128,8 @@ class CandidateController extends Controller
         return redirect()->route('candidate.account')->with('success', 'Thông tin cá nhân đã được cập nhật.');
     }
 
-    public function updateAvatar(Request $request)
-    {
-        $request->validate([
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
 
-        $candidate = Auth::guard('candidate')->user();
-
-        if ($request->hasFile('avatar')) {
-            // Xóa ảnh cũ nếu có
-            if ($candidate->avatar_candidate && Storage::disk('public')->exists($candidate->avatar_candidate)) {
-                Storage::disk('public')->delete($candidate->avatar_candidate);
-            }
-
-            // Lưu ảnh mới vào disk 'public'
-            $avatar = $request->file('avatar');
-            $path = $avatar->store('avatars', 'public');
-
-            // Cập nhật đường dẫn ảnh vào cơ sở dữ liệu
-            $candidate->avatar_candidate = $path;
-            $candidate->save();
-        }
-
-        return redirect()->back()->with('success', 'Ảnh đại diện đã được cập nhật.');
-    }
-   public function showChangePasswordForm()
+    public function showChangePasswordForm()
     {
         return view('pages.change-password');
     }
@@ -174,5 +150,84 @@ class CandidateController extends Controller
         $user->save();
 
         return back()->with('success', 'Mật khẩu đã được thay đổi thành công');
+    }
+
+    public function showPersonalProfile()
+    {
+        return view('pages.personal-profile');
+    }
+    public function updatePersonalProfile(Request $request)
+    {
+        $candidate = Auth::guard('candidate')->user();
+
+        $request->validate([
+            'fullname' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:15',
+            'dob' => 'nullable|date',
+            'gender' => 'nullable|string|max:10',
+            'address' => 'nullable|string|max:255',
+            'favorite_skills' => 'nullable|string|max:255',
+            'favorite_tags' => 'nullable|string|max:255',
+            'is_public_profile' => 'boolean',
+            'hide_cv' => 'boolean',
+            'description' => 'nullable|string|max:1000',
+            'linkedin' => 'nullable|string|max:255',
+            'bio' => 'nullable|string|max:100000',
+            'resume' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'cover_letter' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        // Cập nhật thông tin cá nhân
+        $candidate->update([
+            'fullname_candidate' => $request->input('fullname'),
+            'phone_number_candidate' => $request->input('phone'),
+            'dob' => $request->input('dob'),
+            'gender' => $request->input('gender'),
+            'address' => $request->input('address'),
+            'skill' => $request->input('favorite_skills'),
+            'position' => $request->input('favorite_tags'),
+            'is_public' => $request->input('is_public_profile', 0),
+            'cv_public' => $request->input('hide_cv', 0),
+            'story' => $request->input('description'),
+            'linkedin' => $request->input('linkedin'),
+        ]);
+
+        // Cập nhật avatar nếu có upload
+        if ($request->hasFile('avatar')) {
+            if ($candidate->avatar_candidate && Storage::disk('public')->exists($candidate->avatar_candidate)) {
+                Storage::disk('public')->delete($candidate->avatar_candidate);
+            }
+            $avatar = $request->file('avatar');
+            $candidate->avatar_candidate = $avatar->store('avatars', 'public');
+        }
+
+        // Cập nhật CV nếu có upload
+        if ($request->hasFile('resume')) {
+            if ($candidate->cv_path && Storage::disk('public')->exists($candidate->cv_path)) {
+                Storage::disk('public')->delete($candidate->cv_path);
+            }
+            $candidate->cv_path = $request->file('resume')->store('cvs', 'public');
+        }
+
+        // Cập nhật thư xin việc nếu có upload
+        if ($request->hasFile('cover_letter')) {
+            if ($candidate->letter_path && Storage::disk('public')->exists($candidate->letter_path)) {
+                Storage::disk('public')->delete($candidate->letter_path);
+            }
+            $candidate->letter_path = $request->file('cover_letter')->store('cover_letters', 'public');
+        }
+
+        // Cập nhật ảnh bìa nếu có upload
+        if ($request->hasFile('cover_image')) {
+            if ($candidate->cover_image && Storage::disk('public')->exists($candidate->cover_image)) {
+                Storage::disk('public')->delete($candidate->cover_image);
+            }
+            $candidate->cover_image = $request->file('cover_image')->store('cover_images', 'public');
+        }
+
+        $candidate->save();
+
+        return redirect()->route('personal.profile.account')->with('success', 'Hồ sơ cá nhân đã được cập nhật.');
     }
 }

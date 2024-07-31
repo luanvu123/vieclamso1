@@ -24,7 +24,18 @@ class Candidate extends Authenticatable
         'fullname_candidate',
         'avatar_candidate',
         'status',
-        'cv_path'
+        'cv_path',
+        'gender',
+        'address',
+        'skill',
+        'position',
+        'is_public',
+        'cv_public',
+        'linkedin',
+        'story',
+        'letter_path',
+        'cover_image',
+        'dob',
     ];
 
     /**
@@ -45,25 +56,61 @@ class Candidate extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-     public function cvs()
+    public function cvs()
     {
         return $this->hasMany(Cv::class);
     }
-     public function applications(): HasMany
+    public function applications(): HasMany
     {
         return $this->hasMany(Application::class);
     }
 
-     public function followedCompanies()
+    public function followedCompanies()
     {
         return $this->belongsToMany(Company::class, 'company_follower');
     }
     public function savedJobs()
-{
-    return $this->hasMany(SavedJob::class);
-}
-public function messages()
+    {
+        return $this->hasMany(SavedJob::class);
+    }
+    public function messages()
     {
         return $this->hasMany(Message::class);
     }
+    public function experiences()
+    {
+        return $this->hasMany(Experience::class);
+    }
+    public function educations()
+{
+    return $this->hasMany(Education::class);
+
+
+}
+   public function skills()
+{
+    return $this->hasMany(Skill::class);
+}
+   public function certificates()
+{
+    return $this->hasMany(Certificate::class);
+}
+
+public function projects(){
+    return $this->hasMany(Project::class);
+}
+
+public function activities(){
+    return $this->hasMany(Activity::class);
+}
+public function hobbies(){
+    return $this->hasMany(Hobby::class);
+}
+
+public function advisers(){
+    return $this->hasMany(Adviser::class);
+}
+public function prizes(){
+    return $this->hasMany(Prize::class);
+}
 }
