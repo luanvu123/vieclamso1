@@ -64,6 +64,8 @@ class SiteController extends Controller
     public function show($slug)
     {
         $jobPosting = JobPosting::with('company')->where('slug', $slug)->where('status', 0)->firstOrFail();
+        // Tăng số lượt xem lên 1
+        $jobPosting->increment('views');
         $closingDate = Carbon::parse($jobPosting->closing_date);
         $isExpired = $closingDate->isPast();
         $candidate = Auth::guard('candidate')->user();
@@ -87,10 +89,10 @@ class SiteController extends Controller
             $relatedJob->days_to_closing = Carbon::now()->diffInDays(Carbon::parse($relatedJob->closing_date), false);
             $relatedJob->time_since_update = Carbon::parse($relatedJob->updated_at)->diffForHumans();
         }
-         $courses = Course::where('status', 1)->take(3)->get();
-          $company_random = Company::inRandomOrder()->first();
-        $jobPosting_random = $company_random->jobPostings()->where('status', 1)->get();
-        return view('pages.job', compact('jobPosting', 'closingDate', 'isExpired', 'candidate', 'applied', 'appliedDate', 'relatedJobs','courses','company_random', 'jobPosting_random'));
+        $courses = Course::where('status', 1)->take(3)->get();
+        $company_random = Company::inRandomOrder()->first();
+        $jobPosting_random = $company_random->jobPostings()->where('status', 0)->get();
+        return view('pages.job', compact('jobPosting', 'closingDate', 'isExpired', 'candidate', 'applied', 'appliedDate', 'relatedJobs', 'courses', 'company_random', 'jobPosting_random'));
     }
 
     public function searchJobs(Request $request)
@@ -154,21 +156,19 @@ class SiteController extends Controller
         $jobPostings = $company->jobPostings()->where('status', 0)->get(); // Lấy các job postings của company có status = 1
         return view('pages.company-show', compact('company', 'jobPostings'));
     }
-     public function showPost($slug)
+    public function showPost($slug)
     {
         $genrePost = GenrePost::where('slug', $slug)->with('posts')->firstOrFail();
         $featuredPosts = $genrePost->posts()->where('featured', 1)->take(1)->get();
         return view('pages.blog', compact('genrePost', 'featuredPosts'));
     }
-     public function showCourse()
+    public function showCourse()
     {
         $courses = Course::where('status', 1)->get(); // Chỉ lấy những khóa học có trạng thái active
         return view('pages.course', compact('courses'));
     }
-     public function showApp()
+    public function showApp()
     {
         return view('pages.app');
     }
-
-   
 }

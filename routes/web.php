@@ -62,6 +62,8 @@ Route::get('cam-nang-nghe-nghiep/{slug}', [SiteController::class, 'showPost'])->
 Route::get('/khoa-hoc', [SiteController::class, 'showCourse'])->name('site.courses');
 Route::get('/ung-dung', [SiteController::class, 'showApp'])->name('site.app');
 
+Route::get('/candidate_cv/{id}', [JobPostingController::class, 'showCv'])->name('candidates.show.cv');
+
 Auth::routes();
 Route::get('/recruitment', function () {
     return view('pages.recruitment');
@@ -174,4 +176,5 @@ Route::middleware(['employer'])->group(function () {
     Route::post('employer/profile', [EmployerLoginController::class, 'updateProfile'])->name('employer.profile.update');
 
     Route::resource('companies', CompanyController::class);
+
 });

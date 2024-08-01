@@ -259,4 +259,22 @@ class CandidateController extends Controller
             'prizes'
         ));
     }
+
+
+     public function showCv($id)
+    {
+        $candidate = Candidate::with([
+            'educations',
+            'experiences',
+            'skills',
+            'certificates',
+            'projects',
+            'activities',
+            'hobbies',
+            'advisers',
+            'prizes'
+        ])->findOrFail($id);
+
+        return view('pages.overview-cv', compact('candidate'));
+    }
 }

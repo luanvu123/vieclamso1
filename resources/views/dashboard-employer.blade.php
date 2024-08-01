@@ -50,8 +50,8 @@
                 <div class="dashboard-nav-inner">
 
                     <ul data-submenu-title="Start">
-                        <li class="{{ Route::is('recruitment') ? 'active' : '' }}">
-                            <a href="{{ route('recruitment') }}">Dashboard</a>
+                        <li class="{{ Route::is('job-postings.dashboard') ? 'active' : '' }}">
+                            <a href="{{ route('job-postings.dashboard') }}">Dashboard</a>
                         </li>
                     </ul>
 

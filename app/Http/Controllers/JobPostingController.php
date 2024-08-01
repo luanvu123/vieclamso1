@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\Candidate;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\JobPosting;
@@ -21,8 +22,15 @@ class JobPostingController extends Controller
 
     public function dashboard()
     {
-        return view('job_postings.dashboard');
+        $employer = Auth::guard('employer')->user();
+        $activeJobPostingsCount = $employer->activeJobPostingsCount();
+        $totalJobViews = $employer->totalJobViews();
+        $totalApplications = $employer->totalApplications();
+        $totalMessages = $employer->totalMessages();
+        return view('job_postings.dashboard', compact('activeJobPostingsCount', 'totalJobViews', 'totalApplications', 'totalMessages'));
     }
+
+
 
     public function create()
     {
@@ -214,5 +222,24 @@ class JobPostingController extends Controller
         $application->status = $data['trangthai_val'];
         $application->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $application->save();
+    }
+
+
+      public function showCV($id)
+    {
+        $candidate = Candidate::with([
+            'cvs',
+            'educations',
+            'experiences',
+            'skills',
+            'certificates',
+            'projects',
+            'activities',
+            'hobbies',
+            'advisers',
+            'prizes'
+        ])->findOrFail($id);
+
+        return view('pages.overview-cv', compact('candidate'));
     }
 }

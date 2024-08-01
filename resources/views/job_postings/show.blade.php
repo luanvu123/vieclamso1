@@ -9,6 +9,7 @@
                      <th>#</th>
                      <th>Candidate</th>
                      <th>CV</th>
+                     <th>Profile</th>
                      <th>Status</th>
                  </tr>
              </thead>
@@ -18,6 +19,8 @@
                          <td>{{ $key }}</td>
                          <td>{{ $application->candidate->fullname_candidate }}</td>
                          <td><a href="{{ asset('storage/' . $application->cv->cv_path) }}" target="_blank">View CV</a></td>
+                        <td><a href="{{ route('candidates.show.cv', $application->candidate->id) }}">View Profile</a></td>
+
                          <td>
                              <select id="{{ $application->id }}" class="application_choose">
                                  @if ($application->status == 1)
@@ -43,7 +46,6 @@
                                  @endif
                              </select>
                          </td>
-
                      </tr>
                  @endforeach
              </tbody>

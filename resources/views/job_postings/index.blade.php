@@ -31,7 +31,7 @@
                     <table class="manage-table responsive-table">
                         <tr>
                             <th><i class="fa fa-file-text"></i> Title</th>
-                            <th><i class="fa fa-check-square-o"></i> Filled?</th>
+                            <th><i class="fa fa-check-square-o"></i> Views</th>
                             <th><i class="fa fa-calendar"></i> Date Posted</th>
                             <th><i class="fa fa-calendar"></i> Date Expires</th>
                             <th><i class="fa fa-user"></i> Applications</th>
@@ -45,7 +45,7 @@
                                         {{ $jobPosting->title }}
                                     </a>
                                 </td>
-                                <td class="centered">-</td>
+                                <td class="centered">{{$jobPosting->views}} view</td>
                                 <td>{{ $jobPosting->created_at->format('F d, Y') }}</td>
                                 <td>{{ $jobPosting->closing_date ? \Carbon\Carbon::parse($jobPosting->closing_date)->format('F d, Y') : '-' }}
                                 </td>

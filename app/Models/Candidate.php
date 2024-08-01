@@ -27,7 +27,7 @@ class Candidate extends Authenticatable
         'cv_path',
         'gender',
         'address',
-        'skill',
+        'skill', 
         'position',
         'is_public',
         'cv_public',
