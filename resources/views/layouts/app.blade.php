@@ -69,7 +69,7 @@
                             <a href="#">General Management</a>
                             <ul>
                                 <li class="{{ Route::is('users.index') ? 'active' : '' }}">
-                                    <a href="{{ route('users.index') }}">Manage Users <span class="nav-tag">5</span></a>
+                                    <a href="{{ route('users.index') }}">Manage Users</a>
                                 </li>
                                 <li class="{{ Route::is('roles.index') ? 'active' : '' }}">
                                     <a href="{{ route('roles.index') }}">Manage Roles</a>
@@ -86,6 +86,7 @@
                                 <li class="{{ Route::is('medias.index') ? 'active' : '' }}">
                                     <a href="{{ route('medias.index') }}">Manage Medias</a>
                                 </li>
+
                             </ul>
                         </li>
 
@@ -100,10 +101,16 @@
                                     <a href="{{ route('genre-posts.index') }}">Manage Genres</a>
                                 </li>
                                 <li class="{{ Route::is('slugs.index') ? 'active' : '' }}">
-                                    <a href="{{ route('slugs.index') }}">Manage Slugs</a>
+                                    <a href="{{ route('slugs.index') }}">Manage Tags</a>
                                 </li>
                                 <li class="{{ Route::is('courses.index') ? 'active' : '' }}">
                                     <a href="{{ route('courses.index') }}">Manage Courses</a>
+                                </li>
+                                <li class="{{ Route::is('type_feedback.index') ? 'active' : '' }}">
+                                    <a href="{{ route('type_feedback.index') }}">Manage Type feedback</a>
+                                </li>
+                                <li class="{{ Route::is('type_support.index') ? 'active' : '' }}">
+                                    <a href="{{ route('type_support.index') }}">Manage Type Support</a>
                                 </li>
                             </ul>
                         </li>
@@ -112,8 +119,11 @@
                             <a href="#">Candidates</a>
                             <ul>
                                 <li class="{{ Route::is('candidates.index') ? 'active' : '' }}">
-                                    <a href="{{ route('candidates.index') }}">Manage Candidates <span
-                                            class="nav-tag">2</span></a>
+                                    <a href="{{ route('candidates.index') }}">Manage Candidates
+                                        @if ($candidateCountTwoHour > 0)
+                                            <span class="nav-tag">{{ $candidateCountTwoHour }}</span>
+                                        @endif
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -123,19 +133,43 @@
                             <a href="#">Employers</a>
                             <ul>
                                 <li class="{{ Route::is('employers.index') ? 'active' : '' }}">
-                                    <a href="{{ route('employers.index') }}">Manage Employers <span
-                                            class="nav-tag">2</span></a>
+                                    <a href="{{ route('employers.index') }}">Manage Employers
+                                        @if ($employerCountTwoHour > 0)
+                                            <span class="nav-tag">{{ $employerCountTwoHour }}</span>
+                                        @endif
+                                    </a>
                                 </li>
                                 <li class="{{ Route::is('job-postings-manage.index') ? 'active' : '' }}">
-                                    <a href="{{ route('job-postings-manage.index') }}">Manage Jobs <span
-                                            class="nav-tag">2</span></a>
+                                    <a href="{{ route('job-postings-manage.index') }}">Manage Jobs
+                                        @if ($jobPostingCountTwoHour > 0)
+                                            <span class="nav-tag">{{ $jobPostingCountTwoHour }}</span>
+                                        @endif
+                                    </a>
                                 </li>
                                 <li class="{{ Route::is('admin.companies.index') ? 'active' : '' }}">
-                                    <a href="{{ route('admin.companies.index') }}">Manage Company <span
-                                            class="nav-tag">2</span></a>
+                                    <a href="{{ route('admin.companies.index') }}">Manage Company
+                                        @if ($companyCountTwoHour > 0)
+                                            <span class="nav-tag">{{ $companyCountTwoHour }}</span>
+                                        @endif
+                                    </a>
                                 </li>
                             </ul>
                         </li>
+                        <li class="{{ Route::is('feedbacks.index.list') ? 'active-submenu' : '' }}">
+                            <a href="{{ route('feedbacks.index.list') }}">Feedbacks
+                                @if ($feedbackCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $feedbackCountTwoHour }}</span>
+                                @endif
+                            </a>
+                        </li>
+                        <li class="{{ Route::is('supports.index.list') ? 'active-submenu' : '' }}">
+                            <a href="{{ route('supports.index.list') }}">Support
+                                @if ($supportCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $supportCountTwoHour }}</span>
+                                @endif
+                            </a>
+                        </li>
+
                     </ul>
 
 

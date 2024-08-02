@@ -1213,7 +1213,7 @@
                              </div>
                          </div>
                      </div>
-                     
+
                  </div>
              </div>
          </section>
@@ -1329,17 +1329,15 @@
                          <div class="box-impressive-numbers__item">
                              <span class="box-impressive-numbers__item--wrapper">
                                  <div class="box-impressive-numbers__item--number box-impressive-number-text"><span
-                                         class="number" data-number="540000">0</span>+</div>
+                                         class="number" data-number="{{ $totalEmployerCount }}">0</span>+</div>
                                  <div class="box-impressive-numbers__item--title">Nhà tuyển dụng uy tín</div>
-                                 <div class="box-impressive-numbers__item--description">Các nhà tuyển dụng đến từ tất
-                                     cả
-                                     các ngành nghề và được xác thực bởi TopCV</div>
+                                 <div class="box-impressive-numbers__item--description">Các nhà tuyển dụng đến từ tất cả các ngành nghề và được xác thực bởi TopCV</div>
                              </span>
                          </div>
                          <div class="box-impressive-numbers__item">
                              <span class="box-impressive-numbers__item--wrapper">
                                  <div class="box-impressive-numbers__item--number box-impressive-number-text"><span
-                                         class="number" data-number="200000">0</span>+</div>
+                                         class="number" data-number="{{ $totalCompanyCount }}">0</span>+</div>
                                  <div class="box-impressive-numbers__item--title">Doanh nghiệp hàng đầu</div>
                                  <div class="box-impressive-numbers__item--description">TopCV được nhiều doanh nghiệp
                                      hàng đầu tin tưởng và đồng hành, trong đó có các thương hiệu nổi bật như Samsung,
@@ -1351,7 +1349,7 @@
                          <div class="box-impressive-numbers__item">
                              <span class="box-impressive-numbers__item--wrapper">
                                  <div class="box-impressive-numbers__item--number box-impressive-number-text"><span
-                                         class="number" data-number="2000000">0</span>+</div>
+                                         class="number" data-number="{{$totalApplicationCount}}">0</span>+</div>
                                  <div class="box-impressive-numbers__item--title">Việc làm đã được kết nối</div>
                                  <div class="box-impressive-numbers__item--description">TopCV đồng hành và kết nối hàng
                                      nghìn ứng viên với những cơ hội việc làm hấp dẫn từ các doanh nghiệp uy tín.</div>
@@ -1365,7 +1363,7 @@
                          <div class="box-impressive-numbers__item">
                              <span class="box-impressive-numbers__item--wrapper">
                                  <div class="box-impressive-numbers__item--number box-impressive-number-text"><span
-                                         class="number" data-number="1200000">0</span>+</div>
+                                         class="number" data-number="{{$totalCandidateCount}}">0</span>+</div>
                                  <div class="box-impressive-numbers__item--title">Lượt tải ứng dụng</div>
                                  <div class="box-impressive-numbers__item--description">Hàng triệu ứng viên sử dụng ứng
                                      dụng TopCV để tìm kiếm việc làm, trong đó có 60% là ứng viên có kinh nghiệm từ 3 năm

@@ -916,66 +916,43 @@
                 fill="white" />
         </svg>
     </div>
+    <!-- Modal Support Ticket -->
+    <!-- Modal Support Ticket -->
     <div class="modal-support-ticket" id="modal-support-ticket">
         <div class="modal-support-ticket__content">
             <div class="modal-support-ticket__content--header">
                 <div class="modal-support-ticket__content--header-title">
-                    Góp ý sản phẩm / Yêu cầu hỗ trợ
+                    Góp ý sản phẩm
                 </div>
                 <div class="modal-support-ticket__content--header-title title-mobile">
-                    Góp ý/Yêu cầu hỗ trợ
+                    Góp ý
                 </div>
                 <div class="modal-support-ticket__content--header-close close-modal-support-ticket">
                     <i class="fa-regular fa-xmark"></i>
                 </div>
             </div>
             <div class="modal-support-ticket__content--body">
-                <div class="modal-support-ticket__content--body-tabs">
-                    <div class="support-ticket-tab active" id="tab-product-comment"
-                        data-content="#tab-product-comment-content">
-                        <i class="fa-regular fa-comment-smile"></i>
-                        Góp ý sản phẩm
-                    </div>
-                    <div class="support-ticket-tab" id="tab-require-to-be-supported"
-                        data-content="#tab-require-to-be-supported-content">
-                        <i class="fa-regular fa-headset"></i>
-                        Yêu cầu hỗ trợ
-                    </div>
-                </div>
-                <form class="support-ticket-tab-content show-content" id="tab-product-comment-content">
+                <form class="support-ticket-tab-content show-content" id="tab-product-comment-content"
+                    action="{{ route('feedback.store') }}" method="POST">
+                    @csrf
                     <div class="support-ticket-tab-content__description">
-                        Phản hồi của bạn rất quan trọng, TopCV mong nhận được nhiều góp ý từ bạn để cải thiện sản phẩm
-                        tốt hơn.
+                        Phản hồi của bạn rất quan trọng, Vieclamso1 mong nhận được nhiều góp ý từ bạn để cải thiện sản
+                        phẩm tốt hơn.
                     </div>
                     <div class="support-ticket-tab-content__group">
                         <div class="support-ticket-tab-content__group--title">Chủ đề cần góp ý <span
                                 class="required-icon">*</span></div>
                         <div class="support-ticket-tab-content__group--content">
-                            <input type="radio" name="type" id="support-ticket-type-1" value="1" hidden>
-                            <label for="support-ticket-type-1" class="support-ticket-radio-button">
-                                Công cụ tạo CV
-                            </label>
-                            <input type="radio" name="type" id="support-ticket-type-2" value="2" hidden>
-                            <label for="support-ticket-type-2" class="support-ticket-radio-button">
-                                Công cụ tìm kiếm
-                            </label>
-                            <input type="radio" name="type" id="support-ticket-type-3" value="3" hidden>
-                            <label for="support-ticket-type-3" class="support-ticket-radio-button">
-                                Tính năng/Giao diện trang web
-                            </label>
-                            <input type="radio" name="type" id="support-ticket-type-4" value="4" hidden>
-                            <label for="support-ticket-type-4" class="support-ticket-radio-button">
-                                Thông báo việc làm
-                            </label>
-                            <input type="radio" name="type" id="support-ticket-type-5" value="5" hidden>
-                            <label for="support-ticket-type-5" class="support-ticket-radio-button">
-                                Thông tin công ty
-                            </label>
-                            <input type="radio" name="type" id="support-ticket-type-6" value="100" hidden>
-                            <label for="support-ticket-type-6" class="support-ticket-radio-button">
-                                Khác
-                            </label>
+                            @foreach ($typeFeedbacks as $typeFeedback)
+                                <input type="radio" name="type_feedback_id"
+                                    id="support-ticket-type-{{ $typeFeedback->id }}" value="{{ $typeFeedback->id }}"
+                                    hidden>
+                                <label for="support-ticket-type-{{ $typeFeedback->id }}"
+                                    class="support-ticket-radio-button">{{ $typeFeedback->name }}</label>
+                            @endforeach
                         </div>
+
+
                         <div class="support-ticket-error"></div>
                     </div>
                     <div class="support-ticket-tab-content__group">
@@ -988,6 +965,20 @@
                         <div class="support-ticket-error"></div>
                     </div>
                     <div class="support-ticket-tab-content__group">
+                        <div class="support-ticket-tab-content__group--title">Số điện thoại</div>
+                        <div class="support-ticket-tab-content__group--content">
+                            <input name="phone" class="support-ticket-input" placeholder="Số điện thoại">
+                        </div>
+                        <div class="support-ticket-error"></div>
+                    </div>
+                    <div class="support-ticket-tab-content__group">
+                        <div class="support-ticket-tab-content__group--title">Email</div>
+                        <div class="support-ticket-tab-content__group--content">
+                            <input name="email" class="support-ticket-input" placeholder="Email">
+                        </div>
+                        <div class="support-ticket-error"></div>
+                    </div>
+                    <div class="support-ticket-tab-content__group">
                         <div class="support-ticket-tab-content__group--title">Bạn có hài lòng với TopCV không?</div>
                         <div class="support-ticket-tab-content__group--content">
                             <div class="list-icon">
@@ -996,64 +987,56 @@
                                     <lottie-player
                                         src="../vieclamso1/v4/image/survey/search-job/animation/verry_bad.json"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
-                                    <div class="list-icon_tab-title">
-                                        Rất tệ
-                                    </div>
+                                    <div class="list-icon_tab-title">Rất tệ</div>
                                 </div>
                                 <div class="list-icon_tab status-option bad" data-option="Tệ" data-value="2">
                                     <lottie-player src="../vieclamso1/v4/image/survey/search-job/animation/bad.json"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
-                                    <div class="list-icon_tab-title">
-                                        Tệ
-                                    </div>
+                                    <div class="list-icon_tab-title">Tệ</div>
                                 </div>
                                 <div class="list-icon_tab status-option normal" data-option="Bình thường"
                                     data-value="3">
                                     <lottie-player src="../vieclamso1/v4/image/survey/search-job/animation/normal.json"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
-                                    <div class="list-icon_tab-title">
-                                        Bình thường
-                                    </div>
+                                    <div class="list-icon_tab-title">Bình thường</div>
                                 </div>
                                 <div class="list-icon_tab status-option good" data-option="Tốt" data-value="4">
                                     <lottie-player src="../vieclamso1/v4/image/survey/search-job/animation/good.json"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
-                                    <div class="list-icon_tab-title">
-                                        Tốt
-                                    </div>
+                                    <div class="list-icon_tab-title">Tốt</div>
                                 </div>
                                 <div class="list-icon_tab status-option verry_good" data-option="Tuyệt vời"
                                     data-value="5">
                                     <lottie-player
                                         src="../vieclamso1/v4/image/survey/search-job/animation/verry_good.json"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
-                                    <div class="list-icon_tab-title">
-                                        Tuyệt vời
-                                    </div>
+                                    <div class="list-icon_tab-title">Tuyệt vời</div>
                                 </div>
                             </div>
+                            <input type="hidden" name="satisfaction" id="satisfaction" value="">
                         </div>
                     </div>
-                </form>
-                <form class="support-ticket-tab-content" id="tab-require-to-be-supported-content">
-                    <div class="support-ticket-tab-content__empty">
-                        <div class="support-ticket-tab-content__empty--message">
-                            <img alt="Empty"
-                                src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/support-ticket/img_empty_result.png">
-                            Vui lòng đăng nhập để gửi yêu cầu hỗ trợ khi gặp lỗi hoặc khó khăn trong quá trình sử dụng
-                            sản phẩm.
-                        </div>
-                        <a href="javascript:showLoginPopup(null, 'Đăng nhập hoặc Đăng ký để gửi yêu cầu')"
-                            class="support-ticket-tab-content__empty--login">Đăng nhập ngay</a>
+                    <div class="modal-support-ticket__content--footer">
+                        <div class="support-content-cancel close-modal-support-ticket">Huỷ</div>
+                        <button type="submit" class="support-content-submit">Gửi phản hồi</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-support-ticket__content--footer">
-                <div class="support-content-cancel close-modal-support-ticket">Huỷ</div>
-                <div class="support-content-submit">Gửi phản hồi</div>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.status-option').forEach(function(element) {
+                element.addEventListener('click', function() {
+                    document.getElementById('satisfaction').value = this.getAttribute('data-value');
+                });
+            });
+        });
+    </script>
+    <!-- End Modal Support Ticket -->
+
+    <!-- End Modal Support Ticket -->
+
     <div class="modal-support-ticket-success" id="modal-support-ticket-success">
         <div class="modal-support-ticket-success__content">
             <div class="support-ticket-success-close modal-support-ticket-success__content--close">
@@ -1599,7 +1582,7 @@
                                     Quản lý CV
                                 </a>
                             </li>
-                             <li class="navbar-menu__item ">
+                            <li class="navbar-menu__item ">
                                 <a href="{{ route('cv.upload') }}" class="text-sm">
                                     <i class="icon fa-regular fa-file-user"></i>
                                     Tải Cv lên
@@ -1719,7 +1702,7 @@
                                         Đổi mật khẩu
                                     </a>
                                 </li>
-                                  <li class="navbar-menu__item tag-border">
+                                <li class="navbar-menu__item tag-border">
                                     <a href="{{ route('messages.receive.candidate') }}" class="text-sm">
                                         <i class="icon fa-regular fa-lock"></i>
                                         Tin nhắn
@@ -1728,7 +1711,7 @@
                                 <li class="navbar-menu__item tag-border">
                                     <a href="{{ route('cv.overview') }}" class="text-sm">
                                         <i class="icon fa-regular fa-lock"></i>
-                                       Hồ sơ
+                                        Hồ sơ
                                     </a>
                                 </li>
                                 <li class="navbar-menu__item logout">
@@ -1848,16 +1831,15 @@
                                 Về TopCV
                             </div>
                             <div class="box-menu-child">
-                                <a target="_blank" href="https://topcv.com.vn/">Giới thiệu</a>
-                                <a target="_blank" href="gioi-thieu.html#bao-chi">Góc báo chí</a>
-                                <a target="_blank" href="brand/topcv294f.html">Tuyển
+                                <a target="_blank" href="#">Giới thiệu</a>
+                                <a target="_blank" href="#">Góc báo chí</a>
+                                <a target="_blank" href="#">Tuyển
                                     dụng</a>
-                                <a target="_blank" href="gioi-thieu.html#lien-he">Liên hệ</a>
-                                <a target="_blank" href="faqs.html">Hỏi đáp</a>
-                                <a target="_blank" href="dieu-khoan-bao-mat.html">Chính sách bảo mật</a>
-                                <a target="_blank" href="terms-of-service.html">Điều khoản dịch vụ</a>
-                                <a href="https://static.topcv.vn/manual/Quy_che_san_TMDT_TopCV.pdf"
-                                    target="_blank">Quy
+                                <a target="_blank" href="#">Liên hệ</a>
+                                <a target="_blank" href="#">Hỏi đáp</a>
+                                <a target="_blank" href="#">Chính sách bảo mật</a>
+                                <a target="_blank" href="#">Điều khoản dịch vụ</a>
+                                <a href="#" target="_blank">Quy
                                     chế hoạt động</a>
                             </div>
                         </div>
@@ -1879,13 +1861,13 @@
                                 Hồ sơ và CV
                             </div>
                             <div class="box-menu-child">
-                                <a href="login.html" target="_blank">Quản lý CV của bạn</a>
-                                <a href="profile.html" target="_blank">TopCV Profile</a>
-                                <a target="_blank" href="viet-cv-the-nao-cho-chuan.html">Hướng dẫn
+                                <a href="{{ route('cv.manage') }}" target="_blank">Quản lý CV của bạn</a>
+                                <a href="{{ route('personal.profile.account') }}" target="_blank">TopCV Profile</a>
+                                <a target="_blank" href="#">Hướng dẫn
                                     viết CV</a>
-                                <a href="mau-cv-theo-nganh-nghe.html" target="_blank">Thư viện CV theo ngành
+                                <a href="#" target="_blank">Thư viện CV theo ngành
                                     nghề</a>
-                                <a href="https://reviewcv.topcv.vn/" target="_blank">Review CV</a>
+                                <a href="#" target="_blank">Review CV</a>
                             </div>
                         </div>
                         <div class="box-menu-item">
@@ -1893,19 +1875,15 @@
                                 Khám phá
                             </div>
                             <div class="box-menu-child">
-                                <a href="app.html" target="_blank">Ứng dụng di động TopCV</a>
-                                <a href="tinh-luong-gross-net.html" target="_blank">Tính lương Gross - Net</a>
-                                <a href="tinh-lai-kep.html" target="_blank">Tính lãi suất kép</a>
-                                <a href="lap-ke-hoach-tiet-kiem.html" target="_blank">Lập kế hoạch tiết kiệm</a>
-                                <a href="cong-cu-tinh-muc-huong-bao-hiem-that-nghiep.html" target="_blank">Tính bảo
-                                    hiểm
-                                    thất
-                                    nghiệp</a>
-                                <a href="tinh-bao-hiem-xa-hoi-mot-lan.html" target="_blank">Tính bảo hiểm xã hội
+                                <a href="{{ route('site.app') }}" target="_blank">Ứng dụng di động TopCV</a>
+                                <a href="#" target="_blank">Tính lương Gross - Net</a>
+                                <a href="#" target="_blank">Tính lãi suất kép</a>
+                                <a href="#" target="_blank">Lập kế hoạch tiết kiệm</a>
+                                <a href="#" target="_blank">Tính bảo hiểm thất nghiệp</a>
+                                <a href="#" target="_blank">Tính bảo hiểm xã hội
                                     một lần</a>
-                                <a href="trac-nghiem-tinh-cach-mbti.html" target="_blank">Trắc nghiệm MBTI</a>
-                                <a href="trac-nghiem-da-tri-thong-minh-multiple-intelligences-test.html"
-                                    target="_blank">Trắc nghiệm MI</a>
+                                <a href="#" target="_blank">Trắc nghiệm MBTI</a>
+                                <a href="#" target="_blank">Trắc nghiệm MI</a>
                             </div>
                         </div>
                     </div>
@@ -1915,13 +1893,8 @@
                                 Xây dựng sự nghiệp
                             </div>
                             <div class="box-menu-child">
-                                <a href="viec-lam-tot-nhat.html" target="_blank">Việc làm tốt nhất</a>
-                                <a href="viec-lam-luong-cao.html" target="_blank">Việc làm lương cao</a>
-                                <a href="viec-lam-quan-ly.html" target="_blank">Việc làm quản lý </a>
-                                <a href="viec-lam-it.html" target="_blank">Việc làm IT </a>
-                                <a href="viec-lam-senior.html" target="_blank">Việc làm Senior</a>
-                                <a href="tim-viec-lam-ban-thoi-gian-t3.html" target="_blank">Việc làm bán
-                                    thời gian</a>
+                                <a href="#" target="_blank">Việc làm tốt nhất</a>
+                                <a href="#" target="_blank">Việc làm lương cao</a>
                             </div>
                         </div>
                         <div class="box-menu-item">
@@ -1929,7 +1902,7 @@
                                 Phát triển bản thân
                             </div>
                             <div class="box-menu-child">
-                                <a href="https://contest.topcv.vn/" target="_blank">TopCV Contest</a>
+                                <a href="#" target="_blank">TopCV Contest</a>
                             </div>
                         </div>
                     </div>
@@ -2004,228 +1977,10 @@
         </div>
     </footer>
     <script></script>
-    <div class="modal fade" id="sign-in-popup" tabindex="-1" aria-labelledby="sign-in-popup-label"
-        aria-hidden="true" style="z-index: 2000">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <ul class="nav nav-tabs" id="auth-tab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="login-tab" data-bs-toggle="tab"
-                                data-bs-target="#login" type="button" role="tab" aria-controls="login"
-                                aria-selected="true">Đăng Nhập
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="register-tab" data-bs-toggle="tab"
-                                data-bs-target="#register" type="button" role="tab" aria-controls="register"
-                                aria-selected="false">Đăng Ký
-                            </button>
-                        </li>
-                    </ul>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="auth_page" class="g-recaptcha" data-size="invisible"
-                        data-sitekey="6LfbkH4lAAAAAJ0pQKkudub91zp8nuziDAXr2Gqa" data-callback="auth_page"></div>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                            <form id="form-login" action>
-                                <div id="sign-error" class="alert-danger d-none"></div>
-                                <div class="form-group mb-3">
-                                    <label for="email" class="mb-1">Email</label>
-                                    <div class="input-group border-hover">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fa-light fa-envelope"></i></span>
-                                        </div>
-                                        <input type="email" name="email" class="form-control"
-                                            placeholder="Nhập email của bạn" aria-label="Nhập email của bạn" value>
-                                    </div>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="password" class="mb-1">Mật khẩu</label>
-                                    <div class="input-group border-hover">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i
-                                                    class="fa-light fa-shield-keyhole"></i></span>
-                                        </div>
-                                        <input type="password" id="password" name="password" class="form-control"
-                                            placeholder="Nhập mật khẩu" aria-label="Nhập mật khẩu">
-                                        <div class="input-group-prepend">
-                                            <button type="button" tabindex="-1" data-input-target="#password"
-                                                class="input-group-text toggle-password"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group mt-3">
-                                    <button type="submit"
-                                        class="btn btn-sign input-block-level w-100 h-40 mb-3 btn-primary-hover">Đăng
-                                        nhập
-                                    </button>
-                                    <p class="or text-center mb-0 fz-12px">Hoặc đăng nhập bằng tài khoản mạng xã hội
-                                    </p>
-                                </div>
-                                <div class="d-flex justify-content-center flex-nowrap">
-                                    <a id="login-with-facebook"
-                                        class="btn btn-social btn-primary input-block-level mx-1 h-40 my-3 btn-login-social">
-                                        <i class="fa-brands fa-facebook-square"></i>
-                                        <span class="ml-2">Facebook</span>
-                                    </a>
-                                    <a id="login-with-google"
-                                        class="btn btn-social btn-default input-block-level mx-1 h-40 my-3 btn-login-social">
-                                        <i class="fa-brands fa-google"></i>
-                                        <span class="ml-2">Google</span>
-                                    </a>
-                                    <div class="d-none" id="login-google-render"></div>
-                                    <a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&amp;client_id=86umgx5hytpk2k&amp;redirect_uri=https%3A%2F%2Fwww.topcv.vn%2Fcallback-linkedin%3Fta_source%3DSocialInLoginModal%26referer%3Dhttps%253A%252F%252Fwww.topcv.vn%252F%253Fref%253Dyou&amp;scope=r_liteprofile+r_emailaddress"
-                                        class="btn btn-linkedin btn-social btn-default input-block-level mx-1 h-40 my-3 btn-login-social">
-                                        <i class="fa-brands fa-linkedin"></i>
-                                        <span class="ml-2">Linkedin</span>
-                                    </a>
-                                </div>
-                                <div class="d-flex justify-content-center option-auth">
-                                    <div class="d-flex align-items-start gap-2 agreement-social">
-                                        <div class="pdt-2" style="position: relative">
-                                            <input id="agreement-social-login" name="agreement-social"
-                                                type="checkbox" checked>
-                                            <label for="agreement-social-login"></label>
-                                        </div>
-                                        <p>
-                                            <label for="agreement-social-login">
-                                                Bằng việc đăng nhập bằng tài khoản mạng xã hội, tôi đã đọc và đồng ý với
-                                                <a target="_blank" class="text-success"
-                                                    href="terms-of-service.html">Điều
-                                                    khoản dịch vụ</a> và <a target="_blank" class="text-success"
-                                                    href="dieu-khoan-bao-mat.html">Chính
-                                                    sách
-                                                    bảo
-                                                    mật</a> của TopCV
-                                            </label>
-                                        </p>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="mt-3 d-flex justify-content-between option-auth">
-                                <div>
-                                    <span>Bạn chưa có tài khoản?</span>
-                                    <a class="text-success font-weight-bold" href="sign-up.html">
-                                        Đăng ký ngay
-                                    </a>
-                                </div>
-                                <a class="text-success font-weight-bold" href="forgot-password.html">
-                                    Quên mật khẩu
-                                </a>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="register" role="tabpanel" aria-labelledby="register-tab">
-                            <form id="form-register" action>
-                                <div id="register-error" class="alert-danger d-none"></div>
-                                <div class="form-group mb-3">
-                                    <label for="fullname" class="mb-1">Họ tên</label>
-                                    <div class="input-group border-hover">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i
-                                                    class="fa-light fa-circle-user"></i></span>
-                                        </div>
-                                        <input type="text" name="fullname" class="form-control"
-                                            placeholder="Nhập họ tên của bạn" aria-label="Nhập email của bạn" value>
-                                    </div>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="email" class="mb-1">Email</label>
-                                    <div class="input-group border-hover">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i
-                                                    class="fa-light fa-envelope"></i></span>
-                                        </div>
-                                        <input type="email" name="email" class="form-control"
-                                            placeholder="Nhập email của bạn" aria-label="Nhập email của bạn" value>
-                                    </div>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="password_register" class="mb-1">Mật khẩu</label>
-                                    <div class="input-group border-hover">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i
-                                                    class="fa-light fa-shield-keyhole"></i></span>
-                                        </div>
-                                        <input type="password" id="password_register" name="password"
-                                            class="form-control" placeholder="Nhập mật khẩu"
-                                            aria-label="Nhập mật khẩu">
-                                        <div class="input-group-prepend">
-                                            <button type="button" tabindex="-1"
-                                                data-input-target="#password_register"
-                                                class="input-group-text toggle-password"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="password_confirm" class="mb-1">Xác nhận mật khẩu</label>
-                                    <div class="input-group border-hover">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i
-                                                    class="fa-light fa-shield-keyhole"></i></span>
-                                        </div>
-                                        <input type="password" id="password_confirm" name="passwordConfirm"
-                                            class="form-control" placeholder="Nhập mật khẩu"
-                                            aria-label="Nhập mật khẩu">
-                                        <div class="input-group-prepend">
-                                            <button type="button" tabindex="-1"
-                                                data-input-target="#password_confirm"
-                                                class="input-group-text toggle-password"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group mt-3">
-                                    <div class="d-flex align-items-start gap-2 agreement-social">
-                                        <div class="pdt-2">
-                                            <input id="agreement-social-register" name="agreement-social"
-                                                type="checkbox" checked>
-                                            <label for="agreement-social-register"></label>
-                                        </div>
-                                        <p>
-                                            <label for="agreement-social-register">
-                                                Tôi đã đọc và đồng ý với <a target="_blank"
-                                                    href="terms-of-service.html" class="text-success">Điều khoản
-                                                    dịch vụ</a> và <a target="_blank" href="dieu-khoan-bao-mat.html"
-                                                    class="text-success">Chính sách bảo
-                                                    mật</a> của TopCV
-                                            </label>
-                                        </p>
-                                    </div>
-                                    <button type="submit"
-                                        class="btn btn-sign input-block-level w-100 h-40 mb-3 btn-primary-hover">Đăng
-                                        ký
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <p class="text-bold">Bạn gặp khó khăn khi tạo tài khoản?</p>
-                    <p class="text-nomral">Vui lòng gọi tới số 024 6680 5588 (giờ hành chính).</p>
-                </div>
-            </div>
-        </div>
-    </div>
     <link rel="stylesheet" href="../static.topcv.vn/v4/css/icon.min.9bbbd0ac9d068264G.css">
     <link rel="stylesheet" href="../static.topcv.vn/v4/css/sign-in-popup.65a92cb48ed456d9G.css">
-    <script async defer crossorigin="anonymous"
-        src="../connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=1478418029113221&autoLogAppEvents=1"
-        nonce="vRUcXWy5"></script>
-    <script type="text/javascript">
-        window.ROUTE_LOGIN_WITH_SOCIAL = 'login-with-social.html';
-        window.ROUTE_LOGIN_USING_ACCOUNT = 'login-ajax.html';
-        window.ROUTE_REGISTER_ACCOUNT = 'sign-up-ajax.html';
-        window.CONFIG_OAUTH_GOOGLE_ID = '856359690731-a0j3qaaq21iorl92btoo15nqqsvffsgd.apps.googleusercontent.com';
-        window.GOOGLE_RECAPTCHA_SITE_KEY = '6LfbkH4lAAAAAJ0pQKkudub91zp8nuziDAXr2Gqa';
-    </script>
     <script src="../static.topcv.vn/v4/js/sign-in-popup.min.b45d0ba8edb038f3.js"></script>
     <script src="../vieclamso1/v3/js/common40a0.js?v=2.0.2"></script>
-    <script>
-        IS_LOGGED_IN = false;
-    </script>
     <script src="../vieclamso1/v3/js/vue.min.js"></script>
     <script src="../vieclamso1/js/jquery.cookie.js"></script>
     <script src="../vieclamso1/js/error-tracking28b5.js?v=2.0.0"></script>
@@ -2241,82 +1996,58 @@
     <script src="../vieclamso1/v3/js/toastr.min.js" type="text/javascript"></script>
     <script src="../static.topcv.vn/v4/cdn/js/script.js"></script>
     <script src="../static.topcv.vn/v4/js/app.68e75e4ecb2a8717.js">
-        < /script <
-        script >
-            window.routes = {
-                'upload-avatar-user': 'https://www.topcv.vn/ajax-upload-avatar',
-            }
-    </script>
-    <div id="anti-scam">
-        <div class="anti-scam">
-            <div class="anti-scam-popup" v-bind:class="{ show: statePopup }" v-if="statePopup">
-                <button class="anti-scam-popup__close" v-on:click="close"><i
-                        class="fa-regular fa-xmark"></i></button>
-                <p class="anti-scam-popup__title">Tìm việc an toàn cùng TopCV</p>
-                <a target="_blank"
-                    href="https://blog.topcv.vn/topcv-thong-bao-canh-bao-xuat-hien-mot-so-trang-facebook-mao-danh-cong-ty-co-phan-topcv-viet-nam/">
-                    <img class="anti-scam-popup__avatar"
-                        src="../blog.topcv.vn/wp-content/uploads/2024/04/Blog-TopCV-1200x628-1-696x364.png">
-                    <p class="anti-scam-popup__description">TopCV Thông báo: Cảnh báo xuất hiện một số trang Facebook
-                        mạo danh Công ty Cổ phần TopCV Việt Nam</p>
-                </a>
-            </div>
-            <img class="anti-scam__icon" v-on:click="toggle"
-                src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/anti-scam/shield.png">
-        </div>
-    </div>
-    <link rel="stylesheet"
-        href="../static.topcv.vn/v4/css/components/desktop/anti-scam/anti-scam-popup.d5a4109f907b95a2Gca96.css?v=2.1.7">
-    <script>
-        $(document).ready(function() {
-            antiScam = new Vue({
-                el: '#anti-scam',
-                data: {
-                    statePopup: false,
-                },
-                mounted: function() {
-                    const status = this.getCookie('popup-anti-scam') || 'true'
-                    this.statePopup = (status === 'true');
-                },
-                methods: {
-                    close() {
-                        this.statePopup = false;
-                        this.setCookie('popup-anti-scam', 'false')
+        < link rel = "stylesheet"
+        href = "../static.topcv.vn/v4/css/components/desktop/anti-scam/anti-scam-popup.d5a4109f907b95a2Gca96.css?v=2.1.7" >
+            <
+            script >
+            $(document).ready(function() {
+                antiScam = new Vue({
+                    el: '#anti-scam',
+                    data: {
+                        statePopup: false,
                     },
-                    toggle() {
-                        if (this.statePopup) {
+                    mounted: function() {
+                        const status = this.getCookie('popup-anti-scam') || 'true'
+                        this.statePopup = (status === 'true');
+                    },
+                    methods: {
+                        close() {
                             this.statePopup = false;
                             this.setCookie('popup-anti-scam', 'false')
-                        } else {
-                            this.statePopup = true;
-                            this.setCookie('popup-anti-scam', 'true')
-                        }
-                    },
-                    setCookie(name, value, days) {
-                        var expires = "";
-                        if (days) {
-                            var date = new Date();
-                            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                            expires = "; expires=" + date.toUTCString();
-                        }
-                        document.cookie = name + "=" + (value || "") + expires + "; path=/";
-                    },
-                    getCookie(name) {
-                        var nameEQ = name + "=";
-                        var ca = document.cookie.split(';');
-                        for (var i = 0; i < ca.length; i++) {
-                            var c = ca[i];
-                            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-                        }
-                        return null;
-                    },
-                }
+                        },
+                        toggle() {
+                            if (this.statePopup) {
+                                this.statePopup = false;
+                                this.setCookie('popup-anti-scam', 'false')
+                            } else {
+                                this.statePopup = true;
+                                this.setCookie('popup-anti-scam', 'true')
+                            }
+                        },
+                        setCookie(name, value, days) {
+                            var expires = "";
+                            if (days) {
+                                var date = new Date();
+                                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                                expires = "; expires=" + date.toUTCString();
+                            }
+                            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+                        },
+                        getCookie(name) {
+                            var nameEQ = name + "=";
+                            var ca = document.cookie.split(';');
+                            for (var i = 0; i < ca.length; i++) {
+                                var c = ca[i];
+                                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+                            }
+                            return null;
+                        },
+                    }
+                });
             });
-        });
     </script>
     <div id="support-ticket-root" v-cloak>
-
         <div id="support-ticket-panel" v-if="state == 'open'">
             <div class="support-ticket-panel-header">
                 <div class="support-ticket-panel-title">
@@ -2339,33 +2070,46 @@
             </div>
             <div class="support-ticket-panel-body">
                 <ul>
-                    <li><a target="_blank" href="faqs/find-a-safe-job.html">
-                            <i class="fa-regular fa-briefcase"></i>
-                            <span>Hướng dẫn tìm việc an toàn <span style="color:red">*</span></span></a>
-                    </li>
-                    <li>
-                        <a href="faqs/account-setting.html" target="_blank"><i class="fa-regular fa-user"></i>
-                            Hướng dẫn quản lý tài khoản
-                        </a>
-                    </li>
-                    <li>
-                        <a href="faqs.html" target="_blank"><i class="fa-regular fa-comments-question"></i>
-                            Các
-                            câu hỏi
-                            thường gặp</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" id="btn-show-support-ticket">
-                            <i class="fa-regular fa-message-smile" aria-hidden="true"></i>
-                            Yêu cầu hỗ trợ
-                        </a>
-                    </li>
-                    <li>
-                        <a href="gioi-thieu.html#lien-he" target="_blank"
-                            v-on:click.prevent="showModal('#modalHotlineContact')"><i class="fa-regular fa-phone"
-                                aria-hidden="true"></i> Liên hệ
-                            TopCV</a>
-                    </li>
+                    <div class="modal-support-request" id="modal-support-request">
+                        <div class="modal-support-request__content">
+                            <div class="modal-support-request__content--header">
+                                <div class="modal-support-request__content--header-title">
+                                    Yêu cầu hỗ trợ
+                                </div>
+                            </div>
+                            <div class="modal-support-request__content--body">
+                                <form action="{{ route('support.store') }}" method="POST">
+                                    @csrf
+                                    <div class="support-request__group">
+                                        <label for="phone">Số điện thoại</label>
+                                        <input type="text" name="phone" id="phone"
+                                            placeholder="Số điện thoại">
+                                    </div>
+                                    <div class="support-request__group">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" id="email" placeholder="Email">
+                                    </div>
+                                    <div class="support-request__group">
+                                        <label for="type_support_id">Chủ đề hỗ trợ</label>
+                                        <select name="type_support_id" id="type_support_id">
+                                            @foreach ($typeSupports as $typeSupport)
+                                                <option value="{{ $typeSupport->id }}">{{ $typeSupport->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="support-request__group">
+                                        <label for="description">Mô tả</label>
+                                        <textarea name="description" id="description" rows="4" placeholder="Mô tả yêu cầu hỗ trợ của bạn"></textarea>
+                                    </div>
+                                    <div class="support-request__group">
+                                        <button type="submit">Gửi yêu cầu</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                 </ul>
             </div>
         </div>
@@ -2534,6 +2278,20 @@
         </div>
 
     </div>
+    <div class="modal-support-request" id="modal-support-request">
+    </div>
+    <script>
+        document.getElementById('btn-show-support-ticket').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('modal-support-request').style.display = 'block';
+        });
+
+        document.querySelectorAll('.close-modal-support-request').forEach(function(closeButton) {
+            closeButton.addEventListener('click', function() {
+                document.getElementById('modal-support-request').style.display = 'none';
+            });
+        });
+    </script>
     <script>
         var supportTicket = null;
         var stAjaxLock = false;

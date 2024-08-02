@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Award;
 use App\Models\Category;
 use App\Models\Company;
@@ -26,7 +27,9 @@ class SiteController extends Controller
         $awards = Award::where('status', 1)->take(5)->get();
         $ecosystems = Ecosystem::where('status', 1)->take(4)->get();
         $medias = Media::where('status', 1)->take(6)->get();
-        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias'));
+        $totalCompanyCount = Company::count();
+         $totalApplicationCount = Application::count();
+        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias','totalCompanyCount','totalApplicationCount'));
     }
     public function filter(Request $request)
     {

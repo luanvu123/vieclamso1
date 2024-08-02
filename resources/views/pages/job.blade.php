@@ -820,6 +820,7 @@
                                          <img src="{{ $jobPosting->company->logo ? asset('storage/' . $jobPosting->company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
                                              alt="Avatar" style="width: 60px" class="img-responsive">
                                      </a>
+
                                      <h2 class="company-name-label">
                                          <a rel="nofollow" class="name" href="{{ $jobPosting->company->website }}"
                                              target="_blank" data-toggle="tooltip" title="" data-placement="top"
@@ -1156,12 +1157,8 @@
                                  </div>
                              </section>
                              <a class="box-report-job__action"
-                                 href="javascript:showLoginPopup('https://www.topcv.vn/viec-lam/nhan-vien-video-editor-youtube-linh-vuc-hoat-hinh-ha-noi/1400884.html?report-form=1', 'Đăng nhập hoặc Đăng ký để phản ánh tin tuyển dụng này!')">Báo
+                                 href="">Báo
                                  cáo tin tuyển dụng</a>
-                             <p style="margin-bottom: 0;">Tìm hiểu thêm kinh nghiệm phòng tránh lừa đảo <a
-                                     class="text-highlight" target="__blank"
-                                     href="https://blog.topcv.vn/huong-dan-tim-viec-an-toan-trong-ky-nguyen-so/">tại
-                                     đây</a></p>
                          </div>
                          <link rel="stylesheet"
                              href="https://static.topcv.vn/v4/css/components/sidebar/box-maybe-interested.7d6ada53ff6b5096K.css">
@@ -1222,7 +1219,7 @@
                          </div>
                          <div class="box-easy-apply job-detail__body-right--item">
                              <div class="image">
-                                 <a target="_blank" href="https://www.topcv.vn/mau-cv">
+                                 <a target="_blank" href="{{route('personal.profile.account')}}">
                                      <img data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/job-detail/easy-apply.png"
                                          alt="Apply việc gì cũng dễ" class="w-100 entered loaded" data-ll-status="loaded"
                                          src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/job-detail/easy-apply.png">

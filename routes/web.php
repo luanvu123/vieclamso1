@@ -33,12 +33,16 @@ use App\Http\Controllers\GenrePostController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyFollowerController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HobbyController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PrizeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SavedJobController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\SupportController;
+use App\Http\Controllers\TypeFeedbackController;
+use App\Http\Controllers\TypeSupportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +65,8 @@ Route::get('/cong-ty/{slug}', [SiteController::class, 'showCompany'])->name('com
 Route::get('cam-nang-nghe-nghiep/{slug}', [SiteController::class, 'showPost'])->name('genrepost.showPost');
 Route::get('/khoa-hoc', [SiteController::class, 'showCourse'])->name('site.courses');
 Route::get('/ung-dung', [SiteController::class, 'showApp'])->name('site.app');
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+Route::resource('support', SupportController::class);
 
 Route::get('/candidate_cv/{id}', [JobPostingController::class, 'showCv'])->name('candidates.show.cv');
 
@@ -75,6 +81,10 @@ Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('
 Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
+    Route::resource('type_feedback', TypeFeedbackController::class);
+    Route::get('feedbacks_list', [TypeFeedbackController::class, 'indexList'])->name('feedbacks.index.list');
+    Route::get('feedbacks/{feedback}', [TypeFeedbackController::class, 'showList'])->name('feedbacks.show.list');
+    Route::delete('feedbacks/{feedback}', [TypeFeedbackController::class, 'destroyList'])->name('feedbacks.destroy.list');
     Route::resource('categories', CategoryController::class);
     Route::resource('awards', AwardController::class);
     Route::resource('ecosystems', EcosystemController::class);
@@ -83,6 +93,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('posts', PostController::class);
     Route::resource('genre-posts', GenrePostController::class);
     Route::resource('courses', CourseController::class);
+    Route::resource('type_support', TypeSupportController::class);
+
+    Route::get('supports_list', [TypeSupportController::class, 'indexSupport'])->name('supports.index.list');
+    Route::get('supports_list/{support}', [TypeSupportController::class, 'showSupport'])->name('supports.show.list');
+    Route::delete('supports_list/{support}', [TypeSupportController::class, 'destroySupport'])->name('supports.destroy.list');
+
 
 
     Route::get('/admin/companies', [EmployerManageController::class, 'indexCompany'])->name('admin.companies.index');
@@ -176,5 +192,4 @@ Route::middleware(['employer'])->group(function () {
     Route::post('employer/profile', [EmployerLoginController::class, 'updateProfile'])->name('employer.profile.update');
 
     Route::resource('companies', CompanyController::class);
-
 });
