@@ -80,11 +80,11 @@ Route::get('/recruitment', function () {
 
 
 
-Route::middleware(['guest:employer'])->group(function () {
-    Route::get('employer/password/reset', [EmployerForgotPasswordController::class, 'showLinkRequestForm'])->name('employer.password.request');
-    Route::post('employer/password/email', [EmployerForgotPasswordController::class, 'sendResetLinkEmail'])->name('employer.password.email');
-    Route::get('employer/password/reset/{token}', [EmployerResetPasswordController::class, 'showResetForm'])->name('employer.password.reset');
-    Route::post('employer/password/reset', [EmployerResetPasswordController::class, 'reset'])->name('employer.password.update');
+Route::prefix('employer')->group(function () {
+    Route::get('password/reset', [EmployerForgotPasswordController::class, 'showLinkRequestForm'])->name('employer.password.request');
+    Route::post('password/email', [EmployerForgotPasswordController::class, 'sendResetLinkEmail'])->name('employer.password.email');
+    Route::get('password/reset/{token}', [EmployerResetPasswordController::class, 'showResetForm'])->name('employer.password.reset');
+    Route::post('password/reset', [EmployerResetPasswordController::class, 'reset'])->name('employer.password.update');
 });
 
 
