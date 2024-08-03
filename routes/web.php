@@ -35,6 +35,7 @@ use App\Http\Controllers\CompanyFollowerController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HobbyController;
+use App\Http\Controllers\JobReportController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PrizeController;
 use App\Http\Controllers\ProjectController;
@@ -81,6 +82,7 @@ Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('
 Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
+     Route::resource('job-reports', JobReportController::class)->only(['index', 'show', 'edit', 'update']);
     Route::resource('type_feedback', TypeFeedbackController::class);
     Route::get('feedbacks_list', [TypeFeedbackController::class, 'indexList'])->name('feedbacks.index.list');
     Route::get('feedbacks/{feedback}', [TypeFeedbackController::class, 'showList'])->name('feedbacks.show.list');
@@ -135,6 +137,7 @@ Route::get('candidate/google/callback', [CandidateController::class, 'handleGoog
 
 
 Route::middleware(['candidate'])->group(function () {
+    Route::post('/job-reports', [CandidateController::class, 'storeReport'])->name('job-reports.store');
     Route::get('/candidate/messages', [MessageController::class, 'receiveCandidateMessages'])->name('messages.receive.candidate');
     Route::get('/candidate/messages/{employer}', [MessageController::class, 'showCandidateMessages'])->name('messages.show.candidate');
     Route::post('/candidate/messages/{employer}/reply', [MessageController::class, 'sendCandidateReply'])->name('messages.reply.candidate');

@@ -170,6 +170,14 @@
                             </a>
                         </li>
 
+                           <li class="{{ Route::is('job-reports.index') ? 'active-submenu' : '' }}">
+                            <a href="{{ route('job-reports.index') }}">Report
+                                @if ($reportCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $reportCountTwoHour }}</span>
+                                @endif
+                            </a>
+                        </li>
+
                     </ul>
 
 

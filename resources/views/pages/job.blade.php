@@ -1156,9 +1156,53 @@
                                      </ul>
                                  </div>
                              </section>
-                             <a class="box-report-job__action"
-                                 href="">Báo
-                                 cáo tin tuyển dụng</a>
+                             <a class="box-report-job__action" href="#" data-toggle="modal"
+                                 data-target="#reportJobModal">Báo cáo tin tuyển dụng</a>
+
+                             <!-- Report Job Modal -->
+                             <div class="modal fade" id="reportJobModal" tabindex="-1"
+                                 aria-labelledby="reportJobModalLabel" aria-hidden="true">
+                                 <div class="modal-dialog">
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                             <h5 class="modal-title" id="reportJobModalLabel">Báo cáo tin tuyển dụng</h5>
+                                             <button type="button" class="close" data-dismiss="modal"
+                                                 aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                             </button>
+                                         </div>
+                                         <form action="{{ route('job-reports.store') }}" method="POST">
+                                             @csrf
+                                             <div class="modal-body">
+                                                 <input type="hidden" name="job_posting_id"
+                                                     value="{{ $jobPosting->id }}">
+                                                 <div class="form-group">
+                                                     <label for="jobTitle">Tên công việc</label>
+                                                     <input type="text" class="form-control" id="jobTitle"
+                                                         value="{{ $jobPosting->title }}" disabled>
+                                                 </div>
+                                                 <div class="form-group">
+                                                     <label for="name">Tên của bạn</label>
+                                                     <input type="text" class="form-control" id="name"
+                                                         name="name" required>
+                                                 </div>
+                                                 <div class="form-group">
+                                                     <label for="content">Nội dung báo cáo</label>
+                                                     <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
+                                                 </div>
+                                                 <div class="form-group">
+                                                     <input type="hidden" name="status" value="pending">
+                                                 </div>
+                                             </div>
+                                             <div class="modal-footer">
+                                                 <button type="button" class="btn btn-secondary"
+                                                     data-dismiss="modal">Đóng</button>
+                                                 <button type="submit" class="btn btn-primary">Gửi báo cáo</button>
+                                             </div>
+                                         </form>
+                                     </div>
+                                 </div>
+                             </div>
                          </div>
                          <link rel="stylesheet"
                              href="https://static.topcv.vn/v4/css/components/sidebar/box-maybe-interested.7d6ada53ff6b5096K.css">
@@ -1219,7 +1263,7 @@
                          </div>
                          <div class="box-easy-apply job-detail__body-right--item">
                              <div class="image">
-                                 <a target="_blank" href="{{route('personal.profile.account')}}">
+                                 <a target="_blank" href="{{ route('personal.profile.account') }}">
                                      <img data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/job-detail/easy-apply.png"
                                          alt="Apply việc gì cũng dễ" class="w-100 entered loaded" data-ll-status="loaded"
                                          src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/job-detail/easy-apply.png">

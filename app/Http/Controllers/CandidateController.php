@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JobReport;
 use Illuminate\Http\Request;
 use App\Models\Candidate;
 use App\Models\Experience;
@@ -276,5 +277,24 @@ class CandidateController extends Controller
         ])->findOrFail($id);
 
         return view('pages.overview-cv', compact('candidate'));
+    }
+
+    public function storeReport(Request $request)
+    {
+        $request->validate([
+            'job_posting_id' => 'required|exists:job_postings,id',
+            'name' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        JobReport::create([
+            'job_posting_id' => $request->job_posting_id,
+            'candidate_id' => Auth::guard('candidate')->id(),
+            'name' => $request->name,
+            'content' => $request->content,
+            'status' => 'pending',
+        ]);
+
+        return redirect()->back()->with('success', 'Job report submitted successfully.');
     }
 }

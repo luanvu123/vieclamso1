@@ -11,6 +11,7 @@ use App\Models\Company;
 use App\Models\Ecosystem;
 use App\Models\Feedback;
 use App\Models\GenrePost;
+use App\Models\JobReport;
 use App\Models\Slug;
 use App\Models\Support;
 use App\Models\TypeFeedback;
@@ -53,7 +54,7 @@ class AppServiceProvider extends ServiceProvider
 $now = Carbon::now();
         $twoHoursAgo = $now->subHours(2);
 
-
+ $reportCountTwoHour = JobReport::where('created_at', '>=', $twoHoursAgo)->count();
  $candidateCountTwoHour = Candidate::where('created_at', '>=', $twoHoursAgo)->count();
         $employerCountTwoHour = Employer::where('created_at', '>=', $twoHoursAgo)->count();
         $jobPostingCountTwoHour = JobPosting::where('created_at', '>=', $twoHoursAgo)->count();
@@ -79,6 +80,7 @@ $now = Carbon::now();
             'companyCountTwoHour' => $companyCountTwoHour,
             'feedbackCountTwoHour' => $feedbackCountTwoHour,
             'supportCountTwoHour' => $supportCountTwoHour,
+            'reportCountTwoHour'=>$reportCountTwoHour
         ]);
     }
 }

@@ -51,4 +51,9 @@ class JobPosting extends Model
     {
         return $this->belongsTo(Company::class);
     }
+
+     public function jobReports()
+    {
+        return $this->hasMany(JobReport::class);
+    }
 }
