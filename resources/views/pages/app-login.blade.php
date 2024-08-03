@@ -96,7 +96,7 @@
                             </div>
                         </div>
                         <div class="form-group mb-24 wrap-forgot-password">
-                            <a href="forgot-password.html">Quên mật khẩu</a>
+                            <a href="{{route('employer.password.request')}}">Quên mật khẩu</a>
                         </div>
                         <div class="form-group mt-3">
                             <button class="btn btn-sign input-block-level w-100 h-40 btn-primary-hover g-recaptcha" type="submit">Đăng nhập</button>
@@ -128,7 +128,7 @@
                         <div class="mt-3 d-flex justify-content-around option-auth">
                             <div>
                                 <span>Bạn chưa có tài khoản?</span>
-                                <a class="text-success" href="sign-up.html">
+                                <a class="text-success" href="{{route('employer.register')}}">
                                     Đăng ký ngay
                                 </a>
                             </div>

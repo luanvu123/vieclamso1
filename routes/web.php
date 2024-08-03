@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AdviserController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\Auth\EmployerForgotPasswordController;
 use App\Http\Controllers\Auth\EmployerLoginController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\EcosystemController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CandidateManageController;
 use App\Http\Controllers\Auth\EmployerRegisterController;
+use App\Http\Controllers\Auth\EmployerResetPasswordController;
 use App\Http\Controllers\AwardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CVController;
@@ -76,13 +78,24 @@ Route::get('/recruitment', function () {
     return view('pages.recruitment');
 })->name('recruitment');
 
+
+
+Route::middleware(['guest:employer'])->group(function () {
+    Route::get('employer/password/reset', [EmployerForgotPasswordController::class, 'showLinkRequestForm'])->name('employer.password.request');
+    Route::post('employer/password/email', [EmployerForgotPasswordController::class, 'sendResetLinkEmail'])->name('employer.password.email');
+    Route::get('employer/password/reset/{token}', [EmployerResetPasswordController::class, 'showResetForm'])->name('employer.password.reset');
+    Route::post('employer/password/reset', [EmployerResetPasswordController::class, 'reset'])->name('employer.password.update');
+});
+
+
+
 Route::get('/search-jobs', [SiteController::class, 'searchJobs'])->name('search-jobs');
 Route::get('employer/login', [EmployerLoginController::class, 'showLoginForm'])->name('employer.login');
 Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('employer.login.submit');
 Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
-     Route::resource('job-reports', JobReportController::class)->only(['index', 'show', 'edit', 'update']);
+    Route::resource('job-reports', JobReportController::class)->only(['index', 'show', 'edit', 'update']);
     Route::resource('type_feedback', TypeFeedbackController::class);
     Route::get('feedbacks_list', [TypeFeedbackController::class, 'indexList'])->name('feedbacks.index.list');
     Route::get('feedbacks/{feedback}', [TypeFeedbackController::class, 'showList'])->name('feedbacks.show.list');
@@ -181,6 +194,8 @@ Route::middleware(['candidate'])->group(function () {
 });
 
 Route::middleware(['employer'])->group(function () {
+
+
 
     // web.php
     Route::get('/employer/messages', [MessageController::class, 'receiveMessages'])->name('messages.receive');

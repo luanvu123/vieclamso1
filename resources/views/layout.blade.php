@@ -1650,12 +1650,14 @@
                 </li>
 
             </ul>
+
+            
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guard('candidate')->check())
                     <li class="navbar-right__item">
                         <div class="block-for-employer">
                             <p>Bạn là nhà tuyển dụng?</p>
-                            <a type="button" target="_blank" href="{{ route('recruitment') }}">
+                            <a type="button" target="_blank" href="{{route('employer.login')}}">
                                 <span>Đăng tuyển ngay</span>
                                 <span class="icon"><i class="fa-solid fa-chevrons-right"></i></span>
                             </a>

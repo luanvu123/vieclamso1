@@ -1,15 +1,14 @@
 <?php
-
-// app/Models/Employer.php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\CanResetPassword;
 
-class Employer extends Authenticatable
+class Employer extends Authenticatable implements CanResetPassword
 {
-    use HasFactory;
+     use HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
