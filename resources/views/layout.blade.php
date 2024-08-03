@@ -1526,7 +1526,7 @@
         <div class="menu-item">
             <div class="cvo-flex cvo-items-center box-item-parent">
                 <div class="cvo-flex-grow info">
-                    <a href="index-tuyendung.html" target="_blank" class="name font-weight-bold">
+                    <a href="{{route('employer.login')}}" target="_blank" class="name font-weight-bold">
                         Đăng tuyển & tìm hồ sơ </a>
                 </div>
             </div>
@@ -1651,7 +1651,7 @@
 
             </ul>
 
-            
+
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guard('candidate')->check())
                     <li class="navbar-right__item">
@@ -1743,7 +1743,7 @@
                         </a>
                     </li>
                     <li class="navbar-right__item">
-                        <a type="button" class="btn btn-dark" href="{{ route('recruitment') }}" target="_blank">
+                        <a type="button" class="btn btn-dark" href="{{ route('employer.login') }}" target="_blank">
                             Đăng tuyển & tìm hồ sơ
                         </a>
                     </li>

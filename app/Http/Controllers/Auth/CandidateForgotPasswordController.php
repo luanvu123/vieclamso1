@@ -3,21 +3,19 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Employer;
+use App\Models\Candidate;
 use Carbon\Carbon;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
-class EmployerForgotPasswordController extends Controller
+class CandidateForgotPasswordController extends Controller
 {
     public function showForgetPasswordForm()
     {
-        return view('pages.app-forgetPassword');
+        return view('pages.app-forgetPassword-candidate');
     }
 
     /**
@@ -29,7 +27,7 @@ class EmployerForgotPasswordController extends Controller
     public function submitForgetPasswordForm(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|exists:employers',
+            'email' => 'required|email|exists:candidates',
         ]);
 
         $token = Str::random(64);
@@ -56,7 +54,7 @@ class EmployerForgotPasswordController extends Controller
      */
     public function showResetPasswordForm($token)
     {
-        return view('pages.app-forgetPasswordLink', ['token' => $token]);
+        return view('pages.app-forgetPasswordLink-candidate', ['token' => $token]);
     }
 
     /**
@@ -68,7 +66,7 @@ class EmployerForgotPasswordController extends Controller
     public function submitResetPasswordForm(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|exists:employers',
+            'email' => 'required|email|exists:candidates',
             'password' => 'required|string|min:6|confirmed',
             'password_confirmation' => 'required'
         ]);
@@ -84,11 +82,12 @@ class EmployerForgotPasswordController extends Controller
             return back()->withInput()->with('error', 'Invalid token!');
         }
 
-        $employer = Employer::where('email', $request->email)
+        Candidate::where('email', $request->email)
             ->update(['password' => Hash::make($request->password)]);
 
         DB::table('password_resets')->where(['email' => $request->email])->delete();
 
-        return redirect('/employer/login')->with('message', 'Your password has been changed!');
+        return redirect('/candidate/login')->with('message', 'Your password has been changed!');
     }
 }
+

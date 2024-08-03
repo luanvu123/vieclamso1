@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AdviserController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\Auth\CandidateForgotPasswordController;
 use App\Http\Controllers\Auth\EmployerForgotPasswordController;
 use App\Http\Controllers\Auth\EmployerLoginController;
 use App\Http\Controllers\CertificateController;
@@ -85,6 +86,12 @@ Route::prefix('employer')->group(function () {
     Route::post('forget-password', [EmployerForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
     Route::get('reset-password/{token}', [EmployerForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
     Route::post('reset-password', [EmployerForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+});
+Route::prefix('candidate')->group(function () {
+    Route::get('forget-password', [CandidateForgotPasswordController::class, 'showForgetPasswordForm'])->name('candidate.forget.password.get');
+    Route::post('forget-password', [CandidateForgotPasswordController::class, 'submitForgetPasswordForm'])->name('candidate.forget.password.post');
+    Route::get('reset-password/{token}', [CandidateForgotPasswordController::class, 'showResetPasswordForm'])->name('candidate.reset.password.get');
+    Route::post('reset-password', [CandidateForgotPasswordController::class, 'submitResetPasswordForm'])->name('candidate.reset.password.post');
 });
 
 
