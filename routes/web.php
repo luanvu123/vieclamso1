@@ -81,10 +81,10 @@ Route::get('/recruitment', function () {
 
 
 Route::prefix('employer')->group(function () {
-    Route::get('password/reset', [EmployerForgotPasswordController::class, 'showLinkRequestForm'])->name('employer.password.request');
-    Route::post('password/email', [EmployerForgotPasswordController::class, 'sendResetLinkEmail'])->name('employer.password.email');
-    Route::get('password/reset/{token}', [EmployerResetPasswordController::class, 'showResetForm'])->name('employer.password.reset');
-    Route::post('password/reset', [EmployerResetPasswordController::class, 'reset'])->name('employer.password.update');
+    Route::get('forget-password', [EmployerForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+    Route::post('forget-password', [EmployerForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
+    Route::get('reset-password/{token}', [EmployerForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+    Route::post('reset-password', [EmployerForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 });
 
 

@@ -96,7 +96,7 @@
                             </div>
                         </div>
                         <div class="form-group mb-24 wrap-forgot-password">
-                            <a href="{{route('employer.password.request')}}">Quên mật khẩu</a>
+                            <a href="{{ route('forget.password.get') }}">Quên mật khẩu</a>
                         </div>
                         <div class="form-group mt-3">
                             <button class="btn btn-sign input-block-level w-100 h-40 btn-primary-hover g-recaptcha" type="submit">Đăng nhập</button>
