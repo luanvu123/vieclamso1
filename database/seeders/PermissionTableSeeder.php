@@ -14,16 +14,16 @@ class PermissionTableSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-           'role-list',
-           'role-create',
-           'role-edit',
-           'role-delete',
-           'user-list',
-           'user-create',
-           'user-edit',
-           'user-delete',
+            'role-list',
+            'role-create',
+            'role-edit',
+            'role-delete',
+            'user-list',
+            'user-create',
+            'user-edit',
+            'user-delete',
 
-           // Quyền cho 'candidates'
+            // Quyền cho 'candidates'
             'candidate-list',
             'candidate-create',
             'candidate-edit',
@@ -94,10 +94,45 @@ class PermissionTableSeeder extends Seeder
             'job-posting-manage-create',
             'job-posting-manage-edit',
             'job-posting-manage-delete',
+
+
+            'info-view',
+            'info-update',
+            'job-report-list',
+            'job-report-show',
+            'job-report-edit',
+            'job-report-update',
+            'type-feedback-list',
+            'type-feedback-create',
+            'type-feedback-edit',
+            'type-feedback-delete',
+            'feedback-list',
+            'feedback-show',
+            'feedback-delete',
+
+            'support-list',
+            'support-show',
+            'support-delete',
+            'support-choose',
+            'feedback-choose',
+            'company-list',
+            'company-show',
+
+
+            'user-choose',
+            'category-choose',
+            'company-choose',
+            'top-choose',
+            'top-home-choose',
+            'featured-choose',
+            'post-choose',
+            'slug-choose',
+            'media-choose',
+            'job-posting-choose',
         ];
 
         foreach ($permissions as $permission) {
-             if (!Permission::where('name', $permission)->exists()) {
+            if (!Permission::where('name', $permission)->exists()) {
                 Permission::create(['name' => $permission]);
             }
         }

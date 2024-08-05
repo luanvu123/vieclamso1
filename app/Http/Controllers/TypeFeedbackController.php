@@ -9,6 +9,14 @@ use Carbon\Carbon;
 
 class TypeFeedbackController extends Controller
 {
+     public function __construct()
+    {
+        $this->middleware('permission:type-feedback-list', ['only' => ['index']]);
+        $this->middleware('permission:type-feedback-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:type-feedback-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:type-feedback-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:feedback-choose', ['only' => ['feedback_choose']]);
+    }
     public function index()
     {
         $typeFeedbacks = TypeFeedback::all();

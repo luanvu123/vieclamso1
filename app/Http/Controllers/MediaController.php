@@ -12,6 +12,7 @@ class MediaController extends Controller
 {
  public function __construct()
     {
+         $this->middleware('permission:media-choose', ['only' => ['media_choose']]);
         $this->middleware('permission:media-list|media-create|media-edit|media-delete', ['only' => ['index', 'store']]);
         $this->middleware('permission:media-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:media-edit', ['only' => ['edit', 'update']]);

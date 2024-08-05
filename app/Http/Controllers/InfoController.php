@@ -7,6 +7,11 @@ use App\Models\Info;
 
 class InfoController extends Controller
 {
+     public function __construct()
+    {
+        $this->middleware('permission:info-view', ['only' => ['index']]);
+        $this->middleware('permission:info-update', ['only' => ['update']]);
+    }
     public function index()
     {
         $info = Info::first();

@@ -13,6 +13,7 @@ class SlugController extends Controller
 {
   public function __construct()
     {
+         $this->middleware('permission:slug-choose', ['only' => ['slug_choose']]);
         $this->middleware('permission:slug-list|slug-create|slug-edit|slug-delete', ['only' => ['index', 'store']]);
         $this->middleware('permission:slug-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:slug-edit', ['only' => ['edit', 'update']]);

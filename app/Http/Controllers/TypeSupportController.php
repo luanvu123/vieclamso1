@@ -15,6 +15,10 @@ class TypeSupportController extends Controller
         $this->middleware('permission:type-support-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:type-support-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:type-support-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:support-list', ['only' => ['indexSupport']]);
+        $this->middleware('permission:support-show', ['only' => ['showSupport']]);
+        $this->middleware('permission:support-delete', ['only' => ['destroySupport']]);
+        $this->middleware('permission:support-choose', ['only' => ['support_choose']]);
     }
     public function index()
     {

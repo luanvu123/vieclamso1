@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 class JobReportController extends Controller
 {
+     public function __construct()
+    {
+        $this->middleware('permission:job-report-list', ['only' => ['index']]);
+        $this->middleware('permission:job-report-show', ['only' => ['show']]);
+        $this->middleware('permission:job-report-edit', ['only' => ['edit']]);
+        $this->middleware('permission:job-report-update', ['only' => ['update']]);
+    }
     public function index()
     {
         $jobReports = JobReport::with('jobPosting.employer')->get();

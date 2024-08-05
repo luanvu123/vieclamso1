@@ -13,6 +13,11 @@ class JobsManageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+    {
+        $this->middleware('permission:jobPosting-choose', ['only' => ['jobPosting_choose']]);
+    }
     public function index()
     {
         $jobPostings = JobPosting::with('employer')->get();
