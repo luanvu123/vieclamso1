@@ -9,9 +9,12 @@ use Illuminate\Support\Facades\Storage;
 
 class EcosystemController extends Controller
 {
-    public function __construct()
+ public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('permission:ecosystem-list|ecosystem-create|ecosystem-edit|ecosystem-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:ecosystem-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:ecosystem-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:ecosystem-delete', ['only' => ['destroy']]);
     }
 
     public function index()

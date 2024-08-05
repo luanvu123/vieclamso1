@@ -27,7 +27,15 @@
                     <td>{{ $feedback->phone }}</td>
                     <td>{{ $feedback->email }}</td>
                     <td>{{ $feedback->satisfaction }}</td>
-                    <td>{{ $feedback->status }}</td>
+                       <td>
+                            <select id="{{$feedback->id}}" class="feedback_choose">
+                                <option value="1" {{ $feedback->status === 'pending' ? 'selected' : '' }}>Pending
+                                </option>
+                                <option value="2" {{ $feedback->status === 'resolved' ? 'selected' : '' }}>Resolved
+                                </option>
+                                <option value="3" {{ $feedback->status === 'closed' ? 'selected' : '' }}>Closed</option>
+                            </select>
+                        </td>
                     <td>{{ $feedback->created_at->format('Y-m-d H:i:s') }}</td>
                     <td>
                     <a href="{{ route('feedbacks.show.list', $feedback) }}" class="btn btn-info">View</a>

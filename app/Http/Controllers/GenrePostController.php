@@ -9,6 +9,13 @@ use Illuminate\Support\Str;
 
 class GenrePostController extends Controller
 {
+      public function __construct()
+    {
+        $this->middleware('permission:genre-post-list|genre-post-create|genre-post-edit|genre-post-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:genre-post-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:genre-post-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:genre-post-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $genrePosts = GenrePost::all();

@@ -11,7 +11,10 @@ class AwardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('permission:award-list|award-create|award-edit|award-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:award-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:award-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:award-delete', ['only' => ['destroy']]);
     }
 
     public function index()

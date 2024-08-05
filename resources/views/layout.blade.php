@@ -1143,7 +1143,7 @@
     <nav class="cvo-flex cvo-items-center cvo-justify-between" id="navbar-mobile">
         <h1>
             <a href="{{ route('/') }}" class="cvo-flex cvo-items-center">
-                <img src="../static.topcv.vn/v4/image/logo/topcv-logo-6.png" alt="TopCV tuyen dung tai TopCV"
+                <img src="{{ asset('storage/' . $info->logo) }}" alt="TopCV tuyen dung tai TopCV"
                     title="TopCV tuyển dụng tại TopCV" class="logo">
             </a>
         </h1>
@@ -1526,7 +1526,7 @@
         <div class="menu-item">
             <div class="cvo-flex cvo-items-center box-item-parent">
                 <div class="cvo-flex-grow info">
-                    <a href="{{route('employer.login')}}" target="_blank" class="name font-weight-bold">
+                    <a href="{{ route('employer.login') }}" target="_blank" class="name font-weight-bold">
                         Đăng tuyển & tìm hồ sơ </a>
                 </div>
             </div>
@@ -1540,7 +1540,7 @@
             <div class="navbar-header">
                 <h1 style="margin: 0">
                     <a class="navbar-brand" href="{{ route('/') }}">
-                        <img src="../static.topcv.vn/v4/image/logo/topcv-logo-6.png" alt="TopCV tuyen dung tai TopCV"
+                        <img src="{{ asset('storage/' . $info->logo) }}" alt="TopCV tuyen dung tai TopCV"
                             title="TopCV tuyển dụng tại TopCV" class>
                     </a>
                 </h1>
@@ -1657,7 +1657,7 @@
                     <li class="navbar-right__item">
                         <div class="block-for-employer">
                             <p>Bạn là nhà tuyển dụng?</p>
-                            <a type="button" target="_blank" href="{{route('employer.login')}}">
+                            <a type="button" target="_blank" href="{{ route('employer.login') }}">
                                 <span>Đăng tuyển ngay</span>
                                 <span class="icon"><i class="fa-solid fa-chevrons-right"></i></span>
                             </a>
@@ -1743,7 +1743,8 @@
                         </a>
                     </li>
                     <li class="navbar-right__item">
-                        <a type="button" class="btn btn-dark" href="{{ route('employer.login') }}" target="_blank">
+                        <a type="button" class="btn btn-dark" href="{{ route('employer.login') }}"
+                            target="_blank">
                             Đăng tuyển & tìm hồ sơ
                         </a>
                     </li>
@@ -1767,17 +1768,16 @@
             <div class="container">
                 <div class="box-main">
                     <div class="column">
-                        <a href="index.html">
-                            <img src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/logo/topcv-logo-footer-6.png"
-                                class="img-logo-footer img-responsive" alt="TopCV tuyen dung tai TopCV"
-                                title="TopCV tuyển dụng tại TopCV">
+                        <a href="{{ route('/') }}">
+                            <img src="{{ asset('storage/' . $info->logo) }}" class="img-logo-footer img-responsive"
+                                alt="TopCV tuyen dung tai TopCV" title="TopCV tuyển dụng tại TopCV">
                         </a>
                         <div class="box-image-flex">
-                            <img src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/footer/google_for_startup.png"
+                            <img src="{{ asset('storage/' . $info->logo_google_for_startup) }}"
                                 class="img-responsive" alt title>
                             <a href="http://www.dmca.com/Protection/Status.aspx?ID=8be40718-7da1-4b43-875a-3efb819100c9"
                                 title="DMCA.com Protection Status" class="dmca-badge">
-                                <img src="../images.dmca.com/Badges/DMCA_badge_grn_60we42a.png?ID=8be40718-7da1-4b43-875a-3efb819100c9"
+                                <img src="{{ asset('storage/' . $info->logo_dmca_com) }}"
                                     alt="DMCA.com Protection Status" class="dmca-image" />
                             </a>
                             <script src="../images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
@@ -1795,13 +1795,13 @@
                             <p class="title">Ứng dụng tải xuống</p>
                             <div class="btn-download-app">
                                 <a target="_blank"
-                                    href="https://itunes.apple.com/us/app/topcv-tạo-cv-tìm-việc-làm/id1455928592?ls=1&amp;mt=8"><img
+                                    href="{{$info->link_appstore}}"><img
                                         class="img-responsive"
-                                        src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/welcome/download/app_store.png"
+                                        src="{{ asset('storage/' . $info->image_appstore) }}"
                                         alt="Tai app TopCV tai App Store" title="Tải app TopCV tại App Store"></a>
-                                <a target="_blank" href="https://play.google.com/store/apps/details?id=com.topcv"><img
+                                <a target="_blank" href="{{$info->link_googleplay}}"><img
                                         class="img-responsive"
-                                        src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/welcome/download/chplay.png"
+                                        src="{{ asset('storage/' . $info->image_googleplay) }}"
                                         alt="Tai app TopCV tai Google Play" title="Tải app TopCV tại Google Play"></a>
                             </div>
                         </div>
@@ -1850,12 +1850,15 @@
                                 Đối tác
                             </div>
                             <div class="box-menu-child">
-                                <a href="https://www.testcenter.vn/" target="_blank">TestCenter</a>
-                                <a href="https://tophr.vn/" target="_blank">TopHR</a>
-                                <a href="https://www.viecngay.vn/" target="_blank">ViecNgay</a>
-                                <a href="https://happytime.vn/" target="_blank">Happy Time</a>
+                                @foreach ($ecosystems_layout as $ecosystem_layout)
+                                    <a href="{{ $ecosystem_layout->website }}"
+                                        target="_blank">{{ $ecosystem_layout->name }}</a>
+                                @endforeach
                             </div>
                         </div>
+
+
+
                     </div>
                     <div class="column">
                         <div class="box-menu-item">
@@ -1910,44 +1913,44 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="footer-info">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-10">
                             <h4 class="name-company">
-                                Công ty Cổ phần TopCV Việt Nam
+                                {{ $info->company_name }}
                             </h4>
                             <div class="box-tax-code">
                                 <div class="group-top">
                                     <div class="item">
                                         <i class="fa-solid fa-calculator"></i>
                                         <span>Giấy phép đăng ký kinh doanh số: </span>
-                                        <strong>0107307178</strong>
+                                        <strong>{{ $info->business_license_number }}</strong>
                                     </div>
                                     <div class="item">
                                         <i class="fa-solid fa-file"></i>
                                         <span>Giấy phép hoạt động dịch vụ việc làm số: </span>
-                                        <strong>18/SLĐTBXH-GP</strong>
+                                        <strong>{{ $info->service_license_number }}</strong>
                                     </div>
                                 </div>
                                 <div class="item">
                                     <i class="fa-solid fa-location-dot"></i>
-                                    <span>Trụ sở HN: </span>
-                                    <strong>Tòa FS - GoldSeason số 47 Nguyễn Tuân, P.Thanh Xuân Trung, Q.Thanh Xuân, Hà
-                                        Nội</strong>
+                                    <span>Trụ sở : </span>
+                                    <strong>{{ $info->headquarter_address }}</strong>
                                 </div>
                                 <div class="item">
                                     <i class="fa-solid fa-location-dot"></i>
                                     <span>Chi nhánh HCM: </span>
-                                    <strong>Tòa nhà Dali, 24C Phan Đăng Lưu, P.6, Q.Bình Thạnh, TP HCM</strong>
+                                    <strong>{{ $info->branch_address }}</strong>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-2 box-qr">
                             <div class="box-qr">
-                                <img class="img-responsive"
-                                    src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/footer/qr_code.png">
-                                <a href="https://topcv.com.vn/">topcv.com.vn</a>
+                                <img class="img-responsive" src="{{ asset('storage/' . $info->qr_code_image) }}">
+                                <a href="{{ $info->link_website }}">{{ $info->name_website }}</a>
                             </div>
                         </div>
                         <div class="col-md-12 box-ecosystem">
@@ -1957,8 +1960,8 @@
                                 </div>
                                 <div class="box-image-app">
                                     @foreach ($ecosystems_layout as $ecosystem_layout)
-                                        <a
-                                            href="{{ $ecosystem_layout->website }}"class="{{ $ecosystem_layout->name_link_website }}">
+                                        <a href="{{ $ecosystem_layout->website }}"
+                                            class="{{ $ecosystem_layout->name_link_website }}">
                                             <img src="{{ asset('storage/' . $ecosystem_layout->image_footer) }}"
                                                 class="img-logo-ecosystem img-responsive"
                                                 alt="{{ $ecosystem_layout->name }}"
@@ -1971,11 +1974,13 @@
                         </div>
                         <div class="col-md-12">
                             <p class="copyright">
-                                © 2014-2024 TopCV Vietnam JSC. All rights reserved.
+                                {{ $info->copyright }}
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </footer>
     <script></script>
@@ -2060,12 +2065,12 @@
                 <div class="support-ticket-cs">
                     <div class="support-ticket-cs-people">
                         <div class="support-ticket-cs-avatar">
-                            <img src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/support-ticket/ms-huong-nguyen.png"
-                                alt="Trung tâm hỗ trợ dịch vụ" title="Trung tâm hỗ trợ dịch vụ">
+                            <img src="{{ asset('storage/' . $info->supporter) }}" alt="Trung tâm hỗ trợ dịch vụ"
+                                title="Trung tâm hỗ trợ dịch vụ">
                         </div>
                         <div>
-                            <div class="support-ticket-cs-name">Ms. Hương Nguyễn</div>
-                            <div class="support-ticket-cs-heading">TopCV thường phản hồi trong vòng 24h</div>
+                            <div class="support-ticket-cs-name">{{ $info->name_supporter }}</div>
+                            <div class="support-ticket-cs-heading">{{ $info->title_supporter }}</div>
                         </div>
                     </div>
                 </div>

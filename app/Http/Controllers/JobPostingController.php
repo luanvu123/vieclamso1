@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Auth;
 
 class JobPostingController extends Controller
 {
+
+      public function __construct()
+    {
+        $this->middleware('permission:job-posting-manage-list|job-posting-manage-create|job-posting-manage-edit|job-posting-manage-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:job-posting-manage-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:job-posting-manage-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:job-posting-manage-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $employer = Auth::guard('employer')->user();

@@ -79,7 +79,7 @@
                      <div class="col">
                          <button class="btn-show-video">
                              <img class="img-responsive"
-                                 src="../cdn-new.topcv.vn/unsafe/800x/https_/static.topcv.vn/v4/image/welcome/section-header/banner.png"
+                                 src="{{ asset('storage/' . $info->image_section) }}"
                                  alt>
                          </button>
                      </div>
@@ -1282,30 +1282,29 @@
          <section id="mobile-app-intro">
              <div class="container">
                  <div class="section-left">
-                     <h2 class="title">Kiến tạo sự nghiệp của riêng bạn với ứng dụng TopCV </h2>
-                     <h3>“Tất cả trong một”</h3>
-                     <p>Trải nghiệm tạo CV, tìm việc, ứng tuyển và hơn thế nữa - chỉ với một ứng dụng duy nhất. Bắt đầu
-                         ngay hôm nay!</p>
+                     <h2 class="title">{{$info->title_section}}</h2>
+                     <h3>{{$info->title2_section}}</h3>
+                     <p>{{$info->title3_section}}</p>
                      <div class="box-qr-download">
                          <h3>Tải ứng dụng ngay</h3>
                          <div class="box-imgs">
                              <div class="box-img-qr">
                                  <img class="lazy"
-                                     data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/mobile-app/qrcode_black.png"
+                                     data-src="{{ asset('storage/' . $info->image_qr_code_download) }}"
                                      alt>
                              </div>
                              <div class="box-img-download-app">
-                                 <a href="https://itunes.apple.com/us/app/topcv-tạo-cv-tìm-việc-làm/id1455928592?ls=1&amp;mt=8"
+                                 <a href="{{$info->link_appstore}}"
                                      class="box-img-download-appstore">
                                      <img class="lazy"
-                                         data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/mobile-app/appstore_black.png"
+                                         data-src="{{ asset('storage/' . $info->image_appstore) }}"
                                          alt>
                                  </a>
-                                 <a href="https://play.google.com/store/apps/details?id=com.topcv"
+                                 <a href="{{$info->link_googleplay}}"
                                      class="box-img-download-chplay">
                                      <img class="lazy"
-                                         data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/mobile-app/googleplay_black.png"
-                                         alt>
+                                         data-src="{{ asset('storage/' . $info->image_googleplay) }} "
+                                         alt >
                                  </a>
                              </div>
                          </div>

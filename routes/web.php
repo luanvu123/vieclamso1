@@ -38,6 +38,7 @@ use App\Http\Controllers\CompanyFollowerController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HobbyController;
+use App\Http\Controllers\InfoController;
 use App\Http\Controllers\JobReportController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PrizeController;
@@ -102,11 +103,14 @@ Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('
 Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('admin/info', [InfoController::class, 'index'])->name('admin.info.index');
+    Route::post('admin/info/{id}', [InfoController::class, 'update'])->name('admin.info.update');
     Route::resource('job-reports', JobReportController::class)->only(['index', 'show', 'edit', 'update']);
     Route::resource('type_feedback', TypeFeedbackController::class);
     Route::get('feedbacks_list', [TypeFeedbackController::class, 'indexList'])->name('feedbacks.index.list');
     Route::get('feedbacks/{feedback}', [TypeFeedbackController::class, 'showList'])->name('feedbacks.show.list');
     Route::delete('feedbacks/{feedback}', [TypeFeedbackController::class, 'destroyList'])->name('feedbacks.destroy.list');
+
     Route::resource('categories', CategoryController::class);
     Route::resource('awards', AwardController::class);
     Route::resource('ecosystems', EcosystemController::class);
@@ -120,8 +124,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('supports_list', [TypeSupportController::class, 'indexSupport'])->name('supports.index.list');
     Route::get('supports_list/{support}', [TypeSupportController::class, 'showSupport'])->name('supports.show.list');
     Route::delete('supports_list/{support}', [TypeSupportController::class, 'destroySupport'])->name('supports.destroy.list');
+    Route::get('/support-choose', [TypeSupportController::class, 'support_choose'])->name('support-choose');
 
-
+    Route::get('/feedback-choose', [TypeFeedbackController::class, 'feedback_choose'])->name('feedback-choose');
 
     Route::get('/admin/companies', [EmployerManageController::class, 'indexCompany'])->name('admin.companies.index');
     Route::get('/admin/companies/{id}', [EmployerManageController::class, 'showCompany'])->name('admin.companies.show');
@@ -201,10 +206,6 @@ Route::middleware(['candidate'])->group(function () {
 });
 
 Route::middleware(['employer'])->group(function () {
-
-
-
-    // web.php
     Route::get('/employer/messages', [MessageController::class, 'receiveMessages'])->name('messages.receive');
     Route::get('/employer/messages/{candidate}', [MessageController::class, 'showMessages'])->name('messages.show');
     Route::post('/employer/messages/{candidate}/reply', [MessageController::class, 'sendReply'])->name('messages.reply');
@@ -215,6 +216,5 @@ Route::middleware(['employer'])->group(function () {
     Route::post('employer/logout', [EmployerLoginController::class, 'logout'])->name('logout-employer');
     Route::get('employer/profile', [EmployerLoginController::class, 'profile'])->name('employer.profile');
     Route::post('employer/profile', [EmployerLoginController::class, 'updateProfile'])->name('employer.profile.update');
-
     Route::resource('companies', CompanyController::class);
 });

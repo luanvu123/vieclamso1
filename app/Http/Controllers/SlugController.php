@@ -11,9 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class SlugController extends Controller
 {
-    public function __construct()
+  public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('permission:slug-list|slug-create|slug-edit|slug-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:slug-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:slug-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:slug-delete', ['only' => ['destroy']]);
     }
 
     public function index()

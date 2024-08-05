@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
 use App\Models\TypeFeedback;
+use Carbon\Carbon;
 
 class TypeFeedbackController extends Controller
 {
@@ -86,5 +87,13 @@ class TypeFeedbackController extends Controller
         $feedback->delete();
 
         return redirect()->route('feedbacks.index.list')->with('success', 'Feedback deleted successfully.');
+    }
+      public function feedback_choose(Request $request)
+    {
+        $data = $request->all();
+        $feedback =Feedback::find($data['id']);
+        $feedback->status = $data['trangthai_val'];
+        $feedback->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $feedback->save();
     }
 }

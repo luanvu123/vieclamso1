@@ -177,6 +177,10 @@
                                 @endif
                             </a>
                         </li>
+                         <li class="{{ Route::is('admin.info.index') ? 'active-submenu' : '' }}">
+                            <a href="{{ route('admin.info.index') }}">Edit Front-end
+                            </a>
+                        </li>
 
                     </ul>
 
@@ -428,6 +432,40 @@
             //In slug ra textbox có id “slug”
             document.getElementById('convert_slug').value = slug;
         }
+    </script>
+       <script>
+        $('.support_choose').change(function() {
+            var trangthai_val = $(this).val();
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('support-choose') }}",
+                method: "GET",
+                data: {
+                    trangthai_val: trangthai_val,
+                    id: id
+                },
+                success: function(data) {
+                    alert('Thay đổi trạng thái support thành công!');
+                }
+            });
+        })
+    </script>
+        <script>
+        $('.feedback_choose').change(function() {
+            var trangthai_val = $(this).val();
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('feedback-choose') }}",
+                method: "GET",
+                data: {
+                    trangthai_val: trangthai_val,
+                    id: id
+                },
+                success: function(data) {
+                    alert('Thay đổi trạng thái feedback thành công!');
+                }
+            });
+        })
     </script>
 </body>
 

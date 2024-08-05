@@ -10,9 +10,12 @@ use Illuminate\Support\Facades\Storage;
 
 class MediaController extends Controller
 {
-    public function __construct()
+ public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('permission:media-list|media-create|media-edit|media-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:media-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:media-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:media-delete', ['only' => ['destroy']]);
     }
 
    public function index()

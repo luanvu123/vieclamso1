@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Support;
 use App\Models\TypeSupport;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TypeSupportController extends Controller
 {
+      public function __construct()
+    {
+        $this->middleware('permission:type-support-list|type-support-create|type-support-edit|type-support-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:type-support-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:type-support-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:type-support-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $typeSupports = TypeSupport::all();
@@ -74,5 +82,14 @@ class TypeSupportController extends Controller
         $support->delete();
 
         return redirect()->route('supports.index.list')->with('success', 'Support request deleted successfully.');
+    }
+
+      public function support_choose(Request $request)
+    {
+        $data = $request->all();
+        $support =Support::find($data['id']);
+        $support->status = $data['trangthai_val'];
+        $support->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $support->save();
     }
 }

@@ -11,6 +11,7 @@ use App\Models\Company;
 use App\Models\Ecosystem;
 use App\Models\Feedback;
 use App\Models\GenrePost;
+use App\Models\Info;
 use App\Models\JobReport;
 use App\Models\Slug;
 use App\Models\Support;
@@ -33,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $info = Info::find(1);
         // Đếm số lượng Job Listings active
         $activeJobListingsCount = JobPosting::where('status', 1)->count();
 
@@ -51,11 +53,11 @@ class AppServiceProvider extends ServiceProvider
 
 
 
-$now = Carbon::now();
+        $now = Carbon::now();
         $twoHoursAgo = $now->subHours(2);
 
- $reportCountTwoHour = JobReport::where('created_at', '>=', $twoHoursAgo)->count();
- $candidateCountTwoHour = Candidate::where('created_at', '>=', $twoHoursAgo)->count();
+        $reportCountTwoHour = JobReport::where('created_at', '>=', $twoHoursAgo)->count();
+        $candidateCountTwoHour = Candidate::where('created_at', '>=', $twoHoursAgo)->count();
         $employerCountTwoHour = Employer::where('created_at', '>=', $twoHoursAgo)->count();
         $jobPostingCountTwoHour = JobPosting::where('created_at', '>=', $twoHoursAgo)->count();
         $companyCountTwoHour = Company::where('created_at', '>=', $twoHoursAgo)->count();
@@ -73,14 +75,14 @@ $now = Carbon::now();
             'typeFeedbacks' => $typeFeedbacks,
             'typeSupports' => $typeSupports,
 
-
+            'info' => $info,
             'candidateCountTwoHour' => $candidateCountTwoHour,
             'employerCountTwoHour' => $employerCountTwoHour,
             'jobPostingCountTwoHour' => $jobPostingCountTwoHour,
             'companyCountTwoHour' => $companyCountTwoHour,
             'feedbackCountTwoHour' => $feedbackCountTwoHour,
             'supportCountTwoHour' => $supportCountTwoHour,
-            'reportCountTwoHour'=>$reportCountTwoHour
+            'reportCountTwoHour' => $reportCountTwoHour
         ]);
     }
 }
