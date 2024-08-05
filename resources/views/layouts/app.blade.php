@@ -112,6 +112,7 @@
                                 <li class="{{ Route::is('type_support.index') ? 'active' : '' }}">
                                     <a href="{{ route('type_support.index') }}">Manage Type Support</a>
                                 </li>
+
                             </ul>
                         </li>
 
@@ -179,6 +180,10 @@
                         </li>
                          <li class="{{ Route::is('admin.info.index') ? 'active-submenu' : '' }}">
                             <a href="{{ route('admin.info.index') }}">Edit Front-end
+                            </a>
+                        </li>
+                         <li class="{{ Route::is('public_links.index') ? 'active-submenu' : '' }}">
+                            <a href="{{ route('public_links.index') }}">Edit footer
                             </a>
                         </li>
 

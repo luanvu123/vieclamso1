@@ -129,6 +129,11 @@ class PermissionTableSeeder extends Seeder
             'slug-choose',
             'media-choose',
             'job-posting-choose',
+
+              'public_link-list',
+            'public_link-create',
+            'public_link-edit',
+            'public_link-delete',
         ];
 
         foreach ($permissions as $permission) {

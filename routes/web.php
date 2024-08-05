@@ -43,6 +43,7 @@ use App\Http\Controllers\JobReportController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PrizeController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\PublicLinkController;
 use App\Http\Controllers\SavedJobController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SupportController;
@@ -110,6 +111,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('feedbacks_list', [TypeFeedbackController::class, 'indexList'])->name('feedbacks.index.list');
     Route::get('feedbacks/{feedback}', [TypeFeedbackController::class, 'showList'])->name('feedbacks.show.list');
     Route::delete('feedbacks/{feedback}', [TypeFeedbackController::class, 'destroyList'])->name('feedbacks.destroy.list');
+
+    Route::resource('public_links', PublicLinkController::class);
 
     Route::resource('categories', CategoryController::class);
     Route::resource('awards', AwardController::class);

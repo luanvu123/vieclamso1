@@ -665,67 +665,6 @@
         const IS_TABLET = '';
         const SENTRY_URL = 'https://4c159d47cd1b4691ad8bb60c0d966b35@sentry.topworking.vn/5';
     </script>
-    <div class="modal fade" id="modal-brand-communication" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        TopCV - Tiếp lợi thế, nối thành công
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">
-                            <i class="fa-solid fa-xmark"></i>
-                        </span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <iframe id="video-brand-communication" src title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-                </div>
-                <div class="modal-footer">
-                    <div class="icon">
-                        <img src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/welcome/section-header/toppy-hr-tech.png"
-                            alt>
-                    </div>
-                    <div class="comunication-content">
-                        <div class="comunication-content__text">
-                            <p>
-                                Trong sự nghiệp, chọn đúng việc, đi đúng hướng là một <span class="hight-light">lợi
-                                    thế</span>
-                            </p>
-                            <p>
-                                Định vị bản thân chính xác là một <span class="hight-light">lợi thế</span>
-                            </p>
-                            <p>
-                                Kết nối bền chặt cùng đồng nghiệp cũng là một <span class="hight-light">lợi thế</span>
-                            </p>
-                            <p>
-                                TopCV hiểu rõ, <span class="hight-light">lợi thế</span> nằm trong tay bạn!
-                            </p>
-                        </div>
-                        <p class="hight-light comunication-content__footer">
-                            Với Hệ sinh thái HR Tech, TopCV luôn đồng hành để bạn thành công trong sự nghiệp
-                        </p>
-                    </div>
-                </div>
-                <div class="find-out">
-                    <div class="form-check checkbox-dont-show">
-                        <label class="checkbox-dont-show__input">
-                            Không hiển thị lại
-                            <input type="checkbox" id="dont-show_popup_brand_community">
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
-                    <a href="https://blog.topcv.vn/topcv-tiep-loi-the-noi-thanh-cong/" target="__blank"
-                        class="btn btn-find-out">
-                        Tìm hiểu thêm
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
     <script src="../static.topcv.vn/v4/js/components/addon/flash-job-2023.min.22b6821f401ac744.js" defer></script>
 
     <script type="text/javascript">
@@ -918,112 +857,7 @@
     </div>
     <!-- Modal Support Ticket -->
     <!-- Modal Support Ticket -->
-    <div class="modal-support-ticket" id="modal-support-ticket">
-        <div class="modal-support-ticket__content">
-            <div class="modal-support-ticket__content--header">
-                <div class="modal-support-ticket__content--header-title">
-                    Góp ý sản phẩm
-                </div>
-                <div class="modal-support-ticket__content--header-title title-mobile">
-                    Góp ý
-                </div>
-                <div class="modal-support-ticket__content--header-close close-modal-support-ticket">
-                    <i class="fa-regular fa-xmark"></i>
-                </div>
-            </div>
-            <div class="modal-support-ticket__content--body">
-                <form class="support-ticket-tab-content show-content" id="tab-product-comment-content"
-                    action="{{ route('feedback.store') }}" method="POST">
-                    @csrf
-                    <div class="support-ticket-tab-content__description">
-                        Phản hồi của bạn rất quan trọng, Vieclamso1 mong nhận được nhiều góp ý từ bạn để cải thiện sản
-                        phẩm tốt hơn.
-                    </div>
-                    <div class="support-ticket-tab-content__group">
-                        <div class="support-ticket-tab-content__group--title">Chủ đề cần góp ý <span
-                                class="required-icon">*</span></div>
-                        <div class="support-ticket-tab-content__group--content">
-                            @foreach ($typeFeedbacks as $typeFeedback)
-                                <input type="radio" name="type_feedback_id"
-                                    id="support-ticket-type-{{ $typeFeedback->id }}" value="{{ $typeFeedback->id }}"
-                                    hidden>
-                                <label for="support-ticket-type-{{ $typeFeedback->id }}"
-                                    class="support-ticket-radio-button">{{ $typeFeedback->name }}</label>
-                            @endforeach
-                        </div>
 
-
-                        <div class="support-ticket-error"></div>
-                    </div>
-                    <div class="support-ticket-tab-content__group">
-                        <div class="support-ticket-tab-content__group--title">Mô tả góp ý <span
-                                class="required-icon">*</span></div>
-                        <div class="support-ticket-tab-content__group--content">
-                            <textarea name="content" class="support-ticket-text-area" rows="4"
-                                placeholder="Mô tả góp ý của bạn giúp TopCV cải tiến sản phẩm, hỗ trợ bạn tốt hơn"></textarea>
-                        </div>
-                        <div class="support-ticket-error"></div>
-                    </div>
-                    <div class="support-ticket-tab-content__group">
-                        <div class="support-ticket-tab-content__group--title">Số điện thoại</div>
-                        <div class="support-ticket-tab-content__group--content">
-                            <input name="phone" class="support-ticket-input" placeholder="Số điện thoại">
-                        </div>
-                        <div class="support-ticket-error"></div>
-                    </div>
-                    <div class="support-ticket-tab-content__group">
-                        <div class="support-ticket-tab-content__group--title">Email</div>
-                        <div class="support-ticket-tab-content__group--content">
-                            <input name="email" class="support-ticket-input" placeholder="Email">
-                        </div>
-                        <div class="support-ticket-error"></div>
-                    </div>
-                    <div class="support-ticket-tab-content__group">
-                        <div class="support-ticket-tab-content__group--title">Bạn có hài lòng với TopCV không?</div>
-                        <div class="support-ticket-tab-content__group--content">
-                            <div class="list-icon">
-                                <div class="list-icon_tab status-option verry_bad" data-option="Rất tệ"
-                                    data-value="1">
-                                    <lottie-player
-                                        src="../vieclamso1/v4/image/survey/search-job/animation/verry_bad.json"
-                                        background="transparent.html" speed="1" autoplay loop></lottie-player>
-                                    <div class="list-icon_tab-title">Rất tệ</div>
-                                </div>
-                                <div class="list-icon_tab status-option bad" data-option="Tệ" data-value="2">
-                                    <lottie-player src="../vieclamso1/v4/image/survey/search-job/animation/bad.json"
-                                        background="transparent.html" speed="1" autoplay loop></lottie-player>
-                                    <div class="list-icon_tab-title">Tệ</div>
-                                </div>
-                                <div class="list-icon_tab status-option normal" data-option="Bình thường"
-                                    data-value="3">
-                                    <lottie-player src="../vieclamso1/v4/image/survey/search-job/animation/normal.json"
-                                        background="transparent.html" speed="1" autoplay loop></lottie-player>
-                                    <div class="list-icon_tab-title">Bình thường</div>
-                                </div>
-                                <div class="list-icon_tab status-option good" data-option="Tốt" data-value="4">
-                                    <lottie-player src="../vieclamso1/v4/image/survey/search-job/animation/good.json"
-                                        background="transparent.html" speed="1" autoplay loop></lottie-player>
-                                    <div class="list-icon_tab-title">Tốt</div>
-                                </div>
-                                <div class="list-icon_tab status-option verry_good" data-option="Tuyệt vời"
-                                    data-value="5">
-                                    <lottie-player
-                                        src="../vieclamso1/v4/image/survey/search-job/animation/verry_good.json"
-                                        background="transparent.html" speed="1" autoplay loop></lottie-player>
-                                    <div class="list-icon_tab-title">Tuyệt vời</div>
-                                </div>
-                            </div>
-                            <input type="hidden" name="satisfaction" id="satisfaction" value="">
-                        </div>
-                    </div>
-                    <div class="modal-support-ticket__content--footer">
-                        <div class="support-content-cancel close-modal-support-ticket">Huỷ</div>
-                        <button type="submit" class="support-content-submit">Gửi phản hồi</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.status-option').forEach(function(element) {
@@ -1033,59 +867,6 @@
             });
         });
     </script>
-    <!-- End Modal Support Ticket -->
-
-    <!-- End Modal Support Ticket -->
-
-    <div class="modal-support-ticket-success" id="modal-support-ticket-success">
-        <div class="modal-support-ticket-success__content">
-            <div class="support-ticket-success-close modal-support-ticket-success__content--close">
-                <i class="fa-regular fa-xmark"></i>
-            </div>
-            <img class="support-ticket-success-image"
-                src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/service-payment/payment-success.png">
-            <div class="support-ticket-success-description">
-                <div class="support-ticket-success-description__title">
-                    Gửi yêu cầu thành công
-                </div>
-                <div class="support-ticket-success-description__text" style="margin-bottom: 16px;">
-                    TopCV sẽ gửi phản hồi tới email bạn nhập trong vòng 24 giờ (không kể Thứ 7, Chủ nhật, ngày lễ)
-                </div>
-                <div class="support-ticket-success-description__text">
-                    Trường hợp bạn chưa nhận được phản hồi, vui lòng liên hệ qua:
-                </div>
-                <div class="support-ticket-success-description__text">
-                    Hotline: <span class="description-highlight">(024) 6680 5588 (Giờ hành chính)</span>
-                </div>
-                <div class="support-ticket-success-description__text">
-                    Email: <span class="description-highlight">hotro@topcv.vn</span>
-                </div>
-                <div class="support-ticket-success-close support-ticket-success-description__close">
-                    Đóng
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal-support-ticket-success" id="modal-product-comment-success">
-        <div class="modal-support-ticket-success__content">
-            <div class="support-ticket-success-close modal-support-ticket-success__content--close">
-                <i class="fa-regular fa-xmark"></i>
-            </div>
-            <img class="support-ticket-success-image"
-                src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/service-payment/payment-success.png">
-            <div class="support-ticket-success-description">
-                <div class="support-ticket-success-description__title">
-                    Gửi góp ý thành công
-                </div>
-                <div class="support-ticket-success-description__text" style="margin-top: 8px;">
-                    Cảm ơn bạn đã gửi góp ý! Chúng tôi sẽ nghiêm túc lắng nghe, tiếp thu để cải thiện sản phẩm tốt hơn.
-                </div>
-                <div class="support-ticket-success-close support-ticket-success-description__close">
-                    Đóng
-                </div>
-            </div>
-        </div>
-    </div>
     <link rel="stylesheet"
         href="../static.topcv.vn/v4/css/components/support-ticket/modal-support-ticket.8c7e8cb79bde8276G.css">
     <script src="../static.topcv.vn/v4/js/components/support-ticket/modal-support-ticket.e94b1b10358310bc.js"></script>
@@ -1794,38 +1575,26 @@
                         <div class="box-download">
                             <p class="title">Ứng dụng tải xuống</p>
                             <div class="btn-download-app">
-                                <a target="_blank"
-                                    href="{{$info->link_appstore}}"><img
-                                        class="img-responsive"
+                                <a target="_blank" href="{{ $info->link_appstore }}"><img class="img-responsive"
                                         src="{{ asset('storage/' . $info->image_appstore) }}"
                                         alt="Tai app TopCV tai App Store" title="Tải app TopCV tại App Store"></a>
-                                <a target="_blank" href="{{$info->link_googleplay}}"><img
-                                        class="img-responsive"
+                                <a target="_blank" href="{{ $info->link_googleplay }}"><img class="img-responsive"
                                         src="{{ asset('storage/' . $info->image_googleplay) }}"
                                         alt="Tai app TopCV tai Google Play" title="Tải app TopCV tại Google Play"></a>
                             </div>
                         </div>
                         <div class="box-social">
-                            <p class="title">Cộng đồng TopCV</p>
+                            <p class="title">Cộng đồng Vieclamso1</p>
                             <div class="btn-list-social">
-                                <a target="_blank" href="https://www.facebook.com/topcvbiz/">
-                                    <img class="img-responsive"
-                                        src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/footer/facebook.png">
-                                </a>
-                                <a target="_blank" href="https://www.youtube.com/c/TopCVpro">
-                                    <img class="img-responsive"
-                                        src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/footer/youtube.png">
-                                </a>
-                                <a target="_blank" href="https://www.linkedin.com/company/topcv-vietnam">
-                                    <img class="img-responsive"
-                                        src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/footer/linkedin.png">
-                                </a>
-                                <a target="_blank" href="https://www.tiktok.com/@topcv">
-                                    <img class="img-responsive"
-                                        src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/footer/tiktok.png">
-                                </a>
+                                @foreach ($publiclink_layout as $publicLink)
+                                    <a target="_blank" href="{{ $publicLink->link }}">
+                                        <img class="img-responsive"
+                                            src="{{ asset('storage/' . $publicLink->image) }}">
+                                    </a>
+                                @endforeach
                             </div>
                         </div>
+
                     </div>
                     <div class="column">
                         <div class="box-menu-item">
@@ -2225,8 +1994,7 @@
                         </div>
                         <div class="row" v-show="type == 3">
                             <div class="st-form-group col-md-12">
-                                <span class="st-text-dark-gray">Gói dịch vụ <span
-                                        class="st-text-red">*</span></span>
+                                <span class="st-text-dark-gray">Gói dịch vụ <span class="st-text-red">*</span></span>
                                 <select name="package" id="st-package" class="st-form-control">
                                     <option value>-- Chọn gói dịch vụ --</option>
                                     <option value="pro">Gói tài khoản Pro</option>
@@ -3470,6 +3238,162 @@
                 .catch(error => console.error('Error:', error));
         }
     </script>
+    <div class="modal-support-ticket" id="modal-support-ticket">
+        <div class="modal-support-ticket__content">
+            <div class="modal-support-ticket__content--header">
+                <div class="modal-support-ticket__content--header-title">
+                    Góp ý sản phẩm
+                </div>
+                <div class="modal-support-ticket__content--header-title title-mobile">
+                    Góp ý
+                </div>
+                <div class="modal-support-ticket__content--header-close close-modal-support-ticket">
+                    <i class="fa-regular fa-xmark"></i>
+                </div>
+            </div>
+            <div class="modal-support-ticket__content--body">
+                <form class="support-ticket-tab-content show-content" id="tab-product-comment-content"
+                    action="{{ route('feedback.store') }}" method="POST">
+                    @csrf
+                    <div class="support-ticket-tab-content__description">
+                        Phản hồi của bạn rất quan trọng, Vieclamso1 mong nhận được nhiều góp ý từ bạn để cải thiện sản
+                        phẩm tốt hơn.
+                    </div>
+                    <div class="support-ticket-tab-content__group">
+                        <div class="support-ticket-tab-content__group--title">Chủ đề cần góp ý <span
+                                class="required-icon">*</span></div>
+                        <div class="support-ticket-tab-content__group--content">
+                            @foreach ($typeFeedbacks as $typeFeedback)
+                                <input type="radio" name="type_feedback_id"
+                                    id="support-ticket-type-{{ $typeFeedback->id }}" value="{{ $typeFeedback->id }}"
+                                    hidden>
+                                <label for="support-ticket-type-{{ $typeFeedback->id }}"
+                                    class="support-ticket-radio-button">{{ $typeFeedback->name }}</label>
+                            @endforeach
+                        </div>
+
+
+                        <div class="support-ticket-error"></div>
+                    </div>
+                    <div class="support-ticket-tab-content__group">
+                        <div class="support-ticket-tab-content__group--title">Mô tả góp ý <span
+                                class="required-icon">*</span></div>
+                        <div class="support-ticket-tab-content__group--content">
+                            <textarea name="content" class="support-ticket-text-area" rows="4"
+                                placeholder="Mô tả góp ý của bạn giúp TopCV cải tiến sản phẩm, hỗ trợ bạn tốt hơn"></textarea>
+                        </div>
+                        <div class="support-ticket-error"></div>
+                    </div>
+                    <div class="support-ticket-tab-content__group">
+                        <div class="support-ticket-tab-content__group--title">Số điện thoại</div>
+                        <div class="support-ticket-tab-content__group--content">
+                            <input name="phone" class="support-ticket-input" placeholder="Số điện thoại">
+                        </div>
+                        <div class="support-ticket-error"></div>
+                    </div>
+                    <div class="support-ticket-tab-content__group">
+                        <div class="support-ticket-tab-content__group--title">Email</div>
+                        <div class="support-ticket-tab-content__group--content">
+                            <input name="email" class="support-ticket-input" placeholder="Email">
+                        </div>
+                        <div class="support-ticket-error"></div>
+                    </div>
+                    <div class="support-ticket-tab-content__group">
+                        <div class="support-ticket-tab-content__group--title">Bạn có hài lòng với TopCV không?</div>
+                        <div class="support-ticket-tab-content__group--content">
+                            <div class="list-icon">
+                                <div class="list-icon_tab status-option verry_bad" data-option="Rất tệ"
+                                    data-value="1">
+                                    <lottie-player
+                                        src="../vieclamso1/v4/image/survey/search-job/animation/verry_bad.json"
+                                        background="transparent.html" speed="1" autoplay loop></lottie-player>
+                                    <div class="list-icon_tab-title">Rất tệ</div>
+                                </div>
+                                <div class="list-icon_tab status-option bad" data-option="Tệ" data-value="2">
+                                    <lottie-player src="../vieclamso1/v4/image/survey/search-job/animation/bad.json"
+                                        background="transparent.html" speed="1" autoplay loop></lottie-player>
+                                    <div class="list-icon_tab-title">Tệ</div>
+                                </div>
+                                <div class="list-icon_tab status-option normal" data-option="Bình thường"
+                                    data-value="3">
+                                    <lottie-player
+                                        src="../vieclamso1/v4/image/survey/search-job/animation/normal.json"
+                                        background="transparent.html" speed="1" autoplay loop></lottie-player>
+                                    <div class="list-icon_tab-title">Bình thường</div>
+                                </div>
+                                <div class="list-icon_tab status-option good" data-option="Tốt" data-value="4">
+                                    <lottie-player src="../vieclamso1/v4/image/survey/search-job/animation/good.json"
+                                        background="transparent.html" speed="1" autoplay loop></lottie-player>
+                                    <div class="list-icon_tab-title">Tốt</div>
+                                </div>
+                                <div class="list-icon_tab status-option verry_good" data-option="Tuyệt vời"
+                                    data-value="5">
+                                    <lottie-player
+                                        src="../vieclamso1/v4/image/survey/search-job/animation/verry_good.json"
+                                        background="transparent.html" speed="1" autoplay loop></lottie-player>
+                                    <div class="list-icon_tab-title">Tuyệt vời</div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="satisfaction" id="satisfaction" value="">
+                        </div>
+                    </div>
+                    <div class="modal-support-ticket__content--footer">
+                        <div class="support-content-cancel close-modal-support-ticket">Huỷ</div>
+                        <button type="submit" class="support-content-submit">Gửi phản hồi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-support-ticket-success" id="modal-support-ticket-success">
+        <div class="modal-support-ticket-success__content">
+            <div class="support-ticket-success-close modal-support-ticket-success__content--close">
+                <i class="fa-regular fa-xmark"></i>
+            </div>
+            <img class="support-ticket-success-image"
+                src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/service-payment/payment-success.png">
+            <div class="support-ticket-success-description">
+                <div class="support-ticket-success-description__title">
+                    Gửi yêu cầu thành công
+                </div>
+                <div class="support-ticket-success-description__text" style="margin-bottom: 16px;">
+                    TopCV sẽ gửi phản hồi tới email bạn nhập trong vòng 24 giờ (không kể Thứ 7, Chủ nhật, ngày lễ)
+                </div>
+                <div class="support-ticket-success-description__text">
+                    Trường hợp bạn chưa nhận được phản hồi, vui lòng liên hệ qua:
+                </div>
+                <div class="support-ticket-success-description__text">
+                    Hotline: <span class="description-highlight">(024) 6680 5588 (Giờ hành chính)</span>
+                </div>
+                <div class="support-ticket-success-description__text">
+                    Email: <span class="description-highlight">hotro@topcv.vn</span>
+                </div>
+                <div class="support-ticket-success-close support-ticket-success-description__close">
+                    Đóng
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-support-ticket-success" id="modal-product-comment-success">
+        <div class="modal-support-ticket-success__content">
+            <div class="support-ticket-success-close modal-support-ticket-success__content--close">
+                <i class="fa-regular fa-xmark"></i>
+            </div>
+            <img class="support-ticket-success-image"
+                src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/service-payment/payment-success.png">
+            <div class="support-ticket-success-description">
+                <div class="support-ticket-success-description__title">
+                    Gửi góp ý thành công
+                </div>
+                <div class="support-ticket-success-description__text" style="margin-top: 8px;">
+                    Cảm ơn bạn đã gửi góp ý! Chúng tôi sẽ nghiêm túc lắng nghe, tiếp thu để cải thiện sản phẩm tốt hơn.
+                </div>
+                <div class="support-ticket-success-close support-ticket-success-description__close">
+                    Đóng
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
