@@ -6,6 +6,8 @@
 <link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/css/style.css') }}">
 <link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/job-board/css/avatar.css') }}">
 <link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/core/base/libraries/tagify/tagify.css') }}">
+<link media="all" type="text/css" rel="stylesheet"
+        href="https://vieclam.topgialai.vn/themes/jobbox/plugins/bootstrap/bootstrap.min.css">
     <style>
         .navbar-nav {
             --bs-nav-link-padding-x: 0;
@@ -55,7 +57,7 @@
                                   <li><a class="btn btn-border aboutus-icon mb-20"
                                         href="{{ route('personal.profile.account') }}">Thông tin tài khoản</a>
                                 </li>
-                                <li><a class="btn btn-border recruitment-icon mb-20 active"
+                                <li><a class="btn btn-border recruitment-icon mb-20"
                                         href="{{route('cv.overview')}}">Tổng quan</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20"
                                         href="{{ route('experience.index') }}">Kinh nghiệm</a></li>
@@ -97,11 +99,11 @@
                 <p>{{ $hobby->description }}</p>
             </div>
             <div class="timeline-actions">
-                <a href="{{ route('hobbies.edit', $hobby->id) }}" class="btn btn-editor">Sửa</a>
+                <a href="{{ route('hobbies.edit', $hobby->id) }}" class="btn btn-editor"></a>
                 <form method="POST" action="{{ route('hobbies.destroy', $hobby->id) }}" style="display:inline;">
                     @csrf
                     @method('DELETE')
-                    <button onclick="return confirm('Bạn có chắc muốn xóa mục này?');" class="btn btn-remove" type="submit">Xóa</button>
+                    <button onclick="return confirm('Bạn có chắc muốn xóa mục này?');" class="btn btn-remove" type="submit"></button>
                 </form>
             </div>
         </div>

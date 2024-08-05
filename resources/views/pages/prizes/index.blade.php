@@ -56,7 +56,7 @@
                                    <li><a class="btn btn-border aboutus-icon mb-20"
                                         href="{{ route('personal.profile.account') }}">Thông tin tài khoản</a>
                                 </li>
-                                <li><a class="btn btn-border recruitment-icon mb-20 active"
+                                <li><a class="btn btn-border recruitment-icon mb-20"
                                         href="{{route('cv.overview')}}">Tổng quan</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20"
                                         href="{{ route('experience.index') }}">Kinh nghiệm</a></li>
@@ -101,13 +101,13 @@
                                             </div>
                                             <div class="timeline-actions">
                                                 <a href="{{ route('prizes.edit', $prize->id) }}"
-                                                    class="btn btn-editor">Sửa</a>
+                                                    class="btn btn-editor"></a>
                                                 <form method="POST" action="{{ route('prizes.destroy', $prize->id) }}"
                                                     style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button onclick="return confirm('Bạn có chắc muốn xóa mục này?');"
-                                                        class="btn btn-remove" type="submit">Xóa</button>
+                                                        class="btn btn-remove" type="submit"></button>
                                                 </form>
                                             </div>
                                         </div>

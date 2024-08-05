@@ -1,25 +1,18 @@
 @extends('layout')
 @section('content')
     <link media="all" type="text/css" rel="stylesheet"
-        href="https://vieclam.topgialai.vn/vendor/core/plugins/language/css/language-public.css?v=2.2.0">
-    <link media="all" type="text/css" rel="stylesheet"
-        href="https://vieclam.topgialai.vn/vendor/core/plugins/cookie-consent/css/cookie-consent.css?v=1.0.1">
-    <link media="all" type="text/css" rel="stylesheet"
         href="https://vieclam.topgialai.vn/themes/jobbox/plugins/bootstrap/bootstrap.min.css">
     <link media="all" type="text/css" rel="stylesheet"
-        href="https://vieclam.topgialai.vn/themes/jobbox/css/style.css?v=1.12.3">
+        href="{{ asset('vendor/core/plugins/language/css/language-public.css') }}">
     <link media="all" type="text/css" rel="stylesheet"
-        href="https://vieclam.topgialai.vn/vendor/core/plugins/job-board/css/avatar.css">
+        href="{{ asset('vendor/core/plugins/cookie-consent/css/cookie-consent.css') }}">
     <link media="all" type="text/css" rel="stylesheet"
-        href="https://vieclam.topgialai.vn/vendor/core/core/base/libraries/tagify/tagify.css">
-
-
-    <script data-pagespeed-no-defer="1" src="https://vieclam.topgialai.vn/themes/jobbox/plugins/jquery-3.6.3.min.js">
-    </script>
-    <script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"BreadcrumbList","itemListElement":[]}</script>
-
-    <link type="application/atom+xml" rel="alternate" title="Posts feed" href="https://vieclam.topgialai.vn/feed/posts">
-    <link type="application/atom+xml" rel="alternate" title="Posts feed" href="https://vieclam.topgialai.vn/en/feed/posts">
+        href="{{ asset('themes/jobbox/plugins/bootstrap/bootstrap.min.css') }}">
+    <link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/css/style.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/job-board/css/avatar.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/core/base/libraries/tagify/tagify.css') }}">
 
     <style>
         .navbar-nav {
@@ -71,7 +64,7 @@
                                         href="{{ route('personal.profile.account') }}">Thông tin tài khoản</a>
                                 </li>
                                 <li><a class="btn btn-border recruitment-icon mb-20 active"
-                                        href="{{route('cv.overview')}}">Tổng quan</a></li>
+                                        href="{{ route('cv.overview') }}">Tổng quan</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20"
                                         href="{{ route('experience.index') }}">Kinh nghiệm</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20"
@@ -127,7 +120,8 @@
                                                         <p class="mb-1"><strong>LinkedIn:</strong> <a
                                                                 href="{{ $candidate->linkedin }}"
                                                                 target="_blank">{{ $candidate->linkedin }}</a></p>
-                                                        <p class="mb-1"><strong>Gender:</strong> {{ $candidate->gender }}
+                                                        <p class="mb-1"><strong>Gender:</strong>
+                                                            {{ $candidate->gender }}
                                                         </p>
                                                         <p class="mb-1"><strong>Date of Birth:</strong>
                                                             {{ \Carbon\Carbon::parse($candidate->dob)->format('d-m-Y') }}

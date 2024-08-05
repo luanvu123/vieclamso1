@@ -1,5 +1,7 @@
 @extends('layout')
 @section('content')
+<link media="all" type="text/css" rel="stylesheet"
+        href="https://vieclam.topgialai.vn/themes/jobbox/plugins/bootstrap/bootstrap.min.css">
     <link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/language/css/language-public.css') }}">
 <link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/cookie-consent/css/cookie-consent.css') }}">
 <link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/plugins/bootstrap/bootstrap.min.css') }}">
@@ -98,11 +100,11 @@
                 <p>{{ $adviser->description }}</p>
             </div>
             <div class="timeline-actions">
-                <a href="{{ route('advisers.edit', $adviser->id) }}" class="btn btn-editor">Sửa</a>
+                <a href="{{ route('advisers.edit', $adviser->id) }}" class="btn btn-editor"></a>
                 <form method="POST" action="{{ route('advisers.destroy', $adviser->id) }}" style="display:inline;">
                     @csrf
                     @method('DELETE')
-                    <button onclick="return confirm('Bạn có chắc muốn xóa mục này?');" class="btn btn-remove" type="submit">Xóa</button>
+                    <button onclick="return confirm('Bạn có chắc muốn xóa mục này?');" class="btn btn-remove" type="submit"></button>
                 </form>
             </div>
         </div>

@@ -1,20 +1,15 @@
 @extends('layout')
 @section('content')
-    <link media="all" type="text/css" rel="stylesheet"
-        href="https://vieclam.topgialai.vn/vendor/core/plugins/language/css/language-public.css?v=2.2.0">
-    <link media="all" type="text/css" rel="stylesheet"
-        href="https://vieclam.topgialai.vn/vendor/core/plugins/cookie-consent/css/cookie-consent.css?v=1.0.1">
-    <link media="all" type="text/css" rel="stylesheet"
+
+
+  <link media="all" type="text/css" rel="stylesheet"
         href="https://vieclam.topgialai.vn/themes/jobbox/plugins/bootstrap/bootstrap.min.css">
-    <link media="all" type="text/css" rel="stylesheet"
-        href="https://vieclam.topgialai.vn/themes/jobbox/css/style.css?v=1.12.3">
-    <link media="all" type="text/css" rel="stylesheet"
-        href="https://vieclam.topgialai.vn/vendor/core/plugins/job-board/css/avatar.css">
-    <link media="all" type="text/css" rel="stylesheet"
-        href="https://vieclam.topgialai.vn/vendor/core/core/base/libraries/tagify/tagify.css">
-
-
-
+<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/language/css/language-public.css') }}">
+<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/cookie-consent/css/cookie-consent.css') }}">
+<link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/plugins/bootstrap/bootstrap.min.css') }}">
+<link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/css/style.css') }}">
+<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/job-board/css/avatar.css') }}">
+<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/core/base/libraries/tagify/tagify.css') }}">
 
     <style>
         .navbar-nav {
@@ -33,6 +28,7 @@
             flex-wrap: wrap;
             flex-direction: row;
         }
+
     </style>
 
     <main class="main crop-avatar user-profile-section">
@@ -110,7 +106,6 @@
                                                 <img src="{{ asset('storage/' . Auth::guard('candidate')->user()->avatar_candidate) ?? asset('storage/avatar/avatar-default.jpg') }}"
                                                     id="profile-img">
                                             </div>
-                                            <a class="btn btn-apply">Tải lên hình đại diện</a>
                                         </div>
 
                                         <div class="mb-3 position-relative">

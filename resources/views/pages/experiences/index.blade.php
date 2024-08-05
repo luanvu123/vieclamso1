@@ -6,6 +6,7 @@
 <link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/css/style.css') }}">
 <link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/job-board/css/avatar.css') }}">
 <link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/core/base/libraries/tagify/tagify.css') }}">
+
     <style>
         .navbar-nav {
             --bs-nav-link-padding-x: 0;
@@ -55,7 +56,7 @@
                                   <li><a class="btn btn-border aboutus-icon mb-20"
                                         href="{{ route('personal.profile.account') }}">Thông tin tài khoản</a>
                                 </li>
-                                <li><a class="btn btn-border recruitment-icon mb-20 active"
+                                <li><a class="btn btn-border recruitment-icon mb-20"
                                         href="{{route('cv.overview')}}">Tổng quan</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20 active"
                                         href="{{ route('experience.index') }}">Kinh nghiệm</a></li>
@@ -129,108 +130,7 @@
                 </div>
             </div>
         </section>
-        <div class="modal fade" id="avatar-modal" tabindex="-1" role="dialog" aria-labelledby="avatar-modal-label"
-            aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <form class="avatar-form" method="post" action="https://vieclam.topgialai.vn/account/avatar"
-                        enctype="multipart/form-data">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="avatar-modal-label">
-                                <strong>Hình ảnh hồ sơ cá nhân</strong>
-                            </h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-
-                            <div class="avatar-body">
-
-                                <!-- Upload image and data -->
-                                <div class="avatar-upload">
-                                    <input class="avatar-src" name="avatar_src" type="hidden">
-                                    <input class="avatar-data" name="avatar_data" type="hidden">
-                                    <input type="hidden" name="_token" value="zmj7YfA06f6ilVn8S94JUpEcLWsB8aM1ub8ZEIA1"
-                                        autocomplete="off"> <label for="avatarInput">Hình ảnh mới</label>
-                                    <input class="avatar-input" id="avatarInput" name="avatar_file" type="file">
-                                </div>
-
-                                <div class="loading" tabindex="-1" role="img" aria-label="Đang tải"></div>
-
-                                <!-- Crop and preview -->
-                                <div class="row">
-                                    <div class="col-md-9">
-                                        <div class="avatar-wrapper"></div>
-                                        <div class="error-message text-danger" style="display: none"></div>
-                                    </div>
-                                    <div class="col-md-3 avatar-preview-wrapper">
-                                        <div class="avatar-preview preview-lg"></div>
-                                        <div class="avatar-preview preview-md"></div>
-                                        <div class="avatar-preview preview-sm"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-outline-secondary" type="button"
-                                data-bs-dismiss="modal">Đóng</button>
-                            <button class="btn btn-outline-primary avatar-save" type="submit">Cứu</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </main>
-
-    <script>
-        'use strict';
-
-        var RV_MEDIA_URL = {
-            base: 'https://vieclam.topgialai.vn',
-            filebrowserImageBrowseUrl: false,
-            media_upload_from_editor: 'https://vieclam.topgialai.vn/ajax/accounts/upload-from-editor'
-        }
-
-        function setImageValue(file) {
-            $('.mce-btn.mce-open').parent().find('.mce-textbox').val(file);
-        }
-    </script>
-    <iframe id="form_target" name="form_target" style="display:none"></iframe>
-    <form id="tinymce_form" action="https://vieclam.topgialai.vn/ajax/accounts/upload-from-editor" target="form_target"
-        method="post" enctype="multipart/form-data" style="width:0; height:0; overflow:hidden; display: none;">
-        <input type="hidden" name="_token" value="zmj7YfA06f6ilVn8S94JUpEcLWsB8aM1ub8ZEIA1" autocomplete="off">
-        <input name="upload" id="upload_file" type="file" onchange="$('#tinymce_form').submit();this.value='';">
-        <input type="hidden" value="tinymce" name="upload_type">
-    </form>
-
-
-    </main>
-
-
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/modernizr-3.6.0.min.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/jquery-migrate-3.3.0.min.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins//waypoints.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins//magnific-popup.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/perfect-scrollbar.min.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/select2.min.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/isotope.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/scrollup.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/swiper-bundle.min.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/counterup.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/js/main.js?v=1.12.3"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/js/script.js?v=1.12.3"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/js/backend.js?v=1.12.3"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/plugins/job-board/js/avatar.js"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/core/base/libraries/ckeditor/ckeditor.js"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/core/base/js/editor.js"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/core/base/libraries/tagify/tagify.js"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/core/base/js/tags.js"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/plugins/language/js/language-public.js?v=2.2.0"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/plugins/cookie-consent/js/cookie-consent.js?v=1.0.1"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/plugins/job-board/libraries/cropper.js"></script>
-
-
-
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('summary1');

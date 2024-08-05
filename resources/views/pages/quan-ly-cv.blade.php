@@ -64,15 +64,15 @@
                                  @foreach ($cvs as $cv)
                                      <div class="col-md-6 col-12 pr-12">
                                          <div class="box-cv">
-                                             <img src="{{ asset('storage/' . $cv->image_path) }}" onerror="onErrorImage(this)"
-                                                 class="img-responsive entered loaded" data-ll-status="loaded">
+                                             <img src="{{ asset('storage/' . $cv->image_path) }}"
+                                                 onerror="onErrorImage(this)" class="img-responsive entered loaded"
+                                                 data-ll-status="loaded">
                                              <div class="box-bg">
                                                  <div class="cv-main">
                                                      <a data-container="body" data-toggle="tooltip" data-placement="top"
                                                          title="" data-cv-title="{{ $cv->cv_name }}"
                                                          class="tcv-tooltip"
                                                          data-original-title="Nhà tuyển dụng sẽ xem CV này của bạn trong mục Tìm kiếm ứng viên">
-                                                         <i class="fa fa-star"></i> Đặt làm CV chính
                                                      </a>
                                                  </div>
                                                  <div class="box-info">
@@ -111,8 +111,8 @@
                      @endif
                  </div>
                  <!-- Modal -->
-                 <div class="modal fade" id="editCvModal" tabindex="-1" role="dialog"
-                     aria-labelledby="editCvModalLabel" aria-hidden="true">
+                 <div class="modal fade" id="editCvModal" tabindex="-1" role="dialog" aria-labelledby="editCvModalLabel"
+                     aria-hidden="true">
                      <div class="modal-dialog" role="document">
                          <div class="modal-content">
                              <div class="modal-header">
@@ -186,420 +186,6 @@
                      });
                  </script>
              </div>
-             <div class="col-sm-4" id="sidebar">
-                 <div class="box box-white box-setting-sidebar">
-                     <div class="turn-on-job__header">
-                         <div class="profile-avatar">
-                             <img src="{{ $candidate->avatar_candidate ? asset('storage/' . $candidate->avatar_candidate) : asset('storage/avatar/avatar-default.jpg') }}"
-                                 alt="" onerror="this.src='{{ asset('storage/avatar/avatar-default.jpg') }}'">
-                             <span class="vip-badge" style="background-color: gray">VERIFIED</span>
-                             <a href="{{ route('candidate.update.avatar') }}" class="change-avatar"
-                                 data-target="#upload-profile-avatar" data-toggle="modal" id="btn-upload-avatar">
-                                 <i class="fa-solid fa-camera"></i>
-                             </a>
-                             <form action="{{ route('candidate.update.avatar') }}" method="post"
-                                 enctype="multipart/form-data" id="upload-avatar-form" style="display: none;">
-                                 @csrf
-                                 <input type="file" name="avatar" id="avatar-image">
-                             </form>
-                             <div id="imageEditorWraper" style="display: none;">
-                                 <div class="container">
-                                     <h3>Chỉnh sửa ảnh đại diện</h3>
-                                     <div class="editor-col-left">
-                                         <h4>Ảnh gốc</h4>
-                                         <div class="imageEditor">
-                                             <img src="">
-                                         </div>
-                                         <div class="editorChooseImage">
-                                             <a href="#" class="btn-choose-image"><i
-                                                     class="fa fa-picture-o"></i><br>Click chọn ảnh để tải lên!</a>
-                                         </div>
-                                         <div class="tipCompress"
-                                             style="color: red; margin-top: 5px; margin-left: 20px; text-align: left;">
-                                             Nếu ảnh của bạn có dung lượng trên 5MB, vui lòng
-                                             <a href="https://compressor.io/compress" target="_blank" style="color:">bấm
-                                                 vào đây</a> để giảm dung lượng ảnh.
-                                         </div>
-                                         <div class="loadingShow" style="display: none;">
-                                             <i class="fa fa-spinner fa-spin"></i>
-                                             <br><br>
-                                             <span class="loadingMessage">Đang tải ảnh lên ...</span>
-                                         </div>
-                                     </div>
-                                     <div class="editor-col-right">
-                                         <h4>Ảnh đại diện hiển thị</h4>
-                                         <div class="imageEditorControls">
-                                             <div class="img-edit-preview"
-                                                 style="border: 1px solid #efefef; border-radius: 50%">
-                                                 <img src="{{ asset('storage/avatar/avatar-default.jpg') }}">
-                                             </div>
-                                             <div class="edit-image-btns">
-                                                 <button type="button" class="btn-change-image">Đổi ảnh</button>
-                                                 <button type="button" class="btn-remove-image">Xóa ảnh</button><br>
-                                             </div>
-                                             <div>
-                                                 <button type="button" class="btn-save-image">Xong</button>
-                                             </div>
-                                             <div>
-                                                 <a href="#" class="btn-close-image-editor"
-                                                     title="Đóng trình chỉnh sửa (Không lưu thay đổi)">Đóng lại (Không
-                                                     lưu)</a>
-                                             </div>
-                                             <form action="{{ route('candidate.update.avatar') }}" method="post"
-                                                 id="saveEditedAvatar" style="display: none;">
-                                                 @csrf
-                                                 <input type="hidden" name="key" value="">
-                                                 <input type="hidden" name="cropx" id="inpCropX" value="">
-                                                 <input type="hidden" name="cropy" id="inpCropY" value="">
-                                                 <input type="hidden" name="cropw" id="inpCropW" value="">
-                                                 <input type="hidden" name="croph" id="inpCropH" value="">
-                                                 <input type="hidden" name="rotate" id="inpRotate" value="0">
-                                                 <input type="hidden" name="noimage" id="inpNoImage" value="0">
-                                                 <input type="hidden" name="imgChanged" id="imgChanged" value="0">
-                                             </form>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-
-
-                         <div class="turn-on-job__header-info">
-                             <div class="text-welcome">Chào bạn trở lại,</div>
-                             <h4 class="profile-fullname">{{ $candidate->fullname_candidate }}</h4>
-                             <div class="account-type vip">
-                                 <span style="background-color:  gray">
-                                     Tài khoản đã xác thực
-                                 </span>
-                             </div>
-                             <div class="box-footer">
-                                 <a href="https://www.topcv.vn/tai-khoan/nang-cap" class="btn btn-sm btn-upgrade">
-                                     <i class="fa-solid fa-circle-arrow-up"></i>
-                                     <span>
-                                         Nâng cấp tài khoản
-                                     </span>
-                                 </a>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row turn-on-job__body" style="margin-top: 15px">
-                         <input type="hidden" id="currentStatus" value="0">
-                         <div id="on-off-job-waiting" class="">
-                             <div class="col-xs-12 group-switch">
-                                 <label class="switch">
-                                     <input type="checkbox" value="1" id="btn-job-waiting">
-                                     <span class="slider round"></span>
-                                 </label>
-                                 <span class="job-waiting-status-text job-off-show">
-                                     <strong class="text-neutral-neutral-40">Đang Tắt tìm việc</strong>
-                                 </span>
-                                 <span class="job-waiting-status-text job-on-show">
-                                     <strong class="text-highlight">Trạng thái tìm việc đang bật</strong>
-                                 </span>
-                             </div>
-                             <div class="col-xs-12">
-                                 <p class="job-waiting-description" id="job-waiting-text">
-                                     Bật tìm việc giúp hồ sơ của bạn nổi bật hơn và được chú ý nhiều hơn trong danh sách tìm
-                                     kiếm của
-                                     NTD.
-                                 </p>
-                                 <div id="box-job-waiting" class="box-job-waiting" style="display: none;">
-                                     <div class="box-job-waiting__title">
-                                         Trạng thái <span class="highlight">Bật tìm việc</span> sẽ tự động tắt sau <b
-                                             class="highlight" id="time-remaining-turn-on-job">14 ngày</b>. Nếu bạn vẫn
-                                         còn nhu cầu tìm việc, hãy <span class="highlight">Bật tìm
-                                             việc trở lại</span>
-                                     </div>
-                                     <div class="box-job-waiting__cv-choose">
-                                         <div class="box-job-waiting__cv-choose--icon">
-                                             <i class="fa-solid fa-file-lines"></i>
-                                         </div>
-                                         <div class="box-job-waiting__cv-choose--text">
-                                             <span id="text-count-cv-turn-on-job">0</span> CV đang được chọn
-                                         </div>
-                                         <div class="box-job-waiting__cv-choose--button" id="btn-edit-job-waiting">
-                                             Thay đổi
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-                             <div class="col-xs-12 group-switch">
-                                 <label class="switch">
-                                     <input type="checkbox" value="1" id="btn-allow-epl-view-cv" checked="">
-                                     <span class="slider round"></span>
-                                 </label>
-                                 <span class="job-waiting-status-text">
-                                     <strong id="text-allow-epl-view-cv" class=" text-highlight ">
-                                         Cho phép NTD tìm kiếm hồ sơ
-                                     </strong>
-                                 </span>
-                             </div>
-                             <div id="box-profile-active" class="col-xs-12">
-                                 <div class="description-allow-employee-search">
-                                     <p>
-                                         Khi có cơ hội việc làm phù hợp, NTD sẽ liên hệ và trao đổi với bạn qua:
-                                     </p>
-                                     <ul>
-                                         <li>Nhắn tin qua Top Connect trên TopCV</li>
-                                         <li>Email và Số điện thoại của bạn</li>
-                                     </ul>
-                                     <div class="banner--app  ">
-                                         <img src="https://static.topcv.vn/v4/image/app/banner--app.png" alt="">
-                                     </div>
-                                 </div>
-                             </div>
-                             <div class="col-xs-12">
-                                 <div class="job-waiting-description" id="allow-view-cv-text">
-                                 </div>
-                                 <div>
-                                     <p class="job-waiting-description d-flex  border-top ">
-                                         <i class="fa-light fa-circle-info"></i>
-                                         <span> Bạn cần hoàn thiện trên 70% TopCV Profile để bắt đầu tiếp cận với nhà tuyển
-                                             dụng</span>
-                                     </p>
-                                     <a href="https://www.topcv.vn/p/7467-pham-vu-luan-5863682"
-                                         class="btn btn-create-profile btn-sm">Cập nhật TopCV Profile</a>
-                                 </div>
-                             </div>
-
-                         </div>
-                     </div>
-                     <div class="modal fade modal-turn-on-job modal-slide-up" role="dialog" id="modalTurnOnJob"
-                         data-backdrop="static" data-keyboard="false">
-                         <div class="modal-dialog">
-                             <div class="modal-content">
-                                 <div class="modal-turn-on-job__header">
-                                     <div class="modal-turn-on-job__header--content content">
-                                         <h3 class="content__title">
-                                             Bật tìm việc ngay để không bỏ lỡ những cơ hội đặc biệt hấp dẫn
-                                         </h3>
-                                         <p class="content__desc">
-                                             Vui lòng lựa chọn các CV bạn muốn bật tìm việc Hoặc click "Tôi không có nhu
-                                             cầu" để bỏ qua
-                                         </p>
-                                     </div>
-                                     <div class="modal-turn-on-job__header--image">
-                                         <img src="https://static.topcv.vn/v4/image/turn-on-job/img-header.png"
-                                             alt="">
-                                     </div>
-                                     <div class="modal-turn-on-job__header--close" id="btn-close-turn-on-job">
-                                         <i class="fa-solid fa-xmark"></i>
-                                     </div>
-                                 </div>
-                                 <div class="modal-turn-on-job__cv-empty">
-                                     <img class="modal-turn-on-job__cv-empty--img"
-                                         src="https://static.topcv.vn/v4/image/turn-on-job/img-empty.png" alt="">
-                                     <p class="modal-turn-on-job__cv-empty--desc">Bạn chưa có CV nào.<br>Vui lòng tạo CV
-                                         mới để bật tìm
-                                         việc
-                                     </p>
-                                     <div class="modal-turn-on-job__cv-empty--button-create-cv">
-                                         <a href="https://www.topcv.vn/mau-cv">Tạo CV mới</a>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="overlay-modal-open-to-work-success" style="display: none">
-                     </div>
-                     <div id="modal-open-to-work-success" style="display: none">
-                         <div class="popup-wrapper">
-                             <div class="popup-wrapper__header">
-                                 <div class="popup-wrapper__body-description">
-                                     <img src="https://static.topcv.vn/v4/image/upload-cv/upload-cv-success.png"
-                                         alt="" class="popup-wrapper__body-description--logo img-responsive">
-                                     <div class="popup-wrapper__body-description--title">
-                                         Bật tìm việc thành công
-                                     </div>
-                                     <div class="popup-wrapper__body-description--content">
-                                         Khi có cơ hội việc làm phù hợp, NTD sẽ chủ động liên hệ và trao đổi với bạn qua:
-                                     </div>
-                                     <div class="popup-wrapper__body-description--list">
-                                         <div class="popup-wrapper__body-description--list-item">
-                                             1. Top Connect trên TopCV
-                                         </div>
-                                         <div class="popup-wrapper__body-description--list-item">
-                                             <div class="popup-wrapper__body-description--list-item">
-                                                 2. Email và Số điện thoại của bạn
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="popup-wrapper__body-qr">
-                                     <div class="popup-wrapper__body-qr--description">
-                                         Tải ứng dụng TopCV để nhận thông báo ngay lập tức khi bạn có tin nhắn mới
-                                     </div>
-                                     <div class="popup-wrapper__body-qr--img">
-                                         <img class="competitive-rating__img--qr"
-                                             src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/job-detail/qr-detail-job-feature.png"
-                                             alt="QR Code">
-                                         <span>Quét QR để tải app</span>
-                                     </div>
-                                 </div>
-                             </div>
-                             <div class="popup-wrapper__body-warning" id="open-to-work-warning">
-                                 <div class="popup-wrapper__body-warning--icon">
-                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                         <g clip-path="url(#clip0_3143_6423)">
-                                             <path
-                                                 d="M10 2.74951C13.8555 2.74951 17 5.89404 17 9.74951C17 13.6323 13.8555 16.7495 10 16.7495C6.11719 16.7495 3 13.6323 3 9.74951C3 5.89404 6.11719 2.74951 10 2.74951ZM10 6.24951C9.50781 6.24951 9.125 6.65967 9.125 7.12451C9.125 7.6167 9.50781 7.99951 10 7.99951C10.4648 7.99951 10.875 7.6167 10.875 7.12451C10.875 6.65967 10.4648 6.24951 10 6.24951ZM11.0938 13.2495C11.4492 13.2495 11.75 12.9761 11.75 12.5933C11.75 12.2378 11.4492 11.937 11.0938 11.937H10.6562V9.53076C10.6562 9.17529 10.3555 8.87451 10 8.87451H9.125C8.74219 8.87451 8.46875 9.17529 8.46875 9.53076C8.46875 9.91357 8.74219 10.187 9.125 10.187H9.34375V11.937H8.90625C8.52344 11.937 8.25 12.2378 8.25 12.5933C8.25 12.9761 8.52344 13.2495 8.90625 13.2495H11.0938Z"
-                                                 fill="#286AC6"></path>
-                                         </g>
-                                         <defs>
-                                             <clipPath id="clip0_3143_6423">
-                                                 <rect width="20" height="20" fill="white"
-                                                     transform="translate(0 -0.000488281)"></rect>
-                                             </clipPath>
-                                         </defs>
-                                     </svg>
-                                 </div>
-                                 <div class="popup-wrapper__body-warning--content">
-                                     CV <span id="open-to-work-warning-cv-name"></span> của bạn đã lâu chưa được cập nhật.
-                                     Hãy cập nhật để
-                                     Nhà tuyển dụng nắm được những thông tin mới nhất về năng lực, kinh nghiệm của bạn nhé.
-                                     <br>
-                                     <a href="#" target="_blank" id="open-to-work-warning-link">Cập nhật CV
-                                         ngay</a>
-                                 </div>
-                             </div>
-                             <div class="popup-wrapper__close">
-                                 Đóng
-                             </div>
-                         </div>
-                     </div>
-                     <script>
-                         APP_DOWNLOAD_URL = 'https://www.topcv.vn/app-download'
-                     </script>
-                     <link rel="stylesheet"
-                         href="https://static.topcv.vn/v4/css/components/modals/profile/modal-open-to-work-success.min.28602a53cc00e938K.css">
-                     <script defer="" src="https://static.topcv.vn/v4/js/components/profile/modal-open-to-work-success.6ba1a9b5a5ed4e66.js">
-                     </script>
-                 </div>
-                 <div class="box box-white box-setting-sidebar">
-                     <div id="ignore-cv-employer">
-                         <div class="box-title">
-                             <h4 class="title">Ẩn hồ sơ với NTD</h4>
-                             <span class="tag">Mới</span>
-                         </div>
-                         <p class="desc"> Tôi không muốn CV của tôi hiển thị với danh sách các NTD có tên miền email và
-                             thuộc các công ty dưới đây:</p>
-                         <div class="box-ignore-item ignore-domain">
-                             <div class="title">
-                                 Các NTD với email có tên miền
-                             </div>
-                             <div class="tutorial">
-                                 <i class="fa-solid fa-circle-info"></i>
-                                 <span>Ví dụ: Để ẩn hồ sơ của bạn với NTD có email <u>admin@tenmiencongty.com</u>, vui lòng
-                                     nhập <u>tenmiencongty.com</u>.</span>
-                             </div>
-                             <div class="form-ignore-domain">
-                                 <input class="form-control border-hover input-domain" placeholder="Nhập tên miền email">
-                                 <span class="prefix">@</span>
-                                 <button
-                                     class="btn btn-sm btn-topcv-default btn-default-hover btn-add-domain">Thêm</button>
-                             </div>
-                             <div class="list-ignore-domain">
-                             </div>
-                         </div>
-                         <div class="box-ignore-item">
-                             <div class="title">Các NTD thuộc công ty</div>
-                             <div class="form-ignore-company">
-                                 <input class="form-control border-hover input-company" placeholder="Nhập tên công ty">
-                                 <i class="fa-solid fa-magnifying-glass"></i>
-                                 <div class="box-suggest-company">
-                                 </div>
-                             </div>
-                             <div class="list-ignore-company">
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-                 <script src="https://static.topcv.vn/v4/js/components/mobile-app/download-app-component.c9a553da008b283d.js"></script>
-                 <script>
-                     const LOCAL_STORAGE_MODAL_OPEN_TO_WORK_SUCCESS_KEY = 'isShowModalOpenToWorkSuccess';
-                     let linkEditCv = "https://www.topcv.vn/sua-cv";
-                     var SETTING_PRIVACY_URL = "https://www.topcv.vn/tai-khoan/bao-mat";
-                     var cbjobWaiting = null;
-                     var isRequesting = false;
-                     var allowEplViewCvAjaxLock = false;
-                     var modalOptionWishJobVue = null;
-                     APP_DOWNLOAD_URL = 'https://www.topcv.vn/app-download'
-                     var AJAX_UPDATE_JOB_WAITING_STATUS_URL = "https://www.topcv.vn/profile/ajax-update-status";
-
-                     function openFileDialog() {
-                         $('#img-avatar').click();
-                     }
-                     $(document).ready(function() {
-                         setProgressbarValue(1,
-                             3);
-                         $('#category-selector').select2();
-
-                         $('#no-profile').click(function() {
-                             toastr.error('Hiện tại bạn chưa có TopCV Profile vui lòng cập nhật TopCV Profile.');
-                             return false;
-                         });
-                         $('#incomplete').click(function() {
-                             toastr.error('Hiện tại TopCV Profile của bạn chưa hoàn thành trên 70%.');
-                             return false;
-                         });
-
-                         $('.radio-choose-active input[name=profile_is_active]').change(function() {
-                             if (isRequesting) return false;
-                             isRequesting = true;
-                             $.ajax({
-                                     url: 'https://www.topcv.vn/profile/choose-active',
-                                     type: 'POST',
-                                     data: {
-                                         is_active: $('#box-profile-active input[name=profile_is_active]:checked')
-                                             .val()
-                                     },
-                                 })
-                                 .done(function(response) {
-                                     if (response.success == true) {
-                                         toastr.success(response.message);
-                                     } else {
-                                         toastr.error(response.message);
-                                     }
-                                 })
-                                 .fail(function() {
-                                     toastr.error('Đã có lỗi xảy ra vui lòng liên hệ quản trị hệ thống');
-                                 })
-                                 .always(function() {
-                                     isRequesting = false;
-                                 });
-
-                         });
-
-                         $('.download--app').on('click', function() {
-                             window.downloadApp()
-                         })
-                     });
-                 </script>
-                 <div class="box box-white text-center-sm box-employee-view-cv">
-                     <div class="row">
-                         <div class=" cv-count-header">
-                             <div class="text-highlight">
-                                 <strong style="font-size: 16px;">CV của bạn đã đủ tốt?</strong>
-                                 <p class="text-neutral-neutral-40">Bao nhiêu NTD đang quan tâm tới Hồ sơ của bạn?</p>
-                             </div>
-                         </div>
-                         <div class="col-md-4">
-                             <div class="cv-count  gray ">
-                                 <div class="cv-count-number">0</div>
-                                 <div>lượt</div>
-                             </div>
-                         </div>
-                         <div class="col-md-8" style="padding-top: 5px">
-                             <p>Mỗi lượt Nhà tuyển dụng xem CV mang đến một cơ hội để bạn gần hơn với công việc phù hợp.</p>
-                             <div class="">
-                                 <a href="https://www.topcv.vn/xem-ho-so" target="_blank"
-                                     class="btn btn-sm btn-topcv-primary">Khám phá ngay</a>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
          </div>
      </div>
      <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -616,8 +202,7 @@
      <link rel="stylesheet" href="https://static.topcv.vn/v4/css/style.d8c1fe08632e5e88K.css">
      <link rel="stylesheet"
          href="https://static.topcv.vn/v4/css/components/sidebar/box-sidebar-profile.af4c32d889bb9024K.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/components/common/ignore-cv-employer.e1c5492da1d7a17dK.css">
+     <link rel="stylesheet" href="https://static.topcv.vn/v4/components/common/ignore-cv-employer.e1c5492da1d7a17dK.css">
      <link rel="stylesheet"
          href="https://static.topcv.vn/v4/css/components/support-ticket/support-ticket.b6c89357bb501feaK.css">
      <link rel="stylesheet"
@@ -671,8 +256,7 @@
      <link rel="stylesheet" href="https://static.topcv.vn/v4/css/style.d8c1fe08632e5e88K.css">
      <link rel="stylesheet"
          href="https://static.topcv.vn/v4/css/components/sidebar/box-sidebar-profile.af4c32d889bb9024K.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/components/common/ignore-cv-employer.e1c5492da1d7a17dK.css">
+     <link rel="stylesheet" href="https://static.topcv.vn/v4/components/common/ignore-cv-employer.e1c5492da1d7a17dK.css">
      <link rel="stylesheet"
          href="https://static.topcv.vn/v4/css/components/support-ticket/support-ticket.b6c89357bb501feaK.css">
      <link rel="stylesheet"

@@ -1,11 +1,18 @@
 @extends('layout')
 @section('content')
-     <link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/language/css/language-public.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/cookie-consent/css/cookie-consent.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/plugins/bootstrap/bootstrap.min.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/css/style.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/job-board/css/avatar.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/core/base/libraries/tagify/tagify.css') }}">
+<link media="all" type="text/css" rel="stylesheet"
+        href="https://vieclam.topgialai.vn/themes/jobbox/plugins/bootstrap/bootstrap.min.css">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/language/css/language-public.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/cookie-consent/css/cookie-consent.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('themes/jobbox/plugins/bootstrap/bootstrap.min.css') }}">
+    <link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/css/style.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/job-board/css/avatar.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/core/base/libraries/tagify/tagify.css') }}">
 
     <style>
         .navbar-nav {
@@ -53,16 +60,17 @@
                     <div class="col-lg-3 col-md-4 col-sm-12">
                         <div class="box-nav-tabs nav-tavs-profile mb-5">
                             <ul class="nav" role="tablist">
-  <li><a class="btn btn-border aboutus-icon mb-20"
+                                <li><a class="btn btn-border aboutus-icon mb-20"
                                         href="{{ route('personal.profile.account') }}">Thông tin tài khoản</a>
                                 </li>
-                                <li><a class="btn btn-border recruitment-icon mb-20 active"
-                                        href="{{route('cv.overview')}}">Tổng quan</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('cv.overview') }}">Tổng quan</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20"
                                         href="{{ route('experience.index') }}">Kinh nghiệm</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20 "
                                         href="{{ route('education.index') }}">Giáo dục</a></li>
-                                <li><a class="btn btn-border recruitment-icon mb-20 active" href="{{ route('skills.index') }}">Kĩ
+                                <li><a class="btn btn-border recruitment-icon mb-20 active"
+                                        href="{{ route('skills.index') }}">Kĩ
                                         năng</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20"
                                         href="{{ route('certificates.index') }}">Chứng chỉ</a></li>
@@ -83,33 +91,37 @@
                         <div class="content-single">
                             <div class="tab-content">
 
-<div class="col-lg-12">
-    <div class="mb-3 mt-10">
-        <a href="{{ route('skills.create') }}" class="btn btn-default btn-brand icon-tick">Thêm kỹ năng</a>
-    </div>
-</div>
+                                <div class="col-lg-12">
+                                    <div class="mb-3 mt-10">
+                                        <a href="{{ route('skills.create') }}"
+                                            class="btn btn-default btn-brand icon-tick">Thêm kỹ năng</a>
+                                    </div>
+                                </div>
 
-<div class="box-timeline mt-50">
-    @foreach ($skills as $skill)
-        <div class="item-timeline">
-            <div class="timeline-info">
-                <h5 class="color-brand-1 mb-20">{{ $skill->name }}
-                    <span class="ml-5 text-muted">({{ $skill->proficiency }})</span>
-                </h5>
-            </div>
-            <div class="timeline-actions">
-                <a href="{{ route('skills.edit', $skill->id) }}" class="btn btn-editor">Sửa</a>
-                <form method="POST" action="{{ route('skills.destroy', $skill->id) }}" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button onclick="return confirm('Bạn có chắc muốn xóa mục này?');" class="btn btn-remove" type="submit">Xóa</button>
-                </form>
-            </div>
-        </div>
-    @endforeach
-</div>
+                                <div class="box-timeline mt-50">
+                                    @foreach ($skills as $skill)
+                                        <div class="item-timeline">
+                                            <div class="timeline-info">
+                                                <h5 class="color-brand-1 mb-20">{{ $skill->name }}
+                                                    <span class="ml-5 text-muted">({{ $skill->proficiency }})</span>
+                                                </h5>
+                                            </div>
+                                            <div class="timeline-actions">
+                                                <a href="{{ route('skills.edit', $skill->id) }}"
+                                                    class="btn btn-editor"></a>
+                                                <form method="POST" action="{{ route('skills.destroy', $skill->id) }}"
+                                                    style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button onclick="return confirm('Bạn có chắc muốn xóa mục này?');"
+                                                        class="btn btn-remove" type="submit"></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
 
-</div>
+                            </div>
                         </div>
                     </div>
 

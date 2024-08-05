@@ -1,11 +1,18 @@
 @extends('layout')
 @section('content')
- <link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/language/css/language-public.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/cookie-consent/css/cookie-consent.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/plugins/bootstrap/bootstrap.min.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/css/style.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/job-board/css/avatar.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/core/base/libraries/tagify/tagify.css') }}">
+<link media="all" type="text/css" rel="stylesheet"
+        href="https://vieclam.topgialai.vn/themes/jobbox/plugins/bootstrap/bootstrap.min.css">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/language/css/language-public.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/cookie-consent/css/cookie-consent.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('themes/jobbox/plugins/bootstrap/bootstrap.min.css') }}">
+    <link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/css/style.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/job-board/css/avatar.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/core/base/libraries/tagify/tagify.css') }}">
     <style>
         .navbar-nav {
             --bs-nav-link-padding-x: 0;
@@ -52,11 +59,11 @@
                     <div class="col-lg-3 col-md-4 col-sm-12">
                         <div class="box-nav-tabs nav-tavs-profile mb-5">
                             <ul class="nav" role="tablist">
-                               <li><a class="btn btn-border aboutus-icon mb-20"
+                                <li><a class="btn btn-border aboutus-icon mb-20"
                                         href="{{ route('personal.profile.account') }}">Thông tin tài khoản</a>
                                 </li>
-                                <li><a class="btn btn-border recruitment-icon mb-20 active"
-                                        href="{{route('cv.overview')}}">Tổng quan</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('cv.overview') }}">Tổng quan</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20"
                                         href="{{ route('experience.index') }}">Kinh nghiệm</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20 "
@@ -102,13 +109,13 @@
                                             </div>
                                             <div class="timeline-actions">
                                                 <a href="{{ route('projects.edit', $project->id) }}"
-                                                    class="btn btn-editor">Sửa</a>
+                                                    class="btn btn-editor"></a>
                                                 <form method="POST" action="{{ route('projects.destroy', $project->id) }}"
                                                     style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button onclick="return confirm('Bạn có chắc muốn xóa mục này?');"
-                                                        class="btn btn-remove" type="submit">Xóa</button>
+                                                        class="btn btn-remove" type="submit"></button>
                                                 </form>
                                             </div>
                                         </div>

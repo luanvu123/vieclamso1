@@ -102,11 +102,7 @@
                              </div>
                          </div>
                          <div class="box-header__tool">
-                             <span class="see-more">
-                                 <a href="viec-lam-tot-nhat.html" target="_blank">
-                                     Xem tất cả
-                                 </a>
-                             </span>
+                             
                              <span class="btn-feature-jobs-pre btn-slick-arrow"
                                  :class="{ 'slick-disabled': currentPage === 1 || totalPage === 0 }" @click="backPage">
                                  <i class="fa-solid fa-chevron-left"></i>

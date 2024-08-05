@@ -169,68 +169,11 @@
                                      Tài khoản đã xác thực
                                  </span>
                              </div>
-                             <div class="box-footer">
-                                 <a href="https://www.topcv.vn/tai-khoan/nang-cap" class="btn btn-sm btn-upgrade">
-                                     <i class="fa-solid fa-circle-arrow-up"></i>
-                                     <span>
-                                         Nâng cấp tài khoản
-                                     </span>
-                                 </a>
-                             </div>
                          </div>
                      </div>
                      <div class="row turn-on-job__body" style="margin-top: 15px">
                          <input type="hidden" id="currentStatus" value="0">
                          <div id="on-off-job-waiting" class="">
-                             <div class="col-xs-12 group-switch">
-                                 <label class="switch">
-                                     <input type="checkbox" value="1" id="btn-job-waiting">
-                                     <span class="slider round"></span>
-                                 </label>
-                                 <span class="job-waiting-status-text job-off-show">
-                                     <strong class="text-neutral-neutral-40">Đang Tắt tìm việc</strong>
-                                 </span>
-                                 <span class="job-waiting-status-text job-on-show">
-                                     <strong class="text-highlight">Trạng thái tìm việc đang bật</strong>
-                                 </span>
-                             </div>
-                             <div class="col-xs-12">
-                                 <p class="job-waiting-description" id="job-waiting-text">
-                                     Bật tìm việc giúp hồ sơ của bạn nổi bật hơn và được chú ý nhiều hơn trong danh
-                                     sách tìm kiếm của
-                                     NTD.
-                                 </p>
-                                 <div id="box-job-waiting" class="box-job-waiting" style="display: none;">
-                                     <div class="box-job-waiting__title">
-                                         Trạng thái <span class="highlight">Bật tìm việc</span> sẽ tự động tắt sau
-                                         <b class="highlight" id="time-remaining-turn-on-job"></b>. Nếu bạn vẫn
-                                         còn nhu cầu tìm việc, hãy <span class="highlight">Bật tìm
-                                             việc trở lại</span>
-                                     </div>
-                                     <div class="box-job-waiting__cv-choose">
-                                         <div class="box-job-waiting__cv-choose--icon">
-                                             <i class="fa-solid fa-file-lines"></i>
-                                         </div>
-                                         <div class="box-job-waiting__cv-choose--text">
-                                             <span id="text-count-cv-turn-on-job">0</span> CV đang được chọn
-                                         </div>
-                                         <div class="box-job-waiting__cv-choose--button" id="btn-edit-job-waiting">
-                                             Thay đổi
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-                             <div class="col-xs-12 group-switch">
-                                 <label class="switch">
-                                     <input type="checkbox" value="1" id="btn-allow-epl-view-cv" checked="">
-                                     <span class="slider round"></span>
-                                 </label>
-                                 <span class="job-waiting-status-text">
-                                     <strong id="text-allow-epl-view-cv" class=" text-highlight ">
-                                         Cho phép NTD tìm kiếm hồ sơ
-                                     </strong>
-                                 </span>
-                             </div>
                              <div id="box-profile-active" class="col-xs-12">
                                  <div class="description-allow-employee-search">
                                      <p>

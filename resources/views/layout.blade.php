@@ -42,6 +42,7 @@
 
     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/desktop/job-save.min.d88c8255578e7d64K.css">
     <link rel="stylesheet" href="https://static.topcv.vn/v4/components/desktop/history-apply.fe7877ceeda62d0fK.css">
+    
     <link rel="stylesheet" href="../static.topcv.vn/v4/css/components/desktop/app-page.min.540613ab89f44167G.css">
     <link rel="stylesheet" href="../../static.topcv.vn/v4/css/pages/blog-page/blog-desktop.d6b67a34ec167762G.css">
     <link rel="stylesheet" href="../static.topcv.vn/v4/css/components/desktop/company/detail.min.b7fffc86741bf76cG.css">

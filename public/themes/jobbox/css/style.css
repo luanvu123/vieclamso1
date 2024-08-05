@@ -1,4 +1,4 @@
-/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
 html {
     -webkit-text-size-adjust: 100%;
     line-height: 1.15
@@ -105,6 +105,7 @@ select {
 [type=submit],
 button {
     -webkit-appearance: button
+
 }
 
 [type=button]::-moz-focus-inner,
@@ -4723,6 +4724,7 @@ h6 {
 }
 
 .btn {
+    color: green;
     border-radius: 8px;
     font-family: var(--primary-font), sans-serif;
     font-size: 14px;
@@ -4733,7 +4735,7 @@ h6 {
 
 .btn.btn-default {
     background-color: var(--primary-color);
-    color: #fff;
+    color: #11ec2e;
     line-height: 26px;
     padding: 10px 25px
 }
@@ -4794,14 +4796,14 @@ h6 {
 .btn-apply {
     background-color: var(--primary-color);
     border-radius: 4px;
-    color: #fff;
+    color: #35ce24;
     padding: 12px 20px;
     white-space: nowrap
 }
 
 .btn-apply:hover {
     background-color: var(--secondary-color);
-    color: #fff
+    color: #1afa64
 }
 
 .btn-apply-icon {
@@ -13845,7 +13847,7 @@ span .user-name-dropdown {
 .box-company-profile .image-candidate img {
     border-radius: 50%;
     height: 85px;
-    width: 100%
+    width: 85px;
 }
 
 .avatar-view .image-profile img {
@@ -14106,7 +14108,8 @@ span .user-name-dropdown {
 
 .btn-primary {
     background-color: var(--primary-color);
-    border-color: unset
+    border-color: unset;
+    color:green;
 }
 
 .btn-primary:hover {

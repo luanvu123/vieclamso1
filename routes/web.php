@@ -165,6 +165,8 @@ Route::get('candidate/google/callback', [CandidateController::class, 'handleGoog
 
 
 Route::middleware(['candidate'])->group(function () {
+
+    
     Route::post('/job-reports', [CandidateController::class, 'storeReport'])->name('job-reports.store');
     Route::get('/candidate/messages', [MessageController::class, 'receiveCandidateMessages'])->name('messages.receive.candidate');
     Route::get('/candidate/messages/{employer}', [MessageController::class, 'showCandidateMessages'])->name('messages.show.candidate');

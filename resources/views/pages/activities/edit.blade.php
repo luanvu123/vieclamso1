@@ -1,11 +1,18 @@
 @extends('layout')
 @section('content')
-    <link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/language/css/language-public.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/cookie-consent/css/cookie-consent.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/plugins/bootstrap/bootstrap.min.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/css/style.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/job-board/css/avatar.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/core/base/libraries/tagify/tagify.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="https://vieclam.topgialai.vn/themes/jobbox/plugins/bootstrap/bootstrap.min.css">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/language/css/language-public.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/cookie-consent/css/cookie-consent.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('themes/jobbox/plugins/bootstrap/bootstrap.min.css') }}">
+    <link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/css/style.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/job-board/css/avatar.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/core/base/libraries/tagify/tagify.css') }}">
 
     <style>
         .navbar-nav {
@@ -53,11 +60,11 @@
                     <div class="col-lg-3 col-md-4 col-sm-12">
                         <div class="box-nav-tabs nav-tavs-profile mb-5">
                             <ul class="nav" role="tablist">
-                                 <li><a class="btn btn-border aboutus-icon mb-20"
+                                <li><a class="btn btn-border aboutus-icon mb-20"
                                         href="{{ route('personal.profile.account') }}">Thông tin tài khoản</a>
                                 </li>
-                                <li><a class="btn btn-border recruitment-icon mb-20 active"
-                                        href="{{route('cv.overview')}}">Tổng quan</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20"
+                                        href="{{ route('cv.overview') }}">Tổng quan</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20"
                                         href="{{ route('experience.index') }}">Kinh nghiệm</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20 "
@@ -84,36 +91,40 @@
                             <div class="tab-content">
 
 
-                               <h2>Sửa Hoạt Động</h2>
+                                <h2>Sửa Hoạt Động</h2>
 
-<form method="POST" action="{{ route('activities.update', $activity->id) }}">
-    @csrf
-    @method('PUT')
+                                <form method="POST" action="{{ route('activities.update', $activity->id) }}">
+                                    @csrf
+                                    @method('PUT')
 
-    <div class="mb-3">
-        <label class="form-label" for="title">Tiêu đề *</label>
-        <input class="form-control" id="title" type="text" name="title" value="{{ $activity->title }}" required>
-    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="title">Tiêu đề *</label>
+                                        <input class="form-control" id="title" type="text" name="title"
+                                            value="{{ $activity->title }}" required>
+                                    </div>
 
-    <div class="mb-3">
-        <label class="form-label" for="description">Mô tả *</label>
-        <textarea class="form-control" id="description" name="description" rows="4" required>{{ $activity->description }}</textarea>
-    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="description">Mô tả *</label>
+                                        <textarea class="form-control" id="description" name="description" rows="4" required>{{ $activity->description }}</textarea>
+                                    </div>
 
-    <div class="mb-3">
-        <label class="form-label" for="start_date">Ngày bắt đầu *</label>
-        <input class="form-control" id="start_date" type="date" name="start_date" value="{{ \Carbon\Carbon::parse($activity->start_date)->format('Y-m-d') }}" required>
-    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="start_date">Ngày bắt đầu *</label>
+                                        <input class="form-control" id="start_date" type="date" name="start_date"
+                                            value="{{ \Carbon\Carbon::parse($activity->start_date)->format('Y-m-d') }}"
+                                            required>
+                                    </div>
 
-    <div class="mb-3">
-        <label class="form-label" for="end_date">Ngày kết thúc</label>
-        <input class="form-control" id="end_date" type="date" name="end_date" value="{{ $activity->end_date ? \Carbon\Carbon::parse($activity->end_date)->format('Y-m-d') : '' }}">
-    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="end_date">Ngày kết thúc</label>
+                                        <input class="form-control" id="end_date" type="date" name="end_date"
+                                            value="{{ $activity->end_date ? \Carbon\Carbon::parse($activity->end_date)->format('Y-m-d') : '' }}">
+                                    </div>
 
-    <div class="mb-3">
-        <button class="btn btn-primary" type="submit">Cập nhật</button>
-    </div>
-</form>
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary" type="submit">Cập nhật</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
