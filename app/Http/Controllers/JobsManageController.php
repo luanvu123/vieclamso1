@@ -6,6 +6,7 @@ use App\Models\JobPosting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use File;
+
 class JobsManageController extends Controller
 {
     /**
@@ -14,18 +15,23 @@ class JobsManageController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function __construct()
+    public function __construct()
     {
+        $this->middleware('permission:job-posting-manage-list|job-posting-manage-create|job-posting-manage-edit|job-posting-manage-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:job-posting-manage-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:job-posting-manage-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:job-posting-manage-delete', ['only' => ['destroy']]);
         $this->middleware('permission:jobPosting-choose', ['only' => ['jobPosting_choose']]);
     }
+
     public function index()
     {
         $jobPostings = JobPosting::with('employer')->get();
-         $path=public_path()."/json/";
-        if(!is_dir($path)) {
-            mkdir($path,0777,true);
-         }
-        File::put($path.'jobs.json',json_encode($jobPostings));
+        $path = public_path() . "/json/";
+        if (!is_dir($path)) {
+            mkdir($path, 0777, true);
+        }
+        File::put($path . 'jobs.json', json_encode($jobPostings));
         return view('admin.jobs_manage.index', compact('jobPostings'));
     }
 
@@ -41,7 +47,7 @@ class JobsManageController extends Controller
         return view('admin.jobs_manage.show', compact('jobPosting'));
     }
 
-     public function jobPosting_choose(Request $request)
+    public function jobPosting_choose(Request $request)
     {
         $data = $request->all();
         $jobPosting = jobPosting::find($data['id']);

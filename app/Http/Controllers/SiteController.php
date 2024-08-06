@@ -61,7 +61,9 @@ class SiteController extends Controller
         $awards = Award::where('status', 1)->take(5)->get();
         $ecosystems = Ecosystem::where('status', 1)->take(4)->get();
         $medias = Media::where('status', 1)->take(6)->get();
-        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias'));
+          $totalCompanyCount = Company::count();
+         $totalApplicationCount = Application::count();
+        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias','totalCompanyCount','totalApplicationCount'));
     }
 
     public function show($slug)
@@ -95,7 +97,7 @@ class SiteController extends Controller
         $courses = Course::where('status', 1)->take(3)->get();
         $company_random = Company::inRandomOrder()->first();
         $jobPosting_random = $company_random->jobPostings()->where('status', 0)->get();
-        
+
         return view('pages.job', compact('jobPosting', 'closingDate', 'isExpired', 'candidate', 'applied', 'appliedDate', 'relatedJobs', 'courses', 'company_random', 'jobPosting_random'));
     }
 
