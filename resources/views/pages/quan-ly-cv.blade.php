@@ -5,7 +5,7 @@
              <div class="col-sm-8" id="manager-cv">
                  <div id="cv-list" class="box-block">
                      <div class="box-header">
-                         <h1 class="title">CV đã tạo trên TopCV</h1> <a href="https://www.topcv.vn/mau-cv"
+                         <h1 class="title">CV đã tạo trên TopCV</h1> <a href="{{route('personal.profile.account')}}"
                              class="btn btn-add-cv btn-primary-hover "><i class="fa-solid fa-plus"></i> Tạo mới</a>
                          <div id="createCVModal" tabindex="-1" role="dialog" class="modal fade">
                              <div class="modal-dialog">
@@ -188,78 +188,4 @@
              </div>
          </div>
      </div>
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link rel="stylesheet" href="https://www.topcv.vn/v2/bootstrap/css/bootstrap.min.css?v=1.1.1">
-     <link rel="stylesheet" href="https://www.topcv.vn/v2/plugins/select2/css/select2.min.css" />
-     <link rel="stylesheet" href="https://www.topcv.vn/v3/css/notification.css?v=1.0.10">
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/app.min.fa6e35ed40ac0f6cK.css">
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/navbar_bs.48a14966e2c4f3ceK.css">
-     <link rel="preload" as="style" onload="this.rel='stylesheet'"
-         href="https://www.topcv.vn/v3/plugins/slick/slick.css?v=1.0.0">
-     <link rel="preload" as="style" onload="this.rel='stylesheet'"
-         href="https://www.topcv.vn/v3/plugins/slick/slick-theme.css?v=1.0.0">
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/style.d8c1fe08632e5e88K.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/sidebar/box-sidebar-profile.af4c32d889bb9024K.css">
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/components/common/ignore-cv-employer.e1c5492da1d7a17dK.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/support-ticket/support-ticket.b6c89357bb501feaK.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/desktop/partials/icon-verified-employer.min.59a8d20b3e34dfbfK.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/desktop/anti-scam/anti-scam-popup.c5649f2e22fa75d8K.css?v=2.1.7">
-     <script src="https://static.topcv.vn/v4/js/components/addon/slide-custom.1fe596cbde5867d1.js"></script>
-     <script src="https://static.topcv.vn/v4/js/sign-in-popup.min.b45d0ba8edb038f3.js"></script>
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/components/addon/service-payment/service-payment.min.19d612aa801cdbffK.css">
-     <script src="https://www.topcv.vn/v3/js/qrcode.min.js"></script>
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/icon.min.9bbbd0ac9d068264K.css">
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/sign-in-popup.65a92cb48ed456d9K.css">
-     <script async defer crossorigin="anonymous"
-         src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=1478418029113221&autoLogAppEvents=1"
-         nonce="vRUcXWy5"></script>
-     <link rel="stylesheet" href="https://www.topcv.vn/cv-new/css/download-v2.css?v=1.1.1">
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/components/download-cv/download-cv.bae8846e2f67db9fK.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/modals/profile/modal-open-to-work-success.min.28602a53cc00e938K.css">
-     <script defer src="https://static.topcv.vn/v4/js/components/profile/modal-open-to-work-success.6ba1a9b5a5ed4e66.js">
-     </script>
-     <link rel="stylesheet" href="https://www.topcv.vn/v2/css/font.css?v=1.1.1">
-
-     <link rel="stylesheet" href="https://www.topcv.vn/v2/css/animate.css?v=1.1.1">
-     <link rel="stylesheet" href="https://www.topcv.vn/v3/css/jquery-ui.css">
-     <link rel="stylesheet" type="text/css" href="https://www.topcv.vn/v3/css/cropper.min.css">
-     <link rel="stylesheet" type="text/css" href="https://www.topcv.vn/packages/cvo/cropper/style.css?v=2.1">
-     <link rel="stylesheet" href="https://www.topcv.vn/v3/plugins/icon8/css/styles.min.css">
-     <link rel="stylesheet" href="https://www.topcv.vn/v2/plugins/switchery/switchery.min.css">
-     <link rel="stylesheet" href="https://www.topcv.vn/v3/css/toastr.min.css">
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/jobs/save-job.min.c9999edafec369a1K.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/support-ticket/modal-support-ticket.883d333234b516c9K.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/modal-cv-competitive-notification.min.6cd319d7597e2f70K.css">
-     <script defer
-         src="https://static.topcv.vn/v4/js/common/cv-competition/modal-cv-competition-notification.8e5c106c1249aa51.js">
-     </script>
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link rel="stylesheet" href="https://www.topcv.vn/v2/bootstrap/css/bootstrap.min.css?v=1.1.1">
-     <link rel="stylesheet" href="https://www.topcv.vn/v2/plugins/select2/css/select2.min.css" />
-     <link rel="stylesheet" href="https://www.topcv.vn/v3/css/notification.css?v=1.0.10">
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/app.min.fa6e35ed40ac0f6cK.css">
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/navbar_bs.48a14966e2c4f3ceK.css">
-     <link rel="preload" as="style" onload="this.rel='stylesheet'"
-         href="https://www.topcv.vn/v3/plugins/slick/slick.css?v=1.0.0">
-     <link rel="preload" as="style" onload="this.rel='stylesheet'"
-         href="https://www.topcv.vn/v3/plugins/slick/slick-theme.css?v=1.0.0">
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/style.d8c1fe08632e5e88K.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/sidebar/box-sidebar-profile.af4c32d889bb9024K.css">
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/components/common/ignore-cv-employer.e1c5492da1d7a17dK.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/support-ticket/support-ticket.b6c89357bb501feaK.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/desktop/partials/icon-verified-employer.min.59a8d20b3e34dfbfK.css">
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/desktop/manager-cv.b6b84668d5c1950aK.css">
  @endsection

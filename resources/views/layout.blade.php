@@ -62,7 +62,7 @@
     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/style.d8c1fe08632e5e88K.css">
     <link rel="stylesheet" href="https://www.topcv.vn/v3/css/notification.css?v=1.0.10">
     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/app.min.fa6e35ed40ac0f6cK.css">
-
+    <link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/desktop/manager-cv.b6b84668d5c1950aK.css">
     <!-- Slick CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css" />
