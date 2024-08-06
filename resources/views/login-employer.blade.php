@@ -81,7 +81,7 @@
                 <p>TopCV - Hệ sinh thái nhân sự tiên phong ứng dụng công nghệ tại Việt Nam</p>
             </div>
             <div class="bg-right-arrow"></div>
-            <a class="bg-right-link" href="{{route("/>")}}"></a>
+            <a class="bg-right-link" href="{{route("/")}}"></a>
         </div>
     </div>
     <script src="../www.google.com/recaptcha/api.js"></script>
