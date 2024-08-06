@@ -31,7 +31,7 @@
 
         <div>
             <label for="icon">Icon:</label>
-            <input type="file" id="icon" name="icon">
+            <input type="text" id="icon" name="icon">
             @error('icon')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
             @enderror

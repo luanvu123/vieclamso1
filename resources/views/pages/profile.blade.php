@@ -374,38 +374,9 @@
                      </script>
                  </div>
                  <script src="https://static.topcv.vn/v4/js/components/mobile-app/download-app-component.c9a553da008b283d.js"></script>
-                 <div class="box box-white text-center-sm box-employee-view-cv">
-                     <div class="row">
-                         <div class=" cv-count-header">
-                             <div class="text-highlight">
-                                 <strong style="font-size: 16px;">CV của bạn đã đủ tốt?</strong>
-                                 <p class="text-neutral-neutral-40">Bao nhiêu NTD đang quan tâm tới Hồ sơ của bạn?
-                                 </p>
-                             </div>
-                         </div>
-                         <div class="col-md-4">
-                             <div class="cv-count  gray ">
-                                 <div class="cv-count-number">0</div>
-                                 <div>lượt</div>
-                             </div>
-                         </div>
-                         <div class="col-md-8" style="padding-top: 5px">
-                             <p>Mỗi lượt Nhà tuyển dụng xem CV mang đến một cơ hội để bạn gần hơn với công việc phù
-                                 hợp.</p>
-                             <div class="">
-                                 <a href="https://www.topcv.vn/xem-ho-so" target="_blank"
-                                     class="btn btn-sm btn-topcv-primary">Khám phá ngay</a>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
              </div>
          </div>
      </div>
-
-
-
-
      <script src="https://www.topcv.vn/js/jquery.form.js" type="text/javascript"></script>
      <script src="https://www.topcv.vn/v3/js/cropper.min.js"></script>
      <script src="https://www.topcv.vn/v3/js/axios.js"></script>

@@ -38,14 +38,7 @@
 
         <div>
             <label for="icon">Icon:</label>
-            <input type="file" id="icon" name="icon">
-            @if ($genrePost->icon)
-                <div>
-                    <img src="{{ asset('storage/' . $genrePost->icon) }}" alt="Icon" width="100">
-                    <br>
-                    <small>Current icon</small>
-                </div>
-            @endif
+            <input type="text" id="icon" name="icon" value="{{ old('icon', $genrePost->icon) }}" >
             @error('icon')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
             @enderror

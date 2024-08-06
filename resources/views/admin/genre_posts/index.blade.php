@@ -27,13 +27,7 @@
                     <td>{{ $genrePost->slug }}</td>
                     <td>{{ Str::limit($genrePost->note, 50) }}</td>
                     <td>{{ $genrePost->status ? 'Active' : 'Inactive' }}</td>
-                    <td>
-                        @if ($genrePost->icon)
-                            <img src="{{ asset('storage/' . $genrePost->icon) }}" alt="Icon" width="100">
-                        @else
-                            No Icon
-                        @endif
-                    </td>
+                    <td>{{ $genrePost->icon }}</td>
                     <td>{{ $genrePost->created_at->format('Y-m-d H:i:s') }}</td>
                     <td>{{ $genrePost->updated_at->format('Y-m-d H:i:s') }}</td>
                     <td>

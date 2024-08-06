@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class GenrePostController extends Controller
 {
-      public function __construct()
+    public function __construct()
     {
         $this->middleware('permission:genre-post-list|genre-post-create|genre-post-edit|genre-post-delete', ['only' => ['index', 'store']]);
         $this->middleware('permission:genre-post-create', ['only' => ['create', 'store']]);
@@ -39,23 +39,15 @@ class GenrePostController extends Controller
             'title' => 'required|string|max:255',
             'status' => 'boolean',
             'slug' => 'nullable|string|unique:genre_posts,slug',
-            'icon' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'icon' => 'nullable|string|max:255',
             'note' => 'nullable|string',
         ]);
-
-        // Handle icon upload
-        $iconPath = null;
-        if ($request->hasFile('icon')) {
-            $icon = $request->file('icon');
-            $iconPath = $icon->store('genre_posts', 'public');
-        }
-
         GenrePost::create([
             'user_id' => Auth::id(),
             'title' => $request->title,
             'status' => $request->status,
             'slug' => $request->slug ?? Str::slug($request->title),
-            'icon' => $iconPath,
+            'icon' => $request->icon,
             'note' => $request->note,
         ]);
 
@@ -74,21 +66,14 @@ class GenrePostController extends Controller
             'title' => 'required|string|max:255',
             'status' => 'boolean',
             'slug' => 'nullable|string|unique:genre_posts,slug,' . $id,
-            'icon' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'icon' => 'nullable|string|max:255',
             'note' => 'nullable|string',
         ]);
 
         $genrePost = GenrePost::findOrFail($id);
-
-        // Handle icon upload if a new one is provided
-        if ($request->hasFile('icon')) {
-            $icon = $request->file('icon');
-            $iconPath = $icon->store('genre_posts', 'public');
-            $genrePost->icon = $iconPath;
-        }
-
         $genrePost->update([
             'title' => $request->title,
+            'icon' => $request->icon,
             'status' => $request->status,
             'slug' => $request->slug ?? Str::slug($request->title),
             'note' => $request->note,
@@ -104,4 +89,3 @@ class GenrePostController extends Controller
         return redirect()->route('genre-posts.index');
     }
 }
-

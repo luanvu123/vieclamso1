@@ -39,21 +39,24 @@
     <link rel="preload" as="image" fetchpriority="high"
         href="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/bg_header.webp"
         type="image/webp">
+    <link rel="stylesheet" href="{{ asset('v4/css/components/desktop/job-save.min.d88c8255578e7d64K.css') }}">
+    <link rel="stylesheet" href="{{ asset('v4/components/desktop/history-apply.fe7877ceeda62d0fK.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/app-page.min.540613ab89f44167G.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/pages/blog-page/blog-desktop.d6b67a34ec167762G.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/company/detail.min.b7fffc86741bf76cG.css') }}">
+    <link rel="stylesheet" href="{{ asset('static.topcv.vn/v4/cdn/plugins/bootstrap/bootstrap-3.3.4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('static.topcv.vn/v4/css/app.min.644b242d2ff872f5G.css') }}">
+    <link rel="stylesheet" href="{{ asset('vieclamso1/v3/css/toastr.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/company.min.2c1c6ef49abb59bfG.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('v4/css/components/desktop/suggest-job-setting/setting.92bab7ad30839efeK.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/sidebar/box-sidebar-profile.af4c32d889bb9024K.css') }}">
 
-    <link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/desktop/job-save.min.d88c8255578e7d64K.css">
-    <link rel="stylesheet" href="https://static.topcv.vn/v4/components/desktop/history-apply.fe7877ceeda62d0fK.css">
-    
-    <link rel="stylesheet" href="../static.topcv.vn/v4/css/components/desktop/app-page.min.540613ab89f44167G.css">
-    <link rel="stylesheet" href="../../static.topcv.vn/v4/css/pages/blog-page/blog-desktop.d6b67a34ec167762G.css">
-    <link rel="stylesheet" href="../static.topcv.vn/v4/css/components/desktop/company/detail.min.b7fffc86741bf76cG.css">
-    <link rel="stylesheet" href="../static.topcv.vn/v4/cdn/plugins/bootstrap/bootstrap-3.3.4.min.css">
-    <link rel="stylesheet" href="../static.topcv.vn/v4/css/app.min.644b242d2ff872f5G.css">
-    <link rel="stylesheet" href="../vieclamso1/v3/css/toastr.min.css">
-    <link rel="stylesheet" href="../static.topcv.vn/v4/css/components/desktop/company.min.2c1c6ef49abb59bfG.css">
-    <link rel="stylesheet"
-        href="https://static.topcv.vn/v4/css/components/desktop/suggest-job-setting/setting.92bab7ad30839efeK.css">
-    <link rel="stylesheet"
-        href="https://static.topcv.vn/v4/css/components/sidebar/box-sidebar-profile.af4c32d889bb9024K.css">
     <link rel="stylesheet" href="https://www.topcv.vn/v2/bootstrap/css/bootstrap.min.css?v=1.1.1">
     <link rel="stylesheet" href="https://www.topcv.vn/v2/plugins/select2/css/select2.min.css" />
     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/style.d8c1fe08632e5e88K.css">
@@ -947,7 +950,7 @@
         <div class="menu-item">
             <div class="cvo-flex cvo-items-center box-item-parent">
                 <div class="cvo-flex-grow info">
-                    <a href="sign-up.html" class="name
+                    <a href="{{ route('candidate.register') }}" class="name
                                 ">
                         Đăng kí tài khoản mới
                     </a>
@@ -957,7 +960,7 @@
         <div class="menu-item">
             <div class="cvo-flex cvo-items-center box-item-parent">
                 <div class="cvo-flex-grow info">
-                    <a href="login.html" class="name
+                    <a href="{{ route('candidate.login') }}" class="name
                                 ">
                         Đăng nhập
                     </a>
@@ -990,28 +993,13 @@
                     </a>
                 </div>
                 <div class="cvo-flex cvo-items-center item-child">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
-                            class="fa-regular fa-check-to-slot"></i></span>
-                    <a href="login.html" class=" ">
-                        Việc làm phù hợp
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child">
                     <span class="cvo-flex cvo-items-center cvo-justify-content icon-child">
                         <i class="fa-light fa-laptop-code font-sm"></i>
                     </span>
-                    <a href="viec-lam-it.html" class="cvo-flex cvo-items-center
+                    <a href="{{ route('saved-jobs') }}"
+                        class="cvo-flex cvo-items-center
                                 ">
-                        Việc làm IT
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child">
-                        <i class="font-sm fa-light fa-medal"></i>
-                    </span>
-                    <a href="viec-lam-senior.html" class="cvo-flex cvo-items-center
-                                ">
-                        Việc làm Senior
+                        Việc làm đã lưu
                     </a>
                 </div>
             </div>
@@ -1031,55 +1019,23 @@
                     <i class="fa-solid fa-chevron-up"></i>
                 </span>
             </div>
+
             <div class="box-item-child cvo-hidden" id="menu-item-cv-profile">
                 <div class="cvo-flex cvo-items-center item-child">
                     <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
                             class="fa-regular fa-file-user"></i></span>
-                    <a href="mau-cv.html" class="cvo-flex cvo-items-center
+                    <a href="{{ route('cv.manage') }}"
+                        class="cvo-flex cvo-items-center
                                 ">
-                        Mẫu CV
+                        Quản lý CV
                     </a>
                 </div>
                 <div class="cvo-flex cvo-items-center item-child tag-border">
                     <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
                             class="fa-regular fa-file-lines"></i></span>
-                    <a href="mau-cover-letter-thu-xin-viec.html" class="
+                    <a href="{{ route('cv.upload') }}" class="
                                 ">
-                        Mẫu Cover letter
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
-                            class="fa-regular fa-file-user"></i></span>
-                    <a href="https://reviewcv.topcv.vn/" target="_blank" class="cvo-flex cvo-items-center">
-                        Dịch vụ tư vấn CV
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
-                            class="fa-regular fa-file-pen"></i></span>
-                    <a href="huong-dan-viet-cv-chi-tiet-theo-nganh.html" target="_blank"
-                        class="cvo-flex cvo-items-center">
-                        Hướng dẫn viết CV theo ngành nghề
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child tag-border">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child">
-                        <i class="fa-regular fa-file-check"></i>
-                    </span>
-                    <a href="mau-cv-theo-nganh-nghe.html" class="
-                                        ">
-                        Thư viện CV theo ngành nghề
-                        <span class="label label-warning">Mới</span>
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
-                            class="fa-regular fa-square-user"></i></span>
-                    <a href="profileab80.html?ta_source=ViewProfileInMenubar"
-                        class="
-                                ">
-                        TopCV Profile
+                        Tải Cv lên
                     </a>
                 </div>
             </div>
@@ -1109,22 +1065,13 @@
                         Danh sách công ty
                     </a>
                 </div>
-                <div class="cvo-flex cvo-items-center item-child">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
-                            class="fa-regular fa-stars"></i></span>
-                    <a href="top-cong-ty.html" class="
-                                ">
-                        Top công ty
-                    </a>
-                </div>
             </div>
         </div>
         <div class="menu-item">
             <div class="cvo-flex cvo-items-center box-item-parent btn-icon-parent"
                 menu-child="menu-item-career-development">
                 <div class="cvo-flex-grow info">
-                    <a href="javascript: void(0)" class="name
-                                ">
+                    <a href="javascript: void(0)" class="name">
                         Công cụ
                     </a>
                 </div>
@@ -1136,88 +1083,11 @@
                 </span>
             </div>
             <div class="box-item-child cvo-hidden" id="menu-item-career-development">
-                <div class="cvo-flex cvo-items-center item-child">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
-                            class="fa-regular fa-chart-user"></i></span>
-                    <a href="trac-nghiem-tinh-cach-mbti.html"
-                        class="cvo-flex cvo-items-center
-                                ">
-                        Trắc nghiệm tính cách MBTI
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child tag-border">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
-                            class="fa-regular fa-chart-pie"></i></span>
-                    <a href="trac-nghiem-da-tri-thong-minh-multiple-intelligences-test.html"
-                        class="
-                                ">
-                        Trắc nghiệm MI
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
-                            class="fa-regular fa-scale-balanced"></i></span>
-                    <a href="tinh-luong-gross-net.html"
-                        class="cvo-flex cvo-items-center
-                                ">
-                        Tính lương GROSS - NET
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child tag-border">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
-                            class="fa-regular fa-coins"></i></span>
-                    <a href="tinh-thue-thu-nhap-ca-nhan.html"
-                        class="cvo-flex cvo-items-center
-                                ">
-                        Tính thuế thu nhập cá nhân
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
-                            class="fa-regular fa-chart-mixed"></i></span>
-                    <a href="tinh-lai-kep.html" class="cvo-flex cvo-items-center
-                                ">
-                        Tính lãi suất kép
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child tag-border">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
-                            class="fa-regular fa-sack-dollar"></i></span>
-                    <a href="lap-ke-hoach-tiet-kiem.html"
-                        class="cvo-flex cvo-items-center
-                                ">
-                        Lập kế hoạch tiết kiệm
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
-                            class="fa-regular fa-shield-xmark"></i></span>
-                    <a href="cong-cu-tinh-muc-huong-bao-hiem-that-nghiep.html"
-                        class="
-                                ">
-                        Tính bảo hiểm thất nghiệp
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child tag-border">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
-                            class="fa-regular fa-shield-check"></i></span>
-                    <a href="tinh-bao-hiem-xa-hoi-mot-lan.html" class="
-                                ">
-                        Tính bảo hiểm xã hội một lần
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child">
-                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
-                            class="icon fa-light fa-pencil"></i></span>
-                    <a href="danh-gia-nang-luc.html" class="
-                                ">
-                        TopCV Skills
-                    </a>
-                </div>
+
                 <div class="cvo-flex cvo-items-center item-child">
                     <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
                             class="icon fa-regular fa-graduation-cap"></i></span>
-                    <a href="khoa-hoc.html" class="
+                    <a href="{{ route('site.courses') }}" class="
                                 ">
                         Khóa học
                     </a>
@@ -1225,7 +1095,7 @@
                 <div class="cvo-flex cvo-items-center item-child">
                     <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
                             class="fa-light fa-mobile"></i></span>
-                    <a href="app.html" class="
+                    <a href="{{ route('site.app') }}" class="
                                 ">
                         Mobile App TopCV
                     </a>
@@ -1248,60 +1118,15 @@
                 </span>
             </div>
             <div class="box-item-child cvo-hidden" id="menu-item-blog">
-                <div class="cvo-flex cvo-items-center item-child tag-border">
-                    <i class="fa-solid fa-newspaper"></i>
-                    <a href="blog.html" class="cvo-flex cvo-items-center">
-                        Trang chủ cẩm nang nghề nghiệp
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child">
-                    <i class="icon fa-regular fa-compass"></i>
-                    <a href="blog/huong-nghiep.html"
-                        class="cvo-flex cvo-items-center
-                                             ">
-                        Định hướng nghề nghiệp
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child">
-                    <i class="icon fa-regular fa-folder-magnifying-glass"></i>
-                    <a href="blog/bi-kip-tim-viec.html"
-                        class="cvo-flex cvo-items-center
-                                             ">
-                        Bí kíp tìm việc
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child">
-                    <i class="icon fa-regular fa-money-check-dollar-pen"></i>
-                    <a href="blog/che-do-luong-thuong.html"
-                        class="cvo-flex cvo-items-center
-                                             ">
-                        Chế độ lương thưởng
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child">
-                    <i class="icon fa-regular fa-folder-bookmark"></i>
-                    <a href="blog/kien-thuc-nganh.html"
-                        class="cvo-flex cvo-items-center
-                                             ">
-                        Kiến thức chuyên ngành
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child">
-                    <i class="icon fa-regular fa-briefcase"></i>
-                    <a href="blog/hanh-trang-nghe-nghiep.html"
-                        class="cvo-flex cvo-items-center
-                                             ">
-                        Hành trang nghề nghiệp
-                    </a>
-                </div>
-                <div class="cvo-flex cvo-items-center item-child">
-                    <i class="icon fa-regular fa-chart-pyramid"></i>
-                    <a href="blog/xu-huong.html"
-                        class="cvo-flex cvo-items-center
-                                             ">
-                        Thị trường và xu hướng tuyển dụng
-                    </a>
-                </div>
+                @foreach ($genrepost_layout as $genrepost)
+                    <div class="cvo-flex cvo-items-center item-child tag-border">
+                        <i class="{{ $genrepost->icon }}"></i>
+                        <a href="{{ route('genrepost.showPost', ['slug' => $genrepost->slug]) }}"
+                            class="cvo-flex cvo-items-center">
+                            {{ $genrepost->title }}
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
         <h2>Dành cho nhà tuyển dụng</h2>
@@ -1488,13 +1313,13 @@
                                 </li>
                                 <li class="navbar-menu__item tag-border">
                                     <a href="{{ route('messages.receive.candidate') }}" class="text-sm">
-                                        <i class="icon fa-regular fa-lock"></i>
+                                        <i class="icon fa-regular fa-message"></i>
                                         Tin nhắn
                                     </a>
                                 </li>
                                 <li class="navbar-menu__item tag-border">
                                     <a href="{{ route('cv.overview') }}" class="text-sm">
-                                        <i class="icon fa-regular fa-lock"></i>
+                                        <i class="icon fa-regular fa-file"></i>
                                         Hồ sơ
                                     </a>
                                 </li>
@@ -3266,8 +3091,8 @@
                         <div class="support-ticket-tab-content__group--content">
                             @foreach ($typeFeedbacks as $typeFeedback)
                                 <input type="radio" name="type_feedback_id"
-                                    id="support-ticket-type-{{ $typeFeedback->id }}" value="{{ $typeFeedback->id }}"
-                                    hidden>
+                                    id="support-ticket-type-{{ $typeFeedback->id }}"
+                                    value="{{ $typeFeedback->id }}" hidden>
                                 <label for="support-ticket-type-{{ $typeFeedback->id }}"
                                     class="support-ticket-radio-button">{{ $typeFeedback->name }}</label>
                             @endforeach
@@ -3317,8 +3142,7 @@
                                 </div>
                                 <div class="list-icon_tab status-option normal" data-option="Bình thường"
                                     data-value="3">
-                                    <lottie-player
-                                        src="../vieclamso1/v4/image/survey/search-job/animation/normal.json"
+                                    <lottie-player src="../vieclamso1/v4/image/survey/search-job/animation/normal.json"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
                                     <div class="list-icon_tab-title">Bình thường</div>
                                 </div>
