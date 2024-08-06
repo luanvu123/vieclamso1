@@ -7,10 +7,7 @@
                      <div class="box-search">
                          <ul class="nav header">
                              <li class="nav-item">
-                                 <a href="cong-ty.html" class="nav-link  active ">Danh sách công ty</a>
-                             </li>
-                             <li class="nav-item">
-                                 <a href="top-cong-ty.html" class="nav-link ">Top công ty</a>
+                                 <a href="{{route('all.company')}}" class="nav-link  active ">Danh sách công ty</a>
                              </li>
                          </ul>
                          <div class="caption">

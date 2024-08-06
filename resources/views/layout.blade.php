@@ -1191,7 +1191,7 @@
                             </li>
                             <li class="navbar-menu__item ">
                                 <a href="{{ route('cv.upload') }}" class="text-sm">
-                                    <i class="icon fa-regular fa-file-user"></i>
+                                    <i class="icon fa-regular fa-file-lines"></i>
                                     Tải Cv lên
                                 </a>
                             </li>
@@ -1238,7 +1238,7 @@
                 <li
                     class="navbar-left__item group
     {{ Str::startsWith(Route::currentRouteName(), 'genrepost.showPost') ? 'active' : '' }}">
-                    <a href="blog.html" title="Blog">
+                    <a href="#" title="Blog">
                         Cẩm nang nghề nghiệp
                     </a>
                     <div class="group-hover:menu navbar__item__dropdown-menu">

@@ -2,7 +2,7 @@
 <html lang="vi">
 
 
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
 <head>
     <meta charset="utf-8">
@@ -74,14 +74,14 @@
         </div>
         <div class="bg-right">
             <div class="bg-right-abs">
-                <a href="index944d.html?ref=you">
+                <a href="{{route("/")}}">
                     <img width="160" src="../static.topcv.vn/v4/image/auth/topcv_white.png">
                 </a>
                 <h1 class="mt-4">Tiếp lợi thế<br>Nối thành công</h1>
                 <p>TopCV - Hệ sinh thái nhân sự tiên phong ứng dụng công nghệ tại Việt Nam</p>
             </div>
             <div class="bg-right-arrow"></div>
-            <a class="bg-right-link" href="index944d.html?ref=you"></a>
+            <a class="bg-right-link" href="{{route("/>")}}"></a>
         </div>
     </div>
     <script src="../www.google.com/recaptcha/api.js"></script>

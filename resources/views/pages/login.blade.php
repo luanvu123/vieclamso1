@@ -68,8 +68,8 @@
                      <p class="mb-0">
                          <label for="agreement-social-login">
                              Bằng việc đăng nhập bằng tài khoản mạng xã hội, tôi đã đọc và đồng ý với <a target="_blank"
-                                 class="text-success" href="terms-of-service.html">Điều khoản dịch vụ</a> và <a
-                                 target="_blank" class="text-success" href="dieu-khoan-bao-mat.html">Chính sách bảo mật</a>
+                                 class="text-success" href="#">Điều khoản dịch vụ</a> và <a
+                                 target="_blank" class="text-success" href="#">Chính sách bảo mật</a>
                              của TopCV
                          </label>
                      </p>
@@ -80,7 +80,7 @@
          <div class="mt-3 d-flex justify-content-around option-auth">
              <div>
                  <span>Bạn chưa có tài khoản?</span>
-                 <a class="text-success" href="sign-up.html">
+                 <a class="text-success" href="{{route('employer.register')}}">
                      Đăng ký ngay
                  </a>
              </div>

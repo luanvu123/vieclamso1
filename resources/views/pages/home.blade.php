@@ -102,7 +102,7 @@
                              </div>
                          </div>
                          <div class="box-header__tool">
-                             
+
                              <span class="btn-feature-jobs-pre btn-slick-arrow"
                                  :class="{ 'slick-disabled': currentPage === 1 || totalPage === 0 }" @click="backPage">
                                  <i class="fa-solid fa-chevron-left"></i>
@@ -277,7 +277,7 @@
                              Top ngành nghề nổi bật
                          </h2>
                          <p>Bạn muốn tìm việc mới? Xem danh sách việc làm <a class="text-highlight text-underline"
-                                 target="_blank" href="viec-lam.html">tại đây</a></p>
+                                 target="_blank" href="{{route("/")}}">tại đây</a></p>
                      </div>
                      <div class="top-category__navigation">
                          <button disabled="disabled" class="btn btn-prev btn-navigation">

@@ -137,7 +137,7 @@
     </div>
          <div class="container-banner">
              <div class="banner-mbti container">
-                 <a href="../trac-nghiem-tinh-cach-mbti.html" target="_blank">
+                 <a href="#" target="_blank">
                      <img src="../../cdn-new.topcv.vn/unsafe/1100x/https_/static.topcv.vn/v4/image/blog/banner_mbti.png"
                          alt="banner_mbti">
                  </a>

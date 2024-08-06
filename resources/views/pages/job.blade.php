@@ -181,7 +181,7 @@
                                                          Ứng tuyển lại
                                                      </a>
                                                      <a class="job-detail__info--actions-button button-white" target="_blank"
-                                                         href="http://candidate.topcvconnect.com/conversations/new/667298">
+                                                         href="{{route('applications.showAppliedJobs')}}">
                                                          <span class="button-icon">
                                                              <i class="fa-solid fa-comments"></i>
                                                          </span>
@@ -190,7 +190,7 @@
                                                      <p style="margin-bottom: 0">
                                                          Bạn đã gửi CV cho vị trí này vào ngày:
                                                          <span class="date">{{ $appliedDate }}</span>.
-                                                         <a href="#" target="_blank" type="button"
+                                                         <a href="{{route('applications.showAppliedJobs')}}" target="_blank" type="button"
                                                              class="text-highlight show-applied-cv"
                                                              style="margin-left: 5px">Xem CV đã nộp</a>
                                                      </p>
@@ -252,12 +252,6 @@
                                      <h2 class="job-detail__information-detail--title">
                                          Chi tiết tin tuyển dụng
                                      </h2>
-                                     <button
-                                         onclick="javascript:showLoginPopup('', 'Đăng nhập hoặc Đăng ký để tạo thông báo việc làm')"
-                                         class="page-job-detail btn btn-job-notification-setting">
-                                         <i class="fa fa-bell"></i>
-                                         <span>Gửi tôi việc làm tương tự</span>
-                                     </button>
                                  </div>
                                  <div class="job-detail__information-detail--content">
                                      <div class="job-description">

@@ -72,8 +72,8 @@
                  </div>
                  <p class="agree-term mb-3">
                      <label for="agreement">
-                         Tôi đã đọc và đồng ý với <a target="_blank" href="terms-of-service.html" class="text-success">Điều
-                             khoản dịch vụ</a> và <a target="_blank" href="dieu-khoan-bao-mat.html"
+                         Tôi đã đọc và đồng ý với <a target="_blank" href="#" class="text-success">Điều
+                             khoản dịch vụ</a> và <a target="_blank" href="#"
                              class="text-success">Chính sách bảo mật</a> của TopCV
                      </label>
                  </p>
@@ -99,8 +99,8 @@
                  <p class="mb-0">
                      <label for="agreement-social">
                          Bằng việc đăng nhập bằng tài khoản mạng xã hội, tôi đã đọc và đồng ý với <a target="_blank"
-                             class="text-success" href="terms-of-service.html">Điều khoản dịch vụ</a> và <a
-                             target="_blank" class="text-success" href="dieu-khoan-bao-mat.html">Chính sách bảo mật</a>
+                             class="text-success" href="#">Điều khoản dịch vụ</a> và <a
+                             target="_blank" class="text-success" href="#">Chính sách bảo mật</a>
                          của Vieclamso1
                      </label>
                  </p>

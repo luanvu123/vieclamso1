@@ -95,6 +95,7 @@ class SiteController extends Controller
         $courses = Course::where('status', 1)->take(3)->get();
         $company_random = Company::inRandomOrder()->first();
         $jobPosting_random = $company_random->jobPostings()->where('status', 0)->get();
+        
         return view('pages.job', compact('jobPosting', 'closingDate', 'isExpired', 'candidate', 'applied', 'appliedDate', 'relatedJobs', 'courses', 'company_random', 'jobPosting_random'));
     }
 
