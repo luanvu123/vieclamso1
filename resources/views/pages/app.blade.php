@@ -50,16 +50,16 @@
                             <h3>Tải ứng dụng ngay</h3>
                             <div class="box-imgs">
                                 <div class="box-img-qr">
-                                    <img src="../static.topcv.vn/v4/image/welcome/mobile-app/qr_code.png" alt>
+                                    <img src="{{ asset('storage/' . $info->qr_code_image) }}" alt>
                                 </div>
                                 <div class="box-img-download-app">
-                                    <a href="https://itunes.apple.com/us/app/topcv-tạo-cv-tìm-việc-làm/id1455928592?ls=1&amp;mt=8"
+                                    <a href="{{ $info->link_appstore }}"
                                         class="box-img-download-appstore">
-                                        <img src="../static.topcv.vn/v4/image/welcome/mobile-app/appstore.png" alt>
+                                        <img src="{{ asset('storage/' . $info->image_appstore) }}" alt>
                                     </a>
-                                    <a href="https://play.google.com/store/apps/details?id=com.topcv"
+                                    <a href="{{ $info->link_googleplay }}"
                                         class="box-img-download-chplay">
-                                        <img src="../static.topcv.vn/v4/image/welcome/mobile-app/chplay.png" alt>
+                                        <img src="{{ asset('storage/' . $info->image_googleplay) }}" alt>
                                     </a>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="header-right">
                         <div class="header-image">
-                            <img src="../static.topcv.vn/v4/image/welcome/mobile-app/mobile.png" alt>
+                            <img src="{{asset('static.topcv.vn/v4/image/welcome/mobile-app/mobile.png')}}" alt>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                                     ty nổi bật và Top Connect - Chat trực tiếp với Nhà tuyển dụng. </div>
                             </div>
                             <div class="featured-img">
-                                <img src="v4/image/welcome/mobile-app/select_truejob.png"
+                                <img src="{{asset('v4/image/welcome/mobile-app/select_truejob.png')}}"
                                     alt="Chọn đúng việc - Đi đúng hướng">
                             </div>
                         </div>
@@ -216,17 +216,17 @@
                                 <h3>Tải ứng dụng ngay</h3>
                                 <div class="box-imgs">
                                     <div class="box-img-qr">
-                                        <img src="../static.topcv.vn/v4/image/welcome/mobile-app/qrcode_black.png" alt>
+                                        <img src="{{ asset('storage/' . $info->qr_code_image) }}" alt>
                                     </div>
                                     <div class="box-img-download-app">
-                                        <a href="https://itunes.apple.com/us/app/topcv-tạo-cv-tìm-việc-làm/id1455928592?ls=1&amp;mt=8"
+                                        <a href="{{ $info->link_appstore }}"
                                             class="box-img-download-appstore">
-                                            <img src="../static.topcv.vn/v4/image/welcome/mobile-app/appstore_black.png"
+                                            <img src="{{ asset('storage/' . $info->image_appstore) }}"
                                                 alt>
                                         </a>
-                                        <a href="https://play.google.com/store/apps/details?id=com.topcv"
+                                        <a href="{{ $info->link_googleplay }}"
                                             class="box-img-download-chplay">
-                                            <img src="../static.topcv.vn/v4/image/welcome/mobile-app/googleplay_black.png"
+                                            <img src="{{ asset('storage/' . $info->image_googleplay) }}"
                                                 alt>
                                         </a>
                                     </div>

@@ -1,8 +1,5 @@
  @extends('layout')
  @section('content')
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/desktop/search-job.min.5b2166bc3defa96bK.css">
-     <link
-         rel="stylesheet"href="https://static.topcv.vn/v4/css/components/desktop/jobs/job-list-search-result.f3a3504e765512c7K.css">
      <div class="search-job">
          <div class="header">
              <div class="box-search-job">
@@ -17,7 +14,6 @@
                              gap: 10px;
                              /* Khoảng cách giữa các phần tử */
                          }
-
                          /* CSS cho các item bên trong form */
                          .search-form .item {
                              flex: 1;
@@ -127,9 +123,9 @@
                                                                  <a target="_blank"
                                                                      href="{{ route('job.show', $jobPosting->slug) }}"
                                                                      rel="noopener noreferrer">
-                                                                     <img src="{{ $jobPosting->logo ? asset('storage/' . $jobPosting->logo) : asset('storage/avatar/avatar-default.jpg') }}"
+                                                                     <img src="{{ $jobPosting->company->logo ? asset('storage/' . $jobPosting->company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
                                                                          class="w-100 lazy"
-                                                                         alt="{{ $jobPosting->company_name }}"
+                                                                         alt="{{ $jobPosting->company->name }}"
                                                                          title="{{ $jobPosting->title }}">
                                                                  </a>
                                                              </div>
@@ -156,8 +152,8 @@
                                                                                  data-toggle="tooltip" title=""
                                                                                  data-placement="top" target="_blank"
                                                                                  rel="noopener noreferrer"
-                                                                                 data-original-title="{{ $jobPosting->company_name }}">
-                                                                                 {{ $jobPosting->company_name }}
+                                                                                 data-original-title="{{ $jobPosting->company->name }}">
+                                                                                 {{ $jobPosting->company->name }}
                                                                              </a>
                                                                          </div>
                                                                          <div class="box-right">
@@ -201,15 +197,12 @@
                                          </div>
                                          <script></script>
                                      </div>
-                                     <link rel="stylesheet"
-                                         href="https://static.topcv.vn/v4/css/components/box-job-notification-setting.6e3fb86463e68cdfK.css">
+
                                  </div>
                                  <div class="job-list-detail"></div>
                                  <!-- Phân trang -->
                                  {{ $jobPostings->links() }}
                              </div>
-
-
                          </div>
                      </div>
                  </div>
@@ -261,13 +254,4 @@
          </div>
      </div>
      </div>
-
-     <script>
-         window.lazyFunctions.initBoxSurveySearchJob = async function(element) {
-             await window.loadScript('https://static.topcv.vn/v4/plugins/lottie-player/lottie-player.js');
-         }
-     </script>
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/job-notification-setting.bea5fa3f03028ed1K.css">
-     <script data-type="lazy" data-src="https://static.topcv.vn/v4/js/common/job-notification-setting/popup-job-notification-setting.min.b66ea965f6d6b5ba.js" src="https://static.topcv.vn/v4/js/common/job-notification-setting/popup-job-notification-setting.min.b66ea965f6d6b5ba.js"></script>
  @endsection

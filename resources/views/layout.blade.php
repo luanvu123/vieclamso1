@@ -77,7 +77,14 @@
     <link rel="stylesheet"
         href="{{ asset('static.topcv.vn/v4/css/components/support-ticket/support-ticket.b6c89357bb501feaK.css') }}">
 
-
+    <script>
+        window.lazyFunctions.initBoxSurveySearchJob = async function(element) {
+            await window.loadScript('https://static.topcv.vn/v4/plugins/lottie-player/lottie-player.js');
+        }
+    </script>
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/job-notification-setting.bea5fa3f03028ed1K.css') }}">
+    <script data-type="lazy" data-src="https://static.topcv.vn/v4/js/common/job-notification-setting/popup-job-notification-setting.min.b66ea965f6d6b5ba.js" src="https://static.topcv.vn/v4/js/common/job-notification-setting/popup-job-notification-setting.min.b66ea965f6d6b5ba.js"></script>
     <link rel="stylesheet"
         href="{{ asset('static.topcv.vn/v4/css/components/desktop/upload-cv.min.29bd6003627f486fK.css') }}">
     <link rel="stylesheet"
@@ -85,7 +92,22 @@
     <link
         rel="stylesheet"href="{{ asset('static.topcv.vn/v4/css/components/desktop/jobs/job-list-search-result.f3a3504e765512c7K.css') }}">
     <link rel="stylesheet"
-        href="{{ asset('static.topcv.vn/v4/css/components/desktop/jobs/job-list-default.40710d157e4df9feK.css')}}">
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/jobs/job-list-default.40710d157e4df9feK.css') }}">
+
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/box-job-notification-setting.6e3fb86463e68cdfK.css') }}">
+
+
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/update-info.min.d09d237a2056cfd0K.css') }}">
+
+
+
+
+
+
+
+
 
 
     <style>

@@ -124,7 +124,7 @@
                                      value="{{ request('experience') }}">
                                  <input type="text" name="category" placeholder="Ngành nghề"
                                      value="{{ request('category') }}">
-                                 <button type="submit">Lọc</button>
+                                 <button type="submit">Lọc</button> 
                              </div>
                          </form>
                          <div class="box-smart-filter box-smart-feature-jobs"></div>

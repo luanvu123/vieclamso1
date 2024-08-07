@@ -215,8 +215,6 @@
                                          </div>
                                          <script></script>
                                      </div>
-                                     <link rel="stylesheet"
-                                         href="https://static.topcv.vn/v4/css/components/box-job-notification-setting.6e3fb86463e68cdfK.css">
                                  </div>
                                  <div class="job-list-detail"></div>
                              </div>

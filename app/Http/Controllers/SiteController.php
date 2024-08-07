@@ -133,7 +133,7 @@ class SiteController extends Controller
         // Lấy các công việc thuộc danh mục với trạng thái = 0
         $jobPostings = JobPosting::whereHas('categories', function ($query) use ($category) {
             $query->where('category_id', $category->id);
-        })->where('status', 0)->paginate(12);
+        })->with('employer', 'company')->where('status', 0)->paginate(12);
 
         return view('pages.category', compact('category', 'jobPostings'));
     }
