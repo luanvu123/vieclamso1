@@ -1,7 +1,5 @@
  @extends('layout')
  @section('content')
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/desktop/jobs/job-list-default.40710d157e4df9feK.css">
      <div id="main">
          <div class="container" id="box-save-job">
              <div class="row">
@@ -15,7 +13,7 @@
                                      nghề nghiệp dành cho bạn.</p>
                              </div>
                              <div class="image">
-                                 <img src="https://static.topcv.vn/v4/image/featured-job-list/arrow_desktop.png"
+                                 <img src="{{asset('static.topcv.vn/v4/image/featured-job-list/arrow_desktop.png')}}"
                                      alt="Việc làm từ xa (remote) background" title="Việc làm từ xa (remote) background"
                                      class="w-100">
                              </div>

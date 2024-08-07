@@ -9,15 +9,11 @@
     <link rel="icon" href="https://static.topcv.vn/v4/image/favicon.ico" type="image/x-icon">
     <meta property="fb:app_id" content="1478418029113221" />
     <link rel="publisher" href="https://plus.google.com/u/0/+TopcvVn" />
-    <meta name="csrf-token" content="LicyJlAnIvZsu3qxp6mFVnQMyy0Fqy2DOXxP9U4X">
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link rel="preconnect" href="https://cdn-new.topcv.vn/">
     <title>vieclamso1 - CV xịn việc làm chất - Tạo CV & Tìm việc miễn phí
     </title>
     <meta name="google-site-verification" content="PXU5Eo3ud7KiuUsHLnZHY7_Y-5yrxB_RIbKozeENtFg" />
     <meta name="dmca-site-verification" content="UTd2SHpqb1hYdC9mUnV4YUFDN3U0QT090" />
-    <link rel="canonical" href="index.html" />
+    <link rel="canonical" href="{{ route('/') }}" />
     <meta name="description"
         content="Tạo CV online & tìm việc làm miễn phí trên TopCV ngay hôm nay để tiếp cận 30.000+ cơ hội việc làm được kết nối thành công trên TopCV mỗi ngày.">
     <meta name="keywords"
@@ -35,7 +31,8 @@
         content="Sở hữu ngay cv xịn cùng việc làm mơ ước. 30.000+ cơ hội việc làm được kết nối thành công qua TopCV mỗi ngày.">
     <meta name="og:site_name" content="TopCV">
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="../static.topcv.vn/v4/image/thumbnail/Thumb-Homepage-TopCV.vne8da.png?v=2.0.3">
+    <meta property="og:image"
+        content="{{ asset('static.topcv.vn/v4/image/thumbnail/Thumb-Homepage-TopCV.vne8da.png') }}">
     <link rel="preload" as="image" fetchpriority="high"
         href="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/bg_header.webp"
         type="image/webp">
@@ -57,27 +54,40 @@
     <link rel="stylesheet"
         href="{{ asset('static.topcv.vn/v4/css/components/sidebar/box-sidebar-profile.af4c32d889bb9024K.css') }}">
 
-    <link rel="stylesheet" href="https://www.topcv.vn/v2/bootstrap/css/bootstrap.min.css?v=1.1.1">
-    <link rel="stylesheet" href="https://www.topcv.vn/v2/plugins/select2/css/select2.min.css" />
-    <link rel="stylesheet" href="https://static.topcv.vn/v4/css/style.d8c1fe08632e5e88K.css">
-    <link rel="stylesheet" href="https://www.topcv.vn/v3/css/notification.css?v=1.0.10">
-    <link rel="stylesheet" href="https://static.topcv.vn/v4/css/app.min.fa6e35ed40ac0f6cK.css">
-    <link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/desktop/manager-cv.b6b84668d5c1950aK.css">
+    <link rel="stylesheet" href="{{ asset('v2/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('v2/plugins/select2/css/select2.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('v4/css/style.d8c1fe08632e5e88K.css') }}">
+    <link rel="stylesheet" href="{{ asset('v3/css/notification.css') }}">
+    <link rel="stylesheet" href="{{ asset('v4/css/app.min.fa6e35ed40ac0f6cK.css') }}">
+    <link rel="stylesheet" href="{{ asset('v4/css/components/desktop/manager-cv.b6b84668d5c1950aK.css') }}">
     <!-- Slick CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css') }}" />
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css') }}" />
 
     <!-- jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Slick JS -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+    <script type="text/javascript" src="{{ asset('cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js') }}"></script>
     <link rel="preload" as="style" onload="this.rel='stylesheet'"
-        href="https://www.topcv.vn/v3/plugins/slick/slick.css?v=1.0.0">
+        href="{{ asset('v3/plugins/slick/slick.css') }}">
     <link rel="preload" as="style" onload="this.rel='stylesheet'"
-        href="https://www.topcv.vn/v3/plugins/slick/slick-theme.css?v=1.0.0">
+        href="{{ asset('v3/plugins/slick/slick-theme.css') }}">
     <link rel="stylesheet"
-        href="https://static.topcv.vn/v4/css/components/support-ticket/support-ticket.b6c89357bb501feaK.css">
+        href="{{ asset('static.topcv.vn/v4/css/components/support-ticket/support-ticket.b6c89357bb501feaK.css') }}">
+
+
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/upload-cv.min.29bd6003627f486fK.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/search-job.min.5b2166bc3defa96bK.css') }}">
+    <link
+        rel="stylesheet"href="{{ asset('static.topcv.vn/v4/css/components/desktop/jobs/job-list-search-result.f3a3504e765512c7K.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/jobs/job-list-default.40710d157e4df9feK.css')}}">
+
+
     <style>
         #toast-container>div {
             opacity: unset;
@@ -588,14 +598,17 @@
             display: none;
         }
     </style>
-    <link rel="stylesheet" href="../vieclamso1/v3/css/animate.css">
-    <link rel="stylesheet" href="../cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
-        referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../static.topcv.vn/v4/css/components/desktop/welcome.min.e2b4b0eb0378b8b1G.css">
+    <link rel="stylesheet" href="{{ asset('vieclamso1/v3/css/animate.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css') }}"
+        referrerpolicy="no-referrer">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/welcome.min.e2b4b0eb0378b8b1G.css') }}">
     <link rel="preload"
-        href="../static.topcv.vn/v4/css/components/search-job/keyword-autocomplete.min.a2eb399076b73b77G.css"
+        href="{{ asset('static.topcv.vn/v4/css/components/search-job/keyword-autocomplete.min.a2eb399076b73b77G.css') }}"
         as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <script src="../static.topcv.vn/v4/cdn/js/jquery-1.11.2.min.js"></script>
+    <script src="{{ asset('static.topcv.vn/v4/cdn/js/jquery-1.11.2.min.js') }}"></script>
+
 
 
 
@@ -669,7 +682,8 @@
         const IS_TABLET = '';
         const SENTRY_URL = 'https://4c159d47cd1b4691ad8bb60c0d966b35@sentry.topworking.vn/5';
     </script>
-    <script src="../static.topcv.vn/v4/js/components/addon/flash-job-2023.min.22b6821f401ac744.js" defer></script>
+    <script src="{{ asset('static.topcv.vn/v4/js/components/addon/flash-job-2023.min.22b6821f401ac744.js') }}" defer>
+    </script>
 
     <script type="text/javascript">
         _linkedin_partner_id = "4459588";
@@ -688,10 +702,11 @@
             var b = document.createElement("script");
             b.type = "text/javascript";
             b.async = true;
-            b.src = "../snap.licdn.com/li.lms-analytics/insight.min.js";
+            b.src = "{{ asset('snap.licdn.com/li.lms-analytics/insight.min.js') }}";
             s.parentNode.insertBefore(b, s);
         })(window.lintrk);
     </script>
+
     <noscript>
         <img height="1" width="1" style="display:none;" alt=""
             src="https://px.ads.linkedin.com/collect/?pid=4459588&amp;fmt=gif" />
@@ -775,8 +790,8 @@
             http.send(JSON.stringify(params));
         }
     </script>
-    <script src="../static.topcv.vn/v4/js/common/evaluate-tool-cv-success.0d139f508d292cc9.js" defer></script>
-    <script src="../static.topcv.vn/v4/js/helper.e6a97e09a77e1d17.js"></script>
+    <script src="{{ asset('static.topcv.vn/v4/js/common/evaluate-tool-cv-success.0d139f508d292cc9.js') }}" defer></script>
+    <script src="{{ asset('static.topcv.vn/v4/js/helper.e6a97e09a77e1d17.js') }}"></script>
     <script type="text/javascript">
         (function(c, l, a, r, i, t, y) {
             c[a] = c[a] || function() {
@@ -840,7 +855,7 @@
             s = b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t, s)
         }(window, document, 'script',
-            '../connect.facebook.net/en_US/fbevents.js');
+            '{{ asset('connect.facebook.net/en_US/fbevents.js') }}');
         fbq('init', '2258780824475319');
         fbq('track', 'PageView');
     </script>
@@ -872,8 +887,9 @@
         });
     </script>
     <link rel="stylesheet"
-        href="../static.topcv.vn/v4/css/components/support-ticket/modal-support-ticket.8c7e8cb79bde8276G.css">
-    <script src="../static.topcv.vn/v4/js/components/support-ticket/modal-support-ticket.e94b1b10358310bc.js"></script>
+        href="{{ asset('static.topcv.vn/v4/css/components/support-ticket/modal-support-ticket.8c7e8cb79bde8276G.css') }}">
+    <script src="{{ asset('static.topcv.vn/v4/js/components/support-ticket/modal-support-ticket.e94b1b10358310bc.js') }}">
+    </script>
 </head>
 
 <body>
@@ -883,11 +899,12 @@
 
 
     <noscript id="deferred-styles">
-        <link rel='stylesheet' href="../static.topcv.vn/v4/cdn/plugins/slick/slick.css">
-        <link rel='stylesheet' href="../static.topcv.vn/v4/cdn/plugins/slick/slick-theme.css">
-        <link rel='stylesheet' href="../static.topcv.vn/v4/cdn/plugins/select2/select2.min.css" />
+        <link rel="stylesheet" href="{{ asset('static.topcv.vn/v4/cdn/plugins/slick/slick.css') }}">
+        <link rel="stylesheet" href="{{ asset('static.topcv.vn/v4/cdn/plugins/slick/slick-theme.css') }}">
+        <link rel="stylesheet" href="{{ asset('static.topcv.vn/v4/cdn/plugins/select2/select2.min.css') }}">
         <link rel="stylesheet"
-            href="../static.topcv.vn/v4/css/components/support-ticket/support-ticket.b6c89357bb501feaG.css">
+            href="{{ asset('static.topcv.vn/v4/css/components/support-ticket/support-ticket.b6c89357bb501feaG.css') }}">
+
 
     </noscript>
     <script>
@@ -907,19 +924,10 @@
     </script>
     <noscript id="deferred-styles">
         <link rel="stylesheet"
-            href="../static.topcv.vn/v4/css/components/support-ticket/support-ticket.b6c89357bb501feaG.css">
+            href="{{ asset('static.topcv.vn/v4/css/components/support-ticket/support-ticket.b6c89357bb501feaG.css') }}">
+
     </noscript>
     <div id="fb-root"></div>
-    <script>
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = '../connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=1478418029113221';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
     <div id="topbar-event" style="display: none">
         <p><a href="#" target="_blank" class="event-detail">Chi Tiết</a><i
                 class="fa fa-times topbar-close"></i>
@@ -1382,14 +1390,13 @@
                         <div class="box-image-flex">
                             <img src="{{ asset('storage/' . $info->logo_google_for_startup) }}"
                                 class="img-responsive" alt title>
-                            <a href="http://www.dmca.com/Protection/Status.aspx?ID=8be40718-7da1-4b43-875a-3efb819100c9"
-                                title="DMCA.com Protection Status" class="dmca-badge">
+                            <a href="#" title="DMCA.com Protection Status" class="dmca-badge">
                                 <img src="{{ asset('storage/' . $info->logo_dmca_com) }}"
                                     alt="DMCA.com Protection Status" class="dmca-image" />
                             </a>
-                            <script src="../images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
+                            <script src="{{ asset('images.dmca.com/Badges/DMCABadgeHelper.min.js') }}"></script>
                             <a href="http://online.gov.vn/Home/WebDetails/25388" target="_blank">
-                                <img src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/footer/bct.jpg"
+                                <img src="{{ asset('cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/footer/bct.jpg') }}"
                                     class="img-responsive bct-image" alt title>
                             </a>
                         </div>
@@ -1579,27 +1586,28 @@
         </div>
     </footer>
     <script></script>
-    <link rel="stylesheet" href="../static.topcv.vn/v4/css/icon.min.9bbbd0ac9d068264G.css">
-    <link rel="stylesheet" href="../static.topcv.vn/v4/css/sign-in-popup.65a92cb48ed456d9G.css">
-    <script src="../static.topcv.vn/v4/js/sign-in-popup.min.b45d0ba8edb038f3.js"></script>
-    <script src="../vieclamso1/v3/js/common40a0.js?v=2.0.2"></script>
-    <script src="../vieclamso1/v3/js/vue.min.js"></script>
-    <script src="../vieclamso1/js/jquery.cookie.js"></script>
-    <script src="../vieclamso1/js/error-tracking28b5.js?v=2.0.0"></script>
-    <script src="../static.topcv.vn/v4/js/modules/tracking/tracking.540f1a976cca78a7.js"></script>
-    <script src="../static.topcv.vn/v4/js/modules/tracking/tracking-handlers.f7f15ee0d1d9c81b.js"></script>
-    <script src="../static.topcv.vn/v4/cdn/plugins/bootstrap/bootstrap-3.3.4.min.js"></script>
-    <script src="../vieclamso1/v3/js/navigation-mobilec924.js?v=1.0.6"></script>
-    <script src="../static.topcv.vn/v4/cdn/plugins/slick/slick.min.js"></script>
-    <script src="../vieclamso1/js/jquery.form.js" type="text/javascript"></script>
-    <script src="../vieclamso1/v3/js/perfect-scrollbar.min.js"></script>
-    <script src="../vieclamso1/v2/plugins/switchery/switchery.min.js"></script>
-    <script src="../vieclamso1/v3/js/jquery-ui.min.js"></script>
-    <script src="../vieclamso1/v3/js/toastr.min.js" type="text/javascript"></script>
-    <script src="../static.topcv.vn/v4/cdn/js/script.js"></script>
-    <script src="../static.topcv.vn/v4/js/app.68e75e4ecb2a8717.js">
+    <link rel="stylesheet" href="{{ asset('static.topcv.vn/v4/css/icon.min.9bbbd0ac9d068264G.css') }}">
+    <link rel="stylesheet" href="{{ asset('static.topcv.vn/v4/css/sign-in-popup.65a92cb48ed456d9G.css') }}">
+    <script src="{{ asset('static.topcv.vn/v4/js/sign-in-popup.min.b45d0ba8edb038f3.js') }}"></script>
+    <script src="{{ asset('vieclamso1/v3/js/common40a0.js?v=2.0.2') }}"></script>
+    <script src="{{ asset('vieclamso1/v3/js/vue.min.js') }}"></script>
+    <script src="{{ asset('vieclamso1/js/jquery.cookie.js') }}"></script>
+    <script src="{{ asset('vieclamso1/js/error-tracking28b5.js?v=2.0.0') }}"></script>
+    <script src="{{ asset('static.topcv.vn/v4/js/modules/tracking/tracking.540f1a976cca78a7.js') }}"></script>
+    <script src="{{ asset('static.topcv.vn/v4/js/modules/tracking/tracking-handlers.f7f15ee0d1d9c81b.js') }}"></script>
+    <script src="{{ asset('static.topcv.vn/v4/cdn/plugins/bootstrap/bootstrap-3.3.4.min.js') }}"></script>
+    <script src="{{ asset('vieclamso1/v3/js/navigation-mobilec924.js?v=1.0.6') }}"></script>
+    <script src="{{ asset('static.topcv.vn/v4/cdn/plugins/slick/slick.min.js') }}"></script>
+    <script src="{{ asset('vieclamso1/js/jquery.form.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('vieclamso1/v3/js/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('vieclamso1/v2/plugins/switchery/switchery.min.js') }}"></script>
+    <script src="{{ asset('vieclamso1/v3/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('vieclamso1/v3/js/toastr.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('static.topcv.vn/v4/cdn/js/script.js') }}"></script>
+    <script src="{{ asset('static.topcv.vn/v4/js/app.68e75e4ecb2a8717.js') }}">
         < link rel = "stylesheet"
-        href = "../static.topcv.vn/v4/css/components/desktop/anti-scam/anti-scam-popup.d5a4109f907b95a2Gca96.css?v=2.1.7" >
+        href =
+            "{{ asset('static.topcv.vn/v4/css/components/desktop/anti-scam/anti-scam-popup.d5a4109f907b95a2Gca96.css') }}" >
             <
             script >
             $(document).ready(function() {
@@ -1653,7 +1661,7 @@
         <div id="support-ticket-panel" v-if="state == 'open'">
             <div class="support-ticket-panel-header">
                 <div class="support-ticket-panel-title">
-                    <img src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/support-ticket/customer.png"
+                    <img src="{{ asset('cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/support-ticket/customer.png') }}"
                         alt>
                     <span>Trung tâm hỗ trợ ứng viên</span>
                 </div>
@@ -1719,12 +1727,12 @@
 
         <div id="support-ticket-floating-message" v-if="state == 'close' && showFloatMessage">
             <div class="support-ticket-avatar" v-on:click.prevent="toggle">
-                <img src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/support-ticket/ms-huong-nguyen.png"
-                    alt="Trung tâm hỗ trợ dịch vụ" title="Trung tâm hỗ trợ dịch vụ">
+                <img src="{{ asset('storage/' . $info->supporter) }}" alt="Trung tâm hỗ trợ dịch vụ"
+                    title="Trung tâm hỗ trợ dịch vụ">
                 <div class="icon-status"></div>
             </div>
             <div class="support-ticket-author" v-on:click.prevent="toggle">
-                <p class="support-ticket-author_name">Ms. Hương Nguyễn</p>
+                <p class="support-ticket-author_name">{{ $info->name_supporter }}</p>
                 <p class="support-ticket-author_support-online">Hỗ trợ trực tuyến</p>
             </div>
             <div class="support-ticket-close" v-on:click.prevent="hideFloatingMessage">
@@ -1735,8 +1743,8 @@
 
         <div id="support-ticket-launcher" v-on:click.prevent="toggle">
             <i class="fa fa-times" aria-hidden="true" v-if="state == 'open'"></i>
-            <img src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/support-ticket/customer.png" alt
-                v-if="state == 'close'">
+            <img src="{{ asset('cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/support-ticket/customer.png') }}"
+                alt v-if="state == 'close'">
         </div>
 
 
@@ -2144,7 +2152,7 @@
                 <div id="normal-popover">
                     <div class="popover-body" style="display: grid; grid-template-columns: 30% 70%;gap: 10px">
                         <div class="popover-body-icon"><img style="width: 100%; padding: 10px"
-                                alt="notification icon" class src="../static.topcv.vn/v4/image/logo/topcv-logo.png">
+                                alt="notification icon" class src="{{ asset('storage/' . $info->logo) }}">
                         </div>
                         <div class="popover-body-message">Đăng ký nhận thông báo từ TopCV để không bỏ lỡ các cơ hội
                             việc
@@ -2165,8 +2173,8 @@
             </div>
         </div>
     </div>
-    <script src="../www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-    <script src="../www.gstatic.com/firebasejs/8.6.8/firebase-messaging.js"></script>
+    <script src="{{ asset('www.gstatic.com/firebasejs/8.6.8/firebase-app.js') }}"></script>
+    <script src="{{ asset('www.gstatic.com/firebasejs/8.6.8/firebase-messaging.js') }}"></script>
     <script>
         var bellNotification = new Vue({
             el: "#bell-container",
@@ -2489,426 +2497,16 @@
             event.stopPropagation();
         });
     </script>
-    <script src="../static.topcv.vn/v4/js/components/nav-header.564259730905beea.js"></script>
-    <script src="../static.topcv.vn/v4/js/common/chart/chart-demand-job-home-page.37b17e84098c9e3f.js"></script>
-    <script>
-        $(document).ready(function() {
-            let indexSectionTitle = 1;
-            const arraySectionTitle = [
-                "Định hướng nghề nghiệp",
-                "Việc làm mới",
-                "Công ty phù hợp",
-                "Phúc lợi tốt",
-                "Mức lương cao",
-                "Thông tin thị trường",
-                "CV mới",
-            ];
-
-            setInterval(() => {
-                $("#section-header .section-title").fadeOut(200, function() {
-                    $(this).html(arraySectionTitle[indexSectionTitle]).fadeIn();
-                });
-
-                indexSectionTitle++;
-                if (indexSectionTitle >= arraySectionTitle.length) {
-                    indexSectionTitle = 0;
-                }
-            }, 2000);
-
-            setTimeout(() => {
-                $('#section-header #frm-search-job select.select2').each((i, el) => {
-                    let option = {
-                        dropdownParent: $(el).parent(),
-                    }
-                    const arrNotSeacrh = ['salary-advanced', 'exp-advanced'];
-
-                    if (arrNotSeacrh.includes($(el).attr('id'))) {
-                        option['minimumResultsForSearch'] = -1
-                    }
-                    $(el).select2(option).data('select2').$dropdown.addClass(
-                        "dropdown-box-search-home-page");
-                });
-
-                $('#section-header #demand-job-select').each((i, el) => {
-                    $(el).select2({
-                        dropdownParent: $(el).parent(),
-                    }).data('select2').$dropdown.addClass("dropdown-demand-job-home-page");
-                });
-            }, 0);
-
-            requestAnimationFrame(() => {
-                window.ChartDemandJobHomePage.init([], 'myChartDemandJobHomePage');
-            });
-
-
-            loadChart()
-            loadWorkMarket()
-
-            $('#section-header #demand-job-select').change(function() {
-                loadChart()
-                if ($('#demand-job-select-dashboard')) {
-                    $('#demand-job-select-dashboard').val($('#section-header #demand-job-select').val())
-                        .trigger('change')
-                }
-
-            })
-
-            function loadChart() {
-                $.ajax({
-                    url: "https://www.topcv.vn/get-recruitment-demand",
-                    data: {
-                        type: $('#section-header #demand-job-select').val()
-                    },
-                    type: 'get',
-                    success: function(response) {
-                        if (response.status == 'success') {
-                            $('#section-header .loading-chart').css("display", "none")
-                            $('#section-header .box-chart').css("display", "block")
-                            setTimeout(() => {
-                                requestAnimationFrame(() => {
-                                    window.ChartDemandJobHomePage.update(response.data)
-                                })
-                            }, 100);
-                        } else {
-                            console.log('failed!');
-                        }
-                    },
-                    error: function(error) {
-                        console.log('failed!');
-                    }
-                });
-            }
-
-            function loadWorkMarket() {
-                var dataWorkMarket = getDataWorkMarketLocalStorage();
-
-                if (dataWorkMarket != null) {
-                    fillDataWorkMarket(dataWorkMarket);
-                }
-
-                $.ajax({
-                    url: "https://www.topcv.vn/get-work-market",
-                    type: 'get',
-                    success: function(response) {
-                        if (response.status == 'success') {
-                            const data = response.data;
-                            data.timestamp = new Date().getTime()
-                            localStorage.setItem("data_work_market_home_page", JSON.stringify(data))
-                            if (dataWorkMarket == null) {
-                                fillDataWorkMarket(data);
-                            }
-                        } else {
-                            console.log('failed!');
-                        }
-                    },
-                    error: function(error) {
-                        console.log('failed!');
-                    }
-                });
-            }
-
-            function fillDataWorkMarket(data) {
-                for (let index in data) {
-                    $("#section-header .box-demand-job_work-market [name=" + index + "]").html(data[
-                        index])
-                }
-
-                $('#section-header .box-demand-job_work-market .quantity').each(function() {
-                    $(this).prop('Counter', 0).animate({
-                        Counter: $(this).text()
-                    }, {
-                        duration: 1500,
-                        easing: 'swing',
-                        step: function(now) {
-                            $(this).text(Math.ceil(now).toLocaleString(
-                                'vi-VN'));
-                        }
-                    });
-                });
-
-                if (data.quantity_job_recruitment >= data
-                    .quantity_job_recruitment_yesterday) {
-                    $("#section-header .box-demand-job_work-market .job-hiring .status")
-                        .addClass("up")
-                } else {
-                    $("#section-header .box-demand-job_work-market .job-hiring .status")
-                        .addClass("down")
-                }
-            }
-
-            function getDataWorkMarketLocalStorage() {
-                var dataWorkMarket = localStorage.getItem("data_work_market_home_page");
-
-                if (dataWorkMarket) {
-                    dataWorkMarket = JSON.parse(dataWorkMarket)
-                    var checkTime = checkTimeDistance(dataWorkMarket.timestamp, new Date().getTime(), 5)
-                    if (!checkTime) {
-                        return dataWorkMarket;
-                    }
-                    return null;
-                }
-                return null;
-            }
-
-            function checkTimeDistance(time1, time2, distance) {
-                const diff = Math.abs(time1 - time2);
-                const distanceInMillis = distance * 60000;
-                return diff >= distanceInMillis;
-            }
-
-            $("#section-header .box-load-more").click(function() {
-                $('html, body').animate({
-                    scrollTop: $("#dashboard").offset().top - 100
-                }, 1000);
-            });
-        })
+    <script src="{{ asset('static.topcv.vn/v4/js/components/nav-header.564259730905beea.js') }}"></script>
+    <script src="{{ asset('static.topcv.vn/v4/js/common/chart/chart-demand-job-home-page.37b17e84098c9e3f.js') }}">
     </script>
-    <script>
-        window.lazyFunctions.initTopCompany = async function(element) {
-            $(document).ready(function() {
-                const topCompanyInstance = new Vue({
-                    el: '.top-company',
-                    data: {
-                        companies: [],
-                    },
-                    methods: {
-                        async fetchData() {
-                            const response = await $.ajax({
-                                url: 'https://www.topcv.vn/top-company/list',
-                                method: 'get',
-                            });
-                            if (response.success) {
-                                this.companies.push(
-                                    ...response.data.companies,
-                                );
-                            }
-                        },
-                    },
-                    async created() {
-                        await this.fetchData();
-                        $('#slider-company').show();
-                        $('.top-company .loading').hide();
-                        $('#slider-company').slick({
-                            dots: false,
-                            slidesToShow: 4,
-                            slidesToScroll: 4,
-                            fade: false,
-                            gap: 10,
-                            infinite: true,
-                            speed: 500,
-                            autoplay: true,
-                            autoplaySpeed: 5000,
-                            pauseOnHover: true,
-                            arrows: true,
-                            responsive: [{
-                                    breakpoint: 1280,
-                                    settings: {
-                                        slidesToShow: 4,
-                                        slidesToScroll: 4,
-                                    },
-                                },
-                                {
-                                    breakpoint: 766,
-                                    settings: {
-                                        slidesToShow: 2,
-                                        slidesToScroll: 2,
-                                    },
-                                },
-                            ],
-                            prevArrow: '.top-company .btn-prev',
-                            nextArrow: '.top-company .btn-next',
-                        }).on('init', function(event, slick) {
+    <script src="{{ asset('static.topcv.vn/v4/cdn/js/popper.min.js') }}"></script>
+    <script src="{{ asset('static.topcv.vn/v4/cdn/plugins/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('static.topcv.vn/v4/cdn/plugins/select2/select2.dropdown-position.js') }}"></script>
+    <script src="{{ asset('static.topcv.vn/v4/cdn/plugins/chart/chart.js') }}"></script>
+    <script src="{{ asset('static.topcv.vn/v4/plugins/owl-carousel/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('vieclamso1/v3/js/jobs2513.js?v=3.0.0') }}" type="text/javascript"></script>
 
-                        });
-                    },
-                });
-            });
-        };
-    </script>
-    <script>
-        window.lazyFunctions.initTopCategory = async function(element) {
-            await window.loadScript('../static.topcv.vn/v4/plugins/owl-carousel/js/owl.carousel.min.js');
-            const topCategoryInstance = new Vue({
-                el: '.top-category',
-                data: {
-                    categories: [],
-                },
-                async created() {
-                    await this.fetchData();
-                    const sliderCategory = $('#top-category-carousel').owlCarousel({
-                        loop: false,
-                        nav: false,
-                        dots: false,
-                        items: 1,
-                        autoplay: false,
-                        autoplayTimeout: 3000,
-                        stopOnHover: true,
-                        autoplayHoverPause: true,
-                        margin: 30,
-                        onInitialized: function() {
-                            window.myLazyLoad.update();
-                        }
-                    });
-
-                    sliderCategory.on('changed.owl.carousel', function(e) {
-                        const items = e.item.count;
-                        const item = e.item.index;
-                        const size = e.page.size;
-                        if (item === 0) {
-                            $('.top-category .btn-prev').attr('disabled', 'disabled');
-                            $('.top-category .btn-next').removeAttr('disabled');
-                        } else if ((items - size) === item) {
-                            $('.top-category .btn-next').attr('disabled', 'disabled');
-                            $('.top-category .btn-prev').removeAttr('disabled');
-                        } else {
-                            $('.top-category .btn-next').removeAttr('disabled');
-                            $('.top-category .btn-prev').removeAttr('disabled');
-                        }
-                    });
-                    $('.top-category .btn-next').on('click', function() {
-                        sliderCategory.trigger('next.owl.carousel');
-                    });
-                    $('.top-category .btn-prev').on('click', function() {
-                        sliderCategory.trigger('prev.owl.carousel');
-                    });
-                },
-                methods: {
-                    async fetchData() {
-                        const response = await $.ajax({
-                            url: 'https://www.topcv.vn/categories/list-top',
-                            method: 'get',
-                        });
-                        if (response.success) {
-                            this.categories.push(...this.chunk(response.data.categories, 8));
-                        }
-                    },
-                    chunk(array, size) {
-                        if (size < 1) throw new Error('Size must be positive')
-                        const result = []
-                        for (let i = 0; i < array.length; i += size) {
-                            result.push(array.slice(i, i + size))
-                        }
-                        return result
-                    }
-                },
-            });
-        }
-    </script>
-    <script src="../static.topcv.vn/v4/cdn/js/popper.min.js"></script>
-    <script src="../static.topcv.vn/v4/cdn/plugins/select2/select2.min.js"></script>
-    <script src="../static.topcv.vn/v4/cdn/plugins/select2/select2.dropdown-position.js"></script>
-    <script src="../static.topcv.vn/v4/cdn/plugins/chart/chart.js"></script>
-    <script src="../static.topcv.vn/v4/plugins/owl-carousel/js/owl.carousel.min.js"></script>
-    <script src="../vieclamso1/v3/js/jobs2513.js?v=3.0.0" type="text/javascript"></script>
-
-
-
-    <script type="text/javascript">
-        var onFeatureTrackingTa = '1'
-        var listSaveJobs = '[]';
-        listSaveJobs = JSON.parse(listSaveJobs);
-        var savedJobIds = {
-            data: {
-                savedJobIds: listSaveJobs
-            },
-
-        };
-        $(document).on("click", ".save-job", function() {
-            window.trackingTopCV.sendEventSaveJob()
-            var jobId = $(this).data("id");
-            var url = "";
-            if ($(this).hasClass("active")) {
-                url = unsaveJobUrl;
-            } else {
-                url = saveJobUrl;
-            }
-            var self = this;
-            $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data: {
-                        job_id: jobId,
-                    },
-                })
-                .done(function(response) {
-
-                    if (response.status == 'success') {
-                        $("button.save-job[data-id=" + jobId + "]").each(function(index) {
-                            $(this).toggleClass("active")
-                        });
-
-                    } else if (response.status == 'failed') {
-                        showModalError(response.message);
-                    }
-                })
-                .fail(function() {
-                    console.log('error');
-                })
-                .always(function() {});
-        })
-
-
-
-
-        function getOriginOptions() {
-            var categoryId = $('#category').val();
-            var cityId = $('#city').val();
-            var keyword = $('#keyword').val().trim();
-            var position = $('#position-advanced').val();
-            var salary = $('#salary-advanced').val();
-            var type = $('#type-advanced').val();
-            var companyField = $('#company-field-advanced').val();
-            var exp = $('#exp-advanced').val();
-            var options = {};
-
-            if (keyword) {
-                options.keyword = keyword;
-            }
-            if (categoryId) {
-                options.categories = [categories[parseInt(categoryId)]];
-            }
-            if (cityId) {
-                options.locations = [cities[parseInt(cityId)]];
-            }
-            if (position) {
-                options.position = position;
-            }
-            if (salary) {
-                options.salary = salary;
-            }
-            if (exp) {
-                options.exp = exp;
-            }
-            if (type) {
-                options.types = [type];
-            }
-            if (companyField) {
-                options.companyField = companyField;
-            }
-            return options;
-        }
-
-        function submitFormSearchJob() {
-            var options = getOriginOptions();
-            var url = generateJobSearchUrl(options);
-            document.location.href = url;
-        }
-
-        $(document).ready(function() {
-            delayLoadJs(async () => {
-                await window.loadScript(
-                    '../static.topcv.vn/v4/js/modules/autocomplete/keyword-search-autocomplete.d01ea7c73ea6d16d.js'
-                );
-                window.searchTOPCV.instanceKeywordSearchAutocomplete.autocomplete(document
-                    .getElementById("keyword"), getOriginOptions);
-            });
-
-            $('#frm-search-job').submit(function(e) {
-                e.preventDefault();
-                submitFormSearchJob();
-            });
-        });
-    </script>
     <script>
         $(document).ready(function() {
             $('.btn-download-app').click('click', function() {
@@ -2920,15 +2518,14 @@
             $(this).closest('a[data-toggle="tooltip"]').tooltip("hide");
         })
     </script>
-    <script data-type="lazy"
-        data-src="https://static.topcv.vn/v4/js/common/homepage/index.775948cf06390eb7.js"></script>
-    <script src="../static.topcv.vn/v4/js/pages/home.853e0bf512ee00fe.js"></script>
+    <script src="{{ asset('static.topcv.vn/v4/js/common/homepage/index.775948cf06390eb7.js') }}"></script>
+    <script src="{{ asset('static.topcv.vn/v4/js/pages/home.853e0bf512ee00fe.js') }}"></script>
     <script>
         document.querySelectorAll('.footer-top a[target="_blank"]').forEach((tag) => {
             tag.setAttribute('rel', 'nooppener noreferrer');
         });
     </script>
-    <script src="../static.topcv.vn/v4/cdn/plugins/lazyload/lazyload.min.js"></script>
+    <script src="{{ asset('static.topcv.vn/v4/cdn/plugins/lazyload/lazyload.min.js') }}"></script>
     <script>
         function executeLazyFunction(element) {
             var lazyFunctionName = element.getAttribute("data-lazy-function");
@@ -2944,8 +2541,8 @@
             });
         });
     </script>
-    <script src="https://static.topcv.vn/v4/js/common/evaluate-tool-cv-success.0d139f508d292cc9.js" defer></script>
-    <script src="https://static.topcv.vn/v4/js/helper.e6a97e09a77e1d17.js"></script>
+    <script src="{{ asset('static.topcv.vn/v4/js/common/evaluate-tool-cv-success.0d139f508d292cc9.js') }}" defer></script>
+    <script src="{{ asset('static.topcv.vn/v4/js/helper.e6a97e09a77e1d17.js') }}"></script>
     <script type="text/javascript">
         (function(c, l, a, r, i, t, y) {
             c[a] = c[a] || function() {
@@ -3131,30 +2728,33 @@
                                 <div class="list-icon_tab status-option verry_bad" data-option="Rất tệ"
                                     data-value="1">
                                     <lottie-player
-                                        src="../vieclamso1/v4/image/survey/search-job/animation/verry_bad.json"
+                                        src="{{ asset('vieclamso1/v4/image/survey/search-job/animation/verry_bad.json') }}"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
                                     <div class="list-icon_tab-title">Rất tệ</div>
                                 </div>
                                 <div class="list-icon_tab status-option bad" data-option="Tệ" data-value="2">
-                                    <lottie-player src="../vieclamso1/v4/image/survey/search-job/animation/bad.json"
+                                    <lottie-player
+                                        src="{{ asset('vieclamso1/v4/image/survey/search-job/animation/bad.json') }}"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
                                     <div class="list-icon_tab-title">Tệ</div>
                                 </div>
                                 <div class="list-icon_tab status-option normal" data-option="Bình thường"
                                     data-value="3">
-                                    <lottie-player src="../vieclamso1/v4/image/survey/search-job/animation/normal.json"
+                                    <lottie-player
+                                        src="{{ asset('vieclamso1/v4/image/survey/search-job/animation/normal.json') }}"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
                                     <div class="list-icon_tab-title">Bình thường</div>
                                 </div>
                                 <div class="list-icon_tab status-option good" data-option="Tốt" data-value="4">
-                                    <lottie-player src="../vieclamso1/v4/image/survey/search-job/animation/good.json"
+                                    <lottie-player
+                                        src="{{ asset('vieclamso1/v4/image/survey/search-job/animation/good.json') }}"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
                                     <div class="list-icon_tab-title">Tốt</div>
                                 </div>
                                 <div class="list-icon_tab status-option verry_good" data-option="Tuyệt vời"
                                     data-value="5">
                                     <lottie-player
-                                        src="../vieclamso1/v4/image/survey/search-job/animation/verry_good.json"
+                                        src="{{ asset('vieclamso1/v4/image/survey/search-job/animation/verry_good.json') }}"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
                                     <div class="list-icon_tab-title">Tuyệt vời</div>
                                 </div>
@@ -3176,7 +2776,7 @@
                 <i class="fa-regular fa-xmark"></i>
             </div>
             <img class="support-ticket-success-image"
-                src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/service-payment/payment-success.png">
+                src="{{ asset('cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/service-payment/payment-success.png') }}">
             <div class="support-ticket-success-description">
                 <div class="support-ticket-success-description__title">
                     Gửi yêu cầu thành công
@@ -3205,7 +2805,7 @@
                 <i class="fa-regular fa-xmark"></i>
             </div>
             <img class="support-ticket-success-image"
-                src="../cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/service-payment/payment-success.png">
+                src="{{ asset('cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/service-payment/payment-success.png') }}">
             <div class="support-ticket-success-description">
                 <div class="support-ticket-success-description__title">
                     Gửi góp ý thành công

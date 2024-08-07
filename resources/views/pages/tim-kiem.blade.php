@@ -1,8 +1,5 @@
  @extends('layout')
  @section('content')
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/desktop/search-job.min.5b2166bc3defa96bK.css">
-     <link
-         rel="stylesheet"href="https://static.topcv.vn/v4/css/components/desktop/jobs/job-list-search-result.f3a3504e765512c7K.css">
      <div class="search-job">
          <div class="header">
              <div class="box-search-job">

@@ -1,6 +1,5 @@
  @extends('layout')
  @section('content')
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/desktop/upload-cv.min.29bd6003627f486fK.css">
      <div>
          <div class="container">
              <div class="box-main-upload-cv">
