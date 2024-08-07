@@ -196,33 +196,6 @@
 
 
     </main>
-
-
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/modernizr-3.6.0.min.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/jquery-migrate-3.3.0.min.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins//waypoints.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins//magnific-popup.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/perfect-scrollbar.min.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/select2.min.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/isotope.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/scrollup.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/swiper-bundle.min.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/plugins/counterup.js"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/js/main.js?v=1.12.3"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/js/script.js?v=1.12.3"></script>
-    <script src="https://vieclam.topgialai.vn/themes/jobbox/js/backend.js?v=1.12.3"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/plugins/job-board/js/avatar.js"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/core/base/libraries/ckeditor/ckeditor.js"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/core/base/js/editor.js"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/core/base/libraries/tagify/tagify.js"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/core/base/js/tags.js"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/plugins/language/js/language-public.js?v=2.2.0"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/plugins/cookie-consent/js/cookie-consent.js?v=1.0.1"></script>
-    <script src="https://vieclam.topgialai.vn/vendor/core/plugins/job-board/libraries/cropper.js"></script>
-
-
-
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('summary1');
