@@ -7,7 +7,7 @@ use App\Models\Info;
 
 class InfoController extends Controller
 {
-     public function __construct()
+    public function __construct()
     {
         $this->middleware('permission:info-view', ['only' => ['index']]);
         $this->middleware('permission:info-update', ['only' => ['update']]);
@@ -45,6 +45,25 @@ class InfoController extends Controller
             'image_appstore' => 'nullable|image|max:2048',
             'link_googleplay' => 'nullable|url|max:255',
             'image_googleplay' => 'nullable|image|max:2048',
+
+            'recruitment_title_1' => 'nullable|string|max:255',
+            'recruitment_image_1' => 'nullable|image|max:2048',
+            'big_update_title' => 'nullable|string|max:255',
+            'big_update_title_1' => 'nullable|string|max:255',
+            'big_update_description' => 'nullable|string',
+            'big_update_image' => 'nullable|image|max:2048',
+            'ai_in_recruitment' => 'nullable|string|max:255',
+            'ai_in_recruitment_h1' => 'nullable|string|max:255',
+            'ai_in_recruitment_h2' => 'nullable|string',
+            'ai_in_recruitment_image' => 'nullable|image|max:2048',
+            'core_functions' => 'nullable|string|max:255',
+            'smart_recruitment' => 'nullable|string|max:255',
+            'smart_recruitment_description' => 'nullable|string',
+            'about_us' => 'nullable|string|max:255',
+            'about_us_h1' => 'nullable|string',
+            'about_us_image' => 'nullable|image|max:2048',
+            'bct_url' => 'nullable|url|max:255',
+            'bct_image' => 'nullable|image|max:2048',
         ]);
 
         $info = Info::findOrFail($id);
@@ -100,6 +119,45 @@ class InfoController extends Controller
             $info->image_googleplay = $path;
         }
 
+        if ($request->hasFile('recruitment_image_1')) {
+            $path = $request->file('recruitment_image_1')->store('images', 'public');
+            $info->recruitment_image_1 = $path;
+        }
+
+        if ($request->hasFile('big_update_image')) {
+            $path = $request->file('big_update_image')->store('images', 'public');
+            $info->big_update_image = $path;
+        }
+
+        if ($request->hasFile('ai_in_recruitment_image')) {
+            $path = $request->file('ai_in_recruitment_image')->store('images', 'public');
+            $info->ai_in_recruitment_image = $path;
+        }
+
+        if ($request->hasFile('about_us_image')) {
+            $path = $request->file('about_us_image')->store('images', 'public');
+            $info->about_us_image = $path;
+        }
+
+        if ($request->hasFile('bct_image')) {
+            $path = $request->file('bct_image')->store('images', 'public');
+            $info->bct_image = $path;
+        }
+
+        // Update new text fields
+        $info->recruitment_title_1 = $request->recruitment_title_1;
+        $info->big_update_title = $request->big_update_title;
+        $info->big_update_title_1 = $request->big_update_title_1;
+        $info->big_update_description = $request->big_update_description;
+        $info->ai_in_recruitment = $request->ai_in_recruitment;
+        $info->ai_in_recruitment_h1 = $request->ai_in_recruitment_h1;
+        $info->ai_in_recruitment_h2 = $request->ai_in_recruitment_h2;
+        $info->core_functions = $request->core_functions;
+        $info->smart_recruitment = $request->smart_recruitment;
+        $info->smart_recruitment_description = $request->smart_recruitment_description;
+        $info->about_us = $request->about_us;
+        $info->about_us_h1 = $request->about_us_h1;
+        $info->bct_url = $request->bct_url;
         // Cập nhật các trường khác
         $info->link_website = $request->link_website;
         $info->name_website = $request->name_website;

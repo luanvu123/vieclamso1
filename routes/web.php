@@ -11,9 +11,12 @@ use App\Http\Controllers\EcosystemController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\EmployerManageController;
 use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\FigureController;
 use App\Http\Controllers\JobPostingController;
 use App\Http\Controllers\JobsManageController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\SmartRecruitmentController;
+use App\Http\Controllers\ValueController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -41,13 +44,16 @@ use App\Http\Controllers\HobbyController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\JobReportController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PrizeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PublicLinkController;
+use App\Http\Controllers\RecruitmentServiceController;
 use App\Http\Controllers\SavedJobController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TypeFeedbackController;
+use App\Http\Controllers\TypePartnerController;
 use App\Http\Controllers\TypeSupportController;
 
 /*
@@ -71,15 +77,17 @@ Route::get('/cong-ty/{slug}', [SiteController::class, 'showCompany'])->name('com
 Route::get('cam-nang-nghe-nghiep/{slug}', [SiteController::class, 'showPost'])->name('genrepost.showPost');
 Route::get('/khoa-hoc', [SiteController::class, 'showCourse'])->name('site.courses');
 Route::get('/ung-dung', [SiteController::class, 'showApp'])->name('site.app');
+
+
+Route::get('/recruitment', [SiteController::class, 'recruitment'])->name('recruitment');
 Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 Route::resource('support', SupportController::class);
 
 Route::get('/candidate_cv/{id}', [JobPostingController::class, 'showCv'])->name('candidates.show.cv');
 
 Auth::routes();
-Route::get('/recruitment', function () {
-    return view('pages.recruitment');
-})->name('recruitment');
+
+
 
 
 
@@ -104,6 +112,12 @@ Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('
 Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
+    Route::resource('partners', PartnerController::class);
+Route::resource('type-partners', TypePartnerController::class);
+    Route::resource('values', ValueController::class);
+    Route::resource('figures', FigureController::class);
+    Route::resource('recruitment_services', RecruitmentServiceController::class);
+    Route::resource('smart_recruitments', SmartRecruitmentController::class);
     Route::get('admin/info', [InfoController::class, 'index'])->name('admin.info.index');
     Route::post('admin/info/{id}', [InfoController::class, 'update'])->name('admin.info.update');
     Route::resource('job-reports', JobReportController::class)->only(['index', 'show', 'edit', 'update']);
@@ -166,7 +180,7 @@ Route::get('candidate/google/callback', [CandidateController::class, 'handleGoog
 
 Route::middleware(['candidate'])->group(function () {
 
-    
+
     Route::post('/job-reports', [CandidateController::class, 'storeReport'])->name('job-reports.store');
     Route::get('/candidate/messages', [MessageController::class, 'receiveCandidateMessages'])->name('messages.receive.candidate');
     Route::get('/candidate/messages/{employer}', [MessageController::class, 'showCandidateMessages'])->name('messages.show.candidate');

@@ -171,20 +171,51 @@
                             </a>
                         </li>
 
-                           <li class="{{ Route::is('job-reports.index') ? 'active-submenu' : '' }}">
+                        <li class="{{ Route::is('job-reports.index') ? 'active-submenu' : '' }}">
                             <a href="{{ route('job-reports.index') }}">Report
                                 @if ($reportCountTwoHour > 0)
                                     <span class="nav-tag">{{ $reportCountTwoHour }}</span>
                                 @endif
                             </a>
                         </li>
-                         <li class="{{ Route::is('admin.info.index') ? 'active-submenu' : '' }}">
-                            <a href="{{ route('admin.info.index') }}">Edit Front-end
-                            </a>
-                        </li>
-                         <li class="{{ Route::is('public_links.index') ? 'active-submenu' : '' }}">
-                            <a href="{{ route('public_links.index') }}">Edit footer
-                            </a>
+
+                        <li
+                            class="{{ Route::is('admin.info.index') || Route::is('public_links.index') || Route::is('smart_recruitments.index') || Route::is('recruitment_services.index') ? 'active-submenu' : '' }}">
+                            <a href="#">Front-end</a>
+                            <ul>
+                                <li class="{{ Route::is('admin.info.index') ? 'active-submenu' : '' }}">
+                                    <a href="{{ route('admin.info.index') }}">Edit Front-end
+                                    </a>
+                                </li>
+                                <li class="{{ Route::is('public_links.index') ? 'active-submenu' : '' }}">
+                                    <a href="{{ route('public_links.index') }}">Edit footer
+                                    </a>
+                                </li>
+                                <li class="{{ Route::is('smart_recruitments.index') ? 'active-submenu' : '' }}">
+                                    <a href="{{ route('smart_recruitments.index') }}">Edit smart_recruitments
+                                    </a>
+                                </li>
+                                <li class="{{ Route::is('recruitment_services.index') ? 'active-submenu' : '' }}">
+                                    <a href="{{ route('recruitment_services.index') }}">Edit recruitment_services
+                                    </a>
+                                </li>
+                                <li class="{{ Route::is('figures.index') ? 'active-submenu' : '' }}">
+                                    <a href="{{ route('figures.index') }}">Edit figures
+                                    </a>
+                                </li>
+                                <li class="{{ Route::is('values.index') ? 'active-submenu' : '' }}">
+                                    <a href="{{ route('values.index') }}">Edit values
+                                    </a>
+                                </li>
+                                <li class="{{ Route::is('partners.index') ? 'active-submenu' : '' }}">
+                                    <a href="{{ route('partners.index') }}">Edit partners
+                                    </a>
+                                </li>
+                                <li class="{{ Route::is('type-partners.index') ? 'active-submenu' : '' }}">
+                                    <a href="{{ route('type-partners.index') }}">Edit type-partners
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                     </ul>
@@ -438,7 +469,7 @@
             document.getElementById('convert_slug').value = slug;
         }
     </script>
-       <script>
+    <script>
         $('.support_choose').change(function() {
             var trangthai_val = $(this).val();
             var id = $(this).attr('id');
@@ -455,7 +486,7 @@
             });
         })
     </script>
-        <script>
+    <script>
         $('.feedback_choose').change(function() {
             var trangthai_val = $(this).val();
             var id = $(this).attr('id');
@@ -471,6 +502,11 @@
                 }
             });
         })
+    </script>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('summary2');
+        CKEDITOR.replace('summary3');
     </script>
 </body>
 

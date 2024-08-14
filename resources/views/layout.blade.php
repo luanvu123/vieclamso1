@@ -100,16 +100,6 @@
 
     <link rel="stylesheet"
         href="{{ asset('static.topcv.vn/v4/css/components/desktop/update-info.min.d09d237a2056cfd0K.css') }}">
-
-
-
-
-
-
-
-
-
-
     <style>
         #toast-container>div {
             opacity: unset;
@@ -1380,7 +1370,7 @@
                         </a>
                     </li>
                     <li class="navbar-right__item">
-                        <a type="button" class="btn btn-dark" href="{{ route('employer.login') }}"
+                        <a type="button" class="btn btn-dark" href="{{ route('recruitment') }}"
                             target="_blank">
                             Đăng tuyển & tìm hồ sơ
                         </a>
@@ -1416,9 +1406,9 @@
                                 <img src="{{ asset('storage/' . $info->logo_dmca_com) }}"
                                     alt="DMCA.com Protection Status" class="dmca-image" />
                             </a>
-                            <script src="{{ asset('images.dmca.com/Badges/DMCABadgeHelper.min.js') }}"></script>
+                            <script src="{{$info->bct}}"></script>
                             <a href="http://online.gov.vn/Home/WebDetails/25388" target="_blank">
-                                <img src="{{ asset('cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/footer/bct.jpg') }}"
+                                <img src="{{ asset('storage/' . $info->bct_image) }}"
                                     class="img-responsive bct-image" alt title>
                             </a>
                         </div>

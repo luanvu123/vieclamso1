@@ -8,9 +8,15 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\Course;
 use App\Models\Ecosystem;
+use App\Models\Figure;
 use App\Models\GenrePost;
 use App\Models\JobPosting;
 use App\Models\Media;
+use App\Models\Partner;
+use App\Models\RecruitmentService;
+use App\Models\SmartRecruitment;
+use App\Models\TypePartner;
+use App\Models\Value;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,8 +34,8 @@ class SiteController extends Controller
         $ecosystems = Ecosystem::where('status', 1)->take(4)->get();
         $medias = Media::where('status', 1)->take(6)->get();
         $totalCompanyCount = Company::count();
-         $totalApplicationCount = Application::count();
-        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias','totalCompanyCount','totalApplicationCount'));
+        $totalApplicationCount = Application::count();
+        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount'));
     }
     public function filter(Request $request)
     {
@@ -61,9 +67,9 @@ class SiteController extends Controller
         $awards = Award::where('status', 1)->take(5)->get();
         $ecosystems = Ecosystem::where('status', 1)->take(4)->get();
         $medias = Media::where('status', 1)->take(6)->get();
-          $totalCompanyCount = Company::count();
-         $totalApplicationCount = Application::count();
-        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias','totalCompanyCount','totalApplicationCount'));
+        $totalCompanyCount = Company::count();
+        $totalApplicationCount = Application::count();
+        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount'));
     }
 
     public function show($slug)
@@ -176,5 +182,18 @@ class SiteController extends Controller
     public function showApp()
     {
         return view('pages.app');
+    }
+
+    public function recruitment()
+    {
+        $recruitments = SmartRecruitment::where('status', true)->get();
+        $services = RecruitmentService::where('status', true)->get();
+        $figures = Figure::where('status', true)->get();
+        $values = Value::where('status', true)->get();
+        $awards = Award::where('status', 1)->get();
+        $partners = Partner::where('status', true)->get();
+        $typePartners = TypePartner::with('partners')->get();
+
+        return view('pages.recruitment', compact('recruitments', 'services', 'figures', 'values', 'awards', 'partners', 'typePartners'));
     }
 }

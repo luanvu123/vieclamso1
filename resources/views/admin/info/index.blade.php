@@ -2,6 +2,19 @@
 
 @section('content')
     <div class="container">
+         @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
         <h2>Edit Footer Information</h2>
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
@@ -177,6 +190,125 @@
                         style="max-width: 100px;">
                 @endif
                 <input type="file" class="form-control" id="image_googleplay" name="image_googleplay">
+            </div>
+            <!-- New fields -->
+            <div class="form-group">
+                <label for="recruitment_title_1">Recruitment Title 1</label>
+                <input type="text" class="form-control" id="recruitment_title_1" name="recruitment_title_1"
+                    value="{{ $info->recruitment_title_1 }}">
+            </div>
+
+            <div class="form-group">
+                <label for="recruitment_image_1">Recruitment Image 1</label>
+                @if ($info->recruitment_image_1)
+                    <img src="{{ asset('storage/' . $info->recruitment_image_1) }}" alt="Recruitment Image"
+                        style="max-width: 100px;">
+                @endif
+                <input type="file" class="form-control" id="recruitment_image_1" name="recruitment_image_1">
+            </div>
+
+            <div class="form-group">
+                <label for="big_update_title">Big Update Title</label>
+                <input type="text" class="form-control" id="big_update_title" name="big_update_title"
+                    value="{{ $info->big_update_title }}">
+            </div>
+
+            <div class="form-group">
+                <label for="big_update_title_1">Big Update Title 1</label>
+                <input type="text" class="form-control" id="big_update_title_1" name="big_update_title_1"
+                    value="{{ $info->big_update_title_1 }}">
+            </div>
+
+            <div class="form-group">
+                <label for="big_update_description">Big Update Description</label>
+                <textarea class="form-control" id="big_update_description" name="big_update_description">{{ $info->big_update_description }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="big_update_image">Big Update Image</label>
+                @if ($info->big_update_image)
+                    <img src="{{ asset('storage/' . $info->big_update_image) }}" alt="Big Update Image"
+                        style="max-width: 100px;">
+                @endif
+                <input type="file" class="form-control" id="big_update_image" name="big_update_image">
+            </div>
+
+            <div class="form-group">
+                <label for="ai_in_recruitment">AI in Recruitment</label>
+                <input type="text" class="form-control" id="ai_in_recruitment" name="ai_in_recruitment"
+                    value="{{ $info->ai_in_recruitment }}">
+            </div>
+
+            <div class="form-group">
+                <label for="ai_in_recruitment_h1">AI in Recruitment H1</label>
+                <input type="text" class="form-control" id="ai_in_recruitment_h1" name="ai_in_recruitment_h1"
+                    value="{{ $info->ai_in_recruitment_h1 }}">
+            </div>
+
+            <div class="form-group">
+                <label for="ai_in_recruitment_h2">AI in Recruitment H2</label>
+                <input type="text" class="form-control" id="ai_in_recruitment_h2" name="ai_in_recruitment_h2"
+                    value="{{ $info->ai_in_recruitment_h2 }}">
+            </div>
+
+            <div class="form-group">
+                <label for="ai_in_recruitment_image">AI in Recruitment Image</label>
+                @if ($info->ai_in_recruitment_image)
+                    <img src="{{ asset('storage/' . $info->ai_in_recruitment_image) }}" alt="AI in Recruitment Image"
+                        style="max-width: 100px;">
+                @endif
+                <input type="file" class="form-control" id="ai_in_recruitment_image" name="ai_in_recruitment_image">
+            </div>
+
+            <div class="form-group">
+                <label for="core_functions">Core Functions</label>
+                <input type="text" class="form-control" id="core_functions" name="core_functions"
+                    value="{{ $info->core_functions }}">
+            </div>
+
+            <div class="form-group">
+                <label for="smart_recruitment">Smart Recruitment</label>
+                <input type="text" class="form-control" id="smart_recruitment" name="smart_recruitment"
+                    value="{{ $info->smart_recruitment }}">
+            </div>
+
+            <div class="form-group">
+                <label for="smart_recruitment_description">Smart Recruitment Description</label>
+                <textarea class="form-control" id="smart_recruitment_description" name="smart_recruitment_description">{{ $info->smart_recruitment_description }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="about_us">About Us</label>
+                <input type="text" class="form-control" id="about_us" name="about_us"
+                    value="{{ $info->about_us }}">
+            </div>
+
+            <div class="form-group">
+                <label for="about_us_h1">About Us H1</label>
+                <input type="text" class="form-control" id="about_us_h1" name="about_us_h1"
+                    value="{{ $info->about_us_h1 }}">
+            </div>
+
+            <div class="form-group">
+                <label for="about_us_image">About Us Image</label>
+                @if ($info->about_us_image)
+                    <img src="{{ asset('storage/' . $info->about_us_image) }}" alt="About Us Image"
+                        style="max-width: 100px;">
+                @endif
+                <input type="file" class="form-control" id="about_us_image" name="about_us_image">
+            </div>
+
+            <div class="form-group">
+                <label for="bct_url">BCT URL</label>
+                <input type="text" class="form-control" id="bct_url" name="bct_url" value="{{ $info->bct_url }}">
+            </div>
+
+            <div class="form-group">
+                <label for="bct_image">BCT Image</label>
+                @if ($info->bct_image)
+                    <img src="{{ asset('storage/' . $info->bct_image) }}" alt="BCT Image" style="max-width: 100px;">
+                @endif
+                <input type="file" class="form-control" id="bct_image" name="bct_image">
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
