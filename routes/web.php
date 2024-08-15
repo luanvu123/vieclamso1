@@ -29,6 +29,7 @@ use App\Http\Controllers\Auth\EmployerRegisterController;
 use App\Http\Controllers\Auth\EmployerResetPasswordController;
 use App\Http\Controllers\AwardController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\CVController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\SlugController;
@@ -38,9 +39,11 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\GenrePostController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyFollowerController;
+use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HobbyController;
+use App\Http\Controllers\HotlineController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\JobReportController;
 use App\Http\Controllers\MessageController;
@@ -52,7 +55,9 @@ use App\Http\Controllers\RecruitmentServiceController;
 use App\Http\Controllers\SavedJobController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SupportController;
+use App\Http\Controllers\TypeConsultationController;
 use App\Http\Controllers\TypeFeedbackController;
+use App\Http\Controllers\TypeHotlineController;
 use App\Http\Controllers\TypePartnerController;
 use App\Http\Controllers\TypeSupportController;
 
@@ -81,6 +86,7 @@ Route::get('/ung-dung', [SiteController::class, 'showApp'])->name('site.app');
 
 Route::get('/recruitment', [SiteController::class, 'recruitment'])->name('recruitment');
 Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+Route::post('/consultations', [SiteController::class, 'storeConsultation'])->name('consultations.store');
 Route::resource('support', SupportController::class);
 
 Route::get('/candidate_cv/{id}', [JobPostingController::class, 'showCv'])->name('candidates.show.cv');
@@ -112,8 +118,18 @@ Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('
 Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
+    Route::resource('consultations', ConsultationController::class)
+    ->only(['index', 'edit', 'update', 'destroy']);
+    // City resource routes
+    Route::resource('cities', CityController::class);
+
+    // TypeConsultation resource routes
+    Route::resource('type-consultations', TypeConsultationController::class);
+    Route::resource('hotlines', HotlineController::class);
+    Route::resource('type_hotlines', TypeHotlineController::class);
+
     Route::resource('partners', PartnerController::class);
-Route::resource('type-partners', TypePartnerController::class);
+    Route::resource('type-partners', TypePartnerController::class);
     Route::resource('values', ValueController::class);
     Route::resource('figures', FigureController::class);
     Route::resource('recruitment_services', RecruitmentServiceController::class);

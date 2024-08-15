@@ -969,8 +969,8 @@
                 <div class="w-container">
                     <div class="md:flex md:items-center md:h-[80px]">
                         <div class="relative h-[68px] md:h-auto flex items-center justify-center md:pr-[30px]">
-                            <a href="index.html?ref=you" class="business-image">
-                                <img src="{{ asset('images/image131.gif') }}" class="max-w-[200px] md:mb-[-10px]"
+                            <a href="{{route("/")}}" class="business-image">
+                                <img src="{{ asset('storage/' . $info->logo) }}" class="max-w-[200px] md:mb-[-10px]"
                                     alt="topcv logo">
                             </a>
                             <div class="md:hidden absolute top-0 right-0">
@@ -1430,7 +1430,6 @@
                                 class="btn-post-job-free">Đăng tin miễn phí ngay</a>
                         </div>
                     </div>
-
                 </div>
             </div>
             <script>

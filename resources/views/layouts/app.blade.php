@@ -178,6 +178,13 @@
                                 @endif
                             </a>
                         </li>
+                         <li class="{{ Route::is('consultations.index') ? 'active-submenu' : '' }}">
+                            <a href="{{ route('consultations.index') }}">Đăng kí nhận tư vấn
+                                @if ($consultationCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $consultationCountTwoHour }}</span>
+                                @endif
+                            </a>
+                        </li>
 
                         <li
                             class="{{ Route::is('admin.info.index') || Route::is('public_links.index') || Route::is('smart_recruitments.index') || Route::is('recruitment_services.index') ? 'active-submenu' : '' }}">
@@ -187,34 +194,7 @@
                                     <a href="{{ route('admin.info.index') }}">Edit Front-end
                                     </a>
                                 </li>
-                                <li class="{{ Route::is('public_links.index') ? 'active-submenu' : '' }}">
-                                    <a href="{{ route('public_links.index') }}">Edit footer
-                                    </a>
-                                </li>
-                                <li class="{{ Route::is('smart_recruitments.index') ? 'active-submenu' : '' }}">
-                                    <a href="{{ route('smart_recruitments.index') }}">Edit smart_recruitments
-                                    </a>
-                                </li>
-                                <li class="{{ Route::is('recruitment_services.index') ? 'active-submenu' : '' }}">
-                                    <a href="{{ route('recruitment_services.index') }}">Edit recruitment_services
-                                    </a>
-                                </li>
-                                <li class="{{ Route::is('figures.index') ? 'active-submenu' : '' }}">
-                                    <a href="{{ route('figures.index') }}">Edit figures
-                                    </a>
-                                </li>
-                                <li class="{{ Route::is('values.index') ? 'active-submenu' : '' }}">
-                                    <a href="{{ route('values.index') }}">Edit values
-                                    </a>
-                                </li>
-                                <li class="{{ Route::is('partners.index') ? 'active-submenu' : '' }}">
-                                    <a href="{{ route('partners.index') }}">Edit partners
-                                    </a>
-                                </li>
-                                <li class="{{ Route::is('type-partners.index') ? 'active-submenu' : '' }}">
-                                    <a href="{{ route('type-partners.index') }}">Edit type-partners
-                                    </a>
-                                </li>
+
                             </ul>
                         </li>
 

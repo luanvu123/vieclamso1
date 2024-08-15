@@ -2,24 +2,67 @@
 
 @section('content')
     <div class="container">
-         @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-        <h2>Edit Footer Information</h2>
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <h2>Edit Footer Information</h2>
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+        <li class="{{ Route::is('public_links.index') ? 'active-submenu' : '' }}">
+            <a href="{{ route('public_links.index') }}">Edit footer
+            </a>
+        </li>
+        <li class="{{ Route::is('smart_recruitments.index') ? 'active-submenu' : '' }}">
+            <a href="{{ route('smart_recruitments.index') }}">Edit smart_recruitments
+            </a>
+        </li>
+        <li class="{{ Route::is('recruitment_services.index') ? 'active-submenu' : '' }}">
+            <a href="{{ route('recruitment_services.index') }}">Edit recruitment_services
+            </a>
+        </li>
+        <li class="{{ Route::is('figures.index') ? 'active-submenu' : '' }}">
+            <a href="{{ route('figures.index') }}">Edit figures
+            </a>
+        </li>
+        <li class="{{ Route::is('values.index') ? 'active-submenu' : '' }}">
+            <a href="{{ route('values.index') }}">Edit values
+            </a>
+        </li>
+        <li class="{{ Route::is('partners.index') ? 'active-submenu' : '' }}">
+            <a href="{{ route('partners.index') }}">Edit partners
+            </a>
+        </li>
+        <li class="{{ Route::is('type-partners.index') ? 'active-submenu' : '' }}">
+            <a href="{{ route('type-partners.index') }}">Edit type-partners
+            </a>
+        </li>
+        <li class="{{ Route::is('hotlines.index') ? 'active-submenu' : '' }}">
+            <a href="{{ route('hotlines.index') }}">Edit hotlines
+            </a>
+        </li>
+        <li class="{{ Route::is('type_hotlines.index') ? 'active-submenu' : '' }}">
+            <a href="{{ route('type_hotlines.index') }}">Edit type_hotlines
+            </a>
+        </li>
+        <li class="{{ Route::is('cities.index') ? 'active-submenu' : '' }}">
+            <a href="{{ route('cities.index') }}">Edit cities
+            </a>
+        </li>
+        <li class="{{ Route::is('type-consultations.index') ? 'active-submenu' : '' }}">
+            <a href="{{ route('type-consultations.index') }}">Edit type-consultations
+            </a>
+        </li>
         <form action="{{ route('admin.info.update', $info->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <!-- Các trường hiện tại -->

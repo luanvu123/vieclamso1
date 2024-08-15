@@ -5,16 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\Award;
 use App\Models\Category;
+use App\Models\City;
 use App\Models\Company;
+use App\Models\Consultation;
 use App\Models\Course;
 use App\Models\Ecosystem;
 use App\Models\Figure;
 use App\Models\GenrePost;
+use App\Models\Hotline;
 use App\Models\JobPosting;
 use App\Models\Media;
 use App\Models\Partner;
 use App\Models\RecruitmentService;
 use App\Models\SmartRecruitment;
+use App\Models\TypeConsultation;
+use App\Models\TypeHotline;
 use App\Models\TypePartner;
 use App\Models\Value;
 use Carbon\Carbon;
@@ -193,7 +198,38 @@ class SiteController extends Controller
         $awards = Award::where('status', 1)->get();
         $partners = Partner::where('status', true)->get();
         $typePartners = TypePartner::with('partners')->get();
+        $hotlines = Hotline::with('typeHotline')->where('status', true)->get();
+        $typeHotlines = TypeHotline::where('status', true)->get();
+         $cities = City::where('status', 1)->pluck('name', 'id');
+        $typeConsultations = TypeConsultation::where('status',1)->pluck('name', 'id');
 
-        return view('pages.recruitment', compact('recruitments', 'services', 'figures', 'values', 'awards', 'partners', 'typePartners'));
+        return view('pages.recruitment', compact('recruitments', 'services', 'figures', 'values', 'awards', 'partners', 'typePartners', 'hotlines', 'typeHotlines','cities', 'typeConsultations'));
+    }
+
+     public function storeConsultation(Request $request)
+    {
+        // Validate the form data
+        $request->validate([
+            'fullname' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:10',
+            'city_id' => 'required|exists:cities,id',
+            'type_consulting_id' => 'required|exists:type_consultings,id',
+            'consulting_text' => 'nullable|string|max:1000',
+        ]);
+
+        // Create a new consultation record
+        Consultation::create([
+            'fullname' => $request->input('fullname'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'city_id' => $request->input('city_id'),
+            'type_consulting_id' => $request->input('type_consulting_id'),
+            'consulting_text' => $request->input('consulting_text'),
+            'status' => Consultation::STATUS_PENDING, // Default to pending
+        ]);
+
+        // Redirect or return response
+        return redirect()->back()->with('success', 'Your consultation request has been submitted successfully.');
     }
 }

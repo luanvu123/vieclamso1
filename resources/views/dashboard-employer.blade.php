@@ -56,10 +56,7 @@
                     </ul>
 
                     <ul data-submenu-title="Management">
-                        <li
-                            class="{{ Route::is('job-postings.index') || Route::is('companies.index') || Route::is('job-postings.create') ? 'active-submenu' : '' }}">
-                            <a href="#">Job</a>
-                            <ul>
+
                                 <li class="{{ Route::is('job-postings.index') ? 'active' : '' }}">
                                     <a href="{{ route('job-postings.index') }}">Job</a>
                                 </li>
@@ -72,8 +69,7 @@
                                 <li class="{{ Route::is('job-postings.create') ? 'active' : '' }}">
                                     <a href="{{ route('messages.receive') }}">Message</a>
                                 </li>
-                            </ul>
-                        </li>
+                            
                     </ul>
 
                     <ul data-submenu-title="Account">

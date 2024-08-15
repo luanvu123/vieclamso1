@@ -228,127 +228,65 @@
                         <div class="icon-top-form-lead"><span class="btn-close-form-lead"><i
                                     class="fa-regular fa-xmark"></i></span></div>
                         <div class="form-lead-title">Đăng ký nhận tư vấn</div>
-                        <div class="d-flex form-lead-scroll" id="form-lead-scroll-">
-                            <div class="form-lead-label">Họ và tên</div>
-                            <div class="form-lead-item form-item-name">
-                                <i class="fa-regular fa-user"></i>
-                                <input type="text" required id="fullname-" placeholder="Họ và tên" />
-                            </div>
-                            <div class="form-lead-msg msg-name"></div>
-                            <div class="form-lead-label">Email</div>
-                            <div class="form-lead-item form-item-email">
-                                <i class="fa-regular fa-envelope"></i>
-                                <input type="email" required id="email-" placeholder="Email" />
-                            </div>
-                            <div class="form-lead-msg msg-email"></div>
-                            <div class="form-lead-label">Số điện thoại</div>
-                            <div class="form-lead-item form-item-phone">
-                                <i class="fa-regular fa-mobile-notch"></i>
-                                <input type="text" maxlength="10" id="phone-" required
-                                    placeholder="Số điện thoại" />
-                            </div>
-                            <div class="form-lead-msg msg-phone"></div>
-                            <div class="form-lead-label">Tỉnh/Thành phố</div>
-                            <div class="form-lead-item form-item-city">
-                                <i class="fa-regular fa-building"></i>
-                                <select id="city-id-" class="place_holder dropdown_select" required>
-                                    <option value hidden>Chọn Tỉnh/Thành phố</option>
-                                    <option value="1">Hà Nội</option>
-                                    <option value="2">Hồ Chí Minh</option>
-                                    <option value="3">Bình Dương</option>
-                                    <option value="4">Bắc Ninh</option>
-                                    <option value="5">Đồng Nai</option>
-                                    <option value="6">Hưng Yên</option>
-                                    <option value="7">Hải Dương</option>
-                                    <option value="8">Đà Nẵng</option>
-                                    <option value="9">Hải Phòng</option>
-                                    <option value="10">An Giang</option>
-                                    <option value="11">Bà Rịa-Vũng Tàu</option>
-                                    <option value="12">Bắc Giang</option>
-                                    <option value="13">Bắc Kạn</option>
-                                    <option value="14">Bạc Liêu</option>
-                                    <option value="15">Bến Tre</option>
-                                    <option value="16">Bình Định</option>
-                                    <option value="17">Bình Phước</option>
-                                    <option value="18">Bình Thuận</option>
-                                    <option value="19">Cà Mau</option>
-                                    <option value="20">Cần Thơ</option>
-                                    <option value="21">Cao Bằng</option>
-                                    <option value="22">Cửu Long</option>
-                                    <option value="23">Đắk Lắk</option>
-                                    <option value="24">Đắc Nông</option>
-                                    <option value="25">Điện Biên</option>
-                                    <option value="26">Đồng Tháp</option>
-                                    <option value="27">Gia Lai</option>
-                                    <option value="28">Hà Giang</option>
-                                    <option value="29">Hà Nam</option>
-                                    <option value="30">Hà Tĩnh</option>
-                                    <option value="31">Hậu Giang</option>
-                                    <option value="32">Hoà Bình</option>
-                                    <option value="33">Khánh Hoà</option>
-                                    <option value="34">Kiên Giang</option>
-                                    <option value="35">Kon Tum</option>
-                                    <option value="36">Lai Châu</option>
-                                    <option value="37">Lâm Đồng</option>
-                                    <option value="38">Lạng Sơn</option>
-                                    <option value="39">Lào Cai</option>
-                                    <option value="40">Long An</option>
-                                    <option value="41">Miền Bắc</option>
-                                    <option value="42">Miền Nam</option>
-                                    <option value="43">Miền Trung</option>
-                                    <option value="44">Nam Định</option>
-                                    <option value="45">Nghệ An</option>
-                                    <option value="46">Ninh Bình</option>
-                                    <option value="47">Ninh Thuận</option>
-                                    <option value="48">Phú Thọ</option>
-                                    <option value="49">Phú Yên</option>
-                                    <option value="50">Quảng Bình</option>
-                                    <option value="51">Quảng Nam</option>
-                                    <option value="52">Quảng Ngãi</option>
-                                    <option value="53">Quảng Ninh</option>
-                                    <option value="54">Quảng Trị</option>
-                                    <option value="55">Sóc Trăng</option>
-                                    <option value="56">Sơn La</option>
-                                    <option value="57">Tây Ninh</option>
-                                    <option value="58">Thái Bình</option>
-                                    <option value="59">Thái Nguyên</option>
-                                    <option value="60">Thanh Hoá</option>
-                                    <option value="61">Thừa Thiên Huế</option>
-                                    <option value="62">Tiền Giang</option>
-                                    <option value="63">Toàn Quốc</option>
-                                    <option value="64">Trà Vinh</option>
-                                    <option value="65">Tuyên Quang</option>
-                                    <option value="66">Vĩnh Long</option>
-                                    <option value="67">Vĩnh Phúc</option>
-                                    <option value="68">Yên Bái</option>
-                                    <option value="100">Nước Ngoài</option>
-                                </select>
-                            </div>
-                            <div class="form-lead-msg msg-city"></div>
-                            <div class="form-lead-label">Nhu cầu tư vấn</div>
-                            <div class="form-lead-item form-item-consulting">
-                                <i class="fa-regular fa-square-question"></i>
-                                <select id="consulting-type-" class="place_holder dropdown_select" required>
-                                    <option value hidden>Chọn nhu cầu tư vấn</option>
-                                    <option value="1">Tôi muốn được đăng tin miễn phí</option>
-                                    <option value="2">Tôi muốn được tìm hiểu thêm về các gói dịch vụ
-                                    </option>
-                                    <option value="3">Tôi muốn được biết thêm về các chương trình ưu đãi
-                                    </option>
-                                    <option value="4">Tôi muốn được hướng dẫn đăng ký tài khoản</option>
-                                    <option value="5">Khác</option>
-                                </select>
-                            </div>
-                            <div class="form-lead-item mt-3 other-consulting" id="other-consulting-">
-                                <textarea id="consulting-text-" placeholder="Nhập nhu cầu tư vấn..." rows="3"></textarea>
-                            </div>
-                            <div class="form-lead-msg msg-consulting"></div>
-                        </div>
-                        <div class="form-footer-lead">
-                            <button id="created-lead-"><i class="fa-solid fa-paper-plane-top"></i>Gửi yêu cầu
-                                tư vấn
-                            </button>
-                        </div>
+                        <form action="{{ route('consultations.store') }}" method="POST">
+                            @csrf
+                            <div class="d-flex form-lead-scroll" id="form-lead-scroll-">
+                                <div class="form-lead-label">Họ và tên</div>
+                                <div class="form-lead-item form-item-name">
+                                    <i class="fa-regular fa-user"></i>
+                                    <input type="text" name="fullname" required id="fullname-"
+                                        placeholder="Họ và tên" />
+                                </div>
+                                <div class="form-lead-msg msg-name"></div>
+
+                                <div class="form-lead-label">Email</div>
+                                <div class="form-lead-item form-item-email">
+                                    <i class="fa-regular fa-envelope"></i>
+                                    <input type="email" name="email" required id="email-" placeholder="Email" />
+                                </div>
+                                <div class="form-lead-msg msg-email"></div>
+
+                                <div class="form-lead-label">Số điện thoại</div>
+                                <div class="form-lead-item form-item-phone">
+                                    <i class="fa-regular fa-mobile-notch"></i>
+                                    <input type="text" name="phone" maxlength="10" id="phone-" required
+                                        placeholder="Số điện thoại" />
+                                </div>
+                                <div class="form-lead-msg msg-phone"></div>
+
+                                <div class="form-lead-label">Tỉnh/Thành phố</div>
+                                <div class="form-lead-item form-item-city">
+                                    <i class="fa-regular fa-building"></i>
+                                    <select name="city_id" id="city-id-" class="place_holder dropdown_select" required>
+                                        <option value="" disabled selected>Chọn Tỉnh/Thành phố</option>
+                                        @foreach ($cities as $id => $name)
+                                            <option value="{{ $id }}">{{ $name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-lead-msg msg-city"></div>
+
+                                <div class="form-lead-label">Nhu cầu tư vấn</div>
+                                <div class="form-lead-item form-item-consulting">
+                                    <i class="fa-regular fa-square-question"></i>
+                                    <select name="type_consulting_id" id="consulting-type-"
+                                        class="place_holder dropdown_select" required>
+                                        <option value="" disabled selected>Chọn nhu cầu tư vấn</option>
+                                        @foreach ($typeConsultations as $id => $name)
+                                            <option value="{{ $id }}">{{ $name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-lead-item mt-3 other-consulting" id="other-consulting-">
+                                    <textarea name="consulting_text" id="consulting-text-" placeholder="Nhập nhu cầu tư vấn..." rows="3"></textarea>
+                                </div>
+                                <div class="form-lead-msg msg-consulting"></div>
+
+                                <div class="form-footer-lead">
+                                    <button type="submit" id="created-lead-"><i
+                                            class="fa-solid fa-paper-plane-top"></i>Gửi yêu cầu tư vấn</button>
+                                </div>
+                        </form>
                         <div class="suggest-post-job">
                             Bạn cần tuyển dụng gấp?
                             <a href="{{ route('job-postings.index') }}" target="_blank" class="btn-post-job-free">Đăng
@@ -371,7 +309,7 @@
                 <div class="text-primary uppercase">
                     Values
                 </div>
-                <h2 class="text-[24px] md:text-[30px] mt-2 font-bold">
+                <h2 class="text-[24px] md:text-[30px] mt-2 font-bold" style="color: white">
                     Giá trị khi sử dụng TopCV Smart Recruitment Platform
                 </h2>
             </div>
@@ -523,143 +461,26 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 gap-[20px] md:grid-cols-3 md:gap-[40px]">
-                <div class="flex-1 pb-4 md:mr-10 ">
-                    <h3 class="text-[#212f3fcc] font-semibold">Hotline Tư vấn Tuyển dụng miền Bắc</h3>
-                    <div class="mt-4">
-                        <div class="bg-white p-2 md:p-4 mb-2 rounded-lg flex">
-                            <div class="flex">
-                                <i
-                                    class="fas fa-phone m-auto rounded-full flex justify-center items-center w-[31px] h-[31px] md:w-[42px] md:h-[42px] md:text-[14px]  text-primary bg-[#e5f7ed] mr-4"></i>
-                            </div>
-                            <div class>
-                                <a href="tel:0969 827 691" class="text-primary font-medium">0969 827 691</a>
-                                <p class="md:font-light md:text-[14px]">Tạ Thị Linh</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-2 md:p-4 mb-2 rounded-lg flex">
-                            <div class="flex">
-                                <i
-                                    class="fas fa-phone m-auto rounded-full flex justify-center items-center w-[31px] h-[31px] md:w-[42px] md:h-[42px] md:text-[14px]  text-primary bg-[#e5f7ed] mr-4"></i>
-                            </div>
-                            <div class>
-                                <a href="tel:0945 867 758" class="text-primary font-medium">0945 867 758</a>
-                                <p class="md:font-light md:text-[14px]">Nguyễn Ngọc Hà An</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-2 md:p-4 mb-2 rounded-lg flex">
-                            <div class="flex">
-                                <i
-                                    class="fas fa-phone m-auto rounded-full flex justify-center items-center w-[31px] h-[31px] md:w-[42px] md:h-[42px] md:text-[14px]  text-primary bg-[#e5f7ed] mr-4"></i>
-                            </div>
-                            <div class>
-                                <a href="tel:0376 780 575" class="text-primary font-medium">0376 780 575</a>
-                                <p class="md:font-light md:text-[14px]">Nguyễn Thị Linh</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-2 md:p-4 mb-2 rounded-lg flex">
-                            <div class="flex">
-                                <i
-                                    class="fas fa-phone m-auto rounded-full flex justify-center items-center w-[31px] h-[31px] md:w-[42px] md:h-[42px] md:text-[14px]  text-primary bg-[#e5f7ed] mr-4"></i>
-                            </div>
-                            <div class>
-                                <a href="tel:0981 940 698" class="text-primary font-medium">0981 940 698</a>
-                                <p class="md:font-light md:text-[14px]">Bùi Hải Yến</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-2 md:p-4 mb-2 rounded-lg flex">
-                            <div class="flex">
-                                <i
-                                    class="fas fa-phone m-auto rounded-full flex justify-center items-center w-[31px] h-[31px] md:w-[42px] md:h-[42px] md:text-[14px]  text-primary bg-[#e5f7ed] mr-4"></i>
-                            </div>
-                            <div class>
-                                <a href="tel:0339 317 722" class="text-primary font-medium">0339 317 722</a>
-                                <p class="md:font-light md:text-[14px]">Nguyễn Thị Trang</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex-1 pb-4 md:mr-10 ">
-                    <h3 class="text-[#212f3fcc] font-semibold">Hotline Tư vấn Tuyển dụng miền Nam</h3>
-                    <div class="mt-4">
-                        <div class="bg-white p-2 md:p-4 mb-2 rounded-lg flex">
-                            <div class="flex">
-                                <i
-                                    class="fas fa-phone m-auto rounded-full flex justify-center items-center w-[31px] h-[31px] md:w-[42px] md:h-[42px] md:text-[14px]  text-primary bg-[#e5f7ed] mr-4"></i>
-                            </div>
-                            <div class>
-                                <a href="tel:0396 932 311" class="text-primary font-medium">0396 932 311</a>
-                                <p class="md:font-light md:text-[14px]">Lê Thị Mỹ Trang</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-2 md:p-4 mb-2 rounded-lg flex">
-                            <div class="flex">
-                                <i
-                                    class="fas fa-phone m-auto rounded-full flex justify-center items-center w-[31px] h-[31px] md:w-[42px] md:h-[42px] md:text-[14px]  text-primary bg-[#e5f7ed] mr-4"></i>
-                            </div>
-                            <div class>
-                                <a href="tel:0879 752 733" class="text-primary font-medium">0879 752 733</a>
-                                <p class="md:font-light md:text-[14px]">Nguyễn Thị Phương Trâm</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-2 md:p-4 mb-2 rounded-lg flex">
-                            <div class="flex">
-                                <i
-                                    class="fas fa-phone m-auto rounded-full flex justify-center items-center w-[31px] h-[31px] md:w-[42px] md:h-[42px] md:text-[14px]  text-primary bg-[#e5f7ed] mr-4"></i>
-                            </div>
-                            <div class>
-                                <a href="tel:0393 452 323" class="text-primary font-medium">0393 452 323</a>
-                                <p class="md:font-light md:text-[14px]">Lê Thị Thảo Nhi</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-2 md:p-4 mb-2 rounded-lg flex">
-                            <div class="flex">
-                                <i
-                                    class="fas fa-phone m-auto rounded-full flex justify-center items-center w-[31px] h-[31px] md:w-[42px] md:h-[42px] md:text-[14px]  text-primary bg-[#e5f7ed] mr-4"></i>
-                            </div>
-                            <div class>
-                                <a href="tel:0942 630 812" class="text-primary font-medium">0942 630 812</a>
-                                <p class="md:font-light md:text-[14px]">Nguyễn Thị Huỳnh Như</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-2 md:p-4 mb-2 rounded-lg flex">
-                            <div class="flex">
-                                <i
-                                    class="fas fa-phone m-auto rounded-full flex justify-center items-center w-[31px] h-[31px] md:w-[42px] md:h-[42px] md:text-[14px]  text-primary bg-[#e5f7ed] mr-4"></i>
-                            </div>
-                            <div class>
-                                <a href="tel:0962 799 083" class="text-primary font-medium">0962 799 083</a>
-                                <p class="md:font-light md:text-[14px]">Nguyễn Thị Như Quỳnh</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex-1">
-                    <div class>
-                        <h3 class="text-[#212f3fcc] font-semibold">Hỗ trợ khách hàng và khiếu nại dịch vụ</h3>
+                @foreach ($typeHotlines as $typeHotline)
+                    <div class="flex-1 pb-4 md:mr-10">
+                        <h3 class="text-[#212f3fcc] font-semibold">Hotline {{ $typeHotline->name }}</h3>
                         <div class="mt-4">
-                            <div class="flex flex-col">
+                            @foreach ($hotlines->where('type_hotline_id', $typeHotline->id) as $hotline)
                                 <div class="bg-white p-2 md:p-4 mb-2 rounded-lg flex">
-                                    <i
-                                        class="fas fa-phone rounded-full flex justify-center items-center w-[31px] h-[31px]  text-[#F39C12] bg-amber-100 mr-4"></i>
                                     <div class="flex">
-                                        <a href="tel:024 7107 9799"
-                                            class="text-[#F39C12] items-center flex font-medium">(024) 7107
-                                            9799</a>
+                                        <i
+                                            class="fas fa-phone m-auto rounded-full flex justify-center items-center w-[31px] h-[31px] md:w-[42px] md:h-[42px] md:text-[14px] text-primary bg-[#e5f7ed] mr-4"></i>
+                                    </div>
+                                    <div>
+                                        <a href="tel:{{ $hotline->phone_number }}"
+                                            class="text-primary font-medium">{{ $hotline->phone_number }}</a>
+                                        <p class="md:font-light md:text-[14px]">{{ $hotline->contact_name }}</p>
                                     </div>
                                 </div>
-                                <div class="bg-white p-2 md:p-4 mb-2 rounded-lg flex">
-                                    <i
-                                        class="fas fa-phone rounded-full flex justify-center items-center w-[31px] h-[31px]  text-[#F39C12] bg-amber-100 mr-4"></i>
-                                    <div class="flex">
-                                        <a href="tel:0862 69 19 29"
-                                            class="text-[#F39C12] items-center flex font-medium">0862 69 19
-                                            29</a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
