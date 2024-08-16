@@ -238,4 +238,6 @@ class JobPostingController extends Controller
 
         return view('pages.overview-cv', compact('candidate'));
     }
+
+
 }

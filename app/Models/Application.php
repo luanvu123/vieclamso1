@@ -14,7 +14,10 @@ class Application extends Model
         'candidate_id',
         'cv_id',
         'application_letter',
-        'status'
+        'status',
+        'rating',
+        'note',
+        'hidden'  // hidden
     ];
 
     public function jobPosting()

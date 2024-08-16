@@ -82,13 +82,13 @@
 
                      </div>
 
-                     <!--  Hidden Tabs -->
+
+
                      <div class="app-tabs">
                          <a href="#" class="close-tab button gray" style="display: none;"><i
                                  class="fa fa-close"></i></a>
                          <!-- First Tab -->
                          <div class="app-tab-content" id="one-1" style="display: none;">
-
                              <div class="select-grid">
                                  <select id="{{ $application->id }}" class="chosen-select-no-single">
                                      @if ($application->status == 1)
@@ -119,7 +119,7 @@
                              </div>
                              <div class="clearfix"></div>
                              <a href="#" class="button margin-top-15">Save</a>
-                             <a href="#" class="button gray margin-top-15 delete-application">Hidden this
+                             <a href="#" class="button gray margin-top-15 delete-application">Delete this
                                  application</a>
                          </div>
                          <!-- Second Tab -->
