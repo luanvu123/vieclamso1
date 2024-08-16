@@ -36,9 +36,17 @@ class MessageController extends Controller
         $candidates = Candidate::whereHas('messages', function ($query) use ($employer_id) {
             $query->where('employer_id', $employer_id);
         })->get();
+        foreach ($candidates as $candidate) {
+            $candidate->latestMessage = $candidate->messages()
+                ->where('employer_id', $employer_id)
+                ->latest()
+                ->first();
+        }
 
         return view('job_postings.messages', compact('candidates'));
     }
+
+
 
     public function showMessages(Candidate $candidate)
     {

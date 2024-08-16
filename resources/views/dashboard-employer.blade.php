@@ -57,19 +57,19 @@
 
                     <ul data-submenu-title="Management">
 
-                                <li class="{{ Route::is('job-postings.index') ? 'active' : '' }}">
-                                    <a href="{{ route('job-postings.index') }}">Job</a>
-                                </li>
-                                <li class="{{ Route::is('companies.index') ? 'active' : '' }}">
-                                    <a href="{{ route('companies.index') }}">Company</a>
-                                </li>
-                                <li class="{{ Route::is('job-postings.create') ? 'active' : '' }}">
-                                    <a href="{{ route('job-postings.create') }}">Add Job</a>
-                                </li>
-                                <li class="{{ Route::is('job-postings.create') ? 'active' : '' }}">
-                                    <a href="{{ route('messages.receive') }}">Message</a>
-                                </li>
-                            
+                        <li class="{{ Route::is('job-postings.index') ? 'active' : '' }}">
+                            <a href="{{ route('job-postings.index') }}">Job</a>
+                        </li>
+                        <li class="{{ Route::is('companies.index') ? 'active' : '' }}">
+                            <a href="{{ route('companies.index') }}">Company</a>
+                        </li>
+                        <li class="{{ Route::is('job-postings.create') ? 'active' : '' }}">
+                            <a href="{{ route('job-postings.create') }}">Add Job</a>
+                        </li>
+                        <li class="{{ Route::is('messages.receive') || Route::is('messages.show') ? 'active' : '' }}">
+                            <a href="{{ route('messages.receive') }}">Message</a>
+                        </li>
+
                     </ul>
 
                     <ul data-submenu-title="Account">
@@ -192,4 +192,3 @@
 </body>
 
 </html>
-

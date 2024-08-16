@@ -2,20 +2,49 @@
 @extends('dashboard-employer')
 
 @section('content')
-    <div class="container">
-        <h2 class="mb-4">Tin nhắn từ ứng viên</h2>
-        <div class="list-group">
-            @foreach ($candidates as $candidate)
-                <a href="{{ route('messages.show', $candidate) }}" class="list-group-item list-group-item-action">
-                    <div class="media">
-                        <img src="{{ $candidate->avatar_candidate ? asset('storage/' . $candidate->avatar_candidate) : asset('storage/avatar/avatar-default.jpg') }}" class="mr-3 rounded-circle" alt="Avatar" style="width: 50px; height: 50px;">
-                        <div class="media-body">
-                            <h5 class="mt-0">{{ $candidate->fullname_candidate }}</h5>
-                            <p>Click to view messages</p>
-                        </div>
-                    </div>
-                </a>
-            @endforeach
+    <!-- Titlebar -->
+    <div id="titlebar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Messages</h2>
+                <nav id="breadcrumbs">
+                    <ul>
+                        <li><a href="{{ route('job-postings.dashboard') }}">Home</a></li>
+                        <li><a href="{{ route('messages.receive') }}">List Message</a></li>
+                        <li>Messages</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="messages-container-inner">
+        <div class="messages-inbox">
+            <ul>
+                @foreach ($candidates as $candidate)
+                    @php
+                        $latestMessage = $candidate->latestMessage;
+                    @endphp
+                    <li class="active-message">
+                        <a href="{{ route('messages.show', $candidate) }}">
+                            <div class="message-avatar">
+                                <img src="{{ $candidate->avatar_candidate ? asset('storage/' . $candidate->avatar_candidate) : asset('storage/avatar/avatar-default.jpg') }}"
+                                    alt="">
+                            </div>
+                            <div class="message-by">
+                                <div class="message-by-headline">
+                                    <h5>{{ $candidate->fullname_candidate }}</h5>
+                                    @if ($latestMessage)
+                                        <span>{{ $latestMessage->created_at->diffForHumans() }}</span>
+                                    @else
+                                        <span>No messages</span>
+                                    @endif
+                                </div>
+                                <p>{{ $latestMessage->message ?? 'No messages' }}</p>
+                            </div>
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
         </div>
     </div>
 @endsection
