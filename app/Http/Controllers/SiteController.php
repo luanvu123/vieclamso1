@@ -118,19 +118,13 @@ class SiteController extends Controller
     public function searchJobs(Request $request)
     {
         $query = JobPosting::query()->where('status', 0);
-
-        // Lấy danh sách thành phố để hiển thị trong form
         $cities = City::where('status', 1)->pluck('name', 'id');
-
-        // Nếu có từ khóa tìm kiếm, lọc theo tiêu đề công việc
         if ($request->filled('keyword')) {
             $query->where('title', 'like', '%' . $request->keyword . '%');
             $keyword = $request->keyword;
         } else {
             $keyword = null;
         }
-
-        // Nếu có thành phố được chọn, lọc theo city_id
         if ($request->filled('city')) {
             $cityId = $request->city;
             $query->whereHas('cities', function ($q) use ($cityId) {
