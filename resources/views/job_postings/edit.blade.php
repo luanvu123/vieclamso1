@@ -55,15 +55,18 @@
                               </div>
                               <!-- Chọn thành phố -->
                               <div class="form">
-                                  <h5>City</h5>
-                                  <select name="city[]" id="city" data-placeholder="Choose Cities"
-                                      class="chosen-select" multiple>
-                                      @foreach ($cities as $city)
-                                          <option value="{{ $city }}"
-                                              {{ in_array($city, $selectedCities) ? 'selected' : '' }}>{{ $city }}
-                                          </option>
-                                      @endforeach
-                                  </select>
+                                  <div class="select">
+                                      <h5>City</h5>
+                                      <select name="city[]" data-placeholder="Choose Cities" class="chosen-select"
+                                          multiple>
+                                          @foreach ($cities as $city)
+                                              <option value="{{ $city->id }}"
+                                                  {{ in_array($city->id, $selectedCities) ? 'selected' : '' }}>
+                                                  {{ $city->name }}
+                                              </option>
+                                          @endforeach
+                                      </select>
+                                  </div>
                               </div>
 
                               <!-- Job Type -->

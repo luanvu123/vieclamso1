@@ -17,11 +17,7 @@ class JobsManageController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:job-posting-manage-list|job-posting-manage-create|job-posting-manage-edit|job-posting-manage-delete', ['only' => ['index', 'store']]);
-        $this->middleware('permission:job-posting-manage-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:job-posting-manage-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:job-posting-manage-delete', ['only' => ['destroy']]);
-        $this->middleware('permission:jobPosting-choose', ['only' => ['jobPosting_choose']]);
+        $this->middleware('permission:job-posting-manage-list|jobPosting-choose|job-posting-manage-create|job-posting-manage-edit|job-posting-manage-delete', ['only' => ['index', 'store','jobPosting_choose']]);
     }
 
     public function index()

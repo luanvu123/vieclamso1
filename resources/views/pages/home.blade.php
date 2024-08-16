@@ -57,18 +57,17 @@
                              <span class="section-title">Định hướng nghề nghiệp</span>
                              dành cho bạn.
                          </h2>
-                         <form class="search-form" action="/search-jobs" method="GET">
+                         <form class="search-form" action="{{ route('search-jobs') }}" method="GET">
                              <div class="form-group">
-                                 <input type="text" id="key" name="keyword" placeholder="Nhập từ khóa tìm kiếm...">
+                                 <input type="text" id="key" name="keyword" value=""
+                                     placeholder="Nhập từ khóa tìm kiếm...">
                              </div>
                              <div class="form-group">
                                  <select id="city" name="city">
                                      <option value="">Chọn thành phố</option>
-                                     <option value="Hà Nội">Hà Nội</option>
-                                     <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                     <option value="Đà Nẵng">Đà Nẵng</option>
-                                     <option value="Cần Thơ">Cần Thơ</option>
-                                     <option value="Hải Phòng">Hải Phòng</option>
+                                     @foreach ($cities as $id => $name)
+                                          <option value="{{ $id }}">{{ $name }}</option>
+                                     @endforeach
                                  </select>
                              </div>
                              <div class="form-group">
@@ -78,9 +77,7 @@
                      </div>
                      <div class="col">
                          <button class="btn-show-video">
-                             <img class="img-responsive"
-                                 src="{{ asset('storage/' . $info->image_section) }}"
-                                 alt>
+                             <img class="img-responsive" src="{{ asset('storage/' . $info->image_section) }}" alt>
                          </button>
                      </div>
                  </div>
@@ -124,7 +121,7 @@
                                      value="{{ request('experience') }}">
                                  <input type="text" name="category" placeholder="Ngành nghề"
                                      value="{{ request('category') }}">
-                                 <button type="submit">Lọc</button> 
+                                 <button type="submit">Lọc</button>
                              </div>
                          </form>
                          <div class="box-smart-filter box-smart-feature-jobs"></div>
@@ -277,7 +274,7 @@
                              Top ngành nghề nổi bật
                          </h2>
                          <p>Bạn muốn tìm việc mới? Xem danh sách việc làm <a class="text-highlight text-underline"
-                                 target="_blank" href="{{route("/")}}">tại đây</a></p>
+                                 target="_blank" href="{{ route('/') }}">tại đây</a></p>
                      </div>
                      <div class="top-category__navigation">
                          <button disabled="disabled" class="btn btn-prev btn-navigation">
@@ -1175,7 +1172,7 @@
                                          thế mạnh của bản thân thông qua việc đính kèm học vấn, kinh nghiệm, dự án, kỹ
                                          năng,... của mình
                                      </p>
-                                     <a class="btn btn-success btn-growth" href="{{route('candidate.account')}}">
+                                     <a class="btn btn-success btn-growth" href="{{ route('candidate.account') }}">
                                          Tạo Profile &nbsp;
                                          <i class="fa-light fa-arrow-right"></i>
                                      </a>
@@ -1196,7 +1193,7 @@
                                          khả
                                          năng vượt qua vòng lọc CV.
                                      </p>
-                                     <a class="btn btn-success btn-growth" href="{{route('cv.upload')}}">
+                                     <a class="btn btn-success btn-growth" href="{{ route('cv.upload') }}">
                                          Tạo CV ngay
                                          <i class="fa-light fa-arrow-right"></i>
                                      </a>
@@ -1218,7 +1215,7 @@
                  <h2>Công cụ vượt trội!</h2>
                  <div class="superior-tool__content">
                      <div class="content__session">
-                         <a class="item" href="{{route('site.courses')}}" target="_blank">
+                         <a class="item" href="{{ route('site.courses') }}" target="_blank">
                              <div class="icon">
                                  <img class="lazy"
                                      data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/superior-tool/gross-net.png"
@@ -1232,7 +1229,7 @@
                                  </span>
                              </div>
                          </a>
-                         <a class="item" href="{{route('site.app')}}" target="_blank">
+                         <a class="item" href="{{ route('site.app') }}" target="_blank">
                              <div class="icon">
                                  <img class="lazy"
                                      data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/superior-tool/lai-suat-kep.png"
@@ -1278,29 +1275,24 @@
          <section id="mobile-app-intro">
              <div class="container">
                  <div class="section-left">
-                     <h2 class="title">{{$info->title_section}}</h2>
-                     <h3>{{$info->title2_section}}</h3>
-                     <p>{{$info->title3_section}}</p>
+                     <h2 class="title">{{ $info->title_section }}</h2>
+                     <h3>{{ $info->title2_section }}</h3>
+                     <p>{{ $info->title3_section }}</p>
                      <div class="box-qr-download">
                          <h3>Tải ứng dụng ngay</h3>
                          <div class="box-imgs">
                              <div class="box-img-qr">
-                                 <img class="lazy"
-                                     data-src="{{ asset('storage/' . $info->image_qr_code_download) }}"
+                                 <img class="lazy" data-src="{{ asset('storage/' . $info->image_qr_code_download) }}"
                                      alt>
                              </div>
                              <div class="box-img-download-app">
-                                 <a href="{{$info->link_appstore}}"
-                                     class="box-img-download-appstore">
-                                     <img class="lazy"
-                                         data-src="{{ asset('storage/' . $info->image_appstore) }}"
+                                 <a href="{{ $info->link_appstore }}" class="box-img-download-appstore">
+                                     <img class="lazy" data-src="{{ asset('storage/' . $info->image_appstore) }}"
                                          alt>
                                  </a>
-                                 <a href="{{$info->link_googleplay}}"
-                                     class="box-img-download-chplay">
-                                     <img class="lazy"
-                                         data-src="{{ asset('storage/' . $info->image_googleplay) }} "
-                                         alt >
+                                 <a href="{{ $info->link_googleplay }}" class="box-img-download-chplay">
+                                     <img class="lazy" data-src="{{ asset('storage/' . $info->image_googleplay) }} "
+                                         alt>
                                  </a>
                              </div>
                          </div>
@@ -1326,7 +1318,8 @@
                                  <div class="box-impressive-numbers__item--number box-impressive-number-text"><span
                                          class="number" data-number="{{ $totalEmployerCount }}">0</span>+</div>
                                  <div class="box-impressive-numbers__item--title">Nhà tuyển dụng uy tín</div>
-                                 <div class="box-impressive-numbers__item--description">Các nhà tuyển dụng đến từ tất cả các ngành nghề và được xác thực bởi TopCV</div>
+                                 <div class="box-impressive-numbers__item--description">Các nhà tuyển dụng đến từ tất cả
+                                     các ngành nghề và được xác thực bởi TopCV</div>
                              </span>
                          </div>
                          <div class="box-impressive-numbers__item">
@@ -1344,7 +1337,7 @@
                          <div class="box-impressive-numbers__item">
                              <span class="box-impressive-numbers__item--wrapper">
                                  <div class="box-impressive-numbers__item--number box-impressive-number-text"><span
-                                         class="number" data-number="{{$totalApplicationCount}}">0</span>+</div>
+                                         class="number" data-number="{{ $totalApplicationCount }}">0</span>+</div>
                                  <div class="box-impressive-numbers__item--title">Việc làm đã được kết nối</div>
                                  <div class="box-impressive-numbers__item--description">TopCV đồng hành và kết nối hàng
                                      nghìn ứng viên với những cơ hội việc làm hấp dẫn từ các doanh nghiệp uy tín.</div>
@@ -1358,7 +1351,7 @@
                          <div class="box-impressive-numbers__item">
                              <span class="box-impressive-numbers__item--wrapper">
                                  <div class="box-impressive-numbers__item--number box-impressive-number-text"><span
-                                         class="number" data-number="{{$totalCandidateCount}}">0</span>+</div>
+                                         class="number" data-number="{{ $totalCandidateCount }}">0</span>+</div>
                                  <div class="box-impressive-numbers__item--title">Lượt tải ứng dụng</div>
                                  <div class="box-impressive-numbers__item--description">Hàng triệu ứng viên sử dụng ứng
                                      dụng TopCV để tìm kiếm việc làm, trong đó có 60% là ứng viên có kinh nghiệm từ 3 năm
@@ -1380,18 +1373,18 @@
                              </style>
                              <g>
                                  <path class="st0" d="M968.5,492c0,31.2-3.1,62.4-9.2,93c-6.1,30.6-15.2,60.6-27.2,89.4c-23.9,57.6-59.3,110.4-103.5,154.4
-                                                      c-44.1,44.1-96.9,79.4-154.5,103.2c-28.8,11.9-58.8,21-89.3,27c-30.6,6-61.7,9-92.9,9c-31.1,0-62.3-3.1-92.8-9.2
-                                                      c-30.5-6.1-60.5-15.2-89.2-27.1c-57.5-23.9-110.2-59.3-154.2-103.3c-44-44.1-79.3-96.8-103-154.3c-11.9-28.8-20.9-58.7-26.9-89.2
-                                                      c-6-30.5-9-61.6-9-92.7c0-31.1,3.1-62.2,9.1-92.7C32,368.8,41,338.9,53,310.2c23.8-57.5,59.2-110.1,103.2-154
-                                                      c44-43.9,96.7-79.2,154.1-102.9c28.7-11.9,58.6-20.9,89.1-26.9c30.5-6,61.6-9,92.6-9c31.1,0,62.1,3.1,92.6,9.1
-                                                      c30.5,6.1,60.3,15.1,89,27c57.4,23.8,109.9,59.1,153.8,103.1c43.9,43.9,79.1,96.5,102.8,153.9c11.9,28.7,20.9,58.5,26.9,89
-                                                      c6,30.4,9,61.5,9,92.5H968.5z M966,492c0-31-3.1-62-9.1-92.5c-6-30.4-15.1-60.2-27-88.9c-23.8-57.3-59-109.8-102.9-153.6
-                                                      c-43.9-43.8-96.4-79-153.7-102.6c-28.6-11.8-58.5-20.9-88.9-26.8c-30.4-6-61.4-9-92.4-9c-31,0-62,3.1-92.4,9.1
-                                                      c-30.4,6-60.2,15.1-88.8,27c-57.2,23.7-109.6,58.9-153.4,102.8C113.7,201.3,78.6,253.8,55,311c-11.8,28.6-20.8,58.4-26.8,88.7
-                                                      c-6,30.4-9,61.3-8.9,92.3c0,30.9,3.1,61.9,9.1,92.2c6,30.3,15.1,60.1,26.9,88.7C79,730,114.2,782.4,157.9,826.1
-                                                      c43.8,43.7,96.1,78.8,153.3,102.4c28.6,11.8,58.3,20.8,88.6,26.8c30.3,6,61.2,8.9,92.1,8.9c30.9,0,61.8-3.1,92.1-9.1
-                                                      c30.3-6,60-15,88.5-26.9c57.1-23.7,109.3-58.8,153-102.5c43.7-43.7,78.6-96,102.2-153.1c11.8-28.5,20.8-58.2,26.7-88.5
-                                                      c6-30.3,8.9-61.2,8.9-92H966z" />
+                                                          c-44.1,44.1-96.9,79.4-154.5,103.2c-28.8,11.9-58.8,21-89.3,27c-30.6,6-61.7,9-92.9,9c-31.1,0-62.3-3.1-92.8-9.2
+                                                          c-30.5-6.1-60.5-15.2-89.2-27.1c-57.5-23.9-110.2-59.3-154.2-103.3c-44-44.1-79.3-96.8-103-154.3c-11.9-28.8-20.9-58.7-26.9-89.2
+                                                          c-6-30.5-9-61.6-9-92.7c0-31.1,3.1-62.2,9.1-92.7C32,368.8,41,338.9,53,310.2c23.8-57.5,59.2-110.1,103.2-154
+                                                          c44-43.9,96.7-79.2,154.1-102.9c28.7-11.9,58.6-20.9,89.1-26.9c30.5-6,61.6-9,92.6-9c31.1,0,62.1,3.1,92.6,9.1
+                                                          c30.5,6.1,60.3,15.1,89,27c57.4,23.8,109.9,59.1,153.8,103.1c43.9,43.9,79.1,96.5,102.8,153.9c11.9,28.7,20.9,58.5,26.9,89
+                                                          c6,30.4,9,61.5,9,92.5H968.5z M966,492c0-31-3.1-62-9.1-92.5c-6-30.4-15.1-60.2-27-88.9c-23.8-57.3-59-109.8-102.9-153.6
+                                                          c-43.9-43.8-96.4-79-153.7-102.6c-28.6-11.8-58.5-20.9-88.9-26.8c-30.4-6-61.4-9-92.4-9c-31,0-62,3.1-92.4,9.1
+                                                          c-30.4,6-60.2,15.1-88.8,27c-57.2,23.7-109.6,58.9-153.4,102.8C113.7,201.3,78.6,253.8,55,311c-11.8,28.6-20.8,58.4-26.8,88.7
+                                                          c-6,30.4-9,61.3-8.9,92.3c0,30.9,3.1,61.9,9.1,92.2c6,30.3,15.1,60.1,26.9,88.7C79,730,114.2,782.4,157.9,826.1
+                                                          c43.8,43.7,96.1,78.8,153.3,102.4c28.6,11.8,58.3,20.8,88.6,26.8c30.3,6,61.2,8.9,92.1,8.9c30.9,0,61.8-3.1,92.1-9.1
+                                                          c30.3-6,60-15,88.5-26.9c57.1-23.7,109.3-58.8,153-102.5c43.7-43.7,78.6-96,102.2-153.1c11.8-28.5,20.8-58.2,26.7-88.5
+                                                          c6-30.3,8.9-61.2,8.9-92H966z" />
                              </g>
                          </svg>
                      </div>
@@ -1445,19 +1438,20 @@
                  </div>
              </div>
          </section>
-        <section id="newspapers-talk-about-topcv">
-    <div class="container">
-        <h2>Báo chí nói về Vieclamso1</h2>
-        <div class="box-image">
-            @foreach ($medias as $media)
-                <div class="box-image-item">
-                    <a target="_blank" href="{{ $media->website }}">
-                        <img data-src="{{ asset('storage/' . $media->image) }}" class="img-responsive lazy" title="{{ $media->name }}" alt="{{ $media->name }}" />
-                    </a>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
+         <section id="newspapers-talk-about-topcv">
+             <div class="container">
+                 <h2>Báo chí nói về Vieclamso1</h2>
+                 <div class="box-image">
+                     @foreach ($medias as $media)
+                         <div class="box-image-item">
+                             <a target="_blank" href="{{ $media->website }}">
+                                 <img data-src="{{ asset('storage/' . $media->image) }}" class="img-responsive lazy"
+                                     title="{{ $media->name }}" alt="{{ $media->name }}" />
+                             </a>
+                         </div>
+                     @endforeach
+                 </div>
+             </div>
+         </section>
      </div>
  @endsection

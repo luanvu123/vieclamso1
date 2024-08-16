@@ -63,14 +63,12 @@
                              <input type="text" id="key" name="keyword" placeholder="Nhập từ khóa tìm kiếm...">
                          </div>
                          <div class="item item-search">
-                             <select id="city" name="city">
-                                 <option value="">Chọn thành phố</option>
-                                 <option value="Hà Nội">Hà Nội</option>
-                                 <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                 <option value="Đà Nẵng">Đà Nẵng</option>
-                                 <option value="Cần Thơ">Cần Thơ</option>
-                                 <option value="Hải Phòng">Hải Phòng</option>
-                             </select>
+                              <select id="city" name="city">
+                                     <option value="">Chọn thành phố</option>
+                                     @foreach ($cities as $id => $name)
+                                          <option value="{{ $id }}">{{ $name }}</option>
+                                     @endforeach
+                                 </select>
                          </div>
                          <div class="item item-search">
                              <button type="submit">Tìm kiếm</button>

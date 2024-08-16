@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\Candidate;
 use App\Models\Category;
+use App\Models\City;
 use App\Models\Company;
 use App\Models\JobPosting;
 use Carbon\Carbon;
@@ -37,8 +38,9 @@ class JobPostingController extends Controller
         $employer = Auth::guard('employer')->user();
         $email = $employer->email;
         $categories = Category::all();
+        $cities = City::all();
         $companies = $employer->companies; // Lấy tất cả các công ty của nhà tuyển dụng
-        return view('job_postings.create', compact('email', 'categories', 'companies'));
+        return view('job_postings.create', compact('email', 'categories', 'companies', 'cities'));
     }
 
     public function show($id)
@@ -99,8 +101,6 @@ class JobPostingController extends Controller
         $jobPosting->status = 1;
         $jobPosting->skills_required = $request->skills_required;
         $jobPosting->area = $request->area;
-        $jobPosting->city = implode(', ', $request->city); // Convert array to comma-separated string
-
         // Handle logo
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
@@ -113,6 +113,7 @@ class JobPostingController extends Controller
 
         // Sync categories
         $jobPosting->categories()->sync($request->category);
+        $jobPosting->cities()->sync($request->city);
 
         // Redirect with success message
         return redirect()->route('job-postings.index')->with('success', 'Job posting created successfully!');
@@ -122,13 +123,9 @@ class JobPostingController extends Controller
     public function destroy($id)
     {
         $jobPosting = JobPosting::findOrFail($id);
-
-        // Kiểm tra quyền truy cập của người dùng
         if ($jobPosting->employer_id !== Auth::guard('employer')->id()) {
             return redirect()->route('job-postings.index')->with('error', 'Unauthorized access.');
         }
-
-        // Xóa job posting
         $jobPosting->delete();
 
         return redirect()->route('job-postings.index')->with('success', 'Job posting deleted successfully!');
@@ -141,15 +138,14 @@ class JobPostingController extends Controller
     {
         $jobPosting = JobPosting::findOrFail($id);
         $selectedCities = explode(', ', $jobPosting->city);
-        $cities = [
-            'Hà Nội', 'Hồ Chí Minh', 'Đà Nẵng', 'Cần Thơ', 'Hải Phòng', 'Huế',
-        ];
+        $cities = City::all();
+         $selectedCities = $jobPosting->cities->pluck('id')->toArray();
         $jobPosting = JobPosting::findOrFail($id);
         $categories = Category::all();
         $selectedCategories = $jobPosting->categories->pluck('id')->toArray();
         $employer = Auth::guard('employer')->user();
         $companies = $employer->companies;
-        return view('job_postings.edit', compact('jobPosting', 'selectedCities', 'cities', 'categories', 'selectedCategories', 'companies'));
+        return view('job_postings.edit', compact('jobPosting', 'selectedCities', 'cities', 'categories', 'selectedCategories', 'companies','selectedCities'));
     }
 
 
@@ -202,13 +198,13 @@ class JobPostingController extends Controller
         $jobPosting->sex = $request->sex;
         $jobPosting->skills_required = $request->skills_required;
         $jobPosting->area = $request->area;
-        $jobPosting->city = implode(', ', $request->city); // Convert array to comma-separated string
         $jobPosting->company_id = $request->company_id;
 
         $jobPosting->save();
 
         // Sync categories
         $jobPosting->categories()->sync($request->category);
+        $jobPosting->cities()->sync($request->city);
 
         // Redirect with success message
         return redirect()->route('job-postings.index')->with('success', 'Job posting updated successfully!');
@@ -225,7 +221,7 @@ class JobPostingController extends Controller
     }
 
 
-      public function showCV($id)
+    public function showCV($id)
     {
         $candidate = Candidate::with([
             'cvs',

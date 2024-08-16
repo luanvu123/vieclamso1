@@ -65,10 +65,9 @@
                                 <div class="select">
                                     <h5>City</h5>
                                     <select name="city[]" class="chosen-select" multiple>
-                                        <option value="Hà Nội">Hà Nội</option>
-                                        <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                        <option value="Đà Nẵng">Đà Nẵng</option>
-                                        <option value="Cần Thơ">Cần Thơ</option>
+                                        @foreach ($cities as $city)
+                                            <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

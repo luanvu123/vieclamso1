@@ -119,7 +119,7 @@ Route::get('employer/register', [EmployerRegisterController::class, 'showRegistr
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('consultations', ConsultationController::class)
-    ->only(['index', 'edit', 'update', 'destroy']);
+        ->only(['index', 'edit', 'update', 'destroy']);
     // City resource routes
     Route::resource('cities', CityController::class);
 

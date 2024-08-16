@@ -60,14 +60,14 @@
                              <input type="text" id="key" name="keyword" placeholder="Nhập từ khóa tìm kiếm...">
                          </div>
                          <div class="item item-search">
-                             <select id="city" name="city">
-                                 <option value="">Chọn thành phố</option>
-                                 <option value="Hà Nội">Hà Nội</option>
-                                 <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                 <option value="Đà Nẵng">Đà Nẵng</option>
-                                 <option value="Cần Thơ">Cần Thơ</option>
-                                 <option value="Hải Phòng">Hải Phòng</option>
-                             </select>
+
+                                 <select id="city" name="city">
+                                     <option value="">Chọn thành phố</option>
+                                     @foreach ($cities as $id => $name)
+                                          <option value="{{ $id }}">{{ $name }}</option>
+                                     @endforeach
+                                 </select>
+
                          </div>
                          <div class="item item-search">
                              <button type="submit">Tìm kiếm</button>
@@ -140,9 +140,9 @@
                                                                  <a target="_blank"
                                                                      href="{{ route('job.show', $jobPosting->slug) }}"
                                                                      rel="nooppener noreferrer">
-                                                                     <img src="{{ $jobPosting->logo ? asset('storage/' . $jobPosting->logo) : asset('storage/avatar/avatar-default.jpg') }}"
+                                                                     <img src="{{ $jobPosting->company->logo ? asset('storage/' . $jobPosting->company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
                                                                          class="w-100 lazy"
-                                                                         alt="{{ $jobPosting->company_name }}"
+                                                                         alt="{{ $jobPosting->company->name }}"
                                                                          title="{{ $jobPosting->title }}">
                                                                  </a>
                                                              </div>

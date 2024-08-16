@@ -30,6 +30,7 @@ class SiteController extends Controller
 {
     public function index()
     {
+
         $jobPostings = JobPosting::with('employer', 'company')->where('status', 0)->paginate(12);
         $categories = Category::withCount('jobPostings')
             ->where('status', 1)
@@ -40,7 +41,8 @@ class SiteController extends Controller
         $medias = Media::where('status', 1)->take(6)->get();
         $totalCompanyCount = Company::count();
         $totalApplicationCount = Application::count();
-        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount'));
+        $cities = City::where('status', 1)->pluck('name', 'id');
+        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities'));
     }
     public function filter(Request $request)
     {
@@ -74,7 +76,8 @@ class SiteController extends Controller
         $medias = Media::where('status', 1)->take(6)->get();
         $totalCompanyCount = Company::count();
         $totalApplicationCount = Application::count();
-        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount'));
+        $cities = City::where('status', 1)->pluck('name', 'id');
+        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities'));
     }
 
     public function show($slug)
@@ -108,33 +111,44 @@ class SiteController extends Controller
         $courses = Course::where('status', 1)->take(3)->get();
         $company_random = Company::inRandomOrder()->first();
         $jobPosting_random = $company_random->jobPostings()->where('status', 0)->get();
-
-        return view('pages.job', compact('jobPosting', 'closingDate', 'isExpired', 'candidate', 'applied', 'appliedDate', 'relatedJobs', 'courses', 'company_random', 'jobPosting_random'));
+        $cities = City::where('status', 1)->pluck('name', 'id');
+        return view('pages.job', compact('jobPosting', 'closingDate', 'isExpired', 'candidate', 'applied', 'appliedDate', 'relatedJobs', 'courses', 'company_random', 'jobPosting_random', 'cities'));
     }
 
     public function searchJobs(Request $request)
     {
         $query = JobPosting::query()->where('status', 0);
 
+        // Lấy danh sách thành phố để hiển thị trong form
+        $cities = City::where('status', 1)->pluck('name', 'id');
+
+        // Nếu có từ khóa tìm kiếm, lọc theo tiêu đề công việc
         if ($request->filled('keyword')) {
             $query->where('title', 'like', '%' . $request->keyword . '%');
-            $keyword = $request->keyword; // Lưu từ khóa tìm kiếm
+            $keyword = $request->keyword;
         } else {
             $keyword = null;
         }
 
+        // Nếu có thành phố được chọn, lọc theo city_id
         if ($request->filled('city')) {
-            $query->where('city', $request->city);
-            $city = $request->city; // Lưu thành phố tìm kiếm
+            $cityId = $request->city;
+            $query->whereHas('cities', function ($q) use ($cityId) {
+                $q->where('city_id', $cityId);
+            });
+            $city = $cities->get($cityId);
         } else {
             $city = null;
         }
 
+        // Lấy các bài đăng công việc theo truy vấn
         $jobPostings = $query->get();
-        $jobCount = $jobPostings->count(); // Số lượng công việc tìm thấy
+        $jobCount = $jobPostings->count();
 
-        return view('pages.tim-kiem', compact('jobPostings', 'keyword', 'city', 'jobCount'));
+        // Trả dữ liệu về view
+        return view('pages.tim-kiem', compact('jobPostings', 'keyword', 'city', 'jobCount', 'cities'));
     }
+
 
     public function showCategory($slug)
     {
@@ -200,13 +214,13 @@ class SiteController extends Controller
         $typePartners = TypePartner::with('partners')->get();
         $hotlines = Hotline::with('typeHotline')->where('status', true)->get();
         $typeHotlines = TypeHotline::where('status', true)->get();
-         $cities = City::where('status', 1)->pluck('name', 'id');
-        $typeConsultations = TypeConsultation::where('status',1)->pluck('name', 'id');
+        $cities = City::where('status', 1)->pluck('name', 'id');
+        $typeConsultations = TypeConsultation::where('status', 1)->pluck('name', 'id');
 
-        return view('pages.recruitment', compact('recruitments', 'services', 'figures', 'values', 'awards', 'partners', 'typePartners', 'hotlines', 'typeHotlines','cities', 'typeConsultations'));
+        return view('pages.recruitment', compact('recruitments', 'services', 'figures', 'values', 'awards', 'partners', 'typePartners', 'hotlines', 'typeHotlines', 'cities', 'typeConsultations'));
     }
 
-     public function storeConsultation(Request $request)
+    public function storeConsultation(Request $request)
     {
         // Validate the form data
         $request->validate([
