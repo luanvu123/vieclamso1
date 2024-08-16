@@ -10,6 +10,10 @@
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="{{ old('name', $company->name) }}" required>
         </div>
+         <div>
+            <label for="mst">MST:</label>
+            <input type="text" id="mst" name="mst" value="{{ old('mst', $company->mst) }}" required>
+        </div>
         <div>
             <label for="image">Image:</label>
             <input type="file" id="image" name="image">

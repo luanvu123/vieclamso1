@@ -39,10 +39,11 @@ class CompanyController extends Controller
             'facebook' => 'nullable|url',
             'twitter' => 'nullable|url',
             'linkedin' => 'nullable|url',
+             'mst' => 'nullable|string|max:255',
         ]);
 
         $companyData = $request->only([
-            'name', 'scale', 'address', 'map', 'detail', 'status', 'url', 'website', 'facebook', 'twitter', 'linkedin'
+            'name', 'scale', 'address', 'map', 'detail', 'status', 'url', 'website', 'facebook', 'twitter', 'linkedin','mst'
         ]);
 
         if ($request->hasFile('image')) {
@@ -93,12 +94,13 @@ class CompanyController extends Controller
             'facebook' => 'nullable|url',
             'twitter' => 'nullable|url',
             'linkedin' => 'nullable|url',
+             'mst' => 'nullable|string|max:255',
         ]);
 
         $company = Company::findOrFail($id);
 
         $companyData = $request->only([
-            'name', 'scale', 'address', 'map', 'detail', 'status', 'url', 'website', 'facebook', 'twitter', 'linkedin'
+            'name', 'scale', 'address', 'map', 'detail', 'status', 'url', 'website', 'facebook', 'twitter', 'linkedin','mst'
         ]);
 
         if ($request->hasFile('image')) {
@@ -124,5 +126,5 @@ class CompanyController extends Controller
         $company->delete();
         return redirect()->route('companies.index')->with('success', 'Company deleted successfully.');
     }
-    
+
 }

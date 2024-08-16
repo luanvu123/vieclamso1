@@ -44,6 +44,10 @@
             <label for="map">Map:</label>
             <input type="text" id="map" name="map" value="{{ old('map') }}">
         </div>
+          <div>
+        <label for="mst">Mã Số Thuế:</label>
+        <input type="text" id="mst" name="mst"value="{{ old('mst') }}">
+    </div>
         <div>
             <label for="detail">Detail:</label>
             <textarea id="detail" name="detail">{{ old('detail') }}</textarea>

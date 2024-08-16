@@ -27,7 +27,8 @@ class Company extends Model
         'featured',
         'slug', // Thêm cột slug
         'top',  // Thêm cột top
-        'top-home'
+        'top-home',
+        'mst'
     ];
 
     public function employer()
