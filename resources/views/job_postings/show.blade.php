@@ -34,15 +34,13 @@
              <!-- Select -->
              <select data-placeholder="Filter by status" class="chosen-select-no-single" style="display: none;">
                  <option value="">Filter by status</option>
-                 <option value="new">New</option>
-                 <option value="interviewed">Interviewed</option>
-                 <option value="offer">Offer extended</option>
-                 <option value="hired">Hired</option>
-                 <option value="archived">Archived</option>
+                 <option selected value="1">Đã ứng tuyển</option>
+                 <option value="2">NTD đã xem hồ sơ</option>
+                 <option value="3">Hồ sơ phù hợp</option>
+                 <option value="4">Hồ sơ chưa phù hợp</option>
              </select>
              <div class="margin-bottom-15"></div>
          </div>
-
          <div class="col-md-6">
              <!-- Select -->
              <select data-placeholder="Newest first" class="chosen-select-no-single" style="display: none;">
@@ -69,7 +67,8 @@
                                              class="fa fa-file-text"></i> CV</a></li>
                                  <li><a href="{{ route('candidates.show.cv', $application->candidate->id) }}"><i
                                              class="fa fa-user"></i> Profile</a></li>
-                                 <li><a href="{{ route('messages.show', $application->candidate) }}"><i class="fa fa-envelope"></i> Message</a></li>
+                                 <li><a href="{{ route('messages.show', $application->candidate) }}"><i
+                                             class="fa fa-envelope"></i> Message</a></li>
                              </ul>
                          </div>
                          <div class="buttons">
@@ -79,11 +78,7 @@
                                  Details</a>
                          </div>
                          <div class="clearfix"></div>
-
                      </div>
-
-
-
                      <div class="app-tabs">
                          <a href="#" class="close-tab button gray" style="display: none;"><i
                                  class="fa fa-close"></i></a>
@@ -114,19 +109,28 @@
                                      @endif
                                  </select>
                              </div>
-                             <div class="select-grid">
-                                 <input type="number" min="1" max="5" placeholder="Rating (out of 5)">
-                             </div>
-                             <div class="clearfix"></div>
-                             <a href="#" class="button margin-top-15">Save</a>
-                             <a href="#" class="button gray margin-top-15 delete-application">Delete this
-                                 application</a>
+                             <form id="rating-form" action="{{ route('applications.update.rating', $application->id) }}"
+                                 method="POST">
+                                 @csrf
+                                 @method('PUT')
+                                 <div class="select-grid">
+                                     <input name="rating" type="number" min="1" max="5"
+                                         placeholder="Rating (out of 5)" value="{{ old('rating', $application->rating) }}">
+                                 </div>
+                                 <div class="clearfix"></div>
+                                 <button type="submit" class="button margin-top-15">Save</button>
+                             </form>
                          </div>
                          <!-- Second Tab -->
-                         <div class="app-tab-content" id="two-1" style="display: none;">
-                             <textarea placeholder="Private note regarding this application"></textarea>
-                             <a href="#" class="button margin-top-15">Add Note</a>
-                         </div>
+                         <form id="note-form" action="{{ route('applications.update.note', $application->id) }}"
+                             method="POST">
+                             @csrf
+                             @method('PUT')
+                             <div class="app-tab-content" id="two-1">
+                                 <textarea name="note" placeholder="Private note regarding this application">{{ old('note', $application->note) }}</textarea>
+                                 <button type="submit" class="button margin-top-15">Add Note</button>
+                             </div>
+                         </form>
                          <!-- Third Tab -->
                          <div class="app-tab-content" id="three-1" style="display: none;">
                              <i>Full Name:</i>
@@ -134,7 +138,7 @@
 
                              <i>Email:</i>
                              <span><a href="">{{ $application->candidate->email }}</a></span>
-                               <i>Phone:</i>
+                             <i>Phone:</i>
                              <span><a href="">{{ $application->candidate->phone_number_candidate }}</a></span>
 
                              <i>Message:</i>
@@ -143,10 +147,37 @@
                      </div>
                      <!-- Footer -->
                      <div class="app-footer">
-                         <div class="rating no-stars">
-                             <div class="star-rating"></div>
-                             <div class="star-bg"></div>
-                         </div>
+                         @if ($application->rating == 0)
+                             <div class="rating no-stars">
+                                 <div class="star-rating"></div>
+                                 <div class="star-bg"></div>
+                             </div>
+                         @elseif($application->rating == 1)
+                             <div class="rating one-stars">
+                                 <div class="star-rating"></div>
+                                 <div class="star-bg"></div>
+                             </div>
+                         @elseif($application->rating == 2)
+                             <div class="rating two-stars">
+                                 <div class="star-rating"></div>
+                                 <div class="star-bg"></div>
+                             </div>
+                         @elseif($application->rating == 3)
+                             <div class="rating three-stars">
+                                 <div class="star-rating"></div>
+                                 <div class="star-bg"></div>
+                             </div>
+                         @elseif($application->rating == 4)
+                             <div class="rating four-stars">
+                                 <div class="star-rating"></div>
+                                 <div class="star-bg"></div>
+                             </div>
+                         @elseif($application->rating == 5)
+                             <div class="rating five-stars">
+                                 <div class="star-rating"></div>
+                                 <div class="star-bg"></div>
+                             </div>
+                         @endif
                          <ul>
                              <li><i class="fa fa-file-text-o"></i>
                                  @if ($application->status == 1)

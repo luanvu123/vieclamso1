@@ -245,6 +245,12 @@ Route::middleware(['employer'])->group(function () {
 
     Route::resource('job-postings', JobPostingController::class);
     Route::get('/application-choose', [JobPostingController::class, 'application_choose'])->name('application-choose');
+    Route::put('/applications/{application}/update-note', [JobPostingController::class, 'updateNote'])->name('applications.update.note');
+    Route::put('/applications/{application}/update-rating', [JobPostingController::class, 'updateRating'])->name('applications.update.rating');
+    
+
+
+
     Route::get('trang-chu-tuyen-dung', [JobPostingController::class, 'dashboard'])->name('job-postings.dashboard');
     Route::post('employer/logout', [EmployerLoginController::class, 'logout'])->name('logout-employer');
     Route::get('employer/profile', [EmployerLoginController::class, 'profile'])->name('employer.profile');

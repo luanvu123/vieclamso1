@@ -14,6 +14,32 @@ use Illuminate\Support\Facades\Auth;
 
 class JobPostingController extends Controller
 {
+
+    public function updateNote(Request $request, Application $application)
+    {
+        $validatedData = $request->validate([
+            'note' => 'nullable|string',
+        ]);
+
+        $application->update([
+            'note' => $validatedData['note'],
+        ]);
+
+        return redirect()->back()->with('success', 'Application updated successfully');
+    }
+   public function updateRating(Request $request, Application $application)
+{
+    $validatedData = $request->validate([
+        'rating' => 'nullable|integer|min:1|max:5',
+    ]);
+
+    $application->update([
+        'rating' => $validatedData['rating'],
+    ]);
+
+    return redirect()->back()->with('success', 'Rating updated successfully');
+}
+
     public function index()
     {
         $employer = Auth::guard('employer')->user();
@@ -47,6 +73,7 @@ class JobPostingController extends Controller
     {
         $jobPosting = JobPosting::findOrFail($id);
         $applications = $jobPosting->applications()->with('candidate')->get();
+
         return view('job_postings.show', compact('jobPosting', 'applications'));
     }
 
