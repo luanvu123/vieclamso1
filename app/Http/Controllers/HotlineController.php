@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class HotlineController extends Controller
 {
+     public function __construct()
+    {
+        $this->middleware('permission:hotline-list', ['only' => ['index']]);
+        $this->middleware('permission:hotline-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:hotline-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:hotline-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $hotlines = Hotline::with('typeHotline')->get();

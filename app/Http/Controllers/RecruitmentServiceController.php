@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class RecruitmentServiceController extends Controller
 {
+      public function __construct()
+    {
+        $this->middleware('permission:recruitment-service-list', ['only' => ['index']]);
+        $this->middleware('permission:recruitment-service-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:recruitment-service-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:recruitment-service-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $services = RecruitmentService::all();

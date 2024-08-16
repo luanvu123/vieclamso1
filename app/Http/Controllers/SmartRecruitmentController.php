@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 class SmartRecruitmentController extends Controller
 {
+     public function __construct()
+    {
+        $this->middleware('permission:smart-recruitment-list', ['only' => ['index']]);
+        $this->middleware('permission:smart-recruitment-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:smart-recruitment-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:smart-recruitment-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $recruitments = SmartRecruitment::all();

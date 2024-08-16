@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ValueController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:value-list', ['only' => ['index']]);
+        $this->middleware('permission:value-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:value-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:value-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $values = Value::all();

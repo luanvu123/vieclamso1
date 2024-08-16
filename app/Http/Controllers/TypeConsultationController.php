@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class TypeConsultationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:type-consultation-list', ['only' => ['index']]);
+        $this->middleware('permission:type-consultation-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:type-consultation-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:type-consultation-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $typeConsultations = TypeConsultation::all();

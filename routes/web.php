@@ -120,7 +120,6 @@ Route::post('employer/register', [EmployerRegisterController::class, 'register']
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('consultations', ConsultationController::class)
         ->only(['index', 'edit', 'update', 'destroy']);
-    // City resource routes
     Route::resource('cities', CityController::class);
     Route::resource('type-consultations', TypeConsultationController::class);
     Route::resource('hotlines', HotlineController::class);
@@ -247,7 +246,7 @@ Route::middleware(['employer'])->group(function () {
     Route::get('/application-choose', [JobPostingController::class, 'application_choose'])->name('application-choose');
     Route::put('/applications/{application}/update-note', [JobPostingController::class, 'updateNote'])->name('applications.update.note');
     Route::put('/applications/{application}/update-rating', [JobPostingController::class, 'updateRating'])->name('applications.update.rating');
-    
+
 
 
 

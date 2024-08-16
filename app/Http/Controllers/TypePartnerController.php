@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 class TypePartnerController extends Controller
 {
+      public function __construct()
+    {
+        $this->middleware('permission:type-partner-list', ['only' => ['index']]);
+        $this->middleware('permission:type-partner-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:type-partner-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:type-partner-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $typePartners = TypePartner::all();

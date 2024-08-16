@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ConsultationController extends Controller
 {
+     public function __construct()
+    {
+        $this->middleware('permission:consultation-list', ['only' => ['index']]);
+        $this->middleware('permission:consultation-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:consultation-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:consultation-delete', ['only' => ['destroy']]);
+    }
    public function index()
     {
         $consultations = Consultation::with('city', 'typeConsultation')->get();

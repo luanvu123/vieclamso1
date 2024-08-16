@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:city-list', ['only' => ['index']]);
+        $this->middleware('permission:city-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:city-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:city-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $cities = City::all();

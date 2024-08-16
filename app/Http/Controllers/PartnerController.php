@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Storage;
 
 class PartnerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:partner-list', ['only' => ['index']]);
+        $this->middleware('permission:partner-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:partner-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:partner-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $partners = Partner::all();

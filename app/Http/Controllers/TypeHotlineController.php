@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 
 class TypeHotlineController extends Controller
 {
+     public function __construct()
+    {
+        $this->middleware('permission:type-hotline-list', ['only' => ['index']]);
+        $this->middleware('permission:type-hotline-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:type-hotline-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:type-hotline-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $typeHotlines = TypeHotline::all();

@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class FigureController extends Controller
 {
+     public function __construct()
+    {
+        $this->middleware('permission:figure-list', ['only' => ['index']]);
+        $this->middleware('permission:figure-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:figure-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:figure-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $figures = Figure::all();
