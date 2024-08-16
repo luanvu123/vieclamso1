@@ -20,30 +20,36 @@
     <div class="messages-container-inner">
         <div class="messages-inbox">
             <ul>
-                @foreach ($candidates as $candidate)
-                    @php
-                        $latestMessage = $candidate->latestMessage;
-                    @endphp
-                    <li class="active-message">
-                        <a href="{{ route('messages.show', $candidate) }}">
-                            <div class="message-avatar">
-                                <img src="{{ $candidate->avatar_candidate ? asset('storage/' . $candidate->avatar_candidate) : asset('storage/avatar/avatar-default.jpg') }}"
-                                    alt="">
-                            </div>
-                            <div class="message-by">
-                                <div class="message-by-headline">
-                                    <h5>{{ $candidate->fullname_candidate }}</h5>
-                                    @if ($latestMessage)
-                                        <span>{{ $latestMessage->created_at->diffForHumans() }}</span>
-                                    @else
-                                        <span>No messages</span>
+                 @foreach ($candidates as $candidate)
+                @php
+                    $latestMessage = $candidate->latestMessage;
+                @endphp
+                <li class="active-message">
+                    <a href="{{ route('messages.show', $candidate) }}">
+                        <div class="message-avatar">
+                            <img src="{{ $candidate->avatar_candidate ? asset('storage/' . $candidate->avatar_candidate) : asset('storage/avatar/avatar-default.jpg') }}"
+                                alt="">
+                        </div>
+                        <div class="message-by">
+                            <div class="message-by-headline">
+                                <h5>{{ $candidate->fullname_candidate }}
+                                    @if ($latestMessage && !$latestMessage->is_read)
+                                        <i>Unread</i>
                                     @endif
-                                </div>
-                                <p>{{ $latestMessage->message ?? 'No messages' }}</p>
+                                </h5>
+                                @if ($latestMessage)
+                                    <span>{{ $latestMessage->created_at->diffForHumans() }}</span>
+                                @else
+                                    <span>No messages</span>
+                                @endif
                             </div>
-                        </a>
-                    </li>
-                @endforeach
+                            <p @if ($latestMessage && !$latestMessage->is_read) style="font-weight: bold;" @endif>
+                                {{ $latestMessage->message ?? 'No messages' }}
+                            </p>
+                        </div>
+                    </a>
+                </li>
+            @endforeach
             </ul>
         </div>
     </div>

@@ -16,4 +16,8 @@ class City extends Model
     {
         return $this->hasMany(Consultation::class);
     }
+     public function jobPostings()
+    {
+        return $this->belongsToMany(JobPosting::class, 'city_job_posting');
+    }
 }

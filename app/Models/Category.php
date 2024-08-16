@@ -10,7 +10,7 @@ class Category extends Model
 
     protected $fillable = ['user_id', 'name','image','status','slug'];
 
-    public function user()
+    public function user() 
     {
         return $this->belongsTo(User::class);
     }

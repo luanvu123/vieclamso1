@@ -67,7 +67,7 @@
                             <a href="{{ route('job-postings.create') }}">Add Job</a>
                         </li>
                         <li class="{{ Route::is('messages.receive') || Route::is('messages.show') ? 'active' : '' }}">
-                            <a href="{{ route('messages.receive') }}">Message</a>
+                            <a href="{{ route('messages.receive') }}">Message </a>
                         </li>
 
                     </ul>

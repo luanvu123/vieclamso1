@@ -14,6 +14,7 @@ class Message extends Model
         'company_id',
         'message',
         'sender_type',
+        'is_read',
     ];
 
     public function candidate()
@@ -28,5 +29,10 @@ class Message extends Model
      public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+     public function markAsRead()
+    {
+        $this->is_read = true;
+        $this->save();
     }
 }

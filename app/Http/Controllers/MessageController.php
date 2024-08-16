@@ -36,12 +36,18 @@ class MessageController extends Controller
         $candidates = Candidate::whereHas('messages', function ($query) use ($employer_id) {
             $query->where('employer_id', $employer_id);
         })->get();
+
         foreach ($candidates as $candidate) {
             $candidate->latestMessage = $candidate->messages()
                 ->where('employer_id', $employer_id)
                 ->latest()
                 ->first();
         }
+
+        // Sắp xếp các ứng viên theo thời gian của tin nhắn mới nhất
+        $candidates = $candidates->sortByDesc(function ($candidate) {
+            return $candidate->latestMessage ? $candidate->latestMessage->created_at : null;
+        });
 
         return view('job_postings.messages', compact('candidates'));
     }
@@ -55,6 +61,11 @@ class MessageController extends Controller
             ->where('candidate_id', $candidate->id)
             ->with('candidate', 'employer')
             ->get();
+        foreach ($messages as $message) {
+            if (!$message->is_read) {
+                $message->markAsRead();
+            }
+        }
 
         return view('job_postings.messages_show', compact('messages', 'candidate'));
     }
