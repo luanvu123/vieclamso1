@@ -9,12 +9,17 @@
     </style>
     <link media="all" type="text/css" rel="stylesheet"
         href="https://vieclam.topgialai.vn/themes/jobbox/plugins/bootstrap/bootstrap.min.css">
-  <link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/language/css/language-public.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/cookie-consent/css/cookie-consent.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/plugins/bootstrap/bootstrap.min.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/css/style.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/job-board/css/avatar.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/core/base/libraries/tagify/tagify.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/language/css/language-public.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/cookie-consent/css/cookie-consent.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('themes/jobbox/plugins/bootstrap/bootstrap.min.css') }}">
+    <link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/css/style.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/job-board/css/avatar.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/core/base/libraries/tagify/tagify.css') }}">
     <div class="container">
         <div class="banner-hero banner-image-single"
             style="background: url('{{ $candidate->cover_image ? asset('storage/' . $candidate->cover_image) : asset('storage/pages/background-cover-candidate.png') }}') center no-repeat">
@@ -52,7 +57,7 @@
                                             <div class="candidate-avatar me-4">
                                                 <img src="{{ asset('storage/' . $candidate->avatar_candidate) }}"
                                                     alt="{{ $candidate->fullname_candidate }}" class="rounded-circle"
-                                                    width="150" height="150">
+                                                    style="width: 262px;height: 262px">
                                             </div>
                                             <div class="candidate-details">
                                                 <h2 class="fs-24 fw-bold mb-1">{{ $candidate->fullname_candidate }}

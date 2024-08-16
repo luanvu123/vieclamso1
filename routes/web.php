@@ -122,8 +122,6 @@ Route::group(['middleware' => ['auth']], function () {
         ->only(['index', 'edit', 'update', 'destroy']);
     // City resource routes
     Route::resource('cities', CityController::class);
-
-    // TypeConsultation resource routes
     Route::resource('type-consultations', TypeConsultationController::class);
     Route::resource('hotlines', HotlineController::class);
     Route::resource('type_hotlines', TypeHotlineController::class);

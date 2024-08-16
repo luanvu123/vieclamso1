@@ -173,7 +173,7 @@
         }
     </script>
     <script>
-        $('.application_choose').change(function() {
+        $('.chosen-select-no-single').change(function() {
             var trangthai_val = $(this).val();
             var id = $(this).attr('id');
             $.ajax({
