@@ -27,18 +27,18 @@ class JobPostingController extends Controller
 
         return redirect()->back()->with('success', 'Application updated successfully');
     }
-   public function updateRating(Request $request, Application $application)
-{
-    $validatedData = $request->validate([
-        'rating' => 'nullable|integer|min:1|max:5',
-    ]);
+    public function updateRating(Request $request, Application $application)
+    {
+        $validatedData = $request->validate([
+            'rating' => 'nullable|integer|min:1|max:5',
+        ]);
 
-    $application->update([
-        'rating' => $validatedData['rating'],
-    ]);
+        $application->update([
+            'rating' => $validatedData['rating'],
+        ]);
 
-    return redirect()->back()->with('success', 'Rating updated successfully');
-}
+        return redirect()->back()->with('success', 'Rating updated successfully');
+    }
 
     public function index()
     {
@@ -69,14 +69,28 @@ class JobPostingController extends Controller
         return view('job_postings.create', compact('email', 'categories', 'companies', 'cities'));
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $jobPosting = JobPosting::findOrFail($id);
-        $applications = $jobPosting->applications()->with('candidate')->get();
+
+        // Get filter and sort parameters from request
+        $status = $request->input('status');
+        $sort = $request->input('sort', 'created_at'); // Default sort by created_at
+        $applications = $jobPosting->applications()
+            ->when($status, function ($query, $status) {
+                return $query->where('applications.status', $status);
+            })
+            ->when($sort === 'name', function ($query) {
+                return $query->join('candidates', 'applications.candidate_id', '=', 'candidates.id')
+                    ->orderBy('candidates.fullname_candidate', 'asc');
+            }, function ($query) use ($sort) {
+                return $query->orderBy($sort, 'desc');
+            })
+            ->with('candidate')
+            ->get();
 
         return view('job_postings.show', compact('jobPosting', 'applications'));
     }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -166,13 +180,13 @@ class JobPostingController extends Controller
         $jobPosting = JobPosting::findOrFail($id);
         $selectedCities = explode(', ', $jobPosting->city);
         $cities = City::all();
-         $selectedCities = $jobPosting->cities->pluck('id')->toArray();
+        $selectedCities = $jobPosting->cities->pluck('id')->toArray();
         $jobPosting = JobPosting::findOrFail($id);
         $categories = Category::all();
         $selectedCategories = $jobPosting->categories->pluck('id')->toArray();
         $employer = Auth::guard('employer')->user();
         $companies = $employer->companies;
-        return view('job_postings.edit', compact('jobPosting', 'selectedCities', 'cities', 'categories', 'selectedCategories', 'companies','selectedCities'));
+        return view('job_postings.edit', compact('jobPosting', 'selectedCities', 'cities', 'categories', 'selectedCategories', 'companies', 'selectedCities'));
     }
 
 
@@ -265,6 +279,4 @@ class JobPostingController extends Controller
 
         return view('pages.overview-cv', compact('candidate'));
     }
-
-
 }

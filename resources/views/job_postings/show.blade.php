@@ -30,26 +30,30 @@
              </div>
          </div>
 
-         <div class="col-md-6">
-             <select data-placeholder="Filter by status" class="chosen-select-no-single" style="display: none;">
-                 <option value="">Filter by status</option>
-                 <option selected value="1">Đã ứng tuyển</option>
-                 <option value="2">NTD đã xem hồ sơ</option>
-                 <option value="3">Hồ sơ phù hợp</option>
-                 <option value="4">Hồ sơ chưa phù hợp</option>
-             </select>
-             <div class="margin-bottom-15"></div>
-         </div>
-         <div class="col-md-6">
-             <select data-placeholder="Newest first" class="chosen-select-no-single" style="display: none;">
-                 <option value="">Newest first</option>
-                 <option value="name">Sort by name</option>
-                 <option value="rating">Sort by rating</option>
-             </select>
-             <div class="margin-bottom-35"></div>
-         </div>
+         <form method="GET" action="{{ route('job-postings.show', $jobPosting->id) }}">
+             <div class="col-md-6">
+                 <select name="status" class="chosen-select-no-single" onchange="this.form.submit()">
+                     <option value="">Filter by status</option>
+                     <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Đã ứng tuyển</option>
+                     <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>NTD đã xem hồ sơ</option>
+                     <option value="3" {{ request('status') == '3' ? 'selected' : '' }}>Hồ sơ phù hợp</option>
+                     <option value="4" {{ request('status') == '4' ? 'selected' : '' }}>Hồ sơ chưa phù hợp</option>
+                 </select>
+                 <div class="margin-bottom-15"></div>
+             </div>
+             <div class="col-md-6">
+                 <select name="sort" class="chosen-select-no-single" onchange="this.form.submit()">
+                     <option value="created_at" {{ request('sort') == 'created_at' ? 'selected' : '' }}>Newest first
+                     </option>
+                     <option value="name" {{ request('sort') == 'name' ? 'selected' : '' }}>Sort by name</option>
+                     <option value="rating" {{ request('sort') == 'rating' ? 'selected' : '' }}>Sort by rating</option>
+                 </select>
+                 <div class="margin-bottom-35"></div>
+             </div>
+         </form>
+
          <div class="col-md-12">
-             @foreach ($jobPosting->applications as $key => $application)
+             @foreach ($applications as $application)
                  <div class="application">
                      <div class="app-content">
                          <div class="info">

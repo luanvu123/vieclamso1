@@ -72,39 +72,43 @@
                         License</a>
                 @endif
             @endif
-    </div>
-    <div class="form-group"><label for="commission">Commission:</label><input type="file" class="form-control"
-            id="commission" name="commission">
-        @if ($employer->commission)
-            @php
-                $fileExtension = pathinfo(asset('storage/' . $employer->commission), PATHINFO_EXTENSION);
-            @endphp
-            @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
-                <img src="{{ asset('storage/' . $employer->commission) }}"alt="Commission"
-                    style="max-width: 100px; max-height: 100px;" />
-            @else
-                <a href="{{ asset('storage/' . $employer->commission) }}"target="_blank">View Commission</a>
-            @endif
-        @endif
-    </div>
-    <div class="form-group"><label for="identification_card">Identification Card:</label><input type="file"
-            class="form-control" id="identification_card" name="identification_card">
-        @if ($employer->identification_card)
-            @php
-                $fileExtension = pathinfo(asset('storage/' . $employer->identification_card), PATHINFO_EXTENSION);
-            @endphp
-            @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
-                <img src="{{ asset('storage/' . $employer->identification_card) }}"alt="Identification Card"
-                    style="max-width: 100px; max-height: 100px;" />
-            @else
-                <a href="{{ asset('storage/' . $employer->identification_card) }}"target="_blank">View Identification
-                    Card</a>
-            @endif
-        @endif
-    </div>
+
+            <div class="form-group"><label for="commission">Commission:</label><input type="file" class="form-control"
+                    id="commission" name="commission">
+                @if ($employer->commission)
+                    @php
+                        $fileExtension = pathinfo(asset('storage/' . $employer->commission), PATHINFO_EXTENSION);
+                    @endphp
+                    @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
+                        <img src="{{ asset('storage/' . $employer->commission) }}"alt="Commission"
+                            style="max-width: 100px; max-height: 100px;" />
+                    @else
+                        <a href="{{ asset('storage/' . $employer->commission) }}"target="_blank">View Commission</a>
+                    @endif
+                @endif
+            </div>
+            <div class="form-group"><label for="identification_card">Identification Card:</label><input type="file"
+                    class="form-control" id="identification_card" name="identification_card">
+                @if ($employer->identification_card)
+                    @php
+                        $fileExtension = pathinfo(
+                            asset('storage/' . $employer->identification_card),
+                            PATHINFO_EXTENSION,
+                        );
+                    @endphp
+                    @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
+                        <img src="{{ asset('storage/' . $employer->identification_card) }}"alt="Identification Card"
+                            style="max-width: 100px; max-height: 100px;" />
+                    @else
+                        <a href="{{ asset('storage/' . $employer->identification_card) }}"target="_blank">View
+                            Identification
+                            Card</a>
+                    @endif
+                @endif
+            </div>
 
 
-    <button type="submit" class="btn btn-primary">Update Profile</button>
-    </form>
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
     </div>
 @endsection
