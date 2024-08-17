@@ -7,15 +7,16 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class EmployerLoginController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('guest:employer')->except('logout');
-    // }
+    public function __construct()
+    {
+        $this->middleware('employer')->except('logout');
+    }
 
     public function showLoginForm()
     {
@@ -108,5 +109,23 @@ class EmployerLoginController extends Controller
         $employer->save();
 
         return redirect()->route('employer.profile')->with('success', 'Profile updated successfully.');
+    }
+    public function changePasswordEmployer(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ]);
+
+        $employer = Auth::guard('employer')->user();
+
+        if (!Hash::check($request->current_password, $employer->password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect']);
+        }
+
+        $employer->password = Hash::make($request->new_password);
+        $employer->save();
+
+        return back()->with('status', 'Password changed successfully');
     }
 }
