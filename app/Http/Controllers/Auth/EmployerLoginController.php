@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
- 
+
 class EmployerLoginController extends Controller
 {
     // public function __construct()
@@ -22,7 +22,7 @@ class EmployerLoginController extends Controller
         return view('pages.app-login');
     }
 
-      public function login(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
@@ -59,22 +59,51 @@ class EmployerLoginController extends Controller
             'gender' => 'nullable|string',
             'phone' => 'nullable|string',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'business_license' => 'nullable|mimes:jpeg,png,jpg,pdf|max:2048',
+            'commission' => 'nullable|mimes:jpeg,png,jpg,pdf|max:2048',
+            'identification_card' => 'nullable|mimes:jpeg,png,jpg,pdf|max:2048',
         ]);
 
         $employer->name = $request->name;
         $employer->email = $request->email;
         $employer->gender = $request->gender;
         $employer->phone = $request->phone;
-       $employer->status = $request->status ?? $employer->status;
+        $employer->status = $request->status ?? $employer->status;
 
-         if ($request->hasFile('avatar')) {
-        if ($employer->avatar && Storage::disk('public')->exists($employer->avatar)) {
-            Storage::disk('public')->delete($employer->avatar);
+        if ($request->hasFile('avatar')) {
+            if ($employer->avatar && Storage::disk('public')->exists($employer->avatar)) {
+                Storage::disk('public')->delete($employer->avatar);
+            }
+            $avatar = $request->file('avatar');
+            $avatarPath = $avatar->store('avatar_employer', 'public');
+            $employer->avatar = $avatarPath;
         }
-        $avatar = $request->file('avatar');
-        $avatarPath = $avatar->store('avatar_employer', 'public');
-        $employer->avatar = $avatarPath;
-    }
+        if ($request->hasFile('business_license')) {
+            if ($employer->business_license && Storage::disk('public')->exists($employer->business_license)) {
+                Storage::disk('public')->delete($employer->business_license);
+            }
+            $businessLicense = $request->file('business_license');
+            $businessLicensePath = $businessLicense->store('documents', 'public');
+            $employer->business_license = $businessLicensePath;
+        }
+
+        if ($request->hasFile('commission')) {
+            if ($employer->commission && Storage::disk('public')->exists($employer->commission)) {
+                Storage::disk('public')->delete($employer->commission);
+            }
+            $commission = $request->file('commission');
+            $commissionPath = $commission->store('documents', 'public');
+            $employer->commission = $commissionPath;
+        }
+
+        if ($request->hasFile('identification_card')) {
+            if ($employer->identification_card && Storage::disk('public')->exists($employer->identification_card)) {
+                Storage::disk('public')->delete($employer->identification_card);
+            }
+            $identificationCard = $request->file('identification_card');
+            $identificationCardPath = $identificationCard->store('documents', 'public');
+            $employer->identification_card = $identificationCardPath;
+        }
 
         $employer->save();
 

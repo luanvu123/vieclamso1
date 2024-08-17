@@ -17,7 +17,10 @@ class Employer extends Authenticatable implements CanResetPassword
         'gender',
         'phone',
         'status',
-        'avatar'
+        'avatar',
+        'business_license',
+        'commission',
+        'identification_card',
     ];
 
     public function jobPostings()

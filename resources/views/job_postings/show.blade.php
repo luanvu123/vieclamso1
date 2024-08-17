@@ -31,7 +31,6 @@
          </div>
 
          <div class="col-md-6">
-             <!-- Select -->
              <select data-placeholder="Filter by status" class="chosen-select-no-single" style="display: none;">
                  <option value="">Filter by status</option>
                  <option selected value="1">Đã ứng tuyển</option>
@@ -42,7 +41,6 @@
              <div class="margin-bottom-15"></div>
          </div>
          <div class="col-md-6">
-             <!-- Select -->
              <select data-placeholder="Newest first" class="chosen-select-no-single" style="display: none;">
                  <option value="">Newest first</option>
                  <option value="name">Sort by name</option>
@@ -50,11 +48,7 @@
              </select>
              <div class="margin-bottom-35"></div>
          </div>
-
-
-         <!-- Applications -->
          <div class="col-md-12">
-
              @foreach ($jobPosting->applications as $key => $application)
                  <div class="application">
                      <div class="app-content">
