@@ -35,6 +35,12 @@
             <a href="{{ route('figures.index') }}">Edit figures
             </a>
         </li>
+        <li class="{{ Route::is('type_feedback.index') ? 'active' : '' }}">
+            <a href="{{ route('type_feedback.index') }}">Manage Type feedback</a>
+        </li>
+        <li class="{{ Route::is('type_support.index') ? 'active' : '' }}">
+            <a href="{{ route('type_support.index') }}">Manage Type Support</a>
+        </li>
         <li class="{{ Route::is('values.index') ? 'active-submenu' : '' }}">
             <a href="{{ route('values.index') }}">Edit values
             </a>
@@ -62,6 +68,15 @@
         <li class="{{ Route::is('type-consultations.index') ? 'active-submenu' : '' }}">
             <a href="{{ route('type-consultations.index') }}">Edit type-consultations
             </a>
+        </li>
+        <li class="{{ Route::is('awards.index') ? 'active' : '' }}">
+            <a href="{{ route('awards.index') }}">Manage Awards</a>
+        </li>
+        <li class="{{ Route::is('ecosystems.index') ? 'active' : '' }}">
+            <a href="{{ route('ecosystems.index') }}">Manage Ecosystems</a>
+        </li>
+        <li class="{{ Route::is('medias.index') ? 'active' : '' }}">
+            <a href="{{ route('medias.index') }}">Manage Medias</a>
         </li>
         <form action="{{ route('admin.info.update', $info->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -119,7 +134,8 @@
 
             <div class="form-group">
                 <label for="copyright">Copyright</label>
-                <input type="text" class="form-control" id="copyright" name="copyright" value="{{ $info->copyright }}">
+                <input type="text" class="form-control" id="copyright" name="copyright"
+                    value="{{ $info->copyright }}">
             </div>
 
             <div class="form-group">

@@ -57,10 +57,10 @@
 
                     <ul data-submenu-title="Management">
 
-                        <li class="{{ Route::is('job-postings.index') ? 'active' : '' }}">
+                        <li class="{{ Route::is('job-postings.index')||Route::is('job-postings.show') ||Route::is('job-postings.edit')? 'active' : '' }}">
                             <a href="{{ route('job-postings.index') }}">Job</a>
                         </li>
-                        <li class="{{ Route::is('companies.index') ? 'active' : '' }}">
+                        <li class="{{ Route::is('companies.index') || Route::is('companies.show')|| Route::is('companies.edit')? 'active' : '' }}">
                             <a href="{{ route('companies.index') }}">Company</a>
                         </li>
                         <li class="{{ Route::is('job-postings.create') ? 'active' : '' }}">

@@ -83,16 +83,14 @@
                             <input id="email" name="email" value="{{ $employer->email }}"type="email">
 
                             <label>Gender</label>
-                            <div class="form">
-                                <select name="type" class="chosen-select-no-single"id="gender" name="gender">
+                            <div class="form"><select class="chosen-select-no-single" id="gender" name="gender">
                                     <option value="">Select Gender</option>
                                     <option value="male" {{ $employer->gender == 'male' ? 'selected' : '' }}>Male</option>
                                     <option value="female" {{ $employer->gender == 'female' ? 'selected' : '' }}>Female
                                     </option>
                                     <option value="other" {{ $employer->gender == 'other' ? 'selected' : '' }}>Other
                                     </option>
-                                </select>
-                            </div>
+                                </select></div>
 
                         </div>
 

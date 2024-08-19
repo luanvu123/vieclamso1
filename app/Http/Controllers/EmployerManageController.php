@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class EmployerManageController extends Controller
 {
-    public function __construct()
+    public function __construct() 
     {
         $this->middleware('permission:employer-list|employer-create|employer-edit|employer-delete', ['only' => ['index', 'store']]);
         $this->middleware('permission:employer-create', ['only' => ['create', 'store']]);

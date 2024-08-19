@@ -18,7 +18,7 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                     }
-                </style>
+                </style> 
                 <a href="{{ route('posts.create') }}" class="btn btn-primary mb-3">Create New Post</a>
 
                 <div class="table-container">

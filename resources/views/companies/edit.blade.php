@@ -1,7 +1,21 @@
 @extends('dashboard-employer')
 
 @section('content')
-    <h1>Edit Company</h1>
+ <div id="titlebar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>My Company</h2>
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Company</a></li>
+                        <li>{{ $company->name }}</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
 
     <form action="{{ route('companies.update', $company->id) }}" method="POST" enctype="multipart/form-data">
         @csrf

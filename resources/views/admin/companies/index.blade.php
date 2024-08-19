@@ -3,10 +3,11 @@
 @section('content')
     <div class="container">
         <h1>Danh sách công ty</h1>
-        <table class="table" id="user-table">
+        <table  class="display" id="user-table">
             <thead>
                 <tr>
                     <th>#</th>
+                    <th></th>
                     <th>Tên công ty</th>
                     <th>Người tạo</th>
                     <th>Địa chỉ</th>
@@ -22,6 +23,7 @@
                 @foreach ($companies as $company)
                     <tr>
                         <td>{{ $company->id }}</td>
+                          <td><img src="{{ Storage::url($company->logo) }}" alt="{{ $company->name }}" width="50"></td>
                         <td>{{ $company->name }}</td>
                         <td>{{ $company->employer->name }}</td>
                         <td>{{ $company->address }}</td>

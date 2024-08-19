@@ -12,6 +12,9 @@
     <div>
         <strong>Website:</strong> <a href="{{ $company->website }}" target="_blank">{{ $company->website }}</a>
     </div>
+      <div>
+        <strong>MST:</strong> {{ $company->mst }}
+    </div>
     <div>
         <strong>Mô tả:</strong> {{ $company->detail }}
     </div>

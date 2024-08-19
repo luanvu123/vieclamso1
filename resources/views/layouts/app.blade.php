@@ -65,7 +65,7 @@
 
                     <ul data-submenu-title="Management">
                         <li
-                            class="{{ Route::is('users.index') || Route::is('roles.index') || Route::is('categories.index') || Route::is('awards.index') || Route::is('ecosystems.index') || Route::is('medias.index') ? 'active-submenu' : '' }}">
+                            class="{{ Route::is('users.index') || Route::is('roles.index') || Route::is('categories.index') ? 'active-submenu' : '' }}">
                             <a href="#">General Management</a>
                             <ul>
                                 <li class="{{ Route::is('users.index') ? 'active' : '' }}">
@@ -77,15 +77,7 @@
                                 <li class="{{ Route::is('categories.index') ? 'active' : '' }}">
                                     <a href="{{ route('categories.index') }}">Manage Categories</a>
                                 </li>
-                                <li class="{{ Route::is('awards.index') ? 'active' : '' }}">
-                                    <a href="{{ route('awards.index') }}">Manage Awards</a>
-                                </li>
-                                <li class="{{ Route::is('ecosystems.index') ? 'active' : '' }}">
-                                    <a href="{{ route('ecosystems.index') }}">Manage Ecosystems</a>
-                                </li>
-                                <li class="{{ Route::is('medias.index') ? 'active' : '' }}">
-                                    <a href="{{ route('medias.index') }}">Manage Medias</a>
-                                </li>
+
 
                             </ul>
                         </li>
@@ -105,12 +97,6 @@
                                 </li>
                                 <li class="{{ Route::is('courses.index') ? 'active' : '' }}">
                                     <a href="{{ route('courses.index') }}">Manage Courses</a>
-                                </li>
-                                <li class="{{ Route::is('type_feedback.index') ? 'active' : '' }}">
-                                    <a href="{{ route('type_feedback.index') }}">Manage Type feedback</a>
-                                </li>
-                                <li class="{{ Route::is('type_support.index') ? 'active' : '' }}">
-                                    <a href="{{ route('type_support.index') }}">Manage Type Support</a>
                                 </li>
 
                             </ul>
@@ -156,7 +142,17 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="{{ Route::is('feedbacks.index.list') ? 'active-submenu' : '' }}">
+
+
+                        <li
+                            class="{{ Route::is('admin.info.index') || Route::is('feedbacks.index.list') || Route::is('supports.index.list') || Route::is('recruitment_services.index') ? 'active-submenu' : '' }}">
+                            <a href="#">Front-end</a>
+                            <ul>
+                                <li class="{{ Route::is('admin.info.index') ? 'active-submenu' : '' }}">
+                                    <a href="{{ route('admin.info.index') }}">Edit Front-end
+                                    </a>
+                                </li>
+                                 <li class="{{ Route::is('feedbacks.index.list') ? 'active-submenu' : '' }}">
                             <a href="{{ route('feedbacks.index.list') }}">Feedbacks
                                 @if ($feedbackCountTwoHour > 0)
                                     <span class="nav-tag">{{ $feedbackCountTwoHour }}</span>
@@ -185,16 +181,6 @@
                                 @endif
                             </a>
                         </li>
-
-                        <li
-                            class="{{ Route::is('admin.info.index') || Route::is('public_links.index') || Route::is('smart_recruitments.index') || Route::is('recruitment_services.index') ? 'active-submenu' : '' }}">
-                            <a href="#">Front-end</a>
-                            <ul>
-                                <li class="{{ Route::is('admin.info.index') ? 'active-submenu' : '' }}">
-                                    <a href="{{ route('admin.info.index') }}">Edit Front-end
-                                    </a>
-                                </li>
-
                             </ul>
                         </li>
 
