@@ -114,7 +114,7 @@
                                 <select name="sex" class="chosen-select-no-single">
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
-                                    <option value="Other">Other</option>
+                                    <option value="Not required">Not required</option>
                                 </select>
                             </div>
                             <!-- Skills required -->

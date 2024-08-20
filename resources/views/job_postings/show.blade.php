@@ -190,7 +190,7 @@
                              </li>
                              <li><i class="fa fa-calendar"></i> {{ $application->created_at }}</li>
                          </ul>
-                         <div class="clearfix"></div>
+                         <div class="clearfix"></div> 
                      </div>
                  </div>
              @endforeach

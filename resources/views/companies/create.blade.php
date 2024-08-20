@@ -2,15 +2,15 @@
 
 @section('content')
     <h1>Create New Company</h1>
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <form action="{{ route('companies.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -36,6 +36,16 @@
             <label for="scale">Scale:</label>
             <input type="text" id="scale" name="scale" value="{{ old('scale') }}">
         </div>
+        <div class="form">
+            <div class="select">
+                <h5>Category</h5>
+                <select name="category[]" class="chosen-select" multiple>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <div>
             <label for="address">Address:</label>
             <input type="text" id="address" name="address" value="{{ old('address') }}">
@@ -44,10 +54,10 @@
             <label for="map">Map:</label>
             <input type="text" id="map" name="map" value="{{ old('map') }}">
         </div>
-          <div>
-        <label for="mst">Mã Số Thuế:</label>
-        <input type="text" id="mst" name="mst"value="{{ old('mst') }}">
-    </div>
+        <div>
+            <label for="mst">Mã Số Thuế:</label>
+            <input type="text" id="mst" name="mst"value="{{ old('mst') }}">
+        </div>
         <div>
             <label for="detail">Detail:</label>
             <textarea id="detail" name="detail">{{ old('detail') }}</textarea>

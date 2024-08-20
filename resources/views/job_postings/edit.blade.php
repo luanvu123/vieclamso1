@@ -134,7 +134,7 @@
                                       </option>
                                       <option value="Female" {{ $jobPosting->sex == 'Female' ? 'selected' : '' }}>Female
                                       </option>
-                                      <option value="Other" {{ $jobPosting->sex == 'Other' ? 'selected' : '' }}>Other
+                                      <option value="Not required" {{ $jobPosting->sex == 'Not required' ? 'selected' : '' }}>Not required
                                       </option>
                                   </select>
                               </div>

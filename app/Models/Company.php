@@ -45,4 +45,9 @@ class Company extends Model
     {
         return $this->belongsToMany(Candidate::class, 'company_follower');
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_company');
+    }
 }

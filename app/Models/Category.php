@@ -10,7 +10,7 @@ class Category extends Model
 
     protected $fillable = ['user_id', 'name','image','status','slug'];
 
-    public function user() 
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
@@ -22,5 +22,10 @@ class Category extends Model
      public function jobPostingsCount()
     {
         return $this->jobPostings()->count();
+    }
+
+     public function companies()
+    {
+        return $this->belongsToMany(Company::class, 'category_company');
     }
 }

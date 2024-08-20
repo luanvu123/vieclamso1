@@ -1,7 +1,7 @@
 @extends('dashboard-employer')
 
 @section('content')
- <div id="titlebar">
+    <div id="titlebar">
         <div class="row">
             <div class="col-md-12">
                 <h2>My Company</h2>
@@ -24,9 +24,22 @@
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="{{ old('name', $company->name) }}" required>
         </div>
-         <div>
+        <div>
             <label for="mst">MST:</label>
             <input type="text" id="mst" name="mst" value="{{ old('mst', $company->mst) }}" required>
+        </div>
+        <div class="form">
+            <div class="select">
+                <h5>Category</h5>
+                <select name="category[]" data-placeholder="Choose Categories" class="chosen-select" multiple>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}"
+                            {{ in_array($category->id, $selectedCategories) ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
         <div>
             <label for="image">Image:</label>

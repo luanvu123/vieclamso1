@@ -13,10 +13,10 @@ use Illuminate\Validation\ValidationException;
 
 class EmployerLoginController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('employer')->except('logout');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('employer')->except('logout');
+    // }
 
     public function showLoginForm()
     {

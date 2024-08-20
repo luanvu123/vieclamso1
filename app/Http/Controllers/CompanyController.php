@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Company;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,15 +13,19 @@ class CompanyController extends Controller
 {
     public function index()
     {
+        $categories = Category::where('status', 1)
+            ->get();
         $employer = Auth::guard('employer')->user();
         $companies = $employer->companies; // Assuming a relationship exists
-        return view('companies.index', compact('companies'));
+        return view('companies.index', compact('companies', 'categories'));
     }
 
     public function create()
     {
+        $categories = Category::where('status', 1)
+            ->get();
         $employer = Auth::guard('employer')->user();
-        return view('companies.create', compact('employer'));
+        return view('companies.create', compact('employer', 'categories'));
     }
 
     public function store(Request $request)
@@ -39,11 +44,22 @@ class CompanyController extends Controller
             'facebook' => 'nullable|url',
             'twitter' => 'nullable|url',
             'linkedin' => 'nullable|url',
-             'mst' => 'nullable|string|max:255',
+            'mst' => 'nullable|string|max:255',
         ]);
 
         $companyData = $request->only([
-            'name', 'scale', 'address', 'map', 'detail', 'status', 'url', 'website', 'facebook', 'twitter', 'linkedin','mst'
+            'name',
+            'scale',
+            'address',
+            'map',
+            'detail',
+            'status',
+            'url',
+            'website',
+            'facebook',
+            'twitter',
+            'linkedin',
+            'mst'
         ]);
 
         if ($request->hasFile('image')) {
@@ -61,7 +77,12 @@ class CompanyController extends Controller
         $companyData['employer_id'] = Auth::guard('employer')->id(); // Set employer_id
         $companyData['slug'] = Str::slug($request->name); // Tạo slug từ tên công ty
         $companyData['top'] = 0; // Đặt giá trị mặc định cho cột top
-        Company::create($companyData);
+        $company = Company::create($companyData);
+
+        if ($request->has('category')) {
+            $company->categories()->sync($request->category);
+        }
+
 
         return redirect()->route('companies.index')->with('success', 'Company created successfully.');
     }
@@ -75,8 +96,11 @@ class CompanyController extends Controller
     public function edit($id)
     {
         $company = Company::findOrFail($id);
-        return view('companies.edit', compact('company'));
+        $categories = Category::where('status', 1)->get();
+        $selectedCategories = $company->categories->pluck('id')->toArray();
+        return view('companies.edit', compact('company', 'categories', 'selectedCategories'));
     }
+
 
     public function update(Request $request, $id)
     {
@@ -94,13 +118,24 @@ class CompanyController extends Controller
             'facebook' => 'nullable|url',
             'twitter' => 'nullable|url',
             'linkedin' => 'nullable|url',
-             'mst' => 'nullable|string|max:255',
+            'mst' => 'nullable|string|max:255',
         ]);
 
         $company = Company::findOrFail($id);
 
         $companyData = $request->only([
-            'name', 'scale', 'address', 'map', 'detail', 'status', 'url', 'website', 'facebook', 'twitter', 'linkedin','mst'
+            'name',
+            'scale',
+            'address',
+            'map',
+            'detail',
+            'status',
+            'url',
+            'website',
+            'facebook',
+            'twitter',
+            'linkedin',
+            'mst'
         ]);
 
         if ($request->hasFile('image')) {
@@ -116,6 +151,9 @@ class CompanyController extends Controller
         }
         $companyData['slug'] = Str::slug($request->name);
         $company->update($companyData);
+        if ($request->has('category')) {
+            $company->categories()->sync($request->category);
+        }
 
         return redirect()->route('companies.index')->with('success', 'Company updated successfully.');
     }
@@ -126,5 +164,4 @@ class CompanyController extends Controller
         $company->delete();
         return redirect()->route('companies.index')->with('success', 'Company deleted successfully.');
     }
-
 }
