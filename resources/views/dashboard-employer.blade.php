@@ -29,8 +29,8 @@
                 <div class="sixteen columns">
                     <div id="logo">
                         <h1><a href="{{ route('recruitment') }}"><img
-                                    src="{{ asset('static.topcv.vn/v4/image/logo/topcv-logo-6.png') }}"
-                                    style="width: 206px" alt="Work Scout" /></a></h1>
+                                    src="{{ asset('storage/' . $info->logo_recruitment) }}" style="width: 206px" /></a>
+                        </h1>
                     </div>
                 </div>
             </div>
@@ -49,17 +49,27 @@
             <div class="dashboard-nav">
                 <div class="dashboard-nav-inner">
 
-                    <ul data-submenu-title="Start">
-                        <li class="{{ Route::is('job-postings.dashboard') ? 'active' : '' }}">
-                            <a href="{{ route('job-postings.dashboard') }}">Dashboard</a>
-                        </li>
-                    </ul>
-                    <ul data-submenu-title="Management">
+                    <ul>
 
-                        <li class="{{ Route::is('job-postings.index')||Route::is('job-postings.show') ||Route::is('job-postings.edit')? 'active' : '' }}">
+
+                        <li class="{{ Route::is('employer.profile') ? 'active' : '' }}">
+                            <a href="{{ route('employer.profile') }}">
+                                <div class="message-avatar">
+                                    <img src="{{ Auth::guard('employer')->user()->avatar ? asset('storage/' . Auth::guard('employer')->user()->avatar) : asset('storage/avatar/avatar-default.jpg') }}"
+                                        alt="">
+                                </div>
+                                {{ Auth::guard('employer')->user()->name }}
+                            </a>
+                        </li>
+                        <li class="{{ Route::is('job-postings.dashboard') ? 'active' : '' }}">
+                            <a href="{{ route('job-postings.dashboard') }}"></span>Dashboard</a>
+                        </li>
+                        <li
+                            class="{{ Route::is('job-postings.index') || Route::is('job-postings.show') || Route::is('job-postings.edit') ? 'active' : '' }}">
                             <a href="{{ route('job-postings.index') }}">Job</a>
                         </li>
-                        <li class="{{ Route::is('companies.index') || Route::is('companies.show')|| Route::is('companies.edit')? 'active' : '' }}">
+                        <li
+                            class="{{ Route::is('companies.index') || Route::is('companies.show') || Route::is('companies.edit') ? 'active' : '' }}">
                             <a href="{{ route('companies.index') }}">Company</a>
                         </li>
                         <li class="{{ Route::is('job-postings.create') ? 'active' : '' }}">
@@ -68,21 +78,15 @@
                         <li class="{{ Route::is('messages.receive') || Route::is('messages.show') ? 'active' : '' }}">
                             <a href="{{ route('messages.receive') }}">Message </a>
                         </li>
-                         <li class="{{ Route::is('job-postings.cart')? 'active' : '' }}">
+                        <li class="{{ Route::is('job-postings.cart') ? 'active' : '' }}">
                             <a href="{{ route('job-postings.cart') }}">Buy Services </a>
                         </li>
-                          <li class="{{ Route::is('cartlist.index')? 'active' : '' }}">
+                        <li class="{{ Route::is('cartlist.index') ? 'active' : '' }}">
                             <a href="{{ route('cartlist.index') }}">My cart </a>
                         </li>
-                         <li class="{{ Route::is('cartlist.listOrder')|| Route::is('cartlist.showOrder') ? 'active' : '' }}">
+                        <li
+                            class="{{ Route::is('cartlist.listOrder') || Route::is('cartlist.showOrder') ? 'active' : '' }}">
                             <a href="{{ route('cartlist.listOrder') }}">My Order </a>
-                        </li>
-
-                    </ul>
-
-                    <ul data-submenu-title="Account">
-                        <li class="{{ Route::is('employer.profile') ? 'active' : '' }}">
-                            <a href="{{ route('employer.profile') }}">My Profile</a>
                         </li>
                         <li>
                             <a href="{{ route('logout') }}"
@@ -92,7 +96,10 @@
                                 @csrf
                             </form>
                         </li>
+
                     </ul>
+
+
 
 
                 </div>

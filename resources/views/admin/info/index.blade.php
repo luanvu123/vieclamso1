@@ -374,6 +374,13 @@
                 <input type="number" step="0.01" class="form-control" id="vat" name="vat"
                     value="{{ $info->vat }}" required>
             </div>
+             <div class="form-group">
+                <label for="logo_recruitment">Logo Recruitment</label>
+                @if ($info->logo_recruitment)
+                    <img src="{{ asset('storage/' . $info->logo_recruitment) }}" alt="logo_recruitment" style="max-width: 100px;">
+                @endif
+                <input type="file" class="form-control" id="logo_recruitment" name="logo_recruitment">
+            </div>
 
             <button type="submit" class="btn btn-primary">Update</button>
         </form>

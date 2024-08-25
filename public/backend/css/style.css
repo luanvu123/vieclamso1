@@ -7266,7 +7266,7 @@ label.upload-btn input[type="file"] { display: none; }
 	padding-top: 90px;
 }
 
-header.dashboard-header { height: auto; min-height: 90px; }
+header.dashboard-header { height: auto; min-height: 90px;background-color: #212f3f!important }
 
 /* Flexbox Adjustments */
 .dashboard-content,
@@ -7375,7 +7375,7 @@ a.dashboard-responsive-nav-trigger { display: none; }
 }
 
 .dashboard-nav ul:first-child {
-	margin: 30px 0 0 0;
+	margin: 0 0 0 0;
 }
 
 .dashboard-nav ul:before {

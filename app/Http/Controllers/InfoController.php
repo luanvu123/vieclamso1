@@ -65,6 +65,7 @@ class InfoController extends Controller
             'bct_url' => 'nullable|url|max:255',
             'bct_image' => 'nullable|image|max:2048',
             'vat' => 'required|string|max:255',
+            'logo_recruitment' => 'nullable|image|max:2048',
         ]);
 
         $info = Info::findOrFail($id);
@@ -145,6 +146,12 @@ class InfoController extends Controller
             $info->bct_image = $path;
         }
 
+        if ($request->hasFile('logo_recruitment')) {
+            $path = $request->file('logo_recruitment')->store('images', 'public');
+            $info->logo_recruitment = $path;
+        }
+
+
         // Update new text fields
         $info->recruitment_title_1 = $request->recruitment_title_1;
         $info->big_update_title = $request->big_update_title;
@@ -170,7 +177,7 @@ class InfoController extends Controller
         $info->title3_section = $request->title3_section;
         $info->link_appstore = $request->link_appstore;
         $info->link_googleplay = $request->link_googleplay;
-          $info->vat = $request->vat;
+        $info->vat = $request->vat;
 
         $info->save();
 
