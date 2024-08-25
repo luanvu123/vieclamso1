@@ -54,7 +54,6 @@
                             <a href="{{ route('job-postings.dashboard') }}">Dashboard</a>
                         </li>
                     </ul>
-
                     <ul data-submenu-title="Management">
 
                         <li class="{{ Route::is('job-postings.index')||Route::is('job-postings.show') ||Route::is('job-postings.edit')? 'active' : '' }}">
@@ -68,6 +67,15 @@
                         </li>
                         <li class="{{ Route::is('messages.receive') || Route::is('messages.show') ? 'active' : '' }}">
                             <a href="{{ route('messages.receive') }}">Message </a>
+                        </li>
+                         <li class="{{ Route::is('job-postings.cart')? 'active' : '' }}">
+                            <a href="{{ route('job-postings.cart') }}">Buy Services </a>
+                        </li>
+                          <li class="{{ Route::is('cartlist.index')? 'active' : '' }}">
+                            <a href="{{ route('cartlist.index') }}">My cart </a>
+                        </li>
+                         <li class="{{ Route::is('cartlist.listOrder')|| Route::is('cartlist.showOrder') ? 'active' : '' }}">
+                            <a href="{{ route('cartlist.listOrder') }}">My Order </a>
                         </li>
 
                     </ul>

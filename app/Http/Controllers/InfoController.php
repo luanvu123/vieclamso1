@@ -64,6 +64,7 @@ class InfoController extends Controller
             'about_us_image' => 'nullable|image|max:2048',
             'bct_url' => 'nullable|url|max:255',
             'bct_image' => 'nullable|image|max:2048',
+            'vat' => 'required|string|max:255',
         ]);
 
         $info = Info::findOrFail($id);
@@ -169,6 +170,7 @@ class InfoController extends Controller
         $info->title3_section = $request->title3_section;
         $info->link_appstore = $request->link_appstore;
         $info->link_googleplay = $request->link_googleplay;
+          $info->vat = $request->vat;
 
         $info->save();
 

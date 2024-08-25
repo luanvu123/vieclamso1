@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Candidate;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Company;
@@ -69,30 +70,30 @@ class JobPostingController extends Controller
         return view('job_postings.create', compact('email', 'categories', 'companies', 'cities'));
     }
 
-   public function show(Request $request, $id)
-{
-    $jobPosting = JobPosting::findOrFail($id);
+    public function show(Request $request, $id)
+    {
+        $jobPosting = JobPosting::findOrFail($id);
 
-    // Get filter and sort parameters from request
-    $status = $request->input('status');
-    $sort = $request->input('sort', 'created_at'); // Default sort by created_at
+        // Get filter and sort parameters from request
+        $status = $request->input('status');
+        $sort = $request->input('sort', 'created_at'); // Default sort by created_at
 
-    $applications = $jobPosting->applications()
-        ->when($status, function ($query, $status) {
-            return $query->where('applications.status', $status);
-        })
-        ->when($sort === 'name', function ($query) {
-            return $query->join('candidates', 'applications.candidate_id', '=', 'candidates.id')
-                        ->orderBy('candidates.fullname_candidate', 'asc')
-                        ->select('applications.*'); // Select only the columns from applications
-        }, function ($query) use ($sort) {
-            return $query->orderBy($sort, 'desc');
-        })
-        ->with('candidate') // Ensure candidate relationship is loaded for use in views
-        ->get();
+        $applications = $jobPosting->applications()
+            ->when($status, function ($query, $status) {
+                return $query->where('applications.status', $status);
+            })
+            ->when($sort === 'name', function ($query) {
+                return $query->join('candidates', 'applications.candidate_id', '=', 'candidates.id')
+                    ->orderBy('candidates.fullname_candidate', 'asc')
+                    ->select('applications.*'); // Select only the columns from applications
+            }, function ($query) use ($sort) {
+                return $query->orderBy($sort, 'desc');
+            })
+            ->with('candidate') // Ensure candidate relationship is loaded for use in views
+            ->get();
 
-    return view('job_postings.show', compact('jobPosting', 'applications'));
-}
+        return view('job_postings.show', compact('jobPosting', 'applications'));
+    }
 
     public function store(Request $request)
     {
@@ -281,5 +282,14 @@ class JobPostingController extends Controller
         ])->findOrFail($id);
 
         return view('pages.overview-cv', compact('candidate'));
+    }
+
+    public function showCart()
+    {
+        // Lấy các carts có status = 1
+        $carts = Cart::where('status', 1)->get();
+
+        // Truyền dữ liệu carts sang view
+        return view('job_postings.cart', compact('carts'));
     }
 }

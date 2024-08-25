@@ -369,6 +369,12 @@
                 @endif
                 <input type="file" class="form-control" id="bct_image" name="bct_image">
             </div>
+            <div class="form-group">
+                <label for="vat">VAT</label>
+                <input type="number" step="0.01" class="form-control" id="vat" name="vat"
+                    value="{{ $info->vat }}" required>
+            </div>
+
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>

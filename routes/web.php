@@ -28,6 +28,8 @@ use App\Http\Controllers\CandidateManageController;
 use App\Http\Controllers\Auth\EmployerRegisterController;
 use App\Http\Controllers\Auth\EmployerResetPasswordController;
 use App\Http\Controllers\AwardController;
+use App\Http\Controllers\CartListController;
+use App\Http\Controllers\CartManageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CVController;
@@ -47,7 +49,10 @@ use App\Http\Controllers\HotlineController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\JobReportController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\OrderManageController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\PlanCurrencyController;
+use App\Http\Controllers\PlanFeatureController;
 use App\Http\Controllers\PrizeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PublicLinkController;
@@ -118,6 +123,10 @@ Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('
 Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
+    Route::resource('carts', CartManageController::class);
+    Route::resource('ordermanages', OrderManageController::class); // Added for order management
+    Route::resource('plan-currencies', PlanCurrencyController::class);
+    Route::resource('plan-features', PlanFeatureController::class);
     Route::resource('consultations', ConsultationController::class)
         ->only(['index', 'edit', 'update', 'destroy']);
     Route::resource('cities', CityController::class);
@@ -238,10 +247,16 @@ Route::middleware(['candidate'])->group(function () {
 });
 
 Route::middleware(['employer'])->group(function () {
+    Route::post('add-to-cart/{cartId}', [CartListController::class, 'addToCart'])->name('cartlist.add');
+    Route::post('cartlist/storeOrder', [CartListController::class, 'storeOrder'])->name('cartlist.storeOrder');
+    Route::get('/orders', [CartListController::class, 'listOrder'])->name('cartlist.listOrder');
+    Route::get('/orders/{orderId}', [CartListController::class, 'showOrder'])->name('cartlist.showOrder');
+
+    Route::resource('cartlist', CartListController::class);
     Route::get('/employer/messages', [MessageController::class, 'receiveMessages'])->name('messages.receive');
     Route::get('/employer/messages/{candidate}', [MessageController::class, 'showMessages'])->name('messages.show');
     Route::post('/employer/messages/{candidate}/reply', [MessageController::class, 'sendReply'])->name('messages.reply');
-
+    Route::get('job-postings/cart', [JobPostingController::class, 'showCart'])->name('job-postings.cart');
     Route::resource('job-postings', JobPostingController::class);
     Route::get('/application-choose', [JobPostingController::class, 'application_choose'])->name('application-choose');
     Route::put('/applications/{application}/update-note', [JobPostingController::class, 'updateNote'])->name('applications.update.note');
