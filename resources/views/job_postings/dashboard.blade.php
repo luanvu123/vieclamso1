@@ -18,7 +18,6 @@
       </div>
       <!-- Content -->
       <div class="row">
-
           <!-- Item -->
           <div class="col-lg-3 col-md-6">
               <div class="dashboard-stat color-1">
@@ -28,7 +27,6 @@
                   <div class="dashboard-stat-icon"><i class="ln ln-icon-File-Link"></i></div>
               </div>
           </div>
-
           <!-- Total Job Views -->
           <div class="col-lg-3 col-md-6">
               <div class="dashboard-stat color-2">
@@ -38,8 +36,6 @@
                   <div class="dashboard-stat-icon"><i class="ln ln-icon-Bar-Chart"></i></div>
               </div>
           </div>
-
-
           <div class="col-lg-3 col-md-6">
               <div class="dashboard-stat color-3">
                   <div class="dashboard-stat-content">
@@ -57,6 +53,5 @@
                   <div class="dashboard-stat-icon"><i class="ln ln-icon-Add-UserStar"></i></div>
               </div>
           </div>
-
       </div>
   @endsection

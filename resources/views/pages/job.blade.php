@@ -687,7 +687,7 @@
                                                          <div class="avatar">
                                                              <a target="_blank" href="">
                                                                  <img
-                                                                     src="{{ $jobPosting->company->logo ? asset('storage/' . $jobPosting->company->logo) : asset('storage/avatar/avatar-default.jpg') }}">
+                                                                     src="{{ $relatedJob->company->logo ? asset('storage/' . $relatedJob->company->logo) : asset('storage/avatar/avatar-default.jpg') }}">
                                                              </a>
                                                              <div class="tag-job-flash">
                                                                  <img src="https://www.topcv.vn/v4/image/job-list/icon-flash.webp"
@@ -707,7 +707,7 @@
                                                                              </a>
                                                                          </h3>
                                                                          <a rel="nofollow" class="company"
-                                                                             href="{{ route('job.show', $relatedJob->slug) }}">{{ $relatedJob->company_name }}</a>
+                                                                             href="{{ route('company-home.show', $relatedJob->company->slug) }}">{{ $relatedJob->company->name }}</a>
                                                                      </div>
                                                                      <div class="box-right">
                                                                          <label class="title-salary">
