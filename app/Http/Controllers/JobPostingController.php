@@ -48,15 +48,39 @@ class JobPostingController extends Controller
         return view('job_postings.index', compact('jobPostings'));
     }
 
-    public function dashboard()
-    {
-        $employer = Auth::guard('employer')->user();
-        $activeJobPostingsCount = $employer->activeJobPostingsCount();
-        $totalJobViews = $employer->totalJobViews();
-        $totalApplications = $employer->totalApplications();
-        $totalMessages = $employer->totalMessages();
-        return view('job_postings.dashboard', compact('activeJobPostingsCount', 'totalJobViews', 'totalApplications', 'totalMessages'));
+  public function dashboard()
+{
+    $employer = Auth::guard('employer')->user();
+    $activeJobPostingsCount = $employer->activeJobPostingsCount();
+    $totalJobViews = $employer->totalJobViews();
+    $totalApplications = $employer->totalApplications();
+    $totalMessages = $employer->totalMessages();
+
+    // Get total applications per day for the last 30 days
+    $applicationsLast30Days = $employer->jobPostings()
+        ->with('applications')
+        ->get()
+        ->flatMap(function($jobPosting) {
+            return $jobPosting->applications;
+        })
+        ->groupBy(function($date) {
+            return Carbon::parse($date->created_at)->format('Y-m-d');
+        })
+        ->map(function ($applications) {
+            return count($applications);
+        });
+
+    // Ensure that each of the last 30 days has a value, even if it's 0
+    $dates = collect();
+    for ($i = 0; $i < 30; $i++) {
+        $date = Carbon::now()->subDays($i)->format('Y-m-d');
+        $dates[$date] = $applicationsLast30Days->get($date, 0);
     }
+
+    $dates = $dates->reverse(); // Reverse to have the oldest date first
+
+    return view('job_postings.dashboard', compact('activeJobPostingsCount', 'totalJobViews', 'totalApplications', 'totalMessages', 'dates'));
+}
 
 
 

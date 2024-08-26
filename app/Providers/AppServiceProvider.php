@@ -58,7 +58,7 @@ class AppServiceProvider extends ServiceProvider
         $now = Carbon::now();
         $twoHoursAgo = $now->subHours(2);
 
-           $consultationCountTwoHour = Consultation::where('created_at', '>=', $twoHoursAgo)->count();
+        $consultationCountTwoHour = Consultation::where('created_at', '>=', $twoHoursAgo)->count();
 
         $reportCountTwoHour = JobReport::where('created_at', '>=', $twoHoursAgo)->count();
         $candidateCountTwoHour = Candidate::where('created_at', '>=', $twoHoursAgo)->count();
@@ -79,7 +79,7 @@ class AppServiceProvider extends ServiceProvider
             'genrepost_layout' => $genrepost_layout,
             'typeFeedbacks' => $typeFeedbacks,
             'typeSupports' => $typeSupports,
-            'publiclink_layout'=> $publiclink_layout,
+            'publiclink_layout' => $publiclink_layout,
 
             'info' => $info,
             'candidateCountTwoHour' => $candidateCountTwoHour,
@@ -89,7 +89,7 @@ class AppServiceProvider extends ServiceProvider
             'feedbackCountTwoHour' => $feedbackCountTwoHour,
             'supportCountTwoHour' => $supportCountTwoHour,
             'reportCountTwoHour' => $reportCountTwoHour,
-            'consultationCountTwoHour'=>$consultationCountTwoHour
+            'consultationCountTwoHour' => $consultationCountTwoHour
         ]);
     }
 }
