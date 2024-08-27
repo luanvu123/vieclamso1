@@ -1,15 +1,6 @@
   @extends('dashboard-employer')
 
   @section('content')
-      <style>
-          .row.mb-4 {
-              margin-bottom: 40px;
-          }
-
-          .dashboard-stat {
-              margin-top: 20px;
-          }
-      </style>
 
       <link rel="stylesheet" href="/vieclamso1/css-frontend/tai-khoan-nha-tuyen-dung.css" type="text/css">
 
@@ -29,68 +20,32 @@
               </div> <!---->
           </div>
           <h4 data-v-b9ee596a="" class="mb-4">Bảng tin</h4>
-          <div data-v-0fd2e78b="" data-v-b9ee596a="" class="VueCarousel">
+          <div class="VueCarousel">
               <div class="VueCarousel-wrapper">
-                  <div class="VueCarousel-inner"
-                      style="transform: translate(-5024px, 0px); transition: transform 0.5s ease 0s; flex-basis: 628px; visibility: visible; height: auto;">
-                      <div data-v-0fd2e78b="" tabindex="-1" role="tabpanel" class="VueCarousel-slide banner col-6 px-0"
-                          id="0" aria-hidden="true"><a data-v-0fd2e78b="" href="coupons" target="_blank"><img
-                                  data-v-0fd2e78b="" alt="Banner-thang"
-                                  src="https://tuyendung.topcv.vn/app/_nuxt/img/banner_06_2024.f5d2628.png"></a>
+                  <div class="VueCarousel-inner">
+                      <!-- Slide 1 -->
+                      <div class="VueCarousel-slide banner col-6">
+                          <a href="https://happytime.vn/?utm_source=srp&amp;utm_medium=banner" target="_blank">
+                              <img alt="HappyTime" src="https://tuyendung.topcv.vn/app/_nuxt/img/Happytime.6e4479e.webp">
+                          </a>
                       </div>
-                      <div data-v-0fd2e78b="" tabindex="-1" role="tabpanel" class="VueCarousel-slide banner col-6 pr-0"
-                          id="1" aria-hidden="true"><a data-v-0fd2e78b=""
-                              href="https://docs.google.com/forms/d/e/1FAIpQLSdme3X6vr5iy969C_LWPHQ_Oxkdl-J1hMrikJ98U2pLKp7O-A/viewform"
-                              target="_blank"><img data-v-0fd2e78b="" alt="Banner-cds"
-                                  src="https://tuyendung.topcv.vn/app/_nuxt/img/banner_shiring.8856fba.png"></a>
+                      <!-- Slide 2 -->
+                      <div class="VueCarousel-slide banner col-6">
+                          <a href="https://www.testcenter.vn/?utm_source=srp&amp;utm_medium=banner" target="_blank">
+                              <img alt="TestCenter" src="https://tuyendung.topcv.vn/app/_nuxt/img/Testcenter.c08f7e8.webp">
+                          </a>
                       </div>
-                      <div data-v-0fd2e78b="" tabindex="-1" role="tabpanel" class="VueCarousel-slide banner col-6 px-0"
-                          id="2" aria-hidden="true"><a data-v-0fd2e78b=""
-                              href="https://tuyendung.topcv.vn/app/system-notification/49" target="_blank"><img
-                                  data-v-0fd2e78b="" alt="Banner-verify"
-                                  src="https://tuyendung.topcv.vn/app/_nuxt/img/banner-verify.2e1a5c9.png"></a>
+                      <!-- Slide 3 -->
+                      <div class="VueCarousel-slide banner col-6" style="width: 600px;">
+                          <a href="https://www.testcenter.vn/?utm_source=srp&amp;utm_medium=banner" target="_blank">
+                              <img alt="TestCenter" src="https://tuyendung.topcv.vn/app/_nuxt/img/Testcenter.c08f7e8.webp">
+                          </a>
                       </div>
-                      <div data-v-0fd2e78b="" tabindex="-1" role="tabpanel" class="VueCarousel-slide banner col-6 pr-0"
-                          id="3" aria-hidden="true"><a data-v-0fd2e78b=""
-                              href="https://tuyendung.topcv.vn/help/tong-quan/ra-mat-goi-ban-topcv-standard-plus-combo-dang-tin-tuyen-dung-tiet-kiem-tiep-loi-the-cho-nha-tuyen-dung/"
-                              target="_blank"><img data-v-0fd2e78b="" alt="banner-Standard-Plus"
-                                  src="https://tuyendung.topcv.vn/app/_nuxt/img/banner_standard_plus.7496323.webp"></a>
-                      </div>
-                      <div data-v-0fd2e78b="" tabindex="-1" role="tabpanel" class="VueCarousel-slide banner col-6 px-0"
-                          id="4" aria-hidden="true"><a data-v-0fd2e78b=""
-                              href="https://tuyendung.topcv.vn/chuong-trinh-khach-hang-than-thiet-topcv"
-                              target="_blank"><img data-v-0fd2e78b="" alt="Banner-top-reward"
-                                  src="https://tuyendung.topcv.vn/app/_nuxt/img/banner_topcv_reward.f0bc6e4.webp"></a>
-                      </div>
-                      <div data-v-0fd2e78b="" tabindex="-1" role="tabpanel" class="VueCarousel-slide banner col-6 pr-0"
-                          id="5" aria-hidden="true"><a data-v-0fd2e78b=""
-                              href="https://insights.topcv.vn/recruitment-report-2023-2024?source=srpbannerslide"
-                              target="_blank"><img data-v-0fd2e78b="" alt="Banner-MKT-Reward"
-                                  src="https://tuyendung.topcv.vn/app/_nuxt/img/banner_mkt.b470c5f.webp"></a>
-                      </div>
-                      <div data-v-0fd2e78b="" tabindex="-1" role="tabpanel" class="VueCarousel-slide banner col-6 px-0"
-                          id="6" aria-hidden="true"><a data-v-0fd2e78b=""
-                              href="https://insights.topcv.vn/topcv-insights-22/source=srp" target="_blank"><img
-                                  data-v-0fd2e78b="" alt="Banner-top-insight"
-                                  src="https://tuyendung.topcv.vn/app/_nuxt/img/banner-top-insight.bb192b0.webp"></a>
-                      </div>
-                      <div data-v-0fd2e78b="" tabindex="-1" role="tabpanel" class="VueCarousel-slide banner col-6 pr-0"
-                          id="7" aria-hidden="true"><a data-v-0fd2e78b=""
-                              href="https://shiring.ai/?utm_source=srp&amp;utm_medium=banner " target="_blank"><img
-                                  data-v-0fd2e78b="" alt="SHiring"
-                                  src="https://tuyendung.topcv.vn/app/_nuxt/img/Shiring.f941d02.webp"></a>
-                      </div>
-                      <div data-v-0fd2e78b="" tabindex="-1" role="tabpanel"
-                          class="VueCarousel-slide banner col-6 VueCarousel-slide-active px-0" id="8"><a
-                              data-v-0fd2e78b="" href="https://happytime.vn/?utm_source=srp&amp;utm_medium=banner"
-                              target="_blank"><img data-v-0fd2e78b="" alt="HappyTime"
-                                  src="https://tuyendung.topcv.vn/app/_nuxt/img/Happytime.6e4479e.webp"></a>
-                      </div>
-                      <div data-v-0fd2e78b="" tabindex="-1" role="tabpanel"
-                          class="VueCarousel-slide banner col-6 VueCarousel-slide-active pr-0" id="9"><a
-                              data-v-0fd2e78b="" href="https://www.testcenter.vn/?utm_source=srp&amp;utm_medium=banner"
-                              target="_blank"><img data-v-0fd2e78b="" alt="TestCenter"
-                                  src="https://tuyendung.topcv.vn/app/_nuxt/img/Testcenter.c08f7e8.webp"></a>
+                      <!-- Slide 4 -->
+                      <div class="VueCarousel-slide banner col-6">
+                          <a href="https://www.testcenter.vn/?utm_source=srp&amp;utm_medium=banner" target="_blank">
+                              <img alt="TestCenter" src="https://tuyendung.topcv.vn/app/_nuxt/img/Testcenter.c08f7e8.webp">
+                          </a>
                       </div>
                   </div>
               </div>
@@ -125,8 +80,7 @@
                                           </div>
                                       </a></div>
                                   <div data-v-66fd7bea="" class="col-6 pr-0"><a data-v-66fd7bea=""
-                                          href="https://tuyendung.topcv.vn/app/cvs-management"
-                                          class="text-decoration-none">
+                                          href="https://tuyendung.topcv.vn/app/cvs-management" class="text-decoration-none">
                                           <div data-v-66fd7bea="" class="bg-success transparent-2 d-flex statistic-box">
                                               <div data-v-66fd7bea="" class="text-green">
                                                   <h5 data-v-66fd7bea="" class="font-weight-bold">{{ $totalJobViews }}

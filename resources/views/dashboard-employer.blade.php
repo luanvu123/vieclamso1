@@ -18,7 +18,7 @@
 
 
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-    
+
 
 </head>
 
@@ -206,6 +206,25 @@
             });
         })
     </script>
+    <!-- Include jQuery and Slick JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+
+    <!-- Initialize the slider -->
+    <script>
+        $(document).ready(function() {
+            $('.VueCarousel-inner').slick({
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                infinite: true,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                arrows: true,
+                dots: true
+            });
+        });
+    </script>
+
 </body>
 
 </html>
