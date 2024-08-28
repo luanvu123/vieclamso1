@@ -147,6 +147,10 @@
                                         @endif --}}
                                     </a>
                                 </li>
+                                 <li class="{{ Route::is('products.index') ? 'active' : '' }}">
+                                    <a href="{{ route('products.index') }}">Manage Product
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li

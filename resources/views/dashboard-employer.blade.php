@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/colors.css') }}">
 
-
+    <link rel="stylesheet" href="{{ asset('vieclamso1/css-frontend/tai-khoan-nha-tuyen-dung.css') }}" type="text/css">
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 
 
@@ -79,6 +79,9 @@
                         </li>
                         <li class="{{ Route::is('messages.receive') || Route::is('messages.show') ? 'active' : '' }}">
                             <a href="{{ route('messages.receive') }}">Message </a>
+                        </li>
+                        <li class="{{ Route::is('buy-gift') ? 'active' : '' }}">
+                            <a href="{{ route('buy-gift') }}">Đổi quà </a>
                         </li>
                         <li class="{{ Route::is('job-postings.cart') ? 'active' : '' }}">
                             <a href="{{ route('job-postings.cart') }}">Buy Services </a>

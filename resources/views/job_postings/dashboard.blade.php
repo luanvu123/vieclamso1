@@ -1,7 +1,7 @@
   @extends('dashboard-employer')
 
   @section('content')
-      <link rel="stylesheet" href="/vieclamso1/css-frontend/tai-khoan-nha-tuyen-dung.css" type="text/css">
+     
 
       <div data-v-b9ee596a="" class="container-fluid page-content">
           <div data-v-5ce51de7="" data-v-b9ee596a="" class="alert-slide"><!---->

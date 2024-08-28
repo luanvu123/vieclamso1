@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\Company;
 use App\Models\JobPosting;
+use App\Models\Product;
 use App\Models\Slide;
 use App\Models\TypeEmployer;
 use Carbon\Carbon;
@@ -315,5 +316,22 @@ class JobPostingController extends Controller
 
         // Truyền dữ liệu carts sang view
         return view('job_postings.cart', compact('carts'));
+    }
+
+    public function buyGift(Request $request)
+    {
+
+         // Lấy type_product từ request, mặc định là 'all'
+        $typeProduct = $request->get('type_product', 'all');
+
+        // Lọc sản phẩm theo type_product
+        if ($typeProduct === 'all') {
+            $products = Product::active()->get();
+        } else {
+            $products = Product::active()->where('type_product', $typeProduct)->get();
+        }
+
+        // Trả về view với danh sách sản phẩm
+        return view('job_postings.gift', compact('products'));
     }
 }

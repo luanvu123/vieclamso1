@@ -54,6 +54,7 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PlanCurrencyController;
 use App\Http\Controllers\PlanFeatureController;
 use App\Http\Controllers\PrizeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PublicLinkController;
 use App\Http\Controllers\RecruitmentServiceController;
@@ -125,6 +126,7 @@ Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('
 Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
+     Route::resource('products', ProductController::class);
     Route::resource('type-employer', TypeEmployerController::class);
     Route::resource('slides', SlideController::class);
     Route::resource('carts', CartManageController::class);
@@ -268,7 +270,7 @@ Route::middleware(['employer'])->group(function () {
 
 
 
-
+    Route::get('doi-qua', [JobPostingController::class, 'buyGift'])->name('buy-gift');
     Route::get('trang-chu-tuyen-dung', [JobPostingController::class, 'dashboard'])->name('job-postings.dashboard');
     Route::post('employer/logout', [EmployerLoginController::class, 'logout'])->name('logout-employer');
     Route::get('employer/profile', [EmployerLoginController::class, 'profile'])->name('employer.profile');
