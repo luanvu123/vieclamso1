@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Cart;
+use App\Models\TypeEmployer;
 
 class OrderManageController extends Controller
 {
@@ -34,20 +35,51 @@ class OrderManageController extends Controller
         return view('admin.orders.edit', compact('order'));
     }
 
+
     // Update the status of the specified order
     public function update(Request $request, $id)
     {
         $order = Order::findOrFail($id);
 
-        $request->validate([
-            'status' => 'required|in:pending,completed,canceled',
-        ]);
+        $transitions = [
+            'pending' => ['completed', 'canceled'],
+            'completed' => ['canceled'],
+            'canceled' => [],
+        ];
 
-        $order->status = $request->input('status');
+        $currentStatus = $order->status;
+        $newStatus = $request->input('status');
+
+        if (!in_array($newStatus, $transitions[$currentStatus])) {
+            return redirect()->back()->withErrors(['status' => 'Invalid status transition.']);
+        }
+
+        if ($currentStatus !== 'completed' && $newStatus === 'completed') {
+            $employer = $order->employer;
+
+            // Update employer's top_point based on the carts in the order
+            foreach ($order->orderDetails as $orderDetail) {
+                $cart = $orderDetail->cart;
+                if ($cart->top_point > 0) {
+                    $employer->top_point += $cart->top_point;
+                }
+            }
+
+            // Save the updated top_point value for the employer
+            $employer->save();
+
+            // Update type_employer_id based on the updated top_point
+            $employer->updateTypeEmployer();
+        }
+
+        $order->status = $newStatus;
         $order->save();
 
         return redirect()->route('ordermanages.index')->with('success', 'Order status updated successfully.');
     }
+
+
+
 
     // Remove the specified order from storage
     public function destroy($id)

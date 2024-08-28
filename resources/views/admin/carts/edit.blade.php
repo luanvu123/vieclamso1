@@ -27,6 +27,10 @@
             <label for="description">Description:</label>
             <textarea id="description" name="description">{{ $cart->description }}</textarea>
         </div>
+         <div>
+        <label for="top_point">Top Point:</label>
+        <input type="number" id="top_point" name="top_point" value="{{ $cart->top_point }}" required>
+    </div>
         <div>
             <label for="status">Status:</label>
             <select id="status" name="status" required>

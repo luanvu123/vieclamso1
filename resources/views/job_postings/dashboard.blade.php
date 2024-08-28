@@ -1,7 +1,6 @@
   @extends('dashboard-employer')
 
   @section('content')
-
       <link rel="stylesheet" href="/vieclamso1/css-frontend/tai-khoan-nha-tuyen-dung.css" type="text/css">
 
       <div data-v-b9ee596a="" class="container-fluid page-content">
@@ -14,7 +13,7 @@
                       <div data-v-65de3a3a="" class="notify__content">Từ ngày <span
                               class="font-weight-600">03/06/2024</span>, TopCV chính thức tiến hành cập nhật
                           chính sách xác thực tài khoản. <a target="_blank" style="color: #00B14F"
-                              href="https://tuyendung.topcv.vn/app/system-notification/49">Tìm hiểu thêm</a>
+                              href="#">Tìm hiểu thêm</a>
                       </div>
                   </div>
               </div> <!---->
@@ -22,32 +21,15 @@
           <h4 data-v-b9ee596a="" class="mb-4">Bảng tin</h4>
           <div class="VueCarousel">
               <div class="VueCarousel-wrapper">
-                  <div class="VueCarousel-inner">
-                      <!-- Slide 1 -->
-                      <div class="VueCarousel-slide banner col-6">
-                          <a href="https://happytime.vn/?utm_source=srp&amp;utm_medium=banner" target="_blank">
-                              <img alt="HappyTime" src="https://tuyendung.topcv.vn/app/_nuxt/img/Happytime.6e4479e.webp">
-                          </a>
-                      </div>
-                      <!-- Slide 2 -->
-                      <div class="VueCarousel-slide banner col-6">
-                          <a href="https://www.testcenter.vn/?utm_source=srp&amp;utm_medium=banner" target="_blank">
-                              <img alt="TestCenter" src="https://tuyendung.topcv.vn/app/_nuxt/img/Testcenter.c08f7e8.webp">
-                          </a>
-                      </div>
-                      <!-- Slide 3 -->
-                      <div class="VueCarousel-slide banner col-6" style="width: 600px;">
-                          <a href="https://www.testcenter.vn/?utm_source=srp&amp;utm_medium=banner" target="_blank">
-                              <img alt="TestCenter" src="https://tuyendung.topcv.vn/app/_nuxt/img/Testcenter.c08f7e8.webp">
-                          </a>
-                      </div>
-                      <!-- Slide 4 -->
-                      <div class="VueCarousel-slide banner col-6">
-                          <a href="https://www.testcenter.vn/?utm_source=srp&amp;utm_medium=banner" target="_blank">
-                              <img alt="TestCenter" src="https://tuyendung.topcv.vn/app/_nuxt/img/Testcenter.c08f7e8.webp">
-                          </a>
-                      </div>
-                  </div>
+                   <div class="VueCarousel-inner">
+                @foreach($slides as $slide)
+                    <div class="VueCarousel-slide banner col-6">
+                        <a href="{{ $slide->link }}" target="_blank">
+                            <img alt="Slide Image" src="{{ asset('storage/' . $slide->image) }}">
+                        </a>
+                    </div>
+                @endforeach
+            </div>
               </div>
           </div>
           <div data-v-b9ee596a="" class="row mt-3">
@@ -66,7 +48,7 @@
                           <div data-v-66fd7bea="" class="px-3">
                               <div data-v-66fd7bea="" class="row pb-3 mr-0">
                                   <div data-v-66fd7bea="" class="col-6 pr-0"><a data-v-66fd7bea=""
-                                          href="https://tuyendung.topcv.vn/app/recruitment-campaigns?filter_by=only_open"
+                                          href="{{route('job-postings.index')}}"
                                           class="text-decoration-none">
                                           <div data-v-66fd7bea="" class="bg-info transparent-2 d-flex statistic-box">
                                               <div data-v-66fd7bea="" class="text-info">
@@ -80,7 +62,7 @@
                                           </div>
                                       </a></div>
                                   <div data-v-66fd7bea="" class="col-6 pr-0"><a data-v-66fd7bea=""
-                                          href="https://tuyendung.topcv.vn/app/cvs-management" class="text-decoration-none">
+                                          href="{{route('job-postings.index')}}" class="text-decoration-none">
                                           <div data-v-66fd7bea="" class="bg-success transparent-2 d-flex statistic-box">
                                               <div data-v-66fd7bea="" class="text-green">
                                                   <h5 data-v-66fd7bea="" class="font-weight-bold">{{ $totalJobViews }}
@@ -89,14 +71,14 @@
                                               </div>
                                               <div data-v-66fd7bea="" class="ml-auto"><span data-v-66fd7bea=""
                                                       class="rounded-pill transparent-1 badge badge-success ml-auto icon"><i
-                                                          data-v-66fd7bea="" class="fal fa-file-powerpoint"></i></span>
+                                                          data-v-66fd7bea="" class="fa fa"></i></span>
                                               </div>
                                           </div>
                                       </a></div>
                               </div>
                               <div data-v-66fd7bea="" class="row pb-3 mr-0">
                                   <div data-v-66fd7bea="" class="col-6 pr-0"><a data-v-66fd7bea=""
-                                          href="https://tuyendung.topcv.vn/app/recruitment-campaigns?filter_by=has_publishing_job"
+                                          href="{{route('job-postings.index')}}"
                                           class="text-decoration-none">
                                           <div data-v-66fd7bea="" class="bg-warning transparent-2 d-flex statistic-box">
                                               <div data-v-66fd7bea="" class="text-yellow">
@@ -110,7 +92,7 @@
                                           </div>
                                       </a></div>
                                   <div data-v-66fd7bea="" class="col-6 pr-0"><a data-v-66fd7bea=""
-                                          href="https://tuyendung.topcv.vn/app/recruitment-campaigns?filter_by=has_new_cv"
+                                          href="{{route('messages.receive')}}"
                                           class="text-decoration-none">
                                           <div data-v-66fd7bea="" class="bg-danger transparent-2 d-flex statistic-box">
                                               <div data-v-66fd7bea="" class="text-danger">
@@ -136,7 +118,7 @@
                           <hr data-v-66fd7bea="" class="m-0">
                           <div data-v-66fd7bea="">
                               <div data-v-66fd7bea="" class="px-3 py-2"><a data-v-66fd7bea=""
-                                      href="https://tuyendung.topcv.vn/app/recruitment-campaigns"
+                                      href="{{route('job-postings.index')}}"
                                       class="btn btn-text text-primary text-left w-100 pl-0"><i data-v-66fd7bea=""
                                           class="fal fa-briefcase mr-1"></i>
                                       QUẢN LÝ CHIẾN DỊCH TUYỂN DỤNG
@@ -152,28 +134,31 @@
                               style="background: linear-gradient(105deg, rgb(242, 251, 255) -1.43%, rgb(231, 239, 245) 100%);">
                               <div data-v-fb75f9fa="" class="info">
                                   <div data-v-fb75f9fa="" class="employer-info" style="color: rgb(0, 0, 0);">
-                                      <div data-v-fb75f9fa="" class="name">7467_ Phạm Vũ Luân</div>
+                                      <div data-v-fb75f9fa="" class="name"> {{ Auth::guard('employer')->user()->name }}
+                                      </div>
                                       <div data-v-fb75f9fa="" class="id"
                                           style="background-color: rgb(232, 237, 242); color: rgb(0, 0, 0);">
-                                          Mã NTD: 658928
+                                          Mã NTD: {{ Auth::guard('employer')->user()->id }}
                                       </div>
                                       <div data-v-fb75f9fa="" class="employer-contact">
                                           <div data-v-fb75f9fa="" class="email"><i data-v-fb75f9fa=""
-                                                  class="fal fa-envelope"></i><span
-                                                  data-v-fb75f9fa="">phamvuluan131@gmail.com</span></div>
+                                                  class="fal fa-envelope"></i><span data-v-fb75f9fa="">
+                                                  {{ Auth::guard('employer')->user()->email }}</span></div>
                                           <div data-v-fb75f9fa="" class="phone"><i data-v-fb75f9fa=""
-                                                  class="fal fa-phone-alt fa-rotate-90"></i><span
-                                                  data-v-fb75f9fa="">0353846493</span></div>
+                                                  class="fal fa-phone-alt fa-rotate-90"></i><span data-v-fb75f9fa="">
+                                                  {{ Auth::guard('employer')->user()->phone }}</span></div>
                                       </div>
                                   </div>
                               </div>
                               <div data-v-fb75f9fa="" class="medal">
                                   <div data-v-fb75f9fa=""
                                       class="rank-name text-white d-flex align-items-center text-decoration-none justify-content-start ">
-                                      <a data-v-fb75f9fa=""
-                                          href="https://tuyendung.topcv.vn/chuong-trinh-khach-hang-than-thiet-topcv"
-                                          target="_blank"><img data-v-fb75f9fa="" alt="Member Medal"
-                                              src="https://tuyendung.topcv.vn/app/_nuxt/img/member.0cd81af.png"></a>
+                                      <a data-v-fb75f9fa="" href="" target="_blank">
+                                          <img data-v-fb75f9fa="" alt="Member Medal"
+                                              src="{{ $employer->typeEmployer && $employer->typeEmployer->image ? asset('storage/' . $employer->typeEmployer->image) : asset('storage/avatar/member.png') }}"
+                                              style="width: 200px; height: 44px;">
+                                      </a>
+
                                   </div>
                               </div>
                           </div>
@@ -189,47 +174,73 @@
                                       <div data-v-823ce444="" class="custom-progress-milestone">
                                           <div data-v-823ce444="" class="pointer"><img data-v-823ce444=""
                                                   src="https://tuyendung.topcv.vn/app/_nuxt/img/member.4470c3d.svg"
-                                                  alt="Pointer" height="32px" width="32px" style="left: -4px;">
+                                                  alt="Pointer" height="32px" width="32px"
+                                                  @switch($employer->type_employer_id)
+                     @case(1)
+                         style="left: 0%;"
+                         @break
+                     @case(2)
+                         style="left: 20%;"
+                         @break
+                     @case(3)
+                         style="left: 40%;"
+                         @break
+                     @case(4)
+                         style="left: 60%;"
+                         @break
+                     @case(5)
+                         style="left: 80%;"
+                         @break
+                     @default
+                         style="left: 0%;"
+                 @endswitch>
                                           </div>
                                       </div> <!---->
                                       <div data-v-823ce444="" class="custom-progress-single"
                                           style="width: 0px; background: rgb(0, 177, 79);"></div>
                                       <div data-v-823ce444="" class="custom-progress-text">
                                           <div data-v-823ce444="" class="d-flex">
-                                              <div data-v-823ce444="" class="text-item" style="left: 20%;">
-                                                  <div data-v-823ce444="" class="ranking">Member</div>
-                                                  <div data-v-823ce444="" class="milestone">0</div>
-                                              </div>
-                                              <div data-v-823ce444="" class="text-item" style="left: 40%;">
-                                                  <div data-v-823ce444="" class="ranking">Silver</div>
-                                                  <div data-v-823ce444="" class="milestone">300</div>
-                                              </div>
-                                              <div data-v-823ce444="" class="text-item" style="left: 60%;">
-                                                  <div data-v-823ce444="" class="ranking">Gold</div>
-                                                  <div data-v-823ce444="" class="milestone">800</div>
-                                              </div>
-                                              <div data-v-823ce444="" class="text-item" style="left: 80%;">
-                                                  <div data-v-823ce444="" class="ranking">Platinum</div>
-                                                  <div data-v-823ce444="" class="milestone">1500</div>
-                                              </div>
-                                              <div data-v-823ce444="" class="text-item" style="left: 100%;">
-                                                  <div data-v-823ce444="" class="ranking">Diamond</div>
-                                                  <div data-v-823ce444="" class="milestone">2500</div>
-                                              </div>
+                                              @foreach ($activeTypeEmployer as $type)
+                                                  <div data-v-823ce444="" class="text-item"
+                                                      style="left: {{ $loop->iteration * 20 }}%;">
+                                                      <div data-v-823ce444="" class="ranking">{{ $type->name }}</div>
+                                                      <div data-v-823ce444="" class="milestone">{{ $type->top_point }}
+                                                      </div>
+                                                  </div>
+                                              @endforeach
                                           </div>
                                       </div>
                                   </div>
                                   <div data-v-823ce444="" class="progress-more">
                                       <div data-v-823ce444="" class="popover-more-info"
-                                          style="--after-left: 6px; --more-info-border-color: 1px solid #2CE175;">
+                                          @switch($employer->type_employer_id)
+             @case(1)
+                 style="--after-left: 2%; --more-info-border-color: 1px solid #2CE175;"
+                 @break
+             @case(2)
+                 style="--after-left: 22%; --more-info-border-color: 1px solid #2CE175;"
+                 @break
+             @case(3)
+                 style="--after-left: 42%; --more-info-border-color: 1px solid #2CE175;"
+                 @break
+             @case(4)
+                 style="--after-left: 62%; --more-info-border-color: 1px solid #2CE175;"
+                 @break
+             @case(5)
+                 style="--after-left: 82%; --more-info-border-color: 1px solid #2CE175;"
+                 @break
+             @default
+                 style="--after-left: 0%; --more-info-border-color: 1px solid #2CE175;"
+         @endswitch>
                                           <div data-v-823ce444="" class="fs-14 loyal-employer-benefit">
                                               <div data-v-823ce444="" class="top-point">
                                                   <div data-v-823ce444="" class="top-point-label">Điểm xét
                                                       hạng</div>
                                                   <div data-v-823ce444=""
                                                       class="font-weight-600 align-items-center d-flex"><span
-                                                          data-v-823ce444="" class="mr-2 top-point-value">0</span> <img
-                                                          data-v-823ce444="" alt="TP Point"
+                                                          data-v-823ce444=""
+                                                          class="mr-2 top-point-value">{{ Auth::guard('employer')->user()->top_point }}</span>
+                                                      <img data-v-823ce444="" alt="TP Point"
                                                           src="https://tuyendung.topcv.vn/app/_nuxt/img/tp-point.fdfeec4.png">
                                                   </div>
                                               </div>
@@ -246,7 +257,7 @@
                                                           khách hàng và sử dụng các quyền lợi tương ứng.</div>
                                                       <div data-v-823ce444="" class="text-success cursor-pointer"><a
                                                               data-v-823ce444=""
-                                                              href="https://tuyendung.topcv.vn/help/huong-dan-su-dung/quy-dinh-chung-cua-chuong-trinh-topcv-rewards/"
+                                                              href="#"
                                                               target="_blank">Tìm hiểu thêm</a></div>
                                                   </div>
                                                   <div data-v-823ce444="" class="verify-now">
@@ -266,31 +277,15 @@
                                           <div data-v-1358ea01="" class="detail-point">
                                               <div data-v-1358ea01="" class="ranking-point"><span data-v-1358ea01=""
                                                       class="ranking-label">Xét hạng:
-                                                  </span> <span data-v-1358ea01="" class="ranking-value">0
+                                                  </span> <span data-v-1358ea01=""
+                                                      class="ranking-value">{{ Auth::guard('employer')->user()->top_point }}
                                                       TP</span></div>
                                               <div data-v-1358ea01="" class="exchange-point"><span data-v-1358ea01=""
                                                       class="ranking-label">Đổi quà:
-                                                  </span> <span data-v-1358ea01="" class="ranking-value">0
+                                                  </span> <span data-v-1358ea01=""
+                                                      class="ranking-value">{{ Auth::guard('employer')->user()->top_point }}
                                                       TP</span></div>
                                           </div> <!---->
-                                      </div>
-                                      <div data-v-1358ea01="" class="col-6 box-point">
-                                          <div data-v-1358ea01="" class="label-point">Số lượng Credit (CP)
-                                          </div>
-                                          <div data-v-1358ea01="" class="detail-point">
-                                              <div data-v-1358ea01="" class="main-credit">
-                                                  <div data-v-1358ea01="" class="ranking-point"><span data-v-1358ea01=""
-                                                          class="ranking-label">Chính:
-                                                      </span> <span data-v-1358ea01="" class="ranking-value">0
-                                                          CP</span></div> <!---->
-                                              </div>
-                                              <div data-v-1358ea01="" class="bonus-credit">
-                                                  <div data-v-1358ea01="" class="exchange-point"><span data-v-1358ea01=""
-                                                          class="ranking-label">Khuyến mãi:
-                                                      </span> <span data-v-1358ea01="" class="ranking-value">0
-                                                          CP</span></div> <!---->
-                                              </div>
-                                          </div>
                                       </div>
                                   </div>
                               </div>
@@ -321,7 +316,7 @@
                               </div>
                               <hr data-v-107eec64="" class="m-0">
                               <div data-v-107eec64="" class="px-3 pb-3 pt-2"><a data-v-107eec64=""
-                                      href="https://tuyendung.topcv.vn/app/suggestions"
+                                      href="#"
                                       class="btn btn-text text-primary text-left w-100 pl-0 pb-0 text-uppercase"><i
                                           data-v-107eec64="" class="fal fa-robot mr-1"></i> Xem tất cả đề xuất
                                   </a></div>

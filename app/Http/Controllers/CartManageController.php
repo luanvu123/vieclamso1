@@ -30,7 +30,9 @@ class CartManageController extends Controller
         'value' => 'required|numeric',
         'description' => 'nullable|string',
         'status' => 'required|boolean',
+        'top_point' => 'required|integer',
         'plan_features' => 'array'
+
     ]);
 
     $cart = new Cart([
@@ -38,7 +40,8 @@ class CartManageController extends Controller
         'plan_currency_id' => $request->plan_currency_id,
         'value' => $request->value,
         'description' => $request->description,
-        'status' => $request->status
+        'status' => $request->status,
+        'top_point' => $request->top_point,
     ]);
     $cart->save();
 
@@ -67,6 +70,7 @@ class CartManageController extends Controller
         'value' => 'required|numeric',
         'description' => 'nullable|string',
         'status' => 'required|boolean',
+        'top_point' => 'required|integer',
         'plan_features' => 'array'
     ]);
 
@@ -74,6 +78,7 @@ class CartManageController extends Controller
         'plan_currency_id' => $request->plan_currency_id,
         'value' => $request->value,
         'description' => $request->description,
+         'top_point' => $request->top_point,
         'status' => $request->status
     ]);
 

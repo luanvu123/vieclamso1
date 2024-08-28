@@ -41,10 +41,14 @@
                     </div>
                     <div class="plan-features">
                         <ul>
+                            @if ($cart->top_point != 0)
+                                <li>Quà tặng: {{ $cart->top_point }} Credits</li>
+                            @endif
                             @foreach ($cart->planFeatures as $feature)
                                 <li>{{ $feature->feature }}</li>
                             @endforeach
                         </ul>
+
                         <form action="{{ route('cartlist.add', $cart->id) }}" method="POST">
                             @csrf
                             <input type="hidden" name="price" value="{{ $cart->value }}">

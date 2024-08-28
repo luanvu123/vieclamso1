@@ -59,8 +59,10 @@ use App\Http\Controllers\PublicLinkController;
 use App\Http\Controllers\RecruitmentServiceController;
 use App\Http\Controllers\SavedJobController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\SlideController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TypeConsultationController;
+use App\Http\Controllers\TypeEmployerController;
 use App\Http\Controllers\TypeFeedbackController;
 use App\Http\Controllers\TypeHotlineController;
 use App\Http\Controllers\TypePartnerController;
@@ -123,6 +125,8 @@ Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('
 Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
+    Route::resource('type-employer', TypeEmployerController::class);
+    Route::resource('slides', SlideController::class);
     Route::resource('carts', CartManageController::class);
     Route::resource('ordermanages', OrderManageController::class); // Added for order management
     Route::resource('plan-currencies', PlanCurrencyController::class);

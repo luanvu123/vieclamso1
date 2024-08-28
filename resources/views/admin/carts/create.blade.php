@@ -3,7 +3,7 @@
 @section('title', 'Create Cart')
 
 @section('content')
-    <h1>Create Cart</h1>
+    <h1>Create Product Cart</h1>
 
     <form action="{{ route('carts.store') }}" method="POST">
         @csrf
@@ -23,6 +23,10 @@
             <label for="description">Description:</label>
             <textarea id="description" name="description"></textarea>
         </div>
+         <div>
+        <label for="top_point">Top Point:</label>
+        <input type="number" id="top_point" name="top_point">
+    </div>
         <div>
             <label for="status">Status:</label>
             <select id="status" name="status" required>
@@ -30,21 +34,18 @@
                 <option value="0">Inactive</option>
             </select>
         </div>
-       <div>
-  <div>
-    <label for="plan_features">Plan Features:</label>
-    <select id="plan_features" name="plan_features[]" multiple>
-        @foreach ($planFeatures as $planFeature)
-            <option value="{{ $planFeature->id }}"
-                {{ in_array($planFeature->id, old('plan_features', [])) ? 'selected' : '' }}>
-                {{ $planFeature->feature }}
-            </option>
-        @endforeach
-    </select>
-</div>
-
-
-
-        <button type="submit">Create</button>
+        <div>
+            <div>
+                <label for="plan_features">Plan Features:</label>
+                <select id="plan_features" name="plan_features[]" multiple>
+                    @foreach ($planFeatures as $planFeature)
+                        <option value="{{ $planFeature->id }}"
+                            {{ in_array($planFeature->id, old('plan_features', [])) ? 'selected' : '' }}>
+                            {{ $planFeature->feature }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <button type="submit">Create</button>
     </form>
 @endsection

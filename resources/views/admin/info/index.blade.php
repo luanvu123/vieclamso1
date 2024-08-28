@@ -57,6 +57,10 @@
             <a href="{{ route('hotlines.index') }}">Edit hotlines
             </a>
         </li>
+          <li class="{{ Route::is('type-employer.index') ? 'active-submenu' : '' }}">
+            <a href="{{ route('type-employer.index') }}">Edit type_employers
+            </a>
+        </li>
         <li class="{{ Route::is('type_hotlines.index') ? 'active-submenu' : '' }}">
             <a href="{{ route('type_hotlines.index') }}">Edit type_hotlines
             </a>
@@ -77,6 +81,9 @@
         </li>
         <li class="{{ Route::is('medias.index') ? 'active' : '' }}">
             <a href="{{ route('medias.index') }}">Manage Medias</a>
+        </li>
+         <li class="{{ Route::is('slides.index') ? 'active' : '' }}">
+            <a href="{{ route('slides.index') }}">Manage Sliders</a>
         </li>
         <form action="{{ route('admin.info.update', $info->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
