@@ -84,15 +84,14 @@
                                                     src="https://tuyendung.topcv.vn/app/_nuxt/img/top_point.49313b4.png">
                                             </div>
                                         </div>
-                                        <button data-v-04419ab5="" type="button"
-                                            class="btn min-width btn btn-primary font-weight-600">Đổi quà</button>
+                                        <a href="{{ route('buy-gift.detail', $product->id) }}" class="btn min-width btn btn-primary font-weight-600">Đổi quà</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
-               
+
             </div>
         </div>
     </div>

@@ -334,4 +334,13 @@ class JobPostingController extends Controller
         // Trả về view với danh sách sản phẩm
         return view('job_postings.gift', compact('products'));
     }
+    // Hàm hiển thị chi tiết sản phẩm
+    public function productDetail($id)
+    {
+        // Tìm sản phẩm theo ID
+        $product = Product::findOrFail($id);
+
+        // Trả về view và truyền thông tin sản phẩm vào view
+        return view('job_postings.gift_detail', compact('product'));
+    }
 }
