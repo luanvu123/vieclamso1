@@ -11,7 +11,7 @@
                 src="https://tuyendung.topcv.vn/app/_nuxt/img/banner_gift.ce6eb61.webp" alt="banner">
             <div data-v-03d2f0de="" class="wrap-point">
                 <div data-v-03d2f0de="" class="title-point">Điểm đổi quà</div>
-                <div data-v-03d2f0de="" class="total-point"><span data-v-03d2f0de="">0</span> <img data-v-03d2f0de=""
+                <div data-v-03d2f0de="" class="total-point"><span data-v-03d2f0de="">{{ $employer->top_point }}</span> <img data-v-03d2f0de=""
                         src="https://tuyendung.topcv.vn/app/_nuxt/img/top_point.49313b4.png" alt="point"></div>
                 <!---->
             </div>

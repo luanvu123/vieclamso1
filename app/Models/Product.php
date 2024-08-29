@@ -46,4 +46,8 @@ class Product extends Model
     {
         return $this->image ? asset('storage/' . $this->image) : null;
     }
+    public function purchases()
+{
+    return $this->hasMany(Purchased::class);
+}
 }

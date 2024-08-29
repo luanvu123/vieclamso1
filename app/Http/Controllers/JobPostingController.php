@@ -10,6 +10,7 @@ use App\Models\City;
 use App\Models\Company;
 use App\Models\JobPosting;
 use App\Models\Product;
+use App\Models\Purchased;
 use App\Models\Slide;
 use App\Models\TypeEmployer;
 use Carbon\Carbon;
@@ -320,11 +321,8 @@ class JobPostingController extends Controller
 
     public function buyGift(Request $request)
     {
-
-         // Lấy type_product từ request, mặc định là 'all'
+         $employer = Auth::guard('employer')->user();
         $typeProduct = $request->get('type_product', 'all');
-
-        // Lọc sản phẩm theo type_product
         if ($typeProduct === 'all') {
             $products = Product::active()->get();
         } else {
@@ -332,15 +330,49 @@ class JobPostingController extends Controller
         }
 
         // Trả về view với danh sách sản phẩm
-        return view('job_postings.gift', compact('products'));
+        return view('job_postings.gift', compact('products','employer'));
     }
     // Hàm hiển thị chi tiết sản phẩm
     public function productDetail($id)
     {
+        $employer = Auth::guard('employer')->user();
         // Tìm sản phẩm theo ID
         $product = Product::findOrFail($id);
 
         // Trả về view và truyền thông tin sản phẩm vào view
-        return view('job_postings.gift_detail', compact('product'));
+        return view('job_postings.gift_detail', compact('product','employer'));
     }
+    public function purchaseProduct(Request $request, $id)
+{
+    $employer = Auth::guard('employer')->user();
+    $product = Product::findOrFail($id);
+
+    // Check if the employer has reached the usage count limit
+    $purchasesCount = Purchased::where('employer_id', $employer->id)
+        ->where('product_id', $product->id)
+        ->count();
+
+    if ($purchasesCount >= $product->usage_count) {
+        return redirect()->back()->with('error', 'Giới hạn lượt mua.');
+    }
+
+    // Check if the employer has enough Top Points
+    if ($employer->top_point >= $product->top_point) {
+        // Deduct the points
+        $employer->top_point -= $product->top_point;
+        $employer->save();
+
+        // Save the purchase
+        Purchased::create([
+            'employer_id' => $employer->id,
+            'product_id' => $product->id,
+            'status' => 'success',
+        ]);
+
+        return redirect()->back()->with('success', 'Product purchased successfully!');
+    } else {
+        return redirect()->back()->with('error', 'Not enough Top Points to purchase this product.');
+    }
+}
+
 }

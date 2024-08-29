@@ -272,6 +272,7 @@ Route::middleware(['employer'])->group(function () {
 
     Route::get('doi-qua', [JobPostingController::class, 'buyGift'])->name('buy-gift');
     Route::get('/doi-qua/{id}/detail', [JobPostingController::class, 'productDetail'])->name('buy-gift.detail');
+    Route::post('/product/purchase/{id}', [JobPostingController::class, 'purchaseProduct'])->name('purchase.product');
     Route::get('trang-chu-tuyen-dung', [JobPostingController::class, 'dashboard'])->name('job-postings.dashboard');
     Route::post('employer/logout', [EmployerLoginController::class, 'logout'])->name('logout-employer');
     Route::get('employer/profile', [EmployerLoginController::class, 'profile'])->name('employer.profile');

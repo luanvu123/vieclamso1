@@ -1,15 +1,18 @@
 @extends('dashboard-employer')
 
 @section('content')
-    <style>
-        .tab-item.active {
-            font-weight: bold;
-            color: #007bff;
-            /* Màu sắc cho tab đang hoạt động */
-            border-bottom: 2px solid #007bff;
-            /* Đường viền dưới cho tab đang hoạt động */
-        }
-    </style>
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
     <div data-v-7240e68e="" class="breadcrumb-box">
         <h6 class="breadcrumb-title d-flex">
             <div><span>Quà tặng</span> </div>
@@ -20,9 +23,9 @@
                 src="https://tuyendung.topcv.vn/app/_nuxt/img/banner_gift.ce6eb61.webp" alt="banner">
             <div data-v-03d2f0de="" class="wrap-point">
                 <div data-v-03d2f0de="" class="title-point">Điểm đổi quà</div>
-                <div data-v-03d2f0de="" class="total-point"><span data-v-03d2f0de="">0</span> <img data-v-03d2f0de=""
-                        src="https://tuyendung.topcv.vn/app/_nuxt/img/top_point.49313b4.png" alt="point"></div>
-                <!---->
+                <div data-v-03d2f0de="" class="total-point"><span data-v-03d2f0de="">{{ $employer->top_point }}</span> <img
+                        data-v-03d2f0de="" src="https://tuyendung.topcv.vn/app/_nuxt/img/top_point.49313b4.png"
+                        alt="point"></div>
             </div>
             <div data-v-03d2f0de="" class="wrap-tab">
                 <div data-v-03d2f0de="" class="footer-wrap-tab">
@@ -46,7 +49,7 @@
             </div>
         </div>
         <div data-v-7240e68e="" class="bg-white shadow-sm mb-3 wrap-gift">
-            <div class="modal-content border-0"><!---->
+            <div class="modal-content border-0">
                 <div data-v-db3e7bea="" class="wrap-header-gift"><span data-v-db3e7bea="" class="btn-close-gift"><i
                             data-v-db3e7bea="" class="far fa-xmark"></i></span></div>
                 <div data-v-db3e7bea="" class="modal-body">
@@ -54,12 +57,11 @@
                         style="background: url('{{ $product->imagePath }}') 50% center / cover no-repeat;">
                     </div>
                     <div data-v-db3e7bea="" class="wrap-detail-gift">
-                        <div data-v-db3e7bea="" class="name-gift"><!---->
+                        <div data-v-db3e7bea="" class="name-gift">
                             <div data-v-db3e7bea="" class="font-weight-700 text-20">{{ $product->name }}</div>
                             <div data-v-db3e7bea="" class="d-flex align-items-center justify-content-between"><span
                                     data-v-db3e7bea=""
                                     class="text-16 font-weight-400 text-neutral-700 mt-1 text-uppercase">{{ $product->company }}</span>
-                                <!---->
                             </div>
                         </div>
                     </div>
@@ -128,18 +130,31 @@
 
                 </div>
                 <div data-v-db3e7bea="" class="modal-footer">
-                    <div data-v-db3e7bea="" class="warning-change-gift"><i data-v-db3e7bea=""
-                            class="fas fa-triangle-exclamation"></i>
-                        <div data-v-db3e7bea="" class="font-weight-400 ml-2">
-                            Số Top Point không đủ để đổi quà. Vui lòng
-                            <span data-v-db3e7bea="" class="text-primary font-weight-600 cursor-pointer">Mua thêm đơn
-                                hàng</span>
-                            để tích thêm Top Point.
+                    @if ($employer->top_point < $product->top_point)
+                        <div data-v-db3e7bea="" class="warning-change-gift">
+                            <i data-v-db3e7bea="" class="fas fa-triangle-exclamation"></i>
+                            <div data-v-db3e7bea="" class="font-weight-400 ml-2">
+                                Số Top Point không đủ để đổi quà. Vui lòng
+                                <span data-v-db3e7bea="" class="text-primary font-weight-600 cursor-pointer">Mua thêm đơn
+                                    hàng</span>
+                                để tích thêm Top Point.
+                            </div>
                         </div>
-                    </div> <button data-v-db3e7bea="" type="button"
-                        class="btn min-width btn btn-primary-disable btn-lg w-100 font-weight-600" disabled="disabled">
-                        Đổi ngay {{ $product->top_point }} Top Point
-                    </button>
+                        <button data-v-db3e7bea="" type="button"
+                            class="btn min-width btn btn-primary-disable btn-lg w-100 font-weight-600"
+                            disabled="disabled">
+                            Đổi ngay {{ $product->top_point }} Top Point
+                        </button>
+                    @else
+                        <form action="{{ route('purchase.product', $product->id) }}" method="POST">
+                            @csrf
+                            <button data-v-db3e7bea="" type="submit"
+                                class="btn min-width btn btn-primary btn-lg w-100 font-weight-600">
+                                Đổi ngay {{ $product->top_point }} Top Point
+                            </button>
+                        </form>
+                    @endif
+
                 </div>
             </div>
         </div>
