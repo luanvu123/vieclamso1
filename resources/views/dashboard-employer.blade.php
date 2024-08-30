@@ -50,17 +50,20 @@
 
             <div class="dashboard-nav">
                 <div class="dashboard-nav-inner">
-
                     <ul>
-
 
                         <li class="{{ Route::is('employer.profile') ? 'active' : '' }}">
                             <a href="{{ route('employer.profile') }}">
                                 <div class="message-avatar">
                                     <img src="{{ Auth::guard('employer')->user()->avatar ? asset('storage/' . Auth::guard('employer')->user()->avatar) : asset('storage/avatar/avatar-default.jpg') }}"
                                         alt="">
+                                    {{ Auth::guard('employer')->user()->name }}
+
                                 </div>
-                                {{ Auth::guard('employer')->user()->name }}
+                                <div data-v-76d90e0b="" class="user-role mb-2">
+                                    Tài khoản xác thực: <span data-v-76d90e0b="" class="text-primary mr-2">Cấp
+                                        1/3</span></div>
+
                             </a>
                         </li>
                         <li class="{{ Route::is('job-postings.dashboard') ? 'active' : '' }}">
@@ -80,7 +83,7 @@
                         <li class="{{ Route::is('messages.receive') || Route::is('messages.show') ? 'active' : '' }}">
                             <a href="{{ route('messages.receive') }}">Message </a>
                         </li>
-                         <li class="{{ Route::is('loyal-customer') ? 'active' : '' }}">
+                        <li class="{{ Route::is('loyal-customer') ? 'active' : '' }}">
                             <a href="{{ route('loyal-customer') }}">Rewards </a>
                         </li>
                         <li class="{{ Route::is('buy-gift') ? 'active' : '' }}">
