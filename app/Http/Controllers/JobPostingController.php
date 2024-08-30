@@ -79,9 +79,9 @@ class JobPostingController extends Controller
 
         $dates = $dates->reverse();
         $activeTypeEmployer = TypeEmployer::where('status', 'active')->get();
-         $slides = Slide::where('status', 'active')->get();
+        $slides = Slide::where('status', 'active')->get();
 
-        return view('job_postings.dashboard', compact('activeJobPostingsCount', 'totalJobViews', 'totalApplications', 'totalMessages', 'dates', 'activeTypeEmployer','employer','slides'));
+        return view('job_postings.dashboard', compact('activeJobPostingsCount', 'totalJobViews', 'totalApplications', 'totalMessages', 'dates', 'activeTypeEmployer', 'employer', 'slides'));
     }
 
 
@@ -321,7 +321,7 @@ class JobPostingController extends Controller
 
     public function buyGift(Request $request)
     {
-         $employer = Auth::guard('employer')->user();
+        $employer = Auth::guard('employer')->user();
         $typeProduct = $request->get('type_product', 'all');
         if ($typeProduct === 'all') {
             $products = Product::active()->get();
@@ -330,7 +330,7 @@ class JobPostingController extends Controller
         }
 
         // Trả về view với danh sách sản phẩm
-        return view('job_postings.gift', compact('products','employer'));
+        return view('job_postings.gift', compact('products', 'employer'));
     }
     // Hàm hiển thị chi tiết sản phẩm
     public function productDetail($id)
@@ -340,39 +340,52 @@ class JobPostingController extends Controller
         $product = Product::findOrFail($id);
 
         // Trả về view và truyền thông tin sản phẩm vào view
-        return view('job_postings.gift_detail', compact('product','employer'));
+        return view('job_postings.gift_detail', compact('product', 'employer'));
     }
     public function purchaseProduct(Request $request, $id)
+    {
+        $employer = Auth::guard('employer')->user();
+        $product = Product::findOrFail($id);
+
+        // Check if the employer has reached the usage count limit
+        $purchasesCount = Purchased::where('employer_id', $employer->id)
+            ->where('product_id', $product->id)
+            ->count();
+
+        if ($purchasesCount >= $product->usage_count) {
+            return redirect()->back()->with('error', 'Giới hạn lượt mua.');
+        }
+
+        // Check if the employer has enough Top Points
+        if ($employer->top_point >= $product->top_point) {
+            // Deduct the points
+            $employer->top_point -= $product->top_point;
+            $employer->save();
+
+            // Save the purchase
+            Purchased::create([
+                'employer_id' => $employer->id,
+                'product_id' => $product->id,
+                'status' => 'success',
+            ]);
+
+            return redirect()->back()->with('success', 'Product purchased successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Not enough Top Points to purchase this product.');
+        }
+    }
+
+
+
+  public function loyalCustomer()
 {
     $employer = Auth::guard('employer')->user();
-    $product = Product::findOrFail($id);
+    $nextType = $employer->pointsToNextTypeEmployer();
 
-    // Check if the employer has reached the usage count limit
-    $purchasesCount = Purchased::where('employer_id', $employer->id)
-        ->where('product_id', $product->id)
-        ->count();
+    // Retrieve the list of purchases for the employer
+    $purchases = Purchased::where('employer_id', $employer->id)->with('product')->get();
 
-    if ($purchasesCount >= $product->usage_count) {
-        return redirect()->back()->with('error', 'Giới hạn lượt mua.');
-    }
-
-    // Check if the employer has enough Top Points
-    if ($employer->top_point >= $product->top_point) {
-        // Deduct the points
-        $employer->top_point -= $product->top_point;
-        $employer->save();
-
-        // Save the purchase
-        Purchased::create([
-            'employer_id' => $employer->id,
-            'product_id' => $product->id,
-            'status' => 'success',
-        ]);
-
-        return redirect()->back()->with('success', 'Product purchased successfully!');
-    } else {
-        return redirect()->back()->with('error', 'Not enough Top Points to purchase this product.');
-    }
+    return view('job_postings.reward', compact('employer', 'nextType', 'purchases'));
 }
 
 }

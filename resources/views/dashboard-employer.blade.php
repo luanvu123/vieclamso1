@@ -80,6 +80,9 @@
                         <li class="{{ Route::is('messages.receive') || Route::is('messages.show') ? 'active' : '' }}">
                             <a href="{{ route('messages.receive') }}">Message </a>
                         </li>
+                         <li class="{{ Route::is('loyal-customer') ? 'active' : '' }}">
+                            <a href="{{ route('loyal-customer') }}">Rewards </a>
+                        </li>
                         <li class="{{ Route::is('buy-gift') ? 'active' : '' }}">
                             <a href="{{ route('buy-gift') }}">Đổi quà </a>
                         </li>

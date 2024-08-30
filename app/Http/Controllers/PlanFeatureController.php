@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class PlanFeatureController extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('permission:plan-feature-list|plan-feature-create|plan-feature-edit|plan-feature-delete', ['only' => ['index', 'store']]);
+    $this->middleware('permission:plan-feature-create', ['only' => ['create', 'store']]);
+    $this->middleware('permission:plan-feature-edit', ['only' => ['edit', 'update']]);
+    $this->middleware('permission:plan-feature-delete', ['only' => ['destroy']]);
+}
+
     public function index()
     {
         $planFeatures = PlanFeature::all();

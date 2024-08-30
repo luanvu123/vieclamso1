@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class TypeEmployerController extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('permission:type-employer-list|type-employer-create|type-employer-edit|type-employer-delete', ['only' => ['index', 'store']]);
+    $this->middleware('permission:type-employer-create', ['only' => ['create', 'store']]);
+    $this->middleware('permission:type-employer-edit', ['only' => ['edit', 'update']]);
+    $this->middleware('permission:type-employer-delete', ['only' => ['destroy']]);
+}
+
     /**
      * Display a listing of the resource.
      */
@@ -107,5 +115,5 @@ class TypeEmployerController extends Controller
 
         return redirect()->route('type-employer.index')->with('success', 'Type Employer deleted successfully.');
     }
-    
+
 }

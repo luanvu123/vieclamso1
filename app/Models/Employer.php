@@ -72,7 +72,7 @@ class Employer extends Authenticatable implements CanResetPassword
 
         // Iterate through the TypeEmployers to find the first one where top_point is less than or equal to the employer's top_point
         foreach ($typeEmployers as $typeEmployer) {
-            if ($this->top_point >= $typeEmployer->top_point) {
+            if ($this->credit >= $typeEmployer->top_point) {
                 // Update the type_employer_id of the employer
                 $this->type_employer_id = $typeEmployer->id;
                 $this->save();
@@ -80,4 +80,24 @@ class Employer extends Authenticatable implements CanResetPassword
             }
         }
     }
+    public function pointsToNextTypeEmployer()
+{
+    // Get the next type employer with a higher top_point
+    $nextTypeEmployer = TypeEmployer::where('top_point', '>', $this->credit)
+        ->where('status', 'active')
+        ->orderBy('top_point', 'asc')
+        ->first();
+
+    // If there is no next type employer, return null
+    if (!$nextTypeEmployer) {
+        return null;
+    }
+
+    // Calculate the points needed to reach the next type employer
+    return [
+        'points_needed' => $nextTypeEmployer->top_point - $this->credit,
+        'next_type_name' => $nextTypeEmployer->name,
+    ];
+}
+
 }

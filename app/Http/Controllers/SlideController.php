@@ -9,14 +9,15 @@ use Illuminate\Support\Facades\Storage;
 
 class SlideController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('permission:slide-choose', ['only' => ['slide_choose']]);
-    //     $this->middleware('permission:slide-list|slide-create|slide-edit|slide-delete', ['only' => ['index', 'store']]);
-    //     $this->middleware('permission:slide-create', ['only' => ['create', 'store']]);
-    //     $this->middleware('permission:slide-edit', ['only' => ['edit', 'update']]);
-    //     $this->middleware('permission:slide-delete', ['only' => ['destroy']]);
-    // }
+  public function __construct()
+{
+    $this->middleware('permission:slide-choose', ['only' => ['slide_choose']]);
+    $this->middleware('permission:slide-list|slide-create|slide-edit|slide-delete', ['only' => ['index', 'store']]);
+    $this->middleware('permission:slide-create', ['only' => ['create', 'store']]);
+    $this->middleware('permission:slide-edit', ['only' => ['edit', 'update']]);
+    $this->middleware('permission:slide-delete', ['only' => ['destroy']]);
+}
+
 
     public function index()
     {

@@ -126,7 +126,8 @@ Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('
 Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
-     Route::resource('products', ProductController::class);
+    Route::get('employers/purchasedManage', [EmployerManageController::class, 'purchasedManage'])->name('employers.purchasedManage');
+    Route::resource('products', ProductController::class);
     Route::resource('type-employer', TypeEmployerController::class);
     Route::resource('slides', SlideController::class);
     Route::resource('carts', CartManageController::class);
@@ -181,6 +182,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', UserController::class);
     Route::resource('candidates', CandidateManageController::class);
     Route::put('/users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
+    Route::get('/employer-choose', [EmployerManageController::class, 'employer_choose'])->name('employer-choose');
     Route::get('/user-choose', [UserController::class, 'user_choose'])->name('user-choose');
     Route::get('/category-choose', [CategoryController::class, 'category_choose'])->name('category-choose');
     Route::get('/company-choose', [EmployerManageController::class, 'company_choose'])->name('company-choose');
@@ -191,6 +193,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/slug-choose', [SlugController::class, 'slug_choose'])->name('slug-choose');
     Route::get('/media-choose', [MediaController::class, 'media_choose'])->name('media-choose');
     Route::resource('employers', EmployerManageController::class);
+
     Route::resource('job-postings-manage', JobsManageController::class);
     Route::get('/jobPosting-choose', [JobsManageController::class, 'jobPosting_choose'])->name('jobPosting-choose');
 });
@@ -270,6 +273,7 @@ Route::middleware(['employer'])->group(function () {
 
 
 
+    Route::get('loyal-customer', [JobPostingController::class, 'loyalCustomer'])->name('loyal-customer');
     Route::get('doi-qua', [JobPostingController::class, 'buyGift'])->name('buy-gift');
     Route::get('/doi-qua/{id}/detail', [JobPostingController::class, 'productDetail'])->name('buy-gift.detail');
     Route::post('/product/purchase/{id}', [JobPostingController::class, 'purchaseProduct'])->name('purchase.product');

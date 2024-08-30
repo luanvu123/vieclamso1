@@ -130,11 +130,11 @@ class PermissionTableSeeder extends Seeder
             'media-choose',
             'job-posting-choose',
 
-              'public_link-list',
+            'public_link-list',
             'public_link-create',
             'public_link-edit',
             'public_link-delete',
-             'consultation-list',
+            'consultation-list',
             'consultation-create',
             'consultation-edit',
             'consultation-delete',
@@ -178,6 +178,51 @@ class PermissionTableSeeder extends Seeder
             'smart-recruitment-create',
             'smart-recruitment-edit',
             'smart-recruitment-delete',
+
+            // Quyền cho 'products'
+            'product-list',
+            'product-create',
+            'product-edit',
+            'product-delete',
+
+            // Quyền cho 'type-employer'
+            'type-employer-list',
+            'type-employer-create',
+            'type-employer-edit',
+            'type-employer-delete',
+
+            // Quyền cho 'slides'
+            'slide-list',
+            'slide-create',
+            'slide-edit',
+            'slide-delete',
+            'slide-choose',  // Specific permission for choosing slides
+
+            // Quyền cho 'carts'
+            'cart-list',
+            'cart-create',
+            'cart-edit',
+            'cart-delete',
+
+            // Quyền cho 'ordermanages'
+            'ordermanage-list',
+            'ordermanage-create',
+            'ordermanage-edit',
+            'ordermanage-delete',
+
+            // Quyền cho 'plan-currencies'
+            'plan-currency-list',
+            'plan-currency-create',
+            'plan-currency-edit',
+            'plan-currency-delete',
+
+            // Quyền cho 'plan-features'
+            'plan-feature-list',
+            'plan-feature-create',
+            'plan-feature-edit',
+            'plan-feature-delete',
+            // Quyền cho 'purchased-manage'
+            'purchased-manage'
         ];
 
         foreach ($permissions as $permission) {

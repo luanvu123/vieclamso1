@@ -1,7 +1,7 @@
   @extends('dashboard-employer')
 
   @section('content')
-     
+
 
       <div data-v-b9ee596a="" class="container-fluid page-content">
           <div data-v-5ce51de7="" data-v-b9ee596a="" class="alert-slide"><!---->
@@ -239,7 +239,7 @@
                                                   <div data-v-823ce444=""
                                                       class="font-weight-600 align-items-center d-flex"><span
                                                           data-v-823ce444=""
-                                                          class="mr-2 top-point-value">{{ Auth::guard('employer')->user()->top_point }}</span>
+                                                          class="mr-2 top-point-value">{{$employer->credit}}</span>
                                                       <img data-v-823ce444="" alt="TP Point"
                                                           src="https://tuyendung.topcv.vn/app/_nuxt/img/tp-point.fdfeec4.png">
                                                   </div>
@@ -278,12 +278,12 @@
                                               <div data-v-1358ea01="" class="ranking-point"><span data-v-1358ea01=""
                                                       class="ranking-label">Xét hạng:
                                                   </span> <span data-v-1358ea01=""
-                                                      class="ranking-value">{{ Auth::guard('employer')->user()->top_point }}
+                                                      class="ranking-value">{{$employer->credit}}
                                                       TP</span></div>
                                               <div data-v-1358ea01="" class="exchange-point"><span data-v-1358ea01=""
                                                       class="ranking-label">Đổi quà:
                                                   </span> <span data-v-1358ea01=""
-                                                      class="ranking-value">{{ Auth::guard('employer')->user()->top_point }}
+                                                      class="ranking-value">{{$employer->top_point}}
                                                       TP</span></div>
                                           </div> <!---->
                                       </div>

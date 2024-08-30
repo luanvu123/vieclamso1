@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Auth;
 
 class CartManageController extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('permission:cart-list|cart-create|cart-edit|cart-delete', ['only' => ['index', 'store']]);
+    $this->middleware('permission:cart-create', ['only' => ['create', 'store']]);
+    $this->middleware('permission:cart-edit', ['only' => ['edit', 'update']]);
+    $this->middleware('permission:cart-delete', ['only' => ['destroy']]);
+}
+
     public function index()
     {
         $carts = Cart::where('user_id', Auth::id())->get();

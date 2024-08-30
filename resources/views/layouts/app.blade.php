@@ -116,7 +116,7 @@
                         </li>
 
                         <li
-                            class="{{ Route::is('employers.index') || Route::is('job-postings-manage.index') || Route::is('admin.companies.index') ? 'active-submenu' : '' }}">
+                            class="{{ Route::is('employers.index') || Route::is('job-postings-manage.index') || Route::is('employers.purchasedManage') || Route::is('admin.companies.index') || Route::is('ordermanages.index') || Route::is('products.index') ? 'active-submenu' : '' }}">
                             <a href="#">Employers</a>
                             <ul>
                                 <li class="{{ Route::is('employers.index') ? 'active' : '' }}">
@@ -140,28 +140,33 @@
                                         @endif
                                     </a>
                                 </li>
-                                 <li class="{{ Route::is('ordermanages.index') ? 'active' : '' }}">
+                                <li class="{{ Route::is('ordermanages.index') ? 'active' : '' }}">
                                     <a href="{{ route('ordermanages.index') }}">Manage Order
                                         {{-- @if ($ordermanagesCountTwoHour > 0)
                                             <span class="nav-tag">{{ $ordermanagesCountTwoHour }}</span>
                                         @endif --}}
                                     </a>
                                 </li>
-                                 <li class="{{ Route::is('products.index') ? 'active' : '' }}">
+                                <li class="{{ Route::is('products.index') ? 'active' : '' }}">
                                     <a href="{{ route('products.index') }}">Manage Product
                                     </a>
                                 </li>
+                                <li class="{{ Route::is('employers.purchasedManage') ? 'active' : '' }}">
+                                    <a href="{{ route('employers.purchasedManage') }}">Manage Purchased
+                                    </a>
+                                </li>
+
                             </ul>
                         </li>
                         <li
-                            class="{{ Route::is('plan-features.index') || Route::is('plan-currencies.index') || Route::is('carts.index')? 'active-submenu' : '' }}">
+                            class="{{ Route::is('plan-features.index') || Route::is('plan-currencies.index') || Route::is('carts.index') ? 'active-submenu' : '' }}">
                             <a href="#">Carts</a>
                             <ul>
                                 <li class="{{ Route::is('plan-currencies.index') ? 'active' : '' }}"><a
                                         href="{{ route('plan-currencies.index') }}">Plan Currencies</a></li>
                                 <li class="{{ Route::is('plan-features.index') ? 'active' : '' }}"><a
                                         href="{{ route('plan-features.index') }}">Plan Features</a></li>
-                                          <li class="{{ Route::is('carts.index') ? 'active' : '' }}"><a
+                                <li class="{{ Route::is('carts.index') ? 'active' : '' }}"><a
                                         href="{{ route('carts.index') }}">Carts</a></li>
                             </ul>
                         </li>
@@ -488,6 +493,23 @@
                 },
                 success: function(data) {
                     alert('Thay đổi trạng thái feedback thành công!');
+                }
+            });
+        })
+    </script>
+    <script>
+        $('.employer_choose').change(function() {
+            var trangthai_val = $(this).val();
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('employer-choose') }}",
+                method: "GET",
+                data: {
+                    trangthai_val: trangthai_val,
+                    id: id
+                },
+                success: function(data) {
+                    alert('Thay đổi trạng thái nhà tuyển dụng thành công!');
                 }
             });
         })

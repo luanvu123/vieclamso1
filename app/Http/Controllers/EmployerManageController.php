@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Employer;
+use App\Models\Purchased;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class EmployerManageController extends Controller
 {
-    public function __construct() 
+    public function __construct()
     {
         $this->middleware('permission:employer-list|employer-create|employer-edit|employer-delete', ['only' => ['index', 'store']]);
         $this->middleware('permission:employer-create', ['only' => ['create', 'store']]);
@@ -21,6 +22,7 @@ class EmployerManageController extends Controller
         $this->middleware('permission:top-choose', ['only' => ['top_choose']]);
         $this->middleware('permission:top-home-choose', ['only' => ['top_home_choose']]);
         $this->middleware('permission:featured-choose', ['only' => ['featured_choose']]);
+         $this->middleware('permission:purchased-manage', ['only' => ['purchasedManage']]);
     }
     public function index()
     {
@@ -78,5 +80,19 @@ class EmployerManageController extends Controller
         $company->featured = $data['trangthai_val'];
         $company->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $company->save();
+    }
+    public function employer_choose(Request $request)
+    {
+        $data = $request->all();
+        $employer = Employer::find($data['id']);
+        $employer->status = $data['trangthai_val'];
+        $employer->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $employer->save();
+    }
+     public function purchasedManage()
+    {
+        $purchasedItems = Purchased::with(['employer', 'product'])->get();
+
+        return view('admin.employers.purchased', compact('purchasedItems'));
     }
 }

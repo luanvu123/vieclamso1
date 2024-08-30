@@ -10,6 +10,14 @@ use App\Models\TypeEmployer;
 
 class OrderManageController extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('permission:ordermanage-list|ordermanage-create|ordermanage-edit|ordermanage-delete', ['only' => ['index', 'store']]);
+    $this->middleware('permission:ordermanage-create', ['only' => ['create', 'store']]);
+    $this->middleware('permission:ordermanage-edit', ['only' => ['edit', 'update']]);
+    $this->middleware('permission:ordermanage-delete', ['only' => ['destroy']]);
+}
+
     // Display a listing of the orders
     public function index()
     {
@@ -62,6 +70,7 @@ class OrderManageController extends Controller
                 $cart = $orderDetail->cart;
                 if ($cart->top_point > 0) {
                     $employer->top_point += $cart->top_point;
+                     $employer->credit += $cart->top_point;
                 }
             }
 

@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('permission:product-choose', ['only' => ['product_choose']]);
-    //     $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'store']]);
-    //     $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
-    //     $this->middleware('permission:product-edit', ['only' => ['edit', 'update']]);
-    //     $this->middleware('permission:product-delete', ['only' => ['destroy']]);
-    // }
+    public function __construct()
+    {
+        $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:product-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:product-delete', ['only' => ['destroy']]);
+    }
+
 
     public function index()
     {
@@ -45,14 +45,21 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
             'description' => 'nullable|string',
             'condition' => 'nullable|string',
-              'usage_count' => 'required|integer',
+            'usage_count' => 'required|integer',
             'type_product' => 'required|in:service,voucher',
             'status' => 'required|in:active,inactive',
         ]);
 
         $productData = $request->only([
-            'name', 'company', 'number_day', 'top_point',
-            'description', 'condition', 'type_product', 'status','usage_count'
+            'name',
+            'company',
+            'number_day',
+            'top_point',
+            'description',
+            'condition',
+            'type_product',
+            'status',
+            'usage_count'
         ]);
 
         if ($request->hasFile('image')) {
@@ -85,12 +92,19 @@ class ProductController extends Controller
             'condition' => 'nullable|string',
             'type_product' => 'required|in:service,voucher',
             'status' => 'required|in:active,inactive',
-              'usage_count' => 'required|integer',
+            'usage_count' => 'required|integer',
         ]);
 
         $productData = $request->only([
-            'name', 'company', 'number_day', 'top_point',
-            'description', 'condition', 'type_product', 'status','usage_count'
+            'name',
+            'company',
+            'number_day',
+            'top_point',
+            'description',
+            'condition',
+            'type_product',
+            'status',
+            'usage_count'
         ]);
 
         if ($request->hasFile('image')) {
