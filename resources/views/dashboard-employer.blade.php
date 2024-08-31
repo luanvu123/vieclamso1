@@ -52,8 +52,8 @@
                 <div class="dashboard-nav-inner">
                     <ul>
 
-                        <li class="{{ Route::is('employer.profile') ? 'active' : '' }}">
-                            <a href="{{ route('employer.profile') }}">
+                        <li class="{{ Route::is('employer.change-password') ? 'active' : '' }}">
+                            <a href="{{ route('employer.change-password') }}">
                                 <div class="message-avatar">
                                     <img src="{{ Auth::guard('employer')->user()->avatar ? asset('storage/' . Auth::guard('employer')->user()->avatar) : asset('storage/avatar/avatar-default.jpg') }}"
                                         alt="">

@@ -10,14 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use Twilio\Rest\Client;
 
 class EmployerLoginController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('employer')->except('logout');
-    // }
-
     public function showLoginForm()
     {
         return view('pages.app-login');
@@ -48,6 +44,18 @@ class EmployerLoginController extends Controller
     {
         $employer = Auth::guard('employer')->user();
         return view('employer.profile', compact('employer'));
+    }
+    public function formChangePasswordEmployer()
+    {
+        $employer = Auth::guard('employer')->user();
+        return view('employer.password', compact('employer'));
+    }
+
+
+    public function formPhone()
+    {
+        $employer = Auth::guard('employer')->user();
+        return view('employer.phone', compact('employer'));
     }
 
     public function updateProfile(Request $request)
@@ -127,5 +135,51 @@ class EmployerLoginController extends Controller
         $employer->save();
 
         return back()->with('status', 'Password changed successfully');
+    }
+    public function sendOtp(Request $request)
+    {
+        $employer = Auth::guard('employer')->user();
+
+        // Generate a random 6-digit OTP
+        $otp = rand(100000, 999999);
+
+        // Save the OTP to the employer's database record
+        $employer->otp = $otp;
+        $employer->save();
+
+        // Twilio credentials from .env
+        $sid = env('TWILIO_SID');
+        $token = env('TWILIO_TOKEN');
+        $from = env('TWILIO_FROM');
+
+        $twilio = new Client($sid, $token);
+
+
+            $twilio->messages->create(
+                $employer->phone, // The phone number to send to
+                [
+                    'from' => $from,
+                    'body' => "Your OTP is: $otp",
+                ]
+            );
+
+    }
+    public function verifyOtp(Request $request)
+    {
+        $request->validate([
+            'otp' => 'required|string|min:6|max:6',
+        ]);
+
+        $employer = Auth::guard('employer')->user();
+
+        if ($employer->otp === $request->otp) {
+            $employer->isVerify = true;
+            $employer->otp = null; // Clear the OTP after verification
+            $employer->save();
+
+            return redirect()->route('job-postings.dashboard')->with('success', 'Phone number verified successfully.');
+        } else {
+            return back()->withErrors(['otp' => 'The OTP you entered is incorrect.']);
+        }
     }
 }

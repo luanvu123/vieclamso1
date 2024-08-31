@@ -24,6 +24,8 @@ class Employer extends Authenticatable implements CanResetPassword
         'top_point',
         'type_employer_id',
         'credit',
+         'otp',          // Add this line
+        'isVerify',     // Add this line
     ];
 
     public function jobPostings()
