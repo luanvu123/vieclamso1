@@ -17,11 +17,11 @@
                                          <a href="{{ route('messages.show.candidate', $employer) }}"
                                              class="list-group-item list-group-item-action">
                                              <div class="media">
-                                                 <img src="{{ $employer->avatar ? asset('storage/' . $employer->avatar) : asset('storage/avatar/avatar-default.jpg') }}"
+                                                 <img src="{{ $employer->company->logo ? asset('storage/' . $employer->company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
                                                      class="mr-3 rounded-circle" alt="Avatar"
                                                      style="width: 50px; height: 50px;">
                                                  <div class="media-body">
-                                                     <h5 class="mt-0">{{ $employer->name }}</h5>
+                                                     <h5 class="mt-0">{{ $employer->company->name }}</h5>
                                                      <p>Click to view messages</p>
                                                  </div>
                                              </div>

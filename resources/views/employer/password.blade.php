@@ -37,13 +37,11 @@
                         href="{{route('employer.profile')}}"
                         class="list-group-item list-group-item-action border-0 nuxt-link-active"><i data-v-2015c63f=""
                             class="fa mr-2 fa-user"></i> Thông tin cá nhân </a><a data-v-2015c63f=""
-                        href="/app/account/settings/gpkd" class="list-group-item list-group-item-action border-0"><i
+                        href="{{route('employer.gpkd')}}" class="list-group-item list-group-item-action border-0"><i
                             data-v-2015c63f="" class="fa mr-2 fa-file"></i> Giấy đăng ký doanh nghiệp </a><a
-                        data-v-2015c63f="" href="/app/account/settings/company"
+                        data-v-2015c63f="" href="{{route('companies.index')}}"
                         class="list-group-item list-group-item-action border-0"><i data-v-2015c63f=""
-                            class="fa mr-2 fa-building"></i> Thông tin công ty </a><a data-v-2015c63f=""
-                        href="/app/account/settings/connect-api" class="list-group-item list-group-item-action border-0"><i
-                            data-v-2015c63f="" class="fa mr-2 fa-share-alt"></i> Kết nối API </a></div>
+                            class="fa mr-2 fa-building"></i> Thông tin công ty </a></div>
             </div>
             <div data-v-2c0c78b8="" class="bg-white w-100 rounded">
                 <form method="POST" action="{{ route('employer.change-password') }}">

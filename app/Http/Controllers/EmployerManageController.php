@@ -22,7 +22,7 @@ class EmployerManageController extends Controller
         $this->middleware('permission:top-choose', ['only' => ['top_choose']]);
         $this->middleware('permission:top-home-choose', ['only' => ['top_home_choose']]);
         $this->middleware('permission:featured-choose', ['only' => ['featured_choose']]);
-         $this->middleware('permission:purchased-manage', ['only' => ['purchasedManage']]);
+        $this->middleware('permission:purchased-manage', ['only' => ['purchasedManage']]);
     }
     public function index()
     {
@@ -32,9 +32,40 @@ class EmployerManageController extends Controller
 
     public function show($id)
     {
-        $employer = Employer::findOrFail($id);
+        $employer = Employer::with('company')->findOrFail($id); // Nạp thông tin công ty liên quan
         return view('admin.employers.show', compact('employer'));
     }
+
+
+    public function edit($id)
+    {
+        $employer = Employer::findOrFail($id);
+        return view('admin.employers.edit', compact('employer'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'isVerify' => 'nullable|boolean',
+            'isVerify_license' => 'nullable|boolean',
+            'isVerifyCompany' => 'nullable|boolean',
+            'level' => 'nullable|integer|in:1,2,3',
+        ]);
+
+        $employer = Employer::findOrFail($id);
+
+        $data = $request->only([
+            'isVerify',
+            'isVerify_license',
+            'isVerifyCompany',
+            'level',
+        ]);
+
+        $employer->update($data);
+
+        return redirect()->route('employers.index')->with('success', 'Employer updated successfully.');
+    }
+
 
     // Hiển thị danh sách các công ty
     public function indexCompany()
@@ -89,7 +120,7 @@ class EmployerManageController extends Controller
         $employer->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $employer->save();
     }
-     public function purchasedManage()
+    public function purchasedManage()
     {
         $purchasedItems = Purchased::with(['employer', 'product'])->get();
 

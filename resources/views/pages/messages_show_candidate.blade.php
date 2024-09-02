@@ -142,7 +142,7 @@ footer p {
         <main>
 
 
-            <h2 class="mb-4">Tin nhắn với {{ $employer->name }}</h2>
+            <h2 class="mb-4">Tin nhắn với {{ $employer->company->name }}</h2>
             <div class="card">
                 <div class="card-body">
                     @foreach ($messages as $message)
@@ -158,12 +158,12 @@ footer p {
                                 </div>
                             @else
                                 <div class="media-body">
-                                    <h5 class="mt-0">{{ $message->employer->name }}</h5>
+                                    <h5 class="mt-0">{{ $message->employer->company->name }}</h5>
                                     <p>{{ $message->message }}</p>
                                     <small class="text-muted">Sent at:
                                         {{ $message->created_at->format('d-m-Y H:i A') }}</small>
                                 </div>
-                                <img src="{{ $message->employer->avatar ? asset('storage/' . $message->employer->avatar) : asset('storage/avatar/avatar-default.jpg') }}"
+                                <img src="{{ $message->employer->company->logo ? asset('storage/' . $message->employer->company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
                                     class="ml-3 rounded-circle" alt="Avatar" style="width: 50px; height: 50px;">
                             @endif
                         </div>

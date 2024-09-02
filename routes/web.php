@@ -283,10 +283,13 @@ Route::middleware(['employer'])->group(function () {
     Route::post('employer/profile', [EmployerLoginController::class, 'updateProfile'])->name('employer.profile.update');
     Route::get('employer/profile/change-password', [EmployerLoginController::class, 'formChangePasswordEmployer'])->name('employer.change-password');
     Route::post('employer/profile/change-password', [EmployerLoginController::class, 'changePasswordEmployer'])->name('employer.change-password');
+
     Route::resource('companies', CompanyController::class);
 
 
     Route::get('employer/phone', [EmployerLoginController::class, 'formPhone'])->name('employer.phone');
+    Route::get('employer/gpkd', [EmployerLoginController::class, 'formCertificate'])->name('employer.gpkd');
+       Route::post('employer/gpkd', [EmployerLoginController::class, 'updateCertificate'])->name('employer.updateCertificate');
     Route::post('employer/send-otp', [EmployerLoginController::class, 'sendOtp'])->name('employer.send-otp');
     Route::post('employer/verify-otp', [EmployerLoginController::class, 'verifyOtp'])->name('employer.verify-otp');
 });

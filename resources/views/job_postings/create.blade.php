@@ -17,7 +17,11 @@
             </div>
         </div>
     </div>
-
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
     <div class="row">
         <div class="col-lg-12 col-md-12">
             <form action="{{ route('job-postings.store') }}" method="POST" enctype="multipart/form-data">
@@ -38,17 +42,20 @@
 
                             <div class="form">
                                 <h5>Your Email</h5>
-                                <input class="search-field" type="text" name="email" value="{{ $email }}" readonly>
+                                <input class="search-field" type="text" name="email" value="{{ $email }}"
+                                    readonly>
                             </div>
                             <!-- Job Title -->
                             <div class="form">
                                 <h5>Job Title</h5>
-                                <input class="search-field" type="text" name="title" id="slug" onkeyup="ChangeToSlug()" placeholder="">
+                                <input class="search-field" type="text" name="title" id="slug"
+                                    onkeyup="ChangeToSlug()" placeholder="">
                             </div>
                             <!-- Slug -->
                             <div class="form">
                                 <h5>Slug</h5>
-                                <input class="search-field" type="text" name="slug" id="convert_slug" placeholder="Đường dẫn">
+                                <input class="search-field" type="text" name="slug" id="convert_slug"
+                                    placeholder="Đường dẫn">
                             </div>
                             <!-- Job Type -->
                             <div class="form">
@@ -130,8 +137,10 @@
                             <!-- Tags -->
                             <div class="form">
                                 <h5>Job Tags <span>(optional)</span></h5>
-                                <input class="search-field" type="text" name="tags" placeholder="e.g. PHP, Social Media, Management">
-                                <p class="note">Comma separate tags, such as required skills or technologies, for this job.</p>
+                                <input class="search-field" type="text" name="tags"
+                                    placeholder="e.g. PHP, Social Media, Management">
+                                <p class="note">Comma separate tags, such as required skills or technologies, for this
+                                    job.</p>
                             </div>
                             <!-- Description -->
                             <div class="form" style="width: 100%;">
@@ -141,7 +150,8 @@
                             <!-- Application email/url -->
                             <div class="form">
                                 <h5>Application email / URL</h5>
-                                <input type="text" name="application_email_url" placeholder="Enter an email address or website URL">
+                                <input type="text" name="application_email_url"
+                                    placeholder="Enter an email address or website URL">
                             </div>
                             <!-- Closing Date -->
                             <div class="form">
@@ -155,16 +165,20 @@
                 <div class="dashboard-list-box margin-top-30">
                     <h4>Choose Your Company</h4>
                     <div class="form">
-                        <select name="company_id" class="chosen-select">
-                            @foreach ($companies as $company)
+                        @if ($company)
+                            <select name="company_id" class="chosen-select">
                                 <option value="{{ $company->id }}">{{ $company->name }}</option>
-                            @endforeach
-                        </select>
+                            </select>
+                        @else
+                            <p>Bạn chưa tạo công ty nào.</p>
+                            <a href="{{ route('companies.create') }}" class="btn btn-primary">Tạo công ty mới</a>
+                            <!-- Thêm liên kết tạo công ty -->
+                        @endif
                     </div>
                 </div>
-                <button type="submit" class="button margin-top-30">Submit <i class="fa fa-arrow-circle-right"></i></button>
+                <button type="submit" class="button margin-top-30">Submit <i
+                        class="fa fa-arrow-circle-right"></i></button>
             </form>
         </div>
     </div>
 @endsection
-

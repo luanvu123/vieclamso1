@@ -57,6 +57,66 @@ class EmployerLoginController extends Controller
         $employer = Auth::guard('employer')->user();
         return view('employer.phone', compact('employer'));
     }
+    public function formCertificate()
+    {
+        $employer = Auth::guard('employer')->user();
+        return view('employer.gpkd', compact('employer'));
+    }
+     public function formCompany()
+    {
+        $employer = Auth::guard('employer')->user();
+        return view('employer.company', compact('employer'));
+    }
+
+    public function updateCertificate(Request $request)
+    {
+        $employer = Auth::guard('employer')->user();
+
+        // Xử lý cập nhật business_license
+        if ($request->hasFile('business_license')) {
+            if ($employer->business_license && Storage::disk('public')->exists($employer->business_license)) {
+                Storage::disk('public')->delete($employer->business_license);
+            }
+            $businessLicense = $request->file('business_license');
+            $businessLicensePath = $businessLicense->store('documents', 'public');
+            $employer->business_license = $businessLicensePath;
+        }
+
+        // Xử lý cập nhật commission
+        if ($request->hasFile('commission')) {
+            if ($employer->commission && Storage::disk('public')->exists($employer->commission)) {
+                Storage::disk('public')->delete($employer->commission);
+            }
+            $commission = $request->file('commission');
+            $commissionPath = $commission->store('documents', 'public');
+            $employer->commission = $commissionPath;
+        }
+
+        // Xử lý cập nhật identification_card
+        if ($request->hasFile('identification_card')) {
+            if ($employer->identification_card && Storage::disk('public')->exists($employer->identification_card)) {
+                Storage::disk('public')->delete($employer->identification_card);
+            }
+            $identificationCard = $request->file('identification_card');
+            $identificationCardPath = $identificationCard->store('documents', 'public');
+            $employer->identification_card = $identificationCardPath;
+        }
+
+        // Xử lý cập nhật identification_card_behind
+        if ($request->hasFile('identification_card_behind')) {
+            if ($employer->identification_card_behind && Storage::disk('public')->exists($employer->identification_card_behind)) {
+                Storage::disk('public')->delete($employer->identification_card_behind);
+            }
+            $identificationCardBehind = $request->file('identification_card_behind');
+            $identificationCardBehindPath = $identificationCardBehind->store('documents', 'public');
+            $employer->identification_card_behind = $identificationCardBehindPath;
+        }
+
+        // Lưu lại các thay đổi
+        $employer->save();
+
+        return redirect()->back()->with('success', 'Cập nhật thông tin giấy tờ thành công.');
+    }
 
     public function updateProfile(Request $request)
     {
@@ -155,14 +215,13 @@ class EmployerLoginController extends Controller
         $twilio = new Client($sid, $token);
 
 
-            $twilio->messages->create(
-                $employer->phone, // The phone number to send to
-                [
-                    'from' => $from,
-                    'body' => "Your OTP is: $otp",
-                ]
-            );
-
+        $twilio->messages->create(
+            $employer->phone, // The phone number to send to
+            [
+                'from' => $from,
+                'body' => "Your OTP is: $otp",
+            ]
+        );
     }
     public function verifyOtp(Request $request)
     {

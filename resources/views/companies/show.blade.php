@@ -17,19 +17,19 @@
         </div>
     </div>
     <div class="container">
- <div class="listing-title">
-                <a href="{{ route('companies.edit', $company->id) }}"><i class="fa fa-pencil"></i>
-                    Edit</a>
-                <form action="{{ route('companies.destroy', $company->id) }}" method="POST" style="display:inline;"
-                    onsubmit="return confirm('Are you sure you want to delete this job posting?');">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="delete-button"
-                        style="background: none; border: none; color: red; cursor: pointer;">
-                        <i class="fa fa-remove"></i> Delete
-                    </button>
-                </form>
-            </div>
+        <div class="listing-title">
+            <a href="{{ route('companies.edit', $company->id) }}"><i class="fa fa-pencil"></i>
+                Edit</a>
+            <form action="{{ route('companies.destroy', $company->id) }}" method="POST" style="display:inline;"
+                onsubmit="return confirm('Are you sure you want to delete this job posting?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="delete-button"
+                    style="background: none; border: none; color: red; cursor: pointer;">
+                    <i class="fa fa-remove"></i> Delete
+                </button>
+            </form>
+        </div>
         <!-- Recent Jobs -->
         <div class="eleven columns">
             <div class="padding-right">
@@ -83,7 +83,7 @@
                             <i class="fa fa-clock-o"></i>
                             <div>
                                 <strong>Qui mô</strong>
-                                   <span>{{ $company->scale }} Nhân viên</span>
+                                <span>{{ $company->scale }} Nhân viên</span>
 
                             </div>
                         </li>
@@ -91,7 +91,7 @@
                             <i class="fa fa-money"></i>
                             <div>
                                 <strong>Linkedin:</strong>
-                                <span>{{$company->linkedin}}</span>
+                                <span>{{ $company->linkedin }}</span>
                             </div>
                         </li>
                     </ul>

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,7 +9,7 @@ use Illuminate\Contracts\Auth\CanResetPassword;
 
 class Employer extends Authenticatable implements CanResetPassword
 {
-     use HasFactory, Notifiable;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
@@ -24,17 +25,21 @@ class Employer extends Authenticatable implements CanResetPassword
         'top_point',
         'type_employer_id',
         'credit',
-         'otp',          // Add this line
-        'isVerify',     // Add this line
+        'otp',
+        'isVerify',
+        'identification_card_behind',
+        'isVerify_license',
+        'isVerifyCompany',
+        'level',
     ];
 
     public function jobPostings()
     {
         return $this->hasMany(JobPosting::class);
     }
-    public function companies()
+    public function company()
     {
-        return $this->hasMany(Company::class);
+        return $this->hasOne(Company::class);
     }
     public function messages()
     {
@@ -45,27 +50,27 @@ class Employer extends Authenticatable implements CanResetPassword
         return $this->jobPostings()->where('status', 0)->count();
     }
 
-      public function totalJobViews()
+    public function totalJobViews()
     {
         return $this->jobPostings()->sum('views');
     }
- public function slides()
+    public function slides()
     {
         return $this->hasMany(Slide::class);
     }
-     public function totalApplications()
+    public function totalApplications()
     {
         return $this->jobPostings()->withCount('applications')->get()->sum('applications_count');
     }
-     public function totalMessages()
+    public function totalMessages()
     {
         return $this->messages()->count();
     }
-     public function typeEmployer()
+    public function typeEmployer()
     {
         return $this->belongsTo(TypeEmployer::class, 'type_employer_id');
     }
-     public function updateTypeEmployer()
+    public function updateTypeEmployer()
     {
         // Fetch all TypeEmployers ordered by top_point descending
         $typeEmployers = TypeEmployer::where('status', 'active')
@@ -83,23 +88,22 @@ class Employer extends Authenticatable implements CanResetPassword
         }
     }
     public function pointsToNextTypeEmployer()
-{
-    // Get the next type employer with a higher top_point
-    $nextTypeEmployer = TypeEmployer::where('top_point', '>', $this->credit)
-        ->where('status', 'active')
-        ->orderBy('top_point', 'asc')
-        ->first();
+    {
+        // Get the next type employer with a higher top_point
+        $nextTypeEmployer = TypeEmployer::where('top_point', '>', $this->credit)
+            ->where('status', 'active')
+            ->orderBy('top_point', 'asc')
+            ->first();
 
-    // If there is no next type employer, return null
-    if (!$nextTypeEmployer) {
-        return null;
+        // If there is no next type employer, return null
+        if (!$nextTypeEmployer) {
+            return null;
+        }
+
+        // Calculate the points needed to reach the next type employer
+        return [
+            'points_needed' => $nextTypeEmployer->top_point - $this->credit,
+            'next_type_name' => $nextTypeEmployer->name,
+        ];
     }
-
-    // Calculate the points needed to reach the next type employer
-    return [
-        'points_needed' => $nextTypeEmployer->top_point - $this->credit,
-        'next_type_name' => $nextTypeEmployer->name,
-    ];
-}
-
 }

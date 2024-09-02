@@ -62,7 +62,7 @@
                                 </div>
                                 <div data-v-76d90e0b="" class="user-role mb-2">
                                     Tài khoản xác thực: <span data-v-76d90e0b="" class="text-primary mr-2">Cấp
-                                        1/3</span></div>
+                                        {{ Auth::guard('employer')->user()->level }}/3</span></div>
 
                             </a>
                         </li>

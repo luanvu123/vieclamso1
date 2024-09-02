@@ -135,6 +135,8 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('employers.show', $employer->id) }}" class="btn btn-info">View</a>
+                                        <a href="{{ route('employers.edit', $employer->id) }}"
+                                            class="btn btn-danger">Edit</a>
                                     </td>
                                 </tr>
                             @endforeach

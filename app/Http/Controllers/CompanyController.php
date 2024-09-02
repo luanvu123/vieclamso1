@@ -13,23 +13,38 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        $categories = Category::where('status', 1)
-            ->get();
+        $categories = Category::where('status', 1)->get();
         $employer = Auth::guard('employer')->user();
-        $companies = $employer->companies; // Assuming a relationship exists
-        return view('companies.index', compact('companies', 'categories'));
+        $company = $employer->company; // Lấy công ty duy nhất của employer
+
+        return view('companies.index', compact('company', 'categories'));
     }
+
 
     public function create()
     {
-        $categories = Category::where('status', 1)
-            ->get();
         $employer = Auth::guard('employer')->user();
+
+        // Kiểm tra nếu employer đã có công ty
+        if ($employer->company) {
+            return redirect()->route('companies.index')
+                ->with('error', 'You can only create one company.');
+        }
+
+        $categories = Category::where('status', 1)->get();
         return view('companies.create', compact('employer', 'categories'));
     }
 
     public function store(Request $request)
     {
+        $employer = Auth::guard('employer')->user();
+
+        // Kiểm tra nếu employer đã có công ty
+        if ($employer->company) {
+            return redirect()->route('companies.index')
+                ->with('error', 'You can only create one company.');
+        }
+
         $request->validate([
             'name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
@@ -38,7 +53,6 @@ class CompanyController extends Controller
             'address' => 'nullable|string|max:255',
             'map' => 'nullable|string|max:255',
             'detail' => 'nullable|string',
-            'status' => 'boolean',
             'url' => 'nullable|url',
             'website' => 'nullable|url',
             'facebook' => 'nullable|url',
@@ -53,7 +67,6 @@ class CompanyController extends Controller
             'address',
             'map',
             'detail',
-            'status',
             'url',
             'website',
             'facebook',
@@ -74,7 +87,7 @@ class CompanyController extends Controller
             $companyData['logo'] = $logoPath;
         }
 
-        $companyData['employer_id'] = Auth::guard('employer')->id(); // Set employer_id
+        $companyData['employer_id'] = $employer->id(); // Set employer_id
         $companyData['slug'] = Str::slug($request->name); // Tạo slug từ tên công ty
         $companyData['top'] = 0; // Đặt giá trị mặc định cho cột top
         $company = Company::create($companyData);
@@ -83,9 +96,9 @@ class CompanyController extends Controller
             $company->categories()->sync($request->category);
         }
 
-
         return redirect()->route('companies.index')->with('success', 'Company created successfully.');
     }
+
 
     public function show($id)
     {
@@ -112,7 +125,6 @@ class CompanyController extends Controller
             'address' => 'nullable|string|max:255',
             'map' => 'nullable',
             'detail' => 'nullable|string',
-            'status' => 'boolean',
             'url' => 'nullable|url',
             'website' => 'nullable|url',
             'facebook' => 'nullable|url',
@@ -129,7 +141,6 @@ class CompanyController extends Controller
             'address',
             'map',
             'detail',
-            'status',
             'url',
             'website',
             'facebook',

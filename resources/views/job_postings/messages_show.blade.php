@@ -34,7 +34,7 @@
                 @else
                     <div class="message-bubble me">
                         <div class="message-avatar">
-                            <img src="{{ $message->employer->avatar ? asset('storage/' . $message->employer->avatar) : asset('storage/avatar/avatar-default.jpg') }}"
+                            <img src="{{ $message->employer->company->logo ? asset('storage/' . $message->employer->company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
                                 alt="">
                         </div>
                         <div class="message-text">

@@ -89,12 +89,18 @@ class JobPostingController extends Controller
     public function create()
     {
         $employer = Auth::guard('employer')->user();
+
+        if ($employer->level != 3) {
+            return redirect()->back()->with('error', 'Bạn cần có cấp độ 3 để tạo việc làm.');
+        }
+
         $email = $employer->email;
         $categories = Category::all();
         $cities = City::all();
-        $companies = $employer->companies; // Lấy tất cả các công ty của nhà tuyển dụng
-        return view('job_postings.create', compact('email', 'categories', 'companies', 'cities'));
+        $company = $employer->company;
+        return view('job_postings.create', compact('email', 'categories', 'company', 'cities'));
     }
+
 
     public function show(Request $request, $id)
     {
@@ -377,15 +383,14 @@ class JobPostingController extends Controller
 
 
 
-  public function loyalCustomer()
-{
-    $employer = Auth::guard('employer')->user();
-    $nextType = $employer->pointsToNextTypeEmployer();
+    public function loyalCustomer()
+    {
+        $employer = Auth::guard('employer')->user();
+        $nextType = $employer->pointsToNextTypeEmployer();
 
-    // Retrieve the list of purchases for the employer
-    $purchases = Purchased::where('employer_id', $employer->id)->with('product')->get();
+        // Retrieve the list of purchases for the employer
+        $purchases = Purchased::where('employer_id', $employer->id)->with('product')->get();
 
-    return view('job_postings.reward', compact('employer', 'nextType', 'purchases'));
-}
-
+        return view('job_postings.reward', compact('employer', 'nextType', 'purchases'));
+    }
 }

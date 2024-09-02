@@ -12,21 +12,18 @@
                 <div data-v-34354262="" class="d-flex shadow-sm">
                     <div data-v-34354262="">
                         <div data-v-2015c63f="" data-v-34354262="" class="list-group rounded"><a data-v-2015c63f=""
-                                href="/app/account/settings/password-login"
+                                href="{{ route('employer.change-password') }}"
                                 class="list-group-item list-group-item-action border-0"><i data-v-2015c63f=""
                                     class="fa mr-2 fa-lock"></i> Đổi mật khẩu </a><a data-v-2015c63f=""
-                                href="/app/account/settings"
+                                href="{{ route('employer.profile') }}"
                                 class="list-group-item list-group-item-action border-0 nuxt-link-active"><i
                                     data-v-2015c63f="" class="fa mr-2 fa-user"></i> Thông tin cá nhân </a><a
-                                data-v-2015c63f="" href="/app/account/settings/gpkd"
+                                data-v-2015c63f="" href="{{ route('employer.gpkd') }}"
                                 class="list-group-item list-group-item-action border-0"><i data-v-2015c63f=""
                                     class="fa mr-2 fa-file"></i> Giấy đăng ký doanh nghiệp </a><a data-v-2015c63f=""
-                                href="/app/account/settings/company" aria-current="page"
+                                href="{{ route('companies.index') }}" aria-current="page"
                                 class="list-group-item list-group-item-action border-0 nuxt-link-exact-active nuxt-link-active active"><i
-                                    data-v-2015c63f="" class="fa mr-2 fa-building"></i> Thông tin công ty </a><a
-                                data-v-2015c63f="" href="/app/account/settings/connect-api"
-                                class="list-group-item list-group-item-action border-0"><i data-v-2015c63f=""
-                                    class="fa mr-2 fa-share-alt"></i> Kết nối API </a></div>
+                                    data-v-2015c63f="" class="fa mr-2 fa-building"></i> Thông tin công ty </a></div>
                     </div>
                     <div data-v-34354262="" class="bg-white content rounded">
                         <form data-v-7805af9a="" data-v-34354262="">
@@ -191,8 +188,9 @@
                                         <div class="modal-header border-bottom-1 px-4">
                                             <h5
                                                 class="modal-title text-truncate overflow-hidden font-weight-600 text-nowrap">
-                                                <!---->Thông báo</h5> <button aria-label="Close" data-dismiss="modal"
-                                                type="button" class="close"><span aria-hidden="true"><i
+                                                <!---->Thông báo
+                                            </h5> <button aria-label="Close" data-dismiss="modal" type="button"
+                                                class="close"><span aria-hidden="true"><i
                                                         class="fal fa-times"></i></span></button>
                                         </div>
                                         <div class="modal-body"></div>
@@ -210,9 +208,10 @@
                                         <div class="modal-header border-bottom-1 px-4">
                                             <h5
                                                 class="modal-title text-truncate overflow-hidden font-weight-600 text-nowrap">
-                                                <!---->Yêu cầu cập nhật thông tin công ty</h5> <button aria-label="Close"
-                                                data-dismiss="modal" type="button" class="close"><span
-                                                    aria-hidden="true"><i class="fal fa-times"></i></span></button>
+                                                <!---->Yêu cầu cập nhật thông tin công ty
+                                            </h5> <button aria-label="Close" data-dismiss="modal" type="button"
+                                                class="close"><span aria-hidden="true"><i
+                                                        class="fal fa-times"></i></span></button>
                                         </div>
                                         <div data-v-dbd28d6a="" class="modal-body">
                                             <p data-v-dbd28d6a="">Do có cập nhật <span data-v-dbd28d6a=""
@@ -231,7 +230,8 @@
                                                             class="input-container ml-auto position-relative"><!---->
                                                             <!----> <!----> <input data-v-0ec03045="" id="cimzhOFwud"
                                                                 autocomplete="true" placeholder="Nhập lý do"
-                                                                type="text" class="form-control"> <!----></div> <!---->
+                                                                type="text" class="form-control"> <!---->
+                                                        </div> <!---->
                                                     </div>
                                                 </div>
                                                 <div data-v-dbd28d6a="" class="item"><label data-v-dbd28d6a=""
