@@ -9,7 +9,7 @@ use Illuminate\Contracts\Auth\CanResetPassword;
 
 class Employer extends Authenticatable implements CanResetPassword
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable;  
 
     protected $fillable = [
         'name',

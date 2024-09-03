@@ -7,6 +7,8 @@ use App\Models\Cartlist;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ThankYouEmail;
 
 class CartListController extends Controller
 {
@@ -101,10 +103,18 @@ class CartListController extends Controller
             ]);
         }
 
+        $orderId = $order->id;
+        $email = $employer->email;
+        $amount =  $order->total_amount;
+        $this->sendThankYouEmail($email, $orderId, $amount);
         // Clear the cart after order is placed
         Cartlist::where('employer_id', $employer->id)->delete();
 
         return redirect()->route('cartlist.showOrder', $order->id)->with('success', 'Your order has been placed successfully!');
+    }
+    public function sendThankYouEmail($email, $orderId, $amount)
+    {
+        Mail::to($email)->send(new ThankYouEmail($orderId, $amount));
     }
 
     public function listOrder()

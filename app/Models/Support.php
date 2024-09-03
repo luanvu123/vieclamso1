@@ -14,5 +14,9 @@ class Support extends Model
     {
         return $this->belongsTo(TypeSupport::class);
     }
+    public function emailReplies()
+    {
+        return $this->hasMany(EmailReply::class);
+    }
 }
 

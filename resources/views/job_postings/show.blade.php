@@ -32,7 +32,7 @@
 
          <form method="GET" action="{{ route('job-postings.show', $jobPosting->id) }}">
              <div class="col-md-6">
-                 <select name="status" class="chosen-select-no-single" onchange="this.form.submit()">
+                 <select name="status" class="chosen-select-no-singl " onchange="this.form.submit()">
                      <option value="">Filter by status</option>
                      <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Đã ứng tuyển</option>
                      <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>NTD đã xem hồ sơ</option>
@@ -42,7 +42,7 @@
                  <div class="margin-bottom-15"></div>
              </div>
              <div class="col-md-6">
-                 <select name="sort" class="chosen-select-no-single" onchange="this.form.submit()">
+                 <select name="sort" class="chosen-select-no-singl" onchange="this.form.submit()">
                      <option value="created_at" {{ request('sort') == 'created_at' ? 'selected' : '' }}>Newest first
                      </option>
                      <option value="name" {{ request('sort') == 'name' ? 'selected' : '' }}>Sort by name</option>
@@ -190,10 +190,11 @@
                              </li>
                              <li><i class="fa fa-calendar"></i> {{ $application->created_at }}</li>
                          </ul>
-                         <div class="clearfix"></div> 
+                         <div class="clearfix"></div>
                      </div>
                  </div>
              @endforeach
          </div>
      </div>
+
  @endsection

@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Validator;
 
 class EmployerRegisterController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('guest:employer');
-    // }
-
     public function showRegistrationForm()
     {
         return view('pages.app-register');
