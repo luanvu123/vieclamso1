@@ -14,6 +14,7 @@ use App\Models\Feedback;
 use App\Models\GenrePost;
 use App\Models\Info;
 use App\Models\JobReport;
+use App\Models\Order;
 use App\Models\PublicLink;
 use App\Models\Slug;
 use App\Models\Support;
@@ -68,6 +69,7 @@ class AppServiceProvider extends ServiceProvider
         $feedbackCountTwoHour = Feedback::where('created_at', '>=', $twoHoursAgo)->count();
         $supportCountTwoHour = Support::where('created_at', '>=', $twoHoursAgo)->count();
         $publiclink_layout = PublicLink::where('status', 'active')->get();
+        $ordermanagesCountTwoHour=Order::where('created_at', '>=', $twoHoursAgo)->count();
         // Chia sẻ dữ liệu với tất cả các view
         View::share([
             'activeJobListingsCount' => $activeJobListingsCount,
@@ -89,7 +91,8 @@ class AppServiceProvider extends ServiceProvider
             'feedbackCountTwoHour' => $feedbackCountTwoHour,
             'supportCountTwoHour' => $supportCountTwoHour,
             'reportCountTwoHour' => $reportCountTwoHour,
-            'consultationCountTwoHour' => $consultationCountTwoHour
+            'consultationCountTwoHour' => $consultationCountTwoHour,
+            'ordermanagesCountTwoHour' => $ordermanagesCountTwoHour,
         ]);
     }
 }

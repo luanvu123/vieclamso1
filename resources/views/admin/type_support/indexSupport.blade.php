@@ -12,6 +12,7 @@
                     <th>Type of Support</th>
                     <th>Description</th>
                     <th>Status</th>
+                    <th scope="col">Gửi email</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -32,6 +33,12 @@
                                 <option value="3" {{ $support->status === 'closed' ? 'selected' : '' }}>Closed</option>
                             </select>
                         </td>
+                        <td>
+                            <button onclick="redirectToEmailPage('{{ $support->id }}', '{{ $support->email }}')"
+                                class="btn btn-primary">
+                                Gửi Email <i class="fa-solid fa-envelope" style="color: #ffffff;"></i>
+                            </button>
+                        </td>
 
 
                         <td>
@@ -48,4 +55,11 @@
             </tbody>
         </table>
     </div>
+    <script>
+        function redirectToEmailPage(contactId, emailContact) {
+            // Chuyển hướng đến trang gửi email và truyền giá trị contact_id và emailContact trong URL
+            window.location.href = "{{ route('admin.about.email') }}?contact_id=" + contactId + "&emailContact=" +
+                emailContact;
+        }
+    </script>
 @endsection

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class EmailReply extends Model
 {
     use HasFactory;
+    protected $table = 'emailreplies';
 
     protected $fillable = [
         'support_id',

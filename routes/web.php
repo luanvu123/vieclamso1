@@ -42,6 +42,7 @@ use App\Http\Controllers\GenrePostController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyFollowerController;
 use App\Http\Controllers\ConsultationController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HobbyController;
@@ -196,6 +197,18 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('job-postings-manage', JobsManageController::class);
     Route::get('/jobPosting-choose', [JobsManageController::class, 'jobPosting_choose'])->name('jobPosting-choose');
+
+
+Route::get('/tin-nhan-da-gui', [ContactController::class, 'sent'])->name('about.sent');
+Route::delete('sent/{id}', [ContactController::class, 'destroy_sent'])->name('about.destroy_sent');
+
+
+Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('send-email');
+Route::get('/admin/about/email', function () {
+    $to = request()->query('to');
+    return view('admin.about.email', compact('to'));
+})->name('admin.about.email');
+
 });
 Route::get('/candidate-login-google', [CandidateController::class, 'redirectToGoogle'])->name('candidate.login.google');
 Route::get('candidate/register', [CandidateController::class, 'showRegistrationForm'])->name('candidate.register');

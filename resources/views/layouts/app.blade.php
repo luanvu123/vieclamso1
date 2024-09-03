@@ -56,14 +56,10 @@
 
             <div class="dashboard-nav">
                 <div class="dashboard-nav-inner">
-
-                    <ul data-submenu-title="Start">
+                    <ul>
                         <li class="{{ Route::is('home') ? 'active' : '' }}">
                             <a href="{{ route('home') }}">Dashboard</a>
                         </li>
-                    </ul>
-
-                    <ul data-submenu-title="Management">
                         <li
                             class="{{ Route::is('users.index') || Route::is('roles.index') || Route::is('categories.index') ? 'active-submenu' : '' }}">
                             <a href="#">General Management</a>
@@ -112,6 +108,28 @@
                                         @endif
                                     </a>
                                 </li>
+                                 <li class="{{ Route::is('feedbacks.index.list') ? 'active-submenu' : '' }}">
+                            <a href="{{ route('feedbacks.index.list') }}">Feedbacks
+                                @if ($feedbackCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $feedbackCountTwoHour }}</span>
+                                @endif
+                            </a>
+                        </li>
+                        <li class="{{ Route::is('supports.index.list') ? 'active-submenu' : '' }}">
+                            <a href="{{ route('supports.index.list') }}">Support
+                                @if ($supportCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $supportCountTwoHour }}</span>
+                                @endif
+                            </a>
+                        </li>
+
+                        <li class="{{ Route::is('job-reports.index') ? 'active-submenu' : '' }}">
+                            <a href="{{ route('job-reports.index') }}">Report
+                                @if ($reportCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $reportCountTwoHour }}</span>
+                                @endif
+                            </a>
+                        </li>
                             </ul>
                         </li>
 
@@ -142,9 +160,9 @@
                                 </li>
                                 <li class="{{ Route::is('ordermanages.index') ? 'active' : '' }}">
                                     <a href="{{ route('ordermanages.index') }}">Manage Order
-                                        {{-- @if ($ordermanagesCountTwoHour > 0)
+                                        @if ($ordermanagesCountTwoHour > 0)
                                             <span class="nav-tag">{{ $ordermanagesCountTwoHour }}</span>
-                                        @endif --}}
+                                        @endif
                                     </a>
                                 </li>
                                 <li class="{{ Route::is('products.index') ? 'active' : '' }}">
@@ -180,41 +198,18 @@
                                     <a href="{{ route('admin.info.index') }}">Edit Front-end
                                     </a>
                                 </li>
-                                <li class="{{ Route::is('feedbacks.index.list') ? 'active-submenu' : '' }}">
-                                    <a href="{{ route('feedbacks.index.list') }}">Feedbacks
-                                        @if ($feedbackCountTwoHour > 0)
-                                            <span class="nav-tag">{{ $feedbackCountTwoHour }}</span>
-                                        @endif
-                                    </a>
-                                </li>
-                                <li class="{{ Route::is('supports.index.list') ? 'active-submenu' : '' }}">
-                                    <a href="{{ route('supports.index.list') }}">Support
-                                        @if ($supportCountTwoHour > 0)
-                                            <span class="nav-tag">{{ $supportCountTwoHour }}</span>
-                                        @endif
-                                    </a>
-                                </li>
 
-                                <li class="{{ Route::is('job-reports.index') ? 'active-submenu' : '' }}">
-                                    <a href="{{ route('job-reports.index') }}">Report
-                                        @if ($reportCountTwoHour > 0)
-                                            <span class="nav-tag">{{ $reportCountTwoHour }}</span>
-                                        @endif
-                                    </a>
-                                </li>
-                                <li class="{{ Route::is('consultations.index') ? 'active-submenu' : '' }}">
-                                    <a href="{{ route('consultations.index') }}">Đăng kí nhận tư vấn
-                                        @if ($consultationCountTwoHour > 0)
-                                            <span class="nav-tag">{{ $consultationCountTwoHour }}</span>
-                                        @endif
-                                    </a>
-                                </li>
                             </ul>
                         </li>
 
+                        <li class="{{ Route::is('consultations.index') ? 'active-submenu' : '' }}">
+                            <a href="{{ route('consultations.index') }}">Đăng kí nhận tư vấn
+                                @if ($consultationCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $consultationCountTwoHour }}</span>
+                                @endif
+                            </a>
+                        </li>
                     </ul>
-
-
                     </ul>
                     <ul data-submenu-title="Account">
                         <li><a href="{{ route('users.edit', auth()->user()) }}">My Profile</a></li>
