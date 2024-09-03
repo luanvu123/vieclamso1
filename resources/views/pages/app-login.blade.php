@@ -40,8 +40,7 @@
                  <p class="or text-center fz-12px">Hoặc đăng nhập bằng</p>
              </div>
              <div class="login-social-list">
-                 <a href=""
-                     class="btn btn-default btn-signin input-block-level h-40 btn-login-social">
+                 <a href="" class="btn btn-default btn-signin input-block-level h-40 btn-login-social">
                      <i class="fa-brands fa-google"></i>
                      <span class="ml-2">Google</span>
                  </a>
@@ -56,15 +55,24 @@
                      <p class="mb-0">
                          <label for="agreement-social-login">
                              Bằng việc đăng nhập bằng tài khoản mạng xã hội, tôi đã đọc và đồng ý với <a target="_blank"
-                                 class="text-success" href="#">Điều khoản dịch vụ</a> và <a
-                                 target="_blank" class="text-success" href="#">Chính sách bảo mật</a>
+                                 class="text-success" href="#">Điều khoản dịch vụ</a> và <a target="_blank"
+                                 class="text-success" href="#">Chính sách bảo mật</a>
                              của TopCV
                          </label>
                      </p>
                  </div>
              </div>
          </form>
-
+         @if (session('otp_needed'))
+             <form method="POST" action="{{ route('employer.verify.otp') }}" id="otp-form">
+                 @csrf
+                 <div class="form-group mb-3">
+                     <label for="otp_code">Nhập mã OTP</label>
+                     <input type="text" name="otp_code" class="form-control" required>
+                 </div>
+                 <button type="submit" class="btn btn-success">Xác thực OTP</button>
+             </form>
+         @endif
          <div class="mt-3 d-flex justify-content-around option-auth">
              <div>
                  <span>Bạn chưa có tài khoản?</span>

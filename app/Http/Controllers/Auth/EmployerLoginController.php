@@ -5,12 +5,17 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employer;
+use App\Models\OTP;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Twilio\Rest\Client;
+use App\Mail\SendOTP;
 
 class EmployerLoginController extends Controller
 {
@@ -24,9 +29,53 @@ class EmployerLoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('employer')->attempt($credentials)) {
-            return redirect()->route('job-postings.dashboard')->with('success', 'Xin chào ' . Auth::guard('employer')->user()->name);
+            $employer = Auth::guard('employer')->user();
+
+            if ($employer->isVerifyEmail == false) {
+                // Gửi mã OTP đến email của người dùng
+                $otp = OTP::create([
+                    'employer_id' => $employer->id,
+                    'otp_code' => rand(100000, 999999),
+                    'expires_at' => Carbon::now()->addMinutes(10),
+                ]);
+
+                Mail::to($employer->email)->send(new SendOTP($otp->otp_code));
+
+                Auth::guard('employer')->logout();
+                return redirect()->back()->with('otp_needed', true)
+                    ->withErrors(['otp' => 'Email của bạn chưa được xác thực. Vui lòng kiểm tra email để nhập mã OTP.']);
+            }
+
+            return redirect()->route('job-postings.dashboard')->with('success', 'Xin chào ' . $employer->name);
         } else {
             return redirect()->back()->withInput()->withErrors(['email' => 'Thông tin đăng nhập không chính xác']);
+        }
+    }
+
+    public function verifyEmail(Request $request)
+    {
+        $request->validate([
+            'otp_code' => 'required|numeric',
+        ]);
+
+        $otp = OTP::where('otp_code', $request->input('otp_code'))
+            ->where('expires_at', '>=', Carbon::now())
+            ->first();
+
+        if ($otp) {
+            $employer = Employer::find($otp->employer_id);
+            $employer->isVerifyEmail = true;
+            $employer->save();
+
+            // Xóa OTP sau khi xác thực
+            $otp->delete();
+
+            // Đăng nhập lại sau khi xác thực OTP thành công
+            Auth::guard('employer')->login($employer);
+
+            return redirect()->route('job-postings.dashboard')->with('success', 'Xác thực email thành công.');
+        } else {
+            return redirect()->back()->withErrors(['otp_code' => 'Mã OTP không hợp lệ hoặc đã hết hạn.']);
         }
     }
 
@@ -62,7 +111,7 @@ class EmployerLoginController extends Controller
         $employer = Auth::guard('employer')->user();
         return view('employer.gpkd', compact('employer'));
     }
-     public function formCompany()
+    public function formCompany()
     {
         $employer = Auth::guard('employer')->user();
         return view('employer.company', compact('employer'));

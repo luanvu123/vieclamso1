@@ -105,6 +105,7 @@ Auth::routes();
 
 
 
+Route::post('/employer/verify-otp/email', [EmployerLoginController::class, 'verifyEmail'])->name('employer.verify.otp');
 
 Route::prefix('employer')->group(function () {
     Route::get('forget-password', [EmployerForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
