@@ -5,7 +5,7 @@
     <!-- Basic Page Needs
 ================================================== -->
     <meta charset="utf-8">
-    <title>Work Scout</title>
+    <title>TuyenDungSo1_Trung tâm tìm việc</title>
 
     <!-- Mobile Specific Metas
 ================================================== -->
