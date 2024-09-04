@@ -65,7 +65,7 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('candidates.show', $candidate->id) }}" class="btn btn-info">Xem</a>
+                        <a href="{{ route('candidates.show', $candidate->id) }}"><i class="fa fa-eye"></i> View</a>
                     </td>
                     </tr>
                     @endforeach

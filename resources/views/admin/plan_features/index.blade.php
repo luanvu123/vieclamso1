@@ -20,13 +20,13 @@
                     <td>{{ $planFeature->id }}</td>
                     <td>{{ $planFeature->feature }}</td>
                     <td>
-                        <a href="{{ route('plan-features.show', $planFeature->id) }}">View</a>
-                        <a href="{{ route('plan-features.edit', $planFeature->id) }}">Edit</a>
-                        <form action="{{ route('plan-features.destroy', $planFeature->id) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('plan-features.show', $planFeature->id) }}"><i class="fa fa-eye"></i>View</a>
+                        <a href="{{ route('plan-features.edit', $planFeature->id) }}"><i class="fa fa-pencil"></i>Edit</a>
+                        {{-- <form action="{{ route('plan-features.destroy', $planFeature->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit">Delete</button>
-                        </form>
+                        </form> --}}
                     </td>
                 </tr>
             @endforeach

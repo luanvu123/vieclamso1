@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/colors.css') }}">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 </head>
@@ -58,20 +59,23 @@
                 <div class="dashboard-nav-inner">
                     <ul>
                         <li class="{{ Route::is('home') ? 'active' : '' }}">
-                            <a href="{{ route('home') }}">Dashboard</a>
+                            <a href="{{ route('home') }}"><span class="ln ln-icon-Dashboard"></span> Dashboard</a>
                         </li>
                         <li
                             class="{{ Route::is('users.index') || Route::is('roles.index') || Route::is('categories.index') ? 'active-submenu' : '' }}">
-                            <a href="#">General Management</a>
+                            <a href="#"><span class="ln ln-icon-Management"></span> General Management</a>
                             <ul>
                                 <li class="{{ Route::is('users.index') ? 'active' : '' }}">
-                                    <a href="{{ route('users.index') }}">Manage Users</a>
+                                    <a href="{{ route('users.index') }}"><span class="ln ln-icon-Add-User"></span>
+                                        Manage Users</a>
                                 </li>
                                 <li class="{{ Route::is('roles.index') ? 'active' : '' }}">
-                                    <a href="{{ route('roles.index') }}">Manage Roles</a>
+                                    <a href="{{ route('roles.index') }}"><span class="ln ln-icon-Checked-User"></span>
+                                        Manage Roles</a>
                                 </li>
                                 <li class="{{ Route::is('categories.index') ? 'active' : '' }}">
-                                    <a href="{{ route('categories.index') }}">Manage Categories</a>
+                                    <a href="{{ route('categories.index') }}"><span
+                                            class="ln ln-icon-Credit-Card"></span> Manage Categories</a>
                                 </li>
 
 
@@ -80,122 +84,172 @@
 
                         <li
                             class="{{ Route::is('posts.index') || Route::is('genre-posts.index') || Route::is('slugs.index') || Route::is('courses.index') ? 'active-submenu' : '' }}">
-                            <a href="#">Posts</a>
+                            <a href="#"><span class="ln ln-icon-Newspaper"></span> Posts</a>
                             <ul>
                                 <li class="{{ Route::is('posts.index') ? 'active' : '' }}">
-                                    <a href="{{ route('posts.index') }}">Manage Posts</a>
+                                    <a href="{{ route('posts.index') }}"><span class="ln ln-icon-Newspaper-2"></span>
+                                        Manage Posts</a>
                                 </li>
                                 <li class="{{ Route::is('genre-posts.index') ? 'active' : '' }}">
-                                    <a href="{{ route('genre-posts.index') }}">Manage Genres</a>
+                                    <a href="{{ route('genre-posts.index') }}"><span
+                                            class="ln ln-icon-Navigat-Start"></span> Manage Genres</a>
                                 </li>
                                 <li class="{{ Route::is('slugs.index') ? 'active' : '' }}">
-                                    <a href="{{ route('slugs.index') }}">Manage Tags</a>
+                                    <a href="{{ route('slugs.index') }}"><span class="ln ln-icon-Tag-2"></span> Manage
+                                        Tags</a>
                                 </li>
                                 <li class="{{ Route::is('courses.index') ? 'active' : '' }}">
-                                    <a href="{{ route('courses.index') }}">Manage Courses</a>
+                                    <a href="{{ route('courses.index') }}"><span class="ln ln-icon-Student-Hat"></span>
+                                        Manage Courses</a>
                                 </li>
 
                             </ul>
                         </li>
 
-                        <li class="{{ Route::is('candidates.index') ? 'active-submenu' : '' }}">
-                            <a href="#">Candidates</a>
+                        <li
+                            class="{{ Route::is('candidates.index') || Route::is('feedbacks.index.list') || Route::is('supports.index.list') || Route::is('job-reports.index') ? 'active-submenu' : '' }}">
+                            <a href="#"><span class="ln ln-icon-Student-Female"></span> Candidates
+
+                                @if ($reportCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $reportCountTwoHour }}</span>
+                                @endif
+                                @if ($candidateCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $candidateCountTwoHour }}</span>
+                                @endif
+                                @if ($feedbackCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $feedbackCountTwoHour }}</span>
+                                @endif
+                                @if ($supportCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $supportCountTwoHour }}</span>
+                                @endif
+                            </a>
                             <ul>
                                 <li class="{{ Route::is('candidates.index') ? 'active' : '' }}">
-                                    <a href="{{ route('candidates.index') }}">Manage Candidates
+                                    <a href="{{ route('candidates.index') }}"><span
+                                            class="ln ln-icon-Student-Male"></span> Manage Candidates
                                         @if ($candidateCountTwoHour > 0)
                                             <span class="nav-tag">{{ $candidateCountTwoHour }}</span>
                                         @endif
                                     </a>
                                 </li>
-                                 <li class="{{ Route::is('feedbacks.index.list') ? 'active-submenu' : '' }}">
-                            <a href="{{ route('feedbacks.index.list') }}">Feedbacks
-                                @if ($feedbackCountTwoHour > 0)
-                                    <span class="nav-tag">{{ $feedbackCountTwoHour }}</span>
-                                @endif
-                            </a>
-                        </li>
-                        <li class="{{ Route::is('supports.index.list') ? 'active-submenu' : '' }}">
-                            <a href="{{ route('supports.index.list') }}">Support
-                                @if ($supportCountTwoHour > 0)
-                                    <span class="nav-tag">{{ $supportCountTwoHour }}</span>
-                                @endif
-                            </a>
-                        </li>
+                                <li class="{{ Route::is('feedbacks.index.list') ? 'active-submenu' : '' }}">
+                                    <a href="{{ route('feedbacks.index.list') }}"><span class="ln ln-icon-Mail-Reply">
+                                        </span> Feedbacks
+                                        @if ($feedbackCountTwoHour > 0)
+                                            <span class="nav-tag">{{ $feedbackCountTwoHour }}</span>
+                                        @endif
+                                    </a>
+                                </li>
+                                <li class="{{ Route::is('supports.index.list') ? 'active-submenu' : '' }}">
+                                    <a href="{{ route('supports.index.list') }}"><span
+                                            class="ln ln-icon-Support"></span> Support
+                                        @if ($supportCountTwoHour > 0)
+                                            <span class="nav-tag">{{ $supportCountTwoHour }}</span>
+                                        @endif
+                                    </a>
+                                </li>
 
-                        <li class="{{ Route::is('job-reports.index') ? 'active-submenu' : '' }}">
-                            <a href="{{ route('job-reports.index') }}">Report
-                                @if ($reportCountTwoHour > 0)
-                                    <span class="nav-tag">{{ $reportCountTwoHour }}</span>
-                                @endif
-                            </a>
-                        </li>
+                                <li class="{{ Route::is('job-reports.index') ? 'active-submenu' : '' }}">
+                                    <a href="{{ route('job-reports.index') }}"><span
+                                            class="ln ln-icon-Inbox-Reply"></span> Report
+                                        @if ($reportCountTwoHour > 0)
+                                            <span class="nav-tag">{{ $reportCountTwoHour }}</span>
+                                        @endif
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
                         <li
                             class="{{ Route::is('employers.index') || Route::is('job-postings-manage.index') || Route::is('employers.purchasedManage') || Route::is('admin.companies.index') || Route::is('ordermanages.index') || Route::is('products.index') ? 'active-submenu' : '' }}">
-                            <a href="#">Employers</a>
+                            <a href="#"><span class="ln ln-icon-User"></span> Employers
+
+                                @if ($orderpurchasedCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $orderpurchasedCountTwoHour }}</span>
+                                @endif
+                                @if ($employerCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $employerCountTwoHour }}</span>
+                                @endif
+                                @if ($jobPostingCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $jobPostingCountTwoHour }}</span>
+                                @endif
+                                @if ($companyCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $companyCountTwoHour }}</span>
+                                @endif
+                            </a>
                             <ul>
                                 <li class="{{ Route::is('employers.index') ? 'active' : '' }}">
-                                    <a href="{{ route('employers.index') }}">Manage Employers
+                                    <a href="{{ route('employers.index') }}"><span
+                                            class="ln ln-icon-Add-UserStar"></span> Manage Employers
                                         @if ($employerCountTwoHour > 0)
                                             <span class="nav-tag">{{ $employerCountTwoHour }}</span>
                                         @endif
                                     </a>
                                 </li>
                                 <li class="{{ Route::is('job-postings-manage.index') ? 'active' : '' }}">
-                                    <a href="{{ route('job-postings-manage.index') }}">Manage Jobs
+                                    <a href="{{ route('job-postings-manage.index') }}"><span
+                                            class="ln ln-icon-Computer-3"></span> Manage Jobs
                                         @if ($jobPostingCountTwoHour > 0)
                                             <span class="nav-tag">{{ $jobPostingCountTwoHour }}</span>
                                         @endif
                                     </a>
                                 </li>
                                 <li class="{{ Route::is('admin.companies.index') ? 'active' : '' }}">
-                                    <a href="{{ route('admin.companies.index') }}">Manage Company
+                                    <a href="{{ route('admin.companies.index') }}"><span
+                                            class="ln ln-icon-Computer-Secure"></span> Manage Company
                                         @if ($companyCountTwoHour > 0)
                                             <span class="nav-tag">{{ $companyCountTwoHour }}</span>
                                         @endif
                                     </a>
                                 </li>
                                 <li class="{{ Route::is('ordermanages.index') ? 'active' : '' }}">
-                                    <a href="{{ route('ordermanages.index') }}">Manage Order
+                                    <a href="{{ route('ordermanages.index') }}"><span
+                                            class="ln ln-icon-Computer"></span> Manage Order
                                         @if ($ordermanagesCountTwoHour > 0)
                                             <span class="nav-tag">{{ $ordermanagesCountTwoHour }}</span>
                                         @endif
                                     </a>
                                 </li>
                                 <li class="{{ Route::is('products.index') ? 'active' : '' }}">
-                                    <a href="{{ route('products.index') }}">Manage Product
+                                    <a href="{{ route('products.index') }}"><span class="ln ln-icon-Hoodie"></span>
+                                        Manage Product
                                     </a>
                                 </li>
                                 <li class="{{ Route::is('employers.purchasedManage') ? 'active' : '' }}">
-                                    <a href="{{ route('employers.purchasedManage') }}">Manage Purchased
+                                    <a href="{{ route('employers.purchasedManage') }}"> <span
+                                            class="ln ln-icon-Shopping-Cart"></span> Manage Purchased
+
                                     </a>
                                 </li>
-
+                                @if ($orderpurchasedCountTwoHour > 0)
+                                    <span class="nav-tag">{{ $orderpurchasedCountTwoHour }}</span>
+                                @endif
                             </ul>
                         </li>
                         <li
                             class="{{ Route::is('plan-features.index') || Route::is('plan-currencies.index') || Route::is('carts.index') ? 'active-submenu' : '' }}">
-                            <a href="#">Carts</a>
+                            <a href="#"><span class="ln ln-icon-Shopping-Basket"></span> Carts</a>
                             <ul>
                                 <li class="{{ Route::is('plan-currencies.index') ? 'active' : '' }}"><a
-                                        href="{{ route('plan-currencies.index') }}">Plan Currencies</a></li>
+                                        href="{{ route('plan-currencies.index') }}"><span
+                                            class="ln ln-icon-Money-2"></span> Plan Currencies</a></li>
                                 <li class="{{ Route::is('plan-features.index') ? 'active' : '' }}"><a
-                                        href="{{ route('plan-features.index') }}">Plan Features</a></li>
+                                        href="{{ route('plan-features.index') }}"><span
+                                            class="ln ln-icon-Plane"></span> Plan Features</a></li>
                                 <li class="{{ Route::is('carts.index') ? 'active' : '' }}"><a
-                                        href="{{ route('carts.index') }}">Carts</a></li>
+                                        href="{{ route('carts.index') }}"><span
+                                            class="ln ln-icon-Cart-Quantity"></span> Services</a></li>
                             </ul>
                         </li>
 
 
                         <li
                             class="{{ Route::is('admin.info.index') || Route::is('feedbacks.index.list') || Route::is('supports.index.list') || Route::is('recruitment_services.index') ? 'active-submenu' : '' }}">
-                            <a href="#">Front-end</a>
+                            <a href="#"><span class="ln ln-icon-Landscape-2"></span> Front-end</a>
                             <ul>
                                 <li class="{{ Route::is('admin.info.index') ? 'active-submenu' : '' }}">
-                                    <a href="{{ route('admin.info.index') }}">Edit Front-end
+                                    <a href="{{ route('admin.info.index') }}"><span
+                                            class="ln ln-icon-File-Edit"></span> Edit Front-end
                                     </a>
                                 </li>
 
@@ -203,7 +257,8 @@
                         </li>
 
                         <li class="{{ Route::is('consultations.index') ? 'active-submenu' : '' }}">
-                            <a href="{{ route('consultations.index') }}">Đăng kí nhận tư vấn
+                            <a href="{{ route('consultations.index') }}"><span class="ln ln-icon-Pointer"></span>
+                                Đăng kí nhận tư vấn
                                 @if ($consultationCountTwoHour > 0)
                                     <span class="nav-tag">{{ $consultationCountTwoHour }}</span>
                                 @endif
@@ -212,9 +267,11 @@
                     </ul>
                     </ul>
                     <ul data-submenu-title="Account">
-                        <li><a href="{{ route('users.edit', auth()->user()) }}">My Profile</a></li>
+                        <li><a href="{{ route('users.edit', auth()->user()) }}"><span
+                                    class="ln ln-icon-Profile"></span> My Profile</a></li>
                         <li><a href="{{ route('logout') }}"onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">Logout</a></li>
+                                                     document.getElementById('logout-form').submit();"><span
+                                    class="ln ln-icon-Rotate-Gesture3"></span> Logout</a></li>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>

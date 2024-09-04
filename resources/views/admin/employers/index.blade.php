@@ -92,7 +92,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Gender</th>
-                                <th>Điểm xếp hạng </th>
+                                <th>Điểm xếp hạng</th>
                                 <th>Phone</th>
                                 <th>Status</th>
                                 <th>Job Postings</th>
@@ -134,9 +134,9 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <a href="{{ route('employers.show', $employer->id) }}" class="btn btn-info">View</a>
+                                        <a href="{{ route('employers.show', $employer->id) }}"><i class="fa fa-eye"></i>View</a>
                                         <a href="{{ route('employers.edit', $employer->id) }}"
-                                            class="btn btn-danger">Edit</a>
+                                            ><i class="fa fa-pencil"></i>Edit</a>
                                     </td>
                                 </tr>
                             @endforeach

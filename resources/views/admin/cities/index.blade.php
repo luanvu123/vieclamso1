@@ -22,13 +22,13 @@
                     <td>{{ $city->name }}</td>
                     <td>{{ $city->status ? 'Active' : 'Inactive' }}</td>
                     <td>
-                        <a href="{{ route('cities.show', $city) }}" class="btn btn-info">View</a>
-                        <a href="{{ route('cities.edit', $city) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('cities.destroy', $city) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('cities.show', $city) }}" class="btn btn-info"><i class="fa fa-eye"></i> View</a>
+                        <a href="{{ route('cities.edit', $city) }}" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a>
+                        {{-- <form action="{{ route('cities.destroy', $city) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
+                        </form> --}}
                     </td>
                 </tr>
             @endforeach

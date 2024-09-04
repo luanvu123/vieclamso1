@@ -7,13 +7,13 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Type of Support</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th scope="col">Gửi email</th>
-                    <th>Actions</th>
+                    <th><i class="fa-duotone fa-solid fa-phone"></i> Phone</th>
+                    <th><i class="fa-regular fa-envelope"></i> Email</th>
+                    <th><i class="fa-solid fa-table"></i> Type of Support</th>
+                    <th><i class="fa-solid fa-audio-description"> </i> Description</th>
+                    <th><i class="fa-solid fa-toggle-off"> </i>Status</th>
+                    <th scope="col"><i class="fa-solid fa-envelope"></i> Gửi email</th>
+                    <th><i class="fa-solid fa-pen-to-square"></i>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,14 +42,35 @@
 
 
                         <td>
-                            <a href="{{ route('supports.show.list', $support) }}" class="btn btn-info">View</a>
-                            <form action="{{ route('supports.destroy.list', $support) }}" method="POST"
-                                style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                            <a href="{{ route('supports.show.list', $support) }}" class="btn btn-info">
+                                <i class="fa fa-eye"></i> View
+                            </a>
+                            <a href="javascript:void(0);" class="btn btn-danger"
+                                onclick="deleteSupport({{ $support->id }})">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>
                         </td>
+                        <script>
+                            function deleteSupport(supportId) {
+                                if (confirm('Are you sure you want to delete this support request?')) {
+                                    $.ajax({
+                                        url: '/supports_list/' + supportId, // Sửa URL này cho khớp với route
+                                        type: 'DELETE',
+                                        data: {
+                                            _token: '{{ csrf_token() }}'
+                                        },
+                                        success: function(response) {
+                                            alert('Support request deleted successfully.');
+                                            location.reload();
+                                        },
+                                        error: function(xhr) {
+                                            alert('Failed to delete support request. Please try again.');
+                                        }
+                                    });
+                                }
+                            }
+                        </script>
+
                     </tr>
                 @endforeach
             </tbody>

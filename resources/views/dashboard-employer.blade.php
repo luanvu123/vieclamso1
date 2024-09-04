@@ -67,41 +67,38 @@
                             </a>
                         </li>
                         <li class="{{ Route::is('job-postings.dashboard') ? 'active' : '' }}">
-                            <a href="{{ route('job-postings.dashboard') }}"></span>Dashboard</a>
+                            <a href="{{ route('job-postings.dashboard') }}"><span class="ln ln-icon-Align-JustifyAll"></span> Dashboard</a>
                         </li>
                         <li
                             class="{{ Route::is('job-postings.index') || Route::is('job-postings.show') || Route::is('job-postings.edit') ? 'active' : '' }}">
-                            <a href="{{ route('job-postings.index') }}">Job</a>
-                        </li>
-                        <li
-                            class="{{ Route::is('companies.index') || Route::is('companies.show') || Route::is('companies.edit') ? 'active' : '' }}">
-                            <a href="{{ route('companies.index') }}">Company</a>
+                            <a href="{{ route('job-postings.index') }}"><span class="ln ln-icon-Blackboard"></span> Job
+                            </a>
                         </li>
                         <li class="{{ Route::is('job-postings.create') ? 'active' : '' }}">
-                            <a href="{{ route('job-postings.create') }}">Add Job</a>
+                            <a href="{{ route('job-postings.create') }}"><span class="ln ln-icon-Drag-Down"></span> Add Job</a>
                         </li>
                         <li class="{{ Route::is('messages.receive') || Route::is('messages.show') ? 'active' : '' }}">
-                            <a href="{{ route('messages.receive') }}">Message </a>
+                            <a href="{{ route('messages.receive') }}"><span class="ln ln-icon-Bird-DeliveringLetter"></span> Message </a>
                         </li>
                         <li class="{{ Route::is('loyal-customer') ? 'active' : '' }}">
-                            <a href="{{ route('loyal-customer') }}">Rewards </a>
+                            <a href="{{ route('loyal-customer') }}"><span class="ln ln-icon-Gift-Box"></span> Rewards </a>
                         </li>
                         <li class="{{ Route::is('buy-gift') ? 'active' : '' }}">
-                            <a href="{{ route('buy-gift') }}">Đổi quà </a>
+                            <a href="{{ route('buy-gift') }}"><span class="ln ln-icon-Sled-withGifts"></span> Đổi quà </a>
                         </li>
                         <li class="{{ Route::is('job-postings.cart') ? 'active' : '' }}">
-                            <a href="{{ route('job-postings.cart') }}">Buy Services </a>
+                            <a href="{{ route('job-postings.cart') }}"><span class="ln ln-icon-Film-Cartridge"></span> Buy Services </a>
                         </li>
                         <li class="{{ Route::is('cartlist.index') ? 'active' : '' }}">
-                            <a href="{{ route('cartlist.index') }}">My cart </a>
+                            <a href="{{ route('cartlist.index') }}"><span class="ln ln-icon-Add-Cart"></span> My cart </a>
                         </li>
                         <li
                             class="{{ Route::is('cartlist.listOrder') || Route::is('cartlist.showOrder') ? 'active' : '' }}">
-                            <a href="{{ route('cartlist.listOrder') }}">My Order </a>
+                            <a href="{{ route('cartlist.listOrder') }}"><span class="ln ln-icon-Full-Cart"></span> My Order </a>
                         </li>
                         <li>
                             <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="ln ln-icon-Align-Center"></span> Logout</a>
                             <form id="logout-form" action="{{ route('logout-employer') }}" method="POST"
                                 class="d-none">
                                 @csrf

@@ -30,11 +30,8 @@ class OrderManageController extends Controller
     public function show($id)
     {
         $order = Order::with('orderDetails.cart.planCurrency')->findOrFail($id);
-        $info = \App\Models\Info::first(); // Assuming you want to show VAT info
-
-        return view('admin.orders.show', compact('order', 'info'));
+        return view('admin.orders.show', compact('order'));
     }
-
     // Show the form for editing the status of the specified order
     public function edit($id)
     {

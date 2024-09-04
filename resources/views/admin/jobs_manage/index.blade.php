@@ -36,7 +36,7 @@
                                 </select>
                         </td>
                         <td>
-                            <a href="{{ route('job-postings-manage.show', $jobPosting->id) }}" class="btn btn-info">View</a>
+                            <a href="{{ route('job-postings-manage.show', $jobPosting->id) }}"><i class="fa fa-eye"></i> View</a>
                         </td>
                     </tr>
                 @endforeach

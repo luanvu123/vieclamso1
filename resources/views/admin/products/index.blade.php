@@ -36,17 +36,17 @@
                         <td>{{ ucfirst($product->status) }}</td>
                         <td>
                             @if($product->image)
-                                <img src="{{ $product->getImagePathAttribute() }}" alt="{{ $product->name }}" width="100">
+                                <img src="{{ $product->getImagePathAttribute() }}" alt="{{ $product->name }}" style="width: 70px;">
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('products.show', $product->id) }}" class="btn btn-info">View</a>
-                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline-block;">
+                            <a href="{{ route('products.show', $product->id) }}"><i class="fa fa-eye"></i> View</a>
+                            <a href="{{ route('products.edit', $product->id) }}"><i class="fa fa-pencil"></i> Edit</a>
+                            {{-- <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                            </form> --}}
                         </td>
                     </tr>
                 @endforeach

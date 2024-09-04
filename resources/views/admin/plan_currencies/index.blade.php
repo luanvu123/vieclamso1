@@ -20,13 +20,13 @@
                     <td>{{ $planCurrency->id }}</td>
                     <td>{{ $planCurrency->currency }}</td>
                     <td>
-                        <a href="{{ route('plan-currencies.show', $planCurrency->id) }}">View</a>
-                        <a href="{{ route('plan-currencies.edit', $planCurrency->id) }}">Edit</a>
-                        <form action="{{ route('plan-currencies.destroy', $planCurrency->id) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('plan-currencies.show', $planCurrency->id) }}"><i class="fa fa-eye"></i> View</a>
+                        <a href="{{ route('plan-currencies.edit', $planCurrency->id) }}"><i class="fa fa-pencil"></i> Edit</a>
+                        {{-- <form action="{{ route('plan-currencies.destroy', $planCurrency->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit">Delete</button>
-                        </form>
+                        </form> --}}
                     </td>
                 </tr>
             @endforeach

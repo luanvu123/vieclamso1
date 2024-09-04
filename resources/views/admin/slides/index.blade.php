@@ -71,6 +71,7 @@ form button:hover {
     <table id="user-table">
         <thead>
             <tr>
+                <th>#</th>
                 <th>Status</th>
                 <th>Link</th>
                 <th>Image</th>
@@ -80,6 +81,7 @@ form button:hover {
         <tbody>
             @foreach($sliders as $slider)
                 <tr>
+                     <td>{{ $slider->id }}</td>
                     <td>{{ $slider->status }}</td>
                     <td>{{ $slider->link }}</td>
                     <td>

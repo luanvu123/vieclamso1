@@ -34,13 +34,13 @@
                             </select>
                         </td>
                         <td>
-                            <a href="{{ route('slugs.show', $slug) }}" class="btn btn-info">View</a>
-                            <a href="{{ route('slugs.edit', $slug) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('slugs.destroy', $slug) }}" method="POST" class="d-inline">
+                            <a href="{{ route('slugs.show', $slug) }}"><i class="fa fa-eye"></i> View</a>
+                            <a href="{{ route('slugs.edit', $slug) }}"><i class="fa fa-pencil"></i> Edit</a>
+                            {{-- <form action="{{ route('slugs.destroy', $slug) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                            </form> --}}
                         </td>
                     </tr>
                 @endforeach

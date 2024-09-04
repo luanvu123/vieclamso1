@@ -127,7 +127,7 @@ class CartListController extends Controller
     public function showOrder($orderId)
     {
         $employer = Auth::guard('employer')->user();
-        $order = Order::where('id', $orderId)
+        $order = Order::where('id', $orderId)  
             ->where('employer_id', $employer->id)
             ->with('orderDetails.cart')
             ->firstOrFail();

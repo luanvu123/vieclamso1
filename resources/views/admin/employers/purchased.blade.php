@@ -12,7 +12,6 @@
                         <th>Employer email</th>
                         <th>Product Name</th>
                         <th>Status</th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,9 +22,6 @@
                             <td>{{ $item->employer->email }}</td>
                             <td>{{ $item->product->name }}</td>
                             <td>{{ ucfirst($item->status) }}</td>
-                            <td>
-                                <a href="#" class="btn btn-info">View</a>
-                            </td>
                         </tr>
                     @endforeach
                 </tbody>

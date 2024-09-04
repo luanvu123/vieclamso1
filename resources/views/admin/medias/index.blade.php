@@ -12,6 +12,7 @@
         <table class="table mt-3" id="user-table">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Image</th>
                     <th>Website</th>
                     <th>Status</th>
@@ -21,6 +22,7 @@
             <tbody>
                 @foreach($medias as $media)
                     <tr>
+                        <td>{{$media->id}}</td>
                         <td>
                             @if($media->image)
                                 <img src="{{ asset('storage/' . $media->image) }}" alt="Image" style="width: 100px;">
@@ -41,13 +43,13 @@
                             </select>
                         </td>
                         <td>
-                            <a href="{{ route('medias.edit', $media) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('medias.destroy', $media) }}" method="POST" style="display:inline;">
+                            <a href="{{ route('medias.edit', $media) }}" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a>
+                            {{-- <form action="{{ route('medias.destroy', $media) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                            <a href="{{ route('medias.show', $media) }}" class="btn btn-info">View</a>
+                            </form> --}}
+                            <a href="{{ route('medias.show', $media) }}" class="btn btn-info"><i class="fa fa-eye"></i> View</a>
                         </td>
                     </tr>
                 @endforeach

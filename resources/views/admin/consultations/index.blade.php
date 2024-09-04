@@ -33,13 +33,13 @@
                         <td>{{ optional($consultation->typeConsultation)->name ?? 'N/A' }}</td>
                         <td>{{ ucfirst($consultation->status) }}</td>
                         <td>
-                            <a href="{{ route('consultations.edit', $consultation) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('consultations.destroy', $consultation) }}" method="POST"
+                            <a href="{{ route('consultations.edit', $consultation) }}"><i class="fa fa-pencil"></i> Edit</a>
+                            {{-- <form action="{{ route('consultations.destroy', $consultation) }}" method="POST"
                                 style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
+                            </form> --}}
                         </td>
                     </tr>
                 @endforeach

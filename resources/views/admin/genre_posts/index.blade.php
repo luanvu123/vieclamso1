@@ -31,13 +31,13 @@
                     <td>{{ $genrePost->created_at->format('Y-m-d H:i:s') }}</td>
                     <td>{{ $genrePost->updated_at->format('Y-m-d H:i:s') }}</td>
                     <td>
-                        <a href="{{ route('genre-posts.show', $genrePost->id) }}" class="btn btn-info btn-sm">View</a>
-                        <a href="{{ route('genre-posts.edit', $genrePost->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('genre-posts.destroy', $genrePost->id) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('genre-posts.show', $genrePost->id) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> View</a>
+                        <a href="{{ route('genre-posts.edit', $genrePost->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> Edit</a>
+                        {{-- <form action="{{ route('genre-posts.destroy', $genrePost->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                        </form>
+                        </form> --}}
                     </td>
                 </tr>
             @empty

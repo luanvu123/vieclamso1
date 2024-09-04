@@ -58,7 +58,7 @@
                                     <td class="action">
                                         <a href="{{ route('users.edit', $user->id) }}"><i class="fa fa-pencil"></i>
                                             Edit</a>
-                                        <a href="{{ route('users.show', $user->id) }}" class="delete"><i
+                                        <a href="{{ route('users.show', $user->id) }}"><i
                                                 class="fa fa-eye"></i>
                                             show</a>
                                     </td>

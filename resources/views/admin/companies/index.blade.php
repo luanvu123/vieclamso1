@@ -73,7 +73,7 @@
                             </select>
                         </td>
                         <td>
-                            <a href="{{ route('admin.companies.show', $company->id) }}" class="btn btn-info">Xem</a>
+                            <a href="{{ route('admin.companies.show', $company->id) }}"><i class="fa fa-eye"></i> Xem</a>
                         </td>
                     </tr>
                 @endforeach

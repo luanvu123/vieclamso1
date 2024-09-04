@@ -22,19 +22,21 @@
                     @foreach ($orders as $order)
                         <tr>
                             <td>{{ $order->id }}</td>
-                            <td>{{ $order->total_amount }} {{ $order->orderDetails->first()->cart->planCurrency->currency }}</td>
+                            <td>{{ $order->total_amount }} {{ $order->orderDetails->first()->cart->planCurrency->currency }}
+                            </td>
                             <td>{{ ucfirst($order->status) }}</td>
                             <td>{{ $order->employer->name }}</td>
                             <td>
                                 <a href="{{ route('ordermanages.show', $order->id) }}" class="btn btn-info">View Details</a>
                             </td>
                             <td>
-                                <a href="{{ route('ordermanages.edit', $order->id) }}" class="btn btn-warning">Edit Status</a>
-                                <form action="{{ route('ordermanages.destroy', $order->id) }}" method="POST" style="display:inline-block;">
+                                <a href="{{ route('ordermanages.edit', $order->id) }}"><i class="fa fa-pencil"></i>Edit
+                                    Status</a>
+                                {{-- <form action="{{ route('ordermanages.destroy', $order->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this order?')">Delete</button>
-                                </form>
+                                </form> --}}
                             </td>
                         </tr>
                     @endforeach

@@ -20,7 +20,7 @@ class CartManageController extends Controller
 
     public function index()
     {
-        $carts = Cart::where('user_id', Auth::id())->get();
+        $carts = Cart::all();
         return view('admin.carts.index', compact('carts'));
     }
 
