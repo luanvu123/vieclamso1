@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $info = Info::find(1);
         // Đếm số lượng Job Listings active
-        $activeJobListingsCount = JobPosting::where('status', 1)->count();
+        $activeJobListingsCount = JobPosting::where('status', 0)->count();
 
         // Đếm tổng số Job Listings
         $totalJobCount = JobPosting::count();

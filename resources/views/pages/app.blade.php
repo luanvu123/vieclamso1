@@ -7,7 +7,7 @@
                     <div class="header-left">
                         <h1>CV xịn, việc làm chất</h1>
                         <h2>Ứng tuyển bất cứ nơi đâu!</h2>
-                        <h3>Ứng dụng di động TopCV</h3>
+                        <h3>Ứng dụng di động  Vieclamso1</h3>
                         <div class="list-featured">
                             <div class="box-featured">
                                 <div class="box-featured-icon">
@@ -75,7 +75,7 @@
             <main class="main">
                 <section class="section section-featured-list container-fluid">
                     <h2 class="section-title section-title-decorated">Tính năng nổi bật</h2>
-                    <div class="section-subtitle">Những tính năng của ứng dụng TopCV giúp ứng viên dễ dàng ứng tuyển,
+                    <div class="section-subtitle">Những tính năng của ứng dụng  Vieclamso1 giúp ứng viên dễ dàng ứng tuyển,
                         nâng cao
                         trải nghiệm tìm việc trong kỷ nguyên số</div>
                     <div class="featured-list">
@@ -105,13 +105,13 @@
                         </div>
                         <div class="featured-item ">
                             <div class="featured-text">
-                                <h3 class="featured-title">TopCV Podcast</h3>
+                                <h3 class="featured-title"> Vieclamso1 Podcast</h3>
                                 <div class="featured-content">Các Podcast với nội dung chiều sâu, hữu ích cho người đi
-                                    làm được chia sẻ bởi chuyên gia và TopCV về các chủ đề tìm việc, phỏng vấn, ứng dụng
+                                    làm được chia sẻ bởi chuyên gia và  Vieclamso1 về các chủ đề tìm việc, phỏng vấn, ứng dụng
                                     công nghệ trong công việc.</div>
                             </div>
                             <div class="featured-img">
-                                <img src="v4/image/welcome/mobile-app/topcv_podcast.png" alt="TopCV Podcast">
+                                <img src="v4/image/welcome/mobile-app/topcv_podcast.png" alt=" Vieclamso1 Podcast">
                             </div>
                         </div>
                         <div class="featured-item  featured-item-reverse ">
@@ -164,19 +164,19 @@
                     <div class="container-fluid">
                         <h2 class="section-title section-title-decorated section-title-decorated-white">Con số ấn tượng
                         </h2>
-                        <div class="section-subtitle">Những con số nổi bật mà ứng dụng TopCV đã đạt được</div>
+                        <div class="section-subtitle">Những con số nổi bật mà ứng dụng  Vieclamso1 đã đạt được</div>
                         <div class="box-impressive-numbers-list">
                             <div class="box-left">
                                 <div class="box-impressive-numbers-item">
                                     <div class="box-impressive-number-text">540.000+</div>
                                     <div class="box-impressive-number-title">Nhà tuyển dụng uy tín</div>
                                     <div class="box-impressive-number-content">Các nhà tuyển dụng đến từ tất cả các
-                                        ngành nghề và được xác thực bởi TopCV</div>
+                                        ngành nghề và được xác thực bởi  Vieclamso1</div>
                                 </div>
                                 <div class="box-impressive-numbers-item">
                                     <div class="box-impressive-number-text">2.000.000+</div>
                                     <div class="box-impressive-number-title">Việc làm đã được kết nối</div>
-                                    <div class="box-impressive-number-content">TopCV đồng hành và kết nối hàng nghìn
+                                    <div class="box-impressive-number-content"> Vieclamso1 đồng hành và kết nối hàng nghìn
                                         ứng viên với những cơ hội việc làm hấp dẫn từ các doanh nghiệp uy tín.</div>
                                 </div>
                             </div>
@@ -190,7 +190,7 @@
                                 <div class="box-impressive-numbers-item">
                                     <div class="box-impressive-number-text">200.000+</div>
                                     <div class="box-impressive-number-title">Doanh nghiệp hàng đầu</div>
-                                    <div class="box-impressive-number-content">TopCV được nhiều doanh nghiệp hàng đầu
+                                    <div class="box-impressive-number-content"> Vieclamso1 được nhiều doanh nghiệp hàng đầu
                                         tin tưởng và đồng hành, trong đó có các thương hiệu nổi bật như Samsung,
                                         Viettel, Vingroup, FPT, Techcombank,...</div>
                                 </div>
@@ -198,7 +198,7 @@
                                     <div class="box-impressive-number-text">1.200.000+</div>
                                     <div class="box-impressive-number-title">Lượt tải ứng dụng</div>
                                     <div class="box-impressive-number-content">Hàng triệu ứng viên sử dụng ứng dụng
-                                        TopCV để tìm kiếm việc làm, trong đó có 60% là ứng viên có kinh nghiệm từ 3 năm
+                                         Vieclamso1 để tìm kiếm việc làm, trong đó có 60% là ứng viên có kinh nghiệm từ 3 năm
                                         trở lên.</div>
                                 </div>
                             </div>
@@ -208,7 +208,7 @@
                 <section class="section section-build-career">
                     <div class="section-build-career-inner container-fluid">
                         <div class="section-left">
-                            <h2>Kiến tạo sự nghiệp của riêng bạn với ứng dụng TopCV </h2>
+                            <h2>Kiến tạo sự nghiệp của riêng bạn với ứng dụng  Vieclamso1 </h2>
                             <h3>“Tất cả trong một”</h3>
                             <p>Trải nghiệm tạo CV, tìm việc, ứng tuyển và hơn thế nữa - chỉ với một ứng dụng duy nhất.
                                 Bắt đầu ngay hôm nay!</p>

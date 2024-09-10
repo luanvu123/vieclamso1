@@ -33,10 +33,15 @@
             </div>
 
 
-            <div class="form-group form-check">
-                <input type="checkbox" name="status" class="form-check-input" id="status" {{ old('status', $award->status) ? 'checked' : '' }}>
-                <label class="form-check-label" for="status">Active</label>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select name="status" id="status" class="form-control">
+                    <option value="1" {{ old('status', $award->status) == 1 ? 'selected' : '' }}>Active</option>
+                    <option value="0" {{ old('status', $award->status) == 0 ? 'selected' : '' }}>Inactive</option>
+                </select>
             </div>
+
+
 
             <button type="submit" class="btn btn-primary">Update</button>
         </form>

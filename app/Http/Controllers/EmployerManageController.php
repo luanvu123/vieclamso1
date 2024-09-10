@@ -91,24 +91,24 @@ class EmployerManageController extends Controller
     public function top_choose(Request $request)
     {
         $data = $request->all();
-        $company = Company::find($data['id']);
-        $company->top = $data['trangthai_val'];
+        $company = Company::find($data['company_id']);
+        $company->top = $data['top_choose_val'];
         $company->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $company->save();
     }
     public function top_home_choose(Request $request)
     {
         $data = $request->all();
-        $company = Company::find($data['id']);
-        $company->top_home = $data['trangthai_val'];
+        $company = Company::find($data['company_id']);
+        $company->top_home = $data['top_home_val'];
         $company->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $company->save();
     }
     public function featured_choose(Request $request)
     {
         $data = $request->all();
-        $company = Company::find($data['id']);
-        $company->featured = $data['trangthai_val'];
+        $company = Company::find($data['company_id']);
+        $company->featured = $data['featured_val'];
         $company->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $company->save();
     }

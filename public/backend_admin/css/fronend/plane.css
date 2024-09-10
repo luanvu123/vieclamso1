@@ -124,8 +124,8 @@
         }
 
         .plane-switch input+div div svg {
-            width: 13px;
-            height: 13px;
+            width: 24px;
+            height: 24px;
             display: block;
             color: var(--c, var(--street));
             transition: color 0.6s;

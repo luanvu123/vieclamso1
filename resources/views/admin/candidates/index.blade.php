@@ -29,8 +29,10 @@
                                     <th>Email</th>
                                     <th>Số điện thoại</th>
                                     <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
                                     <th>CVs</th>
                                     <th>Hành động</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,35 +48,46 @@
                                         </td>
                                         <td>
                                             <p class="mb-0 customer-name fw-bold"> {{ $candidate->fullname_candidate }}</p>
-                    </div>
 
-                    </td>
-                    <td>{{ $candidate->email }}</td>
-                    <td>{{ $candidate->phone_number_candidate }}</td>
-                    <td>{{ $candidate->status }}</td>
-                    <td>
-                        @if ($candidate->cvs->isNotEmpty())
-                            <ul>
-                                @foreach ($candidate->cvs as $cv)
-                                    <li><a href="{{ asset('storage/' . $cv->cv_path) }}"
-                                            target="_blank">{{ $cv->cv_name ?? 'CV' }}</a></li>
+
+                                        </td>
+                                        <td>{{ $candidate->email }}</td>
+                                        <td>{{ $candidate->phone_number_candidate }}</td>
+                                        <td>
+                                            {{ $candidate->status == 1 ? 'Active' : 'Inactive' }}
+                                        </td>
+
+                                        <td>{{ $candidate->created_at }}</td>
+                                        <td>
+                                            @if ($candidate->cvs->isNotEmpty())
+                                                <ul>
+                                                    @foreach ($candidate->cvs as $cv)
+                                                        <li><a href="{{ asset('storage/' . $cv->cv_path) }}"
+                                                                target="_blank">{{ $cv->cv_name ?? 'CV' }}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            @else
+                                                Không có CV
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('candidates.show', $candidate->id) }}"><i
+                                                    class="fa fa-eye"></i> View</a>
+                                            <a href="{{ route('candidates.edit', $candidate->id) }}"><i
+                                                    class="fa fa-edit"></i> Edit Status</a>
+                                        </td>
+                                        <td>
+                                            @if ($candidate->created_at > \Carbon\Carbon::now()->subHour())
+                                                <span class="label label-primary pull-right">new</span>
+                                            @endif
+                                        </td>
+                                    </tr>
                                 @endforeach
-                            </ul>
-                        @else
-                            Không có CV
-                        @endif
-                    </td>
-                    <td>
-                        <a href="{{ route('candidates.show', $candidate->id) }}"><i class="fa fa-eye"></i> View</a>
-                    </td>
-                    </tr>
-                    @endforeach
-                    </tbody>
-
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection

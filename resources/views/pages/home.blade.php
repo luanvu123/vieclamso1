@@ -145,8 +145,8 @@
                                                              target="_blank">
                                                              <div class="box-company-logo">
                                                                  <div class="avatar">
-                                                                     <img title="{{ $jobPosting->company->name }} tuyển dụng tại TopCV"
-                                                                         alt="{{ $jobPosting->company->name }} tuyển dụng tại TopCV"
+                                                                     <img title="{{ $jobPosting->company->name }} tuyển dụng tại Vieclamso1"
+                                                                         alt="{{ $jobPosting->company->name }} tuyển dụng tại Vieclamso1"
                                                                          src="{{ $jobPosting->company->logo ? asset('storage/' . $jobPosting->company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
                                                                          class="img-responsive">
                                                                  </div>
@@ -1159,15 +1159,15 @@
              <div class="container">
                  <div class="row">
                      <div class="col-sm-12 self-growth__item">
-                         <h2 class="self-growth__title">Cùng TopCV xây dựng thương hiệu cá nhân</h2>
+                         <h2 class="self-growth__title">Cùng Vieclamso1 xây dựng thương hiệu cá nhân</h2>
                          <div class="self-growth__content">
                              <div class="self-growth__content--item">
                                  <div class="content">
                                      <h3>
-                                         TopCV Profile
+                                         Vieclamso1 Profile
                                      </h3>
                                      <p>
-                                         TopCV Profile là bản hồ sơ năng lực giúp bạn xây dựng thương hiệu cá nhân, thể
+                                         Vieclamso1 Profile là bản hồ sơ năng lực giúp bạn xây dựng thương hiệu cá nhân, thể
                                          hiện
                                          thế mạnh của bản thân thông qua việc đính kèm học vấn, kinh nghiệm, dự án, kỹ
                                          năng,... của mình
@@ -1305,8 +1305,8 @@
          <section id="impressive-numbers" class="lazy" data-lazy-function="ImpressiveNumbers">
              <div class=" impressive-numbers-wrapper ">
                  <h2 class="section-title section-title-decorated section-title-decorated-white">Con số ấn tượng</h2>
-                 <div class="section-subtitle">TopCV là công ty công nghệ nhân sự (HR Tech) hàng đầu Việt Nam. Với năng
-                     lực lõi là công nghệ, đặc biệt là trí tuệ nhân tạo (AI), sứ mệnh của TopCV đặt ra cho mình là thay
+                 <div class="section-subtitle">Vieclamso1 là công ty công nghệ nhân sự (HR Tech) hàng đầu Việt Nam. Với năng
+                     lực lõi là công nghệ, đặc biệt là trí tuệ nhân tạo (AI), sứ mệnh của Vieclamso1 đặt ra cho mình là thay
                      đổi thị trường tuyển dụng - nhân sự ngày một hiệu quả hơn. Bằng công nghệ, chúng tôi tạo ra nền tảng
                      cho phép người lao động tạo CV, phát triển được các kỹ năng cá nhân, xây dựng hình ảnh chuyên nghiệp
                      trong mắt nhà tuyển dụng và tiếp cận với các cơ hội việc làm phù hợp.
@@ -1319,7 +1319,7 @@
                                          class="number" data-number="{{ $totalEmployerCount }}">0</span>+</div>
                                  <div class="box-impressive-numbers__item--title">Nhà tuyển dụng uy tín</div>
                                  <div class="box-impressive-numbers__item--description">Các nhà tuyển dụng đến từ tất cả
-                                     các ngành nghề và được xác thực bởi TopCV</div>
+                                     các ngành nghề và được xác thực bởi Vieclamso1</div>
                              </span>
                          </div>
                          <div class="box-impressive-numbers__item">
@@ -1327,7 +1327,7 @@
                                  <div class="box-impressive-numbers__item--number box-impressive-number-text"><span
                                          class="number" data-number="{{ $totalCompanyCount }}">0</span>+</div>
                                  <div class="box-impressive-numbers__item--title">Doanh nghiệp hàng đầu</div>
-                                 <div class="box-impressive-numbers__item--description">TopCV được nhiều doanh nghiệp
+                                 <div class="box-impressive-numbers__item--description">Vieclamso1 được nhiều doanh nghiệp
                                      hàng đầu tin tưởng và đồng hành, trong đó có các thương hiệu nổi bật như Samsung,
                                      Viettel, Vingroup, FPT, Techcombank,...</div>
                              </span>
@@ -1339,14 +1339,14 @@
                                  <div class="box-impressive-numbers__item--number box-impressive-number-text"><span
                                          class="number" data-number="{{ $totalApplicationCount }}">0</span>+</div>
                                  <div class="box-impressive-numbers__item--title">Việc làm đã được kết nối</div>
-                                 <div class="box-impressive-numbers__item--description">TopCV đồng hành và kết nối hàng
+                                 <div class="box-impressive-numbers__item--description">Vieclamso1 đồng hành và kết nối hàng
                                      nghìn ứng viên với những cơ hội việc làm hấp dẫn từ các doanh nghiệp uy tín.</div>
                              </span>
                          </div>
                          <div class="box-impressive-numbers__item-image">
                              <img class="lazy"
                                  data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/home/topcv_processor_2x.png"
-                                 alt="TopCV Processor">
+                                 alt="Vieclamso1 Processor">
                          </div>
                          <div class="box-impressive-numbers__item">
                              <span class="box-impressive-numbers__item--wrapper">
@@ -1354,7 +1354,7 @@
                                          class="number" data-number="{{ $totalCandidateCount }}">0</span>+</div>
                                  <div class="box-impressive-numbers__item--title">Lượt tải ứng dụng</div>
                                  <div class="box-impressive-numbers__item--description">Hàng triệu ứng viên sử dụng ứng
-                                     dụng TopCV để tìm kiếm việc làm, trong đó có 60% là ứng viên có kinh nghiệm từ 3 năm
+                                     dụng Vieclamso1 để tìm kiếm việc làm, trong đó có 60% là ứng viên có kinh nghiệm từ 3 năm
                                      trở lên.</div>
                              </span>
                          </div>
@@ -1415,7 +1415,7 @@
          <section id="topcv-ecosystem">
              <div class="container">
                  <h2>
-                     Hệ sinh thái công nghệ nhân sự của TopCV bao gồm 4 sản phẩm chủ lực:
+                     Hệ sinh thái công nghệ nhân sự của Vieclamso1 bao gồm 4 sản phẩm chủ lực:
                  </h2>
                  <div class="topcv-products-list">
                      @foreach ($ecosystems as $ecosystem)

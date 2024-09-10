@@ -5,23 +5,8 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <!-- Titlebar -->
-                <div id="titlebar">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2>Manage Users</h2>
-                            <!-- Breadcrumbs -->
-                            <nav id="breadcrumbs">
-                                <ul>
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li>Manage Users</li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
-
+   <a href="{{ route('users.create') }}" class="button margin-top-30">Add User</a>
                     <!-- Table -->
                     <table id="user-table" class="display">
                         <thead>
@@ -68,7 +53,7 @@
                     </table>
 
 
-                    <a href="{{ route('users.create') }}" class="button margin-top-30">Add User</a>
+
 
                 </div>
             </div>

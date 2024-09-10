@@ -1,90 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        /* General container styling */
-        .container {
-            margin-top: 20px;
-        }
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="dashboard-list-box margin-top-30">
+                <div class="dashboard-list-box-content">
+                    <h1>All Employer</h1>
 
-        /* Table styling */
-        .table-container {
-            margin-top: 20px;
-            overflow-x: auto;
-        }
-
-        #user-table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-            border: 1px solid #ddd;
-        }
-
-        #user-table th,
-        #user-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        #user-table th {
-            background-color: #f4f4f4;
-            font-weight: bold;
-        }
-
-        #user-table tbody tr:hover {
-            background-color: #f9f9f9;
-        }
-
-        /* Avatar styling */
-        .message-avatar img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        /* Point and status styling */
-        .point {
-            font-weight: bold;
-            color: #3490dc;
-        }
-
-        td {
-            vertical-align: middle;
-        }
-
-        #user-table td ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        #user-table td ul li {
-            margin-bottom: 5px;
-        }
-
-        /* Button styling */
-        .btn-info {
-            background-color: #3490dc;
-            border-color: #3490dc;
-            color: #fff;
-            padding: 6px 12px;
-            text-decoration: none;
-            border-radius: 4px;
-        }
-
-        .btn-info:hover {
-            background-color: #2176bd;
-            border-color: #2176bd;
-            color: #fff;
-        }
-    </style>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <h1>All Employer</h1>
-                <div class="table-container">
-                    <table id="user-table" class="display">
+                    <table id="user-table" class="manage-table responsive-table">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -95,8 +18,10 @@
                                 <th>Điểm xếp hạng</th>
                                 <th>Phone</th>
                                 <th>Status</th>
+                                <th>Date</th>
                                 <th>Job Postings</th>
                                 <th>Actions</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,6 +38,9 @@
                                     <td>{{ $employer->email }}</td>
                                     <td>{{ ucfirst($employer->gender) }}</td>
                                     <td> <span data-v-69ab245a="" class="point">{{ $employer->credit }}</span>
+                                        <a href="{{ route('type-employer.index') }}">Edit
+                                        </a>
+                                    </td>
                                     <td>{{ $employer->phone }}</td>
                                     <td>
                                         <select id="{{ $employer->id }}"class="employer_choose">
@@ -125,7 +53,7 @@
                                             @endif
                                         </select>
                                     </td>
-
+   <td>{{ $employer->created_at }}</td>
                                     <td>
                                         <ul>
                                             @foreach ($employer->jobPostings as $jobPosting)
@@ -134,16 +62,22 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <a href="{{ route('employers.show', $employer->id) }}"><i class="fa fa-eye"></i>View</a>
-                                        <a href="{{ route('employers.edit', $employer->id) }}"
-                                            ><i class="fa fa-pencil"></i>Edit</a>
+                                        <a href="{{ route('employers.show', $employer->id) }}"><i
+                                                class="fa fa-eye"></i>View</a>
+                                        <a href="{{ route('employers.edit', $employer->id) }}"><i
+                                                class="fa fa-pencil"></i>Edit</a>
+                                    </td>
+                                    <td>
+                                        @if ($employer->created_at > \Carbon\Carbon::now()->subHour())
+                                            <span class="label label-primary pull-right">new</span>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection

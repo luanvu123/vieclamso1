@@ -19,6 +19,27 @@ class CandidateManageController extends Controller
         $candidates = Candidate::with('cvs')->get();
         return view('admin.candidates.index', compact('candidates'));
     }
+  public function edit($id)
+    {
+        $candidate = Candidate::findOrFail($id);
+        return view('admin.candidates.edit', compact('candidate'));
+    }
+
+    // Update candidate status
+   public function update(Request $request, $id)
+{
+    $request->validate([
+        'status' => 'required|in:0,1',
+        // other validation rules
+    ]);
+
+    $candidate = Candidate::findOrFail($id);
+    $candidate->status = (int) $request->input('status');
+    // Update other fields
+    $candidate->save();
+
+    return redirect()->route('candidates.index')->with('success', 'Candidate updated successfully.');
+}
 
     public function show($id)
     {

@@ -186,7 +186,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
     Route::get('/employer-choose', [EmployerManageController::class, 'employer_choose'])->name('employer-choose');
     Route::get('/user-choose', [UserController::class, 'user_choose'])->name('user-choose');
-    Route::get('/category-choose', [CategoryController::class, 'category_choose'])->name('category-choose');
+    Route::get('/category-choose', [CategoryController::class, 'category_choose'])->name('cate-choose');
     Route::get('/company-choose', [EmployerManageController::class, 'company_choose'])->name('company-choose');
     Route::get('/top-choose', [EmployerManageController::class, 'top_choose'])->name('top-choose');
     Route::get('/top-home-choose', [EmployerManageController::class, 'top_home_choose'])->name('top-home-choose');
@@ -298,7 +298,7 @@ Route::middleware(['employer'])->group(function () {
     Route::get('employer/profile/change-password', [EmployerLoginController::class, 'formChangePasswordEmployer'])->name('employer.change-password');
     Route::post('employer/profile/change-password', [EmployerLoginController::class, 'changePasswordEmployer'])->name('employer.change-password');
 
-    Route::resource('companies', CompanyController::class);
+    Route::resource('companies', CompanyController::class); 
 
 
     Route::get('employer/phone', [EmployerLoginController::class, 'formPhone'])->name('employer.phone');

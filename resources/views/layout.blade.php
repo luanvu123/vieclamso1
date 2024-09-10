@@ -1414,8 +1414,8 @@
                         </div>
                         <div class="box-contact">
                             <p class="title">Liên hệ</p>
-                            <span>Hotline:</span><a href="tel:02466805588">(024) 6680 5588 (Giờ hành chính)</a><br>
-                            <span>Email:</span><a href="mailto:hotro@topcv.vn">hotro@topcv.vn</a>
+                            <span>Hotline:</span><a href="tel:02466805588">{{ $info->hotline_contact }}</a><br>
+                            <span>Email:</span><a href="mailto:hotro@topcv.vn">{{ $info->email_contact }}</a>
                         </div>
                         <div class="box-download">
                             <p class="title">Ứng dụng tải xuống</p>

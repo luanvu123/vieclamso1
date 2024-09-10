@@ -74,7 +74,7 @@
                      <label for="agreement">
                          Tôi đã đọc và đồng ý với <a target="_blank" href="#" class="text-success">Điều
                              khoản dịch vụ</a> và <a target="_blank" href="#"
-                             class="text-success">Chính sách bảo mật</a> của TopCV
+                             class="text-success">Chính sách bảo mật</a> của  Vieclamso1
                      </label>
                  </p>
              </div>

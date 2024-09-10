@@ -13,7 +13,9 @@
                     <th><i class="fa-solid fa-audio-description"> </i> Description</th>
                     <th><i class="fa-solid fa-toggle-off"> </i>Status</th>
                     <th scope="col"><i class="fa-solid fa-envelope"></i> Gửi email</th>
+                    <th scope="col"><i class="fa-solid fa-date"></i> Date</th>
                     <th><i class="fa-solid fa-pen-to-square"></i>Actions</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -22,7 +24,9 @@
                         <td>{{ $support->id }}</td>
                         <td>{{ $support->phone }}</td>
                         <td>{{ $support->email }}</td>
-                        <td>{{ $support->typeSupport->name }}</td>
+                        <td>{{ $support->typeSupport->name }}
+                            <a href="{{ route('type_support.index') }}">Manage Type Support</a>
+                        </td>
                         <td>{{ $support->description }}</td>
                         <td>
                             <select id="{{ $support->id }}" class="support_choose">
@@ -39,7 +43,7 @@
                                 Gửi Email <i class="fa-solid fa-envelope" style="color: #ffffff;"></i>
                             </button>
                         </td>
-
+                        <td>{{ $support->created_at }}</td>
 
                         <td>
                             <a href="{{ route('supports.show.list', $support) }}" class="btn btn-info">
@@ -49,6 +53,11 @@
                                 onclick="deleteSupport({{ $support->id }})">
                                 <i class="fa fa-trash"></i> Delete
                             </a>
+                        </td>
+                        <td>
+                            @if ($support->created_at > \Carbon\Carbon::now()->subHour())
+                                <span class="label label-primary pull-right">new</span>
+                            @endif
                         </td>
                         <script>
                             function deleteSupport(supportId) {

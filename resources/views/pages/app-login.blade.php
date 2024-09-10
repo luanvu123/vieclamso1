@@ -57,7 +57,7 @@
                              Bằng việc đăng nhập bằng tài khoản mạng xã hội, tôi đã đọc và đồng ý với <a target="_blank"
                                  class="text-success" href="#">Điều khoản dịch vụ</a> và <a target="_blank"
                                  class="text-success" href="#">Chính sách bảo mật</a>
-                             của TopCV
+                             của  Vieclamso1
                          </label>
                      </p>
                  </div>
@@ -87,9 +87,7 @@
                  Bạn gặp khó khăn khi tạo tài khoản?
              </p>
              <p class="mb-0">
-                 Vui lòng gọi tới số <a href="tel:(024) 6680 5588" class="hotline">(024) 6680 5588</a>
-                 (giờ
-                 hành chính).
+                 Vui lòng gọi tới số <a href="#" class="hotline">{{ $info->hotlne_contact }}
              </p>
          </div>
      </div>

@@ -20,6 +20,7 @@
                     <th>Consultation Type</th>
                     <th>Status</th>
                     <th>Actions</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -30,7 +31,10 @@
                         <td>{{ $consultation->email }}</td>
                         <td>{{ $consultation->phone }}</td>
                         <td>{{ optional($consultation->city)->name ?? 'N/A' }}</td>
-                        <td>{{ optional($consultation->typeConsultation)->name ?? 'N/A' }}</td>
+                        <td>{{ optional($consultation->typeConsultation)->name ?? 'N/A' }}
+                            <a href="{{ route('type-consultations.index') }}">Edit
+                            </a>
+                        </td>
                         <td>{{ ucfirst($consultation->status) }}</td>
                         <td>
                             <a href="{{ route('consultations.edit', $consultation) }}"><i class="fa fa-pencil"></i> Edit</a>
@@ -41,6 +45,11 @@
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form> --}}
                         </td>
+                         <td>
+                                        @if ($consultation->created_at > \Carbon\Carbon::now()->subHour())
+                                            <span class="label label-primary pull-right">new</span>
+                                        @endif
+                                    </td>
                     </tr>
                 @endforeach
             </tbody>

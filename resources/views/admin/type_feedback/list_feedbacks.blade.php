@@ -16,6 +16,7 @@
                     <th><i class="fa fa-toggle-on"></i> Status</th>
                     <th><i class="fa fa-calendar"></i> Created At</th>
                     <th><i class="fa fa-cog"></i> Action</th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -23,7 +24,9 @@
                 @forelse($feedbacks as $key => $feedback)
                     <tr>
                         <td scope="row">{{ $key }}</td>
-                        <td>{{ $feedback->typeFeedback->name }}</td>
+                        <td>{{ $feedback->typeFeedback->name }}
+                            <a href="{{ route('type_feedback.index') }}">Manage Type feedback</a>
+                        </td>
                         <td>{{ $feedback->content }}</td>
                         <td>{{ $feedback->phone }}</td>
                         <td>{{ $feedback->email }}</td>
@@ -48,6 +51,11 @@
                                 <i class="fa fa-trash"></i> Delete
                             </a>
                         </td>
+                         <td>
+                                        @if ($feedback->created_at > \Carbon\Carbon::now()->subHour())
+                                            <span class="label label-primary pull-right">new</span>
+                                        @endif
+                                    </td>
 
                         <script>
                             function deleteFeedback(feedbackId) {

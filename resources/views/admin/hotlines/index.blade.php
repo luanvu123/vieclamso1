@@ -21,7 +21,11 @@
                         <td>{{ $hotline->id }}</td>
                         <td>{{ $hotline->phone_number }}</td>
                         <td>{{ $hotline->contact_name }}</td>
-                        <td>{{ $hotline->typeHotline->name }}</td>
+                        <td>{{ $hotline->typeHotline->name }}
+
+                              <a href="{{ route('type_hotlines.index') }}">Edit
+            </a>
+                        </td>
                         <td>{{ $hotline->status ? 'Active' : 'Inactive' }}</td>
                         <td>
                             <a href="{{ route('hotlines.edit', $hotline->id) }}" class="btn btn-warning">Edit</a>

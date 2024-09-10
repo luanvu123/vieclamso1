@@ -65,39 +65,40 @@ class AwardController extends Controller
     }
 
     public function update(Request $request, Award $award)
-    {
-        if ($award->user_id !== Auth::id()) {
-            return redirect()->route('awards.index')->with('error', 'Unauthorized access.');
-        }
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'website' => 'nullable|string|max:255',
-            'status' => 'nullable|boolean',
-        ]);
-
-        $awardData = [
-            'name' => $request->name,
-            'website' => $request->website,
-            'status' => $request->has('status') ? 1 : 0,
-        ];
-
-        if ($request->hasFile('image')) {
-            // Delete old image if exists
-            if ($award->image && Storage::disk('public')->exists($award->image)) {
-                Storage::disk('public')->delete($award->image);
-            }
-
-            $image = $request->file('image');
-            $imagePath = $image->store('awards', 'public');
-            $awardData['image'] = $imagePath;
-        }
-
-        $award->update($awardData);
-
-        return redirect()->route('awards.index')->with('success', 'Award updated successfully!');
+{
+    if ($award->user_id !== Auth::id()) {
+        return redirect()->route('awards.index')->with('error', 'Unauthorized access.');
     }
+
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'website' => 'nullable|string|max:255',
+        'status' => 'boolean',  // Ensure 'status' is boolean
+    ]);
+
+    $awardData = [
+        'name' => $request->name,
+        'website' => $request->website,
+        'status' => $request->has('status') ? 1 : 0,  // Check if checkbox is checked
+    ];
+
+    if ($request->hasFile('image')) {
+        // Delete old image if exists
+        if ($award->image && Storage::disk('public')->exists($award->image)) {
+            Storage::disk('public')->delete($award->image);
+        }
+
+        $image = $request->file('image');
+        $imagePath = $image->store('awards', 'public');
+        $awardData['image'] = $imagePath;
+    }
+
+    $award->update($awardData);
+
+    return redirect()->route('awards.index')->with('success', 'Award updated successfully!');
+}
+
 
     public function destroy(Award $award)
     {

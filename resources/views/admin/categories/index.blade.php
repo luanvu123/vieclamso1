@@ -3,30 +3,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Titlebar -->
-    <div id="titlebar">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Manage Categories</h2>
-                <!-- Breadcrumbs -->
-                <nav id="breadcrumbs">
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Dashboard</a></li>
-                        <li>Manage Categories</li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
 
+   <a href="{{ route('categories.create') }}" class="button margin-top-30">Add Category</a>
     <div class="row">
-        <!-- Table -->
         <div class="col-lg-12 col-md-12">
-            <div class="notification notice">
-                Your categories are shown in the table below.
-            </div>
-
             <div class="dashboard-list-box margin-top-30">
                 <div class="dashboard-list-box-content">
                     <!-- Table -->
@@ -55,18 +35,36 @@
                                     </td>
                                     <td>{{ $category->job_postings_count }}</td>
                                     <td>
-                                        <select id="{{ $category->id }}" class="category_choose">
-                                            @if ($category->status == 0)
-                                                <option value="1">Show</option>
-                                                <option selected value="0">Hidden</option>
-                                            @else
-                                                <option selected value="1">Show</option>
-                                                <option value="0">Hidden</option>
-                                            @endif
-                                        </select>
+                                        <div class="checkbox-wrapper-5">
+                                            <div class="check">
+                                                <input type="checkbox" id="cateCheckbox_{{ $category->id }}"
+                                                    class="cate_checkbox" {{ $category->status == 1 ? 'checked' : '' }}>
+                                                <label for="cateCheckbox_{{ $category->id }}"></label>
+                                            </div>
+                                        </div>
                                     </td>
+
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('.cate_checkbox').change(function() {
+                                                var trangthai_val = $(this).is(':checked') ? '1' :
+                                                '0';
+                                                var id = $(this).attr('id').replace('cateCheckbox_',
+                                                '');
+
+                                                $.ajax({
+                                                    url: "{{ route('cate-choose') }}",
+                                                    method: "GET",
+                                                    data: {
+                                                        trangthai_val: trangthai_val,
+                                                        id: id
+                                                    },
+                                                });
+                                            });
+                                        });
+                                    </script>
                                     <td>
-                                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> Edit</a>
+                                        <a href="{{ route('categories.edit', $category->id) }}"><i class="fa fa-pencil"></i> Edit</a>
                                         {{-- <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
@@ -79,7 +77,7 @@
                     </table>
                 </div>
             </div>
-            <a href="{{ route('categories.create') }}" class="button margin-top-30">Add New Category</a>
+
         </div>
     </div>
 @endsection

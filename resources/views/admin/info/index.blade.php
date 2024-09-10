@@ -15,76 +15,10 @@
                 </ul>
             </div>
         @endif
-        <h2>Edit Footer Information</h2>
+        <h2>Edit Information</h2>
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
-        <li class="{{ Route::is('public_links.index') ? 'active-submenu' : '' }}">
-            <a href="{{ route('public_links.index') }}">Edit footer
-            </a>
-        </li>
-        <li class="{{ Route::is('smart_recruitments.index') ? 'active-submenu' : '' }}">
-            <a href="{{ route('smart_recruitments.index') }}">Edit smart_recruitments
-            </a>
-        </li>
-        <li class="{{ Route::is('recruitment_services.index') ? 'active-submenu' : '' }}">
-            <a href="{{ route('recruitment_services.index') }}">Edit recruitment_services
-            </a>
-        </li>
-        <li class="{{ Route::is('figures.index') ? 'active-submenu' : '' }}">
-            <a href="{{ route('figures.index') }}">Edit figures
-            </a>
-        </li>
-        <li class="{{ Route::is('type_feedback.index') ? 'active' : '' }}">
-            <a href="{{ route('type_feedback.index') }}">Manage Type feedback</a>
-        </li>
-        <li class="{{ Route::is('type_support.index') ? 'active' : '' }}">
-            <a href="{{ route('type_support.index') }}">Manage Type Support</a>
-        </li>
-        <li class="{{ Route::is('values.index') ? 'active-submenu' : '' }}">
-            <a href="{{ route('values.index') }}">Edit values
-            </a>
-        </li>
-        <li class="{{ Route::is('partners.index') ? 'active-submenu' : '' }}">
-            <a href="{{ route('partners.index') }}">Edit partners
-            </a>
-        </li>
-        <li class="{{ Route::is('type-partners.index') ? 'active-submenu' : '' }}">
-            <a href="{{ route('type-partners.index') }}">Edit type-partners
-            </a>
-        </li>
-        <li class="{{ Route::is('hotlines.index') ? 'active-submenu' : '' }}">
-            <a href="{{ route('hotlines.index') }}">Edit hotlines
-            </a>
-        </li>
-          <li class="{{ Route::is('type-employer.index') ? 'active-submenu' : '' }}">
-            <a href="{{ route('type-employer.index') }}">Edit type_employers
-            </a>
-        </li>
-        <li class="{{ Route::is('type_hotlines.index') ? 'active-submenu' : '' }}">
-            <a href="{{ route('type_hotlines.index') }}">Edit type_hotlines
-            </a>
-        </li>
-        <li class="{{ Route::is('cities.index') ? 'active-submenu' : '' }}">
-            <a href="{{ route('cities.index') }}">Edit cities
-            </a>
-        </li>
-        <li class="{{ Route::is('type-consultations.index') ? 'active-submenu' : '' }}">
-            <a href="{{ route('type-consultations.index') }}">Edit type-consultations
-            </a>
-        </li>
-        <li class="{{ Route::is('awards.index') ? 'active' : '' }}">
-            <a href="{{ route('awards.index') }}">Manage Awards</a>
-        </li>
-        <li class="{{ Route::is('ecosystems.index') ? 'active' : '' }}">
-            <a href="{{ route('ecosystems.index') }}">Manage Ecosystems</a>
-        </li>
-        <li class="{{ Route::is('medias.index') ? 'active' : '' }}">
-            <a href="{{ route('medias.index') }}">Manage Medias</a>
-        </li>
-         <li class="{{ Route::is('slides.index') ? 'active' : '' }}">
-            <a href="{{ route('slides.index') }}">Manage Sliders</a>
-        </li>
         <form action="{{ route('admin.info.update', $info->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <!-- Các trường hiện tại -->
@@ -141,8 +75,7 @@
 
             <div class="form-group">
                 <label for="copyright">Copyright</label>
-                <input type="text" class="form-control" id="copyright" name="copyright"
-                    value="{{ $info->copyright }}">
+                <input type="text" class="form-control" id="copyright" name="copyright" value="{{ $info->copyright }}">
             </div>
 
             <div class="form-group">
@@ -381,14 +314,65 @@
                 <input type="number" step="0.01" class="form-control" id="vat" name="vat"
                     value="{{ $info->vat }}" required>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label for="logo_recruitment">Logo Recruitment</label>
                 @if ($info->logo_recruitment)
-                    <img src="{{ asset('storage/' . $info->logo_recruitment) }}" alt="logo_recruitment" style="max-width: 100px;">
+                    <img src="{{ asset('storage/' . $info->logo_recruitment) }}" alt="logo_recruitment"
+                        style="max-width: 100px;">
                 @endif
                 <input type="file" class="form-control" id="logo_recruitment" name="logo_recruitment">
             </div>
+            <div class="form-group">
+                <label for="company_name">Edit smart_recruitments</label>
+                <a href="{{ route('smart_recruitments.index') }}">Edit smart_recruitments
+                </a>
+            </div>
+            <div class="form-group">
+                <label for="company_name">Edit recruitment_services
+                </label>
+                <a href="{{ route('recruitment_services.index') }}">Edit recruitment_services
+                </a>
+            </div>
+            <div class="form-group">
+                <label for="company_name">Edit figures</label>
+                <a href="{{ route('figures.index') }}">Edit figures
+                </a>
+            </div>
+            <div class="form-group">
+                <label for="company_name">Edit values
+                </label>
+                <a href="{{ route('values.index') }}">Edit values
+                </a>
+            </div>
+            <div class="form-group">
+                <label for="company_name">Edit cities
+                </label>
+                <a href="{{ route('cities.index') }}">Edit cities
+                </a>
+            </div>
+            <div class="form-group">
+                <label for="company_name">Manage Ecosystems</label>
+                <a href="{{ route('ecosystems.index') }}">Manage Ecosystems</a>
+            </div>
+            <div class="form-group">
+                <label for="hotline_contact">Hotline Contact</label>
+                <input type="text" class="form-control" id="hotline_contact" name="hotline_contact"
+                    value="{{ $info->hotline_contact }}">
+            </div>
 
+            <div class="form-group">
+                <label for="email_contact">Email Contact</label>
+                <input type="email" class="form-control" id="email_contact" name="email_contact"
+                    value="{{ $info->email_contact }}">
+            </div>
+
+            <div class="form-group">
+                <label for="logo_home">Home Logo</label>
+                @if ($info->logo_home)
+                    <img src="{{ asset('storage/' . $info->logo_home) }}" alt="Home Logo" style="max-width: 100px;">
+                @endif
+                <input type="file" class="form-control" id="logo_home" name="logo_home">
+            </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>

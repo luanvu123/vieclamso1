@@ -42,27 +42,27 @@
     <meta name="msvalidate.01" content="968C4303D47877E2B0961793E3E4175E" />
     <link rel="preload" as="style" href="{{ asset('build/assets/app.374c2237.css') }}" />
     <link rel="stylesheet" href="{{ asset('build/assets/app.374c2237.css') }}" />
-    <title>Đăng tin tuyển dụng miễn phí – Tìm CV ứng viên trên TopCV</title>
+    <title>Đăng tin tuyển dụng miễn phí – Tìm CV ứng viên trên Vieclamso1</title>
     <meta name="description"
-        content="Đăng tin tuyển dụng miễn phí, tìm hồ sơ ứng viên xin việc, đăng tin tuyển dụng 24h miễn phí, đăng tin tuyển dụng việc làm nhanh, hiệu quả tiếp cận 2.000.000+ hồ sơ người tìm việc trên TopCV." />
+        content="Đăng tin tuyển dụng miễn phí, tìm hồ sơ ứng viên xin việc, đăng tin tuyển dụng 24h miễn phí, đăng tin tuyển dụng việc làm nhanh, hiệu quả tiếp cận 2.000.000+ hồ sơ người tìm việc trên Vieclamso1." />
     <link rel="icon" type="image/png" href="https://static.topcv.vn/srp/website/favicon.ico?">
     <link rel="canonical" href="index.html" />
     <link rel="publisher" href="https://plus.google.com/u/0/+TopcvVn" />
     <meta property="og:url" content />
     <meta property="og:title" content="Dịch vụ tuyển dụng nhân sự chất lượng cao" />
     <meta property="og:description"
-        content="Đăng tin tuyển dụng miễn phí, tìm hồ sơ ứng viên xin việc, đăng tin tuyển dụng 24h miễn phí, đăng tin tuyển dụng việc làm nhanh, hiệu quả tiếp cận 2.000.000+ hồ sơ người tìm việc trên TopCV." />
+        content="Đăng tin tuyển dụng miễn phí, tìm hồ sơ ứng viên xin việc, đăng tin tuyển dụng 24h miễn phí, đăng tin tuyển dụng việc làm nhanh, hiệu quả tiếp cận 2.000.000+ hồ sơ người tìm việc trên Vieclamso1." />
     <meta property="og:image" content="https://static.topcv.vn/srp/website/images/thumbnail_home.jpg" />
-    <meta property="og:site_name" content="TopCV" />
+    <meta property="og:site_name" content="Vieclamso1" />
     <meta property="og:locale" content="vi_VN" />
     <meta property="og:locale:alternate" content="en_US" />
     <meta name="keywords"
         content="đăng tin tuyển dụng, miễn phí, nhà tuyển dụng, quản lý hồ sơ ứng viên, tìm kiếm hồ sơ ứng viên">
     <meta name="twitter:card" content="Dịch vụ tuyển dụng nhân sự chất lượng cao">
-    <meta name="twitter:site" content="TopCV">
+    <meta name="twitter:site" content="Vieclamso1">
     <meta name="twitter:title" content="Dịch vụ tuyển dụng nhân sự chất lượng cao">
     <meta name="twitter:description"
-        content="Đăng tin tuyển dụng miễn phí, tìm hồ sơ ứng viên xin việc, đăng tin tuyển dụng 24h miễn phí, đăng tin tuyển dụng việc làm nhanh, hiệu quả tiếp cận 2.000.000+ hồ sơ người tìm việc trên TopCV.">
+        content="Đăng tin tuyển dụng miễn phí, tìm hồ sơ ứng viên xin việc, đăng tin tuyển dụng 24h miễn phí, đăng tin tuyển dụng việc làm nhanh, hiệu quả tiếp cận 2.000.000+ hồ sơ người tìm việc trên Vieclamso1.">
     <meta property="og:type" content="website" />
 
 
@@ -970,7 +970,7 @@
                     <div class="md:flex md:items-center md:h-[80px]">
                         <div class="relative h-[68px] md:h-auto flex items-center justify-center md:pr-[30px]">
                             <a href="{{route("/")}}" class="business-image">
-                                <img src="{{ asset('storage/' . $info->logo) }}" class="max-w-[200px] md:mb-[-10px]"
+                                <img src="{{ asset('storage/' . $info->logo_home) }}" class="max-w-[200px] md:mb-[-10px]"
                                     alt="topcv logo">
                             </a>
                             <div class="md:hidden absolute top-0 right-0">
@@ -984,29 +984,29 @@
                             <ul class="p-0 m-0 list-none flex flex-col md:flex-row text-sm" id="navbar-menu">
                                 <li>
                                     <a class="text-primary hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="index944d.html?ref=you">
+                                        href="#">
                                         Giới thiệu
                                     </a>
                                 </li>
                                 <li>
                                     <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="index.html?ref=you#service">
+                                        href="#">
                                         Dịch vụ
                                     </a>
                                 </li>
                                 <li>
                                     <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="bang-gia-dich-vu.html?ref=you" target="_blank">
+                                        href="#" target="_blank">
                                         Báo giá
                                     </a>
                                 </li>
                                 <li>
                                     <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="help/index.html" target="_blank">Hỗ trợ</a>
+                                        href="#" target="_blank">Hỗ trợ</a>
                                 </li>
                                 <li>
                                     <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="bai-viet/index.html" target="_blank">
+                                        href="#" target="_blank">
                                         Blog tuyển dụng
                                     </a>
                                 </li>
@@ -1014,21 +1014,21 @@
                             <div class="py-[40px] md:flex md:items-center md:justify-end md:py-0 md:!ml-auto">
                                 <div class="mb-[35px] p-0 flex justify-center md:mb-0 md:mr-[30px]">
                                     <div class="ml-1 border border-gray-100">
-                                        <a href="en944d.html?ref=you">
+                                        <a href="#">
                                             <img style="width: 27px; height: 16px"
                                                 src="{{ asset('static.topcv.vn/srp/website/images/flags/uk.jpg') }}"
                                                 alt="us flag">
                                         </a>
                                     </div>
                                     <div class="ml-1 border border-gray-100">
-                                        <a href="index.html?ref=you">
+                                        <a href="#">
                                             <img style="width: 27px; height: 16px"
                                                 src="{{ asset('static.topcv.vn/srp/website/images/flags/vietnam.png') }}"
                                                 alt="vi flag">
                                         </a>
                                     </div>
                                     <div class="ml-1 border border-gray-100">
-                                        <a href="jp944d.html?ref=you">
+                                        <a href="#">
                                             <img style="width: 27px; height: 16px"
                                                 src="{{ asset('static.topcv.vn/srp/website/images/flags/japan.png') }}"
                                                 alt="jp flag">
@@ -1144,7 +1144,7 @@
                                                     động</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">Chương trình TopCV
+                                                    href="#" target="_blank">Chương trình Vieclamso1
                                                     Rewards</a>
                                             </li>
                                         </ul>
@@ -1249,7 +1249,7 @@
                         </div>
                         <div>
                             <h3 class="text-[14px] font-medium text-color-default text-center md:text-left mb-[17px]">
-                                Hệ sinh thái HR Tech của TopCV
+                                Hệ sinh thái HR Tech của Vieclamso1
                             </h3>
                             <div class="flex justify-center md:justify-between flex-row my-2">
                                 @foreach ($ecosystems_layout as $ecosystem_layout)
@@ -1469,7 +1469,7 @@
             </div>
             <div class="success-msg">Đăng ký thành công!</div>
             <div class="success-des">
-                TopCV sẽ liên hệ để tư vấn bạn trong thời gian sớm nhất. Nếu bạn cần hỗ trợ ngay, vui lòng liên hệ
+                Vieclamso1 sẽ liên hệ để tư vấn bạn trong thời gian sớm nhất. Nếu bạn cần hỗ trợ ngay, vui lòng liên hệ
                 Hotline chăm
                 sóc khách hàng.
             </div>

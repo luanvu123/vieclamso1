@@ -66,6 +66,9 @@ class InfoController extends Controller
             'bct_image' => 'nullable|image|max:2048',
             'vat' => 'required|string|max:255',
             'logo_recruitment' => 'nullable|image|max:2048',
+            'hotline_contact' => 'nullable|string|max:255',
+            'email_contact' => 'nullable|string|email|max:255',
+            'logo_home' => 'nullable|image|max:2048',
         ]);
 
         $info = Info::findOrFail($id);
@@ -151,8 +154,13 @@ class InfoController extends Controller
             $info->logo_recruitment = $path;
         }
 
+        if ($request->hasFile('logo_home')) {
+            $path = $request->file('logo_home')->store('images', 'public');
+            $info->logo_home = $path;
+        }
 
-        // Update new text fields
+        $info->hotline_contact = $request->hotline_contact;
+        $info->email_contact = $request->email_contact;
         $info->recruitment_title_1 = $request->recruitment_title_1;
         $info->big_update_title = $request->big_update_title;
         $info->big_update_title_1 = $request->big_update_title_1;

@@ -15,6 +15,8 @@ use App\Models\GenrePost;
 use App\Models\Hotline;
 use App\Models\JobPosting;
 use App\Models\Media;
+use App\Models\OnlineVisitor;
+use App\Models\OnlineVisitorRecruitment;
 use App\Models\Partner;
 use App\Models\RecruitmentService;
 use App\Models\SmartRecruitment;
@@ -28,9 +30,9 @@ use Illuminate\Support\Facades\Auth;
 
 class SiteController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-
+        $this->trackVisitor($request->ip(), OnlineVisitor::class);
         $jobPostings = JobPosting::with('employer', 'company')->where('status', 0)->paginate(12);
         $categories = Category::withCount('jobPostings')
             ->where('status', 1)
@@ -197,8 +199,9 @@ class SiteController extends Controller
         return view('pages.app');
     }
 
-    public function recruitment()
+    public function recruitment(Request $request)
     {
+        $this->trackVisitor($request->ip(), OnlineVisitorRecruitment::class);
         $recruitments = SmartRecruitment::where('status', true)->get();
         $services = RecruitmentService::where('status', true)->get();
         $figures = Figure::where('status', true)->get();
@@ -239,5 +242,12 @@ class SiteController extends Controller
 
         // Redirect or return response
         return redirect()->back()->with('success', 'Your consultation request has been submitted successfully.');
+    }
+    protected function trackVisitor($ip, $model)
+    {
+        $visitor = $model::updateOrCreate(
+            ['ip_address' => $ip],
+            ['last_activity' => Carbon::now()]
+        );
     }
 }
