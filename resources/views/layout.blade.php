@@ -70,6 +70,7 @@
 
     <!-- Slick JS -->
     <script type="text/javascript" src="{{ asset('cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preload" as="style" onload="this.rel='stylesheet'"
         href="{{ asset('v3/plugins/slick/slick.css') }}">
     <link rel="preload" as="style" onload="this.rel='stylesheet'"

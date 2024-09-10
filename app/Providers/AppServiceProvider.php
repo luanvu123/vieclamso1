@@ -41,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
         $info = Info::find(1);
         // Đếm số lượng Job Listings active
         $activeJobListingsCount = JobPosting::where('status', 0)->count();
+        $activeJobListingsCountToday = JobPosting::whereDate('created_at', today())->where('status', 0)->count();
 
         // Đếm tổng số Job Listings
         $totalJobCount = JobPosting::count();
@@ -75,6 +76,7 @@ class AppServiceProvider extends ServiceProvider
         // Chia sẻ dữ liệu với tất cả các view
         View::share([
             'activeJobListingsCount' => $activeJobListingsCount,
+            'activeJobListingsCountToday'=>$activeJobListingsCountToday,
             'totalJobCount' => $totalJobCount,
             'totalEmployerCount' => $totalEmployerCount,
             'totalCandidateCount' => $totalCandidateCount,

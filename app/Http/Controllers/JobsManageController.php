@@ -17,7 +17,7 @@ class JobsManageController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:job-posting-manage-list|jobPosting-choose|job-posting-manage-create|job-posting-manage-edit|job-posting-manage-delete', ['only' => ['index', 'store','jobPosting_choose']]);
+        $this->middleware('permission:job-posting-manage-list|jobPosting-choose|job-posting-manage-create|job-posting-manage-edit|job-posting-manage-delete', ['only' => ['index', 'store', 'jobPosting_choose']]);
     }
 
     public function index()
@@ -39,9 +39,10 @@ class JobsManageController extends Controller
      */
     public function show($id)
     {
-        $jobPosting = JobPosting::with('employer', 'applications')->findOrFail($id);
+        $jobPosting = JobPosting::with('employer', 'applications', 'categories', 'cities', 'salaries')->findOrFail($id);
         return view('admin.jobs_manage.show', compact('jobPosting'));
     }
+
 
     public function jobPosting_choose(Request $request)
     {

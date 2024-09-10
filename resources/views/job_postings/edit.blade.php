@@ -110,6 +110,20 @@
                                   <h5>Salary <span>(optional)</span></h5>
                                   <input type="text" name="salary" value="{{ $jobPosting->salary }}">
                               </div>
+                              <div class="form">
+                                <div class="select">
+                                  <label for="salaries">Select Salaries:</label>
+                                  <select name="salaries[]" id="salaries" class="form-control" multiple>
+                                      @foreach ($salaries as $salary)
+                                          <option value="{{ $salary->id }}"
+                                              {{ in_array($salary->id, old('salaries', $jobPosting->salaries->pluck('id')->toArray())) ? 'selected' : '' }}>
+                                              {{ $salary->name }}
+                                          </option>
+                                      @endforeach
+                                  </select>
+                                </div>
+                              </div>
+
                               <!-- Experience -->
                               <div class="form">
                                   <h5>Experience <span>(optional)</span></h5>
@@ -134,7 +148,8 @@
                                       </option>
                                       <option value="Female" {{ $jobPosting->sex == 'Female' ? 'selected' : '' }}>Female
                                       </option>
-                                      <option value="Not required" {{ $jobPosting->sex == 'Not required' ? 'selected' : '' }}>Not required
+                                      <option value="Not required"
+                                          {{ $jobPosting->sex == 'Not required' ? 'selected' : '' }}>Not required
                                       </option>
                                   </select>
                               </div>
@@ -171,7 +186,7 @@
                               <!-- Description -->
                               <div class="form" style="width: 100%;">
                                   <h5>Description</h5>
-                                  <textarea class="WYSIWYG" name="description" cols="40" rows="3" id="summary" spellcheck="true">{{ $jobPosting->description }}</textarea>
+                                  <textarea class="WYSIWYG" name="description" cols="40" rows="3" id="summary" spellcheck="true">{!! $jobPosting->description !!}</textarea>
                               </div>
                               <!-- Application email/url -->
                               <div class="form">
@@ -191,14 +206,9 @@
                   </div>
                   <div class="dashboard-list-box margin-top-30">
                       <div class="form">
-                          <h5>Choose Your Company</h5>
-                          <select name="company_id" class="chosen-select-no-single">
-                              @foreach ($companies as $company)
-                                  <option value="{{ $company->id }}"
-                                      {{ $jobPosting->company_id == $company->id ? 'selected' : '' }}>
-                                      {{ $company->name }}
-                                  </option>
-                              @endforeach
+                          <h5>Your Company</h5>
+                          <select name="company_id" class="chosen-select">
+                              <option value="{{ $company->id }}">{{ $company->name }}</option>
                           </select>
                       </div>
 

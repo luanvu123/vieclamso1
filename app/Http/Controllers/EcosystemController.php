@@ -68,10 +68,6 @@ class EcosystemController extends Controller
 
 public function update(Request $request, Ecosystem $ecosystem)
 {
-    if ($ecosystem->user_id !== Auth::id()) {
-        return redirect()->route('ecosystems.index')->with('error', 'Unauthorized access.');
-    }
-
     $request->validate([
         'name' => 'required|string|max:255',
         'detail' => 'nullable|string',
@@ -118,10 +114,6 @@ public function update(Request $request, Ecosystem $ecosystem)
 
     public function edit(Ecosystem $ecosystem)
     {
-        if ($ecosystem->user_id !== Auth::id()) {
-            return redirect()->route('ecosystems.index')->with('error', 'Unauthorized access.');
-        }
-
         return view('admin.ecosystems.edit', compact('ecosystem'));
     }
 
@@ -129,10 +121,6 @@ public function update(Request $request, Ecosystem $ecosystem)
 
     public function destroy(Ecosystem $ecosystem)
     {
-        if ($ecosystem->user_id !== Auth::id()) {
-            return redirect()->route('ecosystems.index')->with('error', 'Unauthorized access.');
-        }
-
         // Delete image if exists
         if ($ecosystem->image && Storage::disk('public')->exists($ecosystem->image)) {
             Storage::disk('public')->delete($ecosystem->image);

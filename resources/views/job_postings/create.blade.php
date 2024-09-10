@@ -17,11 +17,11 @@
             </div>
         </div>
     </div>
-@if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-lg-12 col-md-12">
             <form action="{{ route('job-postings.store') }}" method="POST" enctype="multipart/form-data">
@@ -100,6 +100,24 @@
                                 <h5>Salary <span>(optional)</span></h5>
                                 <input type="text" name="salary" placeholder="Enter salary">
                             </div>
+
+                            <div class="form">
+                                <div class="select">
+                                <label for="salaries">Select Salaries(Mức lương để Vieclamso1 thống kê hệ thống)<span class="text-danger">*</span></label>
+                                <select name="salaries[]" id="salaries" class="form-control" multiple required>
+                                    @foreach ($salaries as $salary)
+                                        <option value="{{ $salary->id }}">
+                                            {{ $salary->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('salaries')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                                </div>
+                            </div>
+
+
                             <!-- Experience -->
                             <div class="form">
                                 <h5>Experience <span>(optional)</span></h5>
@@ -159,6 +177,8 @@
                                 <input data-role="date" type="date" name="closing_date" placeholder="yyyy-mm-dd">
                                 <p class="note">Deadline for new applicants.</p>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -172,7 +192,6 @@
                         @else
                             <p>Bạn chưa tạo công ty nào.</p>
                             <a href="{{ route('companies.create') }}" class="btn btn-primary">Tạo công ty mới</a>
-                            <!-- Thêm liên kết tạo công ty -->
                         @endif
                     </div>
                 </div>

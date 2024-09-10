@@ -59,6 +59,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PublicLinkController;
 use App\Http\Controllers\RecruitmentServiceController;
+use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\SavedJobController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SlideController;
@@ -182,6 +183,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+    Route::resource('salaries', SalaryController::class);
     Route::resource('candidates', CandidateManageController::class);
     Route::put('/users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
     Route::get('/employer-choose', [EmployerManageController::class, 'employer_choose'])->name('employer-choose');
@@ -298,7 +300,7 @@ Route::middleware(['employer'])->group(function () {
     Route::get('employer/profile/change-password', [EmployerLoginController::class, 'formChangePasswordEmployer'])->name('employer.change-password');
     Route::post('employer/profile/change-password', [EmployerLoginController::class, 'changePasswordEmployer'])->name('employer.change-password');
 
-    Route::resource('companies', CompanyController::class); 
+    Route::resource('companies', CompanyController::class);
 
 
     Route::get('employer/phone', [EmployerLoginController::class, 'formPhone'])->name('employer.phone');

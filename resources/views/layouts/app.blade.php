@@ -299,7 +299,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 
                                 <li
-                                    class="treeview {{ Request::is('admin/info*', 'public_links*', 'partners*', 'hotlines*', 'medias*', 'awards*', 'slides*') ? 'active' : '' }}">
+                                    class="treeview {{ Request::is('admin/info*', 'public_links*', 'partners*', 'hotlines*', 'medias*', 'awards*', 'slides*','salaries*') ? 'active' : '' }}">
                                     <a href="#">
                                         <img src="{{ asset('backend_admin/images/5355692_code_coding_development_programming_web_icon.svg') }}"
                                             alt="Google" width="20" height="20">
@@ -323,6 +323,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                             <a href="{{ route('partners.index') }}">
                                                 <img src="{{ asset('backend_admin/images/cooperate-svgrepo-com.svg') }}"
                                                     alt="Google" width="20" height="20"> Partner
+                                            </a>
+                                        </li>
+                                        <li class="{{ Request::is('salaries*') ? 'active' : '' }}">
+                                            <a href="{{ route('salaries.index') }}">
+                                                <img src="{{ asset('backend_admin/images/usd-square-svgrepo-com.svg') }}"
+                                                    alt="Google" width="20" height="20"> Salaries
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('hotlines*') ? 'active' : '' }}">
@@ -749,7 +755,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                 }
             });
         })
-        
+
     </script>
     <script>
         $('.support_choose').change(function() {

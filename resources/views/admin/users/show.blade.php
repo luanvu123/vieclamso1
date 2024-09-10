@@ -8,14 +8,6 @@
             <div class="row">
                 <div class="col-md-12">
                     <h2>My Profile</h2>
-                    <!-- Breadcrumbs -->
-                    <nav id="breadcrumbs">
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Dashboard</a></li>
-                            <li>User Information</li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>
@@ -23,7 +15,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <div class="edit-profile-photo">
+                <div class="message-avatar">
 
                     @if ($user->avatar)
                         <img src="{{ asset('storage/' . $user->avatar) }}">

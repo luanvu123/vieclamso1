@@ -6,14 +6,6 @@
                 <div class="col-md-12">
                     <h2>Edit User</h2>
                     <!-- Breadcrumbs -->
-                    <nav id="breadcrumbs">
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Dashboard</a></li>
-                            <li>Edit</li>
-                        </ul>
-                    </nav>
-
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
                             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -153,5 +145,5 @@
                 </div>
             </div>
         </div>
-   
+
 @endsection

@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <!-- Titlebar -->
                 <div class="row">
-   <a href="{{ route('users.create') }}" class="button margin-top-30">Add User</a>
+                    <a href="{{ route('users.create') }}" class="button margin-top-30">Add User</a>
                     <!-- Table -->
                     <table id="user-table" class="display">
                         <thead>
@@ -43,8 +43,7 @@
                                     <td class="action">
                                         <a href="{{ route('users.edit', $user->id) }}"><i class="fa fa-pencil"></i>
                                             Edit</a>
-                                        <a href="{{ route('users.show', $user->id) }}"><i
-                                                class="fa fa-eye"></i>
+                                        <a href="{{ route('users.show', $user->id) }}"><i class="fa fa-eye"></i>
                                             show</a>
                                     </td>
                                 </tr>

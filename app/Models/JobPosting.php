@@ -32,7 +32,6 @@ class JobPosting extends Model
         'area',
         'slug',
         'status',
-
         'city'
     ];
 
@@ -60,5 +59,9 @@ class JobPosting extends Model
     public function cities()
     {
         return $this->belongsToMany(City::class, 'city_job_posting');
+    }
+    public function salaries()
+    {
+        return $this->belongsToMany(Salary::class, 'job_posting_salary');
     }
 }

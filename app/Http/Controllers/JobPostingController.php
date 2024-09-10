@@ -11,6 +11,7 @@ use App\Models\Company;
 use App\Models\JobPosting;
 use App\Models\Product;
 use App\Models\Purchased;
+use App\Models\Salary;
 use App\Models\Slide;
 use App\Models\TypeEmployer;
 use Carbon\Carbon;
@@ -98,7 +99,8 @@ class JobPostingController extends Controller
         $categories = Category::all();
         $cities = City::all();
         $company = $employer->company;
-        return view('job_postings.create', compact('email', 'categories', 'company', 'cities'));
+        $salaries = Salary::where('status', 'active')->get();
+        return view('job_postings.create', compact('email', 'categories', 'company', 'cities', 'salaries'));
     }
 
 
@@ -146,6 +148,8 @@ class JobPostingController extends Controller
             'skills_required' => 'nullable|string|max:255',
             'area' => 'nullable|string|max:255',
             'city' => 'required|array',
+            'salaries' => 'required|array|min:1',
+            'salaries.*' => 'exists:salaries,id',
         ], [
             'title.required' => 'Job title is required.',
             'type.required' => 'Job type is required.',
@@ -178,6 +182,9 @@ class JobPostingController extends Controller
         $jobPosting->status = 1;
         $jobPosting->skills_required = $request->skills_required;
         $jobPosting->area = $request->area;
+        // Proceed with saving the job posting
+
+
         // Handle logo
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
@@ -191,6 +198,7 @@ class JobPostingController extends Controller
         // Sync categories
         $jobPosting->categories()->sync($request->category);
         $jobPosting->cities()->sync($request->city);
+        $jobPosting->salaries()->sync($request->input('salaries'));
 
         // Redirect with success message
         return redirect()->route('job-postings.index')->with('success', 'Job posting created successfully!');
@@ -221,8 +229,9 @@ class JobPostingController extends Controller
         $categories = Category::all();
         $selectedCategories = $jobPosting->categories->pluck('id')->toArray();
         $employer = Auth::guard('employer')->user();
-        $companies = $employer->companies;
-        return view('job_postings.edit', compact('jobPosting', 'selectedCities', 'cities', 'categories', 'selectedCategories', 'companies', 'selectedCities'));
+        $company = $employer->company;
+        $salaries = Salary::where('status', 'active')->get();
+        return view('job_postings.edit', compact('jobPosting', 'selectedCities', 'cities', 'categories', 'selectedCategories', 'company', 'selectedCities', 'salaries'));
     }
 
 
@@ -244,7 +253,8 @@ class JobPostingController extends Controller
             'sex' => 'nullable|string|max:255',
             'skills_required' => 'nullable|string|max:255',
             'area' => 'nullable|string|max:255',
-
+            'salaries' => 'required|array|min:1', // Salaries are required and must be an array with at least one item
+            'salaries.*' => 'exists:salaries,id', // Each item in the salaries array must exist in the salaries table
             'city' => 'required|array',
         ], [
             'title.required' => 'Job title is required.',
@@ -282,6 +292,7 @@ class JobPostingController extends Controller
         // Sync categories
         $jobPosting->categories()->sync($request->category);
         $jobPosting->cities()->sync($request->city);
+        $jobPosting->salaries()->sync($request->input('salaries'));
 
         // Redirect with success message
         return redirect()->route('job-postings.index')->with('success', 'Job posting updated successfully!');
