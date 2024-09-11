@@ -15,21 +15,21 @@
     <meta name="dmca-site-verification" content="UTd2SHpqb1hYdC9mUnV4YUFDN3U0QT090" />
     <link rel="canonical" href="{{ route('/') }}" />
     <meta name="description"
-        content="Tạo CV online & tìm việc làm miễn phí trên TopCV ngay hôm nay để tiếp cận 30.000+ cơ hội việc làm được kết nối thành công trên TopCV mỗi ngày.">
+        content="Tạo CV online & tìm việc làm miễn phí trên Vieclamso1 ngay hôm nay để tiếp cận 30.000+ cơ hội việc làm được kết nối thành công trên Vieclamso1 mỗi ngày.">
     <meta name="keywords"
         content="cv,curriculum vitae,resume,tao cv,viet cv,viet cv truc tuyen,cv online,cv an tuong,mau cv dep">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@TopCV">
-    <meta name="twitter:title" content="TopCV - CV xịn việc làm chất - Tạo CV & Tìm việc miễn phí">
+    <meta name="twitter:title" content="Vieclamso1 - CV xịn việc làm chất - Tạo CV & Tìm việc miễn phí">
     <meta name="twitter:description"
-        content="Sở hữu ngay cv xịn cùng việc làm mơ ước. 30.000+ cơ hội việc làm được kết nối thành công qua TopCV mỗi ngày.">
+        content="Sở hữu ngay cv xịn cùng việc làm mơ ước. 30.000+ cơ hội việc làm được kết nối thành công qua Vieclamso1 mỗi ngày.">
 
     <meta property="og:locale" content="vi_VN" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta name="og:title" content="TopCV - CV xịn việc làm chất - Tạo CV & Tìm việc miễn phí">
+    <meta name="og:title" content="Vieclamso1 - CV xịn việc làm chất - Tạo CV & Tìm việc miễn phí">
     <meta name="og:description"
-        content="Sở hữu ngay cv xịn cùng việc làm mơ ước. 30.000+ cơ hội việc làm được kết nối thành công qua TopCV mỗi ngày.">
-    <meta name="og:site_name" content="TopCV">
+        content="Sở hữu ngay cv xịn cùng việc làm mơ ước. 30.000+ cơ hội việc làm được kết nối thành công qua Vieclamso1 mỗi ngày.">
+    <meta name="og:site_name" content="Vieclamso1">
     <meta property="og:type" content="website" />
     <meta property="og:image"
         content="{{ asset('static.topcv.vn/v4/image/thumbnail/Thumb-Homepage-TopCV.vne8da.png') }}">
@@ -949,8 +949,8 @@
     <nav class="cvo-flex cvo-items-center cvo-justify-between" id="navbar-mobile">
         <h1>
             <a href="{{ route('/') }}" class="cvo-flex cvo-items-center">
-                <img src="{{ asset('storage/' . $info->logo) }}" alt="TopCV tuyen dung tai TopCV"
-                    title="TopCV tuyển dụng tại TopCV" class="logo">
+                <img src="{{ asset('storage/' . $info->logo) }}" alt="Vieclamso1 tuyen dung tai Vieclamso1 "
+                    title="Vieclamso1 tuyển dụng tại Vieclamso1 " class="logo">
             </a>
         </h1>
         <div class="navbar-item cvo-flex">
@@ -1118,7 +1118,7 @@
                             class="fa-light fa-mobile"></i></span>
                     <a href="{{ route('site.app') }}" class="
                                 ">
-                        Mobile App TopCV
+                        Mobile App Vieclamso1
                     </a>
                 </div>
             </div>
@@ -1168,8 +1168,8 @@
             <div class="navbar-header">
                 <h1 style="margin: 0">
                     <a class="navbar-brand" href="{{ route('/') }}">
-                        <img src="{{ asset('storage/' . $info->logo) }}" alt="TopCV tuyen dung tai TopCV"
-                            title="TopCV tuyển dụng tại TopCV" class>
+                        <img src="{{ asset('storage/' . $info->logo) }}" alt="Vieclamso1 tuyen dung tai Vieclamso1 "
+                            title="Vieclamso1 tuyển dụng tại Vieclamso1" class>
                     </a>
                 </h1>
             </div>
@@ -1250,7 +1250,7 @@
                             <li class="navbar-menu__item ">
                                 <a href="{{ route('site.app') }}" class="text-sm">
                                     <i class="icon fa-regular fa-mobile"></i>
-                                    Mobile App TopCV
+                                    Mobile App Vieclamso1
                                 </a>
                             </li>
                         </ul>
@@ -1398,7 +1398,7 @@
                     <div class="column">
                         <a href="{{ route('/') }}">
                             <img src="{{ asset('storage/' . $info->logo) }}" class="img-logo-footer img-responsive"
-                                alt="TopCV tuyen dung tai TopCV" title="TopCV tuyển dụng tại TopCV">
+                                alt="Vieclamso1 tuyen dung tai Vieclamso1" title="Vieclamso1 tuyển dụng tại Vieclamso1">
                         </a>
                         <div class="box-image-flex">
                             <img src="{{ asset('storage/' . $info->logo_google_for_startup) }}"
@@ -1423,10 +1423,10 @@
                             <div class="btn-download-app">
                                 <a target="_blank" href="{{ $info->link_appstore }}"><img class="img-responsive"
                                         src="{{ asset('storage/' . $info->image_appstore) }}"
-                                        alt="Tai app TopCV tai App Store" title="Tải app TopCV tại App Store"></a>
+                                        alt="Tai app Vieclamso1 tai App Store" title="Tải app Vieclamso1 tại App Store"></a>
                                 <a target="_blank" href="{{ $info->link_googleplay }}"><img class="img-responsive"
                                         src="{{ asset('storage/' . $info->image_googleplay) }}"
-                                        alt="Tai app TopCV tai Google Play" title="Tải app TopCV tại Google Play"></a>
+                                        alt="Tai app Vieclamso1 tai Google Play" title="Tải app Vieclamso1 tại Google Play"></a>
                             </div>
                         </div>
                         <div class="box-social">
@@ -1445,7 +1445,7 @@
                     <div class="column">
                         <div class="box-menu-item">
                             <div class="title">
-                                Về TopCV
+                                Về Vieclamso1
                             </div>
                             <div class="box-menu-child">
                                 <a target="_blank" href="#">Giới thiệu</a>
@@ -1482,7 +1482,7 @@
                             </div>
                             <div class="box-menu-child">
                                 <a href="{{ route('cv.manage') }}" target="_blank">Quản lý CV của bạn</a>
-                                <a href="{{ route('personal.profile.account') }}" target="_blank">TopCV Profile</a>
+                                <a href="{{ route('personal.profile.account') }}" target="_blank">Vieclamso1 Profile</a>
                                 <a target="_blank" href="#">Hướng dẫn
                                     viết CV</a>
                                 <a href="#" target="_blank">Thư viện CV theo ngành
@@ -1495,7 +1495,7 @@
                                 Khám phá
                             </div>
                             <div class="box-menu-child">
-                                <a href="{{ route('site.app') }}" target="_blank">Ứng dụng di động TopCV</a>
+                                <a href="{{ route('site.app') }}" target="_blank">Ứng dụng di động Vieclamso1</a>
                                 <a href="#" target="_blank">Tính lương Gross - Net</a>
                                 <a href="#" target="_blank">Tính lãi suất kép</a>
                                 <a href="#" target="_blank">Lập kế hoạch tiết kiệm</a>
@@ -1522,7 +1522,7 @@
                                 Phát triển bản thân
                             </div>
                             <div class="box-menu-child">
-                                <a href="#" target="_blank">TopCV Contest</a>
+                                <a href="#" target="_blank">Vieclamso1 Contest</a>
                             </div>
                         </div>
                     </div>
@@ -1571,7 +1571,7 @@
                         <div class="col-md-12 box-ecosystem">
                             <div class="list-ecosystem">
                                 <div class="title">
-                                    Hệ sinh thái HR Tech của TopCV
+                                    Hệ sinh thái HR Tech của Vieclamso1
                                 </div>
                                 <div class="box-image-app">
                                     @foreach ($ecosystems_layout as $ecosystem_layout)
@@ -1769,7 +1769,7 @@
                 </div>
                 <div class="support-ticket-modal-body">
                     <div class="st-text-center">
-                        <p><strong class="st-text-bold">TopCV cam kết sẽ xử lý các vấn đề của bạn trong vòng tối đa
+                        <p><strong class="st-text-bold">Vieclamso1 cam kết sẽ xử lý các vấn đề của bạn trong vòng tối đa
                                 24h.</strong></p>
                         <p>Tổng đài:
                             <span class="st-text-highlight">(024) 6680 5588 (Giờ hành chính) </span>
@@ -1860,12 +1860,12 @@
                                 <span class="st-text-dark-gray">Mô tả vấn đề cần hỗ trợ <span
                                         class="st-text-red">*</span></span>
                                 <textarea name="content" id="st-content" class="st-form-control" rows="4"
-                                    placeholder="Mô tả rõ vấn đề bạn gặp phải hoặc thông tin góp ý để TopCV có thể xử lý chính xác nhất."></textarea>
+                                    placeholder="Mô tả rõ vấn đề bạn gặp phải hoặc thông tin góp ý để Vieclamso1 có thể xử lý chính xác nhất."></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="support-ticket-modal-footer text-center">
-                        <p class="notice">TopCV cam kết sẽ xử lý các vấn đề của bạn trong vòng tối đa 24h.</p>
+                        <p class="notice">Vieclamso1 cam kết sẽ xử lý các vấn đề của bạn trong vòng tối đa 24h.</p>
                         <a href="#" class="btn btn-default btn-close" v-on:click.prevent="hideModal"
                             style="min-width: 117px;">Đóng lại</a>
                         <a href="#" class="btn btn-submit" v-on:click.prevent="submitRequest"
@@ -1881,12 +1881,12 @@
                 </div>
                 <div class="support-ticket-modal-body">
                     <div class="st-text-center">
-                        <p><strong class="st-text-bold">TopCV sẽ gửi phản hồi qua email bạn đã nhập trong vòng tối đa
+                        <p><strong class="st-text-bold">Vieclamso1 sẽ gửi phản hồi qua email bạn đã nhập trong vòng tối đa
                                 24h.</strong></p>
                         <p>Liên hệ hotline nếu sau 24h bạn chưa nhận được phản hồi qua email: <br>
                             <span class="st-text-highlight">(024) 6680 5588 (Giờ hành chính) </span>
                         </p>
-                        <p>Hoặc email trực tiếp cho TopCV tại địa chỉ: <span
+                        <p>Hoặc email trực tiếp cho Vieclamso1 tại địa chỉ: <span
                                 class="st-text-highlight">hotro@topcv.vn</span></p>
                         <p>Xin cảm ơn!</p>
                     </div>
@@ -2167,7 +2167,7 @@
                         <div class="popover-body-icon"><img style="width: 100%; padding: 10px"
                                 alt="notification icon" class src="{{ asset('storage/' . $info->logo) }}">
                         </div>
-                        <div class="popover-body-message">Đăng ký nhận thông báo từ TopCV để không bỏ lỡ các cơ hội
+                        <div class="popover-body-message">Đăng ký nhận thông báo từ Vieclamso1 để không bỏ lỡ các cơ hội
                             việc
                             làm tốt nhất từ hàng nghìn doanh nghiệp uy tín tại Việt Nam.</div>
                         <div class="clearfix"></div>
@@ -2716,7 +2716,7 @@
                                 class="required-icon">*</span></div>
                         <div class="support-ticket-tab-content__group--content">
                             <textarea name="content" class="support-ticket-text-area" rows="4"
-                                placeholder="Mô tả góp ý của bạn giúp TopCV cải tiến sản phẩm, hỗ trợ bạn tốt hơn"></textarea>
+                                placeholder="Mô tả góp ý của bạn giúp Vieclamso1 cải tiến sản phẩm, hỗ trợ bạn tốt hơn"></textarea>
                         </div>
                         <div class="support-ticket-error"></div>
                     </div>
@@ -2735,7 +2735,7 @@
                         <div class="support-ticket-error"></div>
                     </div>
                     <div class="support-ticket-tab-content__group">
-                        <div class="support-ticket-tab-content__group--title">Bạn có hài lòng với TopCV không?</div>
+                        <div class="support-ticket-tab-content__group--title">Bạn có hài lòng với Vieclamso1 không?</div>
                         <div class="support-ticket-tab-content__group--content">
                             <div class="list-icon">
                                 <div class="list-icon_tab status-option verry_bad" data-option="Rất tệ"
@@ -2795,7 +2795,7 @@
                     Gửi yêu cầu thành công
                 </div>
                 <div class="support-ticket-success-description__text" style="margin-bottom: 16px;">
-                    TopCV sẽ gửi phản hồi tới email bạn nhập trong vòng 24 giờ (không kể Thứ 7, Chủ nhật, ngày lễ)
+                    Vieclamso1 sẽ gửi phản hồi tới email bạn nhập trong vòng 24 giờ (không kể Thứ 7, Chủ nhật, ngày lễ)
                 </div>
                 <div class="support-ticket-success-description__text">
                     Trường hợp bạn chưa nhận được phản hồi, vui lòng liên hệ qua:
