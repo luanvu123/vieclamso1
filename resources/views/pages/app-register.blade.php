@@ -1,7 +1,7 @@
  @extends('login-employer')
  @section('content')
      <div class="header">
-         <h2 class="title">Chào mừng bạn đến với Vieclamso1</h2>
+         <h2 class="title">Chào mừng bạn đến với Tuyendungso1</h2>
          <div class="text-muted caption">Cùng xây dựng một hồ sơ nổi bật và nhận được các cơ hội sự
              nghiệp lý tưởng</div>
      </div>
