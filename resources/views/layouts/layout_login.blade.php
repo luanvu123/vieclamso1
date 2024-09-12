@@ -18,7 +18,7 @@
     <title>Đăng nhập</title>
     <style>
         body {
-            background: url('backend/images/laptop-3214756_1280.png');
+            background: url('backend_admin/images/laptop-3214756_1280.png');
         }
 
         /* sign in FORM */
