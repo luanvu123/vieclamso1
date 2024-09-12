@@ -6,7 +6,7 @@
              nghiệp lý tưởng</div>
      </div>
      <div class="login">
-         <form action="{{ route('candidate.login') }}" method="post" id="form-login">
+         <form action="{{ route('candidate.login.post') }}" method="post" id="form-login">
              @csrf
              <div class="form-group mb-24">
                  <label for="email" class="mb-1">Email</label>

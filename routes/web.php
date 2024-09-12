@@ -180,6 +180,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/companies', [EmployerManageController::class, 'indexCompany'])->name('admin.companies.index');
     Route::get('/admin/companies/{id}', [EmployerManageController::class, 'showCompany'])->name('admin.companies.show');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+
+
+
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
@@ -217,7 +222,7 @@ Route::get('/candidate-login-google', [CandidateController::class, 'redirectToGo
 Route::get('candidate/register', [CandidateController::class, 'showRegistrationForm'])->name('candidate.showRegister');
 Route::post('candidate/register', [CandidateController::class, 'register'])->name('candidate.register');
 Route::get('candidate/login', [CandidateController::class, 'showLoginForm'])->name('candidate.login');
-Route::post('candidate/login', [CandidateController::class, 'login'])->name('candidate.login');
+Route::post('candidate/login', [CandidateController::class, 'login'])->name('candidate.login.post');
 Route::post('candidate/logout', [CandidateController::class, 'logout'])->name('candidate.logout');
 
 
@@ -258,7 +263,7 @@ Route::middleware(['candidate'])->group(function () {
     Route::post('/candidate/update-avatar', [CandidateController::class, 'updateAvatar'])->name('candidate.update.avatar');
     Route::get('/quan-ly-cv', [CVController::class, 'index'])->name('cv.manage');
     Route::post('/upload-cv', [CVController::class, 'uploadCV'])->name('cv.upload');
-    Route::get('/upload-cv', [CVController::class, 'uploadCV_index'])->name('cv.upload');
+    Route::get('/upload-cv', [CVController::class, 'uploadCV_index'])->name('cv.upload.post');
     Route::post('/cv/update-name', [CVController::class, 'updateCvName'])->name('cv.update.name');
     Route::post('/cv/delete', [CVController::class, 'delete'])->name('cv.delete');
 
@@ -298,7 +303,7 @@ Route::middleware(['employer'])->group(function () {
     Route::get('employer/profile', [EmployerLoginController::class, 'profile'])->name('employer.profile');
     Route::post('employer/profile', [EmployerLoginController::class, 'updateProfile'])->name('employer.profile.update');
     Route::get('employer/profile/change-password', [EmployerLoginController::class, 'formChangePasswordEmployer'])->name('employer.change-password');
-    Route::post('employer/profile/change-password', [EmployerLoginController::class, 'changePasswordEmployer'])->name('employer.change-password');
+    Route::post('employer/profile/change-password', [EmployerLoginController::class, 'changePasswordEmployer'])->name('employer.change-password.post');
 
     Route::resource('companies', CompanyController::class);
 

@@ -31,7 +31,7 @@
                              <p class="name-file"></p>
                              <p>Chọn tệp khác</p>
                          </div>
-                         <form id="formUploadCv" action="{{ route('cv.upload') }}" method="POST"
+                         <form id="formUploadCv" action="{{ route('cv.upload.post') }}" method="POST"
                              enctype="multipart/form-data">
                              @csrf
                              <input type="hidden" name="ta_source" value="UploadCVInManagerCV">

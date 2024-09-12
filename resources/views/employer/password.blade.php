@@ -44,7 +44,7 @@
                             class="fa mr-2 fa-building"></i> Thông tin công ty </a></div>
             </div>
             <div data-v-2c0c78b8="" class="bg-white w-100 rounded">
-                <form method="POST" action="{{ route('employer.change-password') }}">
+                <form method="POST" action="{{ route('employer.change-password.post') }}">
                     @csrf
                     <div data-v-2c0c78b8="">
                         <div data-v-2c0c78b8="" class="card-header bg-white font-weight-bold border-0">
