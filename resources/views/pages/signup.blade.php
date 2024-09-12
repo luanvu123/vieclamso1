@@ -6,7 +6,7 @@
              <div class="text-muted caption">Cùng xây dựng một hồ sơ nổi bật và nhận được các cơ hội sự
                  nghiệp lý tưởng</div>
          </div>
-         <form action="{{ route('employer.register') }}" method="post" id="form-register">
+         <form action="{{ route('candidate.register') }}" method="post" id="form-register">
              @csrf
 
              <div class="form-group mb-3">
@@ -115,7 +115,7 @@
              </div>
          </form>
          <div class="mt-3 d-flex justify-content-center option-auth text-center wrap-redirect-login">
-             <span>Bạn đã có tài khoản?<a class="text-success" href="{{route('employer.login')}}">
+             <span>Bạn đã có tài khoản?<a class="text-success" href="{{route('candidate.login')}}">
                      Đăng nhập ngay
                  </a></span>
          </div>

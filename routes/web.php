@@ -214,7 +214,7 @@ Route::get('/admin/about/email', function () {
 
 });
 Route::get('/candidate-login-google', [CandidateController::class, 'redirectToGoogle'])->name('candidate.login.google');
-Route::get('candidate/register', [CandidateController::class, 'showRegistrationForm'])->name('candidate.register');
+Route::get('candidate/register', [CandidateController::class, 'showRegistrationForm'])->name('candidate.showRegister');
 Route::post('candidate/register', [CandidateController::class, 'register'])->name('candidate.register');
 Route::get('candidate/login', [CandidateController::class, 'showLoginForm'])->name('candidate.login');
 Route::post('candidate/login', [CandidateController::class, 'login'])->name('candidate.login');
