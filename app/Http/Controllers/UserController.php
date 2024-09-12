@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 
@@ -26,14 +27,15 @@ class UserController extends Controller
      */
     function __construct()
     {
-         $this->middleware('permission:user-choose', ['only' => ['user_choose']]);
+        $this->middleware('permission:user-choose', ['only' => ['user_choose']]);
         $this->middleware('permission:user-list|role-create|user-edit|user-delete', ['only' => ['index', 'store']]);
         $this->middleware('permission:user-create', ['user' => ['create', 'store']]);
         $this->middleware('permission:user-edit', ['user' => ['edit', 'update']]);
         $this->middleware('permission:user-delete', ['user' => ['destroy']]);
     }
-     public function index()
+    public function index()
     {
+
         $users = User::all(); // Lấy danh sách tất cả người dùng
 
         return view('admin.users.index', compact('users'));
@@ -68,7 +70,7 @@ class UserController extends Controller
             'address' => 'nullable|string',
             'favorite_color' => 'nullable|string',
             'status' => 'nullable',
-            'date'=>'nullable',
+            'date' => 'nullable',
             'phone' => 'nullable|string',
             'language' => 'nullable|string',
             'google' => 'nullable|string',
@@ -106,9 +108,21 @@ class UserController extends Controller
      */
     public function show($id): View
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
+
+        // Kiểm tra vai trò của người dùng hiện tại
+        $userRoleIds = Auth::user()->roles->pluck('id')->toArray();
+
+        if (in_array(1, $userRoleIds)) {
+            // Người dùng có vai trò role_id = 1 có thể xem thông tin của bất kỳ ai
+            return view('admin.users.show', compact('user'));
+        } elseif ($user->id !== Auth::id()) {
+            // Nếu không phải role_id = 1, chỉ cho phép xem thông tin của chính mình
+            abort(403, 'Unauthorized action.');
+        }
         return view('admin.users.show', compact('user'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -118,12 +132,21 @@ class UserController extends Controller
      */
     public function edit($id): View
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
+
+        // Kiểm tra vai trò của người dùng hiện tại
+        $currentUserRoleIds = Auth::user()->roles->pluck('id')->toArray();
+
+        if (!in_array(1, $currentUserRoleIds) && $user->id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
         return view('admin.users.edit', compact('user', 'roles', 'userRole'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -135,53 +158,75 @@ class UserController extends Controller
 
     public function update(Request $request, $id): RedirectResponse
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'same:confirm-password',
-            'roles' => 'required',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'gender' => 'nullable|string',
-            'address' => 'nullable|string',
-            'favorite_color' => 'nullable|string',
-            'status' => 'nullable',
-            'date'=> 'nullable',
-            'phone' => 'nullable|string',
-            'language' => 'nullable|string',
-            'google' => 'nullable|string',
-            'skype' => 'nullable|string',
-            'slack' => 'nullable|string',
-            'instagram' => 'nullable|string',
-            'facebook' => 'nullable|string',
-            'paypal' => 'nullable|string',
-        ]);
+        // Tìm người dùng dựa trên ID
+        $user = User::findOrFail($id);
 
-        $input = $request->all();
-        if (!empty($input['password'])) {
-            $input['password'] = Hash::make($input['password']);
-        } else {
-            $input = Arr::except($input, ['password']);
-        }
+        // Lấy vai trò của người dùng hiện tại
+        $userRoleIds = Auth::user()->roles->pluck('id')->toArray();
 
-        $user = User::find($id);
+        // Kiểm tra quyền truy cập
+        if (in_array(1, $userRoleIds) || $user->id === Auth::id()) {
+            // Xác thực dữ liệu từ yêu cầu
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email,' . $id,
+                'password' => 'nullable|same:confirm-password',
+                'roles' => 'nullable', // Điều chỉnh điều kiện validation nếu cần
+                'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+                'gender' => 'nullable|string',
+                'address' => 'nullable|string',
+                'favorite_color' => 'nullable|string',
+                'status' => 'nullable',
+                'date' => 'nullable',
+                'phone' => 'nullable|string',
+                'language' => 'nullable|string',
+                'google' => 'nullable|string',
+                'skype' => 'nullable|string',
+                'slack' => 'nullable|string',
+                'instagram' => 'nullable|string',
+                'facebook' => 'nullable|string',
+                'paypal' => 'nullable|string',
+            ]);
 
-        if ($request->hasFile('avatar')) {
-            if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
-                Storage::disk('public')->delete($user->avatar);
+            // Lấy tất cả dữ liệu từ yêu cầu
+            $input = $request->all();
+
+            // Xử lý mật khẩu nếu có
+            if (!empty($input['password'])) {
+                $input['password'] = Hash::make($input['password']);
+            } else {
+                $input = Arr::except($input, ['password']);
             }
-            $avatar = $request->file('avatar');
-            $avatarPath = $avatar->store('avatar', 'public');
-            $input['avatar'] = $avatarPath;
+
+            // Xử lý ảnh đại diện nếu có
+            if ($request->hasFile('avatar')) {
+                if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+                    Storage::disk('public')->delete($user->avatar);
+                }
+                $avatar = $request->file('avatar');
+                $avatarPath = $avatar->store('avatar', 'public');
+                $input['avatar'] = $avatarPath;
+            }
+
+            // Cập nhật thông tin người dùng
+            $user->update($input);
+
+            // Cập nhật vai trò nếu người dùng có quyền quản trị hoặc đang chỉnh sửa chính mình
+            if (in_array(1, $userRoleIds)) {
+                DB::table('model_has_roles')->where('model_id', $id)->delete();
+                $user->assignRole($request->input('roles'));
+            } else {
+                abort(403, 'Unauthorized action.');
+            }
+
+            return redirect()->route('users.index')
+                ->with('success', 'User updated successfully');
         }
 
-        $user->update($input);
-
-        DB::table('model_has_roles')->where('model_id', $id)->delete();
-        $user->assignRole($request->input('roles'));
-
-        return redirect()->route('users.index')
-            ->with('success', 'User updated successfully');
+        // Nếu không có quyền truy cập, trả về lỗi 403
+        abort(403, 'Unauthorized action.');
     }
+
 
 
     /**
@@ -213,7 +258,7 @@ class UserController extends Controller
         $user->save();
     }
 
-     public function updatePassword(Request $request, $id)
+    public function updatePassword(Request $request, $id)
     {
         // Validate dữ liệu đầu vào
         $request->validate([
