@@ -36,6 +36,8 @@
     <link rel="preload" as="image" fetchpriority="high"
         href="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/welcome/bg_header.webp"
         type="image/webp">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/sidebar/box-maybe-interested.7d6ada53ff6b5096K.css') }}">
     <link rel="stylesheet" href="{{ asset('v4/css/components/desktop/job-save.min.d88c8255578e7d64K.css') }}">
     <link rel="stylesheet" href="{{ asset('v4/components/desktop/history-apply.fe7877ceeda62d0fK.css') }}">
     <link rel="stylesheet"
@@ -1371,8 +1373,7 @@
                         </a>
                     </li>
                     <li class="navbar-right__item">
-                        <a type="button" class="btn btn-dark" href="{{ route('recruitment') }}"
-                            target="_blank">
+                        <a type="button" class="btn btn-dark" href="{{ route('recruitment') }}" target="_blank">
                             Đăng tuyển & tìm hồ sơ
                         </a>
                     </li>
@@ -1398,7 +1399,8 @@
                     <div class="column">
                         <a href="{{ route('/') }}">
                             <img src="{{ asset('storage/' . $info->logo) }}" class="img-logo-footer img-responsive"
-                                alt="Vieclamso1 tuyen dung tai Vieclamso1" title="Vieclamso1 tuyển dụng tại Vieclamso1">
+                                alt="Vieclamso1 tuyen dung tai Vieclamso1"
+                                title="Vieclamso1 tuyển dụng tại Vieclamso1">
                         </a>
                         <div class="box-image-flex">
                             <img src="{{ asset('storage/' . $info->logo_google_for_startup) }}"
@@ -1407,7 +1409,7 @@
                                 <img src="{{ asset('storage/' . $info->logo_dmca_com) }}"
                                     alt="DMCA.com Protection Status" class="dmca-image" />
                             </a>
-                            <script src="{{$info->bct}}"></script>
+                            <script src="{{ $info->bct }}"></script>
                             <a href="http://online.gov.vn/Home/WebDetails/25388" target="_blank">
                                 <img src="{{ asset('storage/' . $info->bct_image) }}"
                                     class="img-responsive bct-image" alt title>
@@ -1423,10 +1425,12 @@
                             <div class="btn-download-app">
                                 <a target="_blank" href="{{ $info->link_appstore }}"><img class="img-responsive"
                                         src="{{ asset('storage/' . $info->image_appstore) }}"
-                                        alt="Tai app Vieclamso1 tai App Store" title="Tải app Vieclamso1 tại App Store"></a>
+                                        alt="Tai app Vieclamso1 tai App Store"
+                                        title="Tải app Vieclamso1 tại App Store"></a>
                                 <a target="_blank" href="{{ $info->link_googleplay }}"><img class="img-responsive"
                                         src="{{ asset('storage/' . $info->image_googleplay) }}"
-                                        alt="Tai app Vieclamso1 tai Google Play" title="Tải app Vieclamso1 tại Google Play"></a>
+                                        alt="Tai app Vieclamso1 tai Google Play"
+                                        title="Tải app Vieclamso1 tại Google Play"></a>
                             </div>
                         </div>
                         <div class="box-social">
@@ -1482,7 +1486,8 @@
                             </div>
                             <div class="box-menu-child">
                                 <a href="{{ route('cv.manage') }}" target="_blank">Quản lý CV của bạn</a>
-                                <a href="{{ route('personal.profile.account') }}" target="_blank">Vieclamso1 Profile</a>
+                                <a href="{{ route('personal.profile.account') }}" target="_blank">Vieclamso1
+                                    Profile</a>
                                 <a target="_blank" href="#">Hướng dẫn
                                     viết CV</a>
                                 <a href="#" target="_blank">Thư viện CV theo ngành
@@ -1769,7 +1774,8 @@
                 </div>
                 <div class="support-ticket-modal-body">
                     <div class="st-text-center">
-                        <p><strong class="st-text-bold">Vieclamso1 cam kết sẽ xử lý các vấn đề của bạn trong vòng tối đa
+                        <p><strong class="st-text-bold">Vieclamso1 cam kết sẽ xử lý các vấn đề của bạn trong vòng tối
+                                đa
                                 24h.</strong></p>
                         <p>Tổng đài:
                             <span class="st-text-highlight">(024) 6680 5588 (Giờ hành chính) </span>
@@ -1881,7 +1887,8 @@
                 </div>
                 <div class="support-ticket-modal-body">
                     <div class="st-text-center">
-                        <p><strong class="st-text-bold">Vieclamso1 sẽ gửi phản hồi qua email bạn đã nhập trong vòng tối đa
+                        <p><strong class="st-text-bold">Vieclamso1 sẽ gửi phản hồi qua email bạn đã nhập trong vòng tối
+                                đa
                                 24h.</strong></p>
                         <p>Liên hệ hotline nếu sau 24h bạn chưa nhận được phản hồi qua email: <br>
                             <span class="st-text-highlight">(024) 6680 5588 (Giờ hành chính) </span>
@@ -2167,7 +2174,8 @@
                         <div class="popover-body-icon"><img style="width: 100%; padding: 10px"
                                 alt="notification icon" class src="{{ asset('storage/' . $info->logo) }}">
                         </div>
-                        <div class="popover-body-message">Đăng ký nhận thông báo từ Vieclamso1 để không bỏ lỡ các cơ hội
+                        <div class="popover-body-message">Đăng ký nhận thông báo từ Vieclamso1 để không bỏ lỡ các cơ
+                            hội
                             việc
                             làm tốt nhất từ hàng nghìn doanh nghiệp uy tín tại Việt Nam.</div>
                         <div class="clearfix"></div>
@@ -2735,7 +2743,8 @@
                         <div class="support-ticket-error"></div>
                     </div>
                     <div class="support-ticket-tab-content__group">
-                        <div class="support-ticket-tab-content__group--title">Bạn có hài lòng với Vieclamso1 không?</div>
+                        <div class="support-ticket-tab-content__group--title">Bạn có hài lòng với Vieclamso1 không?
+                        </div>
                         <div class="support-ticket-tab-content__group--content">
                             <div class="list-icon">
                                 <div class="list-icon_tab status-option verry_bad" data-option="Rất tệ"

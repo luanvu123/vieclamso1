@@ -28,7 +28,7 @@ class SmartRecruitmentController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image',
             'description' => 'required|string',
              'url' => 'nullable|url|max:255',
             'status' => 'required|boolean',
@@ -54,7 +54,7 @@ class SmartRecruitmentController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image',
             'description' => 'required|string',
              'url' => 'nullable|url|max:255',
             'status' => 'required|boolean',

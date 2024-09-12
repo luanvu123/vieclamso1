@@ -63,12 +63,12 @@
                              <input type="text" id="key" name="keyword" placeholder="Nhập từ khóa tìm kiếm...">
                          </div>
                          <div class="item item-search">
-                              <select id="city" name="city">
-                                     <option value="">Chọn thành phố</option>
-                                     @foreach ($cities as $id => $name)
-                                          <option value="{{ $id }}">{{ $name }}</option>
-                                     @endforeach
-                                 </select>
+                             <select id="city" name="city">
+                                 <option value="">Chọn thành phố</option>
+                                 @foreach ($cities as $id => $name)
+                                     <option value="{{ $id }}">{{ $name }}</option>
+                                 @endforeach
+                             </select>
                          </div>
                          <div class="item item-search">
                              <button type="submit">Tìm kiếm</button>
@@ -83,7 +83,11 @@
                      class="fa-solid fa-angle-right"></i>
                  <a href="{{ route('/') }}" class="text-highlight bold">Tìm việc làm
                      {{ $jobPosting->category }}</a> <i class="fa-solid fa-angle-right"></i>
-                 <span class="text-dark-blue"> {{ $jobPosting->title }} [{{ $jobPosting->city }}]</span>
+                 <span class="text-dark-blue"> {{ $jobPosting->title }} [ @foreach ($jobPosting->cities as $city)
+                         {{ $city->name }}@if (!$loop->last)
+                             ,
+                         @endif
+                     @endforeach]</span>
              </div>
              <div class="job-detail__wrapper">
                  <div class="job-detail__body">
@@ -130,7 +134,11 @@
                                      <div class="job-detail__info--section-content">
                                          <div class="job-detail__info--section-content-title">Địa điểm</div>
                                          <div class="job-detail__info--section-content-value">
-                                             {{ $jobPosting->city }}
+                                             @foreach ($jobPosting->cities as $city)
+                                                 {{ $city->name }}@if (!$loop->last)
+                                                     ,
+                                                 @endif
+                                             @endforeach
 
 
                                          </div>
@@ -179,7 +187,7 @@
                                                          Ứng tuyển lại
                                                      </a>
                                                      <a class="job-detail__info--actions-button button-white" target="_blank"
-                                                         href="{{route('applications.showAppliedJobs')}}">
+                                                         href="{{ route('applications.showAppliedJobs') }}">
                                                          <span class="button-icon">
                                                              <i class="fa-solid fa-comments"></i>
                                                          </span>
@@ -188,7 +196,8 @@
                                                      <p style="margin-bottom: 0">
                                                          Bạn đã gửi CV cho vị trí này vào ngày:
                                                          <span class="date">{{ $appliedDate }}</span>.
-                                                         <a href="{{route('applications.showAppliedJobs')}}" target="_blank" type="button"
+                                                         <a href="{{ route('applications.showAppliedJobs') }}"
+                                                             target="_blank" type="button"
                                                              class="text-highlight show-applied-cv"
                                                              style="margin-left: 5px">Xem CV đã nộp</a>
                                                      </p>
@@ -719,7 +728,14 @@
                                                              <div class="info">
                                                                  <div class="label-content">
                                                                      <label class="address">
-                                                                         {{ $relatedJob->city }}</label>
+
+                                                                         @foreach ($relatedJob->cities as $city)
+                                                                             {{ $city->name }}@if (!$loop->last)
+                                                                                 ,
+                                                                             @endif
+                                                                         @endforeach
+
+                                                                     </label>
                                                                      <label class="time mobile-hidden">
                                                                          Còn
                                                                          <strong>{{ $relatedJob->days_to_closing }}</strong>
@@ -1133,13 +1149,13 @@
                                              Kiểm tra thông tin về công ty, việc làm trước khi ứng tuyển
                                          </li>
                                          <li>
-                                             Báo cáo tin tuyển dụng với TopCV thông qua nút <strong>"Báo cáo tin tuyển
+                                             Báo cáo tin tuyển dụng với Vieclamso1 thông qua nút <strong>"Báo cáo tin tuyển
                                                  dụng"</strong> để được hỗ
                                              trợ và giúp các
                                              ứng viên khác tránh
                                              được rủi ro </li>
                                          <li>
-                                             Hoặc liên hệ với TopCV thông qua kênh hỗ trợ ứng viên của TopCV:<br>
+                                             Hoặc liên hệ với Vieclamso1 thông qua kênh hỗ trợ ứng viên của Vieclamso1:<br>
                                              Email: <a class="text-highlight"
                                                  href="mailto:hotro@topcv.vn">hotro@topcv.vn</a><br>
                                              Hotline: <a class="text-highlight" href="tel:02466805588">(024) 6680
@@ -1196,14 +1212,13 @@
                                  </div>
                              </div>
                          </div>
-                         <link rel="stylesheet"
-                             href="https://static.topcv.vn/v4/css/components/sidebar/box-maybe-interested.7d6ada53ff6b5096K.css">
+
                          <div class="box-maybe-interested">
                              <h3 class="box-maybe-interested__title">Có thể bạn quan tâm</h3>
                              <div class="box-maybe-interested__company">
                                  <div class="box-maybe-interested__company--image">
-                                     <a rel="nofollow" href="{{ $company_random->url }}">
-                                         <img src="{{ asset('storage/' . $company_random->image) }}"
+                                     <a rel="nofollow" href="{{ route('company-home.show', $company_random->slug) }}">
+                                         <img src="{{ $company_random->image ? asset('storage/' . $company_random->image) : asset('storage/avatar/company_cover_1.jpg') }}"
                                              alt="{{ $company_random->name }}" class="spotlight-cover">
                                      </a>
                                  </div>
@@ -1212,7 +1227,7 @@
                                          <div class="company__info--logo">
                                              <a rel="nofollow"
                                                  href="{{ route('company-home.show', $company_random->slug) }}">
-                                                 <img src="{{ asset('storage/' . $company_random->logo) }}"
+                                                 <img src="{{ $company_random->logo ? asset('storage/' . $company_random->logo) : asset('storage/avatar/avatar-default.jpg') }}"
                                                      alt="{{ $company_random->name }}">
                                              </a>
                                          </div>
@@ -1227,7 +1242,7 @@
                                          @foreach ($jobPosting_random as $jobPosting)
                                              <div class="job job-ta" data-job-id="{{ $jobPosting->id }}"
                                                  data-box="SpotlightCompany">
-                                                 <a href="{{ $jobPosting->application_email_url }}" target="_blank"
+                                                 <a href="{{ route('job.show', $relatedJob->slug) }}" target="_blank"
                                                      data-toggle="tooltip" title="" data-placement="top"
                                                      class="job__name">{{ $jobPosting->title }}</a>
                                                  <div class="job__info">
@@ -1239,7 +1254,9 @@
                                                          <i class="fa-solid fa-location-dot"></i>
                                                          <span data-toggle="tooltip" data-html="true" title=""
                                                              data-placement="top">
-                                                             {{ $jobPosting->location }}
+                                                             @foreach ($cities_random as $city)
+                                                                 <li>{{ $city->name }}</li>
+                                                             @endforeach
                                                          </span>
                                                      </div>
                                                  </div>
@@ -1247,93 +1264,17 @@
                                          @endforeach
                                      </div>
                                      <div class="company__link">
-                                         <a rel="nofollow" href="{{ $company_random->url }}" target="_blank">Tìm hiểu
+                                         <a rel="nofollow" href="{{ route('company-home.show', $company_random->slug) }}"
+                                             target="_blank">Tìm hiểu
                                              ngay</a>
                                      </div>
                                  </div>
                              </div>
                          </div>
-                         <div class="box-easy-apply job-detail__body-right--item">
-                             <div class="image">
-                                 <a target="_blank" href="{{ route('personal.profile.account') }}">
-                                     <img data-src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/job-detail/easy-apply.png"
-                                         alt="Apply việc gì cũng dễ" class="w-100 entered loaded" data-ll-status="loaded"
-                                         src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/v4/image/job-detail/easy-apply.png">
-                                 </a>
-                             </div>
-                         </div>
-                         <div class="box-easy-content job-detail__box--right job-detail__body-right--item">
-                             <div class="box-job-similar__note">
-                                 Vị trí Nhân Viên <a href="https://www.topcv.vn/tim-viec-lam-video-editor"
-                                     target="_blank">Video Editor</a> Youtube Lĩnh Vực Hoạt Hình [Hà Nội]
-                                 tuyển dụng bởi công ty <a rel="nofollow"
-                                     href="https://www.topcv.vn/cong-ty/cong-ty-tnhh-egmedia/185340.html"
-                                     target="_blank">CÔNG TY TNHH EGMEDIA</a>
-                                 tại Hà Nội, Thanh Trì với mức lương 8 - 14 triệu yêu cầu hình thức làm
-                                 việc Toàn thời gian. Bạn có thể tham khảo thêm các vị trí tuyển dụng <a
-                                     href="https://www.topcv.vn/tim-viec-lam-video-editor-tai-ha-noi-kl1"
-                                     target="_blank">Video Editor
-                                     tại Hà Nội, Thanh Trì</a> khác trên kênh tuyển dụng việc làm topcv.
-                             </div>
-                         </div>
                      </div>
                  </div>
              </div>
          </div>
-         <div class="box-white mt-40" id="seo-box-wrapper">
-             <div class="container">
-                 <div class="content-seo-box">
-                     <div id="seo-box">
-                         <p><strong>Cơ hội ứng tuyển việc làm với đãi ngộ hấp dẫn tại các công ty hàng đầu</strong> </p>
-                         <p>Trước sự phát triển vượt bậc của nền kinh tế, rất nhiều ngành nghề trở nên khan hiếm nhân lực
-                             hoặc thiếu nhân lực giỏi. Vì vậy, hầu hết các trường Đại học đều liên kết với các công ty,
-                             doanh nghiệp, cơ quan để tạo cơ hội cho các bạn sinh viên được học tập, rèn luyện bản thân và
-                             làm quen với môi trường làm việc từ sớm. Trong <a target="_blank" rel="noopener noreferrer"
-                                 href="https://www.topcv.vn/viec-lam"><strong>danh sách việc làm</strong></a> trên đây,
-                             TopCV mang đến cho bạn những cơ hội việc làm tại những môi trường làm việc năng động, chuyên
-                             nghiệp.</p>
-                         <p><strong>Vậy tại sao nên tìm việc làm tại TopCV?</strong> </p>
-                         <p><strong>Việc làm Chất lượng</strong> </p>
-                         <ul>
-                             <li>Hàng ngàn tin tuyển dụng chất lượng cao được cập nhật thường xuyên để đáp ứng nhu cầu tìm
-                                 việc của ứng viên.</li>
-                             <li>Hệ thống thông minh tự động gợi ý các công việc phù hợp theo CV của bạn.</li>
-                         </ul>
-                         <p><strong>Công cụ viết CV đẹp Miễn phí</strong> </p>
-                         <ul>
-                             <li>Nhiều mẫu CV đẹp, phù hợp nhu cầu ứng tuyển các vị trí khác nhau.</li>
-                             <li>Tương tác trực quan, dễ dàng chỉnh sửa thông tin, tạo CV online nhanh chóng trong vòng 5
-                                 phút.</li>
-                         </ul>
-                         <p><strong>Hỗ trợ Người tìm việc</strong> </p>
-                         <ul>
-                             <li>Nhà tuyển dụng chủ động tìm kiếm và liên hệ với bạn qua hệ thống kết nối ứng viên thông
-                                 minh.</li>
-                             <li>Báo cáo chi tiết Nhà tuyển dụng đã xem CV và gửi offer tới bạn.</li>
-                         </ul>
-                         <p>Tại <a target="_blank" rel="noopener noreferrer"
-                                 href="https://www.topcv.vn/"><strong>TopCV</strong></a>, bạn có thể tìm thấy những tin
-                             tuyển dụng việc làm với mức lương vô cùng hấp dẫn. Những nhà tuyển dụng kết nối với TopCV đều
-                             là những công ty lớn tại Việt Nam, nơi bạn có thể làm việc trong một môi trường chuyên nghiệp,
-                             năng động, trẻ trung. TopCV là nền tảng tuyển dụng công nghệ cao giúp các nhà tuyển dụng và ứng
-                             viên kết nối với nhau. Nhanh tay tạo CV để ứng tuyển vào các vị trí việc làm mới nhất hấp dẫn
-                             tại <a target="_blank" rel="noopener noreferrer"
-                                 href="https://www.topcv.vn/tim-viec-lam-moi-nhat-tai-ha-noi-l1"><strong>việc làm mới nhất
-                                     tại Hà Nội</strong></a>, <a target="_blank" rel="noopener noreferrer"
-                                 href="https://www.topcv.vn/tim-viec-lam-moi-nhat-tai-ho-chi-minh-l2"><strong>việc làm mới
-                                     nhất tại TP.HCM</strong></a> ở TopCV, bạn sẽ tìm thấy những <a target="_blank"
-                                 rel="noopener noreferrer" href="https://www.topcv.vn/tim-viec-lam-moi-nhat"><strong>việc
-                                     làm mới nhất</strong></a>
-                             với mức lương tốt nhất!</p>
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <link rel="stylesheet"
-             href="https://static.topcv.vn/v4/components/desktop/partials/modal-confirm-job-remote.4991399ab977df16K.css">
-         <link rel="stylesheet"
-             href="https://static.topcv.vn/v4/css/components/job-notification-setting.bea5fa3f03028ed1K.css">
-         <script data-type="lazy" data-src="https://static.topcv.vn/v4/js/common/job-notification-setting/popup-job-notification-setting.min.b66ea965f6d6b5ba.js" src="https://static.topcv.vn/v4/js/common/job-notification-setting/popup-job-notification-setting.min.b66ea965f6d6b5ba.js"></script>
          <style>
              .fade-enter-active,
              .fade-leave-active {

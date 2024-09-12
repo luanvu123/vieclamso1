@@ -306,7 +306,9 @@
                                                                              class="text_ellipsis">{{ $jobPosting->salary }}</span>
                                                                      </div>
                                                                      <div class="address"><span
-                                                                             class="text_ellipsis">{{ $jobPosting->location }}</span>
+                                                                             class="text_ellipsis">  @foreach($jobPosting->cities as $city)
+        {{ $city->name }}@if (!$loop->last), @endif
+    @endforeach</span>
                                                                      </div>
                                                                  </div>
                                                                  <div class="col-like">

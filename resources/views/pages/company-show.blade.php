@@ -31,13 +31,13 @@
                        <div class="cover-wrapper">
                            <img draggable="false"
                                src="{{ $company->image ? asset('storage/' . $company->image) : asset('storage/avatar/company_cover_1.jpg') }}"
-
                                width="100%" class="img-responsive cover-img">
                        </div>
                        <div class="company-logo">
                            <div class="company-image-logo">
                                <img draggable="false"
-                                   src="{{ $company->logo ? asset('storage/' . $company->logo) : asset('storage/default-logo.jpg') }}"
+                                   src="{{ $company->logo ? asset('storage/' . $company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
+
                                    alt="{{ $company->name }}" class="img-responsive">
                            </div>
                        </div>
@@ -150,7 +150,7 @@
                                                <div class="job-item-default bg-highlight job-ta">
                                                    <div class="avatar">
                                                        <a target="_blank" href="{{ route('job.show', $job->slug) }}">
-                                                           <img src="{{ asset('storage/' . $job->company->logo) }}"
+                                                           <img src="{{ $job->company->logo ? asset('storage/' . $job->company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
                                                                class="w-100" alt="{{ $job->title }}"
                                                                title="{{ $job->title }}">
                                                        </a>
@@ -187,8 +187,17 @@
                                                        <div class="info">
                                                            <div class="label-content">
                                                                <label class="address" data-toggle="tooltip"
-                                                                   data-html="true" title="" data-placement="top"
-                                                                   data-original-title="<p style='text-align: left'>{{ $job->city }}</p>">{{ $job->city }}</label>
+                                                                   data-html="true" title=""
+                                                                   style="text-align: left;">
+                                                                   @foreach ($cities as $city)
+                                                                       <span class="city-name"
+                                                                           title="{{ $city->name }}">
+                                                                           {{ Str::limit($city->name, 10) }}
+
+                                                                       </span>
+                                                                   @endforeach
+                                                               </label>
+
                                                                <label class="time mobile-hidden">
                                                                    Còn
                                                                    <strong>{{ \Carbon\Carbon::parse($job->closing_date)->diffInDays() }}</strong>

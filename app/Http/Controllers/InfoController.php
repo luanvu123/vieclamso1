@@ -47,7 +47,7 @@ class InfoController extends Controller
             'image_googleplay' => 'nullable|image|max:2048',
 
             'recruitment_title_1' => 'nullable|string|max:255',
-            'recruitment_image_1' => 'nullable|image|max:2048',
+            'recruitment_image_1' => 'nullable|image',
             'big_update_title' => 'nullable|string|max:255',
             'big_update_title_1' => 'nullable|string|max:255',
             'big_update_description' => 'nullable|string',

@@ -1,0 +1,196 @@
+.box-maybe-interested {
+    background: 0 0;
+    margin-bottom: 20px;
+    width: 100%
+}
+
+.box-maybe-interested__title {
+    color: #212f3f;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    margin: 0 0 16px
+}
+
+.box-maybe-interested__company {
+    background: #fff;
+    border: 1px solid #57d991;
+    border-radius: 8px;
+    overflow: hidden
+}
+
+.box-maybe-interested__company--image img {
+    border-radius: 0 !important;
+    height: 68px !important;
+    max-height: 360px !important;
+    -o-object-fit: cover;
+    object-fit: cover;
+    width: 100% !important
+}
+
+.box-maybe-interested__company--content {
+    background: var(--lo, linear-gradient(94deg, rgba(180, 255, 219, .06) 0, rgba(20, 128, 189, .06) 100.16%));
+    padding: 16px 16px 20px
+}
+
+.box-maybe-interested .company__info {
+    border-bottom: 1px solid #f2f4f5;
+    display: flex;
+    gap: 16px;
+    padding-bottom: 16px
+}
+
+.box-maybe-interested .company__info--logo {
+    background: #fff;
+    border: 2px solid #e6e7e8;
+    border-radius: 74px;
+    flex-shrink: 0;
+    height: 76px;
+    overflow: hidden;
+    width: 76px
+}
+
+.box-maybe-interested .company__info--logo img {
+    height: 100% !important;
+    -o-object-fit: contain;
+    object-fit: contain;
+    width: 100% !important
+}
+
+.box-maybe-interested .company__info--name a {
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color: #212f3f;
+    display: -webkit-box;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    word-break: break-word
+}
+
+.box-maybe-interested .company__info--name img {
+    height: 18px !important;
+    width: 128px !important
+}
+
+.box-maybe-interested .company__description {
+    padding-top: 11px
+}
+
+.box-maybe-interested .company__description--title {
+    color: #263a4d;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    margin-bottom: 8px
+}
+
+.box-maybe-interested .company__description--content {
+    color: #263a4d;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px
+}
+
+.box-maybe-interested .company__link a {
+    background: #00b14f;
+    border-radius: 6px;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
+    margin-top: 16px;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none
+}
+
+.box-maybe-interested .company__job {
+    margin-top: 11px
+}
+
+.box-maybe-interested .company__job .job {
+    border-bottom: 1px solid #f2f4f5;
+    padding: 12px 0
+}
+
+.box-maybe-interested .company__job .job:last-child {
+    border-bottom: 1px solid transparent;
+    margin-bottom: 0
+}
+
+.box-maybe-interested .company__job .job__name {
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color: #212f3f;
+    display: -webkit-box;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content
+}
+
+.box-maybe-interested .company__job .job__info {
+    align-items: center;
+    display: flex;
+    gap: 20px;
+    padding: 2px 0
+}
+
+.box-maybe-interested .company__job .job__info i {
+    align-items: center;
+    color: #00b14f;
+    display: flex;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 900;
+    height: 16px;
+    justify-content: center;
+    line-height: 16px;
+    margin-right: 6px;
+    width: 16px
+}
+
+.box-maybe-interested .company__job .job__info--salary {
+    display: flex;
+    flex-shrink: 0
+}
+
+.box-maybe-interested .company__job .job__info--salary span {
+    color: #11ad39;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px
+}
+
+.box-maybe-interested .company__job .job__info--address {
+    display: flex
+}
+
+.box-maybe-interested .company__job .job__info--address span {
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    color: #263a4d;
+    display: -webkit-box;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: .12px;
+    line-height: 16px;
+    overflow: hidden
+}

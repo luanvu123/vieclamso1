@@ -31,46 +31,46 @@ use Illuminate\Support\Facades\Auth;
 
 class SiteController extends Controller
 {
-   public function index(Request $request)
-{
-    $this->trackVisitor($request->ip(), OnlineVisitor::class);
+    public function index(Request $request)
+    {
+        $this->trackVisitor($request->ip(), OnlineVisitor::class);
 
-    $jobPostings = JobPosting::with('employer', 'company')->where('status', 0)->paginate(12);
-    $categories = Category::withCount('jobPostings')
-        ->where('status', 1)
-        ->get();
+        $jobPostings = JobPosting::with(['company', 'employer', 'cities'])->where('status', 0)->paginate(12);
+        $categories = Category::withCount('jobPostings')
+            ->where('status', 1)
+            ->get();
 
-    $salaries = Salary::where('status', 'active')->withCount('jobPostings')->get();
+        $salaries = Salary::where('status', 'active')->withCount('jobPostings')->get();
 
-    $companies = Company::select('name', 'logo')->take(12)->get();
-    $awards = Award::where('status', 1)->take(5)->get();
-    $ecosystems = Ecosystem::where('status', 1)->take(4)->get();
-    $medias = Media::where('status', 1)->take(6)->get();
-    $totalCompanyCount = Company::count();
-    $totalApplicationCount = Application::count();
-    $cities = City::where('status', 1)->pluck('name', 'id');
+        $companies = Company::select('name', 'logo')->take(12)->get();
+        $awards = Award::where('status', 1)->take(5)->get();
+        $ecosystems = Ecosystem::where('status', 1)->take(4)->get();
+        $medias = Media::where('status', 1)->take(6)->get();
+        $totalCompanyCount = Company::count();
+        $totalApplicationCount = Application::count();
+        $cities = City::where('status', 1)->pluck('name', 'id');
 
-    // Prepare data for categories and salaries
-    $jobData = $categories->map(function ($category) {
-        return [
-            'name' => $category->name,
-            'count' => $category->job_postings_count
-        ];
-    });
+        // Prepare data for categories and salaries
+        $jobData = $categories->map(function ($category) {
+            return [
+                'name' => $category->name,
+                'count' => $category->job_postings_count
+            ];
+        });
 
-    $salaryData = $salaries->map(function ($salary) {
-        return [
-            'name' => $salary->name,
-            'count' => $salary->job_postings_count
-        ];
-    });
+        $salaryData = $salaries->map(function ($salary) {
+            return [
+                'name' => $salary->name,
+                'count' => $salary->job_postings_count
+            ];
+        });
 
-    // Determine which data to show based on the selected type
-    $type = $request->input('type', 'job');
-    $data = ($type === 'salary') ? $salaryData : $jobData;
+        // Determine which data to show based on the selected type
+        $type = $request->input('type', 'job');
+        $data = ($type === 'salary') ? $salaryData : $jobData;
 
-    return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities', 'data', 'type'));
-}
+        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities', 'data', 'type'));
+    }
 
     public function filter(Request $request)
     {
@@ -97,45 +97,45 @@ class SiteController extends Controller
         if ($request->filled('category')) {
             $query->where('category', 'like', '%' . $request->input('category') . '%');
         }
-      $jobPostings = JobPosting::with('employer', 'company')->where('status', 0)->paginate(12);
-    $categories = Category::withCount('jobPostings')
-        ->where('status', 1)
-        ->get();
+        $jobPostings = JobPosting::with('employer', 'company')->where('status', 0)->paginate(12);
+        $categories = Category::withCount('jobPostings')
+            ->where('status', 1)
+            ->get();
 
-    $salaries = Salary::where('status', 'active')->withCount('jobPostings')->get();
+        $salaries = Salary::where('status', 'active')->withCount('jobPostings')->get();
 
-    $companies = Company::select('name', 'logo')->take(12)->get();
-    $awards = Award::where('status', 1)->take(5)->get();
-    $ecosystems = Ecosystem::where('status', 1)->take(4)->get();
-    $medias = Media::where('status', 1)->take(6)->get();
-    $totalCompanyCount = Company::count();
-    $totalApplicationCount = Application::count();
-    $cities = City::where('status', 1)->pluck('name', 'id');
+        $companies = Company::select('name', 'logo')->take(12)->get();
+        $awards = Award::where('status', 1)->take(5)->get();
+        $ecosystems = Ecosystem::where('status', 1)->take(4)->get();
+        $medias = Media::where('status', 1)->take(6)->get();
+        $totalCompanyCount = Company::count();
+        $totalApplicationCount = Application::count();
+        $cities = City::where('status', 1)->pluck('name', 'id');
 
-    // Prepare data for categories and salaries
-    $jobData = $categories->map(function ($category) {
-        return [
-            'name' => $category->name,
-            'count' => $category->job_postings_count
-        ];
-    });
+        // Prepare data for categories and salaries
+        $jobData = $categories->map(function ($category) {
+            return [
+                'name' => $category->name,
+                'count' => $category->job_postings_count
+            ];
+        });
 
-    $salaryData = $salaries->map(function ($salary) {
-        return [
-            'name' => $salary->name,
-            'count' => $salary->job_postings_count
-        ];
-    });
+        $salaryData = $salaries->map(function ($salary) {
+            return [
+                'name' => $salary->name,
+                'count' => $salary->job_postings_count
+            ];
+        });
 
-    // Determine which data to show based on the selected type
-    $type = $request->input('type', 'job');
-    $data = ($type === 'salary') ? $salaryData : $jobData;
+        // Determine which data to show based on the selected type
+        $type = $request->input('type', 'job');
+        $data = ($type === 'salary') ? $salaryData : $jobData;
         return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities', 'data', 'type'));
     }
 
     public function show($slug)
     {
-        $jobPosting = JobPosting::with('company')->where('slug', $slug)->where('status', 0)->firstOrFail();
+        $jobPosting = JobPosting::with(['company', 'cities'])->where('slug', $slug)->where('status', 0)->firstOrFail();
         // Tăng số lượt xem lên 1
         $jobPosting->increment('views');
         $closingDate = Carbon::parse($jobPosting->closing_date);
@@ -151,7 +151,7 @@ class SiteController extends Controller
             }
         }
         // Lấy các công việc liên quan
-        $relatedJobs = JobPosting::with('company')->where('category', $jobPosting->category)
+        $relatedJobs = JobPosting::with(['company', 'cities'])->where('category', $jobPosting->category)
             ->orWhere('city', 'like', '%' . $jobPosting->city . '%')
             ->where('id', '!=', $jobPosting->id)
             ->where('status', 0)
@@ -164,13 +164,16 @@ class SiteController extends Controller
         $courses = Course::where('status', 1)->take(3)->get();
         $company_random = Company::inRandomOrder()->first();
         $jobPosting_random = $company_random->jobPostings()->where('status', 0)->get();
+        $cities_random = City::whereHas('jobPostings', function ($query) use ($jobPosting_random) {
+            $query->whereIn('job_posting_id', $jobPosting_random->pluck('id'));
+        })->get();
         $cities = City::where('status', 1)->pluck('name', 'id');
-        return view('pages.job', compact('jobPosting', 'closingDate', 'isExpired', 'candidate', 'applied', 'appliedDate', 'relatedJobs', 'courses', 'company_random', 'jobPosting_random', 'cities'));
+        return view('pages.job', compact('jobPosting', 'closingDate', 'isExpired', 'candidate', 'applied', 'appliedDate', 'relatedJobs', 'courses', 'company_random', 'jobPosting_random', 'cities_random', 'cities'));
     }
 
     public function searchJobs(Request $request)
     {
-        $query = JobPosting::query()->where('status', 0);
+        $query = JobPosting::with('cities')->where('status', 0);
         $cities = City::where('status', 1)->pluck('name', 'id');
         if ($request->filled('keyword')) {
             $query->where('title', 'like', '%' . $request->keyword . '%');
@@ -228,12 +231,19 @@ class SiteController extends Controller
             ->get();
         return view('pages.company', compact('companies'));
     }
-    public function showCompany($slug)
-    {
-        $company = Company::where('slug', $slug)->firstOrFail();
-        $jobPostings = $company->jobPostings()->where('status', 0)->get(); // Lấy các job postings của company có status = 1
-        return view('pages.company-show', compact('company', 'jobPostings'));
-    }
+   public function showCompany($slug)
+{
+    $company = Company::where('slug', $slug)->firstOrFail();
+    $jobPostings = $company->jobPostings()->where('status', 0)->get();
+
+    // Lấy các cities liên quan đến các jobPostings của công ty
+    $cities = City::whereHas('jobPostings', function ($query) use ($jobPostings) {
+        $query->whereIn('job_posting_id', $jobPostings->pluck('id'));
+    })->get();
+
+    return view('pages.company-show', compact('company', 'jobPostings', 'cities'));
+}
+
     public function showPost($slug)
     {
         $genrePost = GenrePost::where('slug', $slug)->with('posts')->firstOrFail();
