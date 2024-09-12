@@ -7,7 +7,7 @@
                      <div class="box-search">
                          <ul class="nav header">
                              <li class="nav-item">
-                                 <a href="{{route('all.company')}}" class="nav-link  active ">Danh sách công ty</a>
+                                 <a href="{{ route('all.company') }}" class="nav-link  active ">Danh sách công ty</a>
                              </li>
                          </ul>
                          <div class="caption">
@@ -15,14 +15,16 @@
                              <p class="description">Tra cứu thông tin công ty và tìm kiếm nơi làm việc tốt nhất dành
                                  cho bạn</p>
                          </div>
-                       <form action="{{ route('search-company') }}" method="GET" class="form-search border-hover">
-                <i class="fa-light fa-magnifying-glass"></i>
-                <input class="form-control" placeholder="Nhập tên công ty" id="keyword" name="keyword" value="{{ request('keyword') }}">
-                <button type="submit" class="btn btn-search btn-search-company btn-primary-hover">Tìm kiếm</button>
-            </form>
+                         <form action="{{ route('search-company') }}" method="GET" class="form-search border-hover">
+                             <i class="fa-light fa-magnifying-glass"></i>
+                             <input class="form-control" placeholder="Nhập tên công ty" id="keyword" name="keyword"
+                                 value="{{ request('keyword') }}">
+                             <button type="submit" class="btn btn-search btn-search-company btn-primary-hover">Tìm
+                                 kiếm</button>
+                         </form>
                      </div>
                      <div class="box-img">
-                         <img src="../static.topcv.vn/v4/image/brand-identity/company-billBoarde209.png?v=1.0.0" class alt
+                         <img src="{{asset('static.topcv.vn/v4/image/brand-identity/company-billBoarde209.png')}}" class alt
                              style="width: 272px !important;">
                      </div>
                  </div>
@@ -39,7 +41,7 @@
                                      <div class="company-banner">
                                          <a href="{{ route('company-home.show', $company->slug) }}">
                                              <div class="cover-wraper">
-                                                 <img src="{{ $company->image ? asset('storage/' . $company->image) : asset('storage/default-cover.jpg') }}"
+                                                 <img src="{{ $company->image ? asset('storage/' . $company->image) : asset('storage/avatar/company_cover_1.jpg') }}"
                                                      alt="{{ $company->name }}" class="img-fluid">
                                              </div>
                                          </a>

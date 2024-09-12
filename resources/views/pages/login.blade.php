@@ -70,7 +70,7 @@
                              Bằng việc đăng nhập bằng tài khoản mạng xã hội, tôi đã đọc và đồng ý với <a target="_blank"
                                  class="text-success" href="#">Điều khoản dịch vụ</a> và <a
                                  target="_blank" class="text-success" href="#">Chính sách bảo mật</a>
-                             của TopCV
+                             của Vieclamso1
                          </label>
                      </p>
                  </div>

@@ -68,9 +68,9 @@
 
 
 
-    <script src="code.jquery.com/jquery-2.2.4.js"></script>
-    <script src="cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-    <script src="maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    <script src="{{ asset('code.jquery.com/jquery-2.2.4.js')}}"></script>
+    <script src="{{ asset('cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js')}}"></script>
+    <script src="{{ asset('maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')}}"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <link rel="stylesheet" href="{{ asset('cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css') }}" />
@@ -90,6 +90,16 @@
         }
     </style>
     <style>
+        .center-form {
+            min-height: 539px;
+            max-height: 539px;
+            margin-inline: 80px;
+            border-radius: 10px !important;
+            box-shadow: 0 6px 12px 3px rgba(32, 40, 56, 0.05), 0 4px 8px 2px rgba(32, 40, 56, 0.03);
+            height: 27%;
+            margin-bottom: 30px;
+        }
+
         #mask-form-lead {
             position: fixed;
             z-index: 200;
@@ -969,9 +979,9 @@
                 <div class="w-container">
                     <div class="md:flex md:items-center md:h-[80px]">
                         <div class="relative h-[68px] md:h-auto flex items-center justify-center md:pr-[30px]">
-                            <a href="{{route("/")}}" class="business-image">
-                                <img src="{{ asset('storage/' . $info->logo_home) }}" class="max-w-[200px] md:mb-[-10px]"
-                                    alt="topcv logo">
+                            <a href="{{ route('/') }}" class="business-image">
+                                <img src="{{ asset('storage/' . $info->logo_home) }}"
+                                    class="max-w-[200px] md:mb-[-10px]" alt="topcv logo">
                             </a>
                             <div class="md:hidden absolute top-0 right-0">
                                 <button class="md:hidden h-[68px] w-[68px] flex items-center justify-center"
@@ -1089,8 +1099,7 @@
                                         <img src="{{ asset('storage/' . $info->logo_dmca_com) }}"
                                             class="logo max-h-[48px]" alt="DMCA.com Protection Status">
                                     </div>
-                                    <a class="align-middle basis-4/12 order-3"
-                                        href="{{$info->bct}}">
+                                    <a class="align-middle basis-4/12 order-3" href="{{ $info->bct }}">
                                         <img src="{{ asset('storage/' . $info->bct_image) }}"
                                             class="logo max-h-[41px]" alt="bct confirmation">
                                     </a>
@@ -1288,248 +1297,9 @@
             </a>
         </div>
     </div>
-    <div id="mask-form-lead">
-        <div id="modal-form-lead">
-            <div class="md:flex md:items-start md:justify-between mr-[118px] center-form">
-                <div class="md:w-1/2 left-banner-form" id="left-banner-form">
-                    <div class="center-banner-form">
-                    </div>
-                </div>
-                <div class="left-banner-form-mobile">
-                    <div class="center-banner-form">
-                    </div>
-                </div>
-                <div class="md:w-1/2 right-banner-form" id="right-banner-form">
-                    <div class="form-lead-container">
-                        <div class="icon-top-form-lead"><span class="btn-close-form-lead"><i
-                                    class="fa-regular fa-xmark"></i></span>
-                        </div>
-                        <div class="form-lead-title">Đăng ký nhận tư vấn</div>
-                        <div class="d-flex form-lead-scroll" id="form-lead-scroll-1">
-                            <div class="form-lead-label">Họ và tên</div>
-                            <div class="form-lead-item form-item-name">
-                                <i class="fa-regular fa-user"></i>
-                                <input type="text" required id="fullname-1" placeholder="Họ và tên" />
-                            </div>
-                            <div class="form-lead-msg msg-name"></div>
-                            <div class="form-lead-label">Email</div>
-                            <div class="form-lead-item form-item-email">
-                                <i class="fa-regular fa-envelope"></i>
-                                <input type="email" required id="email-1" placeholder="Email" />
-                            </div>
-                            <div class="form-lead-msg msg-email"></div>
-                            <div class="form-lead-label">Số điện thoại</div>
-                            <div class="form-lead-item form-item-phone">
-                                <i class="fa-regular fa-mobile-notch"></i>
-                                <input type="text" maxlength="10" id="phone-1" required
-                                    placeholder="Số điện thoại" />
-                            </div>
-                            <div class="form-lead-msg msg-phone"></div>
-                            <div class="form-lead-label">Tỉnh/Thành phố</div>
-                            <div class="form-lead-item form-item-city">
-                                <i class="fa-regular fa-building"></i>
-                                <select id="city-id-1" class="place_holder dropdown_select" required>
-                                    <option value hidden>Chọn Tỉnh/Thành phố</option>
-                                    <option value="1">Hà Nội</option>
-                                    <option value="2">Hồ Chí Minh</option>
-                                    <option value="3">Bình Dương</option>
-                                    <option value="4">Bắc Ninh</option>
-                                    <option value="5">Đồng Nai</option>
-                                    <option value="6">Hưng Yên</option>
-                                    <option value="7">Hải Dương</option>
-                                    <option value="8">Đà Nẵng</option>
-                                    <option value="9">Hải Phòng</option>
-                                    <option value="10">An Giang</option>
-                                    <option value="11">Bà Rịa-Vũng Tàu</option>
-                                    <option value="12">Bắc Giang</option>
-                                    <option value="13">Bắc Kạn</option>
-                                    <option value="14">Bạc Liêu</option>
-                                    <option value="15">Bến Tre</option>
-                                    <option value="16">Bình Định</option>
-                                    <option value="17">Bình Phước</option>
-                                    <option value="18">Bình Thuận</option>
-                                    <option value="19">Cà Mau</option>
-                                    <option value="20">Cần Thơ</option>
-                                    <option value="21">Cao Bằng</option>
-                                    <option value="22">Cửu Long</option>
-                                    <option value="23">Đắk Lắk</option>
-                                    <option value="24">Đắc Nông</option>
-                                    <option value="25">Điện Biên</option>
-                                    <option value="26">Đồng Tháp</option>
-                                    <option value="27">Gia Lai</option>
-                                    <option value="28">Hà Giang</option>
-                                    <option value="29">Hà Nam</option>
-                                    <option value="30">Hà Tĩnh</option>
-                                    <option value="31">Hậu Giang</option>
-                                    <option value="32">Hoà Bình</option>
-                                    <option value="33">Khánh Hoà</option>
-                                    <option value="34">Kiên Giang</option>
-                                    <option value="35">Kon Tum</option>
-                                    <option value="36">Lai Châu</option>
-                                    <option value="37">Lâm Đồng</option>
-                                    <option value="38">Lạng Sơn</option>
-                                    <option value="39">Lào Cai</option>
-                                    <option value="40">Long An</option>
-                                    <option value="41">Miền Bắc</option>
-                                    <option value="42">Miền Nam</option>
-                                    <option value="43">Miền Trung</option>
-                                    <option value="44">Nam Định</option>
-                                    <option value="45">Nghệ An</option>
-                                    <option value="46">Ninh Bình</option>
-                                    <option value="47">Ninh Thuận</option>
-                                    <option value="48">Phú Thọ</option>
-                                    <option value="49">Phú Yên</option>
-                                    <option value="50">Quảng Bình</option>
-                                    <option value="51">Quảng Nam</option>
-                                    <option value="52">Quảng Ngãi</option>
-                                    <option value="53">Quảng Ninh</option>
-                                    <option value="54">Quảng Trị</option>
-                                    <option value="55">Sóc Trăng</option>
-                                    <option value="56">Sơn La</option>
-                                    <option value="57">Tây Ninh</option>
-                                    <option value="58">Thái Bình</option>
-                                    <option value="59">Thái Nguyên</option>
-                                    <option value="60">Thanh Hoá</option>
-                                    <option value="61">Thừa Thiên Huế</option>
-                                    <option value="62">Tiền Giang</option>
-                                    <option value="63">Toàn Quốc</option>
-                                    <option value="64">Trà Vinh</option>
-                                    <option value="65">Tuyên Quang</option>
-                                    <option value="66">Vĩnh Long</option>
-                                    <option value="67">Vĩnh Phúc</option>
-                                    <option value="68">Yên Bái</option>
-                                    <option value="100">Nước Ngoài</option>
-                                </select>
-                            </div>
-                            <div class="form-lead-msg msg-city"></div>
-                            <div class="form-lead-label">Nhu cầu tư vấn</div>
-                            <div class="form-lead-item form-item-consulting">
-                                <i class="fa-regular fa-square-question"></i>
-                                <select id="consulting-type-1" class="place_holder dropdown_select" required>
-                                    <option value hidden>Chọn nhu cầu tư vấn</option>
-                                    <option value="1">Tôi muốn được đăng tin miễn phí</option>
-                                    <option value="2">Tôi muốn được tìm hiểu thêm về các gói dịch vụ</option>
-                                    <option value="3">Tôi muốn được biết thêm về các chương trình ưu đãi</option>
-                                    <option value="4">Tôi muốn được hướng dẫn đăng ký tài khoản</option>
-                                    <option value="5">Khác</option>
-                                </select>
-                            </div>
-                            <div class="form-lead-item mt-3 other-consulting" id="other-consulting-1">
-                                <textarea id="consulting-text-1" placeholder="Nhập nhu cầu tư vấn..." rows="3"></textarea>
-                            </div>
-                            <div class="form-lead-msg msg-consulting"></div>
-                        </div>
-                        <div class="form-footer-lead">
-                            <button id="created-lead-1"><i class="fa-solid fa-paper-plane-top"></i>Gửi yêu cầu tư
-                                vấn
-                            </button>
-                        </div>
-                        <div class="suggest-post-job">
-                            Bạn cần tuyển dụng gấp?
-                            <a href="{{ route('job-postings.index') }}" target="_blank"
-                                class="btn-post-job-free">Đăng tin miễn phí ngay</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script>
-                $(document).ready(function() {
-                    const heightForm = $(".right-banner-form").height();
-                    if (heightForm) {
-                        $(".left-banner-form").height(heightForm);
-                    }
-                });
-            </script>
-        </div>
-        <div id="modal-form-lead-success">
-            <div class="icon-top-form-lead"><span class="btn-close-form-lead"><i
-                        class="fa-regular fa-xmark"></i></span></div>
-            <div class="form-lead-success-container">
-                <svg xmlns="http://www.w3.org/2000/svg" width="124" height="124" viewBox="0 0 124 124"
-                    fill="none">
-                    <g clip-path="url(#clip0_3204_98360)">
-                        <circle opacity="0.3" cx="62" cy="62" r="62"
-                            fill="url(#paint0_linear_3204_98360)" />
-                        <circle cx="62" cy="62" r="48" fill="#00B14F" />
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M79.1081 49.9144C80.2973 51.1336 80.2973 53.1104 79.1081 54.3296L59.8378 74.0856C58.6487 75.3046 56.7209 75.3048 55.5316 74.0861L45.8924 64.2081C44.7029 62.9891 44.7025 61.0124 45.8915 59.7929C47.0805 58.5734 49.0086 58.573 50.1981 59.7919L57.684 67.4633L74.8014 49.9144C75.9907 48.6952 77.9188 48.6952 79.1081 49.9144Z"
-                            fill="white" />
-                    </g>
-                    <defs>
-                        <linearGradient id="paint0_linear_3204_98360" x1="62" y1="0" x2="62"
-                            y2="124" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#59CA87" />
-                            <stop offset="1" stop-color="#35AB65" stop-opacity="0" />
-                        </linearGradient>
-                        <clipPath id="clip0_3204_98360">
-                            <rect width="124" height="124" fill="white" />
-                        </clipPath>
-                    </defs>
-                </svg>
-            </div>
-            <div class="success-msg">Đăng ký thành công!</div>
-            <div class="success-des">
-                Vieclamso1 sẽ liên hệ để tư vấn bạn trong thời gian sớm nhất. Nếu bạn cần hỗ trợ ngay, vui lòng liên hệ
-                Hotline chăm
-                sóc khách hàng.
-            </div>
-            <div class="support-footer-form">
-                <div class="support-footer-form-item"
-                    style="display: flex; align-items: center; border: 1px solid #D7DEE4; border-radius: 100px; padding: 12px 24px;">
-                    <i class="fa-solid fa-phone" style="color: #00B14F; margin-right: 8px"></i>
-                    <span>Hỗ trợ</span>
-                    <a style="color: #00B14F; font-weight: 600; margin-left: 8px" href="tel:02471079799">(024)
-                        71079799</a>
-                </div>
-                <div class="support-footer-form-item"
-                    style="display: flex; align-items: center; border: 1px solid #D7DEE4; ; border-radius: 100px; padding: 12px 24px;">
-                    <i class="fa-solid fa-phone" style="color: #00B14F; margin-right: 8px"></i>
-                    <span>Hỗ trợ</span>
-                    <a style="color: #00B14F; font-weight: 600; margin-left: 8px" href="tel:0862691929">0862
-                        691929</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        function showPopupLead() {
-            $("#mask-form-lead").fadeIn(500);
-            document.body.style.overflow = 'hidden';
-            const heightForm = $("#modal-form-lead .right-banner-form").height();
-            if (heightForm) {
-                $("#modal-form-lead .left-banner-form").height(heightForm);
-            }
-        }
-
-        function hidePopupLead() {
-            $("#mask-form-lead").fadeOut(500);
-            document.body.style.overflow = 'scroll';
-            $('#modal-form-lead').fadeIn(2000);
-            $('#modal-form-lead-success').fadeOut();
-        }
-        $(document).ready(function() {
-            $(".btn-close-form-lead").click(function(e) {
-                e.preventDefault();
-                hidePopupLead();
-            });
-
-            $('.show-modal-create-lead').click(function(e) {
-                e.preventDefault();
-                showPopupLead();
-                window.ta?.('ClickGetAFreeConsultation')
-            });
-        });
-    </script>
-    <div id="floating-sp-mkt">
-        <img id="close-img-sp-banner" src="{{ asset('images/mkt/floating_marketing.webp') }}" width="210" alt />
-        <div id="close-img-sp">
-            <img id="close-img-sp-icon" src="{{ asset('images/mkt/close_floating_support_mkt.webp') }}"
-                width="24" alt />
-        </div>
-    </div>
     <script src="{{ asset('ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js') }}"></script>
-    <link rel="modulepreload" href="build/assets/header.d1ee4fe5.js" />
-    <script type="module" src="build/assets/header.d1ee4fe5.js"></script>
+    <link rel="modulepreload" href="{{ asset('build/assets/header.d1ee4fe5.js')}}" />
+    <script type="module" src="{{ asset('build/assets/header.d1ee4fe5.js')}}"></script>
     <script>
         document.getElementById("mb-menu-btn").addEventListener("click", function() {
             const isShow = document.getElementById("mb-menu").style.display && document.getElementById("mb-menu")
