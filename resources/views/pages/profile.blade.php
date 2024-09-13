@@ -183,7 +183,7 @@
                                          <li>Email và Số điện thoại của bạn</li>
                                      </ul>
                                      <div class="banner--app  ">
-                                         <img src="https://static.topcv.vn/v4/image/app/banner--app.png" alt="">
+                                         <img src="{{ asset('storage/' . $info->profile_banner_image) }}" alt="">
                                      </div>
                                  </div>
                              </div>

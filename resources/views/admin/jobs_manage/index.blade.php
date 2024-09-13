@@ -11,6 +11,7 @@
                     <th>Employer</th>
                     <th>Phone</th>
                     <th>Location</th>
+                     <th>Created_at</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -23,6 +24,7 @@
                         <td>{{ $jobPosting->employer->name }}</td>
                         <td>{{ $jobPosting->employer->phone }}</td>
                         <td>{{ $jobPosting->location }}</td>
+                           <td>{{ $jobPosting->created_at }}</td>
                         <td>
 
                               <select id="{{  $jobPosting->id }}"class="jobPosting_choose">

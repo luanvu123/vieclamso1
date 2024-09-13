@@ -69,6 +69,11 @@ class InfoController extends Controller
             'hotline_contact' => 'nullable|string|max:255',
             'email_contact' => 'nullable|string|email|max:255',
             'logo_home' => 'nullable|image|max:2048',
+            'about_image_mobile' => 'nullable|image|max:2048',
+            'upload_cv_title' => 'nullable|string|max:255',
+            'upload_cv_subtitle' => 'nullable|string|max:255',
+            'upload_cv_desc' => 'nullable|string',
+            'profile_banner_image' => 'nullable|image|max:2048',
         ]);
 
         $info = Info::findOrFail($id);
@@ -158,7 +163,22 @@ class InfoController extends Controller
             $path = $request->file('logo_home')->store('images', 'public');
             $info->logo_home = $path;
         }
+       
 
+        if ($request->hasFile('about_image_mobile')) {
+            $path = $request->file('about_image_mobile')->store('images', 'public');
+            $info->about_image_mobile = $path;
+        }
+
+        if ($request->hasFile('profile_banner_image')) {
+            $path = $request->file('profile_banner_image')->store('images', 'public');
+            $info->profile_banner_image = $path;
+        }
+
+        // Cập nhật các thông tin khác
+        $info->upload_cv_title = $request->upload_cv_title;
+        $info->upload_cv_subtitle = $request->upload_cv_subtitle;
+        $info->upload_cv_desc = $request->upload_cv_desc;
         $info->hotline_contact = $request->hotline_contact;
         $info->email_contact = $request->email_contact;
         $info->recruitment_title_1 = $request->recruitment_title_1;
@@ -189,6 +209,6 @@ class InfoController extends Controller
 
         $info->save();
 
-        return redirect()->back()->with('success', 'Footer information updated successfully!');
+        return redirect()->back()->with('success', 'Edit information updated successfully!');
     }
 }

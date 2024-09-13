@@ -1157,9 +1157,9 @@
                                          <li>
                                              Hoặc liên hệ với Vieclamso1 thông qua kênh hỗ trợ ứng viên của Vieclamso1:<br>
                                              Email: <a class="text-highlight"
-                                                 href="mailto:hotro@topcv.vn">hotro@topcv.vn</a><br>
-                                             Hotline: <a class="text-highlight" href="tel:02466805588">(024) 6680
-                                                 5588</a><br>
+                                                 href="#">{{ $info->email_contact }}</a><br>
+                                             Hotline: <a class="text-highlight" href="">{{ $info->hotline_contact }}</a><br>
+                                                 
                                          </li>
                                      </ul>
                                  </div>

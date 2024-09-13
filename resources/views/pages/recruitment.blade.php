@@ -338,7 +338,7 @@
         <div class="w-container px-[20px]">
             <div class="text-center mb-[35px] md:mb-[40px]">
                 <div class="text-primary uppercase mb-[10px]">
-                    About us
+                     {{ $info->about_us }}
                 </div>
                 <h2 class="text-[24px] md:text-[30px] font-bold">
                     Về chúng tôi
@@ -348,37 +348,14 @@
                 <div class="md:w-1/2">
                     <div class="font-light md:leading-[36px] md:text-[14px] text-color-light text-justify">
                         <p class="pb-8">
-                             Vieclamso1 Việt Nam là công ty hàng đầu trong lĩnh vực HR Tech tại Việt Nam, xoay quanh
-                            hệ sinh thái nhân
-                            sự với 4 sản phẩm chủ lực:
-                        </p>
-                        <p class="pb-8">
-                            Nền tảng tuyển dụng thông minh  Vieclamso1, Nền tảng thiết lập và đánh giá năng lực nhân
-                            viên TestCenter,
-                            Nền tảng quản lý và gia tăng trải nghiệm nhân viên HappyTime và Giải pháp quản trị
-                            tuyển dụng hiệu
-                            suất cao SHring.
-                        </p>
-                        <p class="pb-8">
-                             Vieclamso1 đang sở hữu hơn 6,9 triệu người dùng, 190.000 khách hàng lớn và đã kết nối
-                            thành công hàng triệu
-                            lượt ứng viên mỗi năm tới các doanh nghiệp phù hợp.
-                        </p>
-                        <p class="pb-8">
-                            Thông qua việc nghiên cứu và không ngừng phát triển năng lực công nghệ lõi vượt trội
-                            (đặc biệt là ứng
-                            dụng sâu Trí tuệ nhân tạo - AI),  Vieclamso1 kỳ vọng mang tới các giải pháp nhân sự hiệu
-                            quả hơn nữa trong
-                            tương lai: tối ưu các trải nghiệm số cho ứng viên, từ đó giúp doanh nghiệp thu hút
-                            và giữ chân nhân
-                            tài, hướng tới một nền kinh tế Việt Nam phát triển bền vững.
+                           {!!$info->about_us_h1!!}
                         </p>
                     </div>
                 </div>
                 <div class="md:w-1/2 md:pl-[40px]">
-                    <img class="hidden md:block md:translate-y-[-57px]" src="../images/about/about-desktop.png"
+                    <img class="hidden md:block md:translate-y-[-57px]" src="{{ asset('storage/' . $info->about_us_image) }}"
                         title="Nhân sự của  Vieclamso1" alt="Nhan su cua  Vieclamso1">
-                    <img class="md:hidden" src="../images/about/about-mobile.png" title="Nhân sự của  Vieclamso1"
+                    <img class="md:hidden" src="{{ asset('storage/' . $info->about_image_mobile) }}" title="Nhân sự của  Vieclamso1"
                         alt="Nhan su cua  Vieclamso1">
                 </div>
             </div>

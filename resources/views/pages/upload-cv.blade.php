@@ -4,16 +4,11 @@
          <div class="container">
              <div class="box-main-upload-cv">
                  <div class="box-header">
-                     <h1 class="title">Upload CV để các cơ hội việc làm tự tìm đến bạn</h1>
-                     <h2 class="sub-title">Giảm đến 50% thời gian cần thiết để tìm được một công việc phù hợp</h2>
+                     <h1 class="title">{{ $info->upload_cv_title }}</h1>
+                     <h2 class="sub-title">{{$info->upload_cv_subtitle}}</h2>
                  </div>
                  <div class="box-body">
-                     <p class="desc">Bạn đã có sẵn CV của mình, chỉ cần tải CV lên, hệ thống sẽ tự động đề xuất
-                         CV của bạn
-                         tới những nhà tuyển dụng uy tín.<br>
-                         Tiết kiệm thời gian, tìm việc thông minh, nắm bắt cơ hội và làm chủ đường đua nghề nghiệp
-                         của chính
-                         mình.</p>
+                     <p class="desc">{{$info->upload_cv_desc}}</p>
                      <div class="box-upload">
                          <div class="box-upload_title">
                              <img src="https://www.topcv.vn/v4/image/upload-cv/upload-cloud.png" alt>

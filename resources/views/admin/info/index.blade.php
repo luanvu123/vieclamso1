@@ -283,9 +283,8 @@
             </div>
 
             <div class="form-group">
-                <label for="about_us_h1">About Us H1</label>
-                <input type="text" class="form-control" id="about_us_h1" name="about_us_h1"
-                    value="{{ $info->about_us_h1 }}">
+                <label for="about_us_h1">About Us Description</label>
+                <textarea class="form-control" id="summary1" name="about_us_h1">{{ $info->about_us_h1 }}</textarea>
             </div>
 
             <div class="form-group">
@@ -373,6 +372,42 @@
                 @endif
                 <input type="file" class="form-control" id="logo_home" name="logo_home">
             </div>
+
+            <div class="form-group">
+                <label for="about_image_mobile">About Image (Mobile)</label>
+                @if ($info->about_image_mobile)
+                    <img src="{{ asset('storage/' . $info->about_image_mobile) }}" alt="About Mobile Image"
+                        style="max-width: 100px;">
+                @endif
+                <input type="file" class="form-control" id="about_image_mobile" name="about_image_mobile">
+            </div>
+
+            <div class="form-group">
+                <label for="profile_banner_image">Profile Banner Image</label>
+                @if ($info->profile_banner_image)
+                    <img src="{{ asset('storage/' . $info->profile_banner_image) }}" alt="Profile Banner Image"
+                        style="max-width: 100px;">
+                @endif
+                <input type="file" class="form-control" id="profile_banner_image" name="profile_banner_image">
+            </div>
+
+            <div class="form-group">
+                <label for="upload_cv_title">Upload CV Title</label>
+                <input type="text" class="form-control" id="upload_cv_title" name="upload_cv_title"
+                    value="{{ $info->upload_cv_title }}">
+            </div>
+
+            <div class="form-group">
+                <label for="upload_cv_subtitle">Upload CV Subtitle</label>
+                <input type="text" class="form-control" id="upload_cv_subtitle" name="upload_cv_subtitle"
+                    value="{{ $info->upload_cv_subtitle }}">
+            </div>
+
+            <div class="form-group">
+                <label for="upload_cv_desc">Upload CV Description</label>
+                <textarea class="form-control" id="upload_cv_desc" name="upload_cv_desc">{{ $info->upload_cv_desc }}</textarea>
+            </div>
+
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>

@@ -299,7 +299,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 
                                 <li
-                                    class="treeview {{ Request::is('admin/info*', 'public_links*', 'partners*', 'hotlines*', 'medias*', 'awards*', 'slides*','salaries*') ? 'active' : '' }}">
+                                    class="treeview {{ Request::is('admin/info*', 'public_links*', 'partners*', 'hotlines*', 'medias*', 'awards*', 'slides*', 'salaries*') ? 'active' : '' }}">
                                     <a href="#">
                                         <img src="{{ asset('backend_admin/images/5355692_code_coding_development_programming_web_icon.svg') }}"
                                             alt="Google" width="20" height="20">
@@ -755,7 +755,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                 }
             });
         })
-
     </script>
     <script>
         $('.support_choose').change(function() {
@@ -811,12 +810,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <script>
         CKEDITOR.replace('summary2');
         CKEDITOR.replace('summary3');
+        CKEDITOR.replace('summary1');
     </script>
 
     <script src="{{ asset('backend_admin/js/utils.js') }}"></script>
 
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
 
     {{-- {!! Toastr::message() !!} --}}
 
