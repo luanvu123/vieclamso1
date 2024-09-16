@@ -27,6 +27,7 @@
                                     <th></th>
                                     <th>Họ tên</th>
                                     <th>Email</th>
+                                    <th></th>
                                     <th>Số điện thoại</th>
                                     <th>Trạng thái</th>
                                     <th>Ngày tạo</th>
@@ -52,6 +53,13 @@
 
                                         </td>
                                         <td>{{ $candidate->email }}</td>
+                                        <td>
+                                            <button
+                                                onclick="redirectToEmailPage('{{ $candidate->id }}', '{{ $candidate->email }}')"
+                                                class="btn btn-primary">
+                                                Gửi Email <i class="fa-solid fa-envelope" style="color: #ffffff;"></i>
+                                            </button>
+                                        </td>
                                         <td>{{ $candidate->phone_number_candidate }}</td>
                                         <td>
                                             {{ $candidate->status == 1 ? 'Active' : 'Inactive' }}
@@ -90,4 +98,10 @@
             </div>
         </div>
     </div>
+    <script>
+        function redirectToEmailPage(candidateId, emailCandidate) {
+            window.location.href = "{{ route('admin.candidate.email') }}?candidate_id=" + candidateId + "&emailCandidate=" +
+                emailCandidate;
+        }
+    </script>
 @endsection

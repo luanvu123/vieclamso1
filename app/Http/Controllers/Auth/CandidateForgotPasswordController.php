@@ -38,7 +38,7 @@ class CandidateForgotPasswordController extends Controller
             'created_at' => Carbon::now()
         ]);
 
-        Mail::send('pages.email.forgetPassword', ['token' => $token], function ($message) use ($request) {
+        Mail::send('pages.email.forgetPassword_candidate', ['token' => $token], function ($message) use ($request) {
             $message->to($request->email);
             $message->subject('Reset Password');
         });

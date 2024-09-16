@@ -7,7 +7,7 @@
                 <div class="table-responsive">
                     <table class="table" id="user-table">
                         <thead>
-                            <tr>
+                            <tr>  
                                 <th scope="col">#</th>
                                 <th scope="col">Người nhận</th>
                                 <th scope="col">email</th>

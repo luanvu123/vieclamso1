@@ -207,17 +207,38 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/jobPosting-choose', [JobsManageController::class, 'jobPosting_choose'])->name('jobPosting-choose');
 
 
-Route::get('/tin-nhan-da-gui', [ContactController::class, 'sent'])->name('about.sent');
-Route::delete('sent/{id}', [ContactController::class, 'destroy_sent'])->name('about.destroy_sent');
+    Route::get('/tin-nhan-da-gui', [ContactController::class, 'sent'])->name('about.sent');
+    Route::delete('sent/{id}', [ContactController::class, 'destroy_sent'])->name('about.destroy_sent');
+    Route::get('/candidate-sent-emails', [CandidateManageController::class, 'sentEmails'])->name('candidate.sentEmails');
+    Route::delete('/candidate-sent-emails/{id}', [CandidateManageController::class, 'destroySentEmail'])->name('candidate.destroySentEmail');
+    Route::get('/employer-sent-emails', [EmployerManageController::class, 'sentEmails'])->name('employer.sentEmails');
+    Route::delete('/employer-sent-emails/{id}', [EmployerManageController::class, 'destroySentEmail'])->name('employer.destroySentEmail');
 
 
-Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('send-email');
-Route::get('/admin/about/email', function () {
-    $to = request()->query('to');
-    return view('admin.about.email', compact('to'));
-})->name('admin.about.email');
 
+
+    Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('send-email');
+    Route::get('/admin/about/email', function () {
+        $to = request()->query('to');
+        return view('admin.about.email', compact('to'));
+    })->name('admin.about.email');
+
+    Route::post('/send-email-candidate', [CandidateManageController::class, 'sendEmail'])->name('send-email-candidate');
+    Route::get('/admin/candidate/email', function () {
+        $to = request()->query('to');
+        return view('admin.candidates.email', compact('to'));
+    })->name('admin.candidate.email');
+
+    Route::post('/send-email-employer', [EmployerManageController::class, 'sendEmail'])->name('send-email-employer');
+    Route::get('/admin/employer/email', function () {
+        $to = request()->query('to');
+        return view('admin.employers.email', compact('to'));
+    })->name('admin.employer.email');
 });
+
+
+
+
 Route::get('/candidate-login-google', [CandidateController::class, 'redirectToGoogle'])->name('candidate.login.google');
 Route::get('candidate/register', [CandidateController::class, 'showRegistrationForm'])->name('candidate.showRegister');
 Route::post('candidate/register', [CandidateController::class, 'register'])->name('candidate.register');
@@ -310,7 +331,7 @@ Route::middleware(['employer'])->group(function () {
 
     Route::get('employer/phone', [EmployerLoginController::class, 'formPhone'])->name('employer.phone');
     Route::get('employer/gpkd', [EmployerLoginController::class, 'formCertificate'])->name('employer.gpkd');
-       Route::post('employer/gpkd', [EmployerLoginController::class, 'updateCertificate'])->name('employer.updateCertificate');
+    Route::post('employer/gpkd', [EmployerLoginController::class, 'updateCertificate'])->name('employer.updateCertificate');
     Route::post('employer/send-otp', [EmployerLoginController::class, 'sendOtp'])->name('employer.send-otp');
     Route::post('employer/verify-otp', [EmployerLoginController::class, 'verifyOtp'])->name('employer.verify-otp');
 });

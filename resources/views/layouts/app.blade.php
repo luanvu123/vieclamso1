@@ -359,7 +359,37 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         </li>
                                     </ul>
                                 </li>
-
+                                <li
+                                    class="treeview {{ Request::is('tin-nhan-da-gui*', 'candidate-sent-emails*', 'employer-sent-emails*') ? 'active' : '' }}">
+                                    <a href="#">
+                                        <img src="{{ asset('backend_admin/images/email-svgrepo-com.svg') }}"
+                                            alt="Email" width="20" height="20">
+                                        <span>Email</span>
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <li class="{{ Request::is('tin-nhan-da-gui*') ? 'active' : '' }}">
+                                            <a href="{{ route('about.sent') }}">
+                                                <img src="{{ asset('backend_admin/images/email-sent-svgrepo-com.svg') }}"
+                                                    alt="About Sent" width="20" height="20"> Support Emails
+                                            </a>
+                                        </li>
+                                        <li class="{{ Request::is('candidate-sent-emails*') ? 'active' : '' }}">
+                                            <a href="{{ route('candidate.sentEmails') }}">
+                                                <img src="{{ asset('backend_admin/images/email2-svgrepo-com.svg') }}"
+                                                    alt="Candidate Emails" width="20" height="20"> Candidate
+                                                Emails
+                                            </a>
+                                        </li>
+                                        <li class="{{ Request::is('employer-sent-emails*') ? 'active' : '' }}">
+                                            <a href="{{ route('employer.sentEmails') }}">
+                                                <img src="{{ asset('backend_admin/images/email2-svgrepo-com.svg') }}"
+                                                    alt="Employer Emails" width="20" height="20"> Employer
+                                                Emails
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li class="treeview {{ Request::is('consultations*') ? 'active' : '' }}">
                                     <a href="{{ route('consultations.index') }}">
                                         <img src="{{ asset('backend_admin/images/register-svgrepo-com.svg') }}"
@@ -404,6 +434,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         @endif
                                     </a>
                                 </li>
+
 
 
 

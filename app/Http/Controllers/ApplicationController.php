@@ -8,6 +8,8 @@ use App\Models\Application;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\ApplicationSuccess;
+use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
 {
@@ -29,6 +31,9 @@ class ApplicationController extends Controller
         $application->cv_id = $request->cv_id;
         $application->application_letter = $request->application_letter;
         $application->save();
+
+        // Gửi email
+        Mail::to($application->candidate->email)->send(new ApplicationSuccess($application));
 
         $message = 'Ứng tuyển thành công!';
         session()->flash('success', $message);

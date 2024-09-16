@@ -7,13 +7,14 @@
                 <div class="dashboard-list-box-content">
                     <h1>All Employer</h1>
 
-                    <table id="user-table" class="manage-table responsive-table">
+                    <table id="user-table" class="display">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Avatar</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th></th>
                                 <th>Gender</th>
                                 <th>Điểm xếp hạng</th>
                                 <th>Phone</th>
@@ -36,6 +37,14 @@
                                     </td>
                                     <td>{{ $employer->name }}</td>
                                     <td>{{ $employer->email }}</td>
+                                    <td>
+                                        <button
+                                            onclick="redirectToEmailPage('{{ $employer->id }}', '{{ $employer->email }}')"
+                                            class="btn btn-primary">
+                                            Gửi Email <i class="fa-solid fa-envelope" style="color: #ffffff;"></i>
+                                        </button>
+
+                                    </td>
                                     <td>{{ ucfirst($employer->gender) }}</td>
                                     <td> <span data-v-69ab245a="" class="point">{{ $employer->credit }}</span>
                                         <a href="{{ route('type-employer.index') }}">Edit
@@ -53,7 +62,7 @@
                                             @endif
                                         </select>
                                     </td>
-   <td>{{ $employer->created_at }}</td>
+                                    <td>{{ $employer->created_at }}</td>
                                     <td>
                                         <ul>
                                             @foreach ($employer->jobPostings as $jobPosting)
@@ -72,6 +81,12 @@
                                             <span class="label label-primary pull-right">new</span>
                                         @endif
                                     </td>
+                                     <script>
+                                            function redirectToEmailPage(employerId, emailEmployer) {
+                                                window.location.href = "{{ route('admin.employer.email') }}?employer_id=" + employerId + "&emailEmployer=" +
+                                                    emailEmployer;
+                                            }
+                                        </script>
                                 </tr>
                             @endforeach
                         </tbody>

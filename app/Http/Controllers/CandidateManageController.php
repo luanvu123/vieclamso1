@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Candidate;
+use App\Mail\SendEmailCandidate;
+use App\Models\EmailReplyCandidate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class CandidateManageController extends Controller
 {
@@ -57,5 +61,61 @@ class CandidateManageController extends Controller
         ])->findOrFail($id);
 
         return view('admin.candidates.show', compact('candidate'));
+    }
+   public function sendEmail(Request $request)
+    {
+        $to = $request->input('emailCandidate');
+        $subject = $request->input('subject');
+        $message = $request->input('message');
+        $attachment = $request->file('attachment');
+        $candidateId = $request->input('candidate_id');
+
+        $emailReply = new EmailReplyCandidate();
+        $emailReply->candidate_id = $candidateId;
+        $emailReply->user_id = auth()->id();
+        $emailReply->to = $to;
+        $emailReply->subject = $subject;
+        $emailReply->message = $message;
+
+        $attachmentPath = null;
+
+        // Lưu file attachment vào thư mục public
+        if ($attachment) {
+            $attachmentPath = $attachment->store('attachments', 'public');
+            $emailReply->attachment = $attachmentPath;
+        }
+
+        $emailReply->save();
+
+        // Gửi email
+        Mail::to($to)->send(new SendEmailCandidate($subject, $message, $attachmentPath));
+
+        session()->flash('success', 'Gửi email thành công');
+        return redirect()->back();
+    }
+     public function sentEmails()
+    {
+        // Lấy danh sách email đã gửi cùng với thông tin người dùng và ứng viên
+        $list = EmailReplyCandidate::with('candidate', 'user')->orderBy('id', 'DESC')->get();
+        return view('admin.candidates.sent_emails', compact('list'));
+    }
+
+    public function destroySentEmail($id)
+    {
+        // Tìm email reply theo id
+        $emailReply = EmailReplyCandidate::find($id);
+
+        // Kiểm tra xem email có file đính kèm hay không
+        if ($emailReply->attachment) {
+            // Xóa file từ thư mục public
+            Storage::disk('public')->delete($emailReply->attachment);
+        }
+
+        // Xóa dữ liệu trong cơ sở dữ liệu
+        $emailReply->delete();
+
+        // Thông báo xóa thành công
+        toastr()->info('Thành công', 'Xóa email thành công');
+        return redirect()->back();
     }
 }

@@ -6,7 +6,11 @@ use App\Models\Company;
 use App\Models\Employer;
 use App\Models\Purchased;
 use Carbon\Carbon;
+use App\Mail\SendEmailEmployer;
+use App\Models\EmailReplyEmployer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class EmployerManageController extends Controller
 {
@@ -30,7 +34,7 @@ class EmployerManageController extends Controller
         return view('admin.employers.index', compact('employers'));
     }
 
-    public function show($id)
+    public function show($id) 
     {
         $employer = Employer::with('company')->findOrFail($id); // Nạp thông tin công ty liên quan
         return view('admin.employers.show', compact('employer'));
@@ -125,5 +129,61 @@ class EmployerManageController extends Controller
         $purchasedItems = Purchased::with(['employer', 'product'])->get();
 
         return view('admin.employers.purchased', compact('purchasedItems'));
+    }
+    public function sendEmail(Request $request)
+    {
+        $to = $request->input('emailEmployer');
+        $subject = $request->input('subject');
+        $message = $request->input('message');
+        $attachment = $request->file('attachment');
+        $employerId = $request->input('employer_id');
+
+        $emailReply = new EmailReplyEmployer();
+        $emailReply->employer_id = $employerId;
+        $emailReply->user_id = auth()->id();
+        $emailReply->to = $to;
+        $emailReply->subject = $subject;
+        $emailReply->message = $message;
+
+        $attachmentPath = null;
+
+        // Lưu file attachment vào thư mục public
+        if ($attachment) {
+            $attachmentPath = $attachment->store('attachments', 'public');
+            $emailReply->attachment = $attachmentPath;
+        }
+
+        $emailReply->save();
+
+        // Gửi email
+        Mail::to($to)->send(new SendEmailEmployer($subject, $message, $attachmentPath));
+
+        session()->flash('success', 'Gửi email thành công');
+        return redirect()->back();
+    }
+     public function sentEmails()
+    {
+        // Lấy danh sách email đã gửi cùng với thông tin người dùng và nhà tuyển dụng
+        $list = EmailReplyEmployer::with('employer', 'user')->orderBy('id', 'DESC')->get();
+        return view('admin.employers.sent_emails', compact('list'));
+    }
+
+    public function destroySentEmail($id)
+    {
+        // Tìm email reply theo id
+        $emailReply = EmailReplyEmployer::find($id);
+
+        // Kiểm tra xem email có file đính kèm hay không
+        if ($emailReply->attachment) {
+            // Xóa file từ thư mục public
+            Storage::disk('public')->delete($emailReply->attachment);
+        }
+
+        // Xóa dữ liệu trong cơ sở dữ liệu
+        $emailReply->delete();
+
+        // Thông báo xóa thành công
+        toastr()->info('Thành công', 'Xóa email thành công');
+        return redirect()->back();
     }
 }
