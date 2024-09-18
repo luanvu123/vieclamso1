@@ -8,7 +8,7 @@
                 <ul>
                     <li class="head">Folders</li>
                     <li><a href="{{ route('supports.index.list') }}"><i class="fa fa-inbox"></i>Inbox </a></li>
-                    <li><a href="{{ route('about.sent') }}"><i class="fa fa fa-envelope-o"></i>Sent </a></li>
+                    <li><a href="{{ route('candidate.sentEmails') }}"><i class="fa fa fa-envelope-o"></i>Sent </a></li>
                 </ul>
             </div>
         </div>

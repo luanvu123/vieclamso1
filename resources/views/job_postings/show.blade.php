@@ -81,120 +81,107 @@
                          <a href="#" class="close-tab button gray" style="display: none;"><i
                                  class="fa fa-close"></i></a>
                          <!-- First Tab -->
-                         <div class="app-tab-content" id="one-1" style="display: none;">
-                             <div class="select-grid">
-                                 <select id="{{ $application->id }}" class="chosen-select-no-single">
-                                     @if ($application->status == 1)
-                                         <option selected value="1">Đã ứng tuyển</option>
-                                         <option value="2">NTD đã xem hồ sơ</option>
-                                         <option value="3">Hồ sơ phù hợp</option>
-                                         <option value="4">Hồ sơ chưa phù hợp</option>
-                                     @elseif ($application->status == 2)
-                                         <option value="1">Đã ứng tuyển</option>
-                                         <option selected value="2">NTD đã xem hồ sơ</option>
-                                         <option value="3">Hồ sơ phù hợp</option>
-                                         <option value="4">Hồ sơ chưa phù hợp</option>
-                                     @elseif ($application->status == 3)
-                                         <option value="1">Đã ứng tuyển</option>
-                                         <option value="2">NTD đã xem hồ sơ</option>
-                                         <option selected value="3">Hồ sơ phù hợp</option>
-                                         <option value="4">Hồ sơ chưa phù hợp</option>
-                                     @else
-                                         <option value="1">Đã ứng tuyển</option>
-                                         <option value="2">NTD đã xem hồ sơ</option>
-                                         <option value="3">Hồ sơ phù hợp</option>
-                                         <option selected value="4">Hồ sơ chưa phù hợp</option>
-                                     @endif
-                                 </select>
-                             </div>
-                             <form id="rating-form" action="{{ route('applications.update.rating', $application->id) }}"
-                                 method="POST">
-                                 @csrf
-                                 @method('PUT')
+                         <form id="rating-form" action="{{ route('applications.update.rating', $application->id) }}"
+                             method="POST">
+                             @csrf
+                             @method('PUT')
+                             <div class="app-tab-content" id="one-1" style="display: none;">
+                                 <div class="select-grid">
+                                     <select name="status" id="status-{{ $application->id }}"
+                                         class="chosen-select-no-single">
+                                         <option value="1" {{ $application->status == 1 ? 'selected' : '' }}>Đã ứng
+                                             tuyển</option>
+                                         <option value="2" {{ $application->status == 2 ? 'selected' : '' }}>NTD đã
+                                             xem hồ sơ</option>
+                                         <option value="3" {{ $application->status == 3 ? 'selected' : '' }}>Hồ sơ phù
+                                             hợp</option>
+                                         <option value="4" {{ $application->status == 4 ? 'selected' : '' }}>Hồ sơ
+                                             chưa phù hợp</option>
+                                     </select>
+                                 </div>
                                  <div class="select-grid">
                                      <input name="rating" type="number" min="1" max="5"
                                          placeholder="Rating (out of 5)" value="{{ old('rating', $application->rating) }}">
                                  </div>
                                  <div class="clearfix"></div>
                                  <button type="submit" class="button margin-top-15">Save</button>
-                             </form>
-                         </div>
-                         <!-- Second Tab -->
-                         <form id="note-form" action="{{ route('applications.update.note', $application->id) }}"
-                             method="POST">
-                             @csrf
-                             @method('PUT')
-                             <div class="app-tab-content" id="two-1">
-                                 <textarea name="note" placeholder="Private note regarding this application">{{ old('note', $application->note) }}</textarea>
-                                 <button type="submit" class="button margin-top-15">Add Note</button>
-                             </div>
                          </form>
-                         <!-- Third Tab -->
-                         <div class="app-tab-content" id="three-1" style="display: none;">
-                             <i>Full Name:</i>
-                             <span>{{ $application->candidate->fullname_candidate }}</span>
-
-                             <i>Email:</i>
-                             <span><a href="">{{ $application->candidate->email }}</a></span>
-                             <i>Phone:</i>
-                             <span><a href="">{{ $application->candidate->phone_number_candidate }}</a></span>
-
-                             <i>Message:</i>
-                             <span>{{ $application->application_letter }}</span>
-                         </div>
                      </div>
-                     <!-- Footer -->
-                     <div class="app-footer">
-                         @if ($application->rating == 0)
-                             <div class="rating no-stars">
-                                 <div class="star-rating"></div>
-                                 <div class="star-bg"></div>
-                             </div>
-                         @elseif($application->rating == 1)
-                             <div class="rating one-stars">
-                                 <div class="star-rating"></div>
-                                 <div class="star-bg"></div>
-                             </div>
-                         @elseif($application->rating == 2)
-                             <div class="rating two-stars">
-                                 <div class="star-rating"></div>
-                                 <div class="star-bg"></div>
-                             </div>
-                         @elseif($application->rating == 3)
-                             <div class="rating three-stars">
-                                 <div class="star-rating"></div>
-                                 <div class="star-bg"></div>
-                             </div>
-                         @elseif($application->rating == 4)
-                             <div class="rating four-stars">
-                                 <div class="star-rating"></div>
-                                 <div class="star-bg"></div>
-                             </div>
-                         @elseif($application->rating == 5)
-                             <div class="rating five-stars">
-                                 <div class="star-rating"></div>
-                                 <div class="star-bg"></div>
-                             </div>
-                         @endif
-                         <ul>
-                             <li><i class="fa fa-file-text-o"></i>
-                                 @if ($application->status == 1)
-                                     Đã ứng tuyển
-                                 @elseif ($application->status == 2)
-                                     NTD đã xem hồ sơ
-                                 @elseif ($application->status == 3)
-                                     Hồ sơ phù hợp
-                                 @else
-                                     Hồ sơ chưa phù hợp
-                                 @endif
-                             </li>
-                             <li><i class="fa fa-calendar"></i> {{ $application->created_at }}</li>
-                         </ul>
-                         <div class="clearfix"></div>
+                     <!-- Second Tab -->
+                     <form id="note-form" action="{{ route('applications.update.note', $application->id) }}"
+                         method="POST">
+                         @csrf
+                         @method('PUT')
+                         <div class="app-tab-content" id="two-1">
+                             <textarea name="note" placeholder="Private note regarding this application">{{ old('note', $application->note) }}</textarea>
+                             <button type="submit" class="button margin-top-15">Add Note</button>
+                         </div>
+                     </form>
+                     <!-- Third Tab -->
+                     <div class="app-tab-content" id="three-1" style="display: none;">
+                         <i>Full Name:</i>
+                         <span>{{ $application->candidate->fullname_candidate }}</span>
+
+                         <i>Email:</i>
+                         <span><a href="">{{ $application->candidate->email }}</a></span>
+                         <i>Phone:</i>
+                         <span><a href="">{{ $application->candidate->phone_number_candidate }}</a></span>
+
+                         <i>Message:</i>
+                         <span>{{ $application->application_letter }}</span>
                      </div>
                  </div>
-             @endforeach
+                 <!-- Footer -->
+                 <div class="app-footer">
+                     @if ($application->rating == 0)
+                         <div class="rating no-stars">
+                             <div class="star-rating"></div>
+                             <div class="star-bg"></div>
+                         </div>
+                     @elseif($application->rating == 1)
+                         <div class="rating one-stars">
+                             <div class="star-rating"></div>
+                             <div class="star-bg"></div>
+                         </div>
+                     @elseif($application->rating == 2)
+                         <div class="rating two-stars">
+                             <div class="star-rating"></div>
+                             <div class="star-bg"></div>
+                         </div>
+                     @elseif($application->rating == 3)
+                         <div class="rating three-stars">
+                             <div class="star-rating"></div>
+                             <div class="star-bg"></div>
+                         </div>
+                     @elseif($application->rating == 4)
+                         <div class="rating four-stars">
+                             <div class="star-rating"></div>
+                             <div class="star-bg"></div>
+                         </div>
+                     @elseif($application->rating == 5)
+                         <div class="rating five-stars">
+                             <div class="star-rating"></div>
+                             <div class="star-bg"></div>
+                         </div>
+                     @endif
+                     <ul>
+                         <li><i class="fa fa-file-text-o"></i>
+                             @if ($application->status == 1)
+                                 Đã ứng tuyển
+                             @elseif ($application->status == 2)
+                                 NTD đã xem hồ sơ
+                             @elseif ($application->status == 3)
+                                 Hồ sơ phù hợp
+                             @else
+                                 Hồ sơ chưa phù hợp
+                             @endif
+                         </li>
+                         <li><i class="fa fa-calendar"></i> {{ $application->created_at }}</li>
+                     </ul>
+                     <div class="clearfix"></div>
+                 </div>
          </div>
+         @endforeach
      </div>
-
+     </div>
  @endsection

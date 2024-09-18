@@ -208,23 +208,6 @@
             document.getElementById('convert_slug').value = slug;
         }
     </script>
-    <script>
-        $('.chosen-select-no-single').change(function() {
-            var trangthai_val = $(this).val();
-            var id = $(this).attr('id');
-            $.ajax({
-                url: "{{ route('application-choose') }}",
-                method: "GET",
-                data: {
-                    trangthai_val: trangthai_val,
-                    id: id
-                },
-                success: function(data) {
-                    alert('Thay đổi trạng thái cv thành công!');
-                }
-            });
-        })
-    </script>
     <!-- Include jQuery and Slick JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>

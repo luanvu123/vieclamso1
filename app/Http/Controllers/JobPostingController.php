@@ -17,6 +17,8 @@ use App\Models\TypeEmployer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\ApplicationStatusUpdate;
+use Illuminate\Support\Facades\Mail;
 
 class JobPostingController extends Controller
 {
@@ -33,18 +35,50 @@ class JobPostingController extends Controller
 
         return redirect()->back()->with('success', 'Application updated successfully');
     }
-    public function updateRating(Request $request, Application $application)
-    {
-        $validatedData = $request->validate([
-            'rating' => 'nullable|integer|min:1|max:5',
-        ]);
+ public function updateRating(Request $request, Application $application)
+{
+    // Xác thực dữ liệu
+    $validatedData = $request->validate([
+        'rating' => 'nullable|integer|min:1|max:5',
+        'status' => 'required|integer|in:1,2,3,4',  // Xác thực giá trị status
+    ]);
 
-        $application->update([
-            'rating' => $validatedData['rating'],
-        ]);
+    // Cập nhật cả rating và status
+    $application->update([
+        'rating' => $validatedData['rating'],
+        'status' => $validatedData['status'],
+        'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+    ]);
 
-        return redirect()->back()->with('success', 'Rating updated successfully');
+    // Xác định thông điệp trạng thái
+    $statusMessage = '';
+    switch ($application->status) {
+        case 1:
+            $statusMessage = 'Đã ứng tuyển';
+            break;
+        case 2:
+            $statusMessage = 'Nhà tuyển dụng đã xem hồ sơ';
+            break;
+        case 3:
+            $statusMessage = 'Hồ sơ phù hợp';
+            break;
+        case 4:
+            $statusMessage = 'Hồ sơ chưa phù hợp';
+            break;
+        default:
+            $statusMessage = 'Trạng thái không xác định';
+            break;
     }
+
+    // Gửi email với rating
+    if ($application->candidate && $application->candidate->email) {
+        Mail::to($application->candidate->email)
+            ->send(new ApplicationStatusUpdate($application, $statusMessage, $validatedData['rating']));
+    }
+
+    // Trả về kết quả sau khi cập nhật
+    return redirect()->back()->with('success', 'CV và đánh giá đã được cập nhật thành công!');
+}
 
     public function index()
     {
@@ -297,18 +331,6 @@ class JobPostingController extends Controller
         // Redirect with success message
         return redirect()->route('job-postings.index')->with('success', 'Job posting updated successfully!');
     }
-
-
-    public function application_choose(Request $request)
-    {
-        $data = $request->all();
-        $application = Application::find($data['id']);
-        $application->status = $data['trangthai_val'];
-        $application->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
-        $application->save();
-    }
-
-
     public function showCV($id)
     {
         $candidate = Candidate::with([

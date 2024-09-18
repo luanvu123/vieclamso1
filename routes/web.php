@@ -309,7 +309,6 @@ Route::middleware(['employer'])->group(function () {
     Route::post('/employer/messages/{candidate}/reply', [MessageController::class, 'sendReply'])->name('messages.reply');
     Route::get('job-postings/cart', [JobPostingController::class, 'showCart'])->name('job-postings.cart');
     Route::resource('job-postings', JobPostingController::class);
-    Route::get('/application-choose', [JobPostingController::class, 'application_choose'])->name('application-choose');
     Route::put('/applications/{application}/update-note', [JobPostingController::class, 'updateNote'])->name('applications.update.note');
     Route::put('/applications/{application}/update-rating', [JobPostingController::class, 'updateRating'])->name('applications.update.rating');
 
