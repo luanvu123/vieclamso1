@@ -14,7 +14,7 @@
                   <div data-v-65de3a3a="" class="text-left">
                       <div data-v-65de3a3a="" class="notify__title">Thông báo quan trọng</div>
                       <div data-v-65de3a3a="" class="notify__content">Từ ngày <span
-                              class="font-weight-600">03/06/2024</span>, TopCV chính thức tiến hành cập nhật
+                              class="font-weight-600">03/06/2024</span>, Tuyendungso1 chính thức tiến hành cập nhật
                           chính sách xác thực tài khoản. <a target="_blank" style="color: #00B14F" href="#">Tìm hiểu
                               thêm</a>
                       </div>
