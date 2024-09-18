@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+    <div class="containe-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                  <div class="table-responsive">
     <h1>Courses</h1>
     <a href="{{ route('courses.create') }}" class="btn btn-primary mb-3">Create New Course</a>
     <table class="table" id="user-table">
@@ -41,5 +44,8 @@
         </tbody>
     </table>
 </div>
+    </div>
+        </div>
+    </div>
 @endsection
 

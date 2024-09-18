@@ -16,7 +16,7 @@ class ConsultationController extends Controller
     }
    public function index()
     {
-        $consultations = Consultation::with('city', 'typeConsultation')->get();
+        $consultations = Consultation::with('city', 'typeConsultation')->orderBy('updated_at', 'DESC')->get();
         return view('admin.consultations.index', compact('consultations'));
     }
     public function edit(Consultation $consultation)

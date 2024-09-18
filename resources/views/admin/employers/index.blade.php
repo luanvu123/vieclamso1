@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 col-md-12">
-            <div class="dashboard-list-box margin-top-30">
-                <div class="dashboard-list-box-content">
-                    <h1>All Employer</h1>
-
+    <div class="containe-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <h1>All Employer</h1>
+                <div class="table-responsive">
                     <table id="user-table" class="display">
                         <thead>
                             <tr>
@@ -81,18 +80,19 @@
                                             <span class="label label-primary pull-right">new</span>
                                         @endif
                                     </td>
-                                     <script>
-                                            function redirectToEmailPage(employerId, emailEmployer) {
-                                                window.location.href = "{{ route('admin.employer.email') }}?employer_id=" + employerId + "&emailEmployer=" +
-                                                    emailEmployer;
-                                            }
-                                        </script>
+                                    <script>
+                                        function redirectToEmailPage(employerId, emailEmployer) {
+                                            window.location.href = "{{ route('admin.employer.email') }}?employer_id=" + employerId + "&emailEmployer=" +
+                                                emailEmployer;
+                                        }
+                                    </script>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-
                 </div>
+
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

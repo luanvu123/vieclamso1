@@ -22,7 +22,7 @@ class JobsManageController extends Controller
 
     public function index()
     {
-        $jobPostings = JobPosting::with('employer')->get();
+        $jobPostings = JobPosting::with('employer')->orderBy('updated_at', 'DESC')->get();
         $path = public_path() . "/json/";
         if (!is_dir($path)) {
             mkdir($path, 0777, true);

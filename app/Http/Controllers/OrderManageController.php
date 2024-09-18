@@ -21,7 +21,7 @@ class OrderManageController extends Controller
     // Display a listing of the orders
     public function index()
     {
-        $orders = Order::with('orderDetails.cart.planCurrency', 'employer')->get();
+        $orders = Order::with('orderDetails.cart.planCurrency', 'employer')->orderBy('updated_at', 'DESC')->get();
 
         return view('admin.orders.index', compact('orders'));
     }

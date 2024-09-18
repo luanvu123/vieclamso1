@@ -39,7 +39,7 @@
                             <div class="checkbox form-group form-box">
                                 <div class="form-check checkbox-theme">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember">
-                                    <label class="form-check-label" for="rememberMe">
+                                    <label class="form-check-label" for="remember">
                                         Remember me
                                     </label>
                                 </div>
@@ -47,6 +47,7 @@
                                     <a href="{{ route('password.request') }}" class="forgot-password">Forgot Password</a>
                                 @endif
                             </div>
+
                             <div class="form-group">
                                 <button type="submit" class="btn-md btn-theme w-100">Login</button>
                             </div>

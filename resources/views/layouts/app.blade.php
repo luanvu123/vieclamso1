@@ -203,7 +203,17 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <a href="#">
                                         <img src="{{ asset('backend_admin/images/company-svgrepo-com.svg') }}"
                                             alt="Google" width="20" height="20">
-                                        <span>Employers</span>
+                                        <span>Employers
+                                            @if (
+                                                $jobPostingCountTwoHour > 0 ||
+                                                    $employerCountTwoHour > 0 ||
+                                                    $companyCountTwoHour > 0 ||
+                                                    $ordermanagesCountTwoHour > 0 ||
+                                                    $ordermanagesCountTwoHour > 0 ||
+                                                    $ordermanagesCountTwoHour > 0)
+                                                <span class="label label-primary pull-right">new</span>
+                                            @endif
+                                        </span>
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </a>
                                     <ul class="treeview-menu">
@@ -212,7 +222,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                                 <img src="{{ asset('backend_admin/images/company-portal-svgrepo-com.svg') }}"
                                                     alt="Google" width="20" height="20"> Employer
                                                 @if ($employerCountTwoHour > 0)
-                                                    <span class="nav-tag">{{ $employerCountTwoHour }}</span>
+                                                    <span
+                                                        class="label label-primary pull-right">{{ $employerCountTwoHour }}</span>
                                                 @endif
                                             </a>
                                         </li>
@@ -222,7 +233,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                                 <img src="{{ asset('backend_admin/images/job-search-svgrepo-com.svg') }}"
                                                     alt="Google" width="20" height="20"> Manage Jobs
                                                 @if ($jobPostingCountTwoHour > 0)
-                                                    <span class="nav-tag">{{ $jobPostingCountTwoHour }}</span>
+                                                    <span
+                                                        class="label label-primary pull-right">{{ $jobPostingCountTwoHour }}</span>
                                                 @endif
                                             </a>
                                         </li>
@@ -232,7 +244,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                                 <img src="{{ asset('backend_admin/images/company-small-svgrepo-com.svg') }}"
                                                     alt="Google" width="20" height="20"> Manage Company
                                                 @if ($companyCountTwoHour > 0)
-                                                    <span class="nav-tag">{{ $companyCountTwoHour }}</span>
+                                                    <span
+                                                        class="label label-primary pull-right">{{ $companyCountTwoHour }}</span>
                                                 @endif
                                             </a>
                                         </li>
@@ -242,7 +255,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                                 <img src="{{ asset('backend_admin/images/order-1-svgrepo-com.svg') }}"
                                                     alt="Google" width="20" height="20"> Manage Order
                                                 @if ($ordermanagesCountTwoHour > 0)
-                                                    <span class="nav-tag">{{ $ordermanagesCountTwoHour }}</span>
+                                                    <span
+                                                        class="label label-primary pull-right">{{ $ordermanagesCountTwoHour }}</span>
                                                 @endif
                                             </a>
                                         </li>
@@ -259,7 +273,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                                 <img src="{{ asset('backend_admin/images/purchase-buy-pay-transaction-svgrepo-com.svg') }}"
                                                     alt="Google" width="20" height="20"> Manage Purchased
                                                 @if ($ordermanagesCountTwoHour > 0)
-                                                    <span class="nav-tag">{{ $ordermanagesCountTwoHour }}</span>
+                                                    <span
+                                                        class="label label-primary pull-right">{{ $ordermanagesCountTwoHour }}</span>
                                                 @endif
                                             </a>
                                         </li>
@@ -394,7 +409,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <a href="{{ route('consultations.index') }}">
                                         <img src="{{ asset('backend_admin/images/register-svgrepo-com.svg') }}"
                                             alt="Google" width="20" height="20">
-                                        <span> Đăng kí nhận tư vấn</span>
+                                        <span> Book A Consultation</span>
                                         @if ($consultationCountTwoHour > 0)
                                             <span
                                                 class="label label-primary pull-right">{{ $consultationCountTwoHour }}</span>
@@ -434,14 +449,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         @endif
                                     </a>
                                 </li>
-
-
-
-
-
-
-
-
                             </ul>
                         </div>
                         <!-- /.navbar-collapse -->
@@ -694,7 +701,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     </script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">

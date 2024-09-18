@@ -21,18 +21,32 @@
         rel="stylesheet">
 
     <!-- Custom Stylesheet -->
-   <link type="text/css" rel="stylesheet" href="{{ asset('backend-template/assets/css/style.css') }}">
-<link rel="stylesheet" type="text/css" id="style_sheet" href="{{ asset('backend-template/assets/css/skins/default.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('backend-template/assets/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" id="style_sheet"
+        href="{{ asset('backend-template/assets/css/skins/default.css') }}">
 
 
 </head>
 
 <body id="top">
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     @yield('content_login')
     <script src="{{ asset('backend-template/assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('backend-template/assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('backend-template/assets/js/bootstrap.bundle.min.js') }}"></script>
-     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 </body>

@@ -1,20 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-          @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+    <div class="containe-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                  <div class="table-responsive">
         <h1>All Awards</h1>
         <a href="{{ route('awards.create') }}" class="btn btn-primary mb-3">Create New Award</a>
 
@@ -49,5 +39,8 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+        </div>
+        </div>
     </div>
 @endsection

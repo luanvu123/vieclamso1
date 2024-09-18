@@ -34,7 +34,7 @@ class EmployerManageController extends Controller
         return view('admin.employers.index', compact('employers'));
     }
 
-    public function show($id) 
+    public function show($id)
     {
         $employer = Employer::with('company')->findOrFail($id); // Nạp thông tin công ty liên quan
         return view('admin.employers.show', compact('employer'));
@@ -126,7 +126,7 @@ class EmployerManageController extends Controller
     }
     public function purchasedManage()
     {
-        $purchasedItems = Purchased::with(['employer', 'product'])->get();
+        $purchasedItems = Purchased::with(['employer', 'product'])->orderBy('updated_at', 'DESC')->get();
 
         return view('admin.employers.purchased', compact('purchasedItems'));
     }

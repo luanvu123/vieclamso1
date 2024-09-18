@@ -1287,7 +1287,7 @@
                     <li class="navbar-right__item">
                         <div class="block-for-employer">
                             <p>Bạn là nhà tuyển dụng?</p>
-                            <a type="button" target="_blank" href="{{ route('employer.login') }}">
+                            <a type="button" target="_blank" href="{{ route('recruitment') }}">
                                 <span>Đăng tuyển ngay</span>
                                 <span class="icon"><i class="fa-solid fa-chevrons-right"></i></span>
                             </a>

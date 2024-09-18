@@ -3,12 +3,12 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="containe-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <a href="{{ route('categories.create') }}" class="button margin-top-30">Add Category</a>
 
-   <a href="{{ route('categories.create') }}" class="button margin-top-30">Add Category</a>
-    <div class="row">
-        <div class="col-lg-12 col-md-12">
-            <div class="dashboard-list-box margin-top-30">
-                <div class="dashboard-list-box-content">
                     <!-- Table -->
                     <table class="manage-table responsive-table" id="user-table">
                         <thead>
@@ -28,7 +28,8 @@
                                     <td>{{ $category->name }}</td>
                                     <td>
                                         @if ($category->image)
-                                            <img src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}" style="width: 30px;">
+                                            <img src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}"
+                                                style="width: 30px;">
                                         @else
                                             No Image
                                         @endif
@@ -48,9 +49,9 @@
                                         $(document).ready(function() {
                                             $('.cate_checkbox').change(function() {
                                                 var trangthai_val = $(this).is(':checked') ? '1' :
-                                                '0';
+                                                    '0';
                                                 var id = $(this).attr('id').replace('cateCheckbox_',
-                                                '');
+                                                    '');
 
                                                 $.ajax({
                                                     url: "{{ route('cate-choose') }}",
@@ -64,7 +65,8 @@
                                         });
                                     </script>
                                     <td>
-                                        <a href="{{ route('categories.edit', $category->id) }}"><i class="fa fa-pencil"></i> Edit</a>
+                                        <a href="{{ route('categories.edit', $category->id) }}"><i
+                                                class="fa fa-pencil"></i> Edit</a>
                                         {{-- <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')

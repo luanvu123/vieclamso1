@@ -71,7 +71,7 @@ class TypeSupportController extends Controller
 
       public function indexSupport()
     {
-        $supports = Support::with('typeSupport')->get();
+        $supports = Support::with('typeSupport')->orderBy('updated_at', 'DESC')->get();
         return view('admin.type_support.indexSupport', compact('supports'));
     }
       public function showSupport($id)

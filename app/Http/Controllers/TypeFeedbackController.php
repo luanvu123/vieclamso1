@@ -9,7 +9,7 @@ use Carbon\Carbon;
 
 class TypeFeedbackController extends Controller
 {
-     public function __construct()
+    public function __construct()
     {
         $this->middleware('permission:type-feedback-list', ['only' => ['index']]);
         $this->middleware('permission:type-feedback-create', ['only' => ['create', 'store']]);
@@ -77,13 +77,10 @@ class TypeFeedbackController extends Controller
 
     public function indexList()
     {
-        // Retrieve all feedbacks
-        $feedbacks = Feedback::all();
-
-        // Pass feedbacks to the view
+      $feedbacks = Feedback::orderBy('updated_at', 'DESC')->get();
         return view('admin.type_feedback.list_feedbacks', compact('feedbacks'));
     }
-     public function showList($id)
+    public function showList($id)
     {
         $feedback = Feedback::with('typeFeedback')->findOrFail($id);
         return view('admin.type_feedback.show_feedback', compact('feedback'));
@@ -96,10 +93,10 @@ class TypeFeedbackController extends Controller
 
         return redirect()->route('feedbacks.index.list')->with('success', 'Feedback deleted successfully.');
     }
-      public function feedback_choose(Request $request)
+    public function feedback_choose(Request $request)
     {
         $data = $request->all();
-        $feedback =Feedback::find($data['id']);
+        $feedback = Feedback::find($data['id']);
         $feedback->status = $data['trangthai_val'];
         $feedback->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $feedback->save();

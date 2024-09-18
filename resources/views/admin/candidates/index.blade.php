@@ -1,25 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="containe-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                @if (session('success'))
-                    <div class="alert alert-success border-0 bg-grd-success alert-dismissible fade show">
-                        <div class="d-flex align-items-center">
-                            <div class="font-35 text-white"><span class="material-icons-outlined fs-2">check_circle</span>
-                            </div>
-                            <div class="ms-3">
-                                <h6 class="mb-0 text-white">Success Alerts</h6>
-                                <div class="text-white">A simple success alert—check it out!</div>
-                            </div>
-                        </div>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-                <div class="card mt-4">
-                    <div class="card-body">
-                        <h5 class="card-title">User List</h5>
+                  <div class="table-responsive">
+                        <h5 class="card-title">Candidate List</h5>
                         <table id="user-table" class="display">
                             <thead>
                                 <tr>
@@ -97,7 +83,6 @@
                 </div>
             </div>
         </div>
-    </div>
     <script>
         function redirectToEmailPage(candidateId, emailCandidate) {
             window.location.href = "{{ route('admin.candidate.email') }}?candidate_id=" + candidateId + "&emailCandidate=" +

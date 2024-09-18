@@ -25,5 +25,5 @@
         @method('DELETE')
         <button type="submit">Delete</button>
     </form>
-    <a href="{{ route('sliders.index') }}">Back to List</a>
+    <a href="{{ route('slides.index') }}">Back to List</a>
 @endsection

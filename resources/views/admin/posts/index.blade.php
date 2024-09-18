@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+  <div class="containe-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12">
+                  <div class="table-responsive">
+
                 <h1>All Posts</h1>
                 <style>
                     .table-container {
@@ -18,10 +20,10 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                     }
-                </style> 
+                </style>
                 <a href="{{ route('posts.create') }}" class="btn btn-primary mb-3">Create New Post</a>
 
-                <div class="table-container">
+
                     <table class="table table-bordered" id="user-table">
                         <thead>
                             <tr>

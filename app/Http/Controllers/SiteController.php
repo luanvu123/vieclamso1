@@ -28,6 +28,7 @@ use App\Models\Value;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class SiteController extends Controller
 {
@@ -35,7 +36,10 @@ class SiteController extends Controller
     {
         $this->trackVisitor($request->ip(), OnlineVisitor::class);
 
-        $jobPostings = JobPosting::with(['company', 'employer', 'cities'])->where('status', 0)->paginate(12);
+        $jobPostings = JobPosting::with(['company', 'employer', 'cities'])
+            ->where('status', 0) // Lọc các jobPostings đang mở
+            ->where('closing_date', '>=', Carbon::now()) // Lấy các jobPostings còn hạn
+            ->paginate(12);
         $categories = Category::withCount('jobPostings')
             ->where('status', 1)
             ->get();
@@ -97,7 +101,7 @@ class SiteController extends Controller
         if ($request->filled('category')) {
             $query->where('category', 'like', '%' . $request->input('category') . '%');
         }
-        $jobPostings = JobPosting::with('employer', 'company')->where('status', 0)->paginate(12);
+        $jobPostings = JobPosting::with('employer', 'company')->where('status', 0)->where('closing_date', '>=', Carbon::now())->paginate(12);
         $categories = Category::withCount('jobPostings')
             ->where('status', 1)
             ->get();
@@ -135,7 +139,7 @@ class SiteController extends Controller
 
     public function show($slug)
     {
-        $jobPosting = JobPosting::with(['company', 'cities'])->where('slug', $slug)->where('status', 0)->firstOrFail();
+        $jobPosting = JobPosting::with(['company', 'cities', 'categories'])->where('slug', $slug)->where('status', 0)->firstOrFail();
         // Tăng số lượt xem lên 1
         $jobPosting->increment('views');
         $closingDate = Carbon::parse($jobPosting->closing_date);
@@ -151,11 +155,18 @@ class SiteController extends Controller
             }
         }
         // Lấy các công việc liên quan
-        $relatedJobs = JobPosting::with(['company', 'cities'])->where('category', $jobPosting->category)
-            ->orWhere('city', 'like', '%' . $jobPosting->city . '%')
-            ->where('id', '!=', $jobPosting->id)
-            ->where('status', 0)
-            ->take(5) // Lấy tối đa 5 công việc liên quan
+        $relatedJobs = JobPosting::with(['company', 'cities'])
+            ->where('closing_date', '>=', Carbon::now()) // Công việc còn hạn ứng tuyển
+            ->where('status', 0) // Công việc đang mở
+            ->where('id', '!=', $jobPosting->id) // Loại trừ công việc hiện tại
+            ->whereHas('cities', function ($query) use ($jobPosting) {
+                $query->whereIn('cities.id', $jobPosting->cities->pluck('id'));
+            })
+            ->whereHas('categories', function ($query) use ($jobPosting) {
+                $query->whereIn('categories.id', $jobPosting->categories->pluck('id'));
+            })
+            ->where('title', 'LIKE', '%' . Str::of($jobPosting->title)->explode(' ')->first() . '%') // Tìm theo từ khóa đầu tiên trong title
+            ->take(5) // Giới hạn 5 công việc
             ->get();
         foreach ($relatedJobs as $relatedJob) {
             $relatedJob->days_to_closing = Carbon::now()->diffInDays(Carbon::parse($relatedJob->closing_date), false);
@@ -163,7 +174,7 @@ class SiteController extends Controller
         }
         $courses = Course::where('status', 1)->take(3)->get();
         $company_random = Company::inRandomOrder()->first();
-        $jobPosting_random = $company_random->jobPostings()->where('status', 0)->get();
+        $jobPosting_random = $company_random->jobPostings()->where('status', 0)->where('closing_date', '>=', Carbon::now())->get();
         $cities_random = City::whereHas('jobPostings', function ($query) use ($jobPosting_random) {
             $query->whereIn('job_posting_id', $jobPosting_random->pluck('id'));
         })->get();
@@ -173,7 +184,7 @@ class SiteController extends Controller
 
     public function searchJobs(Request $request)
     {
-        $query = JobPosting::with('cities')->where('status', 0);
+        $query = JobPosting::with('cities')->where('closing_date', '>=', Carbon::now())->where('status', 0);
         $cities = City::where('status', 1)->pluck('name', 'id');
         if ($request->filled('keyword')) {
             $query->where('title', 'like', '%' . $request->keyword . '%');
@@ -208,7 +219,7 @@ class SiteController extends Controller
         // Lấy các công việc thuộc danh mục với trạng thái = 0
         $jobPostings = JobPosting::whereHas('categories', function ($query) use ($category) {
             $query->where('category_id', $category->id);
-        })->with('employer', 'company')->where('status', 0)->paginate(12);
+        })->with('employer', 'company')->where('closing_date', '>=', Carbon::now())->where('status', 0)->paginate(12);
 
         return view('pages.category', compact('category', 'jobPostings'));
     }
@@ -231,18 +242,18 @@ class SiteController extends Controller
             ->get();
         return view('pages.company', compact('companies'));
     }
-   public function showCompany($slug)
-{
-    $company = Company::where('slug', $slug)->firstOrFail();
-    $jobPostings = $company->jobPostings()->where('status', 0)->get();
+    public function showCompany($slug)
+    {
+        $company = Company::where('slug', $slug)->firstOrFail();
+        $jobPostings = $company->jobPostings()->where('status', 0)->get();
 
-    // Lấy các cities liên quan đến các jobPostings của công ty
-    $cities = City::whereHas('jobPostings', function ($query) use ($jobPostings) {
-        $query->whereIn('job_posting_id', $jobPostings->pluck('id'));
-    })->get();
+        // Lấy các cities liên quan đến các jobPostings của công ty
+        $cities = City::whereHas('jobPostings', function ($query) use ($jobPostings) {
+            $query->whereIn('job_posting_id', $jobPostings->pluck('id'));
+        })->get();
 
-    return view('pages.company-show', compact('company', 'jobPostings', 'cities'));
-}
+        return view('pages.company-show', compact('company', 'jobPostings', 'cities'));
+    }
 
     public function showPost($slug)
     {

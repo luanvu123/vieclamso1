@@ -15,7 +15,7 @@ class JobReportController extends Controller
     }
     public function index()
     {
-        $jobReports = JobReport::with('jobPosting.employer')->get();
+        $jobReports = JobReport::with('jobPosting.employer')->orderBy('updated_at', 'DESC')->get();
         return view('admin.job_reports.index', compact('jobReports'));
     }
 

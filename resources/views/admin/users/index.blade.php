@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="containe-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <!-- Titlebar -->
-                <div class="row">
+                <div class="table-responsive">
+
                     <a href="{{ route('users.create') }}" class="button margin-top-30">Add User</a>
                     <!-- Table -->
                     <table id="user-table" class="display">
@@ -14,9 +14,10 @@
                                 <th>#</th>
                                 <th><i class="fa fa-user"></i> Name</th>
                                 <th><i class="fa fa-file-text"></i> Email</th>
-                                <th><i class="fa fa-map-marker"></i> Address</th>
+                                <th><i class="fa fa-phone"></i> Phone</th>
+                                <th><i class="fa fa-user-edit"></i> Roles</th>
                                 <th><i class="fa fa-calendar"></i> Registered At</th>
-                                <th><i class="fa fa-toggle-on"></i>Status</th>
+                                <th><i class="fa fa-toggle-on"></i> Status</th>
 
                                 <th></th>
                             </tr>
@@ -27,7 +28,14 @@
                                     <td>{{ $key }}</td>
                                     <td class="title">{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->address }}</td>
+                                    <td>{{ $user->phone }}</td>
+                                    <td>
+                                        @if (!empty($user->getRoleNames()))
+                                            @foreach ($user->getRoleNames() as $v)
+                                                <label class="badge badge-success">{{ $v }}</label>
+                                            @endforeach
+                                        @endif
+                                    </td>
                                     <td>{{ $user->created_at->format('M d, Y') }}</td>
                                     <td>
                                         <select id="{{ $user->id }}"class="user_choose">

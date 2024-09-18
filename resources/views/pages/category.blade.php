@@ -209,49 +209,4 @@
              </div>
          </div>
      </div>
-     <div class="box-content" id="section-box-seo">
-         <div class="container">
-             <div class="content-seo-box">
-                 <div id="seo-box">
-                     <p>
-                         <span style="color:rgb(0,0,0);"><strong>Việc HOT thu nhập hấp dẫn tại</strong></span>
-                         <span><strong>Hồ Chí Minh</strong></span>
-                         <span><strong> đang chờ bạn apply </strong><br><br>Hiện nay, </span>
-                         <span><strong>Hồ Chí Minh</strong></span>
-                         <span> là khu vực tập trung rất nhiều công ty và tập đoàn lớn. Nhu cầu tuyển dụng nhân lực tại
-                         </span>
-                         <span><strong>Hồ Chí Minh</strong></span>
-                         <span>luôn rất mạnh mẽ, rất nhiều vị trí việc làm được nhiều doanh nghiệp săn đón. Các công ty
-                             có nhu cầu tuyển nhân sự tại </span>
-                         <span><strong>Hồ Chí Minh</strong></span>
-                         <span> đang đưa ra mức lương và đãi ngộ hấp dẫn nhằm chiêu mộ nhân tài. Nếu như bạn đang tìm
-                             việc làm tại</span>
-                         <span><strong>Hồ Chí Minh</strong></span>
-                         <span><strong> </strong></span>
-                         <span>thì chúc mừng bạn, cơ hội việc làm của vị trí tại địa phương này đang rất hấp dẫn với thu
-                             nhập cực tốt. </span><br><br>
-                         <span><a href="/" target="_blank"
-                                 rel="nooppener noreferrer"><strong>TopCV</strong></a></span>
-                         <span> đồng hành cùng những công ty, tập đoàn hàng đầu có nhu cầu tuyển dụng nhân sự tại
-                         </span>
-                         <span><strong>Hồ Chí Minh</strong></span>
-                         <span> cùng những offer hấp dẫn về lương thưởng và đãi ngộ. Những tin tuyển dụng </span>
-                         <span><a href="https://www.topcv.vn/viec-lam" target="_blank"
-                                 rel="nooppener noreferrer"><strong>việc làm</strong></a></span>
-                         <span> tại TopCV cập nhật liên tục hàng ngày với rất nhiều cơ hội việc làm hấp dẫn. Bạn hãy ứng
-                             tuyển các công việc đang được đăng tuyển tại TopCV để nhận Job xịn, đi làm ngay, nhận lương
-                             liền tay. Ngoài ra, TopCV còn mang đến cơ hội việc làm rất nhiều ngành nghề khác dành tặng
-                             cho những ứng viên muốn tìm </span>
-                         <span><a href="https://www.topcv.vn/tim-viec-lam-moi-nhat-tai-ho-chi-minh-l2" target="_blank"
-                                 rel="nooppener noreferrer"><strong>việc làm tại Hồ Chí
-                                     Minh</strong></a></span>
-                         <span>. Nhanh tay </span><span><a href="https://www.topcv.vn/mau-cv" target="_blank"
-                                 rel="nooppener noreferrer"><strong>tạo CV</strong></a></span>
-                         <span> tại TopCV để đi làm ngay nhé!</span>
-                     </p>
-                 </div>
-             </div>
-         </div>
-     </div>
-     </div>
  @endsection
