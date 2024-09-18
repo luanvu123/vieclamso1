@@ -1,8 +1,7 @@
  @extends('layout')
  @section('content')
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/desktop/jobs/modal-apply.616a455ca1847bcbK.css">
-     <link
-         rel="stylesheet"href="https://static.topcv.vn/v4/css/components/desktop/jobs/job-list-default.40710d157e4df9feK.css">
+     <link rel="stylesheet"
+         href="{{ asset('static.topcv.vn/v4/css/components/desktop/jobs/modal-apply.616a455ca1847bcbK.css') }}">
      <div id="main" style="margin-top: 0px;">
          <div class="header">
              <div class="box-search-job">
@@ -1158,8 +1157,9 @@
                                              Hoặc liên hệ với Vieclamso1 thông qua kênh hỗ trợ ứng viên của Vieclamso1:<br>
                                              Email: <a class="text-highlight"
                                                  href="#">{{ $info->email_contact }}</a><br>
-                                             Hotline: <a class="text-highlight" href="">{{ $info->hotline_contact }}</a><br>
-                                                 
+                                             Hotline: <a class="text-highlight"
+                                                 href="">{{ $info->hotline_contact }}</a><br>
+
                                          </li>
                                      </ul>
                                  </div>
