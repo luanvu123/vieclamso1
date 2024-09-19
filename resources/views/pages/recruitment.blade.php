@@ -3,12 +3,12 @@
     <div style="background-image: url(images/introduction/background_header.png)" class="bg-center bg-no-repeat bg-cover">
         <div class="w-container flex flex-col justify-center text-center pt-2 md:pt-8 px-4 md:px-0 leading-tight">
             <h1 class="md:text-[48px] text-[14px] font-semibold m-auto">
-                {{ $info->recruitment_title_1 }}
+                {{ $info_lg->recruitment_title_1 }}
             </h1>
             <div style="position: relative; margin-top: 5px">
                 <a href="{{ route('job-postings.index') }}" target="_blank"
                     class="bg-primary py-2.5 px-4 rounded text-white text-center font-[14px] font-semibold leading-[3rem] btn-post-job-free">
-                    Đăng tin miễn phí
+                    {{ $post_job_free }}
                     <i class="fa-solid fa-arrow-right ml-1"></i>
                 </a>
             </div>
@@ -26,15 +26,15 @@
                 </div>
                 <h2
                     class="md:text-[24px] text-[18px] leading-tight border-l-4 border-primary font-simibold mb-[10px] pl-[8px]">
-                    {{ $info->big_update_title_1 }}
+                    {{ $info_lg->big_update_title_1 }}
                 </h2>
                 <p class="md:text-[14px] font-light text-color-light">
-                    {{ $info->big_update_description }}
+                    {{ $info_lg->big_update_description }}
                 </p>
                 <div class="text-center md:text-left mt-2">
                     <a href="#"
                         class="bg-primary py-2.5 px-4 rounded text-white text-center font-[14px] font-semibold leading-[3rem] show-modal-create-lead">
-                        Tư vấn tuyển dụng miễn phí
+                        {{ $free_recruitment_advice }}
                         <i class="fa-solid fa-arrow-right ml-1"></i>
                     </a>
                 </div>
@@ -49,7 +49,7 @@
     <div class="bg-white py-[40px] md:py-[80px]">
         <div class="w-container px-[20px]">
             <h2 class="text-[30px] font-bold text-center mb-[32px] md:mb-[40px]">
-                Công nghệ đăng tin tuyển dụng mới. Tính năng mới. Trải nghiệm mới
+                {{ $new_technology }}
             </h2>
             <div class="bg-[#F4F5F5] rounded-[10px] p-[16px] md:flex md:items-center md:flex-row-reverse">
                 <div class="md:w-1/2">
@@ -57,15 +57,15 @@
                         {{ $info->ai_in_recruitment }}
                     </div>
                     <h2 class="text-[18px] md:text-[24px] border-l-4 border-primary font-semibold mb-[10px] pl-[8px]">
-                        {{ $info->ai_in_recruitment_h1 }}
+                        {{ $info_lg->ai_in_recruitment_h1 }}
                     </h2>
                     <p class="md:text-[14px] font-light text-color-light">
-                        {{ $info->ai_in_recruitment_h2 }}
+                        {{ $info_lg->ai_in_recruitment_h2 }}
                     </p>
                     <div class="text-center md:text-left mt-4">
                         <a href="#"
                             class="bg-primary py-2.5 px-4 rounded text-white text-center font-[14px] font-semibold leading-[3rem] show-modal-create-lead">
-                            Tư vấn tuyển dụng miễn phí
+                            {{ $free_recruitment_advice }}
                             <i class="fa-solid fa-arrow-right ml-1"></i>
                         </a>
                     </div>
@@ -83,32 +83,34 @@
                 {{ $info->core_functions }}
             </div>
             <h2 class="text-[30px] md:text-[30px] mt-2 font-bold">
-                {{ $info->smart_recruitment }}
+                {{ $info_lg->smart_recruitment }}
             </h2>
             <p class="md:text-[14px] mt-4 font-light text-color-light">
-                {{ $info->smart_recruitment_description }}
+                {{ $info_lg->smart_recruitment_description }}
             </p>
         </div>
         <div class="px-[20px] mt-[20px] md:mt-[42px]">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-[20px] md:gap-[40px]">
-                @foreach ($recruitments as $recruitment)
+                @foreach ($recruitment_lg as $recruitment)
                     <div class="bg-white relative rounded-[12px] p-[24px]">
                         <h3 class="text-[20px] mb-[16px] font-bold text-center">
                             {{ $recruitment->title }}
                         </h3>
                         <div class="mb-[16px] text-center">
                             <img class="m-auto" src="{{ asset('storage/' . $recruitment->image) }}"
-                                title="Hệ thống đánh giá ứng viên" alt="He thong danh gia ung vien">
+                                title="{{ $recruitment->title }}" alt="{{ $recruitment->title }}">
                         </div>
                         <p class="font-light md:text-[14px] text-center text-color-light">
                             {{ $recruitment->description }}
                         </p>
                         <div class="text-center mt-3">
-                            <a href="{{ $recruitment->url }}" target="_blank" style="color: #00B14F">Tìm
-                                hiểu thêm</a>
+                            <a href="{{ $recruitment->url }}" target="_blank" style="color: #00B14F">
+                                {{ $learn_more }}
+                            </a>
                         </div>
                     </div>
                 @endforeach
+
             </div>
 
         </div>
@@ -123,10 +125,10 @@
                                 RECRUITMENT SERVICES
                             </div>
                             <h2 class="text-[24px] md:text-[30px] mt-2 font-bold">
-                                Dịch vụ đăng tin tuyển dụng
+                               {{$Recruitment_posting_service}}
                             </h2>
                         </div>
-                        @foreach ($services as $service)
+                        @foreach ($service_lg as $service)
                             @if ($service->position_image == 'left')
                                 <div class="md:pb-6 md:flex-row flex flex-col pt-3 pl-3 md:ml-0">
                                     <div class="md:w-5/12">
@@ -144,7 +146,7 @@
                                                 <div class="text-center md:text-left">
                                                     <a href="#"
                                                         class="bg-primary py-2.5 px-4 rounded text-white text-center font-[14px] font-semibold leading-[3rem] show-modal-create-lead">
-                                                        Tư vấn tuyển dụng miễn phí
+                                                        {{$free_recruitment_advice}}
                                                         <i class="fa-solid fa-arrow-right ml-1"></i>
                                                     </a>
                                                 </div>
@@ -164,7 +166,7 @@
                                                 <div class="text-center md:text-left">
                                                     <a href="#"
                                                         class="bg-primary py-2.5 px-4 rounded text-white text-center font-[14px] font-semibold leading-[3rem] show-modal-create-lead">
-                                                        Tư vấn tuyển dụng miễn phí
+                                                      {{$free_recruitment_advice}}
                                                         <i class="fa-solid fa-arrow-right ml-1"></i>
                                                     </a>
                                                 </div>
@@ -189,7 +191,7 @@
                     Figures
                 </div>
                 <h2 class="text-[24px] md:text-[30px] mt-2 font-bold">
-                    Những con số của trang tuyển dụng Vieclamso1
+                    {{$The_numbers_of_the_recruitment}}
                 </h2>
             </div>
             <div class="px-[20px]">

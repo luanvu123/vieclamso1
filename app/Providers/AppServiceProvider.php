@@ -18,7 +18,9 @@ use App\Models\JobReport;
 use App\Models\Order;
 use App\Models\PublicLink;
 use App\Models\Purchased;
+use App\Models\RecruitmentService;
 use App\Models\Slug;
+use App\Models\SmartRecruitment;
 use App\Models\Support;
 use App\Models\TypeFeedback;
 use App\Models\TypeSupport;
@@ -81,25 +83,67 @@ class AppServiceProvider extends ServiceProvider
             $lang = session('app_locale', 'vi');
 
             // Lấy dữ liệu từ bảng Info
-            $info = Info::first();
+            $info_lg = Info::first();
+            // Lấy danh sách SmartRecruitment
+            $recruitment_lg = SmartRecruitment::where('status', true)->get();
+            $service_lg = RecruitmentService::where('status', true)->get();
 
             // Sử dụng Google Translate để dịch tiêu đề
             $tr = new GoogleTranslate($lang);
 
-            // Dịch các chuỗi cần thiết
-            $info->recruitment_title_1 = $tr->translate($info->recruitment_title_1);
+            // Dịch các chuỗi trong bảng info
+            $info_lg->recruitment_title_1 = $tr->translate($info_lg->recruitment_title_1);
+            $info_lg->big_update_title_1 = $tr->translate($info_lg->big_update_title_1);
+            $info_lg->big_update_description = $tr->translate($info_lg->big_update_description);
+            $info_lg->ai_in_recruitment_h1 = $tr->translate($info_lg->ai_in_recruitment_h1);
+            $info_lg->ai_in_recruitment_h2 = $tr->translate($info_lg->ai_in_recruitment_h2);
+            $info_lg->smart_recruitment = $tr->translate($info_lg->smart_recruitment);
+            $info_lg->smart_recruitment_description = $tr->translate($info_lg->smart_recruitment_description);
+            foreach ($recruitment_lg as $recruitment) {
+                $recruitment->title = $tr->translate($recruitment->title);
+                $recruitment->description = $tr->translate($recruitment->description);
+            }
+            foreach ($service_lg as $service) {
+                $service->title = $tr->translate($service->title);
+                $service->description = $tr->translate($service->description);
+            }
 
-            // Dịch các item menu
-            $menuItems = [
-                'Giới thiệu' => $tr->translate('Giới thiệu'),
-                'Dịch vụ' => $tr->translate('Dịch vụ'),
-                'Báo giá' => $tr->translate('Báo giá'),
-                'Hỗ trợ' => $tr->translate('Hỗ trợ'),
-                'Blog tuyển dụng' => $tr->translate('Blog tuyển dụng')
-            ];
+            // Dịch các chuỗi mới
+            $menu_1 = $tr->translate('Giới thiệu');
+            $menu_2 = $tr->translate('Dịch vụ');
+            $menu_3 = $tr->translate('Báo giá');
+            $menu_4 = $tr->translate('Hỗ trợ');
+            $menu_5 = $tr->translate('Blog tuyển dụng');
+            $login = $tr->translate('Đăng nhập');
+            $register = $tr->translate('Đăng ký');
+            $post_job_free = $tr->translate('Đăng tin miễn phí');
+            $free_recruitment_advice = $tr->translate('Tư vấn tuyển dụng miễn phí');
+            $new_technology = $tr->translate('Công nghệ đăng tin tuyển dụng mới. Tính năng mới. Trải nghiệm mới.');
+            $learn_more = $tr->translate('Tìm hiểu thêm');
+            $Recruitment_posting_service=$tr->translate('Dịch vụ đăng tuyển tuyển dụng.');
+            $The_numbers_of_the_recruitment=$tr->translate('Những con số của trang tuyển dụng của Vieclamso1');
 
-            // Chia sẻ dữ liệu dịch với tất cả các views
-            $view->with(compact('info', 'menuItems', 'lang'));
+
+            // Chia sẻ các biến với tất cả các views
+            $view->with(compact(
+                'info_lg',
+                'menu_1',
+                'menu_2',
+                'menu_3',
+                'menu_4',
+                'menu_5',
+                'login',
+                'register',
+                'post_job_free',
+                'free_recruitment_advice',
+                'new_technology',
+                'lang',
+                'learn_more',
+                'recruitment_lg',
+                'service_lg',
+                'Recruitment_posting_service',
+                'The_numbers_of_the_recruitment',
+            ));
         });
         // Chia sẻ dữ liệu với tất cả các view
         View::share([

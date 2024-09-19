@@ -99,14 +99,36 @@
 
                         <div id="mb-menu" class="hidden w-full md:flex">
                             <ul class="p-0 m-0 list-none flex flex-col md:flex-row text-sm" id="navbar-menu">
-                                @foreach ($menuItems as $item)
-                                    <li>
-                                        <a class="text-primary hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                            href="#">
-                                            {{ $item }}
-                                        </a>
-                                    </li>
-                                @endforeach
+                                <li>
+                                    <a class="text-primary hover:text-primary block pd-12 md:py-5 text-center font-medium"
+                                        href="#">
+                                        {{ $menu_1 }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
+                                        href="#">
+                                        {{ $menu_2 }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
+                                        href="#">
+                                        {{ $menu_3 }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
+                                        href="#">
+                                        {{ $menu_4 }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
+                                        href="#">
+                                        {{ $menu_5 }}
+                                    </a>
+                                </li>
                             </ul>
 
                             <div class="py-[40px] md:flex md:items-center md:justify-end md:py-0 md:!ml-auto">
@@ -132,6 +154,14 @@
                                                 alt="jp flag">
                                         </a>
                                     </div>
+                                </div>
+                            </div>
+                            <div id="login-box" class="flex items-center justify-center">
+                                <div class="grid grid-cols-2 gap-[12px]">
+                                    <a href="{{ route('employer.login') }}"
+                                        class="bg-white border border-primary py-[14px] px-[13px] rounded block  text-primary text-center min-w-[104px]">{{$login}}</a>
+                                    <a href="{{ route('employer.register') }}"
+                                        class="bg-primary border border-primary py-[14px] px-[13px] rounded block text-white text-center min-w-[104px]">{{$register}}</a>
                                 </div>
                             </div>
                         </div>

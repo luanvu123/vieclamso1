@@ -13,6 +13,7 @@ use App\Models\Ecosystem;
 use App\Models\Figure;
 use App\Models\GenrePost;
 use App\Models\Hotline;
+use App\Models\Info;
 use App\Models\JobPosting;
 use App\Models\Media;
 use App\Models\OnlineVisitor;
@@ -29,6 +30,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class SiteController extends Controller
 {
@@ -274,8 +276,7 @@ class SiteController extends Controller
     public function recruitment(Request $request)
     {
         $this->trackVisitor($request->ip(), OnlineVisitorRecruitment::class);
-        $recruitments = SmartRecruitment::where('status', true)->get();
-        $services = RecruitmentService::where('status', true)->get();
+
         $figures = Figure::where('status', true)->get();
         $values = Value::where('status', true)->get();
         $awards = Award::where('status', 1)->get();
@@ -286,7 +287,12 @@ class SiteController extends Controller
         $cities = City::where('status', 1)->pluck('name', 'id');
         $typeConsultations = TypeConsultation::where('status', 1)->pluck('name', 'id');
 
-        return view('pages.recruitment', compact('recruitments', 'services', 'figures', 'values', 'awards', 'partners', 'typePartners', 'hotlines', 'typeHotlines', 'cities', 'typeConsultations'));
+
+
+
+
+
+        return view('pages.recruitment', compact( 'figures', 'values', 'awards', 'partners', 'typePartners', 'hotlines', 'typeHotlines', 'cities', 'typeConsultations',));
     }
 
     public function storeConsultation(Request $request)
