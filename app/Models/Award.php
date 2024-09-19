@@ -13,6 +13,7 @@ class Award extends Model
         'user_id',
         'name',
         'image',
+        'category',
         'website',
         'status',
     ];

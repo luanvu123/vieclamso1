@@ -32,6 +32,7 @@ class AwardController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'website' => 'nullable|string|max:255',
             'status' => 'nullable|boolean',
@@ -40,6 +41,7 @@ class AwardController extends Controller
         $awardData = [
             'user_id' => Auth::id(),
             'name' => $request->name,
+            'category' => $request->category,
             'website' => $request->website,
             'status' => $request->has('status') ? 1 : 0,
         ];
@@ -73,12 +75,14 @@ class AwardController extends Controller
     $request->validate([
         'name' => 'required|string|max:255',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'category' => 'required|string|max:255',
         'website' => 'nullable|string|max:255',
         'status' => 'boolean',  // Ensure 'status' is boolean
     ]);
 
     $awardData = [
         'name' => $request->name,
+         'category' => $request->category,
         'website' => $request->website,
         'status' => $request->has('status') ? 1 : 0,  // Check if checkbox is checked
     ];

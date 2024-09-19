@@ -15,7 +15,13 @@
                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                 @enderror
             </div>
-
+            <div class="form-group">
+                <label for="name">Loại giải thưởng</label>
+                <input type="text" name="category" class="form-control" value="{{ old('category', $award->category) }}">
+                @error('category')
+                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                @enderror
+            </div>
             <div class="form-group">
                 <label for="image">Award Image (optional)</label>
                 <input type="file" name="image" id="image" class="form-control">

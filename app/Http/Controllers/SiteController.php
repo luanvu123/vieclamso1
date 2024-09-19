@@ -277,22 +277,12 @@ class SiteController extends Controller
     {
         $this->trackVisitor($request->ip(), OnlineVisitorRecruitment::class);
 
-        $figures = Figure::where('status', true)->get();
-        $values = Value::where('status', true)->get();
-        $awards = Award::where('status', 1)->get();
-        $partners = Partner::where('status', true)->get();
-        $typePartners = TypePartner::with('partners')->get();
+
         $hotlines = Hotline::with('typeHotline')->where('status', true)->get();
-        $typeHotlines = TypeHotline::where('status', true)->get();
         $cities = City::where('status', 1)->pluck('name', 'id');
         $typeConsultations = TypeConsultation::where('status', 1)->pluck('name', 'id');
 
-
-
-
-
-
-        return view('pages.recruitment', compact( 'figures', 'values', 'awards', 'partners', 'typePartners', 'hotlines', 'typeHotlines', 'cities', 'typeConsultations',));
+        return view('pages.recruitment', compact( 'hotlines', 'cities', 'typeConsultations',));
     }
 
     public function storeConsultation(Request $request)

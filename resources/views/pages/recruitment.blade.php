@@ -125,7 +125,7 @@
                                 RECRUITMENT SERVICES
                             </div>
                             <h2 class="text-[24px] md:text-[30px] mt-2 font-bold">
-                               {{$Recruitment_posting_service}}
+                                {{ $Recruitment_posting_service }}
                             </h2>
                         </div>
                         @foreach ($service_lg as $service)
@@ -146,7 +146,7 @@
                                                 <div class="text-center md:text-left">
                                                     <a href="#"
                                                         class="bg-primary py-2.5 px-4 rounded text-white text-center font-[14px] font-semibold leading-[3rem] show-modal-create-lead">
-                                                        {{$free_recruitment_advice}}
+                                                        {{ $free_recruitment_advice }}
                                                         <i class="fa-solid fa-arrow-right ml-1"></i>
                                                     </a>
                                                 </div>
@@ -166,7 +166,7 @@
                                                 <div class="text-center md:text-left">
                                                     <a href="#"
                                                         class="bg-primary py-2.5 px-4 rounded text-white text-center font-[14px] font-semibold leading-[3rem] show-modal-create-lead">
-                                                      {{$free_recruitment_advice}}
+                                                        {{ $free_recruitment_advice }}
                                                         <i class="fa-solid fa-arrow-right ml-1"></i>
                                                     </a>
                                                 </div>
@@ -191,13 +191,13 @@
                     Figures
                 </div>
                 <h2 class="text-[24px] md:text-[30px] mt-2 font-bold">
-                    {{$The_numbers_of_the_recruitment}}
+                    {{ $The_numbers_of_the_recruitment }}
                 </h2>
             </div>
             <div class="px-[20px]">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-[20px] md:gap-[30px]">
 
-                    @foreach ($figures as $figure)
+                    @foreach ($figure_lg as $figure)
                         <div class="bg-white p-[24px] text-center rounded-[10px]">
                             <div class="text-[40px] leading-tight mb-[16px] text-primary font-bold">
                                 {{ $figure->name }}
@@ -312,12 +312,12 @@
                     Values
                 </div>
                 <h2 class="text-[24px] md:text-[30px] mt-2 font-bold" style="color: white">
-                    Giá trị khi sử dụng Vieclamso1 Smart Recruitment Platform
+                    {{ $Smart_recruitment_platform }}
                 </h2>
             </div>
             <div class="px-[20px]">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-[20px] md:gap-[40px]">
-                    @foreach ($values as $value)
+                    @foreach ($value_lg as $value)
                         <div class="bg-white py-[24px] px-[16px] rounded-[10px] md:py-[40px] md:px-[40px]">
                             <div class="mb-[16px] md:mb-[50px]">
                                 <img class="w-full" src="{{ asset('storage/' . $value->image) }}"
@@ -343,7 +343,7 @@
                     {{ $info->about_us }}
                 </div>
                 <h2 class="text-[24px] md:text-[30px] font-bold">
-                    Về chúng tôi
+                    {{ $About_us_lg }}
                 </h2>
             </div>
             <div class="bg-[#F4F5F5] rounded-[10px] p-[16px] md:flex md:items-center md:p-[40px]">
@@ -376,7 +376,7 @@
             </div>
             <div class="grid grid-cols-1 gap-[20px] md:grid-cols-4 md:gap-[40px]">
 
-                @foreach ($awards as $award)
+                @foreach ($award_lg as $award)
                     <div class="bg-white rounded-[10px] shadow-[0_3px_20px_#0000001A] p-[20px]">
                         <div class="mb-[20px]">
                             <img src="{{ asset('storage/' . $award->image) }}"
@@ -385,7 +385,7 @@
                         </div>
                         <div class="text-primary">
                             <a href="#" class>
-                                <span class="uppercase">Brand</span>
+                                <span class="uppercase">{{ $award->category }}</span>
                             </a>
                         </div>
                         <p class="font-semibold mt-[10px]">{{ $award->name }}</p>
@@ -406,11 +406,11 @@
                     Our Partners
                 </div>
                 <h2 class="text-[24px] md:text-[30px] font-bold">
-                    Khách hàng tiêu biểu và đối tác truyền thông của Vieclamso1
+                   {{$Typical_customers}}
                 </h2>
             </div>
             <div class="grid grid-rows-2 md:grid-rows-1 grid-flow-col gap-[20px] md:gap-[40px]">
-                @foreach ($typePartners as $typePartner)
+                @foreach ($typePartner_lg as $typePartner)
                     <div class="px-[16px] py-[28px] bg-white shadow-[0_46px_50px__#0000001A] rounded-[10px]">
                         <h3 class="text-[18px] md:text-[24px] leading-tight border-l-4 border-primary px-2 font-bold">
                             {{ $typePartner->name }}
@@ -441,7 +441,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 gap-[20px] md:grid-cols-3 md:gap-[40px]">
-                @foreach ($typeHotlines as $typeHotline)
+                @foreach ($typeHotline_lg as $typeHotline)
                     <div class="flex-1 pb-4 md:mr-10">
                         <h3 class="text-[#212f3fcc] font-semibold">Hotline {{ $typeHotline->name }}</h3>
                         <div class="mt-4">
