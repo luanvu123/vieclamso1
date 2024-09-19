@@ -64,6 +64,7 @@ use App\Http\Controllers\SavedJobController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\SupportController;
+use App\Http\Controllers\TranslationController;
 use App\Http\Controllers\TypeConsultationController;
 use App\Http\Controllers\TypeEmployerController;
 use App\Http\Controllers\TypeFeedbackController;

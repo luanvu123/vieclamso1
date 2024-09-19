@@ -87,7 +87,7 @@
     </script>
     <link rel="stylesheet"
         href="{{ asset('static.topcv.vn/v4/css/components/job-notification-setting.bea5fa3f03028ed1K.css') }}">
-    <script data-type="lazy" data-src="https://static.topcv.vn/v4/js/common/job-notification-setting/popup-job-notification-setting.min.b66ea965f6d6b5ba.js" src="https://static.topcv.vn/v4/js/common/job-notification-setting/popup-job-notification-setting.min.b66ea965f6d6b5ba.js"></script>
+    <script src="{{ asset('static.topcv.vn/v4/js/common/job-notification-setting/popup-job-notification-setting.min.b66ea965f6d6b5ba.js')}}"></script>
     <link rel="stylesheet"
         href="{{ asset('static.topcv.vn/v4/css/components/desktop/upload-cv.min.29bd6003627f486fK.css') }}">
     <link rel="stylesheet"
@@ -2789,55 +2789,6 @@
                         <button type="submit" class="support-content-submit">Gửi phản hồi</button>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal-support-ticket-success" id="modal-support-ticket-success">
-        <div class="modal-support-ticket-success__content">
-            <div class="support-ticket-success-close modal-support-ticket-success__content--close">
-                <i class="fa-regular fa-xmark"></i>
-            </div>
-            <img class="support-ticket-success-image"
-                src="{{ asset('cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/service-payment/payment-success.png') }}">
-            <div class="support-ticket-success-description">
-                <div class="support-ticket-success-description__title">
-                    Gửi yêu cầu thành công
-                </div>
-                <div class="support-ticket-success-description__text" style="margin-bottom: 16px;">
-                    Vieclamso1 sẽ gửi phản hồi tới email bạn nhập trong vòng 24 giờ (không kể Thứ 7, Chủ nhật, ngày lễ)
-                </div>
-                <div class="support-ticket-success-description__text">
-                    Trường hợp bạn chưa nhận được phản hồi, vui lòng liên hệ qua:
-                </div>
-                <div class="support-ticket-success-description__text">
-                    Hotline: <span class="description-highlight">(024) 6680 5588 (Giờ hành chính)</span>
-                </div>
-                <div class="support-ticket-success-description__text">
-                    Email: <span class="description-highlight">hotro@topcv.vn</span>
-                </div>
-                <div class="support-ticket-success-close support-ticket-success-description__close">
-                    Đóng
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal-support-ticket-success" id="modal-product-comment-success">
-        <div class="modal-support-ticket-success__content">
-            <div class="support-ticket-success-close modal-support-ticket-success__content--close">
-                <i class="fa-regular fa-xmark"></i>
-            </div>
-            <img class="support-ticket-success-image"
-                src="{{ asset('cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/service-payment/payment-success.png') }}">
-            <div class="support-ticket-success-description">
-                <div class="support-ticket-success-description__title">
-                    Gửi góp ý thành công
-                </div>
-                <div class="support-ticket-success-description__text" style="margin-top: 8px;">
-                    Cảm ơn bạn đã gửi góp ý! Chúng tôi sẽ nghiêm túc lắng nghe, tiếp thu để cải thiện sản phẩm tốt hơn.
-                </div>
-                <div class="support-ticket-success-close support-ticket-success-description__close">
-                    Đóng
-                </div>
             </div>
         </div>
     </div>
