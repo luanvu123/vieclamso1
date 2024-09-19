@@ -189,7 +189,7 @@
                     Figures
                 </div>
                 <h2 class="text-[24px] md:text-[30px] mt-2 font-bold">
-                    Những con số của trang tuyển dụng  Vieclamso1
+                    Những con số của trang tuyển dụng Vieclamso1
                 </h2>
             </div>
             <div class="px-[20px]">
@@ -212,7 +212,7 @@
                 Đâu là giải pháp phù hợp cho doanh nghiệp của bạn?
             </div>
             <div class="form-banner-subtitle">
-                Hãy để lại thông tin và các chuyên viên tư vấn tuyển dụng của  Vieclamso1 sẽ liên hệ ngay với bạn
+                Hãy để lại thông tin và các chuyên viên tư vấn tuyển dụng của Vieclamso1 sẽ liên hệ ngay với bạn
             </div>
             <div class="md:flex md:items-start md:justify-between mr-[118px] center-form">
                 <div class="md:w-1/2 left-banner-form" id="left-banner-form">
@@ -310,7 +310,7 @@
                     Values
                 </div>
                 <h2 class="text-[24px] md:text-[30px] mt-2 font-bold" style="color: white">
-                    Giá trị khi sử dụng  Vieclamso1 Smart Recruitment Platform
+                    Giá trị khi sử dụng Vieclamso1 Smart Recruitment Platform
                 </h2>
             </div>
             <div class="px-[20px]">
@@ -338,7 +338,7 @@
         <div class="w-container px-[20px]">
             <div class="text-center mb-[35px] md:mb-[40px]">
                 <div class="text-primary uppercase mb-[10px]">
-                     {{ $info->about_us }}
+                    {{ $info->about_us }}
                 </div>
                 <h2 class="text-[24px] md:text-[30px] font-bold">
                     Về chúng tôi
@@ -348,15 +348,16 @@
                 <div class="md:w-1/2">
                     <div class="font-light md:leading-[36px] md:text-[14px] text-color-light text-justify">
                         <p class="pb-8">
-                           {!!$info->about_us_h1!!}
+                            {!! $info->about_us_h1 !!}
                         </p>
                     </div>
                 </div>
                 <div class="md:w-1/2 md:pl-[40px]">
-                    <img class="hidden md:block md:translate-y-[-57px]" src="{{ asset('storage/' . $info->about_us_image) }}"
-                        title="Nhân sự của  Vieclamso1" alt="Nhan su cua  Vieclamso1">
-                    <img class="md:hidden" src="{{ asset('storage/' . $info->about_image_mobile) }}" title="Nhân sự của  Vieclamso1"
+                    <img class="hidden md:block md:translate-y-[-57px]"
+                        src="{{ asset('storage/' . $info->about_us_image) }}" title="Nhân sự của  Vieclamso1"
                         alt="Nhan su cua  Vieclamso1">
+                    <img class="md:hidden" src="{{ asset('storage/' . $info->about_image_mobile) }}"
+                        title="Nhân sự của  Vieclamso1" alt="Nhan su cua  Vieclamso1">
                 </div>
             </div>
         </div>
@@ -403,7 +404,7 @@
                     Our Partners
                 </div>
                 <h2 class="text-[24px] md:text-[30px] font-bold">
-                    Khách hàng tiêu biểu và đối tác truyền thông của  Vieclamso1
+                    Khách hàng tiêu biểu và đối tác truyền thông của Vieclamso1
                 </h2>
             </div>
             <div class="grid grid-rows-2 md:grid-rows-1 grid-flow-col gap-[20px] md:gap-[40px]">
@@ -429,10 +430,10 @@
         <div class="w-container px-[20px]">
             <div class="mb-[24px]">
                 <div class="border-l-4 border-primary text-[18px] md:text-[24px] font-semibold px-4">
-                     Vieclamso1 Việt Nam mong muốn được hợp tác cùng Doanh nghiệp
+                    Vieclamso1 Việt Nam mong muốn được hợp tác cùng Doanh nghiệp
                 </div>
                 <div class="md:text-[14px] font-light mt-[10px] text-color-light">
-                    Đội ngũ hỗ trợ của  Vieclamso1 luôn sẵn sàng để tư vấn giải pháp tuyển dụng và đồng hành cùng các
+                    Đội ngũ hỗ trợ của Vieclamso1 luôn sẵn sàng để tư vấn giải pháp tuyển dụng và đồng hành cùng các
                     Quý nhà tuyển
                     dụng
                 </div>

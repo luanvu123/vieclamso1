@@ -68,13 +68,13 @@
 
 
 
-    <script src="{{ asset('code.jquery.com/jquery-2.2.4.js')}}"></script>
-    <script src="{{ asset('cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js')}}"></script>
-    <script src="{{ asset('maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')}}"
+    <script src="{{ asset('code.jquery.com/jquery-2.2.4.js') }}"></script>
+    <script src="{{ asset('cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js') }}"></script>
+    <script src="{{ asset('maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js') }}"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <link rel="stylesheet" href="{{ asset('cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css') }}" />
-   
+
 </head>
 
 <body class="min-h-screen font-body bg-[#F4F5F5] pt-[68px] md:pt-[80px] text-color-default font-alexandria">
@@ -95,73 +95,47 @@
                                 </button>
                             </div>
                         </div>
+
+
                         <div id="mb-menu" class="hidden w-full md:flex">
                             <ul class="p-0 m-0 list-none flex flex-col md:flex-row text-sm" id="navbar-menu">
-                                <li>
-                                    <a class="text-primary hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="#">
-                                        Giới thiệu
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="#">
-                                        Dịch vụ
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="#" target="_blank">
-                                        Báo giá
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="#" target="_blank">Hỗ trợ</a>
-                                </li>
-                                <li>
-                                    <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="#" target="_blank">
-                                        Blog tuyển dụng
-                                    </a>
-                                </li>
+                                @foreach ($menuItems as $item)
+                                    <li>
+                                        <a class="text-primary hover:text-primary block pd-12 md:py-5 text-center font-medium"
+                                            href="#">
+                                            {{ $item }}
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
+
                             <div class="py-[40px] md:flex md:items-center md:justify-end md:py-0 md:!ml-auto">
                                 <div class="mb-[35px] p-0 flex justify-center md:mb-0 md:mr-[30px]">
                                     <div class="ml-1 border border-gray-100">
-                                        <a href="#">
+                                        <a href="{{ route('change.language', ['lang' => 'en']) }}">
                                             <img style="width: 27px; height: 16px"
                                                 src="{{ asset('static.topcv.vn/srp/website/images/flags/uk.jpg') }}"
                                                 alt="us flag">
                                         </a>
                                     </div>
                                     <div class="ml-1 border border-gray-100">
-                                        <a href="#">
+                                        <a href="{{ route('change.language', ['lang' => 'vi']) }}">
                                             <img style="width: 27px; height: 16px"
                                                 src="{{ asset('static.topcv.vn/srp/website/images/flags/vietnam.png') }}"
                                                 alt="vi flag">
                                         </a>
                                     </div>
                                     <div class="ml-1 border border-gray-100">
-                                        <a href="#">
+                                        <a href="{{ route('change.language', ['lang' => 'ja']) }}">
                                             <img style="width: 27px; height: 16px"
                                                 src="{{ asset('static.topcv.vn/srp/website/images/flags/japan.png') }}"
                                                 alt="jp flag">
                                         </a>
                                     </div>
                                 </div>
-                                <div id="login-box" class="flex items-center justify-center">
-                                    <div class="grid grid-cols-2 gap-[12px]">
-                                        <a href="{{ route('employer.login') }}"
-                                            class="bg-white border border-primary py-[14px] px-[13px] rounded block  text-primary text-center min-w-[104px]">Đăng
-                                            nhập</a>
-                                        <a href="{{ route('employer.register') }}"
-                                            class="bg-primary border border-primary py-[14px] px-[13px] rounded block text-white text-center min-w-[104px]">Đăng
-                                            ký</a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -403,8 +377,8 @@
         </div>
     </div>
     <script src="{{ asset('ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js') }}"></script>
-    <link rel="modulepreload" href="{{ asset('build/assets/header.d1ee4fe5.js')}}" />
-    <script type="module" src="{{ asset('build/assets/header.d1ee4fe5.js')}}"></script>
+    <link rel="modulepreload" href="{{ asset('build/assets/header.d1ee4fe5.js') }}" />
+    <script type="module" src="{{ asset('build/assets/header.d1ee4fe5.js') }}"></script>
     <script>
         document.getElementById("mb-menu-btn").addEventListener("click", function() {
             const isShow = document.getElementById("mb-menu").style.display && document.getElementById("mb-menu")

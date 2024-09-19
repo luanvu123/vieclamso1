@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 use App\Models\JobPosting;
 use App\Models\Employer;
 use App\Models\Candidate;
@@ -71,12 +72,39 @@ class AppServiceProvider extends ServiceProvider
         $feedbackCountTwoHour = Feedback::where('created_at', '>=', $twoHoursAgo)->count();
         $supportCountTwoHour = Support::where('created_at', '>=', $twoHoursAgo)->count();
         $publiclink_layout = PublicLink::where('status', 'active')->get();
-        $ordermanagesCountTwoHour=Order::where('created_at', '>=', $twoHoursAgo)->count();
-        $orderpurchasedCountTwoHour= Purchased::where('created_at', '>=', $twoHoursAgo)->count();
+        $ordermanagesCountTwoHour = Order::where('created_at', '>=', $twoHoursAgo)->count();
+        $orderpurchasedCountTwoHour = Purchased::where('created_at', '>=', $twoHoursAgo)->count();
+
+
+        View::composer('*', function ($view) {
+            // Lấy ngôn ngữ từ session hoặc mặc định là 'vi'
+            $lang = session('app_locale', 'vi');
+
+            // Lấy dữ liệu từ bảng Info
+            $info = Info::first();
+
+            // Sử dụng Google Translate để dịch tiêu đề
+            $tr = new GoogleTranslate($lang);
+
+            // Dịch các chuỗi cần thiết
+            $info->recruitment_title_1 = $tr->translate($info->recruitment_title_1);
+
+            // Dịch các item menu
+            $menuItems = [
+                'Giới thiệu' => $tr->translate('Giới thiệu'),
+                'Dịch vụ' => $tr->translate('Dịch vụ'),
+                'Báo giá' => $tr->translate('Báo giá'),
+                'Hỗ trợ' => $tr->translate('Hỗ trợ'),
+                'Blog tuyển dụng' => $tr->translate('Blog tuyển dụng')
+            ];
+
+            // Chia sẻ dữ liệu dịch với tất cả các views
+            $view->with(compact('info', 'menuItems', 'lang'));
+        });
         // Chia sẻ dữ liệu với tất cả các view
         View::share([
             'activeJobListingsCount' => $activeJobListingsCount,
-            'activeJobListingsCountToday'=>$activeJobListingsCountToday,
+            'activeJobListingsCountToday' => $activeJobListingsCountToday,
             'totalJobCount' => $totalJobCount,
             'totalEmployerCount' => $totalEmployerCount,
             'totalCandidateCount' => $totalCandidateCount,
@@ -97,7 +125,7 @@ class AppServiceProvider extends ServiceProvider
             'reportCountTwoHour' => $reportCountTwoHour,
             'consultationCountTwoHour' => $consultationCountTwoHour,
             'ordermanagesCountTwoHour' => $ordermanagesCountTwoHour,
-            'orderpurchasedCountTwoHour'=>$orderpurchasedCountTwoHour,
+            'orderpurchasedCountTwoHour' => $orderpurchasedCountTwoHour,
         ]);
     }
 }

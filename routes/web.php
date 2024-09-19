@@ -71,7 +71,7 @@ use App\Http\Controllers\TypeFeedbackController;
 use App\Http\Controllers\TypeHotlineController;
 use App\Http\Controllers\TypePartnerController;
 use App\Http\Controllers\TypeSupportController;
-
+use Illuminate\Support\Facades\Session;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -122,7 +122,10 @@ Route::prefix('candidate')->group(function () {
     Route::post('reset-password', [CandidateForgotPasswordController::class, 'submitResetPasswordForm'])->name('candidate.reset.password.post');
 });
 
-
+Route::get('/change-language/{lang}', function ($lang) {
+    Session::put('app_locale', $lang);
+    return redirect()->back();
+})->name('change.language');
 
 Route::get('/search-jobs', [SiteController::class, 'searchJobs'])->name('search-jobs');
 Route::get('employer/login', [EmployerLoginController::class, 'showLoginForm'])->name('employer.login');
