@@ -159,9 +159,9 @@
                             <div id="login-box" class="flex items-center justify-center">
                                 <div class="grid grid-cols-2 gap-[12px]">
                                     <a href="{{ route('employer.login') }}"
-                                        class="bg-white border border-primary py-[14px] px-[13px] rounded block  text-primary text-center min-w-[104px]">{{$login}}</a>
+                                        class="bg-white border border-primary py-[14px] px-[13px] rounded block  text-primary text-center min-w-[104px]">{{ $login }}</a>
                                     <a href="{{ route('employer.register') }}"
-                                        class="bg-primary border border-primary py-[14px] px-[13px] rounded block text-white text-center min-w-[104px]">{{$register}}</a>
+                                        class="bg-primary border border-primary py-[14px] px-[13px] rounded block text-white text-center min-w-[104px]">{{ $register }}</a>
                                 </div>
                             </div>
                         </div>
@@ -232,62 +232,58 @@
                             <div class="md:w-2/3 md:flex md:flex-nowrap">
                                 <div class="grid grid-cols-2 gap-[16px]">
                                     <div>
-                                        <h5 class="font-semibold text-[18px] text-color-default mb-[16px]">Về
-                                            Vieclamso1
+                                        <h5 class="font-semibold text-[18px] text-color-default mb-[16px]">
+                                            {{ $about_vieclamso1_lg }}
                                         </h5>
                                         <ul>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">Giới thiệu</a>
+                                                    href="#" target="_blank">{{ $introduction_lg }}</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">Tuyển dụng</a>
+                                                    href="#" target="_blank">{{ $recruitmentlg_lg }}</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target>Liên hệ</a>
+                                                    href="#" target>{{ $contact_lg }}</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">Góc
-                                                    báo chí</a>
+                                                    href="#" target="_blank">{{ $press_corner_lg }}</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">Chính
-                                                    sách bảo mật</a>
+                                                    href="#" target="_blank">{{ $privacy_policy_lg }}</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">Điều khoản dịch
-                                                    vụ</a>
+                                                    href="#" target="_blank">{{ $terms_of_service_lg }}</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">Quy chế hoạt
-                                                    động</a>
+                                                    href="#"
+                                                    target="_blank">{{ $operating_regulations_lg }}</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">Chương trình Vieclamso1
-                                                    Rewards</a>
+                                                    href="#" target="_blank">{{ $rewards_program_lg }}</a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div>
-                                        <h5 class="font-semibold text-[18px] text-color-default mb-[16px]">Ứng viên
+                                        <h5 class="font-semibold text-[18px] text-color-default mb-[16px]">
+                                            {{ $candidates_lg }}
                                         </h5>
                                         <ul>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">Tìm việc
-                                                    làm</a>
+                                                    href="#" target="_blank">{{ $find_jobs_lg }}</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">Khoá học</a>
+                                                    href="#" target="_blank">{{ $courses_lg }}</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-2 gap-[16px] md:grid-cols-1">
                                     <div>
-                                        <h5 class="font-semibold text-[18px] text-color-default mb-[16px]">Đối tác</h5>
+                                        <h5 class="font-semibold text-[18px] text-color-default mb-[16px]">
+                                            {{ $partners_lg }}</h5>
                                         <ul>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">Doanh
-                                                    nghiệp</a>
+                                                    href="#" target="_blank">{{ $companies_lg }}</a>
                                             </li>
 
                                         </ul>
@@ -321,18 +317,16 @@
                                     <li class="xl:inline mt-2.5 mr-1">
                                         <img class="inline" src="{{ asset('images/icons/tax.svg') }}"
                                             style="vertical-align: text-bottom !important;" alt="Item icon" />
-                                        <span class="text-[12px] md:text-[14px] text-color-light font-light">Giấy phép
-                                            đăng ký kinh doanh
-                                            số:</span>
+                                        <span
+                                            class="text-[12px] md:text-[14px] text-color-light font-light">{{ $business_license_lg }}:</span>
                                         <span
                                             class="text-[12px] md:text-[14px] font-medium text-color-default">{{ $info->business_license_number }}</span>
                                     </li>
                                     <li class="xl:inline mt-2.5 mr-1">
                                         <img class="inline" src="{{ asset('images/icons/paper.svg') }}"
                                             style="vertical-align: text-bottom !important;" alt="Item icon" />
-                                        <span class="text-[12px] md:text-[14px] text-color-light font-light">Giấy phép
-                                            hoạt động dịch vụ
-                                            việc làm số:</span>
+                                        <span
+                                            class="text-[12px] md:text-[14px] text-color-light font-light">{{ $employment_service_license_lg }}:</span>
                                         <span
                                             class="text-[12px] md:text-[14px] font-medium text-color-default">{{ $info->service_license_number }}
                                         </span>
@@ -340,7 +334,8 @@
                                     <li class=" mt-2.5 mr-1">
                                         <img class="inline" src="{{ asset('images/icons/location.svg') }}"
                                             style="vertical-align: text-bottom !important;" alt="Item icon" />
-                                        <span class="text-[12px] md:text-[14px] text-color-light font-light">Trụ sở HN:
+                                        <span
+                                            class="text-[12px] md:text-[14px] text-color-light font-light">{{ $headquarters_lg }}
                                         </span>
                                         <span
                                             class="text-[12px] md:text-[14px] font-medium text-color-default">{{ $info->headquarter_address }}</span>
@@ -348,8 +343,8 @@
                                     <li class=" mt-2.5 mr-1">
                                         <img class="inline" src="{{ asset('images/icons/location.svg') }}"
                                             style="vertical-align: text-bottom !important;" alt="Item icon" />
-                                        <span class="text-[12px] md:text-[14px] text-color-light font-light">Chi nhánh
-                                            HCM:</span>
+                                        <span
+                                            class="text-[12px] md:text-[14px] text-color-light font-light">{{ $hcm_branch_lg }}:</span>
                                         <span
                                             class="text-[12px] md:text-[14px] font-medium text-color-default">{{ $info->branch_address }}</span>
                                     </li>
@@ -367,7 +362,7 @@
                         </div>
                         <div>
                             <h3 class="text-[14px] font-medium text-color-default text-center md:text-left mb-[17px]">
-                                Hệ sinh thái HR Tech của Vieclamso1
+                                {{ $hr_tech_ecosystem_lg }}
                             </h3>
                             <div class="flex justify-center md:justify-between flex-row my-2">
                                 @foreach ($ecosystems_layout as $ecosystem_layout)
