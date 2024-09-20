@@ -340,7 +340,7 @@
         <div class="w-container px-[20px]">
             <div class="text-center mb-[35px] md:mb-[40px]">
                 <div class="text-primary uppercase mb-[10px]">
-                    {{ $info->about_us }}
+                    {{ $info_lg->about_us }}
                 </div>
                 <h2 class="text-[24px] md:text-[30px] font-bold">
                     {{ $About_us_lg }}
@@ -350,7 +350,7 @@
                 <div class="md:w-1/2">
                     <div class="font-light md:leading-[36px] md:text-[14px] text-color-light text-justify">
                         <p class="pb-8">
-                            {!! $info->about_us_h1 !!}
+                            {!! $info_lg->about_us_h1 !!}
                         </p>
                     </div>
                 </div>
@@ -371,7 +371,7 @@
                     Our Awards
                 </div>
                 <h2 class="text-[24px] md:text-[30px] font-bold">
-                    Giải thưởng tiêu biểu
+                   {{$Awardlg_lg}}
                 </h2>
             </div>
             <div class="grid grid-cols-1 gap-[20px] md:grid-cols-4 md:gap-[40px]">

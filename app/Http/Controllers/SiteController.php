@@ -300,9 +300,12 @@ class SiteController extends Controller
         $info_lg->smart_recruitment = $tr->translate($info_lg->smart_recruitment);
         $info_lg->smart_recruitment_description = $tr->translate($info_lg->smart_recruitment_description);
         $info_lg->about_us_h1 = $tr->translate($info_lg->about_us_h1);
+        $info_lg->about_us = $tr->translate($info_lg->about_us);
+
 
         // Dịch các chuỗi của $recruitment_lg
         foreach ($recruitment_lg as $recruitment) {
+            $recruitment->title = $tr->translate($recruitment->title);
             $recruitment->description = $tr->translate($recruitment->description);
         }
 
@@ -364,6 +367,7 @@ class SiteController extends Controller
         $consultation_needs_lg = $tr->translate('Nhu cầu tư vấn');
         $select_consultation_needs_lg = $tr->translate('Chọn nhu cầu tư vấn');
         $submit_request_lg = $tr->translate('Gửi yêu cầu tư vấn');
+         $Awardlg_lg = $tr->translate('Giải thưởng tiêu biểu');
 
         $cooperation_lg = $tr->translate('Vieclamso1 Việt Nam mong muốn được hợp tác cùng Doanh nghiệp');
         $support_team_ready_lg = $tr->translate('Đội ngũ hỗ trợ của Vieclamso1 luôn sẵn sàng để tư vấn giải pháp tuyển dụng và đồng hành cùng các Quý nhà tuyển dụng');
@@ -401,6 +405,7 @@ class SiteController extends Controller
             'submit_request_lg',
             'cooperation_lg',
             'support_team_ready_lg',
+            'Awardlg_lg',
         ));
     }
     public function storeConsultation(Request $request)
