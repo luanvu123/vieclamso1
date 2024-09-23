@@ -213,7 +213,7 @@
                                             class="logo max-h-[41px]" alt="bct confirmation">
                                     </a>
                                 </div>
-                                <h5 class="font-medium text-color-default mb-[24px] text-[18px]">Ứng dụng tải xuống
+                                <h5 class="font-medium text-color-default mb-[24px] text-[18px]">{{$download_app}}
                                 </h5>
                                 <p class="flex items-center justify-start mb-[36px]">
                                     <a class="block mr-[16px]" target="_blank" href="{{ $info->link_appstore }}">
@@ -312,7 +312,7 @@
                         <div class="grid md:grid-cols-7 text-[13px] mb-[32px]">
                             <div class="md:col-span-5 my-2">
                                 <h3 class="text-[18px] md:text-[24px] font-medium text-color-default mb-[16px]">
-                                    {{ $info->company_name }}</h3>
+                                    {{ $infolglg->company_name }}</h3>
                                 <ul>
                                     <li class="xl:inline mt-2.5 mr-1">
                                         <img class="inline" src="{{ asset('images/icons/tax.svg') }}"
@@ -365,7 +365,7 @@
                                 {{ $hr_tech_ecosystem_lg }}
                             </h3>
                             <div class="flex justify-center md:justify-between flex-row my-2">
-                                @foreach ($ecosystems_layout as $ecosystem_layout)
+                                @foreach ($ecosystems_layout_lg as $ecosystem_layout)
                                     <div class="flex">
                                         <a href="{{ $ecosystem_layout->website }}"
                                             class="{{ $ecosystem_layout->name_link_website }}">

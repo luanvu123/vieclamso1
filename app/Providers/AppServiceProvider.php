@@ -83,8 +83,7 @@ class AppServiceProvider extends ServiceProvider
         $ordermanagesCountTwoHour = Order::where('created_at', '>=', $twoHoursAgo)->count();
         $orderpurchasedCountTwoHour = Purchased::where('created_at', '>=', $twoHoursAgo)->count();
 
-
-        View::composer('*', function ($view) {
+        View::composer('layout-recruitment', function ($view) {
             $lang = session('app_locale', 'vi');
             $tr = new GoogleTranslate($lang);
             $menu_1 = $tr->translate('Giới thiệu');
@@ -114,8 +113,19 @@ class AppServiceProvider extends ServiceProvider
             $headquarters_lg = $tr->translate('Trụ sở');
             $hcm_branch_lg = $tr->translate('Chi nhánh HCM');
             $hr_tech_ecosystem_lg = $tr->translate('Hệ sinh thái HR Tech của Vieclamso1');
+            $download_app = $tr->translate('Ứng dụng tải xuống');
+
+            $infolglg = Info::find(1);
+            $infolglg->company_name = $tr->translate($infolglg->company_name);
+            $ecosystems_layout_lg = Ecosystem::where('status', 1)->get();
+            foreach ($ecosystems_layout_lg as $ecosystems_layout) {
+                $ecosystems_layout->detail = $tr->translate($ecosystems_layout->detail);
+            }
 
             $view->with(compact(
+                'ecosystems_layout_lg',
+                'download_app',
+                'infolglg',
                 'menu_1',
                 'menu_2',
                 'menu_3',
@@ -143,9 +153,9 @@ class AppServiceProvider extends ServiceProvider
                 'headquarters_lg',
                 'hcm_branch_lg',
                 'hr_tech_ecosystem_lg'
-
             ));
         });
+
 
         View::share([
             'activeJobListingsCount' => $activeJobListingsCount,

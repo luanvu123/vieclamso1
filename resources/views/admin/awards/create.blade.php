@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Create New Award</h1>
+        <h1>Tạo giải thưởng</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -18,7 +18,7 @@
             @csrf
 
             <div class="form-group">
-                <label for="name">Award Name</label>
+                <label for="name">Tên</label>
                 <input type="text" name="name" class="form-control" value="{{ old('name') }}">
                 @error('name')
                     <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -33,7 +33,7 @@
             </div>
 
             <div class="form-group">
-                <label for="image">Award Image (optional)</label>
+                <label for="image">Ảnh (bắt buộc)</label>
                 <input type="file" name="image" id="image" class="form-control">
                 @error('image')
                     <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -41,7 +41,7 @@
             </div>
 
             <div class="form-group">
-                <label for="website">Website (optional)</label>
+                <label for="website">Website (bắt buộc)</label>
                 <input type="text" name="website" class="form-control" value="{{ old('website') }}">
                 @error('website')
                     <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -50,17 +50,17 @@
 
 
             <div class="form-group">
-                <label for="status">Status</label>
+                <label for="status">Trạng thái</label>
                 <select name="status" id="status" class="form-control">
-                    <option value="1" {{ old('status', 1) == 1 ? 'selected' : '' }}>Active</option>
-                    <option value="0" {{ old('status') === '0' ? 'selected' : '' }}>Inactive</option>
+                    <option value="1" {{ old('status', 1) == 1 ? 'selected' : '' }}>Ẩn</option>
+                    <option value="0" {{ old('status') === '0' ? 'selected' : '' }}>Hiện</option>
                 </select>
                 @error('status')
                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">Tạo</button>
         </form>
     </div>
 @endsection

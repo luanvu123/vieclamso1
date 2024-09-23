@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="table-responsive">
 
-                    <h1>Plan Currencies</h1>
+                    <h1>Đơn giá</h1>
                     <a href="{{ route('plan-currencies.create') }}">Add New Plan Currency</a>
 
                     <table id="user-table">

@@ -2,24 +2,24 @@
 
 @section('content')
     <div class="main-page compose">
-        <h2 class="title1">Compose Mail Page</h2>
+        <h2 class="title1">Trang soạn thư</h2>
         <div class="col-md-4 compose-left">
             <div class="folder widget-shadow">
                 <ul>
-                    <li class="head">Folders</li>
-                    <li><a href="{{ route('supports.index.list') }}"><i class="fa fa-inbox"></i>Inbox </a></li>
-                    <li><a href="{{ route('about.sent') }}"><i class="fa fa fa-envelope-o"></i>Sent </a></li>
+                    <li class="head">Thư mục</li>
+                    <li><a href="{{ route('supports.index.list') }}"><i class="fa fa-inbox"></i>Danh sách ứng viên yêu cầu hỗ trợ </a></li>
+                    <li><a href="{{ route('about.sent') }}"><i class="fa fa fa-envelope-o"></i>Danh sách đã hỗ trợ </a></li>
                 </ul>
             </div>
         </div>
         <div class="col-md-8 compose-right widget-shadow">
             <div class="panel-default">
                 <div class="panel-heading">
-                    Compose New Message
+                    Soạn tin nhắn mới
                 </div>
                 <div class="panel-body">
                     <div class="alert alert-info">
-                        Please fill details to send a new message
+                       Vui lòng điền thông tin chi tiết để gửi tin nhắn mới
                     </div>
                     <form class="com-mail" method="POST" action="{{ route('send-email') }}" enctype="multipart/form-data">
                         @csrf

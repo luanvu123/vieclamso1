@@ -12,12 +12,12 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Image</th>
+                                <th>Tên giải thưởng</th>
+                                <th>Ảnh</th>
                                 <th>Thể loại</th>
                                 <th>Website</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,7 +36,7 @@
                                             style="display:inline-block;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-danger">Xóa</button>
                                         </form>
                                     </td>
                                 </tr>

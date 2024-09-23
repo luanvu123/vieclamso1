@@ -118,7 +118,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <a href="{{ route('home') }}">
                                         <img src="{{ asset('backend_admin/images/3643769_building_home_house_main_menu_icon.svg') }}"
                                             alt="Google" width="20" height="20">
-                                        <span> Dashboard</span>
+                                        <span> Trang chủ</span>
                                     </a>
                                 </li>
                                 @php
@@ -129,26 +129,26 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <a href="#">
                                         <img src="{{ asset('backend_admin/images/9165478_unbox_package_icon.svg') }}"
                                             alt="Google" width="20" height="20">
-                                        <span>Management</span>
+                                        <span>Quản lý hệ thống</span>
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </a>
                                     <ul class="treeview-menu">
                                         <li class="{{ Request::is('users*') ? 'active' : '' }}">
                                             <a href="{{ route('users.index') }}">
                                                 <img src="{{ asset('backend_admin/images/9989338_rating_evaluation_grade_ranking_rate_icon.svg') }}"
-                                                    alt="Google" width="20" height="20"> User
+                                                    alt="Google" width="20" height="20"> Tài khoản quản trị
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('roles*') ? 'active' : '' }}">
                                             <a href="{{ route('roles.index') }}">
                                                 <img src="{{ asset('backend_admin/images/3018587_admin_administrator_ajax_options_permission_icon.svg') }}"
-                                                    alt="Google" width="20" height="20"> Role
+                                                    alt="Google" width="20" height="20"> Phân quyền
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('categories*') ? 'active' : '' }}">
                                             <a href="{{ route('categories.index') }}">
                                                 <img src="{{ asset('backend_admin/images/8673763_ic_fluent_slide_size_filled_icon.svg') }}"
-                                                    alt="Google" width="20" height="20"> Category
+                                                    alt="Google" width="20" height="20"> Thể loại
                                             </a>
                                         </li>
                                     </ul>
@@ -159,32 +159,32 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <a href="#">
                                         <img src="{{ asset('backend_admin/images/newspaper-news-svgrepo-com.svg') }}"
                                             alt="Google" width="20" height="20">
-                                        <span>Post</span>
+                                        <span>Bài đăng</span>
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </a>
                                     <ul class="treeview-menu">
                                         <li class="{{ Request::is('posts*') ? 'active' : '' }}">
                                             <a href="{{ route('posts.index') }}">
                                                 <img src="{{ asset('backend_admin/images/file-document-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Manage Posts
+                                                    alt="Google" width="20" height="20"> Danh sách bài đăng
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('genre-posts*') ? 'active' : '' }}">
                                             <a href="{{ route('genre-posts.index') }}">
                                                 <img src="{{ asset('backend_admin/images/category-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Manage Genres
+                                                    alt="Google" width="20" height="20"> Thể loại bài đăng
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('slugs*') ? 'active' : '' }}">
                                             <a href="{{ route('slugs.index') }}">
                                                 <img src="{{ asset('backend_admin/images/tag-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Manage Tags
+                                                    alt="Google" width="20" height="20"> Tags
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('courses*') ? 'active' : '' }}">
                                             <a href="{{ route('courses.index') }}">
                                                 <img src="{{ asset('backend_admin/images/study-2-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Manage Courses
+                                                    alt="Google" width="20" height="20"> Khóa học
                                             </a>
                                         </li>
                                     </ul>
@@ -194,7 +194,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <a href="{{ route('candidates.index') }}">
                                         <img src="{{ asset('backend_admin/images/candidate-for-elections-svgrepo-com.svg') }}"
                                             alt="Google" width="20" height="20">
-                                        <span>Candidate</span>
+                                        <span> Ứng viên</span>
                                     </a>
                                 </li>
 
@@ -203,7 +203,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <a href="#">
                                         <img src="{{ asset('backend_admin/images/company-svgrepo-com.svg') }}"
                                             alt="Google" width="20" height="20">
-                                        <span>Employers
+                                        <span> Danh sách ứng viên
                                             @if (
                                                 $jobPostingCountTwoHour > 0 ||
                                                     $employerCountTwoHour > 0 ||
@@ -220,7 +220,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <li class="{{ Request::is('employers') ? 'active' : '' }}">
                                             <a href="{{ route('employers.index') }}">
                                                 <img src="{{ asset('backend_admin/images/company-portal-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Employer
+                                                    alt="Google" width="20" height="20"> Danh sách ứng viên
                                                 @if ($employerCountTwoHour > 0)
                                                     <span
                                                         class="label label-primary pull-right">{{ $employerCountTwoHour }}</span>
@@ -231,7 +231,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <li class="{{ Request::is('job-postings-manage') ? 'active' : '' }}">
                                             <a href="{{ route('job-postings-manage.index') }}">
                                                 <img src="{{ asset('backend_admin/images/job-search-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Manage Jobs
+                                                    alt="Google" width="20" height="20"> Tin ứng tuyển
                                                 @if ($jobPostingCountTwoHour > 0)
                                                     <span
                                                         class="label label-primary pull-right">{{ $jobPostingCountTwoHour }}</span>
@@ -242,7 +242,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <li class="{{ Request::is('admin/companies') ? 'active' : '' }}">
                                             <a href="{{ route('admin.companies.index') }}">
                                                 <img src="{{ asset('backend_admin/images/company-small-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Manage Company
+                                                    alt="Google" width="20" height="20"> Công ty
                                                 @if ($companyCountTwoHour > 0)
                                                     <span
                                                         class="label label-primary pull-right">{{ $companyCountTwoHour }}</span>
@@ -253,7 +253,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <li class="{{ Request::is('ordermanages') ? 'active' : '' }}">
                                             <a href="{{ route('ordermanages.index') }}">
                                                 <img src="{{ asset('backend_admin/images/order-1-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Manage Order
+                                                    alt="Google" width="20" height="20"> Mua tin
                                                 @if ($ordermanagesCountTwoHour > 0)
                                                     <span
                                                         class="label label-primary pull-right">{{ $ordermanagesCountTwoHour }}</span>
@@ -264,14 +264,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <li class="{{ Request::is('products') ? 'active' : '' }}">
                                             <a href="{{ route('products.index') }}">
                                                 <img src="{{ asset('backend_admin/images/gift-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Manage Gift
+                                                    alt="Google" width="20" height="20"> Đổi quà
                                             </a>
                                         </li>
 
                                         <li class="{{ Request::is('employers/purchasedManage') ? 'active' : '' }}">
                                             <a href="{{ route('employers.purchasedManage') }}">
                                                 <img src="{{ asset('backend_admin/images/purchase-buy-pay-transaction-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Manage Purchased
+                                                    alt="Google" width="20" height="20"> Danh sách đổi quà
                                                 @if ($ordermanagesCountTwoHour > 0)
                                                     <span
                                                         class="label label-primary pull-right">{{ $ordermanagesCountTwoHour }}</span>
@@ -287,26 +287,26 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <a href="#">
                                         <img src="{{ asset('backend_admin/images/shopping-cart-reversed-svgrepo-com.svg') }}"
                                             alt="Google" width="20" height="20">
-                                        <span>Service</span>
+                                        <span> Dịch vụ</span>
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </a>
                                     <ul class="treeview-menu">
                                         <li class="{{ Request::is('plan-currencies*') ? 'active' : '' }}">
                                             <a href="{{ route('plan-currencies.index') }}">
                                                 <img src="{{ asset('backend_admin/images/usd-square-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Plan Currencies
+                                                    alt="Google" width="20" height="20"> Đơn giá
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('plan-features*') ? 'active' : '' }}">
                                             <a href="{{ route('plan-features.index') }}">
                                                 <img src="{{ asset('backend_admin/images/content-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Plan Features
+                                                    alt="Google" width="20" height="20"> Chi tiết
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('carts*') ? 'active' : '' }}">
                                             <a href="{{ route('carts.index') }}">
                                                 <img src="{{ asset('backend_admin/images/shopping-cart-reversed-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Services
+                                                    alt="Google" width="20" height="20"> Danh sách dịch vụ
                                             </a>
                                         </li>
                                     </ul>
@@ -318,32 +318,32 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <a href="#">
                                         <img src="{{ asset('backend_admin/images/5355692_code_coding_development_programming_web_icon.svg') }}"
                                             alt="Google" width="20" height="20">
-                                        <span>Front-end</span>
+                                        <span>Giao diện</span>
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </a>
                                     <ul class="treeview-menu">
                                         <li class="{{ Request::is('admin/info*') ? 'active' : '' }}">
                                             <a href="{{ route('admin.info.index') }}">
                                                 <img src="{{ asset('backend_admin/images/5355692_code_coding_development_programming_web_icon.svg') }}"
-                                                    alt="Google" width="20" height="20"> Edit Front-end
+                                                    alt="Google" width="20" height="20"> Quản lý giao diện
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('public_links*') ? 'active' : '' }}">
                                             <a href="{{ route('public_links.index') }}">
                                                 <img src="{{ asset('backend_admin/images/youtube-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Social
+                                                    alt="Google" width="20" height="20"> Giao diện cộng đồng
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('partners*') ? 'active' : '' }}">
                                             <a href="{{ route('partners.index') }}">
                                                 <img src="{{ asset('backend_admin/images/cooperate-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Partner
+                                                    alt="Google" width="20" height="20"> Đối tác khách hàng
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('salaries*') ? 'active' : '' }}">
                                             <a href="{{ route('salaries.index') }}">
                                                 <img src="{{ asset('backend_admin/images/usd-square-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Salaries
+                                                    alt="Google" width="20" height="20"> Lương
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('hotlines*') ? 'active' : '' }}">
@@ -355,14 +355,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <li class="{{ Request::is('medias*') ? 'active' : '' }}">
                                             <a href="{{ route('medias.index') }}">
                                                 <img src="{{ asset('backend_admin/images/press-conference-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Press Media
+                                                    alt="Google" width="20" height="20"> Góc báo chí
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('awards*') ? 'active' : '' }}">
                                             <a href="{{ route('awards.index') }}">
                                                 <img src="{{ asset('backend_admin/images/award-svgrepo-com.svg') }}"
                                                     alt="Google" width="20" height="20">
-                                                <span> Awards</span>
+                                                <span> Giải thưởng</span>
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('slides*') ? 'active' : '' }}">
@@ -386,21 +386,21 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <li class="{{ Request::is('tin-nhan-da-gui*') ? 'active' : '' }}">
                                             <a href="{{ route('about.sent') }}">
                                                 <img src="{{ asset('backend_admin/images/email-sent-svgrepo-com.svg') }}"
-                                                    alt="About Sent" width="20" height="20"> Support Emails
+                                                    alt="About Sent" width="20" height="20"> Emails hỗ trợ
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('candidate-sent-emails*') ? 'active' : '' }}">
                                             <a href="{{ route('candidate.sentEmails') }}">
                                                 <img src="{{ asset('backend_admin/images/email2-svgrepo-com.svg') }}"
-                                                    alt="Candidate Emails" width="20" height="20"> Candidate
-                                                Emails
+                                                    alt="Candidate Emails" width="20" height="20"> Email đã
+                                                gửi cho ứng viên
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('employer-sent-emails*') ? 'active' : '' }}">
                                             <a href="{{ route('employer.sentEmails') }}">
                                                 <img src="{{ asset('backend_admin/images/email2-svgrepo-com.svg') }}"
-                                                    alt="Employer Emails" width="20" height="20"> Employer
-                                                Emails
+                                                    alt="Employer Emails" width="20" height="20"> Email đã gửi
+                                                cho công ty
                                             </a>
                                         </li>
                                     </ul>
@@ -409,7 +409,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <a href="{{ route('consultations.index') }}">
                                         <img src="{{ asset('backend_admin/images/register-svgrepo-com.svg') }}"
                                             alt="Google" width="20" height="20">
-                                        <span> Book A Consultation</span>
+                                        <span> Đăng kí nhận tư vấn </span>
                                         @if ($consultationCountTwoHour > 0)
                                             <span
                                                 class="label label-primary pull-right">{{ $consultationCountTwoHour }}</span>
@@ -420,7 +420,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <li class="treeview {{ Request::is('feedbacks*') ? 'active' : '' }}">
                                     <a href="{{ route('feedbacks.index.list') }}">
                                         <img src="{{ asset('backend_admin/images/feedback-positive-svgrepo-com.svg') }}"
-                                            alt="Google" width="20" height="20"> Feedbacks
+                                            alt="Google" width="20" height="20"> Phản hồi ứng viên
                                         @if ($feedbackCountTwoHour > 0)
                                             <span
                                                 class="label label-primary pull-right">{{ $feedbackCountTwoHour }}</span>
@@ -431,7 +431,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <li class="treeview {{ Request::is('supports*') ? 'active' : '' }}">
                                     <a href="{{ route('supports.index.list') }}">
                                         <img src="{{ asset('backend_admin/images/support-svgrepo-com.svg') }}"
-                                            alt="Google" width="20" height="20"> Support
+                                            alt="Google" width="20" height="20"> Hỗ trợ ứng viên
                                         @if ($supportCountTwoHour > 0)
                                             <span
                                                 class="label label-primary pull-right">{{ $supportCountTwoHour }}</span>
@@ -442,7 +442,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <li class="treeview {{ Request::is('job-reports*') ? 'active' : '' }}">
                                     <a href="{{ route('job-reports.index') }}">
                                         <img src="{{ asset('backend_admin/images/report-comment-svgrepo-com.svg') }}"
-                                            alt="Google" width="20" height="20"> Report
+                                            alt="Google" width="20" height="20"> Tố cáo tin tuyển dụng
                                         @if ($reportCountTwoHour > 0)
                                             <span
                                                 class="label label-primary pull-right">{{ $reportCountTwoHour }}</span>
@@ -515,7 +515,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         </li>
                                         <li>
                                             <a class="dropdown-item" href="{{ route('users.edit', auth()->user()) }}">
-                                                <i class="fa fa-user-edit"></i> Profile
+                                                <i class="fa fa-user-edit"></i> Hồ sơ
                                             </a>
                                         </li>
                                     </ul>
@@ -539,7 +539,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <i class="pull-left fa fa-file icon-rounded"></i>
                                     <div class="stats">
                                         <h5><strong>{{ $activeJobListingsCount }}</strong></h5>
-                                        <span>Active Job Listings </span>
+                                        <span>Việc làm đang mở </span>
                                     </div>
                                 </a>
                             </div>
@@ -549,7 +549,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <a href="{{ route('job-postings-manage.index') }}">
                                     <i class="pull-left fa fa-book user1 icon-rounded"></i>
                                     <div class="stats">
-                                        <h5 class="counter">{{ $totalJobCount }}</h5> <span>Total Job</span>
+                                        <h5 class="counter">{{ $totalJobCount }}</h5> <span> Tông số việc làm</span>
                                     </div>
                                 </a>
                             </div>
@@ -560,8 +560,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <a href="{{ route('candidates.index') }}">
                                     <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
                                     <div class="stats">
-                                        <h5 class="counter">{{ $totalCandidateCount }}</h5> <span>Total
-                                            Candidate</span>
+                                        <h5 class="counter">{{ $totalCandidateCount }}</h5> <span> Ứng viên </span>
                                     </div>
                                 </a>
                             </div>
@@ -573,8 +572,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <a href="{{ route('employers.index') }}">
                                     <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
                                     <div class="stats">
-                                        <h5 class="counter">{{ $totalEmployerCount }}</h5> <span>Total
-                                            Employer</span>
+                                        <h5 class="counter">{{ $totalEmployerCount }}</h5> <span> Nhà tuyển dụng</span>
                                     </div>
                                 </a>
                             </div>
