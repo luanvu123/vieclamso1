@@ -1,62 +1,26 @@
  @extends('layout')
  @section('content')
-     <link rel="stylesheet"
-         href="{{ asset('static.topcv.vn/v4/css/components/desktop/jobs/modal-apply.616a455ca1847bcbK.css') }}">
+     <style>
+         @media (max-width: 768px) {
+             .job-detail__body {
+                 flex-direction: column;
+                 /* Sắp xếp theo chiều dọc trên thiết bị nhỏ */
+             }
+
+             .job-detail__body-left,
+             .job-detail__body-right {
+                 width: 100%;
+                 /* Full width cho thiết bị nhỏ */
+                 margin-bottom: 20px;
+                 /* Khoảng cách giữa các phần */
+             }
+         }
+     </style>
+
      <div id="main" style="margin-top: 0px;">
          <div class="header">
              <div class="box-search-job">
                  <div class="container">
-                     <style>
-                         /* CSS cho form */
-                         .search-form {
-                             display: flex;
-                             /* Sử dụng Flexbox để bố trí các phần tử */
-                             align-items: center;
-                             /* Căn chỉnh các phần tử theo chiều dọc */
-                             gap: 10px;
-                             /* Khoảng cách giữa các phần tử */
-                         }
-
-                         /* CSS cho các item bên trong form */
-                         .search-form .item {
-                             flex: 1;
-                             /* Đảm bảo rằng các item có thể mở rộng để lấp đầy không gian */
-                         }
-
-                         /* CSS cho input và select */
-                         .search-form input[type="text"],
-                         .search-form select {
-                             width: 100%;
-                             /* Đảm bảo input và select chiếm hết chiều rộng của item chứa nó */
-                             padding: 8px;
-                             /* Thêm padding cho các input và select */
-                             border: 1px solid #ccc;
-                             /* Đặt viền cho các input và select */
-                             border-radius: 4px;
-                             /* Bo tròn các góc của input và select */
-                         }
-
-                         /* CSS cho button */
-                         .search-form button {
-                             padding: 8px 16px;
-                             /* Thêm padding cho button */
-                             background-color: #19993d;
-                             /* Màu nền cho button */
-                             color: white;
-                             /* Màu chữ trên button */
-                             border: none;
-                             /* Loại bỏ viền mặc định của button */
-                             border-radius: 4px;
-                             /* Bo tròn các góc của button */
-                             cursor: pointer;
-                             /* Hiển thị con trỏ chuột kiểu tay khi di chuột lên button */
-                         }
-
-                         .search-form button:hover {
-                             background-color: #00b342;
-                             /* Thay đổi màu nền khi di chuột lên button */
-                         }
-                     </style>
                      <form class="search-form" action="/search-jobs" method="GET">
                          <div class="item item-search">
                              <input type="text" id="key" name="keyword" placeholder="Nhập từ khóa tìm kiếm...">
@@ -691,76 +655,79 @@
                                          <div id="box-relate-jobs" class="box_general">
                                              <div class="job-list-default">
                                                  @foreach ($relatedJobs as $relatedJob)
-                                                     <div class="job-item-default job-ta bg-flash-job">
-                                                         <div class="avatar">
-                                                             <a target="_blank" href="">
-                                                                 <img
-                                                                     src="{{ $relatedJob->company->logo ? asset('storage/' . $relatedJob->company->logo) : asset('storage/avatar/avatar-default.jpg') }}">
-                                                             </a>
-                                                             <div class="tag-job-flash">
-                                                                 <img src="https://www.topcv.vn/v4/image/job-list/icon-flash.webp"
-                                                                     alt="">
+                                                     @if ($relatedJob)
+                                                         <div class="job-item-default job-ta bg-flash-job">
+                                                             <div class="avatar">
+                                                                 <a target="_blank" href="">
+                                                                     <img
+                                                                         src="{{ $relatedJob->company->logo ? asset('storage/' . $relatedJob->company->logo) : asset('storage/avatar/avatar-default.jpg') }}">
+                                                                 </a>
+                                                                 <div class="tag-job-flash">
+                                                                     <img src="https://www.topcv.vn/v4/image/job-list/icon-flash.webp"
+                                                                         alt="">
+                                                                 </div>
                                                              </div>
-                                                         </div>
-                                                         <div class="body">
-                                                             <div class="body-content">
-                                                                 <div class="title-block">
-                                                                     <div>
-                                                                         <h3 class="title ">
-                                                                             <div class="box-label-top">
-                                                                             </div>
-                                                                             <a target="_blank"
-                                                                                 href="{{ route('job.show', $relatedJob->slug) }}">
-                                                                                 <span> {{ $relatedJob->title }}</span>
-                                                                             </a>
-                                                                         </h3>
-                                                                         <a rel="nofollow" class="company"
-                                                                             href="{{ route('company-home.show', $relatedJob->company->slug) }}">{{ $relatedJob->company->name }}</a>
+                                                             <div class="body">
+                                                                 <div class="body-content">
+                                                                     <div class="title-block">
+                                                                         <div>
+                                                                             <h3 class="title ">
+                                                                                 <div class="box-label-top">
+                                                                                 </div>
+                                                                                 <a target="_blank"
+                                                                                     href="{{ route('job.show', $relatedJob->slug) }}">
+                                                                                     <span> {{ $relatedJob->title }}</span>
+                                                                                 </a>
+                                                                             </h3>
+                                                                             <a rel="nofollow" class="company"
+                                                                                 href="{{ route('company-home.show', $relatedJob->company->slug) }}">{{ $relatedJob->company->name }}</a>
+                                                                         </div>
+                                                                         <div class="box-right">
+                                                                             <label class="title-salary">
+                                                                                 {{ $relatedJob->salary }}
+                                                                             </label>
+                                                                         </div>
                                                                      </div>
-                                                                     <div class="box-right">
-                                                                         <label class="title-salary">
-                                                                             {{ $relatedJob->salary }}
+                                                                 </div>
+                                                                 <div class="info">
+                                                                     <div class="label-content">
+                                                                         <label class="address">
+
+                                                                             @foreach ($relatedJob->cities as $city)
+                                                                                 {{ $city->name }}@if (!$loop->last)
+                                                                                     ,
+                                                                                 @endif
+                                                                             @endforeach
+
+                                                                         </label>
+                                                                         <label class="time mobile-hidden">
+                                                                             Còn
+                                                                             <strong>{{ $relatedJob->days_to_closing }}</strong>
+                                                                             ngày để ứng tuyển
+                                                                         </label>
+                                                                         <label class="address" data-container="body">
+                                                                             Cập nhật {{ $relatedJob->time_since_update }}
                                                                          </label>
                                                                      </div>
-                                                                 </div>
-                                                             </div>
-                                                             <div class="info">
-                                                                 <div class="label-content">
-                                                                     <label class="address">
-
-                                                                         @foreach ($relatedJob->cities as $city)
-                                                                             {{ $city->name }}@if (!$loop->last)
-                                                                                 ,
-                                                                             @endif
-                                                                         @endforeach
-
-                                                                     </label>
-                                                                     <label class="time mobile-hidden">
-                                                                         Còn
-                                                                         <strong>{{ $relatedJob->days_to_closing }}</strong>
-                                                                         ngày để ứng tuyển
-                                                                     </label>
-                                                                     <label class="address" data-container="body">
-                                                                         Cập nhật {{ $relatedJob->time_since_update }}
-                                                                     </label>
-                                                                 </div>
-                                                                 <div class="icon">
-                                                                     <button data-toggle="modal" data-target="#applyModal"
-                                                                         class="btn btn-apply-now">
-                                                                         <span>Ứng tuyển</span>
-                                                                     </button>
-                                                                     <div class="box-save-job">
-                                                                         <a data-id="{{ $relatedJob->id }}"
-                                                                             href=""onclick="saveJob({{ $relatedJob->id }})"
-                                                                             class="save box-save-job-hover"
-                                                                             data-toggle="tooltip"
-                                                                             title="Bạn phải đăng nhập để lưu tin"><i
-                                                                                 class="fa-regular fa-heart"></i></a>
+                                                                     <div class="icon">
+                                                                         <button data-toggle="modal"
+                                                                             data-target="#applyModal"
+                                                                             class="btn btn-apply-now">
+                                                                             <span>Ứng tuyển</span>
+                                                                         </button>
+                                                                         <div class="box-save-job">
+                                                                             <a data-id="{{ $relatedJob->id }}"
+                                                                                 href=""onclick="saveJob({{ $relatedJob->id }})"
+                                                                                 class="save box-save-job-hover"
+                                                                                 data-toggle="tooltip"
+                                                                                 title="Bạn phải đăng nhập để lưu tin"><i
+                                                                                     class="fa-regular fa-heart"></i></a>
+                                                                         </div>
                                                                      </div>
                                                                  </div>
                                                              </div>
                                                          </div>
-                                                     </div>
+                                                     @endif
                                                  @endforeach
                                              </div>
                                          </div>
@@ -1242,7 +1209,7 @@
                                          @foreach ($jobPosting_random as $jobPosting)
                                              <div class="job job-ta" data-job-id="{{ $jobPosting->id }}"
                                                  data-box="SpotlightCompany">
-                                                 <a href="{{ route('job.show', $relatedJob->slug) }}" target="_blank"
+                                                 <a href="{{ route('job.show', $jobPosting->slug) }}" target="_blank"
                                                      data-toggle="tooltip" title="" data-placement="top"
                                                      class="job__name">{{ $jobPosting->title }}</a>
                                                  <div class="job__info">
@@ -1275,38 +1242,6 @@
                  </div>
              </div>
          </div>
-         <style>
-             .fade-enter-active,
-             .fade-leave-active {
-                 transition: opacity .5s;
-             }
-
-             .fade-enter,
-             .fade-leave-to
-
-             /* .fade-leave-active below version 2.1.8 */
-                 {
-                 opacity: 0;
-             }
-
-             .no-mode-translate-fade-enter-active,
-             .no-mode-translate-fade-leave-active {
-                 transition: all 0.2s;
-             }
-
-             .no-mode-translate-fade-enter,
-             .no-mode-translate-fade-leave-active {
-                 opacity: 0;
-             }
-
-             .no-mode-translate-fade-enter {
-                 transform: translateX(31px);
-             }
-
-             .no-mode-translate-fade-leave-active {
-                 transform: translateX(-31px);
-             }
-         </style>
          <script>
              $(function() {
                  $(document).on('click', '#notice-intern-apply-modal .btn-continue-apply', function(event) {
@@ -1390,35 +1325,8 @@
              }))
          </script>
      </div>
-     <link rel="stylesheet" as="style" href="https://www.topcv.vn/v2/plugins/select2/css/select2.min.css" />
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/app.min.566873512a29dfc6K.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/desktop/job-detail-new.min.26710c4334316a27K.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/desktop/simple-search-job.min.a9523861ff7518f5K.css">
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/job-list-image-company.b29f61ea3112b9d5K.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/desktop/jobs/batch-apply.8a4a0ab47640f636K.css">
-     <link rel="stylesheet" href="https://www.topcv.vn/chartjs/dist/Chart.min.css">
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/desktop/job-suggestion-courses.min.6d5f7bf390a31d2bK.css">
-     <style>
-     </style>
-     <style>
-         #toast-container>div {
-             opacity: unset;
-         }
 
-         [v-cloak] {
-             display: none !important;
-         }
-     </style>
-     <script>
-         window.lazyFunctions = {};
-     </script>
-     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-823531084"></script>
-     <script src="https://static.topcv.vn/v4/js/common/job-search/simple-search.ef7e717a52f78f5e.js"></script>
-     <link rel="stylesheet"
-         href="https://static.topcv.vn/v4/css/components/desktop/simple-search-job.min.a9523861ff7518f5K.css">
+
+     
+
  @endsection

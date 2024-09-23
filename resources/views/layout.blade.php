@@ -87,7 +87,9 @@
     </script>
     <link rel="stylesheet"
         href="{{ asset('static.topcv.vn/v4/css/components/job-notification-setting.bea5fa3f03028ed1K.css') }}">
-    <script src="{{ asset('static.topcv.vn/v4/js/common/job-notification-setting/popup-job-notification-setting.min.b66ea965f6d6b5ba.js')}}"></script>
+    <script
+        src="{{ asset('static.topcv.vn/v4/js/common/job-notification-setting/popup-job-notification-setting.min.b66ea965f6d6b5ba.js') }}">
+    </script>
     <link rel="stylesheet"
         href="{{ asset('static.topcv.vn/v4/css/components/desktop/upload-cv.min.29bd6003627f486fK.css') }}">
     <link rel="stylesheet"
@@ -100,9 +102,23 @@
     <link rel="stylesheet"
         href="{{ asset('static.topcv.vn/v4/css/components/box-job-notification-setting.6e3fb86463e68cdfK.css') }}">
 
-
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/jobs/modal-apply.616a455ca1847bcbK.css') }}">
     <link rel="stylesheet"
         href="{{ asset('static.topcv.vn/v4/css/components/desktop/update-info.min.d09d237a2056cfd0K.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/job-detail-new.min.26710c4334316a27K.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/simple-search-job.min.a9523861ff7518f5K.css') }}">
+    <link rel="stylesheet" href="{{ asset('cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/job-list-image-company.b29f61ea3112b9d5K.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/jobs/batch-apply.8a4a0ab47640f636K.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/job-suggestion-courses.min.6d5f7bf390a31d2bK.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/simple-search-job.min.a9523861ff7518f5K.css') }}">
     <style>
         #toast-container>div {
             opacity: unset;
@@ -2682,6 +2698,7 @@
                 .catch(error => console.error('Error:', error));
         }
     </script>
+    <script src="{{asset('static.topcv.vn/v4/js/common/job-search/simple-search.ef7e717a52f78f5e.js')}}"></script>
     <div class="modal-support-ticket" id="modal-support-ticket">
         <div class="modal-support-ticket__content">
             <div class="modal-support-ticket__content--header">
