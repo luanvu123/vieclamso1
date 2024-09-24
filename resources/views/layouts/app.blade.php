@@ -203,7 +203,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <a href="#">
                                         <img src="{{ asset('backend_admin/images/company-svgrepo-com.svg') }}"
                                             alt="Google" width="20" height="20">
-                                        <span> Danh sách ứng viên
+                                        <span> Nhà tuyẻn dụng
                                             @if (
                                                 $jobPostingCountTwoHour > 0 ||
                                                     $employerCountTwoHour > 0 ||
@@ -220,7 +220,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <li class="{{ Request::is('employers') ? 'active' : '' }}">
                                             <a href="{{ route('employers.index') }}">
                                                 <img src="{{ asset('backend_admin/images/company-portal-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Danh sách ứng viên
+                                                    alt="Google" width="20" height="20"> Danh sách NTD
                                                 @if ($employerCountTwoHour > 0)
                                                     <span
                                                         class="label label-primary pull-right">{{ $employerCountTwoHour }}</span>

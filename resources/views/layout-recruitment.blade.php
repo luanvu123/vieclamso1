@@ -84,7 +84,7 @@
                 <div class="w-container">
                     <div class="md:flex md:items-center md:h-[80px]">
                         <div class="relative h-[68px] md:h-auto flex items-center justify-center md:pr-[30px]">
-                            <a href="{{ route('/') }}" class="business-image">
+                            <a href="{{ route('change.language', ['lang' => 'vi']) }}" class="business-image">
                                 <img src="{{ asset('storage/' . $info->logo_home) }}"
                                     class="max-w-[200px] md:mb-[-10px]" alt="topcv logo">
                             </a>
@@ -154,6 +154,22 @@
                                                 alt="jp flag">
                                         </a>
                                     </div>
+
+                                    <div class="ml-1 border border-gray-100">
+                                        <a href="{{ route('change.language', ['lang' => 'zh']) }}">
+                                            <img style="width: 27px; height: 16px"
+                                                src="{{ asset('static.topcv.vn/srp/website/images/flags/china.png') }}"
+                                                alt="cn flag">
+                                        </a>
+                                    </div>
+                                    <!-- Thêm cờ Hàn Quốc -->
+                                    <div class="ml-1 border border-gray-100">
+                                        <a href="{{ route('change.language', ['lang' => 'ko']) }}">
+                                            <img style="width: 27px; height: 16px"
+                                                src="{{ asset('static.topcv.vn/srp/website/images/flags/korea.png') }}"
+                                                alt="kr flag">
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <div id="login-box" class="flex items-center justify-center">
@@ -213,7 +229,7 @@
                                             class="logo max-h-[41px]" alt="bct confirmation">
                                     </a>
                                 </div>
-                                <h5 class="font-medium text-color-default mb-[24px] text-[18px]">{{$download_app}}
+                                <h5 class="font-medium text-color-default mb-[24px] text-[18px]">{{ $download_app }}
                                 </h5>
                                 <p class="flex items-center justify-start mb-[36px]">
                                     <a class="block mr-[16px]" target="_blank" href="{{ $info->link_appstore }}">
