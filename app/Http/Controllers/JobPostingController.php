@@ -35,50 +35,50 @@ class JobPostingController extends Controller
 
         return redirect()->back()->with('success', 'Application updated successfully');
     }
- public function updateRating(Request $request, Application $application)
-{
-    // Xác thực dữ liệu
-    $validatedData = $request->validate([
-        'rating' => 'nullable|integer|min:1|max:5',
-        'status' => 'required|integer|in:1,2,3,4',  // Xác thực giá trị status
-    ]);
+    public function updateRating(Request $request, Application $application)
+    {
+        // Xác thực dữ liệu
+        $validatedData = $request->validate([
+            'rating' => 'nullable|integer|min:1|max:5',
+            'status' => 'required|integer|in:1,2,3,4',  // Xác thực giá trị status
+        ]);
 
-    // Cập nhật cả rating và status
-    $application->update([
-        'rating' => $validatedData['rating'],
-        'status' => $validatedData['status'],
-        'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
-    ]);
+        // Cập nhật cả rating và status
+        $application->update([
+            'rating' => $validatedData['rating'],
+            'status' => $validatedData['status'],
+            'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+        ]);
 
-    // Xác định thông điệp trạng thái
-    $statusMessage = '';
-    switch ($application->status) {
-        case 1:
-            $statusMessage = 'Đã ứng tuyển';
-            break;
-        case 2:
-            $statusMessage = 'Nhà tuyển dụng đã xem hồ sơ';
-            break;
-        case 3:
-            $statusMessage = 'Hồ sơ phù hợp';
-            break;
-        case 4:
-            $statusMessage = 'Hồ sơ chưa phù hợp';
-            break;
-        default:
-            $statusMessage = 'Trạng thái không xác định';
-            break;
+        // Xác định thông điệp trạng thái
+        $statusMessage = '';
+        switch ($application->status) {
+            case 1:
+                $statusMessage = 'Đã ứng tuyển';
+                break;
+            case 2:
+                $statusMessage = 'Nhà tuyển dụng đã xem hồ sơ';
+                break;
+            case 3:
+                $statusMessage = 'Hồ sơ phù hợp';
+                break;
+            case 4:
+                $statusMessage = 'Hồ sơ chưa phù hợp';
+                break;
+            default:
+                $statusMessage = 'Trạng thái không xác định';
+                break;
+        }
+
+        // Gửi email với rating
+        if ($application->candidate && $application->candidate->email) {
+            Mail::to($application->candidate->email)
+                ->send(new ApplicationStatusUpdate($application, $statusMessage, $validatedData['rating']));
+        }
+
+        // Trả về kết quả sau khi cập nhật
+        return redirect()->back()->with('success', 'CV và đánh giá đã được cập nhật thành công!');
     }
-
-    // Gửi email với rating
-    if ($application->candidate && $application->candidate->email) {
-        Mail::to($application->candidate->email)
-            ->send(new ApplicationStatusUpdate($application, $statusMessage, $validatedData['rating']));
-    }
-
-    // Trả về kết quả sau khi cập nhật
-    return redirect()->back()->with('success', 'CV và đánh giá đã được cập nhật thành công!');
-}
 
     public function index()
     {

@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Twilio\Rest\Client;
 use App\Mail\SendOTP;
+use App\Mail\SendOtpMail;
+
 
 class EmployerLoginController extends Controller
 {
@@ -245,6 +247,30 @@ class EmployerLoginController extends Controller
 
         return back()->with('status', 'Password changed successfully');
     }
+    // public function sendOtp(Request $request)
+    // {
+    //     $employer = Auth::guard('employer')->user();
+    //     $otp = rand(100000, 999999);
+    //     $employer->otp = $otp;
+    //     $employer->save();
+    //     $sid = env('TWILIO_SID');
+    //     $token = env('TWILIO_TOKEN');
+    //     $from = env('TWILIO_FROM');
+
+    //     $twilio = new Client($sid, $token);
+
+
+    //     $twilio->messages->create(
+    //         $employer->phone,
+    //         [
+    //             'from' => $from,
+    //             'body' => "Your OTP is: $otp",
+    //         ]
+    //     );
+    // }
+
+
+
     public function sendOtp(Request $request)
     {
         $employer = Auth::guard('employer')->user();
@@ -256,22 +282,12 @@ class EmployerLoginController extends Controller
         $employer->otp = $otp;
         $employer->save();
 
-        // Twilio credentials from .env
-        $sid = env('TWILIO_SID');
-        $token = env('TWILIO_TOKEN');
-        $from = env('TWILIO_FROM');
+        // Send OTP via email
+        Mail::to($employer->email)->send(new SendOtpMail($otp));
 
-        $twilio = new Client($sid, $token);
-
-
-        $twilio->messages->create(
-            $employer->phone, // The phone number to send to
-            [
-                'from' => $from,
-                'body' => "Your OTP is: $otp",
-            ]
-        );
+        return back()->with('status', 'Otp sent to your email successfully');
     }
+
     public function verifyOtp(Request $request)
     {
         $request->validate([
