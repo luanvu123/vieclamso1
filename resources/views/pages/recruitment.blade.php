@@ -244,7 +244,7 @@
                                 <div class="form-lead-label">{{ $email_lg}}</div>
                                 <div class="form-lead-item form-item-email">
                                     <i class="fa-regular fa-envelope"></i>
-                                    <input type="email" name="email" required id="email-" placeholder="{{ $full_name_lg}}" />
+                                    <input type="email" name="email" required id="email-" placeholder="{{ $email_lg}}" />
                                 </div>
                                 <div class="form-lead-msg msg-email"></div>
 
@@ -252,7 +252,7 @@
                                 <div class="form-lead-item form-item-phone">
                                     <i class="fa-regular fa-mobile-notch"></i>
                                     <input type="text" name="phone" maxlength="10" id="phone-" required
-                                        placeholder="{{ $full_name_lg}}" />
+                                        placeholder="{{$phone_number_lg}}" />
                                 </div>
                                 <div class="form-lead-msg msg-phone"></div>
 
