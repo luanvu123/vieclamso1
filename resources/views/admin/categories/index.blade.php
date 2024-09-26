@@ -28,7 +28,7 @@
                                     <td>{{ $category->name }}</td>
                                     <td>
                                         @if ($category->image)
-                                            <img src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}"
+                                            <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}"
                                                 style="width: 30px;">
                                         @else
                                             No Image

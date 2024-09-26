@@ -1,16 +1,5 @@
  @extends('layout')
  @section('content')
-     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-     <link rel="stylesheet"
-         href="{{ asset('static.topcv.vn/v4/css/components/desktop/home-page/dashboard.8048fde994d8ae2eG.css') }}">
-     <link rel="stylesheet"
-         href="{{ asset('static.topcv.vn/v4/css/components/home/box-flash-badge.3b535c0dc5d2a99dG.css') }}">
-     <link rel="stylesheet"
-         href="{{ asset('static.topcv.vn/v4/css/components/partials/self-growth.min.90d4930a9a50c71fG.css') }}">
-     <style>
-         /* Đặt các div class="col" theo chiều dọc trên thiết bị điện thoại */
-      
-     </style>
 
      <div id="page-welcome">
          <section id="section-header">
@@ -134,18 +123,6 @@
                                          alt>
                                  </div>
                              </div>
-                         </div>
-                         <div class="box-header__tool">
-
-                             <span class="btn-feature-jobs-pre btn-slick-arrow"
-                                 :class="{ 'slick-disabled': currentPage === 1 || totalPage === 0 }" @click="backPage">
-                                 <i class="fa-solid fa-chevron-left"></i>
-                             </span>
-                             <span class="btn-feature-jobs-next btn-slick-arrow"
-                                 :class="{ 'slick-disabled': currentPage === totalPage || totalPage === 0 }"
-                                 @click="nextPage">
-                                 <i class="fa-solid fa-chevron-right"></i>
-                             </span>
                          </div>
                      </div>
                      <div class="box-filter">
@@ -330,7 +307,7 @@
                                                      <div class="top-category__image">
                                                          <a href="{{ route('categoriehomes.show', $category->slug) }}"
                                                              target="_blank">
-                                                             <img src="{{ Storage::url($category->image) }}"
+                                                             <img src="{{ asset('storage/' . $category->image) }}"
                                                                  alt="{{ $category->name }}" class="lazy entered loaded">
                                                          </a>
                                                      </div>
@@ -602,18 +579,6 @@
                      <p class="globe-title">Tiếp lợi thế, nối thành công</p>
                      <div class="overlay"></div>
                  </div>
-
-                 <script>
-                     const urlPointGlobeJson = 'https://static.topcv.vn/v4/cdn/plugins/three-js/globe-points.json'
-                 </script>
-                 <script>
-                     window.lazyFunctions.initGlobe = async function(element) {
-                         await window.loadScript('../static.topcv.vn/v4/cdn/plugins/three-js/three.js');
-                         await window.loadScript('../static.topcv.vn/v4/cdn/plugins/three-js/ThreeOrbitControls.js');
-                         await window.loadScript('../static.topcv.vn/v4/cdn/plugins/three-js/THREE.MeshLine.js');
-                         await window.loadScript('../static.topcv.vn/v4/js/common/globe-threejs.a8d903dbf41fd7c7.js');
-                     }
-                 </script>
              </div>
          </section>
          <section id="topcv-ecosystem">

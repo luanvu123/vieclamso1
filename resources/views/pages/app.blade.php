@@ -99,8 +99,7 @@
                                     theo mức độ kinh nghiệm và số năm đi làm của ứng viên.</div>
                             </div>
                             <div class="featured-img">
-                                <img src="v4/image/welcome/mobile-app/share_together.png"
-                                    alt="Cùng chia sẻ - Cùng vươn xa">
+                             <img src="{{ asset('v4/image/welcome/mobile-app/share_together.png') }}" alt="Cùng chia sẻ - Cùng vươn xa">
                             </div>
                         </div>
                         <div class="featured-item ">
@@ -111,7 +110,7 @@
                                     công nghệ trong công việc.</div>
                             </div>
                             <div class="featured-img">
-                                <img src="v4/image/welcome/mobile-app/topcv_podcast.png" alt=" Vieclamso1 Podcast">
+                              <img src="{{ asset('v4/image/welcome/mobile-app/topcv_podcast.png') }}" alt="Vieclamso1 Podcast">
                             </div>
                         </div>
                         <div class="featured-item  featured-item-reverse ">
@@ -127,7 +126,7 @@
                                 </div>
                             </div>
                             <div class="featured-img">
-                                <img src="v4/image/welcome/mobile-app/tools.png" alt="Thêm công cụ - Thêm vượt trội">
+                              <img src="{{ asset('v4/image/welcome/mobile-app/tools.png') }}" alt="Thêm công cụ - Thêm vượt trội">
                             </div>
                         </div>
                         <div class="featured-item ">
@@ -142,7 +141,7 @@
                                 </div>
                             </div>
                             <div class="featured-img">
-                                <img src="v4/image/welcome/mobile-app/mbti_mi.png" alt="Định vị bản thân">
+                             <img src="{{ asset('v4/image/welcome/mobile-app/mbti_mi.png') }}" alt="Định vị bản thân">
                             </div>
                         </div>
                         <div class="featured-item  featured-item-reverse ">
@@ -155,7 +154,7 @@
                                     Tăng 80% tỉ lệ ứng tuyển thành công.</div>
                             </div>
                             <div class="featured-img">
-                                <img src="v4/image/welcome/mobile-app/cv_profile.png" alt="Tạo CV &amp; Profile">
+                              <img src="{{ asset('v4/image/welcome/mobile-app/cv_profile.png') }}" alt="Tạo CV &amp; Profile">
                             </div>
                         </div>
                     </div>
@@ -182,8 +181,7 @@
                             </div>
                             <div class="box-center">
                                 <div class="box-center-img">
-                                    <img src="../static.topcv.vn/v4/image/welcome/mobile-app/topcv_global.png"
-                                        alt="Con số ấn tượng">
+                                  <img src="{{ asset('static.topcv.vn/v4/image/welcome/mobile-app/topcv_global.png') }}" alt="Con số ấn tượng">
                                 </div>
                             </div>
                             <div class="box-right">

@@ -55,6 +55,13 @@
         href="{{ asset('v4/css/components/desktop/suggest-job-setting/setting.92bab7ad30839efeK.css') }}">
     <link rel="stylesheet"
         href="{{ asset('static.topcv.vn/v4/css/components/sidebar/box-sidebar-profile.af4c32d889bb9024K.css') }}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/home-page/dashboard.8048fde994d8ae2eG.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/home/box-flash-badge.3b535c0dc5d2a99dG.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/partials/self-growth.min.90d4930a9a50c71fG.css') }}">
 
     <link rel="stylesheet" href="{{ asset('v2/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('v2/plugins/select2/css/select2.min.css') }}" />
@@ -2698,7 +2705,7 @@
                 .catch(error => console.error('Error:', error));
         }
     </script>
-    <script src="{{asset('static.topcv.vn/v4/js/common/job-search/simple-search.ef7e717a52f78f5e.js')}}"></script>
+    <script src="{{ asset('static.topcv.vn/v4/js/common/job-search/simple-search.ef7e717a52f78f5e.js') }}"></script>
     <div class="modal-support-ticket" id="modal-support-ticket">
         <div class="modal-support-ticket__content">
             <div class="modal-support-ticket__content--header">

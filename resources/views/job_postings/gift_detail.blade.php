@@ -54,7 +54,7 @@
                             data-v-db3e7bea="" class="far fa-xmark"></i></span></div>
                 <div data-v-db3e7bea="" class="modal-body">
                     <div data-v-db3e7bea="" class="wrap-detail-img"
-                        style="background: url('{{ $product->imagePath }}') 50% center / cover no-repeat;">
+                         style="background: url('{{ asset('storage/' . $product->image) }}') 50% center / cover no-repeat;">
                     </div>
                     <div data-v-db3e7bea="" class="wrap-detail-gift">
                         <div data-v-db3e7bea="" class="name-gift">

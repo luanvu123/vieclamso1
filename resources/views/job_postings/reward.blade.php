@@ -176,7 +176,7 @@
                      @foreach ($purchases as $purchase)
                          <div data-v-04419ab5="" data-v-7240e68e="" class="gift-item" available-exchange-point="0">
                              <div data-v-04419ab5="" class="img-gift"
-                                 style="background: url('{{ $purchase->product->imagePath }}') 50% center / cover no-repeat;">
+                                 style="background: url('{{ asset('storage/' . $purchase->image) }}') 50% center / cover no-repeat;">
                              </div>
                              <div data-v-04419ab5="" class="d-flex flex-column justify-content-end" style="height: 55%;">
                                  <div data-v-04419ab5="" class="footer-gift-item">
