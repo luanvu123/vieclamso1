@@ -64,9 +64,7 @@ class EmployerManageController extends Controller
             'isVerifyCompany',
             'level',
         ]);
-
         $employer->update($data);
-
         return redirect()->route('employers.index')->with('success', 'Employer updated successfully.');
     }
 
