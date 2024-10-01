@@ -140,7 +140,11 @@ class JobPostingController extends Controller
 
     public function show(Request $request, $id)
     {
+        $employer = Auth::guard('employer')->user();
         $jobPosting = JobPosting::findOrFail($id);
+        if ($employer->id !== $jobPosting->employer_id) {
+            return redirect()->back()->with('error', 'Bạn không có quyền xem tin tuyển dụng này.');
+        }
 
         // Get filter and sort parameters from request
         $status = $request->input('status');
@@ -159,8 +163,9 @@ class JobPostingController extends Controller
             })
             ->with('candidate') // Ensure candidate relationship is loaded for use in views
             ->get();
-
-        return view('job_postings.show', compact('jobPosting', 'applications'));
+ // Truyền thêm biến isInfomation để kiểm tra trong view
+        $isInfomation = $employer->isInfomation ?? false;
+        return view('job_postings.show', compact('jobPosting', 'applications','isInfomation'));
     }
 
     public function store(Request $request)
@@ -255,14 +260,19 @@ class JobPostingController extends Controller
 
     public function edit($id)
     {
+        $employer = Auth::guard('employer')->user();
         $jobPosting = JobPosting::findOrFail($id);
+        if ($employer->id !== $jobPosting->employer_id) {
+            // Nếu không phải, chuyển hướng về trang trước đó với thông báo lỗi
+            return redirect()->back()->with('error', 'Bạn không có quyền chỉnh sửa tin tuyển dụng này.');
+        }
         $selectedCities = explode(', ', $jobPosting->city);
         $cities = City::all();
         $selectedCities = $jobPosting->cities->pluck('id')->toArray();
         $jobPosting = JobPosting::findOrFail($id);
         $categories = Category::all();
         $selectedCategories = $jobPosting->categories->pluck('id')->toArray();
-        $employer = Auth::guard('employer')->user();
+
         $company = $employer->company;
         $salaries = Salary::where('status', 'active')->get();
         return view('job_postings.edit', compact('jobPosting', 'selectedCities', 'cities', 'categories', 'selectedCategories', 'company', 'selectedCities', 'salaries'));
@@ -333,6 +343,10 @@ class JobPostingController extends Controller
     }
     public function showCV($id)
     {
+        // Lấy nhà tuyển dụng đang đăng nhập
+        $employer = Auth::guard('employer')->user();
+
+        // Lấy thông tin ứng viên cùng các quan hệ liên quan
         $candidate = Candidate::with([
             'cvs',
             'educations',
@@ -346,8 +360,12 @@ class JobPostingController extends Controller
             'prizes'
         ])->findOrFail($id);
 
-        return view('pages.overview-cv', compact('candidate'));
+        // Truyền thêm biến isInfomation để kiểm tra trong view
+        $isInfomation = $employer->isInfomation ?? false;
+
+        return view('pages.overview-cv', compact('candidate', 'isInfomation'));
     }
+
 
     public function showCart()
     {

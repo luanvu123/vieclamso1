@@ -62,9 +62,16 @@
                                             <div class="candidate-details">
                                                 <h2 class="fs-24 fw-bold mb-1">{{ $candidate->fullname_candidate }}
                                                 </h2>
-                                                <p class="mb-1"><strong>Email:</strong> {{ $candidate->email }}</p>
-                                                <p class="mb-1"><strong>Phone:</strong>
-                                                    {{ $candidate->phone_number_candidate }}</p>
+                                                @if ($isInfomation)
+                                                    <p class="mb-1"><strong>Email:</strong> {{ $candidate->email }}</p>
+                                                    <p class="mb-1"><strong>Phone:</strong>
+                                                        {{ $candidate->phone_number_candidate }}</p>
+                                                @else
+                                                    <p class="mb-1"><strong>Email:</strong> <a
+                                                            href="{{ route('job-postings.cart') }}">Nhấn để xem</a></p>
+                                                    <p class="mb-1"><strong>Phone:</strong> <a
+                                                            href="{{ route('job-postings.cart') }}">Nhấn để xem</a></p>
+                                                @endif
                                                 <p class="mb-1"><strong>Address:</strong> {{ $candidate->address }}
                                                 </p>
                                                 <p class="mb-1"><strong>Position:</strong> {{ $candidate->position }}

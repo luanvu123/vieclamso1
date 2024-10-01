@@ -53,6 +53,7 @@ class EmployerManageController extends Controller
             'isVerify' => 'nullable|boolean',
             'isVerify_license' => 'nullable|boolean',
             'isVerifyCompany' => 'nullable|boolean',
+            'isInfomation' => 'nullable|boolean', //
             'level' => 'nullable|integer|in:1,2,3',
         ]);
 
@@ -62,8 +63,10 @@ class EmployerManageController extends Controller
             'isVerify',
             'isVerify_license',
             'isVerifyCompany',
+            'isInfomation',
             'level',
         ]);
+
         $employer->update($data);
         return redirect()->route('employers.index')->with('success', 'Employer updated successfully.');
     }
@@ -159,7 +162,7 @@ class EmployerManageController extends Controller
         session()->flash('success', 'Gửi email thành công');
         return redirect()->back();
     }
-     public function sentEmails()
+    public function sentEmails()
     {
         // Lấy danh sách email đã gửi cùng với thông tin người dùng và nhà tuyển dụng
         $list = EmailReplyEmployer::with('employer', 'user')->orderBy('id', 'DESC')->get();

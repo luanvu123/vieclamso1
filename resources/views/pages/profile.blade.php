@@ -65,7 +65,7 @@
                                      </div>
                                      <div class="form-group">
                                          <label for="">Email</label>
-                                         <input type="text" class="form-control" value="phamvuluan131@gmail.com"
+                                         <input type="text" class="form-control" value="gmail"
                                              disabled="">
                                      </div>
 

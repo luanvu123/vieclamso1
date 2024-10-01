@@ -61,8 +61,21 @@
                                  alt="">
                              <span>{{ $application->candidate->fullname_candidate }}</span>
                              <ul>
-                                 <li><a href="{{ asset('storage/' . $application->cv->cv_path) }}"><i
-                                             class="fa fa-file-text"></i> CV</a></li>
+                                 <!-- Kiểm tra điều kiện isInfomation -->
+                                 @if ($isInfomation)
+                                     <li>
+                                         <a href="{{ asset('storage/' . $application->cv->cv_path) }}">
+                                             <i class="fa fa-file-text"></i> CV
+                                         </a>
+                                     </li>
+                                 @else
+                                     <li>
+                                         <a href="{{ route('job-postings.cart') }}">
+                                             <i class="fa fa-file-text"></i> CV
+                                         </a>
+                                     </li>
+                                 @endif
+
                                  <li><a href="{{ route('candidates.show.cv', $application->candidate->id) }}"><i
                                              class="fa fa-user"></i> Profile</a></li>
                                  <li><a href="{{ route('messages.show', $application->candidate) }}"><i
@@ -122,14 +135,26 @@
                          <i>Full Name:</i>
                          <span>{{ $application->candidate->fullname_candidate }}</span>
 
-                         <i>Email:</i>
-                         <span><a href="">{{ $application->candidate->email }}</a></span>
-                         <i>Phone:</i>
-                         <span><a href="">{{ $application->candidate->phone_number_candidate }}</a></span>
+                         @if ($isInfomation)
+                             <!-- Hiển thị Email và Phone nếu isInfomation = true -->
+                             <i>Email:</i>
+                             <span>{{ $application->candidate->email }}</span>
+
+                             <i>Phone:</i>
+                             <span>{{ $application->candidate->phone_number_candidate }}</span>
+                         @else
+                             <!-- Hiển thị liên kết nếu isInfomation = false -->
+                             <i>Email:</i>
+                             <span><a href="{{ route('job-postings.cart') }}">Nhấn để xem</a></span>
+
+                             <i>Phone:</i>
+                             <span><a href="{{ route('job-postings.cart') }}">Nhấn để xem</a></span>
+                         @endif
 
                          <i>Message:</i>
                          <span>{{ $application->application_letter }}</span>
                      </div>
+
                  </div>
                  <!-- Footer -->
                  <div class="app-footer">
