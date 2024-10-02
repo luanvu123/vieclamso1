@@ -41,7 +41,7 @@
                                         <td>{{ ucfirst($product->status) }}</td>
                                         <td>
                                             @if ($product->image)
-                                                <img src="{{ $product->getImagePathAttribute() }}" alt="{{ $product->name }}"
+                                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
                                                     style="width: 70px;">
                                             @endif
                                         </td>

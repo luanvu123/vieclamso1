@@ -32,7 +32,7 @@
     <div>
         <strong>Image:</strong>
         @if($product->image)
-            <img src="{{ $product->getImagePathAttribute() }}" alt="{{ $product->name }}" width="100">
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100">
         @endif
     </div>
 

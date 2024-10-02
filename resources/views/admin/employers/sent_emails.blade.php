@@ -31,7 +31,7 @@
                                     <td>{{ $email->message }}</td>
                                     <td>
                                         @if ($email->attachment)
-                                            <a href="{{ Storage::url($email->attachment) }}" target="_blank">Tải về</a>
+                                            <a href="{{ asset('storage/' . $email->attachment) }}" target="_blank">Tải về</a>
                                         @else
                                             Không có
                                         @endif

@@ -16,13 +16,14 @@
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
             @enderror
         </div>
-<div>
-    <label for="usage_count">Usage Count:</label>
-    <input type="number" id="usage_count" name="usage_count" value="{{ old('usage_count', $product->usage_count) }}" required>
-    @error('usage_count')
-        <div class="alert alert-danger mt-2">{{ $message }}</div>
-    @enderror
-</div>
+        <div>
+            <label for="usage_count">Usage Count:</label>
+            <input type="number" id="usage_count" name="usage_count"
+                value="{{ old('usage_count', $product->usage_count) }}" required>
+            @error('usage_count')
+                <div class="alert alert-danger mt-2">{{ $message }}</div>
+            @enderror
+        </div>
 
         <div>
             <label for="company">Company:</label>
@@ -34,7 +35,8 @@
 
         <div>
             <label for="number_day">Number of Days:</label>
-            <input type="number" id="number_day" name="number_day" value="{{ old('number_day', $product->number_day) }}" required>
+            <input type="number" id="number_day" name="number_day" value="{{ old('number_day', $product->number_day) }}"
+                required>
             @error('number_day')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
             @enderror
@@ -42,7 +44,8 @@
 
         <div>
             <label for="top_point">Top Point:</label>
-            <input type="number" id="top_point" name="top_point" value="{{ old('top_point', $product->top_point) }}" required>
+            <input type="number" id="top_point" name="top_point" value="{{ old('top_point', $product->top_point) }}"
+                required>
             @error('top_point')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
             @enderror
@@ -51,8 +54,10 @@
         <div>
             <label for="type_product">Type:</label>
             <select name="type_product" id="type_product" class="form-control" required>
-                <option value="service" {{ old('type_product', $product->type_product) == 'service' ? 'selected' : '' }}>Service</option>
-                <option value="voucher" {{ old('type_product', $product->type_product) == 'voucher' ? 'selected' : '' }}>Voucher</option>
+                <option value="service" {{ old('type_product', $product->type_product) == 'service' ? 'selected' : '' }}>
+                    Service</option>
+                <option value="voucher" {{ old('type_product', $product->type_product) == 'voucher' ? 'selected' : '' }}>
+                    Voucher</option>
             </select>
             @error('type_product')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -63,7 +68,8 @@
             <label for="status">Status:</label>
             <select name="status" id="status" class="form-control" required>
                 <option value="active" {{ old('status', $product->status) == 'active' ? 'selected' : '' }}>Active</option>
-                <option value="inactive" {{ old('status', $product->status) == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                <option value="inactive" {{ old('status', $product->status) == 'inactive' ? 'selected' : '' }}>Inactive
+                </option>
             </select>
             @error('status')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -73,8 +79,8 @@
         <div>
             <label for="image">Image:</label>
             <input type="file" id="image" name="image">
-            @if($product->image)
-                <img src="{{ $product->getImagePathAttribute() }}" alt="{{ $product->name }}" width="100">
+            @if ($product->image)
+                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100">
             @endif
             @error('image')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
