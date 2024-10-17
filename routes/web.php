@@ -243,7 +243,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-Route::get('/candidate-login-google', [CandidateController::class, 'redirectToGoogle'])->name('candidate.login.google');
+// Route::get('/candidate-login-google', [CandidateController::class, 'redirectToGoogle'])->name('candidate.login.google');
 Route::get('candidate/register', [CandidateController::class, 'showRegistrationForm'])->name('candidate.showRegister');
 Route::post('candidate/register', [CandidateController::class, 'register'])->name('candidate.register');
 Route::get('candidate/login', [CandidateController::class, 'showLoginForm'])->name('candidate.login');
@@ -253,11 +253,15 @@ Route::post('candidate/logout', [CandidateController::class, 'logout'])->name('c
 
 Route::get('candidate/google', [CandidateController::class, 'redirectToGoogle'])->name('candidate.google');
 Route::get('candidate/google/callback', [CandidateController::class, 'handleGoogleCallback']);
-
+Route::get('auth/facebook', [CandidateController::class, 'redirectToFacebook'])->name('candidate.login.facebook');
+Route::get('auth/facebook/callback', [CandidateController::class, 'handleFacebookCallback']);
+Route::get('employer/google', [EmployerLoginController::class, 'redirectToGoogle'])->name('employer.google');
+Route::get('employer/google/callback', [EmployerLoginController::class, 'handleGoogleCallback']);
 
 Route::middleware(['candidate'])->group(function () {
 
 
+    Route::post('/notifications/mark-all-read', [CandidateController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
     Route::post('/job-reports', [CandidateController::class, 'storeReport'])->name('job-reports.store');
     Route::get('/candidate/messages', [MessageController::class, 'receiveCandidateMessages'])->name('messages.receive.candidate');
     Route::get('/candidate/messages/{employer}', [MessageController::class, 'showCandidateMessages'])->name('messages.show.candidate');

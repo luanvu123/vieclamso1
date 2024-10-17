@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Experience;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class ExperienceController extends Controller
@@ -12,13 +13,19 @@ class ExperienceController extends Controller
     {
         $candidate = Auth::guard('candidate')->user();
         $experiences = $candidate->experiences;
-        return view('pages.experiences.index', compact('experiences'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.experiences.index', compact('experiences','notifications'));
     }
 
     // Hiển thị form để thêm kinh nghiệm
     public function create()
     {
-        return view('pages.experiences.create');
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.experiences.create',compact('notifications'));
     }
 
     // Lưu kinh nghiệm mới vào cơ sở dữ liệu
@@ -43,7 +50,10 @@ class ExperienceController extends Controller
     // Hiển thị form để chỉnh sửa kinh nghiệm
     public function edit(Experience $experience)
     {
-        return view('pages.experiences.edit', compact('experience'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.experiences.edit', compact('experience','notifications'));
     }
 
     // Cập nhật kinh nghiệm trong cơ sở dữ liệu

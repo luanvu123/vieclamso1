@@ -17,7 +17,7 @@ use Illuminate\Validation\ValidationException;
 use Twilio\Rest\Client;
 use App\Mail\SendOTP;
 use App\Mail\SendOtpMail;
-
+use Laravel\Socialite\Facades\Socialite;
 
 class EmployerLoginController extends Controller
 {
@@ -53,6 +53,7 @@ class EmployerLoginController extends Controller
             return redirect()->back()->withInput()->withErrors(['email' => 'Thông tin đăng nhập không chính xác']);
         }
     }
+
 
     public function verifyEmail(Request $request)
     {
@@ -304,6 +305,32 @@ class EmployerLoginController extends Controller
             return redirect()->route('job-postings.dashboard')->with('success', 'Phone number verified successfully.');
         } else {
             return back()->withErrors(['otp' => 'The OTP you entered is incorrect.']);
+        }
+    }
+
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google_employer')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        try {
+            $user = Socialite::driver('google_employer')->user();
+            $employer = Employer::where('email', $user->getEmail())->first();
+
+            if (!$employer) {
+                $employer = Employer::create([
+                    'name' => $user->getName(),
+                    'email' => $user->getEmail(),
+                    'password' => Hash::make(''), // Để trống mật khẩu
+                ]);
+            }
+
+            Auth::guard('employer')->login($employer);
+            return redirect()->route('job-postings.dashboard')->with('success', 'Xin chào ' . $employer->name);
+        } catch (\Exception $e) {
+            return redirect()->route('employer.login')->with('error', 'Failed to log in with Google.');
         }
     }
 }

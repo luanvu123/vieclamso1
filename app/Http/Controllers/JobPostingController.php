@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\ApplicationStatusUpdate;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Mail;
 
 class JobPostingController extends Controller
@@ -163,9 +164,9 @@ class JobPostingController extends Controller
             })
             ->with('candidate') // Ensure candidate relationship is loaded for use in views
             ->get();
- // Truyền thêm biến isInfomation để kiểm tra trong view
+        // Truyền thêm biến isInfomation để kiểm tra trong view
         $isInfomation = $employer->isInfomation ?? false;
-        return view('job_postings.show', compact('jobPosting', 'applications','isInfomation'));
+        return view('job_postings.show', compact('jobPosting', 'applications', 'isInfomation'));
     }
 
     public function store(Request $request)
@@ -238,8 +239,18 @@ class JobPostingController extends Controller
         $jobPosting->categories()->sync($request->category);
         $jobPosting->cities()->sync($request->city);
         $jobPosting->salaries()->sync($request->input('salaries'));
+        // Lấy công ty đăng bài
+        $company = Company::find($jobPosting->company_id);
 
-        // Redirect with success message
+        // Gửi thông báo đến các candidate theo dõi công ty
+        $followers = $company->followers;
+        foreach ($followers as $follower) {
+            Notification::create([
+                'candidate_id' => $follower->id,
+                'company_id' => $company->id,
+                'message' => "Công ty {$company->name} đã đăng bài tuyển dụng mới.",
+            ]);
+        }
         return redirect()->route('job-postings.index')->with('success', 'Job posting created successfully!');
     }
 
@@ -338,6 +349,7 @@ class JobPostingController extends Controller
         $jobPosting->cities()->sync($request->city);
         $jobPosting->salaries()->sync($request->input('salaries'));
 
+
         // Redirect with success message
         return redirect()->route('job-postings.index')->with('success', 'Job posting updated successfully!');
     }
@@ -362,8 +374,11 @@ class JobPostingController extends Controller
 
         // Truyền thêm biến isInfomation để kiểm tra trong view
         $isInfomation = $employer->isInfomation ?? false;
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return view('pages.overview-cv', compact('candidate', 'isInfomation'));
+        return view('pages.overview-cv', compact('candidate', 'isInfomation', 'notifications'));
     }
 
 

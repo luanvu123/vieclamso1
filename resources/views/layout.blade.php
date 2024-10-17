@@ -62,28 +62,40 @@
         href="{{ asset('static.topcv.vn/v4/css/components/home/box-flash-badge.3b535c0dc5d2a99dG.css') }}">
     <link rel="stylesheet"
         href="{{ asset('static.topcv.vn/v4/css/components/partials/self-growth.min.90d4930a9a50c71fG.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('vieclamso1/v3/css/animate.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css') }}"
+        referrerpolicy="no-referrer">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/desktop/welcome.min.e2b4b0eb0378b8b1G.css') }}">
+    <link rel="preload"
+        href="{{ asset('static.topcv.vn/v4/css/components/search-job/keyword-autocomplete.min.a2eb399076b73b77G.css') }}"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <script src="{{ asset('static.topcv.vn/v4/cdn/js/jquery-1.11.2.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('v2/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('v2/plugins/select2/css/select2.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('v4/css/style.d8c1fe08632e5e88K.css') }}">
     <link rel="stylesheet" href="{{ asset('v3/css/notification.css') }}">
-    <link rel="stylesheet" href="{{ asset('v4/css/app.min.fa6e35ed40ac0f6cK.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('v4/css/app.min.fa6e35ed40ac0f6cK.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('v4/css/components/desktop/manager-cv.b6b84668d5c1950aK.css') }}">
     <!-- Slick CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css') }}" />
     <link rel="stylesheet" type="text/css"
-        href="{{ asset('cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css') }}" />
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+
 
     <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
     <!-- Slick JS -->
-    <script type="text/javascript" src="{{ asset('cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js') }}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preload" as="style" onload="this.rel='stylesheet'"
-        href="{{ asset('v3/plugins/slick/slick.css') }}">
-    <link rel="preload" as="style" onload="this.rel='stylesheet'"
-        href="{{ asset('v3/plugins/slick/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('static.topcv.vn/v4/cdn/plugins/slick/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('static.topcv.vn/v4/cdn/plugins/slick/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('static.topcv.vn/v4/cdn/plugins/select2/select2.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/support-ticket/support-ticket.b6c89357bb501feaG.css') }}">
     <link rel="stylesheet"
         href="{{ asset('static.topcv.vn/v4/css/components/support-ticket/support-ticket.b6c89357bb501feaK.css') }}">
 
@@ -636,16 +648,7 @@
             display: none;
         }
     </style>
-    <link rel="stylesheet" href="{{ asset('vieclamso1/v3/css/animate.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css') }}"
-        referrerpolicy="no-referrer">
-    <link rel="stylesheet"
-        href="{{ asset('static.topcv.vn/v4/css/components/desktop/welcome.min.e2b4b0eb0378b8b1G.css') }}">
-    <link rel="preload"
-        href="{{ asset('static.topcv.vn/v4/css/components/search-job/keyword-autocomplete.min.a2eb399076b73b77G.css') }}"
-        as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <script src="{{ asset('static.topcv.vn/v4/cdn/js/jquery-1.11.2.min.js') }}"></script>
+
 
 
 
@@ -936,15 +939,11 @@
             style="display:none;visibility:hidden"></iframe></noscript>
 
 
-    <noscript id="deferred-styles">
-        <link rel="stylesheet" href="{{ asset('static.topcv.vn/v4/cdn/plugins/slick/slick.css') }}">
-        <link rel="stylesheet" href="{{ asset('static.topcv.vn/v4/cdn/plugins/slick/slick-theme.css') }}">
-        <link rel="stylesheet" href="{{ asset('static.topcv.vn/v4/cdn/plugins/select2/select2.min.css') }}">
-        <link rel="stylesheet"
-            href="{{ asset('static.topcv.vn/v4/css/components/support-ticket/support-ticket.b6c89357bb501feaG.css') }}">
 
 
-    </noscript>
+
+
+
     <script>
         var loadDeferredStyles = function() {
             var addStylesNode = document.getElementById("deferred-styles");
@@ -1319,7 +1318,84 @@
                     <li class="navbar-right__item">
                         <div class="column-divider"></div>
                     </li>
-                    <div class="group-icon"></div>
+                    <div class="group-icon">
+
+                        <li id="nav-notification" class="navbar-right__item icon dropdown notification open">
+                            <a href="" class="dropdown-toggle">
+                                <i class="fa fa-bell noti-icon"></i>
+                                @if ($notifications->where('is_read', false)->count() > 0)
+                                    <span
+                                        class="notification-count">{{ $notifications->where('is_read', false)->count() }}</span>
+                                @endif
+                            </a>
+
+
+
+                            <div class="group-hover:menu navbar__item__dropdown-menu">
+                                <ul class="dropdown-menu nav navbar-menu">
+                                    <li class="header">
+                                        <span class="title">Thông báo</span>
+                                        <div class="pull-right">
+                                            <!-- Sử dụng form để gửi yêu cầu POST -->
+                                            <form action="{{ route('notifications.markAllAsRead') }}" method="POST"
+                                                style="display:inline;">
+                                                @csrf
+                                                <button type="submit" class="mark-viewed-all text-highlight"
+                                                    style="border:none;background:none;">
+                                                    Đánh dấu là đã đọc
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </li>
+
+                                    <li class="body done">
+                                        <ul class="notification-list">
+                                            @foreach ($notifications as $notification)
+                                                <li
+                                                    class="notification-item {{ $notification->is_read ? 'read' : 'not-read' }}">
+                                                    <a href="{{ route('company-home.show', $notification->company->slug) }}"
+                                                        target="_blank">
+                                                        <div class="notification-item-title">
+                                                            <span>{{ $notification->message }}</span>
+                                                        </div>
+                                                        <div class="notification-item-text">
+                                                            {{ $notification->company->name ?? 'Công ty không xác định' }}
+                                                            vừa đăng tải tin tuyển dụng mới.
+                                                        </div>
+                                                    </a>
+                                                    <div class="notification-item-sub row">
+                                                        <div class="col-xs-6">
+                                                            <span
+                                                                class="notification-item-time">{{ $notification->created_at->format('d/m/Y') }}</span>
+                                                        </div>
+                                                        <div class="col-xs-6 text-right">
+                                                            <a href="" class="mark-viewed"><i
+                                                                    class="fa fa-check icon"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+
+
+
+                        <li id="topcv-connect" class="navbar-right__item icon"><a
+                                href="{{ route('messages.receive.candidate') }}" target="_blank"
+                                class="base-relative"><i class="fa fa-messages noti-icon"
+                                    style="font-size: 20px;"></i>
+                            </a>
+                        </li>
+                    </div>
+
+
+
+
+
                     <li class="navbar-right__item group py16">
                         <div class="title">
                             <a href="javascript:void(0)">
@@ -1910,7 +1986,8 @@
                 </div>
                 <div class="support-ticket-modal-body">
                     <div class="st-text-center">
-                        <p><strong class="st-text-bold">Vieclamso1 sẽ gửi phản hồi qua email bạn đã nhập trong vòng tối
+                        <p><strong class="st-text-bold">Vieclamso1 sẽ gửi phản hồi qua email bạn đã nhập trong vòng
+                                tối
                                 đa
                                 24h.</strong></p>
                         <p>Liên hệ hotline nếu sau 24h bạn chưa nhận được phản hồi qua email: <br>
@@ -2541,6 +2618,7 @@
             event.stopPropagation();
         });
     </script>
+       <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('static.topcv.vn/v4/js/components/nav-header.564259730905beea.js') }}"></script>
     <script src="{{ asset('static.topcv.vn/v4/js/common/chart/chart-demand-job-home-page.37b17e84098c9e3f.js') }}">
     </script>
@@ -2550,6 +2628,7 @@
     <script src="{{ asset('static.topcv.vn/v4/cdn/plugins/chart/chart.js') }}"></script>
     <script src="{{ asset('static.topcv.vn/v4/plugins/owl-carousel/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('vieclamso1/v3/js/jobs2513.js?v=3.0.0') }}" type="text/javascript"></script>
+
 
     <script>
         $(document).ready(function() {
@@ -2816,6 +2895,55 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            // Khi nhấn vào #nav-notification
+            $('#nav-notification').on('click', function(e) {
+                e.preventDefault(); // Ngăn chặn hành động mặc định của liên kết
+
+                // Toggle lớp 'open' cho menu thông báo
+                $(this).toggleClass('open');
+            });
+
+            // Đóng menu khi nhấn ra ngoài
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('#nav-notification').length) {
+                    $('#nav-notification').removeClass('open');
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.slick-track').slick({
+                slidesToShow: 4, // Số lượng slide hiển thị cùng lúc
+                slidesToScroll: 1, // Số slide cuộn mỗi lần
+                autoplay: true, // Tự động phát
+                autoplaySpeed: 2000, // Thời gian giữa các slide
+                dots: true, // Hiện dấu chấm chỉ số slide
+                arrows: true, // Hiện mũi tên điều hướng
+                prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-chevron-left"></i></button>',
+                nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-chevron-right"></i></button>',
+                responsive: [{
+                        breakpoint: 768, // Khi kích thước màn hình nhỏ hơn 768px
+                        settings: {
+                            slidesToShow: 2, // Hiển thị 2 slide
+                        }
+                    },
+                    {
+                        breakpoint: 480, // Khi kích thước màn hình nhỏ hơn 480px
+                        settings: {
+                            slidesToShow: 1, // Hiển thị 1 slide
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+
+
 </body>
 
 </html>

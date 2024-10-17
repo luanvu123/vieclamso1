@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Candidate;
 use App\Models\Employer;
 use App\Models\Message;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -92,8 +93,10 @@ class MessageController extends Controller
         $employers = Employer::whereHas('messages', function ($query) use ($candidate_id) {
             $query->where('candidate_id', $candidate_id);
         })->get();
-
-        return view('pages.messages_candidate', compact('employers'));
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.messages_candidate', compact('employers', 'notifications'));
     }
 
     public function showCandidateMessages(Employer $employer)
@@ -103,8 +106,10 @@ class MessageController extends Controller
             ->where('employer_id', $employer->id)
             ->with('candidate', 'employer')
             ->get();
-
-        return view('pages.messages_show_candidate', compact('messages', 'employer'));
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.messages_show_candidate', compact('messages', 'employer','notifications'));
     }
 
     public function sendCandidateReply(Request $request, Employer $employer)

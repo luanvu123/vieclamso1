@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Activity;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class ActivityController extends Controller
@@ -14,13 +15,19 @@ class ActivityController extends Controller
     {
         $candidate = Auth::guard('candidate')->user();
         $activities = $candidate->activities;
-        return view('pages.activities.index', compact('activities'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.activities.index', compact('activities','notifications'));
     }
 
     // Hiển thị form để thêm hoạt động
     public function create()
     {
-        return view('pages.activities.create');
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.activities.create',compact('notifications'));
     }
 
     // Lưu hoạt động mới vào cơ sở dữ liệu
@@ -44,7 +51,10 @@ class ActivityController extends Controller
     // Hiển thị form để chỉnh sửa hoạt động
     public function edit(Activity $activity)
     {
-        return view('pages.activities.edit', compact('activity'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.activities.edit', compact('activity','notifications'));
     }
 
     // Cập nhật hoạt động trong cơ sở dữ liệu

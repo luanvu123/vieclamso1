@@ -48,15 +48,10 @@
                  </a>
 
                  <div class="d-none" id="login-google-render"></div>
-                 <a href="" id="login-width-facebook"
+                 <a href="{{ route('candidate.login.facebook') }}" id="login-width-facebook"
                      class="btn btn-signin btn-primary input-block-level h-40 btn-login-social">
                      <i class="fa-brands fa-facebook"></i>
                      <span class="ml-2">Facebook</span>
-                 </a>
-                 <a href="" id="login-width-linkedin"
-                     class="btn btn-default btn-signin btn-signin-linkedin input-block-level h-40 btn-login-social">
-                     <i class="fa-brands fa-linkedin"></i>
-                     <span class="ml-2">Linkedin</span>
                  </a>
              </div>
              <div class="d-flex justify-content-center mt-3">
@@ -80,7 +75,7 @@
          <div class="mt-3 d-flex justify-content-around option-auth">
              <div>
                  <span>Bạn chưa có tài khoản?</span>
-                 <a class="text-success" href="{{route('employer.register')}}">
+                 <a class="text-success" href="{{route('candidate.register')}}">
                      Đăng ký ngay
                  </a>
              </div>

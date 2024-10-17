@@ -16,6 +16,7 @@ use App\Models\Hotline;
 use App\Models\Info;
 use App\Models\JobPosting;
 use App\Models\Media;
+use App\Models\Notification;
 use App\Models\OnlineVisitor;
 use App\Models\OnlineVisitorRecruitment;
 use App\Models\Partner;
@@ -49,7 +50,7 @@ class SiteController extends Controller
 
         $salaries = Salary::where('status', 'active')->withCount('jobPostings')->get();
 
-        $companies = Company::select('name', 'logo')->take(12)->get();
+        $companies = Company::select('name', 'logo','slug')->take(12)->get();
         $awards = Award::where('status', 1)->take(5)->get();
         $ecosystems = Ecosystem::where('status', 1)->take(4)->get();
         $medias = Media::where('status', 1)->take(6)->get();
@@ -75,8 +76,11 @@ class SiteController extends Controller
         // Determine which data to show based on the selected type
         $type = $request->input('type', 'job');
         $data = ($type === 'salary') ? $salaryData : $jobData;
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities', 'data', 'type'));
+        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities', 'data', 'type', 'notifications'));
     }
 
     public function filter(Request $request)
@@ -137,7 +141,10 @@ class SiteController extends Controller
         // Determine which data to show based on the selected type
         $type = $request->input('type', 'job');
         $data = ($type === 'salary') ? $salaryData : $jobData;
-        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities', 'data', 'type'));
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities', 'data', 'type', 'notifications'));
     }
 
     public function show($slug)
@@ -182,7 +189,10 @@ class SiteController extends Controller
             $query->whereIn('job_posting_id', $jobPosting_random->pluck('id'));
         })->get();
         $cities = City::where('status', 1)->pluck('name', 'id');
-        return view('pages.job', compact('jobPosting', 'closingDate', 'isExpired', 'candidate', 'applied', 'appliedDate', 'relatedJobs', 'courses', 'company_random', 'jobPosting_random', 'cities_random', 'cities'));
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.job', compact('jobPosting', 'closingDate', 'isExpired', 'candidate', 'applied', 'appliedDate', 'relatedJobs', 'courses', 'company_random', 'jobPosting_random', 'cities_random', 'cities', 'notifications'));
     }
 
     public function searchJobs(Request $request)
@@ -208,9 +218,12 @@ class SiteController extends Controller
         // Lấy các bài đăng công việc theo truy vấn
         $jobPostings = $query->get();
         $jobCount = $jobPostings->count();
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         // Trả dữ liệu về view
-        return view('pages.tim-kiem', compact('jobPostings', 'keyword', 'city', 'jobCount', 'cities'));
+        return view('pages.tim-kiem', compact('jobPostings', 'keyword', 'city', 'jobCount', 'cities', 'notifications'));
     }
 
 
@@ -223,8 +236,10 @@ class SiteController extends Controller
         $jobPostings = JobPosting::whereHas('categories', function ($query) use ($category) {
             $query->where('category_id', $category->id);
         })->with('employer', 'company')->where('closing_date', '>=', Carbon::now())->where('status', 0)->paginate(12);
-
-        return view('pages.category', compact('category', 'jobPostings'));
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.category', compact('category', 'jobPostings', 'notifications'));
     }
 
     public function allCompany()
@@ -233,7 +248,11 @@ class SiteController extends Controller
             ->where('status', 1)
             ->take(20)
             ->get(); // Lấy tối đa 20 công ty có top = 1 và status = 1
-        return view('pages.company', compact('companies'));
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('pages.company', compact('companies', 'notifications'));
     }
     public function searchCompany(Request $request)
     {
@@ -243,7 +262,10 @@ class SiteController extends Controller
             ->where('top', 1)
             ->take(20)
             ->get();
-        return view('pages.company', compact('companies'));
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.company', compact('companies', 'notifications'));
     }
     public function showCompany($slug)
     {
@@ -254,24 +276,35 @@ class SiteController extends Controller
         $cities = City::whereHas('jobPostings', function ($query) use ($jobPostings) {
             $query->whereIn('job_posting_id', $jobPostings->pluck('id'));
         })->get();
-
-        return view('pages.company-show', compact('company', 'jobPostings', 'cities'));
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.company-show', compact('company', 'jobPostings', 'cities', 'notifications'));
     }
 
     public function showPost($slug)
     {
         $genrePost = GenrePost::where('slug', $slug)->with('posts')->firstOrFail();
         $featuredPosts = $genrePost->posts()->where('featured', 1)->take(1)->get();
-        return view('pages.blog', compact('genrePost', 'featuredPosts'));
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.blog', compact('genrePost', 'featuredPosts', 'notifications'));
     }
     public function showCourse()
     {
         $courses = Course::where('status', 1)->get(); // Chỉ lấy những khóa học có trạng thái active
-        return view('pages.course', compact('courses'));
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.course', compact('courses', 'notifications'));
     }
     public function showApp()
     {
-        return view('pages.app');
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.app', compact('notifications'));
     }
 
     public function recruitment(Request $request)
@@ -368,7 +401,7 @@ class SiteController extends Controller
         $consultation_needs_lg = $tr->translate('Nhu cầu tư vấn');
         $select_consultation_needs_lg = $tr->translate('Chọn nhu cầu tư vấn');
         $submit_request_lg = $tr->translate('Gửi yêu cầu tư vấn');
-         $Awardlg_lg = $tr->translate('Giải thưởng tiêu biểu');
+        $Awardlg_lg = $tr->translate('Giải thưởng tiêu biểu');
 
         $cooperation_lg = $tr->translate('Vieclamso1 Việt Nam mong muốn được hợp tác cùng Doanh nghiệp');
         $support_team_ready_lg = $tr->translate('Đội ngũ hỗ trợ của Vieclamso1 luôn sẵn sàng để tư vấn giải pháp tuyển dụng và đồng hành cùng các Quý nhà tuyển dụng');

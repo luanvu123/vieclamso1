@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cv;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -13,11 +14,17 @@ class CVController extends Controller
     {
         $candidate = Auth::guard('candidate')->user();
         $cvs = $candidate->cvs; // Lấy danh sách CV của candidate
-        return view('pages.quan-ly-cv', compact('candidate', 'cvs'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.quan-ly-cv', compact('candidate', 'cvs','notifications'));
     }
     public function uploadCV_index()
     {
-        return view('pages.upload-cv');
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.upload-cv',compact('notifications'));
     }
        public function uploadCv(Request $request)
     {

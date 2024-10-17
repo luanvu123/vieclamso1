@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use App\Models\SavedJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,8 +36,11 @@ class SavedJobController extends Controller
         $savedJobs = SavedJob::where('candidate_id', $candidateId)
             ->with('jobPosting')
             ->get();
+             $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return view('pages.save-job', compact('savedJobs'));
+        return view('pages.save-job', compact('savedJobs','notifications'));
     }
      public function unsave(Request $request)
     {

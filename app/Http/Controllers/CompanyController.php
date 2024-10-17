@@ -51,7 +51,7 @@ class CompanyController extends Controller
             'logo' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
             'scale' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:255',
-            'map' => 'nullable|string|max:255',
+            'map' => 'nullable|string',
             'detail' => 'nullable|string',
             'url' => 'nullable|url',
             'website' => 'nullable|url',
@@ -87,7 +87,7 @@ class CompanyController extends Controller
             $companyData['logo'] = $logoPath;
         }
 
-        $companyData['employer_id'] = $employer->id(); // Set employer_id
+        $companyData['employer_id'] = $employer->id; // Set employer_id
         $companyData['slug'] = Str::slug($request->name); // Tạo slug từ tên công ty
         $companyData['top'] = 0; // Đặt giá trị mặc định cho cột top
         $company = Company::create($companyData);

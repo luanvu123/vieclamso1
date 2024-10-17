@@ -6,6 +6,7 @@ use App\Models\JobReport;
 use Illuminate\Http\Request;
 use App\Models\Candidate;
 use App\Models\Experience;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -69,7 +70,10 @@ class CandidateController extends Controller
     }
     public function dashboard()
     {
-        return view('pages.home');
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.home', compact('notifications'));
     }
     public function logout()
     {
@@ -87,29 +91,28 @@ class CandidateController extends Controller
     {
         try {
             $user = Socialite::driver('google')->user();
-            $existingUser = Candidate::where('email', $user->getEmail())->first();
+            $candidate = Candidate::where('email', $user->getEmail())->first();
 
-            if ($existingUser) {
-                Auth::guard('candidate')->login($existingUser);
-            } else {
-                $newUser = Candidate::create([
-                    'fullname_candicate' => $user->getName(),
-                    'email' => $user->getEmail(),
-                    'avatar_candicate' => $user->getAvatar(),
-                    // Other fields as required
-                ]);
-                Auth::guard('candidate')->login($newUser);
+            if (!$candidate) {
+                $candidate = new Candidate();
+                $candidate->fullname_candidate = $user->getName();
+                $candidate->email = $user->getEmail();
+                $candidate->password = Hash::make('');
+                $candidate->save();
             }
-
-            return redirect()->route('candidate.dashboard')->with('success', 'Xin chào ' . Auth::guard('candidate')->user()->fullname_candicate);
+            Auth::guard('candidate')->login($candidate);
+            return redirect('/')->with('success', 'Xin chào ' . $candidate->fullname_candidate);
         } catch (\Exception $e) {
-            return redirect()->route('candidate.login')->withErrors(['email' => 'Đăng nhập bằng Google thất bại, vui lòng thử lại.']);
+            return redirect()->route('candidate.login')->with('error', 'Failed to log in with Google.');
         }
     }
     public function showAccount()
     {
         $candidate = Auth::guard('candidate')->user();
-        return view('pages.profile', compact('candidate'));
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.profile', compact('candidate', 'notifications'));
     }
 
     public function updateAccount(Request $request)
@@ -132,7 +135,10 @@ class CandidateController extends Controller
 
     public function showChangePasswordForm()
     {
-        return view('pages.change-password');
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.change-password','notifications');
     }
 
     public function changePassword(Request $request)
@@ -155,7 +161,10 @@ class CandidateController extends Controller
 
     public function showPersonalProfile()
     {
-        return view('pages.personal-profile');
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.personal-profile', compact('notifications'));
     }
     public function updatePersonalProfile(Request $request)
     {
@@ -233,7 +242,7 @@ class CandidateController extends Controller
     }
 
 
- public function overview()
+    public function overview()
     {
         $candidate = Auth::guard('candidate')->user();
 
@@ -246,7 +255,9 @@ class CandidateController extends Controller
         $hobbies = $candidate->hobbies;
         $advisers = $candidate->advisers;
         $prizes = $candidate->prizes;
-
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
         return view('pages.overview', compact(
             'candidate',
             'educations',
@@ -257,12 +268,12 @@ class CandidateController extends Controller
             'activities',
             'hobbies',
             'advisers',
-            'prizes'
+            'prizes','notifications'
         ));
     }
 
 
-     public function showCv($id)
+    public function showCv($id)
     {
         $candidate = Candidate::with([
             'educations',
@@ -275,8 +286,10 @@ class CandidateController extends Controller
             'advisers',
             'prizes'
         ])->findOrFail($id);
-
-        return view('pages.overview-cv', compact('candidate'));
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.overview-cv', compact('candidate', 'notifications'));
     }
 
     public function storeReport(Request $request)
@@ -296,5 +309,39 @@ class CandidateController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Job report submitted successfully.');
+    }
+
+
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+    public function handleFacebookCallback()
+    {
+        try {
+            $user = Socialite::driver('facebook')->user();
+            $candidate = Candidate::where('email', $user->getEmail())->first();
+
+            if (!$candidate) {
+                $candidate = new Candidate();
+                $candidate->fullname_candidate = $user->getName();
+                $candidate->email = $user->getEmail();
+                $candidate->password = Hash::make('');
+                $candidate->save();
+            }
+            Auth::guard('candidate')->login($candidate);
+            return redirect('/')->with('success', 'Xin chào ' . $candidate->fullname_candidate);
+        } catch (\Exception $e) {
+            return redirect()->route('candidate.login')->with('error', 'Failed to log in with Google.');
+        }
+    }
+
+    public function markAllAsRead()
+    {
+        // Lấy tất cả thông báo của ứng viên hiện tại và cập nhật cột 'is_read' thành true
+        Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->update(['is_read' => true]);
+
+        return back(); // Quay lại trang trước
     }
 }

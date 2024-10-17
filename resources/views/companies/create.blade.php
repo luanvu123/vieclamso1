@@ -60,30 +60,39 @@
                                     </div>
                                     <div data-v-7805af9a="" class="row">
                                         <div data-v-7805af9a="" class="col-md-6">
-                                            <div>
+                                            <style>
+                                                .form-group {
+                                                    margin-bottom: 20px;
+                                                    /* Khoảng cách giữa các div */
+                                                }
+                                            </style>
+
+                                            <div class="form-group">
                                                 <label for="name">Name:</label>
                                                 <input type="text" id="name" name="name"
                                                     value="{{ old('name') }}" required>
                                             </div>
-                                            <div>
-                                                <label for="image">Image:</label>
+                                            <div class="form-group">
+                                                <label for="image">Background Image:</label>
                                                 <input type="file" id="image" name="image">
                                                 @error('image')
                                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div>
-                                                <label for="logo">Logo:</label>
-                                                <input type="file" id="logo" name="logo">
-                                                @error('logo')
+                                          <div class="form-group">
+                                                <label for="image">Logo:</label>
+                                                <input type="file" id="image" name="logo">
+                                                @error('image')
                                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                                                 @enderror
                                             </div>
+
                                             <div>
                                                 <label for="scale">Scale:</label>
                                                 <input type="text" id="scale" name="scale"
                                                     value="{{ old('scale') }}">
                                             </div>
+
                                             <div class="form">
                                                 <div class="select">
                                                     <h5>Category</h5>

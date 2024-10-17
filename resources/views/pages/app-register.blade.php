@@ -82,14 +82,14 @@
                  ký</button>
              <p class="or text-center fz-12px">Hoặc đăng nhập bằng</p>
          </div>
-         <div class="login-social-list">
-             <a href="{{ route('candidate.login.google') }}"
+         {{-- <div class="login-social-list">
+             <a href="{{ route('employer.google') }}"
                  class="btn btn-default btn-signin input-block-level h-40 btn-login-social">
                  <i class="fa-brands fa-google"></i>
                  <span class="ml-2">Google</span>
              </a>
              <div class="d-none" id="login-google-render"></div>
-         </div>
+         </div> --}}
          <div class="d-flex justify-content-center mt-3">
              <div class="d-flex align-items-start gap-2">
                  <div class="pdt-2">

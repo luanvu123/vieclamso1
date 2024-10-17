@@ -35,7 +35,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'slack',
         'instagram',
         'facebook',
-        'paypal'
+        'paypal',
+         'google_id'
     ];
 
     /**

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Hobby;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class HobbyController extends Controller
@@ -15,13 +16,19 @@ class HobbyController extends Controller
     {
         $candidate = Auth::guard('candidate')->user();
         $hobbies = $candidate->hobbies;
-        return view('pages.hobbies.index', compact('hobbies'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.hobbies.index', compact('hobbies','notifications'));
     }
 
     // Hiển thị form để thêm sở thích
     public function create()
     {
-        return view('pages.hobbies.create');
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.hobbies.create',compact('notifications'));
     }
 
     // Lưu sở thích mới vào cơ sở dữ liệu
@@ -43,7 +50,10 @@ class HobbyController extends Controller
     // Hiển thị form để chỉnh sửa sở thích
     public function edit(Hobby $hobby)
     {
-        return view('pages.hobbies.edit', compact('hobby'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.hobbies.edit', compact('hobby','notifications'));
     }
 
     // Cập nhật sở thích trong cơ sở dữ liệu

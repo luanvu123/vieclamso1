@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\Skill;
 use Illuminate\Support\Facades\Auth;
@@ -14,13 +15,19 @@ class SkillController extends Controller
     {
         $candidate = Auth::guard('candidate')->user();
         $skills = $candidate->skills;
-        return view('pages.skills.index', compact('skills'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.skills.index', compact('skills','notifications'));
     }
 
     // Hiển thị form để thêm kỹ năng
     public function create()
     {
-        return view('pages.skills.create');
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.skills.create',compact('notifications'));
     }
 
     // Lưu kỹ năng mới vào cơ sở dữ liệu
@@ -42,7 +49,10 @@ class SkillController extends Controller
     // Hiển thị form để chỉnh sửa kỹ năng
     public function edit(Skill $skill)
     {
-        return view('pages.skills.edit', compact('skill'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.skills.edit', compact('skill','notifications'));
     }
 
     // Cập nhật kỹ năng trong cơ sở dữ liệu

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Adviser;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class AdviserController extends Controller
@@ -15,13 +16,19 @@ class AdviserController extends Controller
     {
         $candidate = Auth::guard('candidate')->user();
         $advisers = $candidate->advisers;
-        return view('pages.advisers.index', compact('advisers'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.advisers.index', compact('advisers','notifications'));
     }
 
     // Hiển thị form để thêm cố vấn
     public function create()
     {
-        return view('pages.advisers.create');
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.advisers.create' ,compact('notifications'));
     }
 
     // Lưu cố vấn mới vào cơ sở dữ liệu
@@ -45,7 +52,10 @@ class AdviserController extends Controller
     // Hiển thị form để chỉnh sửa cố vấn
     public function edit(Adviser $adviser)
     {
-        return view('pages.advisers.edit', compact('adviser'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.advisers.edit', compact('adviser','notifications'));
     }
 
     // Cập nhật cố vấn trong cơ sở dữ liệu

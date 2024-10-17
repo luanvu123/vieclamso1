@@ -87,6 +87,13 @@ return [
         ],
     ],
 
+
+    'socialite' => [
+        'drivers' => [
+            'google',
+            'google_employer'
+        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Resetting Passwords
@@ -115,11 +122,11 @@ return [
         ],
 
         'employers' => [
-        'provider' => 'employers',
-        'table' => 'password_resets',
-        'expire' => 60,
-        'throttle' => 60,
-    ],
+            'provider' => 'employers',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
     ],
 
     /*

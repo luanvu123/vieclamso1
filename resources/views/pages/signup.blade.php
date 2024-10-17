@@ -86,7 +86,7 @@
                  <p class="or text-center fz-12px">Hoặc đăng nhập bằng</p>
              </div>
              <div class="login-social-list">
-                 <a href="{{ route('candidate.login.google') }}"
+                 <a href="{{ route('candidate.google') }}"
                      class="btn btn-default btn-signin input-block-level h-40 btn-login-social">
                      <i class="fa-brands fa-google"></i>
                      <span class="ml-2">Google</span>

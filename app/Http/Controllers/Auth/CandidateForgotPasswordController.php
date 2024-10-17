@@ -15,6 +15,7 @@ class CandidateForgotPasswordController extends Controller
 {
     public function showForgetPasswordForm()
     {
+        
         return view('pages.app-forgetPassword-candidate');
     }
 

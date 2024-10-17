@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Certificate;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class CertificateController extends Controller
@@ -15,13 +16,19 @@ class CertificateController extends Controller
     {
         $candidate = Auth::guard('candidate')->user();
         $certificates = $candidate->certificates;
-        return view('pages.certificates.index', compact('certificates'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.certificates.index', compact('certificates','notifications'));
     }
 
     // Hiển thị form để thêm chứng chỉ
     public function create()
     {
-        return view('pages.certificates.create');
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.certificates.create',compact('notifications'));
     }
 
     // Lưu chứng chỉ mới vào cơ sở dữ liệu
@@ -45,7 +52,10 @@ class CertificateController extends Controller
     // Hiển thị form để chỉnh sửa chứng chỉ
     public function edit(Certificate $certificate)
     {
-        return view('pages.certificates.edit', compact('certificate'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.certificates.edit', compact('certificate','notifications'));
     }
 
     // Cập nhật chứng chỉ trong cơ sở dữ liệu

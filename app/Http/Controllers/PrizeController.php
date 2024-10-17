@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\Prize;
 use Illuminate\Support\Facades\Auth;
@@ -14,13 +15,19 @@ class PrizeController extends Controller
     {
         $candidate = Auth::guard('candidate')->user();
         $prizes = $candidate->prizes;
-        return view('pages.prizes.index', compact('prizes'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.prizes.index', compact('prizes','notifications'));
     }
 
     // Hiển thị form để thêm giải thưởng
     public function create()
     {
-        return view('pages.prizes.create');
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.prizes.create',compact('notifications'));
     }
 
     // Lưu giải thưởng mới vào cơ sở dữ liệu
@@ -44,7 +51,10 @@ class PrizeController extends Controller
     // Hiển thị form để chỉnh sửa giải thưởng
     public function edit(Prize $prize)
     {
-        return view('pages.prizes.edit', compact('prize'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.prizes.edit', compact('prize','notifications'));
     }
 
     // Cập nhật giải thưởng trong cơ sở dữ liệu

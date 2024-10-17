@@ -50,4 +50,9 @@ class Company extends Model
     {
         return $this->belongsToMany(Category::class, 'category_company');
     }
+    public function notifications()
+{
+    return $this->hasMany(Notification::class);
+}
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Education;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class EducationController extends Controller
@@ -12,12 +13,18 @@ class EducationController extends Controller
     {
         $candidate = Auth::guard('candidate')->user();
         $educations = $candidate->educations;
-        return view('pages.educations.index', compact('educations'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.educations.index', compact('educations','notifications'));
     }
 
     public function create()
     {
-        return view('pages.educations.create');
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.educations.create',compact('notifications'));
     }
 
     public function store(Request $request)
@@ -40,7 +47,10 @@ class EducationController extends Controller
 
     public function edit(Education $education)
     {
-        return view('pages.educations.edit', compact('education'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.educations.edit', compact('education','notifications'));
     }
 
     public function update(Request $request, Education $education)

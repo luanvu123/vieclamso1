@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
@@ -14,13 +15,19 @@ class ProjectController extends Controller
     {
         $candidate = Auth::guard('candidate')->user();
         $projects = $candidate->projects;
-        return view('pages.projects.index', compact('projects'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.projects.index', compact('projects','notifications'));
     }
 
     // Hiển thị form để thêm dự án
     public function create()
     {
-        return view('pages.projects.create');
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.projects.create',compact('notifications'));
     }
 
     // Lưu dự án mới vào cơ sở dữ liệu
@@ -44,7 +51,10 @@ class ProjectController extends Controller
     // Hiển thị form để chỉnh sửa dự án
     public function edit(Project $project)
     {
-        return view('pages.projects.edit', compact('project'));
+         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.projects.edit', compact('project','notifications'));
     }
 
     // Cập nhật dự án trong cơ sở dữ liệu

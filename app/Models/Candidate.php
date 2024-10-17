@@ -27,7 +27,7 @@ class Candidate extends Authenticatable
         'cv_path',
         'gender',
         'address',
-        'skill', 
+        'skill',
         'position',
         'is_public',
         'cv_public',
@@ -36,6 +36,7 @@ class Candidate extends Authenticatable
         'letter_path',
         'cover_image',
         'dob',
+        'google_id'
     ];
 
     /**
@@ -113,4 +114,9 @@ public function advisers(){
 public function prizes(){
     return $this->hasMany(Prize::class);
 }
+public function notifications()
+{
+    return $this->hasMany(Notification::class);
+}
+
 }

@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\ApplicationSuccess;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
@@ -42,11 +43,14 @@ class ApplicationController extends Controller
 
     public function showAppliedJobs()
     {
+
         $candidate_id = Auth::guard('candidate')->id();
         $applications = Application::where('candidate_id', $candidate_id)
             ->with('jobPosting.company', 'cv') // Eager load to reduce the number of queries
             ->get();
-
-        return view('pages.history', compact('applications'));
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pages.history', compact('applications', 'notifications'));
     }
 }
