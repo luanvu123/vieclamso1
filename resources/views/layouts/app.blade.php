@@ -125,7 +125,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     $segment = Request::segment(1);
                                 @endphp
                                 <li
-                                    class="treeview {{ Request::is('users*') || Request::is('roles*') || Request::is('categories*') ? 'active' : '' }}">
+                                    class="treeview {{ Request::is('users*')|| Request::is('cv_templates*') || Request::is('roles*') || Request::is('categories*') ? 'active' : '' }}">
                                     <a href="#">
                                         <img src="{{ asset('backend_admin/images/9165478_unbox_package_icon.svg') }}"
                                             alt="Google" width="20" height="20">
@@ -149,6 +149,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                             <a href="{{ route('categories.index') }}">
                                                 <img src="{{ asset('backend_admin/images/8673763_ic_fluent_slide_size_filled_icon.svg') }}"
                                                     alt="Google" width="20" height="20"> Thể loại
+                                            </a>
+                                        </li>
+                                           <li class="{{ Request::is('cv_templates*') ? 'active' : '' }}">
+                                            <a href="{{ route('cv_templates.index') }}">
+                                                <img src="{{ asset('backend_admin/images/file-cv-svgrepo-com.svg') }}"
+                                                    alt="Google" width="20" height="20"> Mẫu CV
                                             </a>
                                         </li>
                                     </ul>
@@ -187,6 +193,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                                     alt="Google" width="20" height="20"> Khóa học
                                             </a>
                                         </li>
+
+
+
                                     </ul>
                                 </li>
 

@@ -50,7 +50,7 @@ class SiteController extends Controller
 
         $salaries = Salary::where('status', 'active')->withCount('jobPostings')->get();
 
-        $companies = Company::select('name', 'logo','slug')->take(12)->get();
+        $companies = Company::select('name', 'logo','slug')->where('status',1)->where('top_home',1)->take(12)->get();
         $awards = Award::where('status', 1)->take(5)->get();
         $ecosystems = Ecosystem::where('status', 1)->take(4)->get();
         $medias = Media::where('status', 1)->take(6)->get();

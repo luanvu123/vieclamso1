@@ -1083,6 +1083,16 @@
                         Tải Cv lên
                     </a>
                 </div>
+                 <div class="cvo-flex cvo-items-center item-child tag-border">
+                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
+                            class="fa-regular fa-file-lines"></i></span>
+                    <a href="{{ route('mau.cv') }}" class="
+                                ">
+                        Tạo CV
+                    </a>
+                </div>
+
+
             </div>
         </div>
         <div class="menu-item">
@@ -1240,6 +1250,13 @@
                                     Tải Cv lên
                                 </a>
                             </li>
+                             <li class="navbar-menu__item ">
+                                <a href="{{ route('mau.cv') }}" class="text-sm">
+                                    <i class="icon fa-regular fa-file-lines"></i>
+                                    Tạo CV
+                                </a>
+                            </li>
+
                         </ul>
                     </div>
                 </li>

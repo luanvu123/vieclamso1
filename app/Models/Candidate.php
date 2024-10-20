@@ -83,40 +83,42 @@ class Candidate extends Authenticatable
         return $this->hasMany(Experience::class);
     }
     public function educations()
-{
-    return $this->hasMany(Education::class);
+    {
+        return $this->hasMany(Education::class);
+    }
+    public function skills()
+    {
+        return $this->hasMany(Skill::class);
+    }
+    public function certificates()
+    {
+        return $this->hasMany(Certificate::class);
+    }
 
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 
-}
-   public function skills()
-{
-    return $this->hasMany(Skill::class);
-}
-   public function certificates()
-{
-    return $this->hasMany(Certificate::class);
-}
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
+    public function hobbies()
+    {
+        return $this->hasMany(Hobby::class);
+    }
 
-public function projects(){
-    return $this->hasMany(Project::class);
-}
-
-public function activities(){
-    return $this->hasMany(Activity::class);
-}
-public function hobbies(){
-    return $this->hasMany(Hobby::class);
-}
-
-public function advisers(){
-    return $this->hasMany(Adviser::class);
-}
-public function prizes(){
-    return $this->hasMany(Prize::class);
-}
-public function notifications()
-{
-    return $this->hasMany(Notification::class);
-}
-
+    public function advisers()
+    {
+        return $this->hasMany(Adviser::class);
+    }
+    public function prizes()
+    {
+        return $this->hasMany(Prize::class);
+    }
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

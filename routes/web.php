@@ -44,6 +44,7 @@ use App\Http\Controllers\CompanyFollowerController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CVTemplateController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HobbyController;
 use App\Http\Controllers\HotlineController;
@@ -133,6 +134,7 @@ Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('
 Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
+    Route::resource('cv_templates', CVTemplateController::class);
     Route::get('employers/purchasedManage', [EmployerManageController::class, 'purchasedManage'])->name('employers.purchasedManage');
     Route::resource('products', ProductController::class);
     Route::resource('type-employer', TypeEmployerController::class);
@@ -259,6 +261,22 @@ Route::get('employer/google', [EmployerLoginController::class, 'redirectToGoogle
 Route::get('employer/google/callback', [EmployerLoginController::class, 'handleGoogleCallback']);
 
 Route::middleware(['candidate'])->group(function () {
+
+    Route::get('/cv-template', [CvController::class, 'show'])->name('cv.template');
+    Route::get('/cv-minimalism', [CvController::class, 'cvMinimalism'])->name('cv.minimalism');
+    Route::get('/cv-outstanding', [CvController::class, 'cvOutstanding'])->name('cv.outstanding');
+    Route::get('/cv-chrome', [CVController::class, 'cvChrome'])->name('cv.chrome');
+    Route::get('/cv-github', [CVController::class, 'cvGithub'])->name('cv.github');
+    Route::get('/cv-facebook', [CVController::class, 'cvFacebook'])->name('cv.facebook');
+    Route::get('/mau-cv', [CVController::class, 'indexCVTemplate'])->name('mau.cv');
+
+    Route::post('/cv-template/download', [CvController::class, 'downloadPdf'])->name('cv.template.download');
+    Route::post('/cv-minimalism/download', [CVController::class, 'downloadCvMinimalism'])->name('cvMinimalism.download');
+    Route::post('/cv-chrome/download', [CVController::class, 'downloadCvChrome'])->name('cvChrome.download');
+
+
+
+
 
 
     Route::post('/notifications/mark-all-read', [CandidateController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
