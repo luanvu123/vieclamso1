@@ -1091,6 +1091,14 @@
                         Tạo CV
                     </a>
                 </div>
+                <div class="cvo-flex cvo-items-center item-child tag-border">
+                    <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
+                            class="fa-regular fa-file-lines"></i></span>
+                    <a href="{{ route('cv.overview') }}" class="
+                                ">
+                        Tạo CV Profile
+                    </a>
+                </div>
 
 
             </div>
@@ -1256,6 +1264,12 @@
                                     Tạo CV
                                 </a>
                             </li>
+                              <li class="navbar-menu__item ">
+                                <a href="{{ route('cv.overview') }}" class="text-sm">
+                                    <i class="icon fa-regular fa-file-lines"></i>
+                                    Tạo CV Profile
+                                </a>
+                            </li>
 
                         </ul>
                     </div>
@@ -1337,7 +1351,7 @@
                     </li>
                     <div class="group-icon">
 
-                        <li id="nav-notification" class="navbar-right__item icon dropdown notification open">
+                        <li id="nav-notification" class="navbar-right__item icon dropdown notification close">
                             <a href="" class="dropdown-toggle">
                                 <i class="fa fa-bell noti-icon"></i>
                                 @if ($notifications->where('is_read', false)->count() > 0)
@@ -1716,30 +1730,29 @@
         </div>
     </footer>
     <script></script>
-    <link rel="stylesheet" href="{{ asset('static.topcv.vn/v4/css/icon.min.9bbbd0ac9d068264G.css') }}">
-    <link rel="stylesheet" href="{{ asset('static.topcv.vn/v4/css/sign-in-popup.65a92cb48ed456d9G.css') }}">
-    <script src="{{ asset('static.topcv.vn/v4/js/sign-in-popup.min.b45d0ba8edb038f3.js') }}"></script>
-    <script src="{{ asset('vieclamso1/v3/js/common40a0.js?v=2.0.2') }}"></script>
-    <script src="{{ asset('vieclamso1/v3/js/vue.min.js') }}"></script>
-    <script src="{{ asset('vieclamso1/js/jquery.cookie.js') }}"></script>
-    <script src="{{ asset('vieclamso1/js/error-tracking28b5.js?v=2.0.0') }}"></script>
-    <script src="{{ asset('static.topcv.vn/v4/js/modules/tracking/tracking.540f1a976cca78a7.js') }}"></script>
-    <script src="{{ asset('static.topcv.vn/v4/js/modules/tracking/tracking-handlers.f7f15ee0d1d9c81b.js') }}"></script>
-    <script src="{{ asset('static.topcv.vn/v4/cdn/plugins/bootstrap/bootstrap-3.3.4.min.js') }}"></script>
-    <script src="{{ asset('vieclamso1/v3/js/navigation-mobilec924.js?v=1.0.6') }}"></script>
-    <script src="{{ asset('static.topcv.vn/v4/cdn/plugins/slick/slick.min.js') }}"></script>
-    <script src="{{ asset('vieclamso1/js/jquery.form.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('vieclamso1/v3/js/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('vieclamso1/v2/plugins/switchery/switchery.min.js') }}"></script>
-    <script src="{{ asset('vieclamso1/v3/js/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('vieclamso1/v3/js/toastr.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('static.topcv.vn/v4/cdn/js/script.js') }}"></script>
-    <script src="{{ asset('static.topcv.vn/v4/js/app.68e75e4ecb2a8717.js') }}">
+    <link rel="stylesheet" href="{{ asset('/static.topcv.vn/v4/css/icon.min.9bbbd0ac9d068264G.css') }}">
+    <link rel="stylesheet" href="{{ asset('/static.topcv.vn/v4/css/sign-in-popup.65a92cb48ed456d9G.css') }}">
+    <script src="{{ asset('/static.topcv.vn/v4/js/sign-in-popup.min.b45d0ba8edb038f3.js') }}"></script>
+    <script src="{{ asset('/vieclamso1/v3/js/common40a0.js?v=2.0.2') }}"></script>
+    <script src="{{ asset('/vieclamso1/v3/js/vue.min.js') }}"></script>
+    <script src="{{ asset('/vieclamso1/js/jquery.cookie.js') }}"></script>
+    <script src="{{ asset('/vieclamso1/js/error-tracking28b5.js?v=2.0.0') }}"></script>
+    <script src="{{ asset('/static.topcv.vn/v4/js/modules/tracking/tracking.540f1a976cca78a7.js') }}"></script>
+    <script src="{{ asset('/static.topcv.vn/v4/js/modules/tracking/tracking-handlers.f7f15ee0d1d9c81b.js') }}"></script>
+    <script src="{{ asset('/static.topcv.vn/v4/cdn/plugins/bootstrap/bootstrap-3.3.4.min.js') }}"></script>
+    <script src="{{ asset('/vieclamso1/v3/js/navigation-mobilec924.js?v=1.0.6') }}"></script>
+    <script src="{{ asset('/static.topcv.vn/v4/cdn/plugins/slick/slick.min.js') }}"></script>
+    <script src="{{ asset('/vieclamso1/js/jquery.form.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/vieclamso1/v3/js/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('/vieclamso1/v2/plugins/switchery/switchery.min.js') }}"></script>
+    <script src="{{ asset('/vieclamso1/v3/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('/vieclamso1/v3/js/toastr.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/static.topcv.vn/v4/cdn/js/script.js') }}"></script>
+    <script src="{{ asset('/static.topcv.vn/v4/js/app.68e75e4ecb2a8717.js') }}">
         < link rel = "stylesheet"
         href =
-            "{{ asset('static.topcv.vn/v4/css/components/desktop/anti-scam/anti-scam-popup.d5a4109f907b95a2Gca96.css') }}" >
-            <
-            script >
+            "{{ asset('/static.topcv.vn/v4/css/components/desktop/anti-scam/anti-scam-popup.d5a4109f907b95a2Gca96.css') }}" >
+            <script >
             $(document).ready(function() {
                 antiScam = new Vue({
                     el: '#anti-scam',
@@ -1791,14 +1804,14 @@
         <div id="support-ticket-panel" v-if="state == 'open'">
             <div class="support-ticket-panel-header">
                 <div class="support-ticket-panel-title">
-                    <img src="{{ asset('cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/support-ticket/customer.png') }}"
+                    <img src="{{ asset('/cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/support-ticket/customer.png') }}"
                         alt>
                     <span>Trung tâm hỗ trợ ứng viên</span>
                 </div>
                 <div class="support-ticket-cs">
                     <div class="support-ticket-cs-people">
                         <div class="support-ticket-cs-avatar">
-                            <img src="{{ asset('storage/' . $info->supporter) }}" alt="Trung tâm hỗ trợ dịch vụ"
+                            <img src="{{ asset('/storage/' . $info->supporter) }}" alt="Trung tâm hỗ trợ dịch vụ"
                                 title="Trung tâm hỗ trợ dịch vụ">
                         </div>
                         <div>
@@ -1857,7 +1870,7 @@
 
         <div id="support-ticket-floating-message" v-if="state == 'close' && showFloatMessage">
             <div class="support-ticket-avatar" v-on:click.prevent="toggle">
-                <img src="{{ asset('storage/' . $info->supporter) }}" alt="Trung tâm hỗ trợ dịch vụ"
+                <img src="{{ asset('/storage/' . $info->supporter) }}" alt="Trung tâm hỗ trợ dịch vụ"
                     title="Trung tâm hỗ trợ dịch vụ">
                 <div class="icon-status"></div>
             </div>
@@ -1873,7 +1886,7 @@
 
         <div id="support-ticket-launcher" v-on:click.prevent="toggle">
             <i class="fa fa-times" aria-hidden="true" v-if="state == 'open'"></i>
-            <img src="{{ asset('cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/support-ticket/customer.png') }}"
+            <img src="{{ asset('/cdn-new.topcv.vn/unsafe/https_/static.topcv.vn/v4/image/support-ticket/customer.png') }}"
                 alt v-if="state == 'close'">
         </div>
 
@@ -1999,8 +2012,7 @@
                 </div>
                 <div class="support-ticket-modal-body">
                     <div class="st-text-center">
-                        <p><strong class="st-text-bold">Vieclamso1 sẽ gửi phản hồi qua email bạn đã nhập trong vòng
-                                tối
+                        <p><strong class="st-text-bold">Vieclamso1 sẽ gửi phản hồi qua email bạn đã nhập trong vòng tối
                                 đa
                                 24h.</strong></p>
                         <p>Liên hệ hotline nếu sau 24h bạn chưa nhận được phản hồi qua email: <br>
@@ -2285,7 +2297,7 @@
                 <div id="normal-popover">
                     <div class="popover-body" style="display: grid; grid-template-columns: 30% 70%;gap: 10px">
                         <div class="popover-body-icon"><img style="width: 100%; padding: 10px"
-                                alt="notification icon" class src="{{ asset('storage/' . $info->logo) }}">
+                                alt="notification icon" class src="{{ asset('/storage/' . $info->logo) }}">
                         </div>
                         <div class="popover-body-message">Đăng ký nhận thông báo từ Vieclamso1 để không bỏ lỡ các cơ
                             hội
@@ -2307,8 +2319,8 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('www.gstatic.com/firebasejs/8.6.8/firebase-app.js') }}"></script>
-    <script src="{{ asset('www.gstatic.com/firebasejs/8.6.8/firebase-messaging.js') }}"></script>
+    <script src="{{ asset('/www.gstatic.com/firebasejs/8.6.8/firebase-app.js') }}"></script>
+    <script src="{{ asset('/www.gstatic.com/firebasejs/8.6.8/firebase-messaging.js') }}"></script>
     <script>
         var bellNotification = new Vue({
             el: "#bell-container",
@@ -2631,17 +2643,15 @@
             event.stopPropagation();
         });
     </script>
-       <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('static.topcv.vn/v4/js/components/nav-header.564259730905beea.js') }}"></script>
-    <script src="{{ asset('static.topcv.vn/v4/js/common/chart/chart-demand-job-home-page.37b17e84098c9e3f.js') }}">
+    <script src="{{ asset('/static.topcv.vn/v4/js/components/nav-header.564259730905beea.js') }}"></script>
+    <script src="{{ asset('/static.topcv.vn/v4/js/common/chart/chart-demand-job-home-page.37b17e84098c9e3f.js') }}">
     </script>
-    <script src="{{ asset('static.topcv.vn/v4/cdn/js/popper.min.js') }}"></script>
-    <script src="{{ asset('static.topcv.vn/v4/cdn/plugins/select2/select2.min.js') }}"></script>
-    <script src="{{ asset('static.topcv.vn/v4/cdn/plugins/select2/select2.dropdown-position.js') }}"></script>
-    <script src="{{ asset('static.topcv.vn/v4/cdn/plugins/chart/chart.js') }}"></script>
-    <script src="{{ asset('static.topcv.vn/v4/plugins/owl-carousel/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('vieclamso1/v3/js/jobs2513.js?v=3.0.0') }}" type="text/javascript"></script>
-
+    <script src="{{ asset('/static.topcv.vn/v4/cdn/js/popper.min.js') }}"></script>
+    <script src="{{ asset('/static.topcv.vn/v4/cdn/plugins/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('/static.topcv.vn/v4/cdn/plugins/select2/select2.dropdown-position.js') }}"></script>
+    <script src="{{ asset('/static.topcv.vn/v4/cdn/plugins/chart/chart.js') }}"></script>
+    <script src="{{ asset('/static.topcv.vn/v4/plugins/owl-carousel/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('/vieclamso1/v3/js/jobs2513.js?v=3.0.0') }}" type="text/javascript"></script>
 
     <script>
         $(document).ready(function() {
@@ -2654,14 +2664,14 @@
             $(this).closest('a[data-toggle="tooltip"]').tooltip("hide");
         })
     </script>
-    <script src="{{ asset('static.topcv.vn/v4/js/common/homepage/index.775948cf06390eb7.js') }}"></script>
-    <script src="{{ asset('static.topcv.vn/v4/js/pages/home.853e0bf512ee00fe.js') }}"></script>
+    <script src="{{ asset('/static.topcv.vn/v4/js/common/homepage/index.775948cf06390eb7.js') }}"></script>
+    <script src="{{ asset('/static.topcv.vn/v4/js/pages/home.853e0bf512ee00fe.js') }}"></script>
     <script>
         document.querySelectorAll('.footer-top a[target="_blank"]').forEach((tag) => {
             tag.setAttribute('rel', 'nooppener noreferrer');
         });
     </script>
-    <script src="{{ asset('static.topcv.vn/v4/cdn/plugins/lazyload/lazyload.min.js') }}"></script>
+    <script src="{{ asset('/static.topcv.vn/v4/cdn/plugins/lazyload/lazyload.min.js') }}"></script>
     <script>
         function executeLazyFunction(element) {
             var lazyFunctionName = element.getAttribute("data-lazy-function");
@@ -2677,8 +2687,9 @@
             });
         });
     </script>
-    <script src="{{ asset('static.topcv.vn/v4/js/common/evaluate-tool-cv-success.0d139f508d292cc9.js') }}" defer></script>
-    <script src="{{ asset('static.topcv.vn/v4/js/helper.e6a97e09a77e1d17.js') }}"></script>
+    <script src="{{ asset('/static.topcv.vn/v4/js/common/evaluate-tool-cv-success.0d139f508d292cc9.js') }}" defer>
+    </script>
+    <script src="{{ asset('/static.topcv.vn/v4/js/helper.e6a97e09a77e1d17.js') }}"></script>
     <script type="text/javascript">
         (function(c, l, a, r, i, t, y) {
             c[a] = c[a] || function() {
@@ -2866,33 +2877,33 @@
                                 <div class="list-icon_tab status-option verry_bad" data-option="Rất tệ"
                                     data-value="1">
                                     <lottie-player
-                                        src="{{ asset('vieclamso1/v4/image/survey/search-job/animation/verry_bad.json') }}"
+                                        src="{{ asset('/vieclamso1/v4/image/survey/search-job/animation/verry_bad.json') }}"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
                                     <div class="list-icon_tab-title">Rất tệ</div>
                                 </div>
                                 <div class="list-icon_tab status-option bad" data-option="Tệ" data-value="2">
                                     <lottie-player
-                                        src="{{ asset('vieclamso1/v4/image/survey/search-job/animation/bad.json') }}"
+                                        src="{{ asset('/vieclamso1/v4/image/survey/search-job/animation/bad.json') }}"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
                                     <div class="list-icon_tab-title">Tệ</div>
                                 </div>
                                 <div class="list-icon_tab status-option normal" data-option="Bình thường"
                                     data-value="3">
                                     <lottie-player
-                                        src="{{ asset('vieclamso1/v4/image/survey/search-job/animation/normal.json') }}"
+                                        src="{{ asset('/vieclamso1/v4/image/survey/search-job/animation/normal.json') }}"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
                                     <div class="list-icon_tab-title">Bình thường</div>
                                 </div>
                                 <div class="list-icon_tab status-option good" data-option="Tốt" data-value="4">
                                     <lottie-player
-                                        src="{{ asset('vieclamso1/v4/image/survey/search-job/animation/good.json') }}"
+                                        src="{{ asset('/vieclamso1/v4/image/survey/search-job/animation/good.json') }}"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
                                     <div class="list-icon_tab-title">Tốt</div>
                                 </div>
                                 <div class="list-icon_tab status-option verry_good" data-option="Tuyệt vời"
                                     data-value="5">
                                     <lottie-player
-                                        src="{{ asset('vieclamso1/v4/image/survey/search-job/animation/verry_good.json') }}"
+                                        src="{{ asset('/vieclamso1/v4/image/survey/search-job/animation/verry_good.json') }}"
                                         background="transparent.html" speed="1" autoplay loop></lottie-player>
                                     <div class="list-icon_tab-title">Tuyệt vời</div>
                                 </div>
@@ -2908,7 +2919,7 @@
             </div>
         </div>
     </div>
-    <script>
+      <script>
         $(document).ready(function() {
             // Khi nhấn vào #nav-notification
             $('#nav-notification').on('click', function(e) {
@@ -2946,17 +2957,15 @@
                         }
                     },
                     {
-                        breakpoint: 480, // Khi kích thước màn hình nhỏ hơn 480px
+                        breakpoint: 480,
                         settings: {
-                            slidesToShow: 1, // Hiển thị 1 slide
+                            slidesToShow: 1,
                         }
                     }
                 ]
             });
         });
     </script>
-
-
 </body>
 
 </html>
