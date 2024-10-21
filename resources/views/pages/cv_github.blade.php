@@ -73,10 +73,10 @@
         }
     </style>
     <div class="github-container"  id="github-container" style="background-color: #ffffff;">
-        <form id="colorForm" class="text-center">
+        {{-- <form id="colorForm" class="text-center">
             <label for="colorPicker">Chọn màu nền cho CV:</label>
             <input type="color" id="colorPicker" name="bgcolor" value="#ffffff">
-        </form>
+        </form> --}}
         <!-- GitHub Header -->
         <header class="github-header">
             <div class="github-profile">
@@ -201,7 +201,7 @@
         </section>
 
         <!-- Download Button -->
-        <form action="{{ route('cv.template.download') }}" method="POST" class="mt-3">
+        <form action="{{ route('cvGithub.download') }}" method="POST" class="mt-3">
             @csrf
             <input type="hidden" name="bgcolor" id="hiddenBgColor" value="#ffffff">
 

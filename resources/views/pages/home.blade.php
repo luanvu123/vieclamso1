@@ -140,6 +140,7 @@
                          <div class="box-smart-filter box-smart-feature-jobs"></div>
                      </div>
 
+
                      <div class="text-guide-quick-view guide-box-feature active">
                          <p><i class="fa-solid fa-lightbulb-on fa-fade"></i> <b>Gợi ý</b>: Di chuột vào tiêu đề việc làm
                              để xem thêm thông tin chi tiết
@@ -174,7 +175,7 @@
                                                                          <span class="label label-warning urgent">Gấp</span>
                                                                      @endif
                                                                      <strong
-                                                                         class="job_title ">{{ $jobPosting->title }}</strong>
+                                                                         class="job_title">{{ $jobPosting->title }}</strong>
                                                                  </a>
                                                              </h3>
                                                              <a href="{{ route('job.show', $jobPosting->slug) }}"
@@ -184,10 +185,12 @@
                                                              </a>
                                                              <div class="box-footer">
                                                                  <div class="col-job-info">
-                                                                     <div class="salary"><span
+                                                                     <div class="salary">
+                                                                         <span
                                                                              class="text_ellipsis">{{ $jobPosting->salary }}</span>
                                                                      </div>
-                                                                     <div class="address"><span class="text_ellipsis">
+                                                                     <div class="address">
+                                                                         <span class="text_ellipsis">
                                                                              @foreach ($jobPosting->cities as $city)
                                                                                  {{ $city->name }}@if (!$loop->last)
                                                                                      ,
@@ -198,7 +201,7 @@
                                                                  </div>
                                                                  <div class="col-like">
                                                                      <a
-                                                                         href="javascript:showLoginPopup(null, 'Đăng nhập hoặc Đăng ký để lưu tin tuyển dụng')">
+                                                                         href="" onclick="saveJob({{ $jobPosting->id }})">
                                                                          <button class="save-job"><i
                                                                                  class="fa-regular fa-heart"></i></button>
                                                                      </a>
@@ -209,22 +212,21 @@
                                                  </div>
                                              </div>
                                          @endforeach
-
                                      </div>
                                  </div>
                              </div>
                          </div>
                          <div class="feature-job-page">
-                             <div class="content"><span class="btn-feature-jobs-pre btn-slick-arrow slick-disabled"><i
-                                         class="fa-solid fa-chevron-left"></i></span>
+                             <div class="content">
                                  <div class="feature-job-page__text">
-                                     <p class="slick-pagination"><span class="hight-light"> {{ $jobPostings->links() }}
+                                     <p class="slick-pagination">
+                                         <span class="highlight">{{ $jobPostings->links() }}</span>
                                      </p>
-                                 </div> <span class="btn-feature-jobs-next btn-slick-arrow"><i
-                                         class="fa-solid fa-chevron-right"></i></span>
+                                 </div>
                              </div>
                          </div>
                      </div>
+
 
                  </section>
              </div>
@@ -239,18 +241,18 @@
                  <div id="slider-company" class="top-company__body slick-initialized slick-slider">
                      <div class="slick-list draggable">
                          <div class="slick-track">
-                                 @foreach ($companies as $company)
-                                     <div class="slick-slide">
-                                         <div class="top-company--item">
-                                             <a href="{{ route('company-home.show', $company->slug) }}" target="_blank">
-                                                 <img src="{{ $company->logo ? asset('storage/' . $company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
-                                                     class="lazy" alt="{{ $company->name }}">
-                                             </a>
-                                             <p>{{ $company->name }}</p>
-                                         </div>
+                             @foreach ($companies as $company)
+                                 <div class="slick-slide">
+                                     <div class="top-company--item">
+                                         <a href="{{ route('company-home.show', $company->slug) }}" target="_blank">
+                                             <img src="{{ $company->logo ? asset('storage/' . $company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
+                                                 class="lazy" alt="{{ $company->name }}">
+                                         </a>
+                                         <p>{{ $company->name }}</p>
                                      </div>
-                                 @endforeach
-                             </div>
+                                 </div>
+                             @endforeach
+                         </div>
                      </div>
                  </div>
              </div>

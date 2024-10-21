@@ -17,12 +17,7 @@
                 <label for="image">Image</label>
                 <input type="file" name="image" class="form-control" accept="image/*" required>
             </div>
-            <div class="form-group" id="color-pickers">
-                <label for="colors">Colors</label>
-                <input type="color" name="colors[]" class="form-control" value="#3498db" required>
-                <input type="color" name="colors[]" class="form-control" value="#e74c3c" required>
-                <input type="color" name="colors[]" class="form-control" value="#2ecc71" required>
-            </div>
+         
             <div class="form-group">
                 <label for="status">Status</label>
                 <select name="status" class="form-control">

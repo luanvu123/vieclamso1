@@ -1,130 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Template</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <title>Tải CV PDF</title>
     <style>
-        * {
-            box-sizing: border-box;
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            /* Use a font that supports Vietnamese */
+            color: #333;
             margin: 0;
             padding: 0;
-            font-family: 'DejaVu Sans', sans-serif;
+            background-color: #f9f9f9;
         }
 
-        body {
-            background-color: #f4f4f4;
+        .classic-container {
+            font-family: 'DejaVu Sans', sans-serif;
+            /* Sử dụng font hỗ trợ tiếng Việt */
             color: #333;
+            line-height: 1.6;
         }
 
-        .cv-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: #fff;
-            font-family: 'DejaVu Sans', sans-serif;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
 
-        .cv-header {
+        .classic-header {
             display: flex;
-            align-items: center;
+            /* Flexbox để căn chỉnh avatar và thông tin */
             border-bottom: 2px solid #ccc;
-            padding-bottom: 20px;
+            /* Đường viền dưới */
+            padding-bottom: 15px;
+            /* Khoảng cách dưới */
+            margin-bottom: 20px;
+            /* Khoảng cách dưới */
         }
 
-        .cv-profile {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-
-        .cv-avatar img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
+        .classic-avatar {
             margin-right: 20px;
+            /* Khoảng cách bên phải cho avatar */
         }
 
-        .cv-info {
+        .classic-avatar img {
+            width: 100px;
+            /* Kích thước avatar */
+            height: 100px;
+            /* Tự động căn chỉnh chiều cao */
+            border-radius: 50%;
+            /* Bo tròn avatar */
+        }
+
+        .classic-info {
             flex-grow: 1;
+            /* Căn giữa thông tin */
         }
 
-        .cv-name {
+        .classic-name {
             font-size: 24px;
-            font-weight: bold;
+            /* Kích thước chữ tên */
+            margin: 0;
+            /* Bỏ khoảng cách mặc định */
         }
 
-        .cv-status {
+        .classic-status {
             font-size: 18px;
-            color: #666;
+            /* Kích thước chữ vị trí */
+            color: #777;
+            /* Màu chữ nhạt hơn */
         }
 
         .cv-section {
-            margin: 20px 0;
+            margin-bottom: 20px;
+            /* Khoảng cách giữa các section */
         }
 
         .section-title {
             font-size: 20px;
+            /* Kích thước chữ tiêu đề section */
+            border-bottom: 1px solid #ccc;
+            /* Đường viền dưới cho tiêu đề */
+            padding-bottom: 10px;
+            /* Khoảng cách dưới tiêu đề */
+        }
+
+        .cv-section ul {
+            list-style: none;
+            /* Bỏ dấu đầu dòng */
+            padding: 0;
+            /* Bỏ khoảng cách */
+        }
+
+        .cv-section ul li {
             margin-bottom: 10px;
-            color: #333;
+            /* Khoảng cách giữa các mục */
         }
 
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        ul li {
-            margin: 5px 0;
-        }
-
-        .btn {
+        .btn-primary {
             background-color: #007bff;
+            /* Màu nền cho nút */
             color: #fff;
-            padding: 10px 20px;
+            /* Màu chữ */
             border: none;
+            /* Bỏ đường viền */
+            padding: 10px 20px;
+            /* Khoảng cách trong nút */
             border-radius: 5px;
+            /* Bo góc nút */
             cursor: pointer;
+            /* Con trỏ chuột */
+            transition: background-color 0.3s;
+            /* Hiệu ứng chuyển màu */
         }
 
-        .btn:hover {
+        .btn-primary:hover {
             background-color: #0056b3;
+            /* Màu nền khi hover */
         }
     </style>
 </head>
 
 <body>
-    <div class="cv-container" id="cv-container">
-        <header class="cv-header">
-            <div class="cv-profile">
-                <div class="cv-avatar">
+    <div class="classic-container" id="cv-container">
+        <!-- Classic Header -->
+        <header class="classic-header">
+            <div class="classic-profile">
+                <div class="classic-avatar">
                     <img src="{{ $candidate->avatar_candidate ? public_path('storage/' . $candidate->avatar_candidate) : public_path('storage/avatar/avatar-default.jpg') }}"
                         alt="Avatar" />
                 </div>
-                <div class="cv-info">
-                    <h1 class="cv-name">{{ $candidate->fullname_candidate }}</h1>
-                    <p class="cv-status">{{ $candidate->position }}</p>
+                <div class="classic-info">
+                    <h1 class="classic-name">{{ $candidate->fullname_candidate }}</h1>
+                    <p class="classic-status">{{ $candidate->position }}</p>
                 </div>
             </div>
         </header>
 
+        <!-- About Section -->
         <section class="cv-section about">
-            <h2 class="section-title"><i class="fas fa-info-circle"></i> Thông Tin Cá Nhân</h2>
-            <p>Email: {{ $candidate->email }}</p>
-            <p>Điện Thoại: {{ $candidate->phone_number_candidate }}</p>
-            <p>Địa Chỉ: {{ $candidate->address }}</p>
+            <h2 class="section-title"> About</h2>
+            <p><strong>Email:</strong> {{ $candidate->email }}</p>
+            <p><strong>Phone:</strong> {{ $candidate->phone_number_candidate }}</p>
+            <p><strong>Address:</strong> {{ $candidate->address }}</p>
         </section>
 
+        <!-- Work Experience -->
         <section class="cv-section work-experience">
-            <h2 class="section-title"><i class="fas fa-briefcase"></i> Kinh Nghiệm Làm Việc</h2>
+            <h2 class="section-title"> Work Experience</h2>
             <ul>
                 @foreach ($candidate->experiences as $experience)
                     <li>
-                        <strong>{{ $experience->title }}</strong> tại {{ $experience->company }}<br>
+                        <strong>{{ $experience->title }}</strong> at {{ $experience->company }}<br>
                         <span class="experience-dates">({{ $experience->start_date }} -
                             {{ $experience->end_date }})</span>
                     </li>
@@ -132,8 +155,9 @@
             </ul>
         </section>
 
+        <!-- Education -->
         <section class="cv-section education">
-            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Học Vấn</h2>
+            <h2 class="section-title"> Education</h2>
             <ul>
                 @foreach ($candidate->educations as $education)
                     <li>
@@ -145,8 +169,9 @@
             </ul>
         </section>
 
+        <!-- Skills -->
         <section class="cv-section skills">
-            <h2 class="section-title"><i class="fas fa-tools"></i> Kỹ Năng</h2>
+            <h2 class="section-title">Skills</h2>
             <ul>
                 @foreach ($candidate->skills as $skill)
                     <li><i class="fa fa-check-circle" aria-hidden="true"></i> {{ $skill->name }}</li>
@@ -154,18 +179,21 @@
             </ul>
         </section>
 
+        <!-- Hobbies -->
         <section class="cv-section hobbies">
-            <h2 class="section-title"><i class="fas fa-smile"></i> Sở Thích</h2>
+            <h2 class="section-title"> Hobbies</h2>
             <p>{{ $candidate->hobbies->pluck('name')->implode(', ') }}</p>
         </section>
 
+        <!-- Certificates -->
         <section class="cv-section certificates">
-            <h2 class="section-title"><i class="fas fa-certificate"></i> Chứng Chỉ</h2>
+            <h2 class="section-title"> Certificates</h2>
             <p>{{ $candidate->certificates->pluck('name')->implode(', ') }}</p>
         </section>
 
+        <!-- Activities -->
         <section class="cv-section activities">
-            <h2 class="section-title"><i class="fas fa-flag"></i> Hoạt Động</h2>
+            <h2 class="section-title"> Activities</h2>
             <ul>
                 @foreach ($candidate->activities as $activity)
                     <li>
@@ -178,8 +206,9 @@
             </ul>
         </section>
 
+        <!-- Advisers -->
         <section class="cv-section advisers">
-            <h2 class="section-title"><i class="fas fa-user-tie"></i> Cố Vấn</h2>
+            <h2 class="section-title"> Advisers</h2>
             <ul>
                 @foreach ($candidate->advisers as $adviser)
                     <li>
@@ -190,8 +219,9 @@
             </ul>
         </section>
 
+        <!-- Prizes -->
         <section class="cv-section prizes">
-            <h2 class="section-title"><i class="fas fa-trophy"></i> Giải Thưởng</h2>
+            <h2 class="section-title"> Prizes</h2>
             <ul>
                 @foreach ($candidate->prizes as $prize)
                     <li>

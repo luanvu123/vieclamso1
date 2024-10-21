@@ -196,6 +196,7 @@
         }
     </style>
     <div class="cv-container" id="cv-container">
+        
         <header>
             <div class="profile-avatar">
                 <img src="{{ $candidate->avatar_candidate ? asset('storage/' . $candidate->avatar_candidate) : asset('storage/avatar/avatar-default.jpg') }}"
@@ -290,11 +291,6 @@
                 @endforeach
             </ul>
         </section>
-
-        <form action="{{ route('cvMinimalism.download') }}" method="POST" class="mt-3">
-            @csrf
-            <button type="submit" class="btn">Tải xuống PDF</button>
-        </form>
         <script>
             // Thay đổi màu nền khi chọn màu
             document.getElementById('colorPicker').addEventListener('input', function() {
@@ -303,5 +299,11 @@
                 document.getElementById('hiddenBgColor').value = selectedColor;
             });
         </script>
+        <form action="{{ route('cvMinimalism.download') }}" method="POST" class="mt-3">
+            @csrf
+            <input type="hidden" id="hiddenBgColor" name="bgcolor" value="#ffffff">
+            <button type="submit" class="btn">Tải xuống PDF</button>
+        </form>
+
     </div>
 @endsection

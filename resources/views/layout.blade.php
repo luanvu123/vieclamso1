@@ -1345,9 +1345,6 @@
                                         class="notification-count">{{ $notifications->where('is_read', false)->count() }}</span>
                                 @endif
                             </a>
-
-
-
                             <div class="group-hover:menu navbar__item__dropdown-menu">
                                 <ul class="dropdown-menu nav navbar-menu">
                                     <li class="header">
@@ -1364,7 +1361,6 @@
                                             </form>
                                         </div>
                                     </li>
-
                                     <li class="body done">
                                         <ul class="notification-list">
                                             @foreach ($notifications as $notification)

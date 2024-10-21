@@ -262,6 +262,7 @@ Route::get('employer/google/callback', [EmployerLoginController::class, 'handleG
 
 Route::middleware(['candidate'])->group(function () {
 
+    Route::get('/cv-coffee', [CvController::class, 'cvCoffee'])->name('cv.coffee');
     Route::get('/cv-template', [CvController::class, 'show'])->name('cv.template');
     Route::get('/cv-minimalism', [CvController::class, 'cvMinimalism'])->name('cv.minimalism');
     Route::get('/cv-outstanding', [CvController::class, 'cvOutstanding'])->name('cv.outstanding');
@@ -270,6 +271,10 @@ Route::middleware(['candidate'])->group(function () {
     Route::get('/cv-facebook', [CVController::class, 'cvFacebook'])->name('cv.facebook');
     Route::get('/mau-cv', [CVController::class, 'indexCVTemplate'])->name('mau.cv');
 
+
+    Route::post('/cv-github/download', [CvController::class, 'downloadCvGithub'])->name('cvGithub.download');
+    Route::post('/cv-outstanding/download', [CvController::class, 'downloadCvOutstanding'])->name('cvOutstanding.download');
+     Route::post('/cv-coffee/download', [CvController::class, 'downloadCvCoffee'])->name('cvCoffee.download');
     Route::post('/cv-template/download', [CvController::class, 'downloadPdf'])->name('cv.template.download');
     Route::post('/cv-minimalism/download', [CVController::class, 'downloadCvMinimalism'])->name('cvMinimalism.download');
     Route::post('/cv-chrome/download', [CVController::class, 'downloadCvChrome'])->name('cvChrome.download');

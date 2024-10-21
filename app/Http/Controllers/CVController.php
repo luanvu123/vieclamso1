@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Imagick;
 use PDF;
+use Str;
 
 class CVController extends Controller
 {
@@ -132,7 +133,7 @@ class CVController extends Controller
         // Tải PDF với các dữ liệu cần thiết
         $pdf = PDF::loadView('pages.cv_template_pdf', compact('candidate', 'bgColor', 'notifications'));
 
-        return $pdf->download('cv_' . $candidate->fullname_candidate . '.pdf');
+        return $pdf->download('cv_' . Str::slug($candidate->fullname_candidate) . '.pdf');
     }
     public function downloadCvChrome(Request $request)
     {
@@ -146,7 +147,7 @@ class CVController extends Controller
         // Optional: Adjust PDF options like page size (A4)
         $pdf->setPaper('A4', 'portrait');
 
-        return $pdf->download('cv_chrome_' . $candidate->fullname_candidate . '.pdf');
+        return $pdf->download('cv_chrome_' . Str::slug($candidate->fullname_candidate) . '.pdf');
     }
 
 
@@ -170,9 +171,7 @@ class CVController extends Controller
         $pdf = Pdf::loadView('pages.cv_minimalism_download', compact('candidate', 'notifications'))
             ->setPaper('a4', 'portrait')  // Thiết lập khổ giấy A4, trang dọc
             ->setOption('defaultFont', 'DejaVu Sans');  // Font hỗ trợ tiếng Việt
-
-        // Trả về file PDF để tải xuống
-        return $pdf->download('cv_minimalism.pdf');
+        return $pdf->download('cv_minimalism_' . Str::slug($candidate->fullname_candidate) . '.pdf');
     }
     public function cvOutstanding()
     {
@@ -210,5 +209,63 @@ class CVController extends Controller
         $candidate = auth()->guard('candidate')->user();
 
         return view('pages.cv_facebook', compact('candidate', 'notifications'));
+    }
+    public function cvCoffee()
+    {
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $candidate = auth()->guard('candidate')->user();
+
+        return view('pages.cv_coffee', compact('candidate', 'notifications'));
+    }
+    public function downloadCvCoffee()
+    {
+        $candidate = auth()->guard('candidate')->user();
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Tạo view cho PDF
+        $pdf = Pdf::loadView('pages.cv_coffee_download', compact('candidate', 'notifications'))
+            ->setPaper('a4', 'portrait')  // Thiết lập khổ giấy A4, trang dọc
+            ->setOption('defaultFont', 'DejaVu Sans');  // Font hỗ trợ tiếng Việt
+
+        // Trả về file PDF để tải xuống
+        return $pdf->download('cv_coffee_' . Str::slug($candidate->fullname_candidate) . '.pdf');
+    }
+    public function  downloadCvOutstanding()
+    {
+        $candidate = auth()->guard('candidate')->user();
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Tạo view cho PDF
+        $pdf = Pdf::loadView('pages.cv_outstanding_download', compact('candidate', 'notifications'))
+            ->setPaper('a4', 'portrait')  // Thiết lập khổ giấy A4, trang dọc
+            ->setOption('defaultFont', 'DejaVu Sans');  // Font hỗ trợ tiếng Việt
+        // Optional: Adjust PDF options like page size (A4)
+        $pdf->setPaper('A4', 'portrait');
+
+        return $pdf->download('cv_outstanding_' . Str::slug($candidate->fullname_candidate) . '.pdf');
+    }
+
+    public function  downloadCvGithub()
+    {
+        $candidate = auth()->guard('candidate')->user();
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Tạo view cho PDF
+        $pdf = Pdf::loadView('pages.cv_github_download', compact('candidate', 'notifications'))
+            ->setPaper('a4', 'portrait')  // Thiết lập khổ giấy A4, trang dọc
+            ->setOption('defaultFont', 'DejaVu Sans');  // Font hỗ trợ tiếng Việt
+        // Optional: Adjust PDF options like page size (A4)
+        $pdf->setPaper('A4', 'portrait');
+
+        return $pdf->download('cv_github_' . Str::slug($candidate->fullname_candidate) . '.pdf');
     }
 }

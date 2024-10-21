@@ -8,8 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class CvTemplate extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['name', 'url', 'image', 'colors', 'status'];
-
-  
+    protected $fillable = ['name', 'url', 'image', 'status'];
 }

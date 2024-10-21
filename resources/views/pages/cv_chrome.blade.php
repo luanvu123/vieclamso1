@@ -2,10 +2,7 @@
 
 @section('content')
     <div class="chrome-container" id="chrome-container" style="font-family: 'Arial', sans-serif; color: #333;">
-        <form id="colorForm" class="text-center">
-            <label for="colorPicker">Chọn màu nền cho CV:</label>
-            <input type="color" id="colorPicker" name="bgcolor" value="#ffffff">
-        </form>
+       
         <!-- Chrome Tab Bar Simulation -->
         <div class="chrome-tab-bar" style="background-color: #f5f5f5; padding: 10px 20px; border-bottom: 2px solid #ddd;">
             <div class="chrome-tab" style="display: flex; align-items: center;">

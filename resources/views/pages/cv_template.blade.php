@@ -91,10 +91,7 @@ ul li {
 
 </style>
   <div class="cv-container" id="cv-container">
-      <form id="colorForm" class="text-center">
-            <label for="colorPicker">Chọn màu nền cho CV:</label>
-            <input type="color" id="colorPicker" name="bgcolor" value="#ffffff">
-        </form>
+      
         <header class="cv-header">
             <div class="cv-profile">
                 <div class="cv-avatar">

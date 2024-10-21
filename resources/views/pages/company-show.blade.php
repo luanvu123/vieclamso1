@@ -37,7 +37,6 @@
                            <div class="company-image-logo">
                                <img draggable="false"
                                    src="{{ $company->logo ? asset('storage/' . $company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
-
                                    alt="{{ $company->name }}" class="img-responsive">
                            </div>
                        </div>
@@ -197,18 +196,32 @@
                                                                        </span>
                                                                    @endforeach
                                                                </label>
-
+                                                               @php
+                                                                   $closingDate = \Carbon\Carbon::parse(
+                                                                       $job->closing_date,
+                                                                   );
+                                                                   $now = \Carbon\Carbon::now();
+                                                                   $daysLeft = $closingDate->diffInDays($now); // Tính số ngày còn lại
+                                                               @endphp
                                                                <label class="time mobile-hidden">
-                                                                   Còn
-                                                                   <strong>{{ \Carbon\Carbon::parse($job->closing_date)->diffInDays() }}</strong>
-                                                                   ngày để ứng tuyển
+                                                                   @if ($closingDate->isPast())
+                                                                       Hết hạn ứng tuyển
+                                                                   @else
+                                                                       Còn <strong>{{ $daysLeft }}</strong> ngày để ứng
+                                                                       tuyển
+                                                                   @endif
                                                                </label>
                                                            </div>
                                                            <div class="icon">
-                                                               <button data-toggle="modal" data-target="#applyModal"
-                                                                   class="btn btn-apply-now">
-                                                                   <span>Ứng tuyển</span>
-                                                               </button>
+                                                               @if ($closingDate->isPast())
+                                                                   Hết hạn ứng tuyển
+                                                               @else
+                                                                   <button data-toggle="modal" data-target="#applyModal"
+                                                                       class="btn btn-apply-now">
+                                                                       <span>Ứng tuyển</span>
+                                                                   </button>
+                                                               @endif
+
                                                                <div
                                                                    class="box-save-job  box-save-job-hover   job-notsave ">
                                                                    <a href="" class="btn-save save">

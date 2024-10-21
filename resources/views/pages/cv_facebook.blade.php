@@ -2,11 +2,7 @@
 
 @section('content')
     <div class="facebook-container" id="facebook-container">
-        <form id="colorForm" class="text-center">
-            <label for="colorPicker">Chọn màu nền cho CV:</label>
-            <input type="color" id="colorPicker" name="bgcolor" value="#ffffff">
-        </form>
-        <!-- Facebook Header -->
+       
         <header class="facebook-header">
             <div class="facebook-profile">
                 <div class="facebook-avatar">

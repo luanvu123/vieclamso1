@@ -61,7 +61,7 @@
                                  data-template="<div data-job-id={{ $jobPosting->id }} class='flash-job-tag-tooltip tooltip' role='tooltip'><div class='tooltip-arrow'></div><div class='tooltip-inner'></div></div>"
                                  title="" data-placement="top" data-container="body"
                                  data-original-title="<div>Tin đăng được NTD tương tác thường xuyên trong 24 giờ qua | <a class='flash-job-tag-tooltip-view-all' href='https://www.topcv.vn/huy-hieu-tia-set'>Xem tất cả</a> <i class='fa fa-chevron-right'></i></div>">
-                                 <img src="https://www.topcv.vn/v4/image/job-list/icon-flash.webp" alt="">
+
                              </div>
                              <h1 class="job-detail__info--title  has-flash ">
                                  {{ $jobPosting->title }}
@@ -663,8 +663,7 @@
                                                                          src="{{ $relatedJob->company->logo ? asset('storage/' . $relatedJob->company->logo) : asset('storage/avatar/avatar-default.jpg') }}">
                                                                  </a>
                                                                  <div class="tag-job-flash">
-                                                                     <img src="https://www.topcv.vn/v4/image/job-list/icon-flash.webp"
-                                                                         alt="">
+                                                                     
                                                                  </div>
                                                              </div>
                                                              <div class="body">
@@ -1327,6 +1326,6 @@
      </div>
 
 
-     
+
 
  @endsection

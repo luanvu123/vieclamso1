@@ -21,15 +21,7 @@
                     <img src="{{ asset('storage/' . $template->image) }}" alt="{{ $template->name }}" width="100" class="mt-2">
                 @endif
             </div>
-            <div class="form-group" id="color-pickers">
-                <label for="colors">Colors</label>
-                @php
-                    $colors = json_decode($template->colors);
-                @endphp
-                @foreach($colors as $color)
-                    <input type="color" name="colors[]" class="form-control" value="{{ $color }}" required>
-                @endforeach
-            </div>
+          
             <div class="form-group">
                 <label for="status">Status</label>
                 <select name="status" class="form-control">

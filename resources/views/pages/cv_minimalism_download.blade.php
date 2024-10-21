@@ -89,7 +89,7 @@
 </head>
 
 <body>
-    <div class="cv-container">
+    <div class="cv-container" id="cv-container">
         <header>
             <div class="profile-avatar">
                 @php

@@ -15,7 +15,6 @@
                     <th>Name</th>
                     <th>URL</th>
                     <th>Image</th>
-                    <th>Colors</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -31,18 +30,6 @@
                                 <img src="{{ asset('storage/' . $template->image) }}" alt="{{ $template->name }}"
                                     width="100">
                             @endif
-                        </td>
-                        <td>
-                            @php
-                                $colors = json_decode($template->colors);
-                            @endphp
-                            <div style="display: flex; gap: 5px;">
-                                @foreach ($colors as $color)
-                                    <div
-                                        style="width: 30px; height: 30px; background-color: {{ $color }}; border: 1px solid #ccc; border-radius: 50%;">
-                                    </div>
-                                @endforeach
-                            </div>
                         </td>
                         <td>
                             {{ $template->status ? 'Active' : 'Inactive' }}

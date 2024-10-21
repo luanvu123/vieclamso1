@@ -26,7 +26,6 @@ class CVTemplateController extends Controller
         'name' => 'required|string|max:255',
         'url' => 'required|url',
         'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048', // Validate image format and size
-        'colors' => 'required|array', // Ensure colors is an array
         'status' => 'boolean',
     ]);
 
@@ -42,7 +41,6 @@ class CVTemplateController extends Controller
         'name' => $request->name,
         'url' => $request->url,
         'image' => $imagePath,
-        'colors' => json_encode($request->colors), // Encode colors as JSON
         'status' => $request->status,
     ]);
 
@@ -69,7 +67,6 @@ public function update(Request $request, $id)
         'name' => 'required|string|max:255',
         'url' => 'required|url',
         'image' => 'image|mimes:jpg,jpeg,png,gif|max:2048', // Optional for update
-        'colors' => 'required|array',
         'status' => 'boolean',
     ]);
 
@@ -93,7 +90,6 @@ public function update(Request $request, $id)
         'name' => $request->name,
         'url' => $request->url,
         'image' => $imagePath,
-        'colors' => json_encode($request->colors),
         'status' => $request->status,
     ]);
 
