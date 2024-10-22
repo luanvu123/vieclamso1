@@ -10,10 +10,7 @@
                margin-top: 10px;
            }
        </style>
-       <link rel="stylesheet"
-           href="https://static.topcv.vn/v4/css/components/tooltip-popper/saved-job-tooltip.f6f880018f1bdc66K.css">
-       <link rel="stylesheet"
-           href="https://static.topcv.vn/v4/css/components/desktop/jobs/job-list-default.40710d157e4df9feK.css">
+     
        <div id="main">
            <div id="breadcrumb" class="breadcrumb">
                <div class="container">
@@ -282,13 +279,13 @@
                                    <p>Chia sẻ qua mạng xã hội</p>
                                    <div class="box-share">
                                        <a href="{{ $company->facebook }}" target="_blank"><img
-                                               src="../../../static.topcv.vn/v4/image/normal-company/share/facebook.png"
+                                               src="{{ asset('static.topcv.vn/v4/image/normal-company/share/facebook.png')}}"
                                                alt></a>
                                        <a href="{{ $company->twitter }}" target="_blank"><img
-                                               src="../../../static.topcv.vn/v4/image/normal-company/share/twitter.png"
+                                               src="{{ asset('static.topcv.vn/v4/image/normal-company/share/twitter.png')}}"
                                                alt></a>
                                        <a href="{{ $company->linkedin }}" target="_blank"><img
-                                               src="../../../static.topcv.vn/v4/image/normal-company/share/linked.png"
+                                               src="{{ asset('static.topcv.vn/v4/image/normal-company/share/linked.png')}}"
                                                alt></a>
                                    </div>
                                </div>

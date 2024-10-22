@@ -117,7 +117,8 @@
         rel="stylesheet"href="{{ asset('static.topcv.vn/v4/css/components/desktop/jobs/job-list-search-result.f3a3504e765512c7K.css') }}">
     <link rel="stylesheet"
         href="{{ asset('static.topcv.vn/v4/css/components/desktop/jobs/job-list-default.40710d157e4df9feK.css') }}">
-
+    <link rel="stylesheet"
+        href="{{ asset('static.topcv.vn/v4/css/components/tooltip-popper/saved-job-tooltip.f6f880018f1bdc66K.css') }}">
     <link rel="stylesheet"
         href="{{ asset('static.topcv.vn/v4/css/components/box-job-notification-setting.6e3fb86463e68cdfK.css') }}">
 
@@ -1083,7 +1084,7 @@
                         Tải Cv lên
                     </a>
                 </div>
-                 <div class="cvo-flex cvo-items-center item-child tag-border">
+                <div class="cvo-flex cvo-items-center item-child tag-border">
                     <span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
                             class="fa-regular fa-file-lines"></i></span>
                     <a href="{{ route('mau.cv') }}" class="
@@ -1258,13 +1259,13 @@
                                     Tải Cv lên
                                 </a>
                             </li>
-                             <li class="navbar-menu__item ">
+                            <li class="navbar-menu__item ">
                                 <a href="{{ route('mau.cv') }}" class="text-sm">
                                     <i class="icon fa-regular fa-file-lines"></i>
                                     Tạo CV
                                 </a>
                             </li>
-                              <li class="navbar-menu__item ">
+                            <li class="navbar-menu__item ">
                                 <a href="{{ route('cv.overview') }}" class="text-sm">
                                     <i class="icon fa-regular fa-file-lines"></i>
                                     Tạo CV Profile
@@ -1752,7 +1753,8 @@
         < link rel = "stylesheet"
         href =
             "{{ asset('/static.topcv.vn/v4/css/components/desktop/anti-scam/anti-scam-popup.d5a4109f907b95a2Gca96.css') }}" >
-            <script >
+            <
+            script >
             $(document).ready(function() {
                 antiScam = new Vue({
                     el: '#anti-scam',
@@ -2919,7 +2921,7 @@
             </div>
         </div>
     </div>
-      <script>
+    <script>
         $(document).ready(function() {
             // Khi nhấn vào #nav-notification
             $('#nav-notification').on('click', function(e) {
