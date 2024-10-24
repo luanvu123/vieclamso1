@@ -67,11 +67,11 @@
                             </a>
                         </li>
                         <li class="{{ Route::is('job-postings.dashboard') ? 'active' : '' }}">
-                            <a href="{{ route('job-postings.dashboard') }}"><span class="ln ln-icon-Align-JustifyAll"></span> Dashboard</a>
+                            <a href="{{ route('job-postings.dashboard') }}"><span class="ln ln-icon-Align-JustifyAll"></span> Bảng tin</a>
                         </li>
                         <li
                             class="{{ Route::is('job-postings.index') || Route::is('job-postings.show') || Route::is('job-postings.edit') ? 'active' : '' }}">
-                            <a href="{{ route('job-postings.index') }}"><span class="ln ln-icon-Blackboard"></span> Job
+                            <a href="{{ route('job-postings.index') }}"><span class="ln ln-icon-Blackboard"></span> Chiến dịch tuyển dụng
                             </a>
                         </li>
                         <li class="{{ Route::is('job-postings.create') ? 'active' : '' }}">
