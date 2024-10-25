@@ -9,10 +9,12 @@ use Carbon\Carbon;
 use App\Mail\SendEmailEmployer;
 use App\Models\Cart;
 use App\Models\EmailReplyEmployer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+
 class EmployerManageController extends Controller
 {
     public function __construct()
@@ -217,15 +219,20 @@ class EmployerManageController extends Controller
     {
         $cartEmployers = $employer->carts()->withPivot('start_date', 'end_date', 'user_id')->get();
 
+        // Retrieve users related to each user_id in the cartEmployers pivot
+        foreach ($cartEmployers as $cart) {
+            $cart->user = User::find($cart->pivot->user_id);
+        }
+
         return view('admin.employers.cart_employer_index', compact('employer', 'cartEmployers'));
     }
     // EmployerManageController.php
 
-public function destroyCart(Employer $employer, Cart $cart)
-{
-    $employer->carts()->detach($cart->id);
+    public function destroyCart(Employer $employer, Cart $cart)
+    {
+        $employer->carts()->detach($cart->id);
 
-    return redirect()->route('employers.carts.index', $employer->id)->with('success', 'Cart removed successfully.');
-}
+        return redirect()->route('employers.carts.index', $employer->id)->with('success', 'Cart removed successfully.');
+    }
 
 }

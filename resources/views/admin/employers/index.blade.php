@@ -19,7 +19,7 @@
                                 <th>Phone</th>
                                 <th>Status</th>
                                 <th>Date</th>
-                                <th>Job Postings</th>
+                                {{-- <th>Job Postings</th> --}}
                                 <th>Actions</th>
                                 <th></th>
                             </tr>
@@ -62,20 +62,20 @@
                                         </select>
                                     </td>
                                     <td>{{ $employer->created_at }}</td>
-                                    <td>
+                                    {{-- <td>
                                         <ul>
                                             @foreach ($employer->jobPostings as $jobPosting)
                                                 <li>{{ $jobPosting->title }}</li>
                                             @endforeach
                                         </ul>
-                                    </td>
+                                    </td> --}}
                                     <td>
-                                        <a href="{{ route('employers.show', $employer->id) }}"><i
-                                                class="fa fa-eye"></i>View</a>
-                                        <a href="{{ route('employers.edit', $employer->id) }}"><i
-                                                class="fa fa-pencil"></i>Edit</a>
+                                        <a href="{{ route('employers.show', $employer->id) }}"class="btn btn-danger"><i
+                                                class="fa fa-eye"></i> View</a>
+                                        <a href="{{ route('employers.edit', $employer->id) }}"class="btn btn-warning"><i
+                                                class="fa fa-pencil"></i> Edit</a>
                                         <a href="{{ route('employers.add-cart', $employer->id) }}"
-                                            class="btn btn-success">Add Cart</a>
+                                            class="btn btn-success">Thêm DV</a>
                                         <a href="{{ route('employers.carts.index', $employer->id) }}"
                                             class="btn btn-info">Dịch vụ</a>
 

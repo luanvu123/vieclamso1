@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\OnlineVisitor;
 use App\Models\OnlineVisitorRecruitment;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -26,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-          // Đếm tổng số IP đã truy cập vào route '/'
+        // Đếm tổng số IP đã truy cập vào route '/'
         $totalHomeVisitors = OnlineVisitor::count();
 
         // Đếm tổng số IP đã truy cập vào route '/recruitment'
@@ -39,4 +41,14 @@ class HomeController extends Controller
         $onlineRecruitmentVisitors = OnlineVisitorRecruitment::where('last_activity', '>=', Carbon::now()->subMinutes(5))->count();
         return view('home', compact('totalHomeVisitors', 'totalRecruitmentVisitors', 'onlineHomeVisitors', 'onlineRecruitmentVisitors'));
     }
+   public function listAllCarts()
+{
+    // Retrieve all Cart records and eager load employers with pivot columns
+    $cartEmployers = Cart::with(['employers' => function ($query) {
+        $query->withPivot('start_date', 'end_date', 'user_id');
+    }])->get();
+
+    return view('admin.employers.list_all_cart_employer', compact('cartEmployers'));
+}
+
 }

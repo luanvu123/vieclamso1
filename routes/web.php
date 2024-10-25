@@ -213,8 +213,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('employers/{employer}/add-cart', [EmployerManageController::class, 'addCart'])->name('employers.add-cart');
     Route::post('employers/{employer}/store-cart', [EmployerManageController::class, 'storeCart'])->name('employers.store-cart');
     Route::get('employers/{employer}/carts', [EmployerManageController::class, 'indexCart'])->name('employers.carts.index');
+
+    Route::get('service', [HomeController::class, 'listAllCarts'])->name('employers.carts.list');
+
     // Add a route to delete a cart from an employer
-Route::delete('employers/{employer}/carts/{cart}', [EmployerManageController::class, 'destroyCart'])->name('employers.carts.destroy');
+    Route::delete('employers/{employer}/carts/{cart}', [EmployerManageController::class, 'destroyCart'])->name('employers.carts.destroy');
 
 
 

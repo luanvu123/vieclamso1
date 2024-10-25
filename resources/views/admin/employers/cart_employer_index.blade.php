@@ -2,31 +2,31 @@
 
 @section('content')
 <div class="container">
-    <h2>Carts for Employer: {{ $employer->name }}</h2>
+    <h2>Dịch vụ của: {{ $employer->name }}</h2>
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-striped">
+    <table class="table table-striped" id="user-table">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Cart Title</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th>Added By (User ID)</th>
+                <th>Added By (User)</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($cartEmployers as $cart)
                 <tr>
-                    <td>{{ $cart->pivot->id }}</td>
+                    <td>{{ $cart->id }}</td>
                     <td>{{ $cart->title }}</td>
                     <td>{{ $cart->pivot->start_date }}</td>
                     <td>{{ $cart->pivot->end_date }}</td>
-                    <td>{{ $cart->pivot->user_id }}</td>
+                    <td>{{ optional($cart->user)->name ?? 'N/A' }}</td>
                     <td>
                         <form action="{{ route('employers.carts.destroy', [$employer->id, $cart->id]) }}" method="POST">
                             @csrf

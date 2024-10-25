@@ -287,6 +287,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                                 @endif
                                             </a>
                                         </li>
+                                        <li class="{{ Request::is('service') ? 'active' : '' }}">
+                                            <a href="{{ route('employers.carts.list') }}">
+                                                <img src="{{ asset('backend_admin/images/usd-square-svgrepo-com.svg') }}"
+                                                    alt="Google" width="20" height="20"> Danh sách dịch vụ
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
 
