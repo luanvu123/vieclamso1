@@ -44,8 +44,8 @@ class EmployerLoginController extends Controller
                 Mail::to($employer->email)->send(new SendOTP($otp->otp_code));
 
                 Auth::guard('employer')->logout();
-                return redirect()->back()->with('otp_needed', true)
-                    ->withErrors(['otp' => 'Email của bạn chưa được xác thực. Vui lòng kiểm tra email để nhập mã OTP.']);
+                 return redirect()->back()->with('otp_needed', true)
+                ->with('warning', 'Email của bạn chưa được xác thực. Vui lòng kiểm tra email để nhập mã OTP bên dưới.');
             }
 
             return redirect()->route('job-postings.dashboard')->with('success', 'Xin chào ' . $employer->name);
