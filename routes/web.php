@@ -141,7 +141,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('type-employer', TypeEmployerController::class);
     Route::resource('slides', SlideController::class);
     Route::resource('carts', CartManageController::class);
-     Route::resource('type_cart', TypeCartController::class);
+    Route::resource('type_cart', TypeCartController::class);
     Route::resource('ordermanages', OrderManageController::class); // Added for order management
     Route::resource('plan-currencies', PlanCurrencyController::class);
     Route::resource('plan-features', PlanFeatureController::class);
@@ -210,6 +210,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/slug-choose', [SlugController::class, 'slug_choose'])->name('slug-choose');
     Route::get('/media-choose', [MediaController::class, 'media_choose'])->name('media-choose');
     Route::resource('employers', EmployerManageController::class);
+    Route::get('employers/{employer}/add-cart', [EmployerManageController::class, 'addCart'])->name('employers.add-cart');
+    Route::post('employers/{employer}/store-cart', [EmployerManageController::class, 'storeCart'])->name('employers.store-cart');
+    Route::get('employers/{employer}/carts', [EmployerManageController::class, 'indexCart'])->name('employers.carts.index');
+    // Add a route to delete a cart from an employer
+Route::delete('employers/{employer}/carts/{cart}', [EmployerManageController::class, 'destroyCart'])->name('employers.carts.destroy');
+
+
 
     Route::resource('job-postings-manage', JobsManageController::class);
     Route::get('/jobPosting-choose', [JobsManageController::class, 'jobPosting_choose'])->name('jobPosting-choose');
@@ -276,7 +283,7 @@ Route::middleware(['candidate'])->group(function () {
 
     Route::post('/cv-github/download', [CvController::class, 'downloadCvGithub'])->name('cvGithub.download');
     Route::post('/cv-outstanding/download', [CvController::class, 'downloadCvOutstanding'])->name('cvOutstanding.download');
-     Route::post('/cv-coffee/download', [CvController::class, 'downloadCvCoffee'])->name('cvCoffee.download');
+    Route::post('/cv-coffee/download', [CvController::class, 'downloadCvCoffee'])->name('cvCoffee.download');
     Route::post('/cv-template/download', [CvController::class, 'downloadPdf'])->name('cv.template.download');
     Route::post('/cv-minimalism/download', [CVController::class, 'downloadCvMinimalism'])->name('cvMinimalism.download');
     Route::post('/cv-chrome/download', [CVController::class, 'downloadCvChrome'])->name('cvChrome.download');
@@ -332,7 +339,7 @@ Route::middleware(['candidate'])->group(function () {
 
 Route::middleware(['employer'])->group(function () {
 
-     Route::get('job-postings/cart/detail/{id}', [JobPostingController::class, 'showCartDetail'])->name('job-postings.cart.detail');
+    Route::get('job-postings/cart/detail/{id}', [JobPostingController::class, 'showCartDetail'])->name('job-postings.cart.detail');
     Route::post('add-to-cart/{cartId}', [CartListController::class, 'addToCart'])->name('cartlist.add');
     Route::post('cartlist/storeOrder', [CartListController::class, 'storeOrder'])->name('cartlist.storeOrder');
     Route::get('/orders', [CartListController::class, 'listOrder'])->name('cartlist.listOrder');

@@ -74,6 +74,12 @@
                                                 class="fa fa-eye"></i>View</a>
                                         <a href="{{ route('employers.edit', $employer->id) }}"><i
                                                 class="fa fa-pencil"></i>Edit</a>
+                                        <a href="{{ route('employers.add-cart', $employer->id) }}"
+                                            class="btn btn-success">Add Cart</a>
+                                        <a href="{{ route('employers.carts.index', $employer->id) }}"
+                                            class="btn btn-info">Dịch vụ</a>
+
+
                                     </td>
                                     <td>
                                         @if ($employer->created_at > \Carbon\Carbon::now()->subHour())
@@ -91,7 +97,6 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>

@@ -7,11 +7,12 @@ use App\Models\Employer;
 use App\Models\Purchased;
 use Carbon\Carbon;
 use App\Mail\SendEmailEmployer;
+use App\Models\Cart;
 use App\Models\EmailReplyEmployer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Auth;
 class EmployerManageController extends Controller
 {
     public function __construct()
@@ -187,4 +188,44 @@ class EmployerManageController extends Controller
         toastr()->info('Thành công', 'Xóa email thành công');
         return redirect()->back();
     }
+    public function addCart(Employer $employer)
+    {
+        $carts = Cart::all(); // Fetch available carts
+        return view('admin.employers.cart_employer', compact('employer', 'carts'));
+    }
+
+    // Store the cart-employer relationship with start and end dates
+    public function storeCart(Request $request, Employer $employer)
+    {
+        $request->validate([
+            'cart_id' => 'required|exists:carts,id',
+        ]);
+
+        $cart = Cart::find($request->cart_id);
+        $startDate = Carbon::now();
+        $endDate = $startDate->copy()->addDays($cart->validity);
+
+        $employer->carts()->attach($cart->id, [
+            'user_id' => Auth::id(),
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+        ]);
+
+        return redirect()->route('employers.edit', $employer->id)->with('success', 'Cart added successfully!');
+    }
+    public function indexCart(Employer $employer)
+    {
+        $cartEmployers = $employer->carts()->withPivot('start_date', 'end_date', 'user_id')->get();
+
+        return view('admin.employers.cart_employer_index', compact('employer', 'cartEmployers'));
+    }
+    // EmployerManageController.php
+
+public function destroyCart(Employer $employer, Cart $cart)
+{
+    $employer->carts()->detach($cart->id);
+
+    return redirect()->route('employers.carts.index', $employer->id)->with('success', 'Cart removed successfully.');
+}
+
 }

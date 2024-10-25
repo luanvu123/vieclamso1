@@ -108,4 +108,12 @@ class Employer extends Authenticatable implements CanResetPassword
             'next_type_name' => $nextTypeEmployer->name,
         ];
     }
+
+    public function carts()
+{
+    return $this->belongsToMany(Cart::class, 'cart_employer')
+                ->withPivot('start_date', 'end_date')
+                ->withTimestamps();
+}
+
 }
