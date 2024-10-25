@@ -90,7 +90,7 @@
             <tbody>
                 @foreach ($order->orderDetails as $detail)
                     <tr>
-                        <td>{{ $detail->cart->description }}</td>
+                        <td>{{ $detail->cart->title }}</td>
                         <td>
                             @foreach ($detail->cart->planFeatures as $feature)
                                 <li>{{ $feature->feature }}</li>

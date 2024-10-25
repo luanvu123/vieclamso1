@@ -83,23 +83,20 @@
                             <a href="{{ route('job-postings.index') }}"><span class="ln ln-icon-Blackboard"></span> Chiến dịch tuyển dụng
                             </a>
                         </li>
-                        <li class="{{ Route::is('job-postings.create') ? 'active' : '' }}">
-                            <a href="{{ route('job-postings.create') }}"><span class="ln ln-icon-Drag-Down"></span> Add Job</a>
-                        </li>
                         <li class="{{ Route::is('messages.receive') || Route::is('messages.show') ? 'active' : '' }}">
-                            <a href="{{ route('messages.receive') }}"><span class="ln ln-icon-Bird-DeliveringLetter"></span> Message </a>
+                            <a href="{{ route('messages.receive') }}"><span class="ln ln-icon-Bird-DeliveringLetter"></span> Tin nhắn </a>
                         </li>
 
 
                         <li class="{{ Route::is('job-postings.cart') ? 'active' : '' }}">
-                            <a href="{{ route('job-postings.cart') }}"><span class="ln ln-icon-Film-Cartridge"></span> Buy Services </a>
+                            <a href="{{ route('job-postings.cart') }}"><span class="ln ln-icon-Film-Cartridge"></span> Dịch vụ </a>
                         </li>
                         <li class="{{ Route::is('cartlist.index') ? 'active' : '' }}">
-                            <a href="{{ route('cartlist.index') }}"><span class="ln ln-icon-Add-Cart"></span> My cart </a>
+                            <a href="{{ route('cartlist.index') }}"><span class="ln ln-icon-Add-Cart"></span> Giỏ hàng của tôi </a>
                         </li>
                         <li
                             class="{{ Route::is('cartlist.listOrder') || Route::is('cartlist.showOrder') ? 'active' : '' }}">
-                            <a href="{{ route('cartlist.listOrder') }}"><span class="ln ln-icon-Full-Cart"></span> My Order </a>
+                            <a href="{{ route('cartlist.listOrder') }}"><span class="ln ln-icon-Full-Cart"></span> Theo dõi đơn hàng </a>
                         </li>
                         <li>
                             <a href="{{ route('logout') }}"

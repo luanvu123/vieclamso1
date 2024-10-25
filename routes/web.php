@@ -331,6 +331,8 @@ Route::middleware(['candidate'])->group(function () {
 });
 
 Route::middleware(['employer'])->group(function () {
+
+     Route::get('job-postings/cart/detail/{id}', [JobPostingController::class, 'showCartDetail'])->name('job-postings.cart.detail');
     Route::post('add-to-cart/{cartId}', [CartListController::class, 'addToCart'])->name('cartlist.add');
     Route::post('cartlist/storeOrder', [CartListController::class, 'storeOrder'])->name('cartlist.storeOrder');
     Route::get('/orders', [CartListController::class, 'listOrder'])->name('cartlist.listOrder');

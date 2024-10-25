@@ -390,6 +390,15 @@ class JobPostingController extends Controller
         // Truyền dữ liệu carts sang view
         return view('job_postings.cart', compact('carts'));
     }
+    public function showCartDetail($id)
+    {
+        // Lấy cart theo ID
+        $cart = Cart::findOrFail($id);
+
+        // Truyền dữ liệu cart sang view
+        return view('job_postings.cart_detail', compact('cart'));
+    }
+
 
     public function buyGift(Request $request)
     {
@@ -459,7 +468,7 @@ class JobPostingController extends Controller
 
         return view('job_postings.reward', compact('employer', 'nextType', 'purchases'));
     }
-       public function appInsight()
+    public function appInsight()
     {
         $employer = Auth::guard('employer')->user();
 

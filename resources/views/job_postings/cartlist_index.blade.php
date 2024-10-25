@@ -110,7 +110,7 @@
                 <tbody>
                     @foreach ($cartlists as $cartlist)
                         <tr>
-                            <td>{{ $cartlist->cart->description }}</td>
+                            <td>{{ $cartlist->cart->title }}</td>
                             <td>{{ $cartlist->price }} {{ $cartlist->cart->planCurrency->currency }}</td>
                             <td>{{ $cartlist->quantity }}</td>
                             <td>{{ $cartlist->price * $cartlist->quantity }} {{ $cartlist->cart->planCurrency->currency }}

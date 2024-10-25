@@ -13,8 +13,7 @@
                     <div data-v-1eb6ef20="" class="service-group">
                         <div data-v-1eb6ef20="" class="d-flex service-group-header">
                             <h3 data-v-1eb6ef20="" class="text-uppercase font-s-1-9 mg-b-8 mb-0">
-                                <span data-v-1eb6ef20=""
-                                    class="text-primary font-normal">{{ $cartsByType->first()->typeCart->name ?? 'Unknown Type' }}</span>
+                                <span data-v-1eb6ef20="" class="text-primary font-normal">{{ $cartsByType->first()->typeCart->name ?? 'Unknown Type' }}</span>
                             </h3>
                             <div data-v-1eb6ef20="" role="button" class="ml-2 position-relative d-flex align-items-center">
                             </div>
@@ -26,42 +25,29 @@
                                     <div data-v-f938ab0e="" data-v-1eb6ef20="">
                                         <div data-v-f938ab0e="" class="v-popover service-box">
                                             <div class="trigger" style="display: inline-block;">
-                                                <div data-v-f938ab0e=""
-                                                    class="service-item d-flex flex-column justify-content-between service-item__lg">
-                                                    <a data-v-f938ab0e=""
-                                                        href="/app/buy-services/detail?service_id={{ $cart->id }}"
-                                                        class="link-service-detail">
+                                                <div data-v-f938ab0e="" class="service-item d-flex flex-column justify-content-between service-item__lg">
+                                                    <a data-v-f938ab0e="" href="{{ route('job-postings.cart.detail', $cart->id) }}" class="link-service-detail">
                                                         <div data-v-f938ab0e="" style="position: relative;"></div>
                                                         <div data-v-f938ab0e="" type="button" class="detail-service">
-                                                            <h4 data-v-f938ab0e=""
-                                                                class="text-uppercase d-flex align-items-center">
-                                                                <span data-v-f938ab0e=""
-                                                                    class="service-name">{{ $cart->title }}</span>
+                                                            <h4 data-v-f938ab0e="" class="text-uppercase d-flex align-items-center">
+                                                                <span data-v-f938ab0e="" class="service-name">{{ $cart->title }}</span>
                                                             </h4>
-                                                            <p data-v-f938ab0e=""
-                                                                class="service-price font-weight-bold text-primary">
+                                                            <p data-v-f938ab0e="" class="service-price font-weight-bold text-primary">
                                                                 {{ number_format($cart->value, 0, ',', '.') }}
-                                                                {{ $cart->planCurrency->currency }}<span data-v-f938ab0e=""
-                                                                    class="text-danger">*</span>
+                                                                {{ $cart->planCurrency->currency }}<span data-v-f938ab0e="" class="text-danger">*</span>
                                                             </p>
                                                             @foreach ($cart->planFeatures as $feature)
-                                                                <p data-v-f938ab0e=""
-                                                                    class="service-description color-gray custom-color">
+                                                                <p data-v-f938ab0e="" class="service-description color-gray custom-color">
                                                                     {{ $feature->feature }}
                                                                 </p>
                                                             @endforeach
-
                                                         </div>
                                                     </a>
-                                                    <div data-v-f938ab0e=""
-                                                        class="d-flex flex-row align-items-center justify-content-between">
-                                                        <form action="{{ route('cartlist.add', $cart->id) }}" method="POST"
-                                                            style="display: inline;">
+                                                    <div data-v-f938ab0e="" class="d-flex flex-row align-items-center justify-content-between">
+                                                        <form action="{{ route('cartlist.add', $cart->id) }}" method="POST" style="display: inline;">
                                                             @csrf
-                                                            <button type="submit"
-                                                                class="btn min-width btn btn-secondary btn-service font-weight-bold btn-add-service">
-                                                                <i class="mr-1 fa-solid fa-cart-shopping mr-1"></i> Thêm vào
-                                                                giỏ
+                                                            <button type="submit" class="btn min-width btn btn-secondary btn-service font-weight-bold btn-add-service">
+                                                                <i class="mr-1 fa-solid fa-cart-shopping mr-1"></i> Thêm vào giỏ
                                                             </button>
                                                         </form>
                                                     </div>
@@ -80,3 +66,4 @@
         </div>
     </main>
 @endsection
+

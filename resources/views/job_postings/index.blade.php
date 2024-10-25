@@ -24,7 +24,7 @@
             <div class="notification notice">
                 Your listings are shown in the table below. Expired listings will be automatically removed after 30 days.
             </div>
-
+            <a href="{{ route('job-postings.create') }}" class="button margin-top-30">Thêm chiến dịch</a>
             <div class="dashboard-list-box margin-top-30">
                 <div class="dashboard-list-box-content">
                     <!-- Table -->
@@ -45,7 +45,7 @@
                                         {{ $jobPosting->title }}
                                     </a>
                                 </td>
-                                <td class="centered">{{$jobPosting->views}} view</td>
+                                <td class="centered">{{ $jobPosting->views }} view</td>
                                 <td>{{ $jobPosting->created_at->format('F d, Y') }}</td>
                                 <td>{{ $jobPosting->closing_date ? \Carbon\Carbon::parse($jobPosting->closing_date)->format('F d, Y') : '-' }}
                                 </td>
@@ -73,7 +73,7 @@
                     </table>
                 </div>
             </div>
-            <a href="{{ route('job-postings.create') }}" class="button margin-top-30">Add New Listing</a>
+
         </div>
     </div>
 @endsection
