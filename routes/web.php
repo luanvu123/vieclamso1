@@ -66,6 +66,7 @@ use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TranslationController;
+use App\Http\Controllers\TypeCartController;
 use App\Http\Controllers\TypeConsultationController;
 use App\Http\Controllers\TypeEmployerController;
 use App\Http\Controllers\TypeFeedbackController;
@@ -140,6 +141,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('type-employer', TypeEmployerController::class);
     Route::resource('slides', SlideController::class);
     Route::resource('carts', CartManageController::class);
+     Route::resource('type_cart', TypeCartController::class);
     Route::resource('ordermanages', OrderManageController::class); // Added for order management
     Route::resource('plan-currencies', PlanCurrencyController::class);
     Route::resource('plan-features', PlanFeatureController::class);
@@ -345,6 +347,8 @@ Route::middleware(['employer'])->group(function () {
 
 
 
+
+    Route::get('app-insights', [JobPostingController::class, 'appInsight'])->name('app-insights');
     Route::get('loyal-customer', [JobPostingController::class, 'loyalCustomer'])->name('loyal-customer');
     Route::get('doi-qua', [JobPostingController::class, 'buyGift'])->name('buy-gift');
     Route::get('/doi-qua/{id}/detail', [JobPostingController::class, 'productDetail'])->name('buy-gift.detail');

@@ -125,7 +125,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     $segment = Request::segment(1);
                                 @endphp
                                 <li
-                                    class="treeview {{ Request::is('users*')|| Request::is('cv_templates*') || Request::is('roles*') || Request::is('categories*') ? 'active' : '' }}">
+                                    class="treeview {{ Request::is('users*') || Request::is('cv_templates*') || Request::is('roles*') || Request::is('categories*') ? 'active' : '' }}">
                                     <a href="#">
                                         <img src="{{ asset('backend_admin/images/9165478_unbox_package_icon.svg') }}"
                                             alt="Google" width="20" height="20">
@@ -151,7 +151,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                                     alt="Google" width="20" height="20"> Thể loại
                                             </a>
                                         </li>
-                                           <li class="{{ Request::is('cv_templates*') ? 'active' : '' }}">
+                                        <li class="{{ Request::is('cv_templates*') ? 'active' : '' }}">
                                             <a href="{{ route('cv_templates.index') }}">
                                                 <img src="{{ asset('backend_admin/images/file-cv-svgrepo-com.svg') }}"
                                                     alt="Google" width="20" height="20"> Mẫu CV
@@ -581,7 +581,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <a href="{{ route('employers.index') }}">
                                     <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
                                     <div class="stats">
-                                        <h5 class="counter">{{ $totalEmployerCount }}</h5> <span> Nhà tuyển dụng</span>
+                                        <h5 class="counter">{{ $totalEmployerCount }}</h5> <span> Nhà tuyển
+                                            dụng</span>
                                     </div>
                                 </a>
                             </div>
@@ -855,6 +856,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         CKEDITOR.replace('summary2');
         CKEDITOR.replace('summary3');
         CKEDITOR.replace('summary1');
+        CKEDITOR.replace('summary4');
+        CKEDITOR.replace('summary5');
     </script>
 
     <script src="{{ asset('backend_admin/js/utils.js') }}"></script>

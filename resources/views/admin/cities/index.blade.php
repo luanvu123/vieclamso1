@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="table-responsive">
                     <h1>Cities</h1>
-                    <a href="{{ route('cities.create') }}" class="btn btn-primary">Add New City</a>
+                    <a href="{{ route('cities.create') }}"class="button margin-top-30">Add New City</a>
                     <table class="table" id="user-table">
                         <thead>
                             <tr>

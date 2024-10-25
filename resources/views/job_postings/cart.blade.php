@@ -1,82 +1,82 @@
 @extends('dashboard-employer')
 
 @section('content')
-    <div class="container">
+    <main data-v-48257136="" class="page-container service-page position-relative">
+        <div data-v-48257136="" class="breadcrumb-box">
+            <h6 class="breadcrumb-title d-flex">
+                <div><span>Mua dịch vụ</span></div>
+            </h6>
+        </div>
+        <div data-v-48257136="" class="container-fluid page-content">
+            <div data-v-1eb6ef20="" data-v-48257136="">
+                @foreach ($carts->groupBy('type_cart_id') as $typeCartId => $cartsByType)
+                    <div data-v-1eb6ef20="" class="service-group">
+                        <div data-v-1eb6ef20="" class="d-flex service-group-header">
+                            <h3 data-v-1eb6ef20="" class="text-uppercase font-s-1-9 mg-b-8 mb-0">
+                                <span data-v-1eb6ef20=""
+                                    class="text-primary font-normal">{{ $cartsByType->first()->typeCart->name ?? 'Unknown Type' }}</span>
+                            </h3>
+                            <div data-v-1eb6ef20="" role="button" class="ml-2 position-relative d-flex align-items-center">
+                            </div>
+                        </div>
+                        <p data-v-1eb6ef20="" class="cat-description mg-0">{!! $cartsByType->first()->typeCart->detail ?? 'Unknown Type' !!}</p>
+                        <div data-v-1eb6ef20="" class="list-service">
+                            @foreach ($cartsByType as $cart)
+                                <div data-v-1eb6ef20="" class="service">
+                                    <div data-v-f938ab0e="" data-v-1eb6ef20="">
+                                        <div data-v-f938ab0e="" class="v-popover service-box">
+                                            <div class="trigger" style="display: inline-block;">
+                                                <div data-v-f938ab0e=""
+                                                    class="service-item d-flex flex-column justify-content-between service-item__lg">
+                                                    <a data-v-f938ab0e=""
+                                                        href="/app/buy-services/detail?service_id={{ $cart->id }}"
+                                                        class="link-service-detail">
+                                                        <div data-v-f938ab0e="" style="position: relative;"></div>
+                                                        <div data-v-f938ab0e="" type="button" class="detail-service">
+                                                            <h4 data-v-f938ab0e=""
+                                                                class="text-uppercase d-flex align-items-center">
+                                                                <span data-v-f938ab0e=""
+                                                                    class="service-name">{{ $cart->title }}</span>
+                                                            </h4>
+                                                            <p data-v-f938ab0e=""
+                                                                class="service-price font-weight-bold text-primary">
+                                                                {{ number_format($cart->value, 0, ',', '.') }}
+                                                                {{ $cart->planCurrency->currency }}<span data-v-f938ab0e=""
+                                                                    class="text-danger">*</span>
+                                                            </p>
+                                                            @foreach ($cart->planFeatures as $feature)
+                                                                <p data-v-f938ab0e=""
+                                                                    class="service-description color-gray custom-color">
+                                                                    {{ $feature->feature }}
+                                                                </p>
+                                                            @endforeach
 
-        <style>
-            .plan-features form {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-            }
+                                                        </div>
+                                                    </a>
+                                                    <div data-v-f938ab0e=""
+                                                        class="d-flex flex-row align-items-center justify-content-between">
+                                                        <form action="{{ route('cartlist.add', $cart->id) }}" method="POST"
+                                                            style="display: inline;">
+                                                            @csrf
+                                                            <button type="submit"
+                                                                class="btn min-width btn btn-secondary btn-service font-weight-bold btn-add-service">
+                                                                <i class="mr-1 fa-solid fa-cart-shopping mr-1"></i> Thêm vào
+                                                                giỏ
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
 
-            .plan-features button {
-                display: inline-block;
-                text-align: center;
-            }
-        </style>
-        <div id="titlebar">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Buy Services</h2>
-                    <!-- Breadcrumbs -->
-                    <nav id="breadcrumbs">
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Buy Services</a></li>
-                            <li>Buy Services</li>
-                        </ul>
-                    </nav>
-                </div>
+                <p data-v-1eb6ef20="" class="text-red">* Giá dịch vụ chưa bao gồm VAT</p>
             </div>
         </div>
-        <div class="row">
-            @foreach ($carts as $cart)
-                <div class="plan color-{{ $loop->index + 1 }} one-third column" id="plan{{ $loop->index + 1 }}"
-                    onclick="activatePlan('plan{{ $loop->index + 1 }}')">
-                    <div class="plan-price">
-                        <h3>{{ $cart->description }}</h3>
-                        <span class="plan-currency">{{ $cart->planCurrency->currency }}</span>
-                        <span class="value">{{ $cart->value }}</span>
-                    </div>
-                    <div class="plan-features">
-                        <ul>
-                            @if ($cart->top_point != 0)
-                                <li>Quà tặng: {{ $cart->top_point }} Credits</li>
-                            @endif
-                            @foreach ($cart->planFeatures as $feature)
-                                <li>{{ $feature->feature }}</li>
-                            @endforeach
-                        </ul>
-
-                        <form action="{{ route('cartlist.add', $cart->id) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="price" value="{{ $cart->value }}">
-                            <button type="submit" class="button"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-                        </form>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-
-        <script>
-            function activatePlan(planId) {
-                var planElement = document.getElementById(planId);
-
-                // Reset class for all plans
-                var allPlans = document.querySelectorAll('.plan');
-                allPlans.forEach(function(plan) {
-                    plan.classList.remove('color-2');
-                    plan.classList.add('color-1');
-                });
-
-                // Add active class to the selected plan
-                planElement.classList.remove('color-1');
-                planElement.classList.add('color-2');
-            }
-        </script>
-
-
-
-    </div>
+    </main>
 @endsection

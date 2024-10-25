@@ -9,13 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up()
+    public function up()
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('plan_currency_id');
             $table->decimal('value', 10, 2);
+            $table->string('title')->nullable();
             $table->string('description')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();

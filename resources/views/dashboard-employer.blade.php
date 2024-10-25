@@ -69,6 +69,15 @@
                         <li class="{{ Route::is('job-postings.dashboard') ? 'active' : '' }}">
                             <a href="{{ route('job-postings.dashboard') }}"><span class="ln ln-icon-Align-JustifyAll"></span> Bảng tin</a>
                         </li>
+                         <li class="{{ Route::is('loyal-customer') ? 'active' : '' }}">
+                            <a href="{{ route('loyal-customer') }}"><span class="ln ln-icon-Gift-Box"></span> TopCV Rewards </a>
+                        </li>
+                         <li class="{{ Route::is('app-insights') ? 'active' : '' }}">
+                            <a href="{{ route('app-insights') }}"><span class="ln ln-icon-Gift-Box"></span> TopCV Insights </a>
+                        </li>
+                         <li class="{{ Route::is('buy-gift') ? 'active' : '' }}">
+                            <a href="{{ route('buy-gift') }}"><span class="ln ln-icon-Sled-withGifts"></span> Đổi quà </a>
+                        </li>
                         <li
                             class="{{ Route::is('job-postings.index') || Route::is('job-postings.show') || Route::is('job-postings.edit') ? 'active' : '' }}">
                             <a href="{{ route('job-postings.index') }}"><span class="ln ln-icon-Blackboard"></span> Chiến dịch tuyển dụng
@@ -80,12 +89,8 @@
                         <li class="{{ Route::is('messages.receive') || Route::is('messages.show') ? 'active' : '' }}">
                             <a href="{{ route('messages.receive') }}"><span class="ln ln-icon-Bird-DeliveringLetter"></span> Message </a>
                         </li>
-                        <li class="{{ Route::is('loyal-customer') ? 'active' : '' }}">
-                            <a href="{{ route('loyal-customer') }}"><span class="ln ln-icon-Gift-Box"></span> Rewards </a>
-                        </li>
-                        <li class="{{ Route::is('buy-gift') ? 'active' : '' }}">
-                            <a href="{{ route('buy-gift') }}"><span class="ln ln-icon-Sled-withGifts"></span> Đổi quà </a>
-                        </li>
+
+
                         <li class="{{ Route::is('job-postings.cart') ? 'active' : '' }}">
                             <a href="{{ route('job-postings.cart') }}"><span class="ln ln-icon-Film-Cartridge"></span> Buy Services </a>
                         </li>

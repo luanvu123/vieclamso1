@@ -459,4 +459,10 @@ class JobPostingController extends Controller
 
         return view('job_postings.reward', compact('employer', 'nextType', 'purchases'));
     }
+       public function appInsight()
+    {
+        $employer = Auth::guard('employer')->user();
+
+        return view('job_postings.insight', compact('employer'));
+    }
 }

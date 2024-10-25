@@ -7,7 +7,7 @@
                 <div class="table-responsive">
 
                     <h1>Hotlines</h1>
-                    <a href="{{ route('hotlines.create') }}" class="btn btn-primary">Add Hotline</a>
+                    <a href="{{ route('hotlines.create') }}" class="button margin-top-30">Add Hotline</a>
                     <table class="table" id="user-table">
                         <thead>
                             <tr>

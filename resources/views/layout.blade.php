@@ -79,7 +79,7 @@
     {{-- <link rel="stylesheet" href="{{ asset('v4/css/app.min.fa6e35ed40ac0f6cK.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('v4/css/components/desktop/manager-cv.b6b84668d5c1950aK.css') }}">
     <!-- Slick CSS -->
-    <link rel="stylesheet" href="{{ asset('cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css')}}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link rel="stylesheet" href="{{ asset('cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css')}}" />
 
 
