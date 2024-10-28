@@ -98,6 +98,14 @@
                             class="{{ Route::is('cartlist.listOrder') || Route::is('cartlist.showOrder') ? 'active' : '' }}">
                             <a href="{{ route('cartlist.listOrder') }}"><span class="ln ln-icon-Full-Cart"></span> Theo dõi đơn hàng </a>
                         </li>
+                          <li
+                            class="{{ Route::is('job_postings.cart') ? 'active' : '' }}">
+                            <a href="{{ route('job_postings.cart') }}"><span class="ln ln-icon-Full-Cart"></span> Dịch vụ đang mở </a>
+                        </li>
+
+
+
+
                         <li>
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="ln ln-icon-Align-Center"></span> Logout</a>

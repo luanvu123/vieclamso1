@@ -500,10 +500,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         data-toggle="dropdown" aria-expanded="false">
                                         <div class="profile_img">
                                             <span class="prfil-img"><img
-                                                    style="  width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;"src="{{ asset('storage/' . Auth::user()->avatar) }}"
+                                                    style="width: 40px;height: 40px;border-radius: 50%;object-fit: cover;"src="{{ asset('storage/' . Auth::user()->avatar) }}"
                                                     alt="">
                                             </span>
                                             <div class="user-name">
@@ -573,7 +570,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         <div class="col-md-3 widget widget1">
                             <div class="r3_counter_box">
                                 <a href="{{ route('candidates.index') }}">
-                                    <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
+                                    <i class="pull-left fa fa-pie-chart dollar1 icon-rounded"></i>
                                     <div class="stats">
                                         <h5 class="counter">{{ $totalCandidateCount }}</h5> <span> Ứng viên </span>
                                     </div>

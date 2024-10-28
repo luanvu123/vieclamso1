@@ -474,4 +474,15 @@ class JobPostingController extends Controller
 
         return view('job_postings.insight', compact('employer'));
     }
+     public function showCartEmployer()
+    {
+        // Lấy employer hiện tại
+        $employer = Auth::guard('employer')->user();
+
+        // Lấy danh sách cart của employer từ bảng pivot cart_employer
+        $cartEmployers = $employer->carts()->withPivot('start_date', 'end_date', 'user_id')->get();
+
+        // Truyền dữ liệu sang view để hiển thị
+        return view('job_postings.cart_employer', compact('employer', 'cartEmployers'));
+    }
 }
