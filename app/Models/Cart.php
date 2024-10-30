@@ -16,7 +16,27 @@ class Cart extends Model
         'validity',
         'title',
         'background_image',
-        'type_cart_id'
+        'type_cart_id',
+         'description_home',
+        'Pricing',
+        'Time_to_display',
+        'Featured_job',
+        'job_suggestions',
+        'job_suggestion_cv',
+        'job_suggestion_related',
+        'job_suggestion_top',
+        'Top_Job_Alert',
+        'prime_time',
+        'regular_time',
+        'AI_powered_CV',
+        'Top_Add_ons',
+        'Advanced_news_headline',
+        'Add_on_visual',
+        'Service_Warranty',
+        'search_results',
+        'Top_Add_ons_in_2',
+        'Activate_CV_proposal',
+        'Give_350_Credits',
     ];
 
     public function user()

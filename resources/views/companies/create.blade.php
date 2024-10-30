@@ -68,12 +68,12 @@
                                             </style>
 
                                             <div class="form-group">
-                                                <label for="name">Name:</label>
+                                                <label for="name">Tên công ty:</label>
                                                 <input type="text" id="name" name="name"
                                                     value="{{ old('name') }}" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="image">Background Image:</label>
+                                                <label for="image">Ảnh nền:</label>
                                                 <input type="file" id="image" name="image">
                                                 @error('image')
                                                     <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -88,14 +88,14 @@
                                             </div>
 
                                             <div>
-                                                <label for="scale">Scale:</label>
+                                                <label for="scale">Quy mô:</label>
                                                 <input type="text" id="scale" name="scale"
                                                     value="{{ old('scale') }}">
                                             </div>
 
                                             <div class="form">
                                                 <div class="select">
-                                                    <h5>Category</h5>
+                                                    <h5>Thể loại ngành nghề</h5>
                                                     <select name="category[]" class="chosen-select" multiple>
                                                         @foreach ($categories as $category)
                                                             <option value="{{ $category->id }}">{{ $category->name }}
@@ -105,12 +105,12 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <label for="address">Address:</label>
+                                                <label for="address">Địa chỉ công ty:</label>
                                                 <input type="text" id="address" name="address"
                                                     value="{{ old('address') }}">
                                             </div>
                                             <div>
-                                                <label for="map">Map:</label>
+                                                <label for="map">Nhập APi bản đồ:</label>
                                                 <input type="text" id="map" name="map"
                                                     value="{{ old('map') }}">
                                             </div>
@@ -122,7 +122,7 @@
                                         </div>
                                         <div data-v-7805af9a="" class="col-md-6">
                                             <div>
-                                                <label for="detail">Detail:</label>
+                                                <label for="detail">Mô tả công ty:</label>
                                                 <textarea id="detail" name="detail">{{ old('detail') }}</textarea>
                                             </div>
                                             <div>

@@ -36,11 +36,14 @@
                                                                 {{ number_format($cart->value, 0, ',', '.') }}
                                                                 {{ $cart->planCurrency->currency }}<span data-v-f938ab0e="" class="text-danger">*</span>
                                                             </p>
-                                                            @foreach ($cart->planFeatures as $feature)
+                                                             <p data-v-f938ab0e="" class="service-description color-gray custom-color">
+                                                                    {{ $cart->description_home }}
+                                                                </p>
+                                                            {{-- @foreach ($cart->planFeatures as $feature)
                                                                 <p data-v-f938ab0e="" class="service-description color-gray custom-color">
                                                                     {{ $feature->feature }}
                                                                 </p>
-                                                            @endforeach
+                                                            @endforeach --}}
                                                         </div>
                                                     </a>
                                                     <div data-v-f938ab0e="" class="d-flex flex-row align-items-center justify-content-between">

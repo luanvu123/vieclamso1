@@ -142,13 +142,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <li class="{{ Request::is('roles*') ? 'active' : '' }}">
                                             <a href="{{ route('roles.index') }}">
                                                 <img src="{{ asset('backend_admin/images/3018587_admin_administrator_ajax_options_permission_icon.svg') }}"
-                                                    alt="Google" width="20" height="20"> Phân quyền
+                                                    alt="Google" width="20" height="20"> Phân quyền quản trị
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('categories*') ? 'active' : '' }}">
                                             <a href="{{ route('categories.index') }}">
                                                 <img src="{{ asset('backend_admin/images/8673763_ic_fluent_slide_size_filled_icon.svg') }}"
-                                                    alt="Google" width="20" height="20"> Thể loại
+                                                    alt="Google" width="20" height="20"> Thể loại ngành nghề
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('cv_templates*') ? 'active' : '' }}">

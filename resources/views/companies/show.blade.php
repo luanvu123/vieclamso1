@@ -68,7 +68,7 @@
                         <li>
                             <i class="fa fa-map-marker"></i>
                             <div>
-                                <strong>Location:</strong>
+                                <strong>Địa chỉ:</strong>
                                 <span> {{ $company->address }}</span>
                             </div>
                         </li>

@@ -7,18 +7,18 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <a href="{{ route('categories.create') }}" class="button margin-top-30">Add Category</a>
+                    <a href="{{ route('categories.create') }}" class="button margin-top-30">Thêm Thể loại</a>
 
                     <!-- Table -->
                     <table class="manage-table responsive-table" id="user-table">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Image</th>
+                                <th>Tên thể loại ngành nghề</th>
+                                <th>Ảnh </th>
                                 <th>Số lượng công việc</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>

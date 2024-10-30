@@ -53,18 +53,18 @@
                                     <div data-v-7805af9a="" class="row">
                                         <div data-v-7805af9a="" class="col-md-6">
                                             <div>
-                                                <label for="name">Name:</label>
+                                                <label for="name">Tên công ty:</label>
                                                 <input type="text" id="name" name="name"
                                                     value="{{ old('name', $company->name) }}" required>
                                             </div>
                                             <div>
-                                                <label for="mst">MST:</label>
+                                                <label for="mst">Mã số thuế:</label>
                                                 <input type="text" id="mst" name="mst"
                                                     value="{{ old('mst', $company->mst) }}" required>
                                             </div>
                                             <div class="form">
                                                 <div class="select">
-                                                    <h5>Category</h5>
+                                                    <h5>Thể loại ngành nghề</h5>
                                                     <select name="category[]" data-placeholder="Choose Categories"
                                                         class="chosen-select" multiple>
                                                         @foreach ($categories as $category)
@@ -77,7 +77,7 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <label for="image">Image:</label>
+                                                <label for="image">Ảnh nền:</label>
                                                 <input type="file" id="image" name="image">
                                                 @if ($company->image)
                                                     <img src="{{ asset('storage/' . $company->image) }}"
@@ -99,24 +99,24 @@
                                                 @enderror
                                             </div>
                                             <div>
-                                                <label for="scale">Scale:</label>
+                                                <label for="scale">Qui mô:</label>
                                                 <input type="text" id="scale" name="scale"
                                                     value="{{ old('scale', $company->scale) }}">
                                             </div>
                                             <div>
-                                                <label for="address">Address:</label>
+                                                <label for="address">Địa chỉ công ty:</label>
                                                 <input type="text" id="address" name="address"
                                                     value="{{ old('address', $company->address) }}">
                                             </div>
                                         </div>
                                         <div data-v-7805af9a="" class="col-md-6">
                                             <div>
-                                                <label for="map">Map:</label>
+                                                <label for="map">Nhập api bản đồ:</label>
                                                 <input type="text" id="map" name="map"
                                                     value="{{ old('map', $company->map) }}">
                                             </div>
                                             <div>
-                                                <label for="detail">Detail:</label>
+                                                <label for="detail">Mô tả công ty:</label>
                                                 <textarea id="detail" name="detail">{{ old('detail', $company->detail) }}</textarea>
                                             </div>
                                             <div>

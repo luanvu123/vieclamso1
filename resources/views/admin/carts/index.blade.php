@@ -14,7 +14,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <h1>Services</h1>
+                    <h1>Dịch vụ</h1>
                     <div class="button-container">
                         <a href="{{ route('carts.create') }}" class="button margin-top-30">Thêm dịch vụ</a>
                         <a href="{{ route('type_cart.create') }}" class="button margin-top-30">Thêm thể loại</a>
@@ -24,16 +24,16 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Title</th> <!-- Thêm cột Title -->
-                                <th>Plan Currency</th>
-                                <th>Value</th>
-                                <th>Description</th>
+                                <th>Tiêu đề</th> <!-- Thêm cột Title -->
+                                <th>Đơn vị</th>
+                                <th>Giá tiền</th>
+                                <th>Mô tả </th>
                                 <th>Top Point</th>
-                                <th>Type Cart</th>
-                                <th>Validity</th> <!-- Thêm cột Validity -->
-                                <th>Background Image</th> <!-- Thêm cột Background Image -->
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <th>Loại Dịch vụ</th>
+                                <th>Số ngày chạy dịch vụ</th> <!-- Thêm cột Validity -->
+                                <th>Ảnh nền</th> <!-- Thêm cột Background Image -->
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,9 +44,7 @@
                                     <td>{{ $cart->planCurrency->currency }}</td>
                                     <td>{{ $cart->value }}</td>
                                     <td>
-                                        @foreach ($cart->planFeatures as $feature)
-                                            <li>{{ $feature->feature }}</li>
-                                        @endforeach
+                                      {{$cart->description_home}}
                                     </td>
                                     <td>
                                         @if ($cart->top_point != 0)
@@ -54,7 +52,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $cart->typeCart->name ?? 'N/A' }}</td>
-                                    <td>{{ $cart->validity }} days</td> <!-- Hiển thị Validity -->
+                                    <td>{{ $cart->validity }} ngày</td> <!-- Hiển thị Validity -->
                                     <td>
                                         @if ($cart->background_image)
                                             <img src="{{ asset('storage/' . $cart->background_image) }}"
