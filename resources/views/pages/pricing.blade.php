@@ -601,67 +601,7 @@
             position: relative;
         }
     </style>
-    <style>
-        .left-banner-form {
-            background-image: url("https://tuyendung.topcv.vn/images/banner_form_bg.png");
-            height: 100%;
-            background-size: 100% 100%;
-            background-position: center;
-            background-repeat: no-repeat;
-            border-bottom-left-radius: 10px;
-            border-top-left-radius: 10px;
-        }
 
-        .center-banner-form {
-            background-image: url("https://tuyendung.topcv.vn/images/banner_form_center.png");
-            height: 100%;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .center-form {
-            margin-inline: 80px;
-            border-radius: 10px !important;
-            box-shadow: 0 6px 12px 3px rgba(32, 40, 56, 0.05), 0 4px 8px 2px rgba(32, 40, 56, 0.03);
-            height: 73%;
-            margin-bottom: 30px;
-        }
-
-        .right-banner-form .form-lead-container {
-            border-bottom-right-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-
-        .left-banner-form-mobile {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .center-form {
-                flex-direction: column;
-                margin-inline: 20px;
-            }
-
-            .left-banner-form-mobile {
-                display: block;
-                width: 100%;
-                height: 350px;
-                background-image: url("https://tuyendung.topcv.vn/images/banner_form_bg.png");
-                background-size: 100% 100%;
-                background-position: center;
-                background-repeat: no-repeat;
-                border-top-left-radius: 10px;
-                border-top-right-radius: 10px;
-            }
-
-            .right-banner-form {
-                border-top-left-radius: 0;
-                border-top-right-radius: 0;
-                background: #fff;
-            }
-        }
-    </style>
     <style>
         .form-lead-container {
             background: #fff;
@@ -863,7 +803,7 @@
                                 <div class="top-job-item item-job">
                                     <div class="header-item border-item-max">
                                         <span>{{ $cart->title }}</span>
-                                        <img class="badge-vip" src="https://tuyendung.topcv.vn/images/badge/vip.png"
+                                        <img class="badge-vip" src="{{asset('static.topcv.vn/images/badge/vip.png')}}"
                                             alt="badge" />
                                     </div>
                                     <div class="item-content">
@@ -883,7 +823,7 @@
                                             @foreach ($cart->planFeatures as $feature)
                                                 <div class="d-flex" style="margin-top: 12px">
                                                     <img class="img-benefit"
-                                                        src="https://tuyendung.topcv.vn/images/icons/check.png"
+                                                        src="{{asset('static.topcv.vn/images/icons/check.png')}}"
                                                         alt="icon" />
                                                     <span class="ml-2 text-benefit"> {{ $feature->feature }}</span>
                                                 </div>
@@ -1146,76 +1086,6 @@
 
                     </div>
                 </div>
-
-
-
-
-                <script>
-                    const slickShadow = $('.benefit-slick-shadow').slick({
-                        infinite: true,
-                        speed: 300,
-                        slidesToShow: 1,
-                        adaptiveHeight: true,
-                        prevArrow: false,
-                        nextArrow: false,
-                    }).on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-                        const tmp = nextSlide - currentSlide
-                        if (tmp === 1 || tmp < -1) {
-                            slickContent.slick('slickNext')
-                        }
-                        if (tmp === -1 || tmp > 1) {
-                            slickContent.slick('slickPrev')
-                        }
-                    });
-
-                    const slickContent = $('.benefit-slick-content').slick({
-                        dots: true,
-                        infinite: true,
-                        speed: 300,
-                        slidesToShow: 1,
-                        adaptiveHeight: false,
-                        prevArrow: false,
-                        nextArrow: false,
-                    }).on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-                        const tmp = nextSlide - currentSlide
-                        if (tmp === 1 || tmp < -1) {
-                            slickShadow.slick('slickNext')
-                        }
-                        if (tmp === -1 || tmp > 1) {
-                            slickShadow.slick('slickPrev')
-                        }
-                    });
-
-                    $(document).ready(function() {
-                        $(this).scroll(function() {
-                            const element = $('#pricing-box');
-                            const distanceFromTop = element?.offset()?.top - $(window).scrollTop();
-
-                            const distanceFromBottom = distanceFromTop + element.height();
-                            if (distanceFromTop <= 68 && distanceFromBottom >= 68 + 185) {
-                                $("#clone-pricing-box").css("display", "block")
-                                slickShadow.slick('refresh')
-                            } else {
-                                $("#clone-pricing-box").css("display", "none")
-                            }
-                        });
-                    })
-
-                    $('.add-on-visual-tooltip').on('touchstart', function(e) {
-                        e.stopPropagation();
-                        e.preventDefault();
-                        $('#modal-addon-visual-mask').show();
-                    });
-
-                    $('#modal-addon-visual-mask .close').click(function() {
-                        $('#modal-addon-visual-mask').hide();
-                    });
-
-                    $('.contact-now').click(function(event) {
-                        event.preventDefault()
-                        window.open('https://tuyendung.topcv.vn/app/dashboard?show_contact=1', '_blank')
-                    })
-                </script>
             </div>
         </div>
     </div>
@@ -1255,9 +1125,6 @@
         });
     </script>
 
-    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <style>
         .box-image img {
             position: relative;
@@ -1277,7 +1144,7 @@
             left: -5px;
         }
     </style>
-   
+
 
     <style>
         .d-flex {
@@ -1640,39 +1507,5 @@
             nextArrow: false,
         })
     </script>
-    <div id="floating-sp-mkt">
-        <div class="w-[210px] rounded-[8px] overflow-hidden">
-            <img id="close-img-sp-banner" src="https://tuyendung.topcv.vn/images/mkt/floating_marketing_hrtech_2024.png"
-                width="210" alt="" />
-        </div>
-        <div id="close-img-sp" class="mt-[12px]">
-            <img id="close-img-sp-icon" src="https://tuyendung.topcv.vn/images/mkt/close_floating_support_mkt.webp"
-                width="24" alt="" />
-        </div>
-    </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            showFloatingIcon()
-        })
 
-
-        function showFloatingIcon() {
-            if (sessionStorage.getItem('hidden_floating_icon') !== 'true') {
-                $('#floating-sp-mkt').fadeIn(1000)
-            }
-        }
-
-        function hiddenFloatingIcon() {
-            $('#floating-sp-mkt').fadeOut(1000)
-            sessionStorage.setItem('hidden_floating_icon', true)
-        }
-
-        $('#close-img-sp-banner').click(function() {
-            window.open('https://hrtechconference.topcv.vn/?SOURCCE=BANNER', '_blank')
-        })
-
-        $('#close-img-sp-icon').click(function() {
-            hiddenFloatingIcon()
-        })
-    </script>
 @endsection
