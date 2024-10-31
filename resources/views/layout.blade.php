@@ -80,7 +80,8 @@
     <link rel="stylesheet" href="{{ asset('v4/css/components/desktop/manager-cv.b6b84668d5c1950aK.css') }}">
     <!-- Slick CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
-    <link rel="stylesheet" href="{{ asset('cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css')}}" />
+    <link rel="stylesheet"
+        href="{{ asset('cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css') }}" />
 
 
     <!-- jQuery -->
@@ -1825,36 +1826,56 @@
                 <ul>
                     <div class="modal-support-request" id="modal-support-request">
                         <div class="modal-support-request__content">
-                            <div class="modal-support-request__content--header">
-                                <div class="modal-support-request__content--header-title">
-                                    Yêu cầu hỗ trợ
-                                </div>
-                            </div>
                             <div class="modal-support-request__content--body">
                                 <form action="{{ route('support.store') }}" method="POST">
                                     @csrf
-                                    <div class="support-request__group">
-                                        <label for="phone">Số điện thoại</label>
-                                        <input type="text" name="phone" id="phone"
-                                            placeholder="Số điện thoại">
+                                    <div class="support-ticket-tab-content__group">
+                                        <div class="support-ticket-tab-content__group--title">Số điện thoại <span
+                                                class="required-icon">*</span></div>
+                                        <div class="support-ticket-tab-content__group--content">
+                                            <input name="phone" class="support-ticket-input"
+                                                placeholder="Nhập số điện thoại" style="margin-left: 20px; width: 310px;" required>
+                                        </div>
+                                        <div class="support-ticket-error"></div>
                                     </div>
-                                    <div class="support-request__group">
-                                        <label for="email">Email</label>
-                                        <input type="email" name="email" id="email" placeholder="Email">
+                                    <div class="support-ticket-tab-content__group">
+                                        <div class="support-ticket-tab-content__group--title">Email <span
+                                                class="required-icon">*</span></div>
+                                        <div class="support-ticket-tab-content__group--content">
+                                            <input name="email" class="support-ticket-input"
+                                                placeholder="Nhập email" style="margin-left: 20px; width: 310px;" required>
+                                        </div>
+                                        <div class="support-ticket-error"></div>
                                     </div>
-                                    <div class="support-request__group">
-                                        <label for="type_support_id">Chủ đề hỗ trợ</label>
-                                        <select name="type_support_id" id="type_support_id">
-                                            @foreach ($typeSupports as $typeSupport)
-                                                <option value="{{ $typeSupport->id }}">{{ $typeSupport->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+
+                                    <div class="support-ticket-tab-content__group" id="support-ticket-package-group">
+                                        <div class="support-ticket-tab-content__group--title">Gói dịch vụ<span
+                                                class="required-icon">*</span></div>
+                                        <div class="support-ticket-tab-content__group--content">
+                                            <select class="support-ticket-select" name="type_support_id" style="margin-left: 20px;width: 310px;"
+                                                id="type_support_id">
+                                                @foreach ($typeSupports as $typeSupport)
+                                                    <option
+                                                        value="{{ $typeSupport->id }}"class="support-ticket-option">
+                                                        {{ $typeSupport->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="support-ticket-error"></div>
                                     </div>
-                                    <div class="support-request__group">
-                                        <label for="description">Mô tả</label>
-                                        <textarea name="description" id="description" rows="4" placeholder="Mô tả yêu cầu hỗ trợ của bạn"></textarea>
+                                    <div class="support-ticket-tab-content__group">
+                                        <div class="support-ticket-tab-content__group--title">Mô tả vấn đề cần hỗ trợ
+                                            <span class="required-icon">*</span></div>
+                                        <div class="support-ticket-tab-content__group--content">
+                                            <textarea name="description" class="support-ticket-text-area"  style="margin-left: 20px; width: 310px;" rows="4"
+                                                placeholder="Mô tả rõ vấn đề bạn gặp phải hoặc thông tin góp ý để TopCV có thể xử lý chính xác nhất"
+                                                spellcheck="false"></textarea>
+                                        </div>
+                                        <div class="support-ticket-error"></div>
                                     </div>
+
+
                                     <div class="support-request__group">
                                         <button type="submit">Gửi yêu cầu</button>
                                     </div>
@@ -2687,8 +2708,7 @@
             });
         });
     </script>
-    <script src="{{ asset('static.topcv.vn/v4/js/common/evaluate-tool-cv-success.0d139f508d292cc9.js') }}" defer>
-    </script>
+    <script src="{{ asset('static.topcv.vn/v4/js/common/evaluate-tool-cv-success.0d139f508d292cc9.js') }}" defer></script>
     <script src="{{ asset('static.topcv.vn/v4/js/helper.e6a97e09a77e1d17.js') }}"></script>
     <script type="text/javascript">
         (function(c, l, a, r, i, t, y) {
@@ -2937,7 +2957,7 @@
             });
         });
     </script>
-  <script src="{{ asset('cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js') }}"></script>
+    <script src="{{ asset('cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js') }}"></script>
 
     <script>
         $(document).ready(function() {
