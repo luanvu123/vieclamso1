@@ -875,11 +875,11 @@
                                         <div class="text-vat">* Giá trên chưa bao gồm VAT</div>
                                         <div class="btn-contact"
                                             data-url="{{ route('job-postings.cart.detail', $cart->id) }}">
-                                            Liên hệ tư vấn
+                                            {{ $tableHeaders['Liên hệ tư vấn']}}
                                         </div>
 
                                         <div class="benefit-content">
-                                            <div class="label-benefit">Quyền lợi đặc biệt</div>
+                                            <div class="label-benefit"> {{ $tableHeaders['Quyền lợi đặc biệt']}}</div>
                                             @foreach ($cart->planFeatures as $feature)
                                                 <div class="d-flex" style="margin-top: 12px">
                                                     <img class="img-benefit"
@@ -897,14 +897,13 @@
                 </div>
             @endforeach
             <div class="text-center mt-[40px] mx-[20px]">
-                <div id="btn-compare-benefit" class="md:inline-block md:w-[268px] hover:bg-[#E5F7ED]">So sánh
-                    quyền lợi <i id="icon-compare-benefit" class="fas fa-chevron-down ml-1"></i></div>
+                <div id="btn-compare-benefit" class="md:inline-block md:w-[268px] hover:bg-[#E5F7ED]">{{$compare_benefits}} <i id="icon-compare-benefit" class="fas fa-chevron-down ml-1"></i></div>
             </div>
             <div id="compare-benefits">
                 <div class="compare-benefits bg-white md:py-10 pl-[20px] pr-0 lg:px-0 py-5">
                     <div class="w-container mx-auto ">
                         <div class="mb-[40px] text-[24px] border-l-4 border-primary px-2 compare-benefits-name">
-                            <span class="font-semibold">So sánh quyền lợi</span>
+                            <span class="font-semibold">{{$compare_benefits}} </span>
                         </div>
                         <table class="font-semibold w-full text-left hidden md:block text-[14px] shadow-xs">
                             <thead>
@@ -915,13 +914,7 @@
                                             <div class="text-center">
                                                 <div class="relative my-[8px] overflow-hidden">
                                                     <div class="top-max-plus relative rounded-[8px] h-[56px] flex items-center justify-center"
-                                                        style="
-                    background-color: #212F3F;
-                    border-top: 4px solid #0BD261;
-                    border-bottom: none;
-                    border-left: none;
-                    border-right: none;
-                    ">
+                                                        style="background-color: #212F3F;border-top: 4px solid #0BD261;border-bottom: none;border-left: none;border-right: none;">
                                                         <span class="text-[14px] leading-[22px]"
                                                             style="color: #FFFFFF">{{ $cart->title }} </span>
                                                     </div>
@@ -941,37 +934,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Thời gian hiển thị tin</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                            {{ $cart->Time_to_display ?? 'N/A' }}</td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Thời gian hiệu lực của dịch vụ</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                            {{ $cart->validity }} ngày</td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="text-primary font-semibold leading-[22px]">Quyền lợi</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium"></td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Tặng Credits</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                            {{ $cart->top_point }}
-                                        </td>
-                                    @endforeach
-                                </tr>
+                               <tr>
+        <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Thời gian hiển thị tin'] }}</td>
+        @foreach ($cart_benefit as $cart)
+            <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
+                {{ $cart->Time_to_display ?? 'N/A' }}</td>
+        @endforeach
+    </tr>
+    <tr>
+        <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Thời gian hiệu lực của dịch vụ'] }}</td>
+        @foreach ($cart_benefit as $cart)
+            <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
+                {{ $cart->validity }} ngày</td>
+        @endforeach
+    </tr>
+    <tr>
+        <td class="text-primary font-semibold leading-[22px]">{{ $tableHeaders['Quyền lợi'] }}</td>
+        @foreach ($cart_benefit as $cart)
+            <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium"></td>
+        @endforeach
+    </tr>
+
 
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Box việc làm nổi bật</td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Box việc làm nổi bật']}}</td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
                                             {{ $cart->Featured_job }}
@@ -979,15 +965,14 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="text-primary font-semibold leading-[22px]">Vị trí hiển thị ưu tiên/ Top
-                                        Impression</td>
+                                    <td class="text-primary font-semibold leading-[22px]">{{ $tableHeaders['Vị trí hiển thị ưu tiên/ Top Impression']}}</td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
                                         </td>
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Hiển thị trong TOP đề xuất việc làm phù hợp</td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Hiển thị trong TOP đề xuất việc làm phù hợp']}}</td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
                                             {{ $cart->job_suggestions }}
@@ -995,7 +980,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Hiển thị trong TOP đề xuất việc làm theo CV</td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Hiển thị trong TOP đề xuất việc làm theo CV']}}</td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
                                             {{ $cart->job_suggestion_cv }}
@@ -1003,7 +988,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Hiển thị trong TOP đề xuất việc làm liên quan
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Hiển thị trong TOP đề xuất việc làm liên quan']}}
                                     </td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
@@ -1012,8 +997,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Hiển thị trong TOP kết quả tìm kiếm việc làm có
-                                        nền nổi bật</td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Hiển thị trong TOP kết quả tìm kiếm việc làm có nền nổi bật']}}</td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
                                             {{ $cart->job_suggestion_top }}
@@ -1021,7 +1005,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="text-primary font-semibold leading-[22px]">Đẩy top tự động hàng tuần/ Re-Top
+                                    <td class="text-primary font-semibold leading-[22px]">{{ $tableHeaders['Đẩy top tự động hàng tuần/ Re-Top']}}
                                     </td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
@@ -1029,7 +1013,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Đẩy top khung giờ vàng</td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Đẩy top khung giờ vàng']}}</td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
                                             {{ $cart->prime_time }}
@@ -1037,7 +1021,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Đẩy top khung giờ thường</td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Đẩy top khung giờ thường']}}</td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
                                             {{ $cart->regular_time }}
@@ -1045,7 +1029,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Thông báo việc làm/ Top Job Alert</td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Thông báo việc làm/ Top Job Alert']}}</td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
                                             {!! $cart->Top_Job_Alert
@@ -1055,14 +1039,14 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="text-primary font-semibold leading-[22px]">Tính năng</td>
+                                    <td class="text-primary font-semibold leading-[22px]">{{ $tableHeaders['Tính năng']}}</td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
                                         </td>
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">AI Powered CV</td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['AI Powered CV']}}</td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
                                             {!! $cart->AI_powered_CV
@@ -1072,7 +1056,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Kích hoạt dịch vụ cộng thêm Top Add-ons</td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Kích hoạt dịch vụ cộng thêm Top Add-ons']}}</td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
 
@@ -1083,7 +1067,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Tiêu đề tin nâng cao</td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Tiêu đề tin nâng cao']}}</td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
 
@@ -1094,7 +1078,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Add-on visual </td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Add-on visual']}} </td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
 
@@ -1106,9 +1090,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Điều kiện: Tin đăng chạy dịch vụ có dưới X lượt
-                                        ứng tuyển trong thời gian chạy dịch
-                                        vụ </td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Điều kiện: Tin đăng chạy dịch vụ có dưới X lượt ứng tuyển trong thời gian chạy dịch vụ']}} </td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
 
@@ -1117,9 +1099,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Hiển thị trong TOP kết quả tìm kiếm việc làm có
-                                        nền xanh và hình ảnh nổi bật trong 2
-                                        tuần </td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Hiển thị trong TOP kết quả tìm kiếm việc làm có nền xanh và hình ảnh nổi bật trong 2 tuần']}} </td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
 
@@ -1130,8 +1110,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Kích hoạt Top Add-on trong 2 tuần
-                                        (nếu tin đăng có sử dụng Top Add-on ngay trước đó) </td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Kích hoạt Top Add-on trong 2 tuần (nếu tin đăng có sử dụng Top Add-on ngay trước đó)']}} </td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
 
@@ -1142,7 +1121,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">Kích hoạt CV đề xuất trong 1 tuần </td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Kích hoạt CV đề xuất trong 1 tuần']}} </td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
 
@@ -1153,7 +1132,7 @@
                                     @endforeach
                                 </tr>
                                 <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">350 Credits</td>
+                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['350 Credits']}}</td>
                                     @foreach ($cart_benefit as $cart)
                                         <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
                                             {!! $cart->Give_350_Credits
@@ -1298,616 +1277,7 @@
             left: -5px;
         }
     </style>
-    <div class="bg-white p-[20px]  " id="rank-employer">
-        <div class="w-container mx-auto">
-            <div class="uppercase mb-3 text-gray-600"><span class="text-primary font-normal md:font-light">TOP
-                    REWARDS</span>
-            </div>
-            <div class="mb-[10px] text-[18px] md:text-[24px] border-l-4 border-primary px-2"><span
-                    class="font-semibold">Chương trình TopCV Rewards</span></div>
-            <div class="md:text-[14px] font-light mb-[28px]">
-                Điều kiện & quà tặng khi đạt hạng khách hàng <br>Khi tham gia chương trình TopCV Rewards và đạt
-                hạng khách hàng Bạc trở lên, khách hàng sẽ nhận được bộ quà tặng tương ứng dựa trên thứ hạng đạt
-                được và không mất điểm để quy đổi như dưới đây</div>
-            <div class="main_reward flex shadow-xs md:hidden ">
-                <div class="content d-flex">
-                    <div class="reward-title">
-                        <div class="img-reward">
-                            <img src="https://tuyendung.topcv.vn/images/arrow-4.png" alt="arrow 4" class="">
-                        </div>
-                        <div class="block-slide"></div>
-                        <div class="list">
-                            <div class="block-tittle-mobile block-title-0">
-                                <span class="font-rose txt-green">VOUCHER ƯU ĐÃI GIẢM GIÁ VÀ QUYỀN LỢI GIA
-                                    TĂNG RIÊNG BIỆT</span>
-                            </div>
-                            <div class="block-mobile block-highlight">
-                                <span class="font-weight-300">Voucher <span class="font-weight-700">giảm
-                                        giá</span></span>
-                            </div>
-                            <div class="block-mobile ">
-                                <span class="font-weight-300">Yêu cầu gia hạn <span class="font-weight-700">kích hoạt
-                                        dịch vụ</span></span>
-                            </div>
-                            <div class="block-mobile block-highlight">
-                                <span class="font-weight-300">Logo Nhà tuyển dụng <span class="font-weight-700">nổi bật
-                                        hiển thị</span> tại <a href="https://topcv.vn/viec-lam"
-                                        class="font-weight-700 txt-green" target="_blank">trang chủ việc làm</a></span>
-                            </div>
-                            <div class="block-mobile ">
-                                <span class="font-weight-300">Chuyên trang tuyển dụng cao cấp</span>
-                            </div>
-                            <div class="block-tittle-mobile block-title-1">
-                                <span class="font-rose txt-green">GIA TĂNG HIỆU QUẢ TIN TUYỂN DỤNG</span>
-                            </div>
-                            <div class="block-mobile block-highlight">
-                                <span class="font-weight-300">Tin đăng được thiết kế <span class="font-weight-700">huy
-                                        hiệu nổi bật</span> với ứng viên trên
-                                    website <a href="https://topcv.vn" class="font-weight-700 txt-green"
-                                        target="_blank">Topcv.vn</a></span>
-                            </div>
-                            <div class="block-mobile ">
-                                <span class="font-weight-300"><span class="font-weight-700">Hiển thị tiêu đề
-                                        tin cơ bản</span> có tiêu chí tương đương tiêu đề tin trả phí/ tin Top
-                                    job</span>
-                            </div>
-                            <div class="block-tittle-mobile block-title-2">
-                                <span class="font-rose txt-green">HOẠT ĐỘNG TRI ÂN VÀ VÉ MỜI THAM DỰ CÁC
-                                    CHƯƠNG TRÌNH SỰ KIỆN CÙNG TOPCV</span>
-                            </div>
-                            <div class="block-mobile block-highlight">
-                                <span class="font-weight-300"><span class="font-weight-700">Vé mời VIP tham
-                                        dự chương trình HR TECH</span> - Sự kiện nhân sự lớn nhất trong
-                                    năm</span>
-                            </div>
-                            <div class="block-mobile ">
-                                <span class="font-weight-300"><span class="font-weight-700">Quyền lợi tham
-                                        dự Talkshow & Workshop</span> đào tạo, chia sẻ kiến thức chuyên
-                                    môn</span>
-                            </div>
-                            <div class="block-mobile block-highlight">
-                                <span class="font-weight-300"><span class="font-weight-700">Hoạt động chúc
-                                        mừng, tri ân</span> nhân dịp lễ tết / ngày kỷ niệm</span>
-                            </div>
-                            <div class="block-tittle-mobile block-title-3">
-                                <span class="font-rose txt-green">ƯU ĐÃI TỪ HỆ SINH THÁI SẢN PHẨM HR TECH
-                                    (HAPPYTIME, TESTCENTER, SHIRING)</span>
-                            </div>
-                            <div class="block-mobile block-highlight">
-                                <span class="font-weight-300">Gói quà tặng trải nghiệm miễn phí các sản phẩm
-                                    trong hệ sinh thái số <span class="font-weight-700">HappyTime, TestCenter,
-                                        SHiring</span></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="reward-content">
-                        <img class="icon-slide-gift" src="https://tuyendung.topcv.vn/images/gift-icon.gif"
-                            alt="icon gift">
-                        <div class="one-time">
-                            <div>
-                                <div class="height-box">
-                                    <img src="https://tuyendung.topcv.vn/images/rewards/member.png" alt="reward Tagcard"
-                                        class="">
-                                    <div class="inner-mobile mt-[20px]">
-                                        <span class="tt">Tổng tích luỹ</span>
-                                        <span class="font-weight-300">Từ <span class="txt-green">0</span>
-                                            đến dưới</span>
-                                        <span class="txt-green">30.000.000</span>
-                                        <span class="tt">Điểm tương ứng</span>
-                                        <span class="txt-green">0 đến <300<br> Top Point</span>
-                                    </div>
-                                </div>
-                                <div class="block-slide"></div>
-                                <div class="reward-list">
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item reward-item-end"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="height-box">
-                                    <img src="https://tuyendung.topcv.vn/images/rewards/silver.png" alt="reward Tagcard"
-                                        class="">
-                                    <div class="inner-mobile mt-[20px]">
-                                        <span class="tt">Tổng tích luỹ</span>
-                                        <span class="font-weight-300">Từ <span class="txt-green">30.000.000</span></span>
-                                        <span class="font-weight-300">đến dưới <span
-                                                class="txt-green">80.000.000</span></span>
-                                        <span class="tt">Điểm tương ứng</span>
-                                        <span class="txt-green">300 đến <800<br> Top Point</span>
-                                    </div>
-                                </div>
-                                <div class="block-slide"></div>
-                                <div class="reward-list">
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item ">10%</div>
-                                    <div class="reward-item ">1 lần</div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item ">1 gói 3 tháng</div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item ">
-                                        <img src="https://tuyendung.topcv.vn/images/khtt/circle-check.svg"
-                                            class="w-[18px] h-[28px]" alt="check" />
-                                    </div>
-                                    <div class="reward-item ">
-                                        <img src="https://tuyendung.topcv.vn/images/khtt/circle-check.svg"
-                                            class="w-[18px] h-[28px]" alt="check" />
-                                    </div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item reward-item-end"><span class="font-weight-300">2
-                                            tháng trải nghiệm miễn phí các sản phẩm trong hệ sinh thái số <span
-                                                class="font-weight-700">HappyTime, TestCenter,
-                                                SHiring</span></span></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="height-box">
-                                    <img src="https://tuyendung.topcv.vn/images/rewards/gold.png" alt="reward Tagcard"
-                                        class="">
-                                    <div class="inner-mobile mt-[20px]">
-                                        <span class="tt">Tổng tích luỹ</span>
-                                        <span class="font-weight-300">Từ <span class="txt-green">80.000.000</span></span>
-                                        <span class="font-weight-300">đến dưới <span
-                                                class="txt-green">150.000.000</span></span>
-                                        <span class="tt">Điểm tương ứng</span>
-                                        <span class="txt-green">800 đến <1500<br> Top Point</span>
-                                    </div>
-                                </div>
-                                <div class="block-slide"></div>
-                                <div class="reward-list">
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item ">20%</div>
-                                    <div class="reward-item ">2 lần</div>
-                                    <div class="reward-item ">3 tháng</div>
-                                    <div class="reward-item ">3 tháng</div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item ">1 gói 6 tháng</div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item ">1 vé</div>
-                                    <div class="reward-item ">
-                                        <img src="https://tuyendung.topcv.vn/images/khtt/circle-check.svg"
-                                            class="w-[18px] h-[28px]" alt="check" />
-                                    </div>
-                                    <div class="reward-item ">
-                                        <img src="https://tuyendung.topcv.vn/images/khtt/circle-check.svg"
-                                            class="w-[18px] h-[28px]" alt="check" />
-                                    </div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item reward-item-end"><span class="font-weight-300">2
-                                            tháng trải nghiệm miễn phí các sản phẩm trong hệ sinh thái số <span
-                                                class="font-weight-700">HappyTime, TestCenter,
-                                                SHiring</span></span></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="height-box">
-                                    <img src="https://tuyendung.topcv.vn/images/rewards/platinum.png" alt="reward Tagcard"
-                                        class="">
-                                    <div class="inner-mobile mt-[20px]">
-                                        <span class="tt">Tổng tích luỹ</span>
-                                        <span class="font-weight-300">Từ <span class="txt-green">150.000.000</span></span>
-                                        <span class="font-weight-300">đến dưới <span
-                                                class="txt-green">250.000.000</span></span>
-                                        <span class="tt">Điểm tương ứng</span>
-                                        <span class="txt-green">1500 đến <2500<br> Top Point</span>
-                                    </div>
-                                </div>
-                                <div class="block-slide"></div>
-                                <div class="reward-list">
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item ">25%</div>
-                                    <div class="reward-item ">3 lần</div>
-                                    <div class="reward-item ">6 tháng</div>
-                                    <div class="reward-item ">6 tháng</div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item ">1 gói 9 tháng</div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item ">1 vé</div>
-                                    <div class="reward-item ">
-                                        <img src="https://tuyendung.topcv.vn/images/khtt/circle-check.svg"
-                                            class="w-[18px] h-[28px]" alt="check" />
-                                    </div>
-                                    <div class="reward-item ">
-                                        <img src="https://tuyendung.topcv.vn/images/khtt/circle-check.svg"
-                                            class="w-[18px] h-[28px]" alt="check" />
-                                    </div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item reward-item-end"><span class="font-weight-300">2
-                                            tháng trải nghiệm miễn phí các sản phẩm trong hệ sinh thái số <span
-                                                class="font-weight-700">HappyTime, TestCenter,
-                                                SHiring</span></span></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="height-box">
-                                    <img src="https://tuyendung.topcv.vn/images/rewards/diamond.png" alt="reward Tagcard"
-                                        class="">
-                                    <div class="inner-mobile mt-[20px]">
-                                        <span class="tt">Tổng tích luỹ</span>
-                                        <span class="font-weight-300">Từ <span class="txt-green">250.000.000</span></span>
-                                        <span class="font-weight-300">trở lên</span>
-                                        <span class="tt">Điểm tương ứng</span>
-                                        <span class="txt-green">2500 Top Point<br> trở lên</span>
-                                    </div>
-                                </div>
-                                <div class="block-slide"></div>
-                                <div class="reward-list">
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item ">30%</div>
-                                    <div class="reward-item ">4 lần</div>
-                                    <div class="reward-item ">12 tháng</div>
-                                    <div class="reward-item ">12 tháng</div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item ">
-                                        <img src="https://tuyendung.topcv.vn/images/khtt/circle-check.svg"
-                                            class="w-[18px] h-[28px]" alt="check" />
-                                    </div>
-                                    <div class="reward-item ">1 gói 12 tháng</div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item ">2 vé</div>
-                                    <div class="reward-item ">
-                                        <img src="https://tuyendung.topcv.vn/images/khtt/circle-check.svg"
-                                            class="w-[18px] h-[28px]" alt="check" />
-                                    </div>
-                                    <div class="reward-item ">
-                                        <img src="https://tuyendung.topcv.vn/images/khtt/circle-check.svg"
-                                            class="w-[18px] h-[28px]" alt="check" />
-                                    </div>
-                                    <div class="reward-item "></div>
-                                    <div class="reward-item reward-item-end"><span class="font-weight-300">2
-                                            tháng trải nghiệm miễn phí các sản phẩm trong hệ sinh thái số <span
-                                                class="font-weight-700">HappyTime, TestCenter,
-                                                SHiring</span></span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="main_reward md:shadow-xs pb-[30px] hidden md:block ">
-                <div class="head">
-
-                    <div class="head_l">
-                        <img src="https://tuyendung.topcv.vn/images/khtt/arrow.png" alt="arrow " class="">
-                    </div>
-                    <div class="head_r">
-                        <div class="item">
-                            <img src="https://tuyendung.topcv.vn/images/rewards/member.png" alt="Reward Tagcard"
-                                class="">
-                            <div class="inner">
-                                <span class="tt">Tổng tích luỹ</span>
-                                <span class="font-weight-300">Từ <span class="txt-green">0</span> đến
-                                    dưới</span>
-                                <span class="txt-green">30.000.000</span>
-                                <span class="tt">Điểm tương ứng</span>
-                                <span class="txt-green">0 đến <300<br> Top Point</span>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="https://tuyendung.topcv.vn/images/rewards/silver.png" alt="Reward Tagcard"
-                                class="">
-                            <div class="inner">
-                                <span class="tt">Tổng tích luỹ</span>
-                                <span class="font-weight-300">Từ <span class="txt-green">30.000.000</span></span>
-                                <span class="font-weight-300">đến dưới <span class="txt-green">80.000.000</span></span>
-                                <span class="tt">Điểm tương ứng</span>
-                                <span class="txt-green">300 đến <800<br> Top Point</span>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="https://tuyendung.topcv.vn/images/rewards/gold.png" alt="Reward Tagcard"
-                                class="">
-                            <div class="inner">
-                                <span class="tt">Tổng tích luỹ</span>
-                                <span class="font-weight-300">Từ <span class="txt-green">80.000.000</span></span>
-                                <span class="font-weight-300">đến dưới <span class="txt-green">150.000.000</span></span>
-                                <span class="tt">Điểm tương ứng</span>
-                                <span class="txt-green">800 đến <1500<br> Top Point</span>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="https://tuyendung.topcv.vn/images/rewards/platinum.png" alt="Reward Tagcard"
-                                class="">
-                            <div class="inner">
-                                <span class="tt">Tổng tích luỹ</span>
-                                <span class="font-weight-300">Từ <span class="txt-green">150.000.000</span></span>
-                                <span class="font-weight-300">đến dưới <span class="txt-green">250.000.000</span></span>
-                                <span class="tt">Điểm tương ứng</span>
-                                <span class="txt-green">1500 đến <2500<br> Top Point</span>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="https://tuyendung.topcv.vn/images/rewards/diamond.png" alt="Reward Tagcard"
-                                class="">
-                            <div class="inner">
-                                <span class="tt">Tổng tích luỹ</span>
-                                <span class="font-weight-300">Từ <span class="txt-green">250.000.000</span></span>
-                                <span class="font-weight-300">trở lên</span>
-                                <span class="tt">Điểm tương ứng</span>
-                                <span class="txt-green">2500 Top Point<br> trở lên</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="list text-[14px]">
-                    <div class="block-tittle">
-                        <span class="font-rose txt-green">VOUCHER ƯU ĐÃI GIẢM GIÁ VÀ QUYỀN LỢI GIA TĂNG RIÊNG
-                            BIỆT</span>
-                    </div>
-                    <div class="block  block-highlight">
-                        <div class="block_l">
-                            <span class="font-weight-300">Voucher <span class="font-weight-700">giảm
-                                    giá</span></span>
-                        </div>
-                        <div class="block_r d-flex align-items-center">
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-                                10%
-                            </div>
-                            <div class="item">
-                                20%
-                            </div>
-                            <div class="item">
-                                25%
-                            </div>
-                            <div class="item">
-                                30%
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block  ">
-                        <div class="block_l">
-                            <span class="font-weight-300">Yêu cầu gia hạn <span class="font-weight-700">kích
-                                    hoạt dịch vụ</span></span>
-                        </div>
-                        <div class="block_r d-flex align-items-center">
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-                                1 lần
-                            </div>
-                            <div class="item">
-                                2 lần
-                            </div>
-                            <div class="item">
-                                3 lần
-                            </div>
-                            <div class="item">
-                                4 lần
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block  block-highlight">
-                        <div class="block_l">
-                            <span class="font-weight-300">Logo Nhà tuyển dụng <span class="font-weight-700">nổi bật hiển
-                                    thị</span> tại <a href="https://topcv.vn/viec-lam" class="font-weight-700 txt-green"
-                                    target="_blank">trang chủ việc làm</a></span>
-                        </div>
-                        <div class="block_r d-flex align-items-center">
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-                                3 tháng
-                            </div>
-                            <div class="item">
-                                6 tháng
-                            </div>
-                            <div class="item">
-                                12 tháng
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block block-end ">
-                        <div class="block_l">
-                            <span class="font-weight-300">Chuyên trang tuyển dụng cao cấp</span>
-                        </div>
-                        <div class="block_r d-flex align-items-center">
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-                                3 tháng
-                            </div>
-                            <div class="item">
-                                6 tháng
-                            </div>
-                            <div class="item">
-                                12 tháng
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block-tittle">
-                        <span class="font-rose txt-green">GIA TĂNG HIỆU QUẢ TIN TUYỂN DỤNG</span>
-                    </div>
-                    <div class="block  block-highlight">
-                        <div class="block_l">
-                            <span class="font-weight-300">Tin đăng được thiết kế <span class="font-weight-700">huy hiệu
-                                    nổi bật</span> với ứng viên trên website
-                                <a href="https://topcv.vn" class="font-weight-700 txt-green"
-                                    target="_blank">Topcv.vn</a></span>
-                        </div>
-                        <div class="block_r d-flex align-items-center">
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-                                <img src=https://tuyendung.topcv.vn/images/khtt/circle-check.svg alt='check' />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block block-end ">
-                        <div class="block_l">
-                            <span class="font-weight-300"><span class="font-weight-700">Hiển thị tiêu đề tin
-                                    cơ bản</span> có tiêu chí tương đương tiêu đề tin trả phí/ tin Top
-                                job</span>
-                        </div>
-                        <div class="block_r d-flex align-items-center">
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-                                1 gói 3 tháng
-                            </div>
-                            <div class="item">
-                                1 gói 6 tháng
-                            </div>
-                            <div class="item">
-                                1 gói 9 tháng
-                            </div>
-                            <div class="item">
-                                1 gói 12 tháng
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block-tittle">
-                        <span class="font-rose txt-green">HOẠT ĐỘNG TRI ÂN VÀ VÉ MỜI THAM DỰ CÁC CHƯƠNG TRÌNH
-                            SỰ KIỆN CÙNG TOPCV</span>
-                    </div>
-                    <div class="block  block-highlight">
-                        <div class="block_l">
-                            <span class="font-weight-300"><span class="font-weight-700">Vé mời VIP tham dự
-                                    chương trình HR TECH</span> - Sự kiện nhân sự lớn nhất trong năm</span>
-                        </div>
-                        <div class="block_r d-flex align-items-center">
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-                                1 vé
-                            </div>
-                            <div class="item">
-                                1 vé
-                            </div>
-                            <div class="item">
-                                2 vé
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block  ">
-                        <div class="block_l">
-                            <span class="font-weight-300"><span class="font-weight-700">Quyền lợi tham dự
-                                    Talkshow & Workshop</span> đào tạo, chia sẻ kiến thức chuyên môn</span>
-                        </div>
-                        <div class="block_r d-flex align-items-center">
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-                                <img src=https://tuyendung.topcv.vn/images/khtt/circle-check.svg alt='check' />
-                            </div>
-                            <div class="item">
-                                <img src=https://tuyendung.topcv.vn/images/khtt/circle-check.svg alt='check' />
-                            </div>
-                            <div class="item">
-                                <img src=https://tuyendung.topcv.vn/images/khtt/circle-check.svg alt='check' />
-                            </div>
-                            <div class="item">
-                                <img src=https://tuyendung.topcv.vn/images/khtt/circle-check.svg alt='check' />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block block-end block-highlight">
-                        <div class="block_l">
-                            <span class="font-weight-300"><span class="font-weight-700">Hoạt động chúc mừng,
-                                    tri ân</span> nhân dịp lễ tết / ngày kỷ niệm</span>
-                        </div>
-                        <div class="block_r d-flex align-items-center">
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-                                <img src=https://tuyendung.topcv.vn/images/khtt/circle-check.svg alt='check' />
-                            </div>
-                            <div class="item">
-                                <img src=https://tuyendung.topcv.vn/images/khtt/circle-check.svg alt='check' />
-                            </div>
-                            <div class="item">
-                                <img src=https://tuyendung.topcv.vn/images/khtt/circle-check.svg alt='check' />
-                            </div>
-                            <div class="item">
-                                <img src=https://tuyendung.topcv.vn/images/khtt/circle-check.svg alt='check' />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block-tittle">
-                        <span class="font-rose txt-green">ƯU ĐÃI TỪ HỆ SINH THÁI SẢN PHẨM HR TECH (HAPPYTIME,
-                            TESTCENTER, SHIRING)</span>
-                    </div>
-                    <div class="block block-end block-highlight">
-                        <div class="block_l">
-                            <span class="font-weight-300">Gói quà tặng trải nghiệm miễn phí các sản phẩm trong
-                                hệ sinh thái số <span class="font-weight-700">HappyTime, TestCenter,
-                                    SHiring</span></span>
-                        </div>
-                        <div class="block_r d-flex align-items-center">
-                            <div class="item">
-
-                            </div>
-                            <div class="item">
-                                <span class="font-weight-300">2 tháng trải nghiệm miễn phí các sản phẩm trong
-                                    hệ sinh thái số <span class="font-weight-700">HappyTime, TestCenter,
-                                        SHiring</span></span>
-                            </div>
-                            <div class="item">
-                                <span class="font-weight-300">2 tháng trải nghiệm miễn phí các sản phẩm trong
-                                    hệ sinh thái số <span class="font-weight-700">HappyTime, TestCenter,
-                                        SHiring</span></span>
-                            </div>
-                            <div class="item">
-                                <span class="font-weight-300">2 tháng trải nghiệm miễn phí các sản phẩm trong
-                                    hệ sinh thái số <span class="font-weight-700">HappyTime, TestCenter,
-                                        SHiring</span></span>
-                            </div>
-                            <div class="item">
-                                <span class="font-weight-300">2 tháng trải nghiệm miễn phí các sản phẩm trong
-                                    hệ sinh thái số <span class="font-weight-700">HappyTime, TestCenter,
-                                        SHiring</span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+   
 
     <style>
         .d-flex {

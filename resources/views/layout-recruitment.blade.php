@@ -100,8 +100,8 @@
                         <div id="mb-menu" class="hidden w-full md:flex">
                             <ul class="p-0 m-0 list-none flex flex-col md:flex-row text-sm" id="navbar-menu">
                                 <li>
-                                    <a class="text-primary hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="#">
+                                    <a class="{{ Request::routeIs('recruitment') ? 'text-primary' : '' }} hover:text-primary block pd-12 md:py-5 text-center font-medium"
+                                        href="{{ route('recruitment') }}">
                                         {{ $menu_1 }}
                                     </a>
                                 </li>
@@ -112,17 +112,12 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="{{route('pricing')}}">
+                                    <a class="{{ Request::routeIs('pricing') ? 'text-primary' : '' }} hover:text-primary block pd-12 md:py-5 text-center font-medium"
+                                        href="{{ route('pricing') }}">
                                         {{ $menu_3 }}
                                     </a>
                                 </li>
-                                <li>
-                                    <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="#">
-                                        {{ $menu_4 }}
-                                    </a>
-                                </li>
+
                                 <li>
                                     <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
                                         href="#">

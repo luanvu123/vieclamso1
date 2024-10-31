@@ -37,12 +37,7 @@ use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class SiteController extends Controller
 {
-    public function pricing()
-    {
-        $carts = Cart::with('typeCart')->where('status', 1)->get();
-        $cart_benefit = Cart::with('typeCart')->where('status', 1)->where('Pricing', 1)->take(6)->get();
-        return view('pages.pricing', compact('carts', 'cart_benefit'));
-    }
+
     public function index(Request $request)
     {
         $this->trackVisitor($request->ip(), OnlineVisitor::class);
@@ -57,7 +52,7 @@ class SiteController extends Controller
 
         $salaries = Salary::where('status', 'active')->withCount('jobPostings')->get();
 
-        $companies = Company::select('name', 'logo','slug')->where('status',1)->where('top_home',1)->take(12)->get();
+        $companies = Company::select('name', 'logo', 'slug')->where('status', 1)->where('top_home', 1)->take(12)->get();
         $awards = Award::where('status', 1)->take(5)->get();
         $ecosystems = Ecosystem::where('status', 1)->take(4)->get();
         $medias = Media::where('status', 1)->take(6)->get();
@@ -91,78 +86,78 @@ class SiteController extends Controller
     }
 
     public function filter(Request $request)
-{
-    // Get filter inputs
-    $city = $request->input('city');
-    $salary = $request->input('salary');
-    $experience = $request->input('experience');
-    $category = $request->input('category');
+    {
+        // Get filter inputs
+        $city = $request->input('city');
+        $salary = $request->input('salary');
+        $experience = $request->input('experience');
+        $category = $request->input('category');
 
-    // Query the job postings with filtering conditions
-    $jobPostings = JobPosting::with('employer', 'company', 'cities', 'categories')
-        ->where('status', 0)
-        ->where('closing_date', '>=', Carbon::now());
+        // Query the job postings with filtering conditions
+        $jobPostings = JobPosting::with('employer', 'company', 'cities', 'categories')
+            ->where('status', 0)
+            ->where('closing_date', '>=', Carbon::now());
 
-    // Apply filters based on the user's input
-    if ($city) {
-        $jobPostings->whereHas('cities', function ($query) use ($city) {
-            $query->where('name', 'like', '%' . $city . '%');
+        // Apply filters based on the user's input
+        if ($city) {
+            $jobPostings->whereHas('cities', function ($query) use ($city) {
+                $query->where('name', 'like', '%' . $city . '%');
+            });
+        }
+
+        if ($salary) {
+            $jobPostings->where('salary', '>=', $salary);
+        }
+
+        if ($experience) {
+            $jobPostings->where('experience', '>=', $experience);
+        }
+
+        if ($category) {
+            $jobPostings->whereHas('categories', function ($query) use ($category) {
+                $query->where('name', 'like', '%' . $category . '%');
+            });
+        }
+
+        // Paginate the results
+        $jobPostings = $jobPostings->paginate(12);
+
+        // Retrieve other necessary data
+        $categories = Category::withCount('jobPostings')->where('status', 1)->get();
+        $salaries = Salary::where('status', 'active')->withCount('jobPostings')->get();
+        $companies = Company::select('name', 'logo', 'slug')->take(12)->get();
+        $awards = Award::where('status', 1)->take(5)->get();
+        $ecosystems = Ecosystem::where('status', 1)->take(4)->get();
+        $medias = Media::where('status', 1)->take(6)->get();
+        $totalCompanyCount = Company::count();
+        $totalApplicationCount = Application::count();
+        $cities = City::where('status', 1)->pluck('name', 'id');
+
+        // Prepare data for categories and salaries
+        $jobData = $categories->map(function ($category) {
+            return [
+                'name' => $category->name,
+                'count' => $category->job_postings_count
+            ];
         });
-    }
 
-    if ($salary) {
-        $jobPostings->where('salary', '>=', $salary);
-    }
-
-    if ($experience) {
-        $jobPostings->where('experience', '>=', $experience);
-    }
-
-    if ($category) {
-        $jobPostings->whereHas('categories', function ($query) use ($category) {
-            $query->where('name', 'like', '%' . $category . '%');
+        $salaryData = $salaries->map(function ($salary) {
+            return [
+                'name' => $salary->name,
+                'count' => $salary->job_postings_count
+            ];
         });
+
+        // Determine which data to show based on the selected type
+        $type = $request->input('type', 'job');
+        $data = ($type === 'salary') ? $salaryData : $jobData;
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Return view with filtered job postings and other data
+        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities', 'data', 'type', 'notifications'));
     }
-
-    // Paginate the results
-    $jobPostings = $jobPostings->paginate(12);
-
-    // Retrieve other necessary data
-    $categories = Category::withCount('jobPostings')->where('status', 1)->get();
-    $salaries = Salary::where('status', 'active')->withCount('jobPostings')->get();
-    $companies = Company::select('name', 'logo', 'slug')->take(12)->get();
-    $awards = Award::where('status', 1)->take(5)->get();
-    $ecosystems = Ecosystem::where('status', 1)->take(4)->get();
-    $medias = Media::where('status', 1)->take(6)->get();
-    $totalCompanyCount = Company::count();
-    $totalApplicationCount = Application::count();
-    $cities = City::where('status', 1)->pluck('name', 'id');
-
-    // Prepare data for categories and salaries
-    $jobData = $categories->map(function ($category) {
-        return [
-            'name' => $category->name,
-            'count' => $category->job_postings_count
-        ];
-    });
-
-    $salaryData = $salaries->map(function ($salary) {
-        return [
-            'name' => $salary->name,
-            'count' => $salary->job_postings_count
-        ];
-    });
-
-    // Determine which data to show based on the selected type
-    $type = $request->input('type', 'job');
-    $data = ($type === 'salary') ? $salaryData : $jobData;
-    $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
-        ->orderBy('created_at', 'desc')
-        ->get();
-
-    // Return view with filtered job postings and other data
-    return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities', 'data', 'type', 'notifications'));
-}
 
 
     public function show($slug)
@@ -389,7 +384,6 @@ class SiteController extends Controller
         foreach ($typePartner_lg as $typePartner) {
             $typePartner->name = $tr->translate($typePartner->name);
         }
-
         // Dịch các chuỗi của $typeHotline_lg
         foreach ($typeHotline_lg as $typeHotline) {
             $typeHotline->name = $tr->translate($typeHotline->name);
@@ -460,6 +454,107 @@ class SiteController extends Controller
             'Awardlg_lg',
         ));
     }
+    public function pricing()
+    {
+        $lang = session('app_locale', 'vi');
+        $tr = new GoogleTranslate($lang);
+
+        // Retrieve carts and cart benefits
+        $carts = Cart::with(['typeCart', 'planCurrency', 'planFeatures'])
+            ->where('status', 1)
+            ->get();
+        $cart_benefit = Cart::with(['typeCart', 'planCurrency', 'planFeatures'])
+            ->where('status', 1)
+            ->where('Pricing', 1)
+            ->take(6)
+            ->get();
+
+        // Translate fields in carts
+        foreach ($carts as $cart) {
+            $cart->title = $tr->translate($cart->title);
+
+            // Translate typeCart fields
+            if ($cart->typeCart) {
+                $cart->typeCart->name = $tr->translate($cart->typeCart->name);
+                $cart->typeCart->detail = $tr->translate($cart->typeCart->detail);
+            }
+
+            // Translate each feature within planFeatures
+            foreach ($cart->planFeatures as $feature) {
+                $feature->feature = $tr->translate($feature->feature);
+            }
+        }
+        // Translate fields in cart_benefit
+        foreach ($cart_benefit as $cart) {
+            $cart->title = $tr->translate($cart->title);
+
+            // Translate typeCart fields
+            if ($cart->typeCart) {
+                $cart->typeCart->name = $tr->translate($cart->typeCart->name);
+                $cart->typeCart->detail = $tr->translate($cart->typeCart->detail);
+            }
+
+            // Translate each feature within planFeatures
+            foreach ($cart->planFeatures as $feature) {
+                $feature->feature = $tr->translate($feature->feature);
+            }
+            $cart->Time_to_display = !empty($cart->Time_to_display) ? $tr->translate($cart->Time_to_display) : '';
+            $cart->validity = !empty($cart->validity) ? $tr->translate($cart->validity) : '';
+            $cart->top_point = !empty($cart->top_point) ? $tr->translate($cart->top_point) : '';
+            $cart->Featured_job = !empty($cart->Featured_job) ? $tr->translate($cart->Featured_job) : '';
+            $cart->job_suggestions = !empty($cart->job_suggestions) ? $tr->translate($cart->job_suggestions) : '';
+            $cart->job_suggestion_cv = !empty($cart->job_suggestion_cv) ? $tr->translate($cart->job_suggestion_cv) : '';
+            $cart->job_suggestion_related = !empty($cart->job_suggestion_related) ? $tr->translate($cart->job_suggestion_related) : '';
+            $cart->job_suggestion_top = !empty($cart->job_suggestion_top) ? $tr->translate($cart->job_suggestion_top) : '';
+            $cart->prime_time = !empty($cart->prime_time) ? $tr->translate($cart->prime_time) : '';
+            $cart->regular_time = !empty($cart->regular_time) ? $tr->translate($cart->regular_time) : '';
+            $cart->Top_Job_Alert = !empty($cart->Top_Job_Alert) ? $tr->translate($cart->Top_Job_Alert) : '';
+            $cart->AI_powered_CV = !empty($cart->AI_powered_CV) ? $tr->translate($cart->AI_powered_CV) : '';
+            $cart->Top_Add_ons = !empty($cart->Top_Add_ons) ? $tr->translate($cart->Top_Add_ons) : '';
+            $cart->Advanced_news_headline = !empty($cart->Advanced_news_headline) ? $tr->translate($cart->Advanced_news_headline) : '';
+            $cart->Add_on_visual = !empty($cart->Add_on_visual) ? $tr->translate($cart->Add_on_visual) : '';
+            $cart->Service_Warranty = !empty($cart->Service_Warranty) ? $tr->translate($cart->Service_Warranty) : '';
+            $cart->search_results = !empty($cart->search_results) ? $tr->translate($cart->search_results) : '';
+        }
+
+
+        $compare_benefits = $tr->translate(' So sánh quyền lợi');
+        $tableHeaders = [
+            'Thời gian hiển thị tin' => $tr->translate('Thời gian hiển thị tin'),
+            'Thời gian hiệu lực của dịch vụ' => $tr->translate('Thời gian hiệu lực của dịch vụ'),
+            'Quyền lợi' => $tr->translate('Quyền lợi'),
+            'Tặng Credits' => $tr->translate('Tặng Credits'),
+            'Box việc làm nổi bật' => $tr->translate('Box việc làm nổi bật'),
+            'Vị trí hiển thị ưu tiên/ Top Impression' => $tr->translate('Vị trí hiển thị ưu tiên/ Top Impression'),
+            'Hiển thị trong TOP đề xuất việc làm phù hợp' => $tr->translate('Hiển thị trong TOP đề xuất việc làm phù hợp'),
+            'Hiển thị trong TOP đề xuất việc làm theo CV' => $tr->translate('Hiển thị trong TOP đề xuất việc làm theo CV'),
+            'Hiển thị trong TOP đề xuất việc làm liên quan' => $tr->translate('Hiển thị trong TOP đề xuất việc làm liên quan'),
+            'Hiển thị trong TOP kết quả tìm kiếm việc làm có nền nổi bật' => $tr->translate('Hiển thị trong TOP kết quả tìm kiếm việc làm có nền nổi bật'),
+            'Đẩy top tự động hàng tuần/ Re-Top' => $tr->translate('Đẩy top tự động hàng tuần/ Re-Top'),
+            'Đẩy top khung giờ vàng' => $tr->translate('Đẩy top khung giờ vàng'),
+            'Đẩy top khung giờ thường' => $tr->translate('Đẩy top khung giờ thường'),
+            'Thông báo việc làm/ Top Job Alert' => $tr->translate('Thông báo việc làm/ Top Job Alert'),
+            'Tính năng' => $tr->translate('Tính năng'),
+            'AI Powered CV' => $tr->translate('AI Powered CV'),
+            'Kích hoạt dịch vụ cộng thêm Top Add-ons' => $tr->translate('Kích hoạt dịch vụ cộng thêm Top Add-ons'),
+            'Tiêu đề tin nâng cao' => $tr->translate('Tiêu đề tin nâng cao'),
+            'Add-on visual' => $tr->translate('Add-on visual'),
+            'Điều kiện: Tin đăng chạy dịch vụ có dưới X lượt ứng tuyển trong thời gian chạy dịch vụ' => $tr->translate('Điều kiện: Tin đăng chạy dịch vụ có dưới X lượt ứng tuyển trong thời gian chạy dịch vụ'),
+            'Hiển thị trong TOP kết quả tìm kiếm việc làm có nền xanh và hình ảnh nổi bật trong 2 tuần' => $tr->translate('Hiển thị trong TOP kết quả tìm kiếm việc làm có nền xanh và hình ảnh nổi bật trong 2 tuần'),
+            'Kích hoạt Top Add-on trong 2 tuần (nếu tin đăng có sử dụng Top Add-on ngay trước đó)' => $tr->translate('Kích hoạt Top Add-on trong 2 tuần (nếu tin đăng có sử dụng Top Add-on ngay trước đó)'),
+            'Kích hoạt CV đề xuất trong 1 tuần' => $tr->translate('Kích hoạt CV đề xuất trong 1 tuần'),
+             '350 Credits' => $tr->translate('350 Credits'),
+             'Liên hệ tư vấn'=>$tr->translate('Liên hệ tư vấn'),
+             'Quyền lợi đặc biệt'=>$tr->translate('Quyền lợi đặc biệt')
+        ];
+
+
+
+        // Return view with translated data
+        return view('pages.pricing', compact('carts', 'cart_benefit', 'compare_benefits', 'tableHeaders'));
+    }
+
+
     public function storeConsultation(Request $request)
     {
         // Validate the form data
