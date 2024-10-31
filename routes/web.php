@@ -86,6 +86,7 @@ use Illuminate\Support\Facades\Session;
 */
 
 Route::get('/', [SiteController::class, 'index'])->name('/');
+Route::get('/pricing', [SiteController::class, 'pricing'])->name('pricing');
 Route::get('job/{slug}', [SiteController::class, 'show'])->name('job.show');
 Route::get('/jobs/filter', [SiteController::class, 'filter'])->name('job.filter');
 Route::get('/categoriehomes/{slug}', [SiteController::class, 'showCategory'])->name('categoriehomes.show');

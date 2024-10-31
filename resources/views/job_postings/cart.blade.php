@@ -30,7 +30,7 @@
                                                         <div data-v-f938ab0e="" style="position: relative;"></div>
                                                         <div data-v-f938ab0e="" type="button" class="detail-service">
                                                             <h4 data-v-f938ab0e="" class="text-uppercase d-flex align-items-center">
-                                                                <span data-v-f938ab0e="" class="service-name">{{ $cart->title }}</span>
+                                                                <span data-v-f938ab0e="" class="service-name">{{ $cart->title }}</span> 
                                                             </h4>
                                                             <p data-v-f938ab0e="" class="service-price font-weight-bold text-primary">
                                                                 {{ number_format($cart->value, 0, ',', '.') }}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Award;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Company;
@@ -36,6 +37,12 @@ use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class SiteController extends Controller
 {
+    public function pricing()
+    {
+        $carts = Cart::with('typeCart')->where('status', 1)->get();
+        $cart_benefit = Cart::with('typeCart')->where('status', 1)->where('Pricing', 1)->take(6)->get();
+        return view('pages.pricing', compact('carts', 'cart_benefit'));
+    }
     public function index(Request $request)
     {
         $this->trackVisitor($request->ip(), OnlineVisitor::class);

@@ -113,7 +113,7 @@
                                 </li>
                                 <li>
                                     <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="#">
+                                        href="{{route('pricing')}}">
                                         {{ $menu_3 }}
                                     </a>
                                 </li>
