@@ -32,7 +32,8 @@ class JobPosting extends Model
         'area',
         'slug',
         'status',
-        'city'
+        'city',
+        'isHot',
     ];
 
     public function employer()

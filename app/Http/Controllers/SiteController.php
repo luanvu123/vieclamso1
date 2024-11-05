@@ -43,7 +43,8 @@ class SiteController extends Controller
         $this->trackVisitor($request->ip(), OnlineVisitor::class);
 
         $jobPostings = JobPosting::with(['company', 'employer', 'cities'])
-            ->where('status', 0) // Lọc các jobPostings đang mở
+            ->where('status', 0)
+           ->where('isHot', '1')
             ->where('closing_date', '>=', Carbon::now()) // Lấy các jobPostings còn hạn
             ->paginate(12);
         $categories = Category::withCount('jobPostings')
@@ -96,6 +97,7 @@ class SiteController extends Controller
         // Query the job postings with filtering conditions
         $jobPostings = JobPosting::with('employer', 'company', 'cities', 'categories')
             ->where('status', 0)
+            ->where('isHot', '1') 
             ->where('closing_date', '>=', Carbon::now());
 
         // Apply filters based on the user's input
@@ -543,9 +545,9 @@ class SiteController extends Controller
             'Hiển thị trong TOP kết quả tìm kiếm việc làm có nền xanh và hình ảnh nổi bật trong 2 tuần' => $tr->translate('Hiển thị trong TOP kết quả tìm kiếm việc làm có nền xanh và hình ảnh nổi bật trong 2 tuần'),
             'Kích hoạt Top Add-on trong 2 tuần (nếu tin đăng có sử dụng Top Add-on ngay trước đó)' => $tr->translate('Kích hoạt Top Add-on trong 2 tuần (nếu tin đăng có sử dụng Top Add-on ngay trước đó)'),
             'Kích hoạt CV đề xuất trong 1 tuần' => $tr->translate('Kích hoạt CV đề xuất trong 1 tuần'),
-             '350 Credits' => $tr->translate('350 Credits'),
-             'Liên hệ tư vấn'=>$tr->translate('Liên hệ tư vấn'),
-             'Quyền lợi đặc biệt'=>$tr->translate('Quyền lợi đặc biệt')
+            '350 Credits' => $tr->translate('350 Credits'),
+            'Liên hệ tư vấn' => $tr->translate('Liên hệ tư vấn'),
+            'Quyền lợi đặc biệt' => $tr->translate('Quyền lợi đặc biệt')
         ];
 
 

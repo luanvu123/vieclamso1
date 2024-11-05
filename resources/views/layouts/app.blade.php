@@ -172,13 +172,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <li class="{{ Request::is('posts*') ? 'active' : '' }}">
                                             <a href="{{ route('posts.index') }}">
                                                 <img src="{{ asset('backend_admin/images/file-document-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Danh sách bài đăng
+                                                    alt="Google" width="20" height="20"> Danh sách Bài viết
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('genre-posts*') ? 'active' : '' }}">
                                             <a href="{{ route('genre-posts.index') }}">
                                                 <img src="{{ asset('backend_admin/images/category-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Thể loại bài đăng
+                                                    alt="Google" width="20" height="20"> Cẩm nang nghề
+                                                nghiệp
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('slugs*') ? 'active' : '' }}">
@@ -309,13 +310,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <li class="{{ Request::is('plan-currencies*') ? 'active' : '' }}">
                                             <a href="{{ route('plan-currencies.index') }}">
                                                 <img src="{{ asset('backend_admin/images/usd-square-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Đơn giá
+                                                    alt="Google" width="20" height="20"> Đơn vị tiền tệ
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('plan-features*') ? 'active' : '' }}">
                                             <a href="{{ route('plan-features.index') }}">
                                                 <img src="{{ asset('backend_admin/images/content-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Chi tiết
+                                                    alt="Google" width="20" height="20"> Quyền lợi đặc biệt
+                                                (Báo giá)
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('carts*') ? 'active' : '' }}">
@@ -547,50 +549,50 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     <div class="col_3">
                         <div class="col-md-3 widget widget1">
                             <div class="r3_counter_box">
-                                <a href="{{ route('job-postings-manage.index') }}">
-                                    <i class="pull-left fa fa-file icon-rounded"></i>
-                                    <div class="stats">
-                                        <h5><strong>{{ $activeJobListingsCount }}</strong></h5>
-                                        <span>Việc làm đang mở </span>
-                                    </div>
-                                </a>
+                                <i class="pull-left fa fa-dollar icon-rounded"></i>
+                                <div class="stats">
+                                    <h5><strong>{{ $activeJobListingsCount }}</strong></h5>
+                                    <span>Chiến dịch đang mở</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-3 widget widget1">
                             <div class="r3_counter_box">
-                                <a href="{{ route('job-postings-manage.index') }}">
-                                    <i class="pull-left fa fa-book user1 icon-rounded"></i>
-                                    <div class="stats">
-                                        <h5 class="counter">{{ $totalJobCount }}</h5> <span> Tông số việc làm</span>
-                                    </div>
-                                </a>
+                                <i class="pull-left fa fa-laptop user1 icon-rounded"></i>
+                                <div class="stats">
+                                    <h5><strong>{{ $totalJobCount }}</strong></h5>
+                                    <span>Tông số việc làm</span>
+                                </div>
                             </div>
                         </div>
-
                         <div class="col-md-3 widget widget1">
                             <div class="r3_counter_box">
-                                <a href="{{ route('candidates.index') }}">
-                                    <i class="pull-left fa fa-pie-chart dollar1 icon-rounded"></i>
-                                    <div class="stats">
-                                        <h5 class="counter">{{ $totalCandidateCount }}</h5> <span> Ứng viên </span>
-                                    </div>
-                                </a>
+                                <i class="pull-left fa fa-money user2 icon-rounded"></i>
+                                <div class="stats">
+                                    <h5><strong>{{ $totalCandidateCount }}</strong></h5>
+                                    <span> Ứng viên </span>
+                                </div>
                             </div>
                         </div>
-
-
+                        <div class="col-md-3 widget widget1">
+                            <div class="r3_counter_box">
+                                <i class="pull-left fa fa-pie-chart dollar1 icon-rounded"></i>
+                                <div class="stats">
+                                    <h5><strong>{{ $totalEmployerCount }}</strong></h5>
+                                    <span>Nhà tuyển
+                                            dụng</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-3 widget">
                             <div class="r3_counter_box">
-                                <a href="{{ route('employers.index') }}">
-                                    <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
-                                    <div class="stats">
-                                        <h5 class="counter">{{ $totalEmployerCount }}</h5> <span> Nhà tuyển
-                                            dụng</span>
-                                    </div>
-                                </a>
+                                <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
+                                <div class="stats">
+                                    <h5><strong>{{ $totalCartEmployerCount }}</strong></h5>
+                                    <span>Dịch vụ đang chạy</span>
+                                </div>
                             </div>
                         </div>
-
                         <div class="clearfix"></div>
                     </div>
                     <br>
@@ -739,7 +741,24 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                 }
             });
         })
+
+        $('.isHot_choose').change(function() {
+            var isHot_val = $(this).val();
+            var id = $(this).attr('id').split('_')[1];
+            $.ajax({
+                url: "{{ route('isHot-choose') }}",
+                method: "GET",
+                data: {
+                    isHot_val: isHot_val,
+                    id: id
+                },
+                success: function(data) {
+                    alert('Thay đổi isHot thành công!');
+                }
+            });
+        });
     </script>
+
     <script>
         $('.user_choose').change(function() {
             var trangthai_val = $(this).val();

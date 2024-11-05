@@ -1,4 +1,3 @@
-<!-- resources/views/admin/products/index.blade.php -->
 
 @extends('layouts.app')
 
@@ -8,24 +7,24 @@
             <div class="col-md-12">
                 <div class="table-responsive">
 
-                    <h1>Products</h1>
+                    <h1>Đổi quà</h1>
 
-                    <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Create New Product</a>
+                    <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Tạo quà mới</a>
 
                     @if ($products->count())
                         <table class="table table-bordered" id="user-table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Company</th>
-                                    <th>Number of Days</th>
-                                    <th>Usage Count</th>
+                                    <th>Tên</th>
+                                    <th>Công ty</th>
+                                    <th>Thời hạn sử dụng</th>
+                                    <th>Số lần sử dụng</th>
                                     <th>Top Point</th>
-                                    <th>Type</th>
-                                    <th>Status</th>
-                                    <th>Image</th>
-                                    <th>Actions</th>
+                                    <th>Thể loại</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ảnh</th>
+                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+     public function __construct()
+    {
+        $this->middleware('permission:about-sent-view', ['only' => ['sent']]);
+        $this->middleware('permission:about-sent-delete', ['only' => ['destroy_sent']]);
+        $this->middleware('permission:contact-send-email', ['only' => ['sendEmail']]);
+    }
     public function sendEmail(Request $request)
     {
         $to = $request->input('emailContact');

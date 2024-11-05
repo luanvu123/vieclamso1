@@ -20,7 +20,6 @@
                         <tbody>
                             @foreach ($purchasedItems as $item)
                                 @php
-                                    // Kiểm tra nếu created_at của mục mua hàng chưa tới 2 giờ kể từ hiện tại
                                     $isNew = $item->created_at->diffInHours(now()) < 2;
                                 @endphp
                                 <tr @if ($isNew) style="font-weight: bold;" @endif>

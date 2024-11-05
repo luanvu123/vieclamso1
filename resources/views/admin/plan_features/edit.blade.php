@@ -3,7 +3,7 @@
 @section('title', 'Edit Plan Feature')
 
 @section('content')
-    <h1>Edit Plan Feature</h1>
+    <h1>Sửa Quyền lợi đặc biệt( báo giá)</h1>
 
     <form action="{{ route('plan-features.update', $planFeature->id) }}" method="POST">
         @csrf
@@ -15,6 +15,6 @@
                 <div>{{ $message }}</div>
             @enderror
         </div>
-        <button type="submit">Update</button>
+        <button type="submit">Lưu</button>
     </form>
 @endsection

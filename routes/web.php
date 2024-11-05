@@ -136,6 +136,7 @@ Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('
 Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
+
     Route::resource('cv_templates', CVTemplateController::class);
     Route::get('employers/purchasedManage', [EmployerManageController::class, 'purchasedManage'])->name('employers.purchasedManage');
     Route::resource('products', ProductController::class);
@@ -201,6 +202,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('candidates', CandidateManageController::class);
     Route::put('/users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
     Route::get('/employer-choose', [EmployerManageController::class, 'employer_choose'])->name('employer-choose');
+    Route::get('/employer-user-choose', [EmployerManageController::class, 'employer_user_choose'])->name('employer-user-choose');
+
     Route::get('/user-choose', [UserController::class, 'user_choose'])->name('user-choose');
     Route::get('/category-choose', [CategoryController::class, 'category_choose'])->name('cate-choose');
     Route::get('/company-choose', [EmployerManageController::class, 'company_choose'])->name('company-choose');
@@ -215,7 +218,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('employers/{employer}/store-cart', [EmployerManageController::class, 'storeCart'])->name('employers.store-cart');
     Route::get('employers/{employer}/carts', [EmployerManageController::class, 'indexCart'])->name('employers.carts.index');
 
-    Route::get('service', [HomeController::class, 'listAllCarts'])->name('employers.carts.list');
+    Route::get('service', [EmployerManageController::class, 'listAllCarts'])->name('employers.carts.list');
 
     // Add a route to delete a cart from an employer
     Route::delete('employers/{employer}/carts/{cart}', [EmployerManageController::class, 'destroyCart'])->name('employers.carts.destroy');
@@ -224,6 +227,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('job-postings-manage', JobsManageController::class);
     Route::get('/jobPosting-choose', [JobsManageController::class, 'jobPosting_choose'])->name('jobPosting-choose');
+Route::get('/isHot-choose', [JobsManageController::class, 'isHot_choose'])->name('isHot-choose');
 
 
     Route::get('/tin-nhan-da-gui', [ContactController::class, 'sent'])->name('about.sent');
@@ -232,10 +236,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/candidate-sent-emails/{id}', [CandidateManageController::class, 'destroySentEmail'])->name('candidate.destroySentEmail');
     Route::get('/employer-sent-emails', [EmployerManageController::class, 'sentEmails'])->name('employer.sentEmails');
     Route::delete('/employer-sent-emails/{id}', [EmployerManageController::class, 'destroySentEmail'])->name('employer.destroySentEmail');
-
-
-
-
     Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('send-email');
     Route::get('/admin/about/email', function () {
         $to = request()->query('to');

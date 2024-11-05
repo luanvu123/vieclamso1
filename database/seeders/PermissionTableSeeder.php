@@ -222,7 +222,16 @@ class PermissionTableSeeder extends Seeder
             'plan-feature-edit',
             'plan-feature-delete',
             // Quyền cho 'purchased-manage'
-            'purchased-manage'
+            'purchased-manage',
+             'employer-carts-list', // quyền xem tất cả carts
+            'employer-carts-delete', // quyền xóa cart
+            'about-sent-view', // quyền xem tin nhắn đã gửi
+            'about-sent-delete', // quyền xóa tin nhắn đã gửi
+            'candidate-sentEmails-view', // quyền xem email đã gửi của ứng viên
+            'candidate-sentEmails-delete', // quyền xóa email đã gửi của ứng viên
+            'employer-sentEmails-view', // quyền xem email đã gửi của nhà tuyển dụng
+            'employer-sentEmails-delete', // quyền xóa email đã gửi của nhà tuyển dụng
+            'contact-send-email', // quyền gửi email
         ];
 
         foreach ($permissions as $permission) {

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Edit Genre Post</h1>
+    <h1>Sửa Cẩm nang nghề nghiệp</h1>
 
     <form action="{{ route('genre-posts.update', $genrePost->id) }}" method="POST" enctype="multipart/form-data">
         @csrf

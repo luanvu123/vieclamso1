@@ -12,11 +12,11 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Cart Title</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Added By (User)</th>
-                <th>Actions</th>
+                <th>Tiêu đề</th>
+                <th>Ngày bắt đàu</th>
+                <th>Ngày kết thúc</th>
+                <th>Quản trị viên</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -31,7 +31,7 @@
                         <form action="{{ route('employers.carts.destroy', [$employer->id, $cart->id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Remove</button>
+                            <button type="submit" class="btn btn-danger">xóa</button>
                         </form>
                     </td>
                 </tr>
@@ -39,6 +39,6 @@
         </tbody>
     </table>
 
-    <a href="{{ route('employers.edit', $employer->id) }}" class="btn btn-secondary">Back to Employer</a>
+    <a href="{{ route('employers.edit', $employer->id) }}" class="btn btn-secondary">Quay lại</a>
 </div>
 @endsection

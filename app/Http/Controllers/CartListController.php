@@ -36,7 +36,7 @@ class CartListController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Item added to cart successfully!');
+        return redirect()->back()->with('success', 'Them dich vu thanh cong!');
     }
 
     public function index()
@@ -49,7 +49,7 @@ class CartListController extends Controller
         $cartlist = Cartlist::findOrFail($id);
         $cartlist->delete();
 
-        return redirect()->route('cartlist.index')->with('success', 'Item removed from cart successfully.');
+        return redirect()->route('cartlist.index')->with('success', 'Xoa dv thanh cong.');
     }
     public function edit($id)
     {
@@ -127,7 +127,7 @@ class CartListController extends Controller
     public function showOrder($orderId)
     {
         $employer = Auth::guard('employer')->user();
-        $order = Order::where('id', $orderId)  
+        $order = Order::where('id', $orderId)
             ->where('employer_id', $employer->id)
             ->with('orderDetails.cart')
             ->firstOrFail();

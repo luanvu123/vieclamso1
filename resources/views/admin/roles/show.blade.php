@@ -19,15 +19,21 @@
             {{ $role->name }}
         </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Permissions:</strong>
-            @if(!empty($rolePermissions))
-                @foreach($rolePermissions as $v)
+  <div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="form-group">
+        <strong>Permissions:</strong>
+        @if(!empty($rolePermissions))
+            @foreach($rolePermissions as $v)
+                <div>
                     <span class="badge bg-grd-danger">{{ $v->name }}</span>
-                @endforeach
-            @endif
-        </div>
+                    @if(!empty($v->description))
+                        <small class="text-muted"> - {{ $v->description }}</small>
+                    @endif
+                </div>
+            @endforeach
+        @endif
     </div>
+</div>
+
 </div>
 @endsection

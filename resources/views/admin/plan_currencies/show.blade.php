@@ -3,11 +3,11 @@
 @section('title', 'View Plan Currency')
 
 @section('content')
-    <h1>View Plan Currency</h1>
+    <h1>Đơn vị tiền tệ</h1>
 
     <div>
         <p>ID: {{ $planCurrency->id }}</p>
-        <p>Currency: {{ $planCurrency->currency }}</p>
+        <p>Đơn vị tiền tệ: {{ $planCurrency->currency }}</p>
     </div>
 
     <a href="{{ route('plan-currencies.edit', $planCurrency->id) }}">Edit</a>

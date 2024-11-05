@@ -8,8 +8,8 @@
             <div class="col-md-12">
                 <div class="table-responsive">
 
-                    <h1>Plan Features</h1>
-                    <a href="{{ route('plan-features.create') }}">Add New Plan Feature</a>
+                    <h1>Quyền lợi đặc biệt( báo giá)</h1>
+                    <a href="{{ route('plan-features.create') }}">Thêm Quyền lợi đặc biệt( báo giá)</a>
 
                     <table id="user-table">
                         <thead>

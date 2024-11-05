@@ -17,6 +17,8 @@ class CandidateManageController extends Controller
         $this->middleware('permission:candidate-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:candidate-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:candidate-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:candidate-sentEmails-view', ['only' => ['sentEmails']]);
+        $this->middleware('permission:candidate-sentEmails-delete', ['only' => ['destroySentEmail']]);
     }
     public function index()
     {

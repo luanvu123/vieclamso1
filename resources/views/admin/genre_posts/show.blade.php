@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Genre Post Details</h1>
+    <h1>Chi tiết Cẩm nang nghề nghiệp</h1>
 
     <div>
         <strong>ID:</strong> {{ $genrePost->id }}

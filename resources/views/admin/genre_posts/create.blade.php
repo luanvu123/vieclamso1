@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create New Genre Post</h1>
+    <h1>Tạo Cẩm nang nghề nghiệp</h1>
 
     <form action="{{ route('genre-posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf

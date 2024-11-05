@@ -3,12 +3,12 @@
 @section('title', 'Create Plan Currency')
 
 @section('content')
-    <h1>Create Plan Currency</h1>
+    <h1>Tạo Đơn vị tiền tệ</h1>
 
     <form action="{{ route('plan-currencies.store') }}" method="POST">
         @csrf
         <div>
-            <label for="currency">Currency:</label>
+            <label for="currency">Đơn vị tiền tệ:</label>
             <input type="text" id="currency" name="currency" value="{{ old('currency') }}" required>
             @error('currency')
                 <div>{{ $message }}</div>

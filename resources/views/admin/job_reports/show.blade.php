@@ -9,9 +9,9 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">Job Title: {{ $jobReport->jobPosting->title }}</h5>
-            <p class="card-text">Employer: {{ $jobReport->jobPosting->employer->name }}</p>
-            <p class="card-text">Candidate: {{ $jobReport->candidate->fullname_candidate }}</p>
-            <p class="card-text">Content: {{ $jobReport->content }}</p>
+            <p class="card-text">Nhà tuyển dụng: {{ $jobReport->jobPosting->employer->name }}</p>
+            <p class="card-text">Ứng viên: {{ $jobReport->candidate->fullname_candidate }}</p>
+            <p class="card-text">Nội dung bc: {{ $jobReport->content }}</p>
             <p class="card-text">Status: {{ $jobReport->status }}</p>
             <a href="{{ route('job-reports.index') }}" class="btn btn-primary">Back to List</a>
         </div>

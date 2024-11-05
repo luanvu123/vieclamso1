@@ -3,21 +3,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Edit Product</h1>
+    <h1>Sửa đổi quà</h1>
 
     <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
         <div>
-            <label for="name">Name:</label>
+            <label for="name">Tên:</label>
             <input type="text" id="name" name="name" value="{{ old('name', $product->name) }}" required>
             @error('name')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
             @enderror
         </div>
         <div>
-            <label for="usage_count">Usage Count:</label>
+            <label for="usage_count">Số lượng đã sử dụng:</label>
             <input type="number" id="usage_count" name="usage_count"
                 value="{{ old('usage_count', $product->usage_count) }}" required>
             @error('usage_count')
@@ -26,7 +26,7 @@
         </div>
 
         <div>
-            <label for="company">Company:</label>
+            <label for="company">Công ty:</label>
             <input type="text" id="company" name="company" value="{{ old('company', $product->company) }}" required>
             @error('company')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -34,7 +34,7 @@
         </div>
 
         <div>
-            <label for="number_day">Number of Days:</label>
+            <label for="number_day">Thời hạn sử dụng:</label>
             <input type="number" id="number_day" name="number_day" value="{{ old('number_day', $product->number_day) }}"
                 required>
             @error('number_day')
@@ -52,7 +52,7 @@
         </div>
 
         <div>
-            <label for="type_product">Type:</label>
+            <label for="type_product">Thể loại:</label>
             <select name="type_product" id="type_product" class="form-control" required>
                 <option value="service" {{ old('type_product', $product->type_product) == 'service' ? 'selected' : '' }}>
                     Service</option>
@@ -65,7 +65,7 @@
         </div>
 
         <div>
-            <label for="status">Status:</label>
+            <label for="status">Trạng thái:</label>
             <select name="status" id="status" class="form-control" required>
                 <option value="active" {{ old('status', $product->status) == 'active' ? 'selected' : '' }}>Active</option>
                 <option value="inactive" {{ old('status', $product->status) == 'inactive' ? 'selected' : '' }}>Inactive

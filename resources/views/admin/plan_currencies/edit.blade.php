@@ -3,13 +3,13 @@
 @section('title', 'Edit Plan Currency')
 
 @section('content')
-    <h1>Edit Plan Currency</h1>
+    <h1>Sửa Đơn vị tiền tệ</h1>
 
     <form action="{{ route('plan-currencies.update', $planCurrency->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div>
-            <label for="currency">Currency:</label>
+            <label for="currency">Đơn vị tiền tệ:</label>
             <input type="text" id="currency" name="currency" value="{{ old('currency', $planCurrency->currency) }}" required>
             @error('currency')
                 <div>{{ $message }}</div>

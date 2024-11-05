@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h2>List of All Cart Employers</h2>
+        <h2>Danh sách tất cả Dịch vụ được mua</h2>
 
         <!-- Filter Options -->
         <div class="mb-3">

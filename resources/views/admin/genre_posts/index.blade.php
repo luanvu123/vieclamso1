@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="table-responsive">
 
-                    <h1>All Genre Posts</h1>
+                    <h1>Cẩm nang nghề nghiệp</h1>
 
                     <a href="{{ route('genre-posts.create') }}" class="btn btn-primary mb-3">Create New Genre Post</a>
 

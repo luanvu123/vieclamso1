@@ -49,7 +49,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">
-                        <strong>Credit:</strong>
+                        <strong>Credit:</strong> 
                     </div>
                     <div class="col-md-8">
                         <span class="point">{{ $employer->credit }}</span>

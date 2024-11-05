@@ -9,13 +9,13 @@
                 <div class="table-responsive">
 
                     <h1>Đơn giá</h1>
-                    <a href="{{ route('plan-currencies.create') }}">Add New Plan Currency</a>
+                    <a href="{{ route('plan-currencies.create') }}">Thêm Đơn vị tiền tệ</a>
 
                     <table id="user-table">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Currency</th>
+                                <th>Đơn vị tiền tệ</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>

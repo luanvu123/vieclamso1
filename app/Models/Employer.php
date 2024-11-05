@@ -10,7 +10,6 @@ use Illuminate\Contracts\Auth\CanResetPassword;
 class Employer extends Authenticatable implements CanResetPassword
 {
     use HasFactory, Notifiable;
-
     protected $fillable = [
         'name',
         'email',
@@ -34,6 +33,11 @@ class Employer extends Authenticatable implements CanResetPassword
         'isVerifyEmail',
         'isInfomation'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function jobPostings()
     {
@@ -110,10 +114,9 @@ class Employer extends Authenticatable implements CanResetPassword
     }
 
     public function carts()
-{
-    return $this->belongsToMany(Cart::class, 'cart_employer')
-                ->withPivot('start_date', 'end_date')
-                ->withTimestamps();
-}
-
+    {
+        return $this->belongsToMany(Cart::class, 'cart_employer')
+            ->withPivot('start_date', 'end_date')
+            ->withTimestamps();
+    }
 }

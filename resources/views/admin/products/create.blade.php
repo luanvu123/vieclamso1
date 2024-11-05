@@ -3,12 +3,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create New Product</h1>
+    <h1>Tạo quà mới</h1>
 
     <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div>
-            <label for="name">Name:</label>
+            <label for="name">Tên:</label>
             <input type="text" id="name" name="name" value="{{ old('name') }}" required>
             @error('name')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -16,14 +16,14 @@
         </div>
 
         <div>
-            <label for="company">Company:</label>
+            <label for="company">Công ty:</label>
             <input type="text" id="company" name="company" value="{{ old('company') }}" required>
             @error('company')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
             @enderror
         </div>
 <div>
-    <label for="usage_count">Usage Count:</label>
+    <label for="usage_count">Số lần sử dụng:</label>
     <input type="number" id="usage_count" name="usage_count" value="{{ old('usage_count') }}" required>
     @error('usage_count')
         <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -31,7 +31,7 @@
 </div>
 
         <div>
-            <label for="number_day">Number of Days:</label>
+            <label for="number_day">Thời hạn sử dụng:</label>
             <input type="number" id="number_day" name="number_day" value="{{ old('number_day') }}" required>
             @error('number_day')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -47,7 +47,7 @@
         </div>
 
         <div>
-            <label for="type_product">Type:</label>
+            <label for="type_product">thể loại:</label>
             <select name="type_product" id="type_product" class="form-control" required>
                 <option value="service" {{ old('type_product') == 'service' ? 'selected' : '' }}>Service</option>
                 <option value="voucher" {{ old('type_product') == 'voucher' ? 'selected' : '' }}>Voucher</option>
@@ -69,7 +69,7 @@
         </div>
 
         <div>
-            <label for="image">Image:</label>
+            <label for="image">Ảnh:</label>
             <input type="file" id="image" name="image">
             @error('image')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -77,15 +77,15 @@
         </div>
 
         <div>
-            <label for="description">Description:</label>
+            <label for="description">Mô tả:</label>
             <textarea id="description" name="description">{{ old('description') }}</textarea>
         </div>
 
         <div>
-            <label for="condition">Condition:</label>
+            <label for="condition">Điều kiện sử dụng:</label>
             <textarea id="condition" name="condition">{{ old('condition') }}</textarea>
         </div>
 
-        <button type="submit">Create Product</button>
+        <button type="submit">Lưu</button>
     </form>
 @endsection

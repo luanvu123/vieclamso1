@@ -30,24 +30,48 @@ class EmployerManageController extends Controller
         $this->middleware('permission:top-home-choose', ['only' => ['top_home_choose']]);
         $this->middleware('permission:featured-choose', ['only' => ['featured_choose']]);
         $this->middleware('permission:purchased-manage', ['only' => ['purchasedManage']]);
+        $this->middleware('permission:employer-carts-list', ['only' => ['listAllCarts']]);
+        $this->middleware('permission:employer-carts-delete', ['only' => ['destroyCart']]);
+        $this->middleware('permission:employer-sentEmails-view', ['only' => ['sentEmails']]);
+        $this->middleware('permission:employer-sentEmails-delete', ['only' => ['destroySentEmail']]);
     }
     public function index()
     {
-        $employers = Employer::all();
-        return view('admin.employers.index', compact('employers'));
+        $userId = Auth::id();
+        $user = Auth::user();
+        if ($user->roles()->where('id', 1)->exists()) {
+            $employers = Employer::with('user')->get();
+        } else {
+            $employers = Employer::with('user')->where('user_id', $userId)->get();
+        }
+        $users = User::all();
+        return view('admin.employers.index', compact('employers', 'users'));
     }
 
     public function show($id)
     {
-        $employer = Employer::with('company')->findOrFail($id); // Nạp thông tin công ty liên quan
-        return view('admin.employers.show', compact('employer'));
-    }
+        $employer = Employer::with('company')->findOrFail($id);
+        $user = Auth::user();
 
+        // Skip ownership check if user has Admin role
+        if ($user->roles()->where('id', 1)->exists() || $employer->user_id === $user->id) {
+            return view('admin.employers.show', compact('employer'));
+        }
+
+        return redirect()->route('employers.index')->with('error', 'You are not authorized to view this employer.');
+    }
 
     public function edit($id)
     {
         $employer = Employer::findOrFail($id);
-        return view('admin.employers.edit', compact('employer'));
+        $user = Auth::user();
+
+        // Skip ownership check if user has Admin role
+        if ($user->roles()->where('id', 1)->exists() || $employer->user_id === $user->id) {
+            return view('admin.employers.edit', compact('employer'));
+        }
+
+        return redirect()->route('employers.index')->with('error', 'You are not authorized to edit this employer.');
     }
 
     public function update(Request $request, $id)
@@ -56,38 +80,66 @@ class EmployerManageController extends Controller
             'isVerify' => 'nullable|boolean',
             'isVerify_license' => 'nullable|boolean',
             'isVerifyCompany' => 'nullable|boolean',
-            'isInfomation' => 'nullable|boolean', //
+            'isInfomation' => 'nullable|boolean',
             'level' => 'nullable|integer|in:1,2,3',
         ]);
 
         $employer = Employer::findOrFail($id);
+        $user = Auth::user();
 
-        $data = $request->only([
-            'isVerify',
-            'isVerify_license',
-            'isVerifyCompany',
-            'isInfomation',
-            'level',
-        ]);
+        // Skip ownership check if user has Admin role
+        if ($user->roles()->where('id', 1)->exists() || $employer->user_id === $user->id) {
+            $data = $request->only([
+                'isVerify',
+                'isVerify_license',
+                'isVerifyCompany',
+                'isInfomation',
+                'level',
+            ]);
 
-        $employer->update($data);
-        return redirect()->route('employers.index')->with('success', 'Employer updated successfully.');
+            $employer->update($data);
+            return redirect()->route('employers.index')->with('success', 'Employer updated successfully.');
+        }
+
+        return redirect()->route('employers.index')->with('error', 'You are not authorized to update this employer.');
     }
 
 
-    // Hiển thị danh sách các công ty
+
     public function indexCompany()
     {
-        $companies = Company::with('employer')->get();
+        $user = Auth::user();
+        $userId = $user->id;
+
+        // Nếu người dùng là Admin, hiển thị tất cả công ty; nếu không, chỉ hiển thị công ty thuộc về user_id của nhà tuyển dụng
+        if ($user->roles()->where('id', 1)->exists()) {
+            $companies = Company::with('employer')->get();
+        } else {
+            $companies = Company::with('employer')->whereHas('employer', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            })->get();
+        }
+
         return view('admin.companies.index', compact('companies'));
     }
 
     // Hiển thị chi tiết một công ty
     public function showCompany($id)
     {
-        $company = Company::findOrFail($id);
-        return view('admin.companies.show', compact('company'));
+        $user = Auth::user();
+        $userId = $user->id;
+
+        // Lấy thông tin công ty
+        $company = Company::with('employer')->findOrFail($id);
+
+        // Kiểm tra nếu người dùng là Admin hoặc là chủ sở hữu của công ty thông qua user_id
+        if ($user->roles()->where('id', 1)->exists() || $company->employer->user_id === $userId) {
+            return view('admin.companies.show', compact('company'));
+        }
+
+        return redirect()->route('companies.index')->with('error', 'Bạn không có quyền xem công ty này.');
     }
+
     public function company_choose(Request $request)
     {
         $data = $request->all();
@@ -128,12 +180,17 @@ class EmployerManageController extends Controller
         $employer->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $employer->save();
     }
-    public function purchasedManage()
+    public function employer_user_choose(Request $request)
     {
-        $purchasedItems = Purchased::with(['employer', 'product'])->orderBy('updated_at', 'DESC')->get();
+        $employer = Employer::find($request->employer_id);
+        $employer->user_id = $request->user_id;
+        $employer->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $employer->save();
 
-        return view('admin.employers.purchased', compact('purchasedItems'));
+        return response()->json(['success' => true, 'message' => 'User ID updated successfully.']);
     }
+
+
     public function sendEmail(Request $request)
     {
         $to = $request->input('emailEmployer');
@@ -192,47 +249,92 @@ class EmployerManageController extends Controller
     }
     public function addCart(Employer $employer)
     {
-        $carts = Cart::all(); // Fetch available carts
-        return view('admin.employers.cart_employer', compact('employer', 'carts'));
+        $user = Auth::user();
+
+        // Kiểm tra quyền truy cập của người dùng
+        if ($user->roles()->where('id', 1)->exists() || $employer->user_id === $user->id) {
+            $carts = Cart::all(); // Fetch available carts
+            return view('admin.employers.cart_employer', compact('carts', 'employer'));
+        }
+
+        return redirect()->route('employers.index')->with('error', 'You are not authorized to add a cart for this employer.');
     }
+
 
     // Store the cart-employer relationship with start and end dates
     public function storeCart(Request $request, Employer $employer)
     {
-        $request->validate([
-            'cart_id' => 'required|exists:carts,id',
-        ]);
+        $user = Auth::user();
 
-        $cart = Cart::find($request->cart_id);
-        $startDate = Carbon::now();
-        $endDate = $startDate->copy()->addDays($cart->validity);
+        // Kiểm tra quyền truy cập của người dùng
+        if ($user->roles()->where('id', 1)->exists() || $employer->user_id === $user->id) {
+            $request->validate([
+                'cart_id' => 'required|exists:carts,id',
+            ]);
 
-        $employer->carts()->attach($cart->id, [
-            'user_id' => Auth::id(),
-            'start_date' => $startDate,
-            'end_date' => $endDate,
-        ]);
+            $cart = Cart::find($request->cart_id);
+            $startDate = Carbon::now();
+            $endDate = $startDate->copy()->addDays($cart->validity);
 
-        return redirect()->route('employers.edit', $employer->id)->with('success', 'Cart added successfully!');
-    }
-    public function indexCart(Employer $employer)
-    {
-        $cartEmployers = $employer->carts()->withPivot('start_date', 'end_date', 'user_id')->get();
+            $employer->carts()->attach($cart->id, [
+                'user_id' => Auth::id(),
+                'start_date' => $startDate,
+                'end_date' => $endDate,
+            ]);
 
-        // Retrieve users related to each user_id in the cartEmployers pivot
-        foreach ($cartEmployers as $cart) {
-            $cart->user = User::find($cart->pivot->user_id);
+            return redirect()->route('service')->with('success', 'Them dich vu thanh cong !');
         }
 
-        return view('admin.employers.cart_employer_index', compact('employer', 'cartEmployers'));
+        return redirect()->route('employers.index')->with('error', 'You are not authorized to add a cart for this employer.');
     }
-    // EmployerManageController.php
+    public function listAllCarts()
+    {
+        $cartEmployers = Cart::with(['employers' => function ($query) {
+            $query->withPivot('start_date', 'end_date', 'user_id');
+        }])->get();
+
+        return view('admin.employers.list_all_cart_employer', compact('cartEmployers'));
+    }
+    public function purchasedManage()
+    {
+        $user = Auth::user();
+        $userId = $user->id;
+        if ($user->roles()->where('id', 1)->exists()) {
+            $purchasedItems = Purchased::with(['employer', 'product'])->orderBy('updated_at', 'DESC')->get();
+        } else {
+            $purchasedItems = Purchased::with(['employer', 'product'])
+                ->whereHas('employer', function ($query) use ($userId) {
+                    $query->where('user_id', $userId);
+                })
+                ->orderBy('updated_at', 'DESC')->get();
+        }
+
+        return view('admin.employers.purchased', compact('purchasedItems'));
+    }
+
+    public function indexCart(Employer $employer)
+    {
+        $user = Auth::user();
+        $userId = $user->id;
+
+        // Kiểm tra quyền truy cập của người dùng để hiển thị các giỏ hàng
+        if ($user->roles()->where('id', 1)->exists() || $employer->user_id === $userId) {
+            $cartEmployers = $employer->carts()->withPivot('start_date', 'end_date', 'user_id')->get();
+            foreach ($cartEmployers as $cart) {
+                $cart->user = User::find($cart->pivot->user_id);
+            }
+
+            return view('admin.employers.cart_employer_index', compact('employer', 'cartEmployers'));
+        }
+
+        return redirect()->route('admin.employers.index')->with('error', 'Bạn không có quyền xem giỏ hàng này.');
+    }
+
 
     public function destroyCart(Employer $employer, Cart $cart)
     {
         $employer->carts()->detach($cart->id);
 
-        return redirect()->route('employers.carts.index', $employer->id)->with('success', 'Cart removed successfully.');
+        return redirect()->route('employers.carts.index', $employer->id)->with('success', 'Removed successfully.');
     }
-
 }

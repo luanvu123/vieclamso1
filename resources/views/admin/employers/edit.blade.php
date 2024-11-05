@@ -14,7 +14,7 @@
                             @method('PUT')
 
                             <div class="form-group">
-                                <label for="isVerify">OTP SMS</label>
+                                <label for="isVerify">OTP SMS (Xác thực số điện thoại)</label>
                                 <input type="checkbox" id="isVerify" name="isVerify" value="1"
                                     {{ $employer->isVerify ? 'checked' : '' }}>
                             </div>
@@ -41,7 +41,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="isInfomation">Infomation</label>
+                                <label for="isInfomation">Có thể xem thông tin ứng viên</label>
                                 <input type="checkbox" id="isInfomation" name="isInfomation" value="1"
                                     {{ $employer->isInfomation ? 'checked' : '' }}>
                             </div>

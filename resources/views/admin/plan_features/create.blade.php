@@ -3,7 +3,7 @@
 @section('title', 'Create Plan Feature')
 
 @section('content')
-    <h1>Create Plan Feature</h1>
+    <h1>Tạo Quyền lợi đặc biệt( báo giá)</h1>
 
     <form action="{{ route('plan-features.store') }}" method="POST">
         @csrf
@@ -14,6 +14,6 @@
                 <div>{{ $message }}</div>
             @enderror
         </div>
-        <button type="submit">Create</button>
+        <button type="submit">Tạo</button>
     </form>
 @endsection

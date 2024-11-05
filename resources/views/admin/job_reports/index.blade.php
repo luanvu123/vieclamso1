@@ -12,9 +12,9 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Job Title</th>
-                                <th>Employer</th>
-                                <th>Candidate</th>
-                                <th>Status</th>
+                                <th>Nhà tuyển dụng</th>
+                                <th>Ứng viên</th>
+                                <th>Trạng thái</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>

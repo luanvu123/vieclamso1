@@ -41,14 +41,4 @@ class HomeController extends Controller
         $onlineRecruitmentVisitors = OnlineVisitorRecruitment::where('last_activity', '>=', Carbon::now()->subMinutes(5))->count();
         return view('home', compact('totalHomeVisitors', 'totalRecruitmentVisitors', 'onlineHomeVisitors', 'onlineRecruitmentVisitors'));
     }
-   public function listAllCarts()
-{
-    // Retrieve all Cart records and eager load employers with pivot columns
-    $cartEmployers = Cart::with(['employers' => function ($query) {
-        $query->withPivot('start_date', 'end_date', 'user_id');
-    }])->get();
-
-    return view('admin.employers.list_all_cart_employer', compact('cartEmployers'));
-}
-
 }
