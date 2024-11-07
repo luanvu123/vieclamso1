@@ -36,7 +36,8 @@ class Candidate extends Authenticatable
         'letter_path',
         'cover_image',
         'dob',
-        'google_id'
+        'google_id',
+        'verification_token',
     ];
 
     /**

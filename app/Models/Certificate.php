@@ -16,6 +16,7 @@ class Certificate extends Model
         'issuer',
         'issue_date',
         'expiry_date',
+     
     ];
 
     public function candidate()

@@ -264,6 +264,8 @@ Route::post('candidate/register', [CandidateController::class, 'register'])->nam
 Route::get('candidate/login', [CandidateController::class, 'showLoginForm'])->name('candidate.login');
 Route::post('candidate/login', [CandidateController::class, 'login'])->name('candidate.login.post');
 Route::post('candidate/logout', [CandidateController::class, 'logout'])->name('candidate.logout');
+Route::get('candidate/verify/{token}', [CandidateController::class, 'verify'])->name('candidate.verify');
+
 
 
 Route::get('candidate/google', [CandidateController::class, 'redirectToGoogle'])->name('candidate.google');

@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CandidateVerificationMail;
+
 
 class CandidateController extends Controller
 {
@@ -43,14 +47,40 @@ class CandidateController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        // Tạo mã xác thực ngẫu nhiên
+        $verificationToken = Str::random(32);
+
+        // Tạo một bản ghi ứng viên tạm thời với trạng thái chưa kích hoạt
         $candidate = Candidate::create([
             'fullname_candidate' => $request->input('fullname'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
-            'status' => 1, // Default status
+            'status' => 0,  // trạng thái chưa kích hoạt
+            'verification_token' => $verificationToken,
         ]);
 
-        return redirect()->route('candidate.register')->with('success', 'Registration successful.');
+        // Gửi email xác thực
+        Mail::to($candidate->email)->send(new CandidateVerificationMail($candidate));
+
+        return redirect()->route('candidate.register')->with('success', 'Vui lòng kiểm tra email để xác thực tài khoản.');
+    }
+
+
+    public function verify($token)
+    {
+        // Tìm ứng viên với mã xác thực
+        $candidate = Candidate::where('verification_token', $token)->first();
+
+        if (!$candidate) {
+            return redirect()->route('candidate.register')->with('error', 'Mã xác thực không hợp lệ.');
+        }
+
+        // Cập nhật trạng thái và xóa mã xác thực
+        $candidate->status = 1;
+        $candidate->verification_token = null;
+        $candidate->save();
+
+        return redirect()->route('candidate.login')->with('success', 'Tài khoản của bạn đã được xác thực thành công.');
     }
 
     public function showLoginForm()
@@ -63,11 +93,21 @@ class CandidateController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('candidate')->attempt($credentials)) {
-            return redirect()->route('/')->with('success', 'Xin chào ' . Auth::guard('candidate')->user()->name);
+            $candidate = Auth::guard('candidate')->user();
+
+            // Kiểm tra nếu tài khoản chưa xác thực
+            if ($candidate->verification_token !== null) {
+                Auth::guard('candidate')->logout(); // Đăng xuất ngay lập tức nếu chưa xác thực
+                return redirect()->back()->withInput()->withErrors(['email' => 'Bạn chưa xác thực tài khoản. Vui lòng kiểm tra email.']);
+            }
+
+            // Nếu đã xác thực
+            return redirect()->route('/')->with('success', 'Xin chào ' . $candidate->fullname_candidate);
         } else {
             return redirect()->back()->withInput()->withErrors(['email' => 'Thông tin đăng nhập không chính xác']);
         }
     }
+
     public function dashboard()
     {
         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
@@ -138,7 +178,7 @@ class CandidateController extends Controller
         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
             ->orderBy('created_at', 'desc')
             ->get();
-        return view('pages.change-password','notifications');
+        return view('pages.change-password', 'notifications');
     }
 
     public function changePassword(Request $request)
@@ -268,7 +308,8 @@ class CandidateController extends Controller
             'activities',
             'hobbies',
             'advisers',
-            'prizes','notifications'
+            'prizes',
+            'notifications'
         ));
     }
 
