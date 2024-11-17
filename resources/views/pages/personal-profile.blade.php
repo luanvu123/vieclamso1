@@ -15,7 +15,9 @@
         href="{{ asset('vendor/core/plugins/job-board/css/avatar.css') }}">
     <link media="all" type="text/css" rel="stylesheet"
         href="{{ asset('vendor/core/core/base/libraries/tagify/tagify.css') }}">
-
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css">
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/js/multi-select-tag.js"></script>
     <style>
         .navbar-nav {
             --bs-nav-link-padding-x: 0;
@@ -125,8 +127,8 @@
                                         </div>
                                         <div class="mb-3 position-relative">
                                             <label class="form-label required" for="level">Cấp bậc hiện tại</label>
-                                            <select class="form-select @error('level') is-invalid @enderror" id="level"
-                                                name="level" required>
+                                            <select class="form-select @error('level') is-invalid @enderror"
+                                                id="level" name="level" required>
                                                 <option value="">Chọn cấp bậc</option>
                                                 @foreach (['Quản lý cấp cao', 'Quản lý cấp trung', 'Quản lý nhóm', 'Chuyên gia', 'Nhân viên', 'Cộng tác viên'] as $option)
                                                     <option value="{{ $option }}"
@@ -193,14 +195,21 @@
                                         <div class="mb-3 position-relative">
                                             <label class="form-label required" for="years_of_experience">Số năm kinh
                                                 nghiệm</label>
-                                            <input type="number"
-                                                class="form-control @error('years_of_experience') is-invalid @enderror"
-                                                id="years_of_experience" name="years_of_experience"
-                                                value="{{ old('years_of_experience', Auth::guard('candidate')->user()->years_of_experience) }}">
+                                            <select class="form-select @error('years_of_experience') is-invalid @enderror"
+                                                id="years_of_experience" name="years_of_experience" required>
+                                                <option value="">Chọn số năm kinh nghiệm</option>
+                                                @for ($i = 0; $i <= 10; $i++)
+                                                    <option value="{{ $i }}"
+                                                        {{ old('years_of_experience', Auth::guard('candidate')->user()->years_of_experience) == $i ? 'selected' : '' }}>
+                                                        {{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </select>
                                             @error('years_of_experience')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+
 
                                         <div class="mb-3 position-relative">
                                             <label class="form-label required" for="working_form">Hình thức làm
@@ -220,29 +229,19 @@
                                             @enderror
                                         </div>
 
-
                                         <div class="mb-3 position-relative">
-                                            <label class="form-label required" for="work_location">Địa điểm làm
-                                                việc</label>
-                                            <input type="text"
-                                                class="form-control @error('work_location') is-invalid @enderror"
-                                                id="work_location" name="work_location"
-                                                value="{{ old('work_location', Auth::guard('candidate')->user()->work_location) }}">
-                                            @error('work_location')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
+                                            <label class="form-label" for="cities">Địa điểm làm việc</label>
+                                            <select name="cities[]" id="cities" class="form-control chosen-select"
+                                                multiple>
+                                                @foreach ($cities as $city)
+                                                    <option value="{{ $city->id }}"
+                                                        {{ Auth::guard('candidate')->user()->cities &&Auth::guard('candidate')->user()->cities->contains($city->id)? 'selected': '' }}>
+                                                        {{ $city->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
 
-                                        @if (Auth::guard('candidate')->user()->categories && Auth::guard('candidate')->user()->categories->isNotEmpty())
-                                            <div class="mb-3 position-relative">
-                                                <label class="form-label">Ngành nghề đã chọn:</label>
-                                                <ul>
-                                                    @foreach (Auth::guard('candidate')->user()->categories as $selectedCategory)
-                                                        <li>{{ $selectedCategory->name }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        @endif
 
                                         <div class="mb-3 position-relative">
                                             <label class="form-label" for="categories">Ngành nghề</label>
@@ -516,4 +515,9 @@
     </main>
 
     <iframe id="form_target" name="form_target" style="display:none"></iframe>
+    <script>
+        new MultiSelectTag('categories') // id
+        new MultiSelectTag('cities')
+    </script>
+
 @endsection

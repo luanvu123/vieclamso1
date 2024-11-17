@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CandidateVerificationMail;
 use App\Models\Category;
+use App\Models\City;
 
 class CandidateController extends Controller
 {
@@ -207,8 +208,9 @@ class CandidateController extends Controller
 
         // Lấy danh sách tất cả ngành nghề
         $categories = Category::where('status', 1)->get();
+          $cities = City::where('status', 1)->get();
 
-        return view('pages.personal-profile', compact('notifications', 'categories'));
+        return view('pages.personal-profile', compact('notifications', 'categories', 'cities'));
     }
 
     public function updatePersonalProfile(Request $request)
@@ -239,7 +241,6 @@ class CandidateController extends Controller
             'education_level' => 'nullable|string|max:255',
             'years_of_experience' => 'nullable|integer|min:0',
             'working_form' => 'nullable|string|max:255',
-            'work_location' => 'nullable|string|max:255',
         ]);
 
         // Cập nhật thông tin cá nhân
@@ -261,8 +262,8 @@ class CandidateController extends Controller
             'education_level' => $request->input('education_level'),
             'years_of_experience' => $request->input('years_of_experience'),
             'working_form' => $request->input('working_form'),
-            'work_location' => $request->input('work_location'),
         ]);
+         $candidate->cities()->sync($request->input('cities', []));
         $candidate->categories()->sync($request->input('categories', []));
         // Cập nhật avatar nếu có upload
         if ($request->hasFile('avatar')) {

@@ -20,4 +20,8 @@ class City extends Model
     {
         return $this->belongsToMany(JobPosting::class, 'city_job_posting');
     }
+      public function candidates()
+    {
+        return $this->belongsToMany(Candidate::class, 'city_candidate');
+    }
 }

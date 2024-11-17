@@ -38,13 +38,13 @@ class Candidate extends Authenticatable
         'dob',
         'google_id',
         'verification_token',
-         'level',
-            'desired_level',
-            'desired_salary',
-            'education_level',
-            'years_of_experience',
-            'working_form',
-            'work_location',
+        'level',
+        'desired_level',
+        'desired_salary',
+        'education_level',
+        'years_of_experience',
+        'working_form',
+        'work_location',
 
     ];
 
@@ -69,6 +69,10 @@ class Candidate extends Authenticatable
     public function cvs()
     {
         return $this->hasMany(Cv::class);
+    }
+    public function cities()
+    {
+        return $this->belongsToMany(City::class, 'city_candidate');
     }
     public function applications(): HasMany
     {
@@ -131,8 +135,7 @@ class Candidate extends Authenticatable
         return $this->hasMany(Notification::class);
     }
     public function categories()
-{
-    return $this->belongsToMany(Category::class, 'candidate_category');
-}
-
+    {
+        return $this->belongsToMany(Category::class, 'candidate_category');
+    }
 }
