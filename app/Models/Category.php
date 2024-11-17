@@ -28,4 +28,9 @@ class Category extends Model
     {
         return $this->belongsToMany(Company::class, 'category_company');
     }
+    public function candidates()
+{
+    return $this->belongsToMany(Candidate::class, 'candidate_category');
+}
+
 }

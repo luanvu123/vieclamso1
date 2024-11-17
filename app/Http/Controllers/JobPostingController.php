@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\ApplicationStatusUpdate;
+use App\Models\Bank;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Mail;
 
@@ -474,7 +475,7 @@ class JobPostingController extends Controller
 
         return view('job_postings.insight', compact('employer'));
     }
-     public function showCartEmployer()
+    public function showCartEmployer()
     {
         // Lấy employer hiện tại
         $employer = Auth::guard('employer')->user();
@@ -484,5 +485,11 @@ class JobPostingController extends Controller
 
         // Truyền dữ liệu sang view để hiển thị
         return view('job_postings.cart_employer', compact('employer', 'cartEmployers'));
+    }
+    public function showCheckout()
+    {
+        $banks = Bank::where('status', '1')->get();
+        $groupedBanks = $banks->groupBy('area');
+        return view('job_postings.checkout', compact('groupedBanks'));
     }
 }

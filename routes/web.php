@@ -28,6 +28,7 @@ use App\Http\Controllers\CandidateManageController;
 use App\Http\Controllers\Auth\EmployerRegisterController;
 use App\Http\Controllers\Auth\EmployerResetPasswordController;
 use App\Http\Controllers\AwardController;
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\CartListController;
 use App\Http\Controllers\CartManageController;
 use App\Http\Controllers\CategoryController;
@@ -136,6 +137,8 @@ Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('
 Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
 Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
 Route::group(['middleware' => ['auth']], function () {
+
+     Route::resource('banks', BankController::class);
 
     Route::resource('cv_templates', CVTemplateController::class);
     Route::get('employers/purchasedManage', [EmployerManageController::class, 'purchasedManage'])->name('employers.purchasedManage');
@@ -344,6 +347,7 @@ Route::middleware(['candidate'])->group(function () {
 });
 
 Route::middleware(['employer'])->group(function () {
+    Route::get('/checkout', [JobPostingController::class, 'showCheckout'])->name('job_postings.checkout');
 
     Route::get('job_postings/cart', [JobPostingController::class, 'showCartEmployer'])->name('job_postings.cart');
 

@@ -2,14 +2,19 @@
 @section('content')
 
 
-  <link media="all" type="text/css" rel="stylesheet"
+    <link media="all" type="text/css" rel="stylesheet"
         href="https://vieclam.topgialai.vn/themes/jobbox/plugins/bootstrap/bootstrap.min.css">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/language/css/language-public.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/cookie-consent/css/cookie-consent.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/plugins/bootstrap/bootstrap.min.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/css/style.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/plugins/job-board/css/avatar.css') }}">
-<link media="all" type="text/css" rel="stylesheet" href="{{ asset('vendor/core/core/base/libraries/tagify/tagify.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/language/css/language-public.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/cookie-consent/css/cookie-consent.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('themes/jobbox/plugins/bootstrap/bootstrap.min.css') }}">
+    <link media="all" type="text/css" rel="stylesheet" href="{{ asset('themes/jobbox/css/style.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/plugins/job-board/css/avatar.css') }}">
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{ asset('vendor/core/core/base/libraries/tagify/tagify.css') }}">
 
     <style>
         .navbar-nav {
@@ -28,7 +33,6 @@
             flex-wrap: wrap;
             flex-direction: row;
         }
-
     </style>
 
     <main class="main crop-avatar user-profile-section">
@@ -40,10 +44,11 @@
                 <div class="box-company-profile">
                     <div class="image-candidate"><img
                             src="{{ asset('storage/' . Auth::guard('candidate')->user()->avatar_candidate) ?? asset('storage/avatar/avatar-default.jpg') }}"
-                            alt="{{  Auth::guard('candidate')->user()->fullname_candidate }} "></div>
+                            alt="{{ Auth::guard('candidate')->user()->fullname_candidate }} "></div>
                     <div class="row mt-30">
                         <div class="col-lg-8 col-md-12">
-                            <h5 class="f-18">{{  Auth::guard('candidate')->user()->fullname_candidate }} <span class="card-location font-regular ml-20"></span></h5>
+                            <h5 class="f-18">{{ Auth::guard('candidate')->user()->fullname_candidate }} <span
+                                    class="card-location font-regular ml-20"></span></h5>
                             <p class="mt-0 font-md color-text-paragraph-2 mb-15"></p>
                         </div>
                     </div>
@@ -57,11 +62,11 @@
                     <div class="col-lg-3 col-md-4 col-sm-12">
                         <div class="box-nav-tabs nav-tavs-profile mb-5">
                             <ul class="nav" role="tablist">
-                               <li><a class="btn btn-border aboutus-icon mb-20 active"
+                                <li><a class="btn btn-border aboutus-icon mb-20 active"
                                         href="{{ route('personal.profile.account') }}">Thông tin tài khoản</a>
                                 </li>
-                                <li><a class="btn btn-border recruitment-icon mb-20"
-                                        href="{{route('cv.overview')}}">Tổng quan</a></li>
+                                <li><a class="btn btn-border recruitment-icon mb-20" href="{{ route('cv.overview') }}">Tổng
+                                        quan</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20"
                                         href="{{ route('experience.index') }}">Kinh nghiệm</a></li>
                                 <li><a class="btn btn-border recruitment-icon mb-20"
@@ -118,6 +123,138 @@
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        <div class="mb-3 position-relative">
+                                            <label class="form-label required" for="level">Cấp bậc hiện tại</label>
+                                            <select class="form-select @error('level') is-invalid @enderror" id="level"
+                                                name="level" required>
+                                                <option value="">Chọn cấp bậc</option>
+                                                @foreach (['Quản lý cấp cao', 'Quản lý cấp trung', 'Quản lý nhóm', 'Chuyên gia', 'Nhân viên', 'Cộng tác viên'] as $option)
+                                                    <option value="{{ $option }}"
+                                                        {{ old('level', Auth::guard('candidate')->user()->level) === $option ? 'selected' : '' }}>
+                                                        {{ $option }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('level')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3 position-relative">
+                                            <label class="form-label required" for="desired_level">Cấp bậc mong
+                                                muốn</label>
+                                            <select class="form-select @error('desired_level') is-invalid @enderror"
+                                                id="desired_level" name="desired_level" required>
+                                                <option value="">Chọn cấp bậc mong muốn</option>
+                                                @foreach (['Quản lý cấp cao', 'Quản lý cấp trung', 'Quản lý nhóm', 'Chuyên gia', 'Nhân viên', 'Cộng tác viên'] as $option)
+                                                    <option value="{{ $option }}"
+                                                        {{ old('desired_level', Auth::guard('candidate')->user()->desired_level) === $option ? 'selected' : '' }}>
+                                                        {{ $option }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('desired_level')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+
+                                        <div class="mb-3 position-relative">
+                                            <label class="form-label required" for="desired_salary">Lương mong
+                                                muốn</label>
+                                            <input type="number"
+                                                class="form-control @error('desired_salary') is-invalid @enderror"
+                                                id="desired_salary" name="desired_salary"
+                                                value="{{ old('desired_salary', Auth::guard('candidate')->user()->desired_salary) }}">
+                                            @error('desired_salary')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3 position-relative">
+                                            <label class="form-label required" for="education_level">Trình độ học
+                                                vấn</label>
+                                            <select class="form-select @error('education_level') is-invalid @enderror"
+                                                id="education_level" name="education_level" required>
+                                                <option value="">Chọn trình độ học vấn</option>
+                                                @foreach (['Trên đại học', 'Đại học', 'Cao đẳng', 'Trung cấp', 'Trung học', 'Chứng chỉ nghề'] as $option)
+                                                    <option value="{{ $option }}"
+                                                        {{ old('education_level', Auth::guard('candidate')->user()->education_level) === $option ? 'selected' : '' }}>
+                                                        {{ $option }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('education_level')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+
+                                        <div class="mb-3 position-relative">
+                                            <label class="form-label required" for="years_of_experience">Số năm kinh
+                                                nghiệm</label>
+                                            <input type="number"
+                                                class="form-control @error('years_of_experience') is-invalid @enderror"
+                                                id="years_of_experience" name="years_of_experience"
+                                                value="{{ old('years_of_experience', Auth::guard('candidate')->user()->years_of_experience) }}">
+                                            @error('years_of_experience')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3 position-relative">
+                                            <label class="form-label required" for="working_form">Hình thức làm
+                                                việc</label>
+                                            <select class="form-select @error('working_form') is-invalid @enderror"
+                                                id="working_form" name="working_form" required>
+                                                <option value="">Chọn hình thức làm việc</option>
+                                                @foreach (['Fulltime', 'Part time', 'Thực tập sinh', 'Freelance'] as $option)
+                                                    <option value="{{ $option }}"
+                                                        {{ old('working_form', Auth::guard('candidate')->user()->working_form) === $option ? 'selected' : '' }}>
+                                                        {{ $option }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('working_form')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+
+                                        <div class="mb-3 position-relative">
+                                            <label class="form-label required" for="work_location">Địa điểm làm
+                                                việc</label>
+                                            <input type="text"
+                                                class="form-control @error('work_location') is-invalid @enderror"
+                                                id="work_location" name="work_location"
+                                                value="{{ old('work_location', Auth::guard('candidate')->user()->work_location) }}">
+                                            @error('work_location')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        @if (Auth::guard('candidate')->user()->categories && Auth::guard('candidate')->user()->categories->isNotEmpty())
+                                            <div class="mb-3 position-relative">
+                                                <label class="form-label">Ngành nghề đã chọn:</label>
+                                                <ul>
+                                                    @foreach (Auth::guard('candidate')->user()->categories as $selectedCategory)
+                                                        <li>{{ $selectedCategory->name }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+
+                                        <div class="mb-3 position-relative">
+                                            <label class="form-label" for="categories">Ngành nghề</label>
+                                            <select name="categories[]" id="categories" class="form-control" multiple>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}"
+                                                        {{ Auth::guard('candidate')->user()->categories &&Auth::guard('candidate')->user()->categories->contains($category->id)? 'selected': '' }}>
+                                                        {{ $category->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
                                         <div class="mb-3 position-relative">
                                             <label class="form-label" for="phone">Điện thoại</label>
@@ -171,7 +308,8 @@
                                         <div class="mb-3 position-relative">
                                             <label class="form-label" for="favorite_skills">Kỹ năng làm việc yêu
                                                 thích</label>
-                                            <input class="form-control tags @error('favorite_skills') is-invalid @enderror"
+                                            <input
+                                                class="form-control tags @error('favorite_skills') is-invalid @enderror"
                                                 name="favorite_skills" type="text"
                                                 value="{{ old('favorite_skills', Auth::guard('candidate')->user()->skill) }}">
                                             @error('favorite_skills')
@@ -235,9 +373,16 @@
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-
                                         <div class="mb-3 position-relative">
-                                            <label class="form-label" for="avatar">Ảnh đại diện</label>
+                                            <label class="form-label" for="avatar">Ảnh đại diện hiện tại:</label>
+                                            <div>
+                                                <img src="{{ Auth::guard('candidate')->user()->avatar_candidate
+                                                    ? asset('storage/' . Auth::guard('candidate')->user()->avatar_candidate)
+                                                    : asset('storage/avatar/avatar-default.jpg') }}"
+                                                    alt="Ảnh đại diện"
+                                                    style="width: 100px; height: 100px; object-fit: cover;">
+                                            </div>
+                                            <label class="form-label" for="avatar">Thay đổi ảnh đại diện:</label>
                                             <input class="form-control @error('avatar') is-invalid @enderror"
                                                 name="avatar" type="file" accept="image/*">
                                             @error('avatar')
@@ -245,8 +390,18 @@
                                             @enderror
                                         </div>
 
+                                        @if (Auth::guard('candidate')->user()->cv_path)
+                                            <div class="mb-3 position-relative">
+                                                <label class="form-label" for="resume">CV hiện tại:</label>
+                                                <div>
+                                                    <a href="{{ asset('storage/' . Auth::guard('candidate')->user()->cv_path) }}"
+                                                        target="_blank">Xem CV</a>
+                                                </div>
+                                            </div>
+                                        @endif
+
                                         <div class="mb-3 position-relative">
-                                            <label class="form-label" for="resume">CV</label>
+                                            <label class="form-label" for="resume">Tải lên CV mới:</label>
                                             <input class="form-control @error('resume') is-invalid @enderror"
                                                 name="resume" type="file" accept=".pdf,.doc,.docx">
                                             @error('resume')
@@ -254,8 +409,19 @@
                                             @enderror
                                         </div>
 
+                                        @if (Auth::guard('candidate')->user()->cover_letter)
+                                            <div class="mb-3 position-relative">
+                                                <label class="form-label" for="cover_letter">Thư xin việc hiện
+                                                    tại:</label>
+                                                <div>
+                                                    <a href="{{ asset('storage/' . Auth::guard('candidate')->user()->cover_letter) }}"
+                                                        target="_blank">Xem Thư xin việc</a>
+                                                </div>
+                                            </div>
+                                        @endif
+
                                         <div class="mb-3 position-relative">
-                                            <label class="form-label" for="cover_letter">Thư xin việc</label>
+                                            <label class="form-label" for="cover_letter">Tải lên thư xin việc mới:</label>
                                             <input class="form-control @error('cover_letter') is-invalid @enderror"
                                                 name="cover_letter" type="file" accept=".pdf,.doc,.docx">
                                             @error('cover_letter')
@@ -263,14 +429,27 @@
                                             @enderror
                                         </div>
 
+                                        @if (Auth::guard('candidate')->user()->cover_image)
+                                            <div class="mb-3 position-relative">
+                                                <label class="form-label" for="cover_image">Ảnh bìa hiện tại:</label>
+                                                <div>
+                                                    <img src="{{ asset('storage/' . Auth::guard('candidate')->user()->cover_image) }}"
+                                                        alt="Ảnh bìa"
+                                                        style="width: 100%; max-height: 200px; object-fit: cover;">
+                                                </div>
+                                            </div>
+                                        @endif
+
                                         <div class="mb-3 position-relative">
-                                            <label class="form-label" for="cover_image">Ảnh bìa</label>
+                                            <label class="form-label" for="cover_image">Thay đổi ảnh bìa:</label>
                                             <input class="form-control @error('cover_image') is-invalid @enderror"
                                                 name="cover_image" type="file" accept="image/*">
                                             @error('cover_image')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+
+
 
                                         <button type="submit" class="btn btn-primary">Cập nhật hồ sơ</button>
                                     </form>

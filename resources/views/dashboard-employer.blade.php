@@ -102,6 +102,10 @@
                             class="{{ Route::is('job_postings.cart') ? 'active' : '' }}">
                             <a href="{{ route('job_postings.cart') }}"><span class="ln ln-icon-Full-Cart"></span> Dịch vụ đang mở </a>
                         </li>
+                          <li
+                            class="{{ Route::is('job_postings.checkout') ? 'active' : '' }}">
+                            <a href="{{ route('job_postings.checkout') }}"><span class="ln ln-icon-Full-Cart"></span> Thông tin thanh toán </a>
+                        </li>
 
 
 

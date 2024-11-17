@@ -15,7 +15,7 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CandidateVerificationMail;
-
+use App\Models\Category;
 
 class CandidateController extends Controller
 {
@@ -204,8 +204,13 @@ class CandidateController extends Controller
         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
             ->orderBy('created_at', 'desc')
             ->get();
-        return view('pages.personal-profile', compact('notifications'));
+
+        // Lấy danh sách tất cả ngành nghề
+        $categories = Category::where('status', 1)->get();
+
+        return view('pages.personal-profile', compact('notifications', 'categories'));
     }
+
     public function updatePersonalProfile(Request $request)
     {
         $candidate = Auth::guard('candidate')->user();
@@ -213,6 +218,8 @@ class CandidateController extends Controller
         $request->validate([
             'fullname' => 'required|string|max:255',
             'phone' => 'nullable|string|max:15',
+            'categories' => 'nullable|array',
+            'categories.*' => 'exists:categories,id',
             'dob' => 'nullable|date',
             'gender' => 'nullable|string|max:10',
             'address' => 'nullable|string|max:255',
@@ -226,6 +233,13 @@ class CandidateController extends Controller
             'resume' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'cover_letter' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'level' => 'nullable|string|max:255',
+            'desired_level' => 'nullable|string|max:255',
+            'desired_salary' => 'nullable|integer|min:0',
+            'education_level' => 'nullable|string|max:255',
+            'years_of_experience' => 'nullable|integer|min:0',
+            'working_form' => 'nullable|string|max:255',
+            'work_location' => 'nullable|string|max:255',
         ]);
 
         // Cập nhật thông tin cá nhân
@@ -241,8 +255,15 @@ class CandidateController extends Controller
             'cv_public' => $request->input('hide_cv', 0),
             'story' => $request->input('description'),
             'linkedin' => $request->input('linkedin'),
+            'level' => $request->input('level'),
+            'desired_level' => $request->input('desired_level'),
+            'desired_salary' => $request->input('desired_salary'),
+            'education_level' => $request->input('education_level'),
+            'years_of_experience' => $request->input('years_of_experience'),
+            'working_form' => $request->input('working_form'),
+            'work_location' => $request->input('work_location'),
         ]);
-
+        $candidate->categories()->sync($request->input('categories', []));
         // Cập nhật avatar nếu có upload
         if ($request->hasFile('avatar')) {
             if ($candidate->avatar_candidate && Storage::disk('public')->exists($candidate->avatar_candidate)) {
@@ -251,24 +272,18 @@ class CandidateController extends Controller
             $avatar = $request->file('avatar');
             $candidate->avatar_candidate = $avatar->store('avatars', 'public');
         }
-
-        // Cập nhật CV nếu có upload
         if ($request->hasFile('resume')) {
             if ($candidate->cv_path && Storage::disk('public')->exists($candidate->cv_path)) {
                 Storage::disk('public')->delete($candidate->cv_path);
             }
             $candidate->cv_path = $request->file('resume')->store('cvs', 'public');
         }
-
-        // Cập nhật thư xin việc nếu có upload
         if ($request->hasFile('cover_letter')) {
             if ($candidate->letter_path && Storage::disk('public')->exists($candidate->letter_path)) {
                 Storage::disk('public')->delete($candidate->letter_path);
             }
             $candidate->letter_path = $request->file('cover_letter')->store('cover_letters', 'public');
         }
-
-        // Cập nhật ảnh bìa nếu có upload
         if ($request->hasFile('cover_image')) {
             if ($candidate->cover_image && Storage::disk('public')->exists($candidate->cover_image)) {
                 Storage::disk('public')->delete($candidate->cover_image);

@@ -145,6 +145,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                                     alt="Google" width="20" height="20"> Phân quyền quản trị
                                             </a>
                                         </li>
+                                          <li class="{{ Request::is('banks*') ? 'active' : '' }}">
+                                            <a href="{{ route('banks.index') }}">
+                                                <img src="{{ asset('backend_admin/images/3018587_admin_administrator_ajax_options_permission_icon.svg') }}"
+                                                    alt="Google" width="20" height="20"> Thông tin thanh toán
+                                            </a>
+                                        </li>
                                         <li class="{{ Request::is('categories*') ? 'active' : '' }}">
                                             <a href="{{ route('categories.index') }}">
                                                 <img src="{{ asset('backend_admin/images/8673763_ic_fluent_slide_size_filled_icon.svg') }}"
@@ -880,6 +886,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         CKEDITOR.replace('summary1');
         CKEDITOR.replace('summary4');
         CKEDITOR.replace('summary5');
+         CKEDITOR.replace('summary6');
     </script>
 
     <script src="{{ asset('backend_admin/js/utils.js') }}"></script>

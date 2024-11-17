@@ -38,6 +38,14 @@ class Candidate extends Authenticatable
         'dob',
         'google_id',
         'verification_token',
+         'level',
+            'desired_level',
+            'desired_salary',
+            'education_level',
+            'years_of_experience',
+            'working_form',
+            'work_location',
+
     ];
 
     /**
@@ -122,4 +130,9 @@ class Candidate extends Authenticatable
     {
         return $this->hasMany(Notification::class);
     }
+    public function categories()
+{
+    return $this->belongsToMany(Category::class, 'candidate_category');
+}
+
 }
