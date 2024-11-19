@@ -347,6 +347,14 @@ Route::middleware(['candidate'])->group(function () {
 });
 
 Route::middleware(['employer'])->group(function () {
+    Route::delete('/saved-profiles/{candidate}', [JobPostingController::class, 'removeSavedProfile'])
+    ->name('job_postings.remove_saved_profile');
+
+    Route::get('/saved-profiles', [JobPostingController::class, 'savedProfiles'])->name('job_postings.saved_profiles');
+
+     Route::post('/save-profile/{candidate}', [JobPostingController::class, 'saveProfile'])->name('job_postings.save_profile');
+
+      Route::get('/search-candidate', [JobPostingController::class, 'searchCandidate'])->name('job_postings.search_candidate');
     Route::get('/checkout', [JobPostingController::class, 'showCheckout'])->name('job_postings.checkout');
 
     Route::get('job_postings/cart', [JobPostingController::class, 'showCartEmployer'])->name('job_postings.cart');

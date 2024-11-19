@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\CandidateDataTable;
 use App\Models\Application;
 use App\Models\Candidate;
 use App\Models\Cart;
@@ -20,10 +21,110 @@ use Illuminate\Support\Facades\Auth;
 use App\Mail\ApplicationStatusUpdate;
 use App\Models\Bank;
 use App\Models\Notification;
+use App\Models\SavedProfile;
 use Illuminate\Support\Facades\Mail;
+
 
 class JobPostingController extends Controller
 {
+    public function savedProfiles()
+{
+    $employerId = Auth::guard('employer')->id();
+
+    $savedProfiles = SavedProfile::with('candidate')->where('employer_id', $employerId)->get();
+
+    return view('job_postings.saved_profiles', compact('savedProfiles'));
+}
+
+public function removeSavedProfile($candidateId)
+{
+    $employerId = Auth::guard('employer')->id();
+
+    // Xóa hồ sơ đã lưu
+    SavedProfile::where('employer_id', $employerId)
+        ->where('candidate_id', $candidateId)
+        ->delete();
+
+    return back()->with('success', 'Xóa hồ sơ thành công!');
+}
+
+    public function saveProfile($candidateId)
+    {
+        $employerId = Auth::guard('employer')->id();
+
+        // Kiểm tra nếu hồ sơ đã được lưu
+        $exists = SavedProfile::where('employer_id', $employerId)
+            ->where('candidate_id', $candidateId)
+            ->exists();
+
+        if ($exists) {
+            return back()->with('error', 'Hồ sơ này đã được lưu trước đó.');
+        }
+
+        // Lưu hồ sơ
+        SavedProfile::create([
+            'employer_id' => $employerId,
+            'candidate_id' => $candidateId,
+        ]);
+
+        return back()->with('success', 'Lưu hồ sơ thành công!');
+    }
+
+
+    public function searchCandidate(Request $request)
+    {
+        $query = Candidate::query();
+
+        // Tìm kiếm theo từ khóa
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+
+            $query->where(function ($q) use ($search) {
+                $q->where('fullname_candidate', 'like', "%$search%")
+                    ->orWhere('position', 'like', "%$search%")
+                    ->orWhere('working_form', 'like', "%$search%")
+                    ->orWhere('desired_salary', 'like', "%$search%")
+                    ->orWhere('years_of_experience', 'like', "%$search%");
+            });
+        }
+
+        // Lọc theo thứ tự
+        if ($request->filled('filter')) {
+            $filter = $request->input('filter');
+
+            switch ($filter) {
+                case 'recent':
+                    $query->orderBy('created_at', 'desc'); // Gần nhất
+                    break;
+
+                case 'oldest':
+                    $query->orderBy('created_at', 'asc'); // Cũ nhất
+                    break;
+
+                case 'ratehigh':
+                    $query->orderBy('years_of_experience', 'desc'); // Nhiều năm kinh nghiệm
+                    break;
+            }
+        }
+
+        // Lọc theo danh mục
+        if ($request->filled('category_candidate')) {
+            $categoryId = $request->input('category_candidate');
+
+            $query->whereHas('categories', function ($q) use ($categoryId) {
+                $q->where('categories.id', $categoryId);
+            });
+        }
+
+        // Phân trang kết quả
+        $candidates = $query->paginate(10);
+
+        // Lấy danh sách danh mục để hiển thị trong bộ lọc
+        $categories = Category::all();
+
+        return view('job_postings.search_candidate', compact('candidates', 'categories'));
+    }
+
 
     public function updateNote(Request $request, Application $application)
     {

@@ -237,7 +237,7 @@ class CandidateController extends Controller
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'level' => 'nullable|string|max:255',
             'desired_level' => 'nullable|string|max:255',
-            'desired_salary' => 'nullable|integer|min:0',
+            'desired_salary' => 'nullable|string|max:255',
             'education_level' => 'nullable|string|max:255',
             'years_of_experience' => 'nullable|integer|min:0',
             'working_form' => 'nullable|string|max:255',

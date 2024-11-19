@@ -74,7 +74,8 @@
                                                 @endif
                                                 <p class="mb-1"><strong>Address:</strong> {{ $candidate->address }}
                                                 </p>
-                                                <p class="mb-1"><strong>Position:</strong> {{ $candidate->position }}
+                                                <p class="mb-1"><strong>Vị trí ứng tuyển:</strong>
+                                                    {{ $candidate->position }}
                                                 </p>
                                                 <p class="mb-1"><strong>LinkedIn:</strong> <a
                                                         href="{{ $candidate->linkedin }}"
@@ -85,6 +86,13 @@
                                             </div>
                                         </div>
                                         <div class="tab-content" id="pills-tabContent">
+                                            <h5 class="fs-18 fw-bold">Thông tin chung</h5>
+                                            <p class="mb-1"><strong>Học vấn: </strong> {{ $candidate->education_level }}</p>
+                                            <p class="mb-1"><strong>Vị trí mong muốn: </strong>{{$candidate->desired_level }}</p>
+                                              <p class="mb-1"><strong>Mức lương mong muốn: </strong>{{$candidate->desired_salary }}</p>
+                                               <p class="mb-1"><strong>Số năm kinh nghiệm: </strong>{{$candidate->years_of_experience }} năm</p>
+                                                
+
                                             <h5 class="fs-18 fw-bold">Giới thiệu</h5>
                                             <p class="text-muted mt-4">{{ $candidate->story }}</p>
 

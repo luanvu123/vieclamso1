@@ -14,7 +14,7 @@ return new class extends Migration
     Schema::table('candidates', function (Blueprint $table) {
         $table->string('level')->nullable(); // Level hiện tại
         $table->string('desired_level')->nullable(); // Level mong muốn
-        $table->integer('desired_salary')->nullable(); // Lương mong muốn
+        $table->string('desired_salary')->nullable(); // Lương mong muốn
         $table->string('education_level')->nullable(); // Trình độ học vấn
         $table->integer('years_of_experience')->nullable(); // Số năm kinh nghiệm
         $table->string('working_form')->nullable(); // Hình thức làm việc

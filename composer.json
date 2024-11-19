@@ -19,6 +19,7 @@
         "spatie/laravel-permission": "^6.9",
         "stichoza/google-translate-php": "^5.2",
         "twilio/sdk": "^8.2",
+        "yajra/laravel-datatables": "9.0",
         "yoeunes/toastr": "^2.3"
     },
     "require-dev": {

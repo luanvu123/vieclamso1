@@ -164,7 +164,7 @@
                                         <div class="mb-3 position-relative">
                                             <label class="form-label required" for="desired_salary">Lương mong
                                                 muốn</label>
-                                            <input type="number"
+                                            <input type="text"
                                                 class="form-control @error('desired_salary') is-invalid @enderror"
                                                 id="desired_salary" name="desired_salary"
                                                 value="{{ old('desired_salary', Auth::guard('candidate')->user()->desired_salary) }}">

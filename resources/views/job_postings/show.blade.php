@@ -59,7 +59,10 @@
                          <div class="info">
                              <img src="{{ $application->candidate->avatar_candidate ? asset('storage/' . $application->candidate->avatar_candidate) : asset('storage/avatar/avatar-default.jpg') }}"
                                  alt="">
-                             <span>{{ $application->candidate->fullname_candidate }}</span>
+                             <span>{{ $application->candidate->fullname_candidate }}
+
+
+                             </span>
                              <ul>
                                  <!-- Kiểm tra điều kiện isInfomation -->
                                  @if ($isInfomation)
@@ -80,6 +83,14 @@
                                              class="fa fa-user"></i> Profile</a></li>
                                  <li><a href="{{ route('messages.show', $application->candidate) }}"><i
                                              class="fa fa-envelope"></i> Message</a></li>
+                                 <li>
+                                     <!-- Nút Lưu Hồ Sơ -->
+                                     <form action="{{ route('job_postings.save_profile', $application->candidate->id) }}"
+                                         method="POST" style="display: inline;">
+                                         @csrf
+                                         <button type="submit" class="listing-date new">Lưu</button>
+                                     </form>
+                                 </li>
                              </ul>
                          </div>
                          <div class="buttons">
@@ -87,6 +98,7 @@
                              <a href="#two-1" class="button gray app-link"><i class="fa fa-sticky-note"></i> Add Note</a>
                              <a href="#three-1" class="button gray app-link"><i class="fa fa-plus-circle"></i> Show
                                  Details</a>
+
                          </div>
                          <div class="clearfix"></div>
                      </div>

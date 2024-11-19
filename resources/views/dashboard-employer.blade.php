@@ -34,6 +34,24 @@
                                     src="{{ asset('storage/' . $info->logo_recruitment) }}" style="width: 206px" /></a>
                         </h1>
                     </div>
+                    <nav id="navigation" class="menu sf-js-enabled sf-arrows">
+
+
+                        <ul class="responsive float-right">
+                            <li><a href="{{ route('/') }}"><i class="fa fa-cog"></i> Vieclamso1</a></li>
+                             <li>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span
+                                    class="ln ln-icon-Align-Center"></span><i class="fa fa-lock"></i> Logout</a>
+                            <form id="logout-form" action="{{ route('logout-employer') }}" method="POST"
+                                class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                        </ul>
+
+                    </nav>
+
                 </div>
             </div>
         </header>
@@ -66,59 +84,68 @@
 
                             </a>
                         </li>
+
                         <li class="{{ Route::is('job-postings.dashboard') ? 'active' : '' }}">
-                            <a href="{{ route('job-postings.dashboard') }}"><span class="ln ln-icon-Align-JustifyAll"></span> Bảng tin</a>
+                            <a href="{{ route('job-postings.dashboard') }}"><span
+                                    class="ln ln-icon-Align-JustifyAll"></span> Bảng tin</a>
                         </li>
-                         <li class="{{ Route::is('loyal-customer') ? 'active' : '' }}">
-                            <a href="{{ route('loyal-customer') }}"><span class="ln ln-icon-Gift-Box"></span> TopCV Rewards </a>
+                        <li class="{{ Route::is('loyal-customer') ? 'active' : '' }}">
+                            <a href="{{ route('loyal-customer') }}"><span class="ln ln-icon-Gift-Box"></span> TopCV
+                                Rewards </a>
                         </li>
-                         <li class="{{ Route::is('app-insights') ? 'active' : '' }}">
-                            <a href="{{ route('app-insights') }}"><span class="ln ln-icon-Gift-Box"></span> TopCV Insights </a>
+                        <li class="{{ Route::is('app-insights') ? 'active' : '' }}">
+                            <a href="{{ route('app-insights') }}"><span class="ln ln-icon-Arrow-Inside45"></span> TopCV
+                                Insights </a>
                         </li>
-                         <li class="{{ Route::is('buy-gift') ? 'active' : '' }}">
-                            <a href="{{ route('buy-gift') }}"><span class="ln ln-icon-Sled-withGifts"></span> Đổi quà </a>
+                        <li class="{{ Route::is('buy-gift') ? 'active' : '' }}">
+                            <a href="{{ route('buy-gift') }}"><span class="ln ln-icon-Sled-withGifts"></span> Đổi quà
+                            </a>
                         </li>
                         <li
                             class="{{ Route::is('job-postings.index') || Route::is('job-postings.show') || Route::is('job-postings.edit') ? 'active' : '' }}">
-                            <a href="{{ route('job-postings.index') }}"><span class="ln ln-icon-Blackboard"></span> Chiến dịch tuyển dụng
+                            <a href="{{ route('job-postings.index') }}"><span class="ln ln-icon-Blackboard"></span>
+                                Chiến dịch tuyển dụng
                             </a>
                         </li>
                         <li class="{{ Route::is('messages.receive') || Route::is('messages.show') ? 'active' : '' }}">
-                            <a href="{{ route('messages.receive') }}"><span class="ln ln-icon-Bird-DeliveringLetter"></span> Tin nhắn </a>
+                            <a href="{{ route('messages.receive') }}"><span
+                                    class="ln ln-icon-Bird-DeliveringLetter"></span> Tin nhắn </a>
                         </li>
 
-
-                        <li class="{{ Route::is('job-postings.cart') ? 'active' : '' }}">
-                            <a href="{{ route('job-postings.cart') }}"><span class="ln ln-icon-Film-Cartridge"></span> Dịch vụ </a>
+<li><a>Quản lý dịch vụ</a>
+					<ul>
+					 <li class="{{ Route::is('job-postings.cart') ? 'active' : '' }}">
+                            <a href="{{ route('job-postings.cart') }}"><span class="ln ln-icon-Film-Cartridge"></span>
+                                Dịch vụ </a>
                         </li>
                         <li class="{{ Route::is('cartlist.index') ? 'active' : '' }}">
-                            <a href="{{ route('cartlist.index') }}"><span class="ln ln-icon-Add-Cart"></span> Giỏ hàng của tôi </a>
+                            <a href="{{ route('cartlist.index') }}"><span class="ln ln-icon-Add-Cart"></span> Giỏ hàng
+                                của tôi </a>
                         </li>
                         <li
                             class="{{ Route::is('cartlist.listOrder') || Route::is('cartlist.showOrder') ? 'active' : '' }}">
-                            <a href="{{ route('cartlist.listOrder') }}"><span class="ln ln-icon-Full-Cart"></span> Theo dõi đơn hàng </a>
+                            <a href="{{ route('cartlist.listOrder') }}"><span class="ln ln-icon-Full-Cart"></span> Theo
+                                dõi đơn hàng </a>
                         </li>
-                          <li
-                            class="{{ Route::is('job_postings.cart') ? 'active' : '' }}">
-                            <a href="{{ route('job_postings.cart') }}"><span class="ln ln-icon-Full-Cart"></span> Dịch vụ đang mở </a>
+                        <li class="{{ Route::is('job_postings.cart') ? 'active' : '' }}">
+                            <a href="{{ route('job_postings.cart') }}"><span class="ln ln-icon-Align-Left"></span> Dịch
+                                vụ đang mở </a>
                         </li>
-                          <li
-                            class="{{ Route::is('job_postings.checkout') ? 'active' : '' }}">
-                            <a href="{{ route('job_postings.checkout') }}"><span class="ln ln-icon-Full-Cart"></span> Thông tin thanh toán </a>
+					</ul>
+				</li>
+
+                        <li class="{{ Route::is('job_postings.checkout') ? 'active' : '' }}">
+                            <a href="{{ route('job_postings.checkout') }}"><span class="ln ln-icon-Arrow-Inside"></span>
+                                Thông tin thanh toán </a>
                         </li>
-
-
-
-
-                        <li>
-                            <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="ln ln-icon-Align-Center"></span> Logout</a>
-                            <form id="logout-form" action="{{ route('logout-employer') }}" method="POST"
-                                class="d-none">
-                                @csrf
-                            </form>
+                        <li class="{{ Route::is('job_postings.search_candidate') ? 'active' : '' }}">
+                            <a href="{{ route('job_postings.search_candidate') }}"><span
+                                    class="ln ln-icon-Film-Cartridge"></span> Tìm kiếm ứng viên </a>
                         </li>
-
+                         <li class="{{ Route::is('job_postings.saved_profiles') ? 'active' : '' }}">
+                            <a href="{{ route('job_postings.saved_profiles') }}"><span
+                                    class="ln ln-icon-Film-Cartridge"></span> Hồ sơ đã lưu </a>
+                        </li>
                     </ul>
 
 
@@ -132,19 +159,19 @@
             <!-- Content
  ================================================== -->
             <div class="dashboard-content">
-                  @if (session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                        @endif
+                @if (session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
 
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 @yield('content')
             </div>
             <!-- Content / End -->
@@ -176,15 +203,7 @@
     <script src="{{ asset('backend/scripts/stacktable.js') }}"></script>
     <script src="{{ asset('backend/scripts/slick.min.js') }}"></script>
     <!-- Include DataTables CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 
-    <!-- Include DataTables JavaScript -->
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#user-table').DataTable();
-        });
-    </script>
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('summary');
@@ -239,9 +258,20 @@
                 dots: true
             });
         });
+
+
     </script>
-     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="https://cdn.bootcdn.net/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+
+    <!-- Include DataTables JavaScript -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#user-table').DataTable();
+        });
+    </script>
 
 </body>
 
