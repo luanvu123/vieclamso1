@@ -31,28 +31,25 @@ class MessageController extends Controller
         return redirect()->back()->with('success', 'Message sent successfully.');
     }
 
-   public function receiveMessages()
-{
-    $employer_id = Auth::guard('employer')->id();
-    $candidates = Candidate::whereHas('messages', function ($query) use ($employer_id) {
-        $query->where('employer_id', $employer_id);
-    })->get();
+    public function receiveMessages()
+    {
+        $employer_id = Auth::guard('employer')->id();
+        $candidates = Candidate::whereHas('messages', function ($query) use ($employer_id) {
+            $query->where('employer_id', $employer_id);
+        })->get();
 
-    foreach ($candidates as $candidate) {
-        $candidate->latestMessage = $candidate->messages()
-            ->where('employer_id', $employer_id)
-            ->latest()
-            ->first();
+        foreach ($candidates as $candidate) {
+            $candidate->latestMessage = $candidate->messages()
+                ->where('employer_id', $employer_id)
+                ->latest()
+                ->first();
+        }
+        $candidates = $candidates->sortByDesc(function ($candidate) {
+            return $candidate->latestMessage ? $candidate->latestMessage->created_at : null;
+        });
+
+        return view('job_postings.messages', compact('candidates'));
     }
-
-    $candidates = $candidates->sortByDesc(function ($candidate) {
-        return $candidate->latestMessage ? $candidate->latestMessage->created_at : null;
-    });
-
-    $messages = Message::where('employer_id', $employer_id)->get();
-    return view('job_postings.messages', compact('candidates', 'messages'));
-}
-
 
 
 
