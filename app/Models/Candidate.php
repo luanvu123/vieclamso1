@@ -44,8 +44,6 @@ class Candidate extends Authenticatable
         'education_level',
         'years_of_experience',
         'working_form',
-        'work_location',
-
     ];
 
     /**

@@ -215,33 +215,33 @@ class CandidateController extends Controller
 
     public function updatePersonalProfile(Request $request)
     {
+
         $candidate = Auth::guard('candidate')->user();
 
         $request->validate([
-            'fullname' => 'required|string|max:255',
-            'phone' => 'nullable|string|max:15',
-            'categories' => 'nullable|array',
-            'categories.*' => 'exists:categories,id',
-            'dob' => 'nullable|date',
-            'gender' => 'nullable|string|max:10',
-            'address' => 'nullable|string|max:255',
-            'favorite_skills' => 'nullable|string|max:255',
-            'favorite_tags' => 'nullable|string|max:255',
-            'is_public_profile' => 'boolean',
-            'hide_cv' => 'boolean',
-            'description' => 'nullable|string|max:1000',
-            'linkedin' => 'nullable|string|max:255',
-            'bio' => 'nullable|string|max:100000',
-            'resume' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'cover_letter' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'level' => 'nullable|string|max:255',
-            'desired_level' => 'nullable|string|max:255',
-            'desired_salary' => 'nullable|string|max:255',
-            'education_level' => 'nullable|string|max:255',
-            'years_of_experience' => 'nullable|integer|min:0',
-            'working_form' => 'nullable|string|max:255',
-        ]);
+        'fullname' => 'required|string|max:255',
+        'phone' => 'required|string|max:15',
+        'categories' => 'required|array',
+        'categories.*' => 'required|exists:categories,id',
+        'dob' => 'required|date',
+        'gender' => 'required|string|max:10',
+        'address' => 'required|string|max:255',
+        'favorite_skills' => 'required|string|max:255',
+        'favorite_tags' => 'required|string|max:255',
+        'is_public_profile' => 'nullable|boolean',
+        'hide_cv' => 'nullable|boolean',
+        'description' => 'required|string|max:1000',
+        'linkedin' => 'nullable|string|max:255',
+        'resume' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'cover_letter' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'cover_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'level' => 'required|string|max:255',
+        'desired_level' => 'required|string|max:255',
+        'desired_salary' => 'required|string|max:255',
+        'education_level' => 'required|string|max:255',
+        'years_of_experience' => 'required|integer|min:0',
+        'working_form' => 'required|string|max:255',
+    ]);
 
         // Cập nhật thông tin cá nhân
         $candidate->update([

@@ -44,8 +44,6 @@
                     </div>
                 @endif
             @endforeach
-
-            <!-- Reply Area -->
             <div class="clearfix"></div>
             <div class="message-reply">
                 <form action="{{ route('messages.reply', $candidate) }}" method="POST">
@@ -54,8 +52,6 @@
                     <button type="submit" class="button">Send Message</button>
                 </form>
             </div>
-            <!-- Message Content -->
-
         </div>
     </div>
 @endsection

@@ -85,11 +85,13 @@
                             <p>Không có hồ sơ nào được lưu.</p>
                         @endforelse
                     </div>
+                    <!-- Pagination Links -->
+                    <div class="pagination-container">
+                        {{ $savedProfiles->links('pagination::bootstrap-4') }}
+                    </div>
                     <div class="clearfix"></div>
                 </div>
             </div>
-
-            <!-- Sidebar -->
             <div class="five columns">
                 <h4>Gợi ý hành động</h4>
                 <p>Bạn có thể tìm thêm ứng viên mới hoặc quản lý các hồ sơ đã lưu.</p>

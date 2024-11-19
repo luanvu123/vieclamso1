@@ -28,25 +28,26 @@ use Illuminate\Support\Facades\Mail;
 class JobPostingController extends Controller
 {
     public function savedProfiles()
-{
-    $employerId = Auth::guard('employer')->id();
+    {
+        $employerId = Auth::guard('employer')->id();
 
-    $savedProfiles = SavedProfile::with('candidate')->where('employer_id', $employerId)->get();
+        $savedProfiles = SavedProfile::with('candidate')->where('employer_id', $employerId)->paginate(10);
 
-    return view('job_postings.saved_profiles', compact('savedProfiles'));
-}
+        return view('job_postings.saved_profiles', compact('savedProfiles'));
+    }
 
-public function removeSavedProfile($candidateId)
-{
-    $employerId = Auth::guard('employer')->id();
 
-    // Xóa hồ sơ đã lưu
-    SavedProfile::where('employer_id', $employerId)
-        ->where('candidate_id', $candidateId)
-        ->delete();
+    public function removeSavedProfile($candidateId)
+    {
+        $employerId = Auth::guard('employer')->id();
 
-    return back()->with('success', 'Xóa hồ sơ thành công!');
-}
+        // Xóa hồ sơ đã lưu
+        SavedProfile::where('employer_id', $employerId)
+            ->where('candidate_id', $candidateId)
+            ->delete();
+
+        return back()->with('success', 'Xóa hồ sơ thành công!');
+    }
 
     public function saveProfile($candidateId)
     {
@@ -74,7 +75,7 @@ public function removeSavedProfile($candidateId)
     public function searchCandidate(Request $request)
     {
         $query = Candidate::query();
-
+        $query->where('is_public', 1);
         // Tìm kiếm theo từ khóa
         if ($request->filled('search')) {
             $search = $request->input('search');
