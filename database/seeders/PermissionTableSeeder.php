@@ -232,6 +232,12 @@ class PermissionTableSeeder extends Seeder
             'employer-sentEmails-view', // quyền xem email đã gửi của nhà tuyển dụng
             'employer-sentEmails-delete', // quyền xóa email đã gửi của nhà tuyển dụng
             'contact-send-email', // quyền gửi email
+
+             // Quyền cho 'banks'
+            'bank-list',
+            'bank-create',
+            'bank-edit',
+            'bank-delete',
         ];
 
         foreach ($permissions as $permission) {

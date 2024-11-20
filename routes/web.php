@@ -139,7 +139,7 @@ Route::post('employer/register', [EmployerRegisterController::class, 'register']
 Route::group(['middleware' => ['auth']], function () {
 
      Route::resource('banks', BankController::class);
-
+Route::resource('categories', CategoryController::class);
     Route::resource('cv_templates', CVTemplateController::class);
     Route::get('employers/purchasedManage', [EmployerManageController::class, 'purchasedManage'])->name('employers.purchasedManage');
     Route::resource('products', ProductController::class);
@@ -173,7 +173,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('public_links', PublicLinkController::class);
 
-    Route::resource('categories', CategoryController::class);
+
     Route::resource('awards', AwardController::class);
     Route::resource('ecosystems', EcosystemController::class);
     Route::resource('medias', MediaController::class);

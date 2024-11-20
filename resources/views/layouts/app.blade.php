@@ -145,10 +145,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                                     alt="Google" width="20" height="20"> Phân quyền quản trị
                                             </a>
                                         </li>
-                                          <li class="{{ Request::is('banks*') ? 'active' : '' }}">
+                                        <li class="{{ Request::is('banks*') ? 'active' : '' }}">
                                             <a href="{{ route('banks.index') }}">
                                                 <img src="{{ asset('backend_admin/images/3018587_admin_administrator_ajax_options_permission_icon.svg') }}"
-                                                    alt="Google" width="20" height="20"> Thông tin thanh toán
+                                                    alt="Google" width="20" height="20"> Thông tin thanh
+                                                toán
                                             </a>
                                         </li>
                                         <li class="{{ Request::is('categories*') ? 'active' : '' }}">
@@ -507,9 +508,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <a href="{{ route('users.edit', auth()->user()) }}" class="dropdown-toggle"
                                         data-toggle="dropdown" aria-expanded="false">
                                         <div class="profile_img">
-                                            <span class="prfil-img"><img
-                                                    style="width: 40px;height: 40px;border-radius: 50%;object-fit: cover;"src="{{ asset('storage/' . Auth::user()->avatar) }}"
-                                                    alt="">
+                                            <span class="prfil-img">
+                                                @if (Auth::user()->avatar)
+                                                    <img style="width: 40px;height: 40px;border-radius: 50%;object-fit: cover;"src="{{ asset('storage/' . Auth::user()->avatar) }}"
+                                                        alt="">
+                                                @else
+                                                    <img style="width: 40px;height: 40px;border-radius: 50%;object-fit: cover;" src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=300"
+                                                        alt="">
+                                                @endif
                                             </span>
                                             <div class="user-name">
                                                 <p> {{ Auth::user()->name }}</p>
@@ -586,7 +592,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <div class="stats">
                                     <h5><strong>{{ $totalEmployerCount }}</strong></h5>
                                     <span>Nhà tuyển
-                                            dụng</span>
+                                        dụng</span>
                                 </div>
                             </div>
                         </div>
@@ -886,7 +892,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         CKEDITOR.replace('summary1');
         CKEDITOR.replace('summary4');
         CKEDITOR.replace('summary5');
-         CKEDITOR.replace('summary6');
+        CKEDITOR.replace('summary6');
     </script>
 
     <script src="{{ asset('backend_admin/js/utils.js') }}"></script>
