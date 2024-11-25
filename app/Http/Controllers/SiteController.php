@@ -47,9 +47,9 @@ class SiteController extends Controller
            ->where('isHot', '1')
             ->where('closing_date', '>=', Carbon::now()) // Lấy các jobPostings còn hạn
             ->paginate(12);
-        $categories = Category::withCount('jobPostings')
-            ->where('status', 1)
-            ->get();
+      $categories = Category::withCount('jobPostings')
+    ->where('status', 1)
+    ->paginate(8);
 
         $salaries = Salary::where('status', 'active')->withCount('jobPostings')->get();
 
@@ -67,14 +67,14 @@ class SiteController extends Controller
                 'name' => $category->name,
                 'count' => $category->job_postings_count
             ];
-        });
+        })->take(5);
 
         $salaryData = $salaries->map(function ($salary) {
             return [
                 'name' => $salary->name,
                 'count' => $salary->job_postings_count
             ];
-        });
+        })->take(5);
 
         // Determine which data to show based on the selected type
         $type = $request->input('type', 'job');
@@ -97,7 +97,7 @@ class SiteController extends Controller
         // Query the job postings with filtering conditions
         $jobPostings = JobPosting::with('employer', 'company', 'cities', 'categories')
             ->where('status', 0)
-            ->where('isHot', '1') 
+            ->where('isHot', '1')
             ->where('closing_date', '>=', Carbon::now());
 
         // Apply filters based on the user's input

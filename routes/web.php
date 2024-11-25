@@ -85,7 +85,7 @@ use Illuminate\Support\Facades\Session;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Auth::routes();
 Route::get('/', [SiteController::class, 'index'])->name('/');
 Route::get('/pricing', [SiteController::class, 'pricing'])->name('pricing');
 Route::get('job/{slug}', [SiteController::class, 'show'])->name('job.show');
@@ -97,28 +97,16 @@ Route::get('/cong-ty/{slug}', [SiteController::class, 'showCompany'])->name('com
 Route::get('cam-nang-nghe-nghiep/{slug}', [SiteController::class, 'showPost'])->name('genrepost.showPost');
 Route::get('/khoa-hoc', [SiteController::class, 'showCourse'])->name('site.courses');
 Route::get('/ung-dung', [SiteController::class, 'showApp'])->name('site.app');
-
-
-Route::get('/recruitment', [SiteController::class, 'recruitment'])->name('recruitment');
 Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
-Route::post('/consultations', [SiteController::class, 'storeConsultation'])->name('consultations.store');
 Route::resource('support', SupportController::class);
-
 Route::get('/candidate_cv/{id}', [JobPostingController::class, 'showCv'])->name('candidates.show.cv');
 
-Auth::routes();
 
 
 
 
-Route::post('/employer/verify-otp/email', [EmployerLoginController::class, 'verifyEmail'])->name('employer.verify.otp');
 
-Route::prefix('employer')->group(function () {
-    Route::get('forget-password', [EmployerForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
-    Route::post('forget-password', [EmployerForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
-    Route::get('reset-password/{token}', [EmployerForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
-    Route::post('reset-password', [EmployerForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
-});
+
 Route::prefix('candidate')->group(function () {
     Route::get('forget-password', [CandidateForgotPasswordController::class, 'showForgetPasswordForm'])->name('candidate.forget.password.get');
     Route::post('forget-password', [CandidateForgotPasswordController::class, 'submitForgetPasswordForm'])->name('candidate.forget.password.post');
@@ -126,20 +114,13 @@ Route::prefix('candidate')->group(function () {
     Route::post('reset-password', [CandidateForgotPasswordController::class, 'submitResetPasswordForm'])->name('candidate.reset.password.post');
 });
 
-Route::get('/change-language/{lang}', function ($lang) {
-    Session::put('app_locale', $lang);
-    return redirect()->back();
-})->name('change.language');
+
 
 Route::get('/search-jobs', [SiteController::class, 'searchJobs'])->name('search-jobs');
-Route::get('employer/login', [EmployerLoginController::class, 'showLoginForm'])->name('employer.login');
-Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('employer.login.submit');
-Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
-Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
-Route::group(['middleware' => ['auth']], function () {
 
-     Route::resource('banks', BankController::class);
-Route::resource('categories', CategoryController::class);
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('banks', BankController::class);
+    Route::resource('categories', CategoryController::class);
     Route::resource('cv_templates', CVTemplateController::class);
     Route::get('employers/purchasedManage', [EmployerManageController::class, 'purchasedManage'])->name('employers.purchasedManage');
     Route::resource('products', ProductController::class);
@@ -147,7 +128,7 @@ Route::resource('categories', CategoryController::class);
     Route::resource('slides', SlideController::class);
     Route::resource('carts', CartManageController::class);
     Route::resource('type_cart', TypeCartController::class);
-    Route::resource('ordermanages', OrderManageController::class); // Added for order management
+    Route::resource('ordermanages', OrderManageController::class);
     Route::resource('plan-currencies', PlanCurrencyController::class);
     Route::resource('plan-features', PlanFeatureController::class);
     Route::resource('consultations', ConsultationController::class)
@@ -156,7 +137,6 @@ Route::resource('categories', CategoryController::class);
     Route::resource('type-consultations', TypeConsultationController::class);
     Route::resource('hotlines', HotlineController::class);
     Route::resource('type_hotlines', TypeHotlineController::class);
-
     Route::resource('partners', PartnerController::class);
     Route::resource('type-partners', TypePartnerController::class);
     Route::resource('values', ValueController::class);
@@ -170,10 +150,7 @@ Route::resource('categories', CategoryController::class);
     Route::get('feedbacks_list', [TypeFeedbackController::class, 'indexList'])->name('feedbacks.index.list');
     Route::get('feedbacks/{feedback}', [TypeFeedbackController::class, 'showList'])->name('feedbacks.show.list');
     Route::delete('feedbacks/{feedback}', [TypeFeedbackController::class, 'destroyList'])->name('feedbacks.destroy.list');
-
     Route::resource('public_links', PublicLinkController::class);
-
-
     Route::resource('awards', AwardController::class);
     Route::resource('ecosystems', EcosystemController::class);
     Route::resource('medias', MediaController::class);
@@ -182,22 +159,14 @@ Route::resource('categories', CategoryController::class);
     Route::resource('genre-posts', GenrePostController::class);
     Route::resource('courses', CourseController::class);
     Route::resource('type_support', TypeSupportController::class);
-
     Route::get('supports_list', [TypeSupportController::class, 'indexSupport'])->name('supports.index.list');
     Route::get('supports_list/{support}', [TypeSupportController::class, 'showSupport'])->name('supports.show.list');
     Route::delete('supports_list/{support}', [TypeSupportController::class, 'destroySupport'])->name('supports.destroy.list');
     Route::get('/support-choose', [TypeSupportController::class, 'support_choose'])->name('support-choose');
-
     Route::get('/feedback-choose', [TypeFeedbackController::class, 'feedback_choose'])->name('feedback-choose');
-
     Route::get('/admin/companies', [EmployerManageController::class, 'indexCompany'])->name('admin.companies.index');
     Route::get('/admin/companies/{id}', [EmployerManageController::class, 'showCompany'])->name('admin.companies.show');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-
-
-
-
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
@@ -206,7 +175,6 @@ Route::resource('categories', CategoryController::class);
     Route::put('/users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
     Route::get('/employer-choose', [EmployerManageController::class, 'employer_choose'])->name('employer-choose');
     Route::get('/employer-user-choose', [EmployerManageController::class, 'employer_user_choose'])->name('employer-user-choose');
-
     Route::get('/user-choose', [UserController::class, 'user_choose'])->name('user-choose');
     Route::get('/category-choose', [CategoryController::class, 'category_choose'])->name('cate-choose');
     Route::get('/company-choose', [EmployerManageController::class, 'company_choose'])->name('company-choose');
@@ -230,7 +198,7 @@ Route::resource('categories', CategoryController::class);
 
     Route::resource('job-postings-manage', JobsManageController::class);
     Route::get('/jobPosting-choose', [JobsManageController::class, 'jobPosting_choose'])->name('jobPosting-choose');
-Route::get('/isHot-choose', [JobsManageController::class, 'isHot_choose'])->name('isHot-choose');
+    Route::get('/isHot-choose', [JobsManageController::class, 'isHot_choose'])->name('isHot-choose');
 
 
     Route::get('/tin-nhan-da-gui', [ContactController::class, 'sent'])->name('about.sent');
@@ -275,8 +243,7 @@ Route::get('candidate/google', [CandidateController::class, 'redirectToGoogle'])
 Route::get('candidate/google/callback', [CandidateController::class, 'handleGoogleCallback']);
 Route::get('auth/facebook', [CandidateController::class, 'redirectToFacebook'])->name('candidate.login.facebook');
 Route::get('auth/facebook/callback', [CandidateController::class, 'handleFacebookCallback']);
-Route::get('employer/google', [EmployerLoginController::class, 'redirectToGoogle'])->name('employer.google');
-Route::get('employer/google/callback', [EmployerLoginController::class, 'handleGoogleCallback']);
+
 
 Route::middleware(['candidate'])->group(function () {
 
@@ -346,15 +313,41 @@ Route::middleware(['candidate'])->group(function () {
     Route::get('applied-jobs', [ApplicationController::class, 'showAppliedJobs'])->name('applications.showAppliedJobs');
 });
 
+
+
+
+// route tuyendung
+
+
+Route::post('/employer/verify-otp/email', [EmployerLoginController::class, 'verifyEmail'])->name('employer.verify.otp');
+Route::prefix('employer')->group(function () {
+    Route::get('forget-password', [EmployerForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+    Route::post('forget-password', [EmployerForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
+    Route::get('reset-password/{token}', [EmployerForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+    Route::post('reset-password', [EmployerForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+});
+
+Route::get('employer/google', [EmployerLoginController::class, 'redirectToGoogle'])->name('employer.google');
+Route::get('employer/google/callback', [EmployerLoginController::class, 'handleGoogleCallback']);
+Route::get('employer/login', [EmployerLoginController::class, 'showLoginForm'])->name('employer.login');
+Route::post('employer/login', [EmployerLoginController::class, 'login'])->name('employer.login.submit');
+Route::get('employer/register', [EmployerRegisterController::class, 'showRegistrationForm'])->name('employer.register');
+Route::post('employer/register', [EmployerRegisterController::class, 'register'])->name('employer.register.submit');
+Route::get('/change-language/{lang}', function ($lang) {
+    Session::put('app_locale', $lang);
+    return redirect()->back();
+})->name('change.language');
+Route::post('/consultations', [SiteController::class, 'storeConsultation'])->name('consultations.store');
+Route::get('/recruitment', [SiteController::class, 'recruitment'])->name('recruitment');
 Route::middleware(['employer'])->group(function () {
     Route::delete('/saved-profiles/{candidate}', [JobPostingController::class, 'removeSavedProfile'])
-    ->name('job_postings.remove_saved_profile');
+        ->name('job_postings.remove_saved_profile');
 
     Route::get('/saved-profiles', [JobPostingController::class, 'savedProfiles'])->name('job_postings.saved_profiles');
 
-     Route::post('/save-profile/{candidate}', [JobPostingController::class, 'saveProfile'])->name('job_postings.save_profile');
+    Route::post('/save-profile/{candidate}', [JobPostingController::class, 'saveProfile'])->name('job_postings.save_profile');
 
-      Route::get('/search-candidate', [JobPostingController::class, 'searchCandidate'])->name('job_postings.search_candidate');
+    Route::get('/search-candidate', [JobPostingController::class, 'searchCandidate'])->name('job_postings.search_candidate');
     Route::get('/checkout', [JobPostingController::class, 'showCheckout'])->name('job_postings.checkout');
 
     Route::get('job_postings/cart', [JobPostingController::class, 'showCartEmployer'])->name('job_postings.cart');

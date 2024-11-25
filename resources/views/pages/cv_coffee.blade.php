@@ -222,7 +222,7 @@
                         <i class="bi bi-geo-alt-fill"></i>
                     </div>
                     <div class="contact-text">
-                        <p>{{ $candidate->address }}</p>
+                        <p>{{ $candidate->address ?? 'Quận A, Hà Nội' }}</p>
                     </div>
                 </div>
                 <div class="contact-list">
@@ -230,7 +230,7 @@
                         <i class="bi bi-envelope-fill"></i>
                     </div>
                     <div class="contact-text">
-                        <p>{{ $candidate->email }}</p>
+                        <p>{{ $candidate->email ?? 'vieclamso1@gmail.com' }}</p>
                     </div>
                 </div>
                 <div class="contact-list">
@@ -238,40 +238,55 @@
                         <i class="bi bi-laptop"></i>
                     </div>
                     <div class="contact-text">
-                        <p>{{ $candidate->linkedin }}</p>
-                        </p>
+                        <p>{{ $candidate->linkedin ?? 'linkedin' }}</p>
                     </div>
                 </div>
                 <div class="contact-list">
                     <div class="icon-container">
-                        <i class="bi bi-linkedin"></i>
+                        <i class="bi bi-phone"></i>
                     </div>
                     <div class="contact-text">
-                        <p>{{ $candidate->phone_number_candidate }}</p>
+                        <p>{{ $candidate->phone_number_candidate ?? '(024) 6680 5588' }}</p>
                     </div>
                 </div>
             </div>
 
+
             <div class="education-container">
                 <h2 class="title2">Education</h2>
                 <ul class="education-list">
-                    @foreach ($candidate->educations as $education)
+                    @if ($candidate->educations && $candidate->educations->count() > 0)
+                        @foreach ($candidate->educations as $education)
+                            <li>
+                                <strong>{{ $education->school }}</strong> {{ $education->degree }}<br>
+                                <span class="education-dates">({{ $education->start_date }} -
+                                    {{ $education->end_date }})</span>
+                                <p>{{ $education->description }}</p>
+                            </li>
+                        @endforeach
+                    @else
                         <li>
-                            <strong>{{ $education->school }}</strong> {{ $education->degree }}<br>
-                            <span class="education-dates">({{ $education->start_date }} -
-                                {{ $education->end_date }})</span>
-                            <p>{{ $education->description }}</p>
+                            <strong>Đại học TOPCV</strong><br>
+                            <span class="education-dates">(2020-10-31 - 2023-07-31)</span>
+                            <p>Tốt nghiệp loại Giỏi, điểm trung bình 9.0</p>
                         </li>
-                    @endforeach
+                    @endif
                 </ul>
             </div>
 
             <div class="skills-container">
                 <h2 class="title2">Skills</h2>
                 <ul class="skills-list">
-                    @foreach ($candidate->skills as $skill)
-                        <li><i class="fa fa-check-circle" style="color: #00838F;"></i> {{ $skill->name }}</li>
-                    @endforeach
+                    @if ($candidate->skills && $candidate->skills->count() > 0)
+                        @foreach ($candidate->skills as $skill)
+                            <li><i class="fa fa-check-circle" style="color: #00838F;"></i> {{ $skill->name }}</li>
+                        @endforeach
+                    @else
+                        <li><i class="fa fa-check-circle" style="color: #00838F;"></i> Sử dụng thành thạo các công cụ Word,
+                            Excel, PowerPoint</li>
+                        <li><i class="fa fa-check-circle" style="color: #00838F;"></i> Khả năng giao tiếp Tiếng Anh trôi
+                            chảy</li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -284,27 +299,48 @@
             <div class="work-container ">
                 <h2 class="title2 text-left">work experience</h2>
                 <ul class="experience-list">
-                    @foreach ($candidate->experiences as $experience)
+                    @if ($candidate->experiences && $candidate->experiences->count() > 0)
+                        @foreach ($candidate->experiences as $experience)
+                            <li>
+                                <strong>{{ $experience->title }}</strong> {{ $experience->company }}<br>
+                                <span class="experience-dates">({{ $experience->start_date }} -
+                                    {{ $experience->end_date }})</span>
+                                <p>{{ $experience->description }}</p>
+                            </li>
+                        @endforeach
+                    @else
                         <li>
-                            <strong>{{ $experience->title }}</strong> {{ $experience->company }}<br>
-                            <span class="experience-dates">({{ $experience->start_date }} -
-                                {{ $experience->end_date }})</span>
-                            <p>{{ $experience->description }}</p>
+                            <strong>Công ty TOPCV1</strong><br>
+                            <span class="experience-dates">(2024-07-03 - 2024-07-29)</span>
+                            <p>- Hỗ trợ viết bài quảng cáo sản phẩm qua kênh Facebook, các forum,...<br>
+                                - Giới thiệu, tư vấn sản phẩm, giải đáp các vấn đề thắc mắc của khách hàng qua điện thoại và
+                                email.</p>
                         </li>
-                    @endforeach
+                    @endif
                 </ul>
             </div>
 
             <div class="references-container">
-                <h2 class="title2 text-left">References</h2>
+                <h2 class="title2 text-left">Adviser</h2>
                 <div class="references">
                     <ul class="experience-list">
-                        @foreach ($candidate->advisers as $adviser)
-                            <li>
-                                <strong>{{ $adviser->name }}</strong> - {{ $adviser->position }}<br>
-                                <p>{{ $adviser->company }} - {{ $adviser->description }}</p>
-                            </li>
-                        @endforeach
+                        @if ($candidate->advisers && $candidate->advisers->count() > 0)
+                            <ul class="experience-list">
+                                @foreach ($candidate->advisers as $adviser)
+                                    <li>
+                                        <strong>{{ $adviser->name }}</strong> - {{ $adviser->position }}<br>
+                                        <p>{{ $adviser->company }} - {{ $adviser->description }}</p>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <ul class="experience-list">
+                                <li>
+                                    <strong>Ông Nguyễn Văn A</strong> - CEO công ty A<br>
+                                    <p>Công ty TOPCV - 0987654321</p>
+                                </li>
+                            </ul>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -312,14 +348,24 @@
                 <h2 class="title2 text-left">Activities</h2>
                 <div class="references">
                     <ul class="skills-list">
-                        @foreach ($candidate->activities as $activity)
-                            <li>
-                                <strong>{{ $activity->title }}</strong><br>
-                                <span class="experience-dates">({{ $activity->start_date }} -
-                                    {{ $activity->end_date }})</span>
-                                <p>{{ $activity->description }}</p>
-                            </li>
-                        @endforeach
+                        @if ($candidate->activities && $candidate->activities->count() > 0)
+                            <ul class="skills-list">
+                                @foreach ($candidate->activities as $activity)
+                                    <li>
+                                        <strong>{{ $activity->title }}</strong><br>
+                                        <span class="experience-dates">({{ $activity->start_date }} -
+                                            {{ $activity->end_date }})</span>
+                                        <p>{{ $activity->description }}</p>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <p><strong>Tình nguyện viên trung tâm</strong></p>
+                            <span class="experience-dates">(2024-07-09 - 2024-07-17)</span>
+                            <p>Tập hợp các món quà và phân phát tới người vô gia cư. Chia sẻ, động viên họ vượt qua giai
+                                đoạn khó
+                                khăn, giúp họ có những suy nghĩ lạc quan.</p>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -327,13 +373,18 @@
             <div class="references-container">
                 <h2 class="title2 text-left"> Certificates</h2>
                 <div class="references">
-                    <p>{{ $candidate->certificates->pluck('name')->implode(', ') }}</p>
+                    @if ($candidate->certificates && $candidate->certificates->count() > 0)
+                        <p>{{ $candidate->certificates->pluck('name')->implode(', ') }}</p>
+                    @else
+                        <p>Giải nhất Tài năng TOPCV</p>
+                    @endif
                 </div>
             </div>
         </div>
         <form action="{{ route('cvCoffee.download') }}" method="POST" class="mt-3">
             @csrf
             <button type="submit" class="btn btn-primary">Download PDF</button>
+            <a href="{{ route('cv.overview') }}" class="btn btn-warning">Dùng mẫu này</a>
         </form>
     </section>
 @endsection

@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
- public function __construct()
+    public function __construct()
     {
-          $this->middleware('permission:category-choose', ['only' => ['category_choose']]);
+        $this->middleware('permission:category-choose', ['only' => ['category_choose']]);
         $this->middleware('permission:category-list|category-create|category-edit|category-delete', ['only' => ['index', 'store']]);
         $this->middleware('permission:category-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:category-edit', ['only' => ['edit', 'update']]);
@@ -24,7 +24,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-       $categories = Category::withCount('jobPostings')->get();
+        $categories = Category::withCount('jobPostings')->get();
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -33,30 +33,30 @@ class CategoryController extends Controller
         return view('admin.categories.create');
     }
 
-   public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255|unique:categories,name',
-        'slug' => 'required|string|max:255|unique:categories,slug',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:categories,name',
+            'slug' => 'required|string|max:255|unique:categories,slug',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    $categoryData = [
-        'name' => $request->name,
-        'slug' => $request->slug,
-        'user_id' => Auth::id(),
-    ];
+        $categoryData = [
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'user_id' => Auth::id(),
+        ];
 
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imagePath = $image->store('categories', 'public');
-        $categoryData['image'] = $imagePath;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagePath = $image->store('categories', 'public');
+            $categoryData['image'] = $imagePath;
+        }
+
+        Category::create($categoryData);
+
+        return redirect()->route('categories.index')->with('success', 'Category created successfully!');
     }
-
-    Category::create($categoryData);
-
-    return redirect()->route('categories.index')->with('success', 'Category created successfully!');
-}
 
 
     public function edit(Category $category)
@@ -64,7 +64,6 @@ class CategoryController extends Controller
         if ($category->user_id !== Auth::id()) {
             return redirect()->route('categories.index')->with('error', 'Unauthorized access.');
         }
-
         return view('admin.categories.edit', compact('category'));
     }
 
@@ -77,15 +76,15 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-             'slug' => 'required|string|max:255|unique:categories,slug',
+            'slug' => 'required|string|max:255|unique:categories,slug',
         ]);
 
         $categoryData = [
-           'name' => $request->name,
-        'slug' => $request->slug,
+            'name' => $request->name,
+            'slug' => $request->slug,
         ];
 
-       if ($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             // Delete old image if exists
             if ($category->image && Storage::disk('public')->exists($category->image)) {
                 Storage::disk('public')->delete($category->image);
@@ -117,10 +116,10 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully!');
     }
-       public function category_choose(Request $request)
+    public function category_choose(Request $request)
     {
         $data = $request->all();
-        $category =Category::find($data['id']);
+        $category = Category::find($data['id']);
         $category->status = $data['trangthai_val'];
         $category->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $category->save();
