@@ -59,7 +59,7 @@ class AwardController extends Controller
 
     public function edit(Award $award)
     {
-        if ($award->user_id !== Auth::id()) {
+        if ($award->user_id != Auth::id()) {
             return redirect()->route('awards.index')->with('error', 'Unauthorized access.');
         }
 
@@ -68,7 +68,7 @@ class AwardController extends Controller
 
     public function update(Request $request, Award $award)
 {
-    if ($award->user_id !== Auth::id()) {
+    if ($award->user_id != Auth::id()) {
         return redirect()->route('awards.index')->with('error', 'Unauthorized access.');
     }
 
@@ -106,7 +106,7 @@ class AwardController extends Controller
 
     public function destroy(Award $award)
     {
-        if ($award->user_id !== Auth::id()) {
+        if ($award->user_id != Auth::id()) {
             return redirect()->route('awards.index')->with('error', 'Unauthorized access.');
         }
 

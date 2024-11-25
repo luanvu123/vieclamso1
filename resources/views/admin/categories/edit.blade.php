@@ -30,7 +30,7 @@
                 @if ($category->image)
                     <div class="mt-2">
                         @if ($category->image)
-                                            <img src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}" style="width: 30px;">
+                                            <img src="{{ asset('public/storage/' . $category->image) }}" style="width: 30px;">
                                         @else
                                             No Image
                                         @endif

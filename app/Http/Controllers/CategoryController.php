@@ -24,7 +24,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::withCount('jobPostings')->get();
+         $categories = Category::with('user')->withCount('jobPostings')->get();
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -61,15 +61,17 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        if ($category->user_id !== Auth::id()) {
+        $user = Auth::user();
+        if ($category->user_id != $user->id) {
             return redirect()->route('categories.index')->with('error', 'Unauthorized access.');
         }
+
         return view('admin.categories.edit', compact('category'));
     }
 
     public function update(Request $request, Category $category)
     {
-        if ($category->user_id !== Auth::id()) {
+        if ($category->user_id != Auth::id()) {
             return redirect()->route('categories.index')->with('error', 'Unauthorized access.');
         }
 
@@ -103,7 +105,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        if ($category->user_id !== Auth::id()) {
+        if ($category->user_id != Auth::id()) {
             return redirect()->route('categories.index')->with('error', 'Unauthorized access.');
         }
 

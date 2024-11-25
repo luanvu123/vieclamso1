@@ -1,4 +1,3 @@
-<!-- resources/views/categories/index.blade.php -->
 
 @extends('layouts.app')
 
@@ -9,7 +8,7 @@
                 <div class="table-responsive">
                     <a href="{{ route('categories.create') }}" class="button margin-top-30">Thêm Thể loại</a>
 
-                    <!-- Table -->
+            
                     <table class="manage-table responsive-table" id="user-table">
                         <thead>
                             <tr>
@@ -17,6 +16,7 @@
                                 <th>Tên thể loại ngành nghề</th>
                                 <th>Ảnh </th>
                                 <th>Số lượng công việc</th>
+                                <th>Người tạo</th>
                                 <th>Trạng thái</th>
                                 <th>Hành động</th>
                             </tr>
@@ -35,6 +35,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $category->job_postings_count }}</td>
+                                    <td>{{ $category->user->name ?? 'N/A' }}</td> <!-- Hiển thị tên người dùng -->
                                     <td>
                                         <div class="checkbox-wrapper-5">
                                             <div class="check">
@@ -67,11 +68,6 @@
                                     <td>
                                         <a href="{{ route('categories.edit', $category->id) }}"><i
                                                 class="fa fa-pencil"></i> Edit</a>
-                                        {{-- <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                        </form> --}}
                                     </td>
                                 </tr>
                             @endforeach

@@ -246,7 +246,7 @@ class JobPostingController extends Controller
     {
         $employer = Auth::guard('employer')->user();
         $jobPosting = JobPosting::findOrFail($id);
-        if ($employer->id !== $jobPosting->employer_id) {
+        if ($employer->id != $jobPosting->employer_id) {
             return redirect()->back()->with('error', 'Bạn không có quyền xem tin tuyển dụng này.');
         }
 
@@ -361,7 +361,7 @@ class JobPostingController extends Controller
     public function destroy($id)
     {
         $jobPosting = JobPosting::findOrFail($id);
-        if ($jobPosting->employer_id !== Auth::guard('employer')->id()) {
+        if ($jobPosting->employer_id != Auth::guard('employer')->id()) {
             return redirect()->route('job-postings.index')->with('error', 'Unauthorized access.');
         }
         $jobPosting->delete();
@@ -376,7 +376,7 @@ class JobPostingController extends Controller
     {
         $employer = Auth::guard('employer')->user();
         $jobPosting = JobPosting::findOrFail($id);
-        if ($employer->id !== $jobPosting->employer_id) {
+        if ($employer->id != $jobPosting->employer_id) {
             // Nếu không phải, chuyển hướng về trang trước đó với thông báo lỗi
             return redirect()->back()->with('error', 'Bạn không có quyền chỉnh sửa tin tuyển dụng này.');
         }
