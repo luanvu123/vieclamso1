@@ -16,57 +16,43 @@
 
         body {
             font-family: 'DejaVu Sans', sans-serif;
-            /* Hỗ trợ tiếng Việt */
             background-color: #EBECF0;
         }
 
         .main-section2 {
             width: 21cm;
             height: 29.7cm;
-            background-color: rgb(245, 15, 15);
+            background-color: rgb(255, 255, 255);
             margin: 0 auto;
             display: flex;
             flex-direction: row;
-            /* Đặt hướng flex là hàng */
             flex-wrap: nowrap;
-            /* Ngăn nội dung xuống dòng */
             align-items: flex-start;
-            /* Căn các phần tử theo hàng trên cùng */
             justify-content: space-between;
-            /* Đảm bảo khoảng cách giữa các phần tử */
             padding: 0;
             box-sizing: border-box;
             border: 1px solid red;
         }
-
-
-        /* Phần trái chiếm 30% */
         .left-part {
-            width: 30%;
+            width: 25%;
             background-color: #f8f8f8;
             padding: 1cm;
             box-sizing: border-box;
-            /* Đảm bảo padding không làm tăng kích thước phần tử */
             overflow: hidden;
-            /* Ngăn chặn tràn nội dung */
         }
-
-        /* Phần phải chiếm 70% */
         .right-part {
-            width: 70%;
-            /* Sửa lại chiều rộng để chiếm 70% */
+            margin-top: -1000px;
+            margin-left: 280px;
+            width: 55%;
             padding: 1cm;
             box-sizing: border-box;
-            /* Đảm bảo padding không làm tăng kích thước phần tử */
             overflow: hidden;
-            /* Ngăn chặn tràn nội dung */
-            background-color: #6d26df;
+            background-color: #ffffff;
         }
 
         .left-part,
         .right-part {
             flex-shrink: 1;
-            /* Cho phép các phần tử co lại nếu vượt quá kích thước cha */
         }
 
 
@@ -270,5 +256,4 @@
         </div>
     </section>
 </body>
-
 </html>
