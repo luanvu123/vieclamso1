@@ -3,10 +3,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Candidate;
 use App\Models\Employer;
 use App\Models\Message;
 use App\Models\Notification;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,6 +36,15 @@ class MessageController extends Controller
     public function receiveMessages()
     {
         $employer_id = Auth::guard('employer')->id();
+         $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         $candidates = Candidate::whereHas('messages', function ($query) use ($employer_id) {
             $query->where('employer_id', $employer_id);
         })->get();
@@ -48,7 +59,7 @@ class MessageController extends Controller
             return $candidate->latestMessage ? $candidate->latestMessage->created_at : null;
         });
 
-        return view('job_postings.messages', compact('candidates'));
+        return view('job_postings.messages', compact('candidates', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
 
@@ -56,6 +67,15 @@ class MessageController extends Controller
     public function showMessages(Candidate $candidate)
     {
         $employer_id = Auth::guard('employer')->id();
+         $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         $messages = Message::where('employer_id', $employer_id)
             ->where('candidate_id', $candidate->id)
             ->with('candidate', 'employer')
@@ -66,7 +86,7 @@ class MessageController extends Controller
             }
         }
 
-        return view('job_postings.messages_show', compact('messages', 'candidate'));
+        return view('job_postings.messages_show', compact('messages', 'candidate', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
     public function sendReply(Request $request, Candidate $candidate)

@@ -17,6 +17,7 @@ use Illuminate\Validation\ValidationException;
 use Twilio\Rest\Client;
 use App\Mail\SendOTP;
 use App\Mail\SendOtpMail;
+use App\Models\Application;
 use Laravel\Socialite\Facades\Socialite;
 
 class EmployerLoginController extends Controller
@@ -84,7 +85,16 @@ class EmployerLoginController extends Controller
 
     public function dashboard()
     {
-        return view('job_postings.dashboard');
+         $employer = Auth::guard('employer')->user();
+         $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        return view('job_postings.dashboard', compact('employer', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
     public function logout(Request $request)
@@ -95,29 +105,69 @@ class EmployerLoginController extends Controller
     public function profile()
     {
         $employer = Auth::guard('employer')->user();
-        return view('employer.profile', compact('employer'));
+         $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        return view('employer.profile', compact('employer', 'recentMessagesCount', 'recentApplicationsCount'));
     }
     public function formChangePasswordEmployer()
     {
         $employer = Auth::guard('employer')->user();
-        return view('employer.password', compact('employer'));
+         $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        return view('employer.password', compact('employer', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
 
     public function formPhone()
     {
         $employer = Auth::guard('employer')->user();
-        return view('employer.phone', compact('employer'));
+         $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        return view('employer.phone', compact('employer', 'recentMessagesCount', 'recentApplicationsCount'));
     }
     public function formCertificate()
     {
         $employer = Auth::guard('employer')->user();
-        return view('employer.gpkd', compact('employer'));
+         $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        return view('employer.gpkd', compact('employer', 'recentMessagesCount', 'recentApplicationsCount'));
     }
     public function formCompany()
     {
         $employer = Auth::guard('employer')->user();
-        return view('employer.company', compact('employer'));
+         $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        return view('employer.company', compact('employer', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
     public function updateCertificate(Request $request)

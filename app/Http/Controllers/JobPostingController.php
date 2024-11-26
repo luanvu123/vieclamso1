@@ -30,10 +30,20 @@ class JobPostingController extends Controller
     public function savedProfiles()
     {
         $employerId = Auth::guard('employer')->id();
+        $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+
 
         $savedProfiles = SavedProfile::with('candidate')->where('employer_id', $employerId)->paginate(10);
 
-        return view('job_postings.saved_profiles', compact('savedProfiles'));
+        return view('job_postings.saved_profiles', compact('savedProfiles', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
 
@@ -107,8 +117,6 @@ class JobPostingController extends Controller
                     break;
             }
         }
-
-        // Lọc theo danh mục
         if ($request->filled('category_candidate')) {
             $categoryId = $request->input('category_candidate');
 
@@ -116,14 +124,20 @@ class JobPostingController extends Controller
                 $q->where('categories.id', $categoryId);
             });
         }
-
-        // Phân trang kết quả
         $candidates = $query->paginate(10);
-
-        // Lấy danh sách danh mục để hiển thị trong bộ lọc
         $categories = Category::all();
 
-        return view('job_postings.search_candidate', compact('candidates', 'categories'));
+        $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+
+        return view('job_postings.search_candidate', compact('candidates', 'categories', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
 
@@ -188,12 +202,29 @@ class JobPostingController extends Controller
     {
         $employer = Auth::guard('employer')->user();
         $jobPostings = $employer->jobPostings;
-        return view('job_postings.index', compact('jobPostings'));
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+
+        return view('job_postings.index', compact('jobPostings', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
     public function dashboard()
     {
         $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         $activeJobPostingsCount = $employer->activeJobPostingsCount();
         $totalJobViews = $employer->totalJobViews();
         $totalApplications = $employer->totalApplications();
@@ -220,7 +251,7 @@ class JobPostingController extends Controller
         $activeTypeEmployer = TypeEmployer::where('status', 'active')->get();
         $slides = Slide::where('status', 'active')->get();
 
-        return view('job_postings.dashboard', compact('activeJobPostingsCount', 'totalJobViews', 'totalApplications', 'totalMessages', 'dates', 'activeTypeEmployer', 'employer', 'slides'));
+        return view('job_postings.dashboard', compact('activeJobPostingsCount', 'totalJobViews', 'totalApplications', 'totalMessages', 'dates', 'activeTypeEmployer', 'employer', 'slides', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
 
@@ -228,7 +259,14 @@ class JobPostingController extends Controller
     public function create()
     {
         $employer = Auth::guard('employer')->user();
-
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         if ($employer->level != 3) {
             return redirect()->back()->with('error', 'Bạn cần có cấp độ 3 để tạo việc làm.');
         }
@@ -238,21 +276,27 @@ class JobPostingController extends Controller
         $cities = City::all();
         $company = $employer->company;
         $salaries = Salary::where('status', 'active')->get();
-        return view('job_postings.create', compact('email', 'categories', 'company', 'cities', 'salaries'));
+        return view('job_postings.create', compact('email', 'categories', 'company', 'cities', 'salaries', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
 
     public function show(Request $request, $id)
     {
         $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         $jobPosting = JobPosting::findOrFail($id);
         if ($employer->id != $jobPosting->employer_id) {
             return redirect()->back()->with('error', 'Bạn không có quyền xem tin tuyển dụng này.');
         }
-
-        // Get filter and sort parameters from request
         $status = $request->input('status');
-        $sort = $request->input('sort', 'created_at'); // Default sort by created_at
+        $sort = $request->input('sort', 'created_at');
 
         $applications = $jobPosting->applications()
             ->when($status, function ($query, $status) {
@@ -261,15 +305,14 @@ class JobPostingController extends Controller
             ->when($sort === 'name', function ($query) {
                 return $query->join('candidates', 'applications.candidate_id', '=', 'candidates.id')
                     ->orderBy('candidates.fullname_candidate', 'asc')
-                    ->select('applications.*'); // Select only the columns from applications
+                    ->select('applications.*');
             }, function ($query) use ($sort) {
                 return $query->orderBy($sort, 'desc');
             })
-            ->with('candidate') // Ensure candidate relationship is loaded for use in views
+            ->with('candidate')
             ->get();
-        // Truyền thêm biến isInfomation để kiểm tra trong view
         $isInfomation = $employer->isInfomation ?? false;
-        return view('job_postings.show', compact('jobPosting', 'applications', 'isInfomation'));
+        return view('job_postings.show', compact('jobPosting', 'applications', 'isInfomation', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
     public function store(Request $request)
@@ -375,6 +418,14 @@ class JobPostingController extends Controller
     public function edit($id)
     {
         $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         $jobPosting = JobPosting::findOrFail($id);
         if ($employer->id != $jobPosting->employer_id) {
             // Nếu không phải, chuyển hướng về trang trước đó với thông báo lỗi
@@ -389,7 +440,7 @@ class JobPostingController extends Controller
 
         $company = $employer->company;
         $salaries = Salary::where('status', 'active')->get();
-        return view('job_postings.edit', compact('jobPosting', 'selectedCities', 'cities', 'categories', 'selectedCategories', 'company', 'selectedCities', 'salaries'));
+        return view('job_postings.edit', compact('jobPosting', 'selectedCities', 'cities', 'categories', 'selectedCategories', 'company', 'selectedCities', 'salaries', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
 
@@ -460,6 +511,14 @@ class JobPostingController extends Controller
     {
         // Lấy nhà tuyển dụng đang đăng nhập
         $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
 
         // Lấy thông tin ứng viên cùng các quan hệ liên quan
         $candidate = Candidate::with([
@@ -481,7 +540,7 @@ class JobPostingController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('pages.overview-cv', compact('candidate', 'isInfomation', 'notifications'));
+        return view('pages.overview-cv', compact('candidate', 'isInfomation', 'notifications', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
 
@@ -489,23 +548,47 @@ class JobPostingController extends Controller
     {
         // Lấy các carts có status = 1
         $carts = Cart::where('status', 1)->get();
-
+        $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         // Truyền dữ liệu carts sang view
-        return view('job_postings.cart', compact('carts'));
+        return view('job_postings.cart', compact('carts', 'recentMessagesCount', 'recentApplicationsCount'));
     }
     public function showCartDetail($id)
     {
         // Lấy cart theo ID
         $cart = Cart::findOrFail($id);
-
+        $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         // Truyền dữ liệu cart sang view
-        return view('job_postings.cart_detail', compact('cart'));
+        return view('job_postings.cart_detail', compact('cart', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
 
     public function buyGift(Request $request)
     {
         $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         $typeProduct = $request->get('type_product', 'all');
         if ($typeProduct === 'all') {
             $products = Product::active()->get();
@@ -514,17 +597,25 @@ class JobPostingController extends Controller
         }
 
         // Trả về view với danh sách sản phẩm
-        return view('job_postings.gift', compact('products', 'employer'));
+        return view('job_postings.gift', compact('products', 'employer', 'recentMessagesCount', 'recentApplicationsCount'));
     }
     // Hàm hiển thị chi tiết sản phẩm
     public function productDetail($id)
     {
         $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         // Tìm sản phẩm theo ID
         $product = Product::findOrFail($id);
 
         // Trả về view và truyền thông tin sản phẩm vào view
-        return view('job_postings.gift_detail', compact('product', 'employer'));
+        return view('job_postings.gift_detail', compact('product', 'employer', 'recentMessagesCount', 'recentApplicationsCount'));
     }
     public function purchaseProduct(Request $request, $id)
     {
@@ -564,34 +655,65 @@ class JobPostingController extends Controller
     public function loyalCustomer()
     {
         $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         $nextType = $employer->pointsToNextTypeEmployer();
 
         // Retrieve the list of purchases for the employer
         $purchases = Purchased::where('employer_id', $employer->id)->with('product')->get();
 
-        return view('job_postings.reward', compact('employer', 'nextType', 'purchases'));
+        return view('job_postings.reward', compact('employer', 'nextType', 'purchases', 'recentMessagesCount', 'recentApplicationsCount'));
     }
     public function appInsight()
     {
         $employer = Auth::guard('employer')->user();
-
-        return view('job_postings.insight', compact('employer'));
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        return view('job_postings.insight', compact('employer', 'recentMessagesCount', 'recentApplicationsCount'));
     }
     public function showCartEmployer()
     {
         // Lấy employer hiện tại
         $employer = Auth::guard('employer')->user();
-
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         // Lấy danh sách cart của employer từ bảng pivot cart_employer
         $cartEmployers = $employer->carts()->withPivot('start_date', 'end_date', 'user_id')->get();
 
         // Truyền dữ liệu sang view để hiển thị
-        return view('job_postings.cart_employer', compact('employer', 'cartEmployers'));
+        return view('job_postings.cart_employer', compact('employer', 'cartEmployers', 'recentMessagesCount', 'recentApplicationsCount'));
     }
     public function showCheckout()
     {
         $banks = Bank::where('status', '1')->get();
         $groupedBanks = $banks->groupBy('area');
-        return view('job_postings.checkout', compact('groupedBanks'));
+        $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        return view('job_postings.checkout', compact('groupedBanks', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 }

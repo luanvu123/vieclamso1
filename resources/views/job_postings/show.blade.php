@@ -64,7 +64,7 @@
 
                              </span>
                              <ul>
-                                 <!-- Kiểm tra điều kiện isInfomation -->
+
                                  @if ($isInfomation)
                                      <li>
                                          <a href="{{ asset('storage/' . $application->cv->cv_path) }}">
@@ -84,13 +84,42 @@
                                  <li><a href="{{ route('messages.show', $application->candidate) }}"><i
                                              class="fa fa-envelope"></i> Message</a></li>
                                  <li>
-                                     <!-- Nút Lưu Hồ Sơ -->
                                      <form action="{{ route('job_postings.save_profile', $application->candidate->id) }}"
                                          method="POST" style="display: inline;">
                                          @csrf
                                          <button type="submit" class="listing-date new">Lưu</button>
                                      </form>
                                  </li>
+                                 <li>
+                                     <style>
+                                         .new-badge {
+                                             background-color: red;
+                                             color: white;
+                                             font-weight: bold;
+                                             padding: 3px 8px;
+                                             border-radius: 5px;
+                                             animation: blink 1s infinite;
+                                         }
+
+                                         @keyframes blink {
+
+                                             0%,
+                                             100% {
+                                                 opacity: 1;
+                                             }
+
+                                             50% {
+                                                 opacity: 0;
+                                             }
+                                         }
+                                     </style>
+                                     @if ($application->created_at->diffInHours(now()) < 5)
+                                         <span class="new-badge">New</span>
+                                     @endif
+
+                                 </li>
+
+
                              </ul>
                          </div>
                          <div class="buttons">

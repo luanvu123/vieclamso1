@@ -9,6 +9,8 @@ use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ThankYouEmail;
+use App\Models\Application;
+use Carbon\Carbon;
 
 class CartListController extends Controller
 {
@@ -41,8 +43,17 @@ class CartListController extends Controller
 
     public function index()
     {
+        $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         $cartlists = Cartlist::with('cart.planCurrency')->where('employer_id', Auth::guard('employer')->id())->get();
-        return view('job_postings.cartlist_index', compact('cartlists'));
+        return view('job_postings.cartlist_index', compact('cartlists', 'recentMessagesCount', 'recentApplicationsCount'));
     }
     public function destroy($id)
     {
@@ -53,8 +64,17 @@ class CartListController extends Controller
     }
     public function edit($id)
     {
+        $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         $cartlist = Cartlist::findOrFail($id);
-        return view('job_postings.cartlist_edit', compact('cartlist'));
+        return view('job_postings.cartlist_edit', compact('cartlist', 'recentMessagesCount', 'recentApplicationsCount'));
     }
     public function update(Request $request, $id)
     {
@@ -120,18 +140,34 @@ class CartListController extends Controller
     public function listOrder()
     {
         $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         $orders = Order::where('employer_id', $employer->id)->with('orderDetails.cart')->get();
 
-        return view('job_postings.cartlist_orders', compact('orders'));
+        return view('job_postings.cartlist_orders', compact('orders', 'recentMessagesCount', 'recentApplicationsCount'));
     }
     public function showOrder($orderId)
     {
         $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
         $order = Order::where('id', $orderId)
             ->where('employer_id', $employer->id)
             ->with('orderDetails.cart')
             ->firstOrFail();
 
-        return view('job_postings.cartlist_order-details', compact('order'));
+        return view('job_postings.cartlist_order-details', compact('order', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 }

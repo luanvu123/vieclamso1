@@ -39,11 +39,43 @@
                         </tr>
 
                         @foreach ($jobPostings as $jobPosting)
+                            @php
+                                $hasRecentApplication = $jobPosting
+                                    ->applications()
+                                    ->where('created_at', '>=', now()->subHours(5))
+                                    ->exists();
+                            @endphp
+
                             <tr>
                                 <td class="title">
+                                    <style>
+                                        .new-badge {
+                                            background-color: red;
+                                            color: white;
+                                            font-weight: bold;
+                                            padding: 3px 8px;
+                                            border-radius: 5px;
+                                            animation: blink 1s infinite;
+                                        }
+
+                                        @keyframes blink {
+
+                                            0%,
+                                            100% {
+                                                opacity: 1;
+                                            }
+
+                                            50% {
+                                                opacity: 0;
+                                            }
+                                        }
+                                    </style>
                                     <a href="{{ route('job-postings.show', $jobPosting->id) }}">
                                         {{ $jobPosting->title }}
                                     </a>
+                                    @if ($hasRecentApplication)
+                                        <span class="new-badge">New</span>
+                                    @endif
                                 </td>
                                 <td class="centered">{{ $jobPosting->views }} view</td>
                                 <td>{{ $jobPosting->created_at->format('F d, Y') }}</td>
@@ -70,6 +102,7 @@
                                 </td>
                             </tr>
                         @endforeach
+
                     </table>
                 </div>
             </div>
