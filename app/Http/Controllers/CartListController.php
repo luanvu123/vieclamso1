@@ -10,36 +10,41 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ThankYouEmail;
 use App\Models\Application;
+use App\Models\Cart;
 use Carbon\Carbon;
 
 class CartListController extends Controller
 {
-    public function addToCart(Request $request, $cartId)
-    {
-        $employer = Auth::guard('employer')->user();
+   public function addToCart(Request $request, $cartId)
+{
+    $employer = Auth::guard('employer')->user();
 
-        // Check if the cart item already exists in the cartlist for this employer
-        $cartlist = Cartlist::where('employer_id', $employer->id)
-            ->where('cart_id', $cartId)
-            ->first();
+    // Lấy thông tin Cart từ $cartId
+    $cart = Cart::findOrFail($cartId);
 
-        if ($cartlist) {
-            // If it exists, increment the quantity
-            $cartlist->quantity += 1;
-            $cartlist->save();
-        } else {
-            // Otherwise, create a new entry
-            Cartlist::create([
-                'employer_id' => $employer->id,
-                'cart_id' => $cartId,
-                'quantity' => 1,
-                'price' => $request->input('price'),
-                'status' => 'pending'
-            ]);
-        }
+    // Check if the cart item already exists in the cartlist for this employer
+    $cartlist = Cartlist::where('employer_id', $employer->id)
+        ->where('cart_id', $cartId)
+        ->first();
 
-        return redirect()->back()->with('success', 'Them dich vu thanh cong!');
+    if ($cartlist) {
+        // If it exists, increment the quantity
+        $cartlist->quantity += 1;
+        $cartlist->save();
+    } else {
+        // Otherwise, create a new entry with price from Cart->value
+        Cartlist::create([
+            'employer_id' => $employer->id,
+            'cart_id' => $cartId,
+            'quantity' => 1,
+            'price' => $cart->value,  // Lấy giá trị value từ Cart
+            'status' => 'pending'
+        ]);
     }
+
+    return redirect()->back()->with('success', 'Thêm dịch vụ thành công!');
+}
+
 
     public function index()
     {

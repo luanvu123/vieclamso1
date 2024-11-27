@@ -10,7 +10,7 @@
             </div>
 
             <div class="six columns">
-                <a href="dashboard-add-job.html" class="button">Ứng viên đã lưu!</a>
+                <a href="{{route('job_postings.saved_profiles')}}" class="button">Ứng viên đã lưu!</a>
             </div>
 
         </div>

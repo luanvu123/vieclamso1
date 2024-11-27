@@ -92,36 +92,41 @@
         }
     </style>
     <div class="container">
-        <h1>Your Cart</h1>
+        <h1>Giỏ hàng</h1>
 
         @if ($cartlists->isEmpty())
-            <p>Your cart is empty.</p>
+            <p>Giỏ hàng trống.</p>
         @else
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th>Actions</th>
+                        <th>Dịch vụ</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Tổng tiền</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($cartlists as $cartlist)
                         <tr>
                             <td>{{ $cartlist->cart->title }}</td>
-                            <td>{{ $cartlist->price }} {{ $cartlist->cart->planCurrency->currency }}</td>
+                            <td> {{ number_format($cartlist->cart->value, 0, ',', '.') }}
+                                {{ $cartlist->cart->planCurrency->currency }}</td>
                             <td>{{ $cartlist->quantity }}</td>
-                            <td>{{ $cartlist->price * $cartlist->quantity }} {{ $cartlist->cart->planCurrency->currency }}
-                            </td>
+                            <td>{{ number_format($cartlist->price * $cartlist->quantity, 0, ',', '.') }}
+                                {{ $cartlist->cart->planCurrency->currency }}</td>
+
+
+
                             <td>
 
                                 <form action="{{ route('cartlist.destroy', $cartlist->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="{{ route('cartlist.edit', $cartlist->id) }}" class="btn btn-warning">Edit Qty</a>
-                                    <button type="submit" class="btn btn-danger">Remove</button>
+                                    <a href="{{ route('cartlist.edit', $cartlist->id) }}" class="btn btn-warning">Thêm số
+                                        lượng</a>
+                                    <button type="submit" class="btn btn-danger">Xóa</button>
                                 </form>
                             </td>
                         </tr>
@@ -130,8 +135,8 @@
             </table>
 
             <div class="cart-summary">
-                <h3>Cart Summary</h3>
-                <p>Total Items: {{ $cartlists->sum('quantity') }}</p>
+                <h3>Thông tin thanh toán</h3>
+                <p>Tổng số lượng: {{ $cartlists->sum('quantity') }}</p>
                 <p>VAT: {{ $info->vat }}%</p>
 
                 @php
@@ -142,9 +147,11 @@
                     $totalCostWithVAT = $totalCost + $vatAmount;
                 @endphp
 
-                <p>Total Cost (Excl. VAT): {{ $totalCost }} {{ $cartlists->first()->cart->planCurrency->currency }}</p>
-                <p>Total Cost (Incl. VAT): {{ $totalCostWithVAT }} {{ $cartlists->first()->cart->planCurrency->currency }}
-                </p>
+                <p>Tổng giá trị (Excl. VAT): {{ number_format($totalCost, 0, ',', '.') }}
+                    {{ $cartlists->first()->cart->planCurrency->currency }}</p>
+
+                <p>Tổng tiền (bao gồm VAT): {{ number_format($totalCostWithVAT, 0, ',', '.') }}
+                    {{ $cartlists->first()->cart->planCurrency->currency }}</p>
             </div>
 
 

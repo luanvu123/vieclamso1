@@ -5,9 +5,8 @@
     <h1>Chi tiết dịch vụ</h1>
     <div class="card">
         <div class="card-body">
-            <p><strong>Đơn vị:</strong> {{ $cart->planCurrency->currency ?? 'N/A' }}</p>
             <p><strong>Thể loại dịch vụ:</strong> {{ $cart->typeCart->name ?? 'N/A' }}</p>
-            <p><strong>Giá:</strong> {{ $cart->value }}</p>
+            <p><strong>Giá trị dịch vụ:</strong> {{ number_format($cart->value, 0, ',', '.') }} {{ $cart->planCurrency->currency }}</p>
             <p><strong>Trạng thái:</strong> {{ $cart->status ? 'Active' : 'Inactive' }}</p>
             <p><strong>Top Point:</strong> {{ $cart->top_point }}</p>
             <p><strong>Thời gian hiệu lực của dịch vụ:</strong> {{ $cart->validity }} days</p>
@@ -43,35 +42,6 @@
 (nếu tin đăng có sử dụng Top Add-on ngay trước đó):</strong> {{ $cart->Top_Add_ons_in_2 ? 'Yes' : 'No' }}</p>
             <p><strong>Kích hoạt CV đề xuất trong 1 tuần:</strong> {{ $cart->Activate_CV_proposal ? 'Yes' : 'No' }}</p>
             <p><strong>Tặng 350 Credits vào tài khoản khuyến mãi:</strong> {{ $cart->Give_350_Credits ? 'Yes' : 'No' }}</p>
-        </div>
-
-        <div class="card-body">
-            <h5 class="card-title">Plan Features</h5>
-            @if($cart->planFeatures->isNotEmpty())
-                <ul>
-                    @foreach($cart->planFeatures as $feature)
-                        <li>{{ $feature->feature }}</li>
-                    @endforeach
-                </ul>
-            @else
-                <p>No features assigned.</p>
-            @endif
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Employers</h5>
-            @if($cart->employers->isNotEmpty())
-                <ul>
-                    @foreach($cart->employers as $employer)
-                        <li>
-                            {{ $employer->name }}
-                            (Start Date: {{ $employer->pivot->start_date }},
-                            End Date: {{ $employer->pivot->end_date }})
-                        </li>
-                    @endforeach
-                </ul>
-            @else
-                <p>No employers assigned.</p>
-            @endif
         </div>
     </div>
 </div>

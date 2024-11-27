@@ -29,12 +29,7 @@
                                                 class="fa-duotone fa-circle-check pt-1"
                                                 style="color: rgb(0, 177, 79); padding-right: 5px;"></i> <span
                                                 data-v-4f7dea58="">
-                                                @foreach ($cart->planFeatures as $feature)
-                                                    <p data-v-f938ab0e=""
-                                                        class="service-description color-gray custom-color">
-                                                        {{ $feature->feature }}
-                                                    </p>
-                                                @endforeach
+                                               {{$cart->description_home}}
 
                                             </span></div>
                                     </li>

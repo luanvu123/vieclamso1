@@ -283,6 +283,7 @@ class JobPostingController extends Controller
     public function show(Request $request, $id)
     {
         $employer = Auth::guard('employer')->user();
+
         $recentMessagesCount = $employer->messages()
             ->where('created_at', '>=', Carbon::now()->subHours(5))
             ->count();
@@ -519,8 +520,6 @@ class JobPostingController extends Controller
         })
             ->where('created_at', '>=', Carbon::now()->subHours(5))
             ->count();
-
-        // Lấy thông tin ứng viên cùng các quan hệ liên quan
         $candidate = Candidate::with([
             'cvs',
             'educations',

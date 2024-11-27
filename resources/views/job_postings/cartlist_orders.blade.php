@@ -67,18 +67,18 @@ p {
 
 </style>
     <div class="container">
-        <h1>Your Orders</h1>
+        <h1>Danh sách đơn hàng</h1>
 
         @if ($orders->isEmpty())
-            <p>You have no orders.</p>
+            <p>Bạn không có đơn hàng nào.</p>
         @else
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Order ID</th>
-                        <th>Total Amount</th>
-                        <th>Status</th>
-                        <th>Details</th>
+                        <th>Mã đơn hàng</th>
+                        <th>Tổng tiền</th>
+                        <th>Trang thái</th>
+                        <th>Chi tiết</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,7 +88,7 @@ p {
                             <td>{{ $order->total_amount }} {{ $order->orderDetails->first()->cart->planCurrency->currency }}</td>
                             <td>{{ ucfirst($order->status) }}</td>
                             <td>
-                                <a href="{{ route('cartlist.showOrder', $order->id) }}" class="btn btn-info">View Details</a>
+                                <a href="{{ route('cartlist.showOrder', $order->id) }}" class="btn btn-info">Xem</a>
                             </td>
                         </tr>
                     @endforeach

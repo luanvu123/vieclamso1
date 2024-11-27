@@ -18,8 +18,6 @@
 
     <link rel="stylesheet" href="{{ asset('vieclamso1/css-frontend/tai-khoan-nha-tuyen-dung.css') }}" type="text/css">
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-
-
 </head>
 
 <body>
@@ -69,7 +67,6 @@
             <div class="dashboard-nav">
                 <div class="dashboard-nav-inner">
                     <ul>
-
                         <li class="{{ Route::is('employer.change-password') ? 'active' : '' }}">
                             <a href="{{ route('employer.change-password') }}">
                                 <div class="message-avatar">
@@ -84,7 +81,6 @@
 
                             </a>
                         </li>
-
                         <li class="{{ Route::is('job-postings.dashboard') ? 'active' : '' }}">
                             <a href="{{ route('job-postings.dashboard') }}"><span
                                     class="ln ln-icon-Align-JustifyAll"></span> Bảng tin</a>
@@ -92,10 +88,6 @@
                         <li class="{{ Route::is('loyal-customer') ? 'active' : '' }}">
                             <a href="{{ route('loyal-customer') }}"><span class="ln ln-icon-Gift-Box"></span> TopCV
                                 Rewards </a>
-                        </li>
-                        <li class="{{ Route::is('app-insights') ? 'active' : '' }}">
-                            <a href="{{ route('app-insights') }}"><span class="ln ln-icon-Arrow-Inside45"></span> TopCV
-                                Insights </a>
                         </li>
                         <li class="{{ Route::is('buy-gift') ? 'active' : '' }}">
                             <a href="{{ route('buy-gift') }}"><span class="ln ln-icon-Sled-withGifts"></span> Đổi quà
@@ -105,42 +97,39 @@
                             class="{{ Route::is('job-postings.index') || Route::is('job-postings.show') || Route::is('job-postings.edit') ? 'active' : '' }}">
                             <a href="{{ route('job-postings.index') }}"><span class="ln ln-icon-Blackboard"></span>
                                 Chiến dịch tuyển dụng
-                                <span class="nav-tag">{{ $recentApplicationsCount }}</span>
+                                @if ($recentApplicationsCount > 0)
+                                    <span class="nav-tag">{{ $recentApplicationsCount }}</span>
+                                @endif
                             </a>
                         </li>
                         <li class="{{ Route::is('messages.receive') || Route::is('messages.show') ? 'active' : '' }}">
                             <a href="{{ route('messages.receive') }}"><span
                                     class="ln ln-icon-Bird-DeliveringLetter"></span> Tin nhắn
-                                 <span class="nav-tag">{{ $recentMessagesCount }}</span>
-                                </a>
+                                @if ($recentMessagesCount > 0)
+                                    <span class="nav-tag">{{ $recentMessagesCount }}</span>
+                                @endif
+                            </a>
                         </li>
 
-                        <li><a>Quản lý dịch vụ</a>
-                            <ul>
-                                <li class="{{ Route::is('job-postings.cart') ? 'active' : '' }}">
-                                    <a href="{{ route('job-postings.cart') }}"><span
-                                            class="ln ln-icon-Film-Cartridge"></span>
-                                        Dịch vụ </a>
-                                </li>
-                                <li class="{{ Route::is('cartlist.index') ? 'active' : '' }}">
-                                    <a href="{{ route('cartlist.index') }}"><span class="ln ln-icon-Add-Cart"></span>
-                                        Giỏ hàng
-                                        của tôi </a>
-                                </li>
-                                <li
-                                    class="{{ Route::is('cartlist.listOrder') || Route::is('cartlist.showOrder') ? 'active' : '' }}">
-                                    <a href="{{ route('cartlist.listOrder') }}"><span
-                                            class="ln ln-icon-Full-Cart"></span> Theo
-                                        dõi đơn hàng </a>
-                                </li>
-                                <li class="{{ Route::is('job_postings.cart') ? 'active' : '' }}">
-                                    <a href="{{ route('job_postings.cart') }}"><span
-                                            class="ln ln-icon-Align-Left"></span> Dịch
-                                        vụ đang mở </a>
-                                </li>
-                            </ul>
-                        </li>
 
+                        <li class="{{ Route::is('job-postings.cart') ? 'active' : '' }}">
+                            <a href="{{ route('job-postings.cart') }}"><span class="ln ln-icon-Film-Cartridge"></span>
+                                Dịch vụ </a>
+                        </li>
+                        <li class="{{ Route::is('cartlist.index') ? 'active' : '' }}">
+                            <a href="{{ route('cartlist.index') }}"><span class="ln ln-icon-Add-Cart"></span>
+                                Giỏ hàng
+                                của tôi </a>
+                        </li>
+                        <li
+                            class="{{ Route::is('cartlist.listOrder') || Route::is('cartlist.showOrder') ? 'active' : '' }}">
+                            <a href="{{ route('cartlist.listOrder') }}"><span class="ln ln-icon-Full-Cart"></span> Theo
+                                dõi đơn hàng </a>
+                        </li>
+                        <li class="{{ Route::is('job_postings.cart') ? 'active' : '' }}">
+                            <a href="{{ route('job_postings.cart') }}"><span class="ln ln-icon-Align-Left"></span> Dịch
+                                vụ đang mở </a>
+                        </li>
                         <li class="{{ Route::is('job_postings.checkout') ? 'active' : '' }}">
                             <a href="{{ route('job_postings.checkout') }}"><span
                                     class="ln ln-icon-Arrow-Inside"></span>
@@ -155,10 +144,6 @@
                                     class="ln ln-icon-Film-Cartridge"></span> Hồ sơ đã lưu </a>
                         </li>
                     </ul>
-
-
-
-
                 </div>
             </div>
             <!-- Navigation / End -->

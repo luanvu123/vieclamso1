@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <h2>Job Postings</h2>
+                   <h3>Danh sách tin tuyển dụng của nhà tuyển dụng: {{ $employer->name }}</h3>
 
                     <!-- Date and Status Filter Controls -->
                     <div class="filter-controls mb-3">
@@ -32,6 +32,7 @@
                                 <th>Tiêu đề</th>
                                 <th>Nhà tuyẻn dụng</th>
                                 <th>SDT</th>
+                                <th>Công ty</th>
                                 <th>Địa điểm</th>
                                 <th>Ngày tạo</th>
                                 <th>Trạng thái</th>
@@ -42,7 +43,6 @@
                         <tbody>
                             @foreach ($jobPostings as $key => $jobPosting)
                                 @php
-                                    // Check if created_at is within the last 2 hours
                                     $isNew = $jobPosting->created_at->diffInHours(now()) < 2;
                                 @endphp
                                 <tr data-created="{{ $jobPosting->created_at->format('Y-m-d') }}"
@@ -55,6 +55,8 @@
                                         {{ $jobPosting->employer->name }}</td>
                                     <td @if ($isNew) style="font-weight: bold;" @endif>
                                         {{ $jobPosting->employer->phone }}</td>
+                                          <td @if ($isNew) style="font-weight: bold;" @endif>
+                                        {{ $jobPosting->company->name }}</td>
                                     <td @if ($isNew) style="font-weight: bold;" @endif>
                                         {{ $jobPosting->location }}</td>
                                     <td @if ($isNew) style="font-weight: bold;" @endif>
@@ -82,6 +84,12 @@
                                     <td>
                                         <a href="{{ route('job-postings-manage.show', $jobPosting->id) }}"><i
                                                 class="fa fa-eye"></i> View</a>
+
+    <a href="{{ route('job-postings.applications', $jobPosting->id) }}" class="btn btn-primary btn-sm">
+        <i class="fa fa-users"></i> Xem ứng tuyển
+    </a>
+
+
                                     </td>
                                 </tr>
                             @endforeach

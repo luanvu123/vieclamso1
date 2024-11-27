@@ -7,8 +7,10 @@ use App\Models\Employer;
 use App\Models\Purchased;
 use Carbon\Carbon;
 use App\Mail\SendEmailEmployer;
+use App\Models\Application;
 use App\Models\Cart;
 use App\Models\EmailReplyEmployer;
+use App\Models\JobPosting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -47,6 +49,48 @@ class EmployerManageController extends Controller
         $users = User::all();
         return view('admin.employers.index', compact('employers', 'users'));
     }
+    // Trong EmployerManageController.php
+    public function showJobPostings($id)
+    {
+        $employer = Employer::findOrFail($id);
+        $jobPostings = $employer->jobPostings;
+        return view('admin.employers.job_postings', compact('employer', 'jobPostings'));
+    }
+
+  public function showApplications($id)
+{
+    // Tìm tin tuyển dụng theo ID
+    $jobPosting = JobPosting::with('applications.candidate', 'applications.cv')->findOrFail($id);
+
+    // Truyền dữ liệu đến view
+    return view('admin.employers.applications', compact('jobPosting'));
+}
+public function updateCvHiddenInfo(Request $request, $id)
+{
+    // Xác thực cho phép file PDF hoặc PNG, tối đa 2MB
+    $request->validate([
+        'cv_hidden_info' => 'required|file|mimes:pdf,png|max:2048', // Cho phép file PDF và PNG, tối đa 2MB
+    ]);
+
+    // Tìm ứng tuyển theo ID
+    $application = Application::findOrFail($id);
+
+    // Lưu file vào thư mục storage nếu có
+    if ($request->hasFile('cv_hidden_info')) {
+        // Lưu tệp vào thư mục cv_hidden_infos trong storage, dùng disk public
+        $filePath = $request->file('cv_hidden_info')->store('cv_hidden_infos', 'public');
+
+        // Cập nhật đường dẫn của file vào trường cv_hidden_info
+        $application->cv_hidden_info = $filePath;
+        $application->save();
+    }
+
+    // Quay lại trang trước với thông báo thành công
+    return redirect()->back()->with('success', 'CV hidden info updated successfully.');
+}
+
+
+
 
     public function show($id)
     {
@@ -74,21 +118,30 @@ class EmployerManageController extends Controller
         return redirect()->route('employers.index')->with('error', 'You are not authorized to edit this employer.');
     }
 
+    // Trong phương thức update của controller, bạn cần đảm bảo rằng các checkbox không được chọn vẫn có giá trị mặc định
     public function update(Request $request, $id)
     {
+        // Thêm giá trị mặc định cho các trường checkbox không được chọn
+        $request->merge([
+            'isVerifyCompany' => $request->has('isVerifyCompany') ? 1 : 0,
+            'isVerifyEmail' => $request->has('isVerifyEmail') ? 1 : 0,
+            'isInfomation' => $request->has('isInfomation') ? 1 : 0,
+        ]);
+
         $request->validate([
             'isVerify' => 'nullable|boolean',
             'isVerify_license' => 'nullable|boolean',
-            'isVerifyCompany' => 'nullable|boolean',
-            'isInfomation' => 'nullable|boolean',
+            'isVerifyCompany' => 'nullable|boolean',  // Đảm bảo rằng giá trị này là boolean
+            'isInfomation' => 'required|boolean',
             'level' => 'nullable|integer|in:1,2,3',
         ]);
 
         $employer = Employer::findOrFail($id);
         $user = Auth::user();
 
-        // Skip ownership check if user has Admin role
+        // Kiểm tra quyền sở hữu hoặc quyền Admin
         if ($user->roles()->where('id', 1)->exists() || $employer->user_id === $user->id) {
+            // Cập nhật các trường
             $data = $request->only([
                 'isVerify',
                 'isVerify_license',
@@ -97,7 +150,9 @@ class EmployerManageController extends Controller
                 'level',
             ]);
 
+            // Cập nhật dữ liệu
             $employer->update($data);
+
             return redirect()->route('employers.index')->with('success', 'Employer updated successfully.');
         }
 

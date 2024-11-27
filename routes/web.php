@@ -85,6 +85,7 @@ use Illuminate\Support\Facades\Session;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Auth::routes();
 Route::get('/', [SiteController::class, 'index'])->name('/');
 Route::get('/pricing', [SiteController::class, 'pricing'])->name('pricing');
@@ -99,7 +100,7 @@ Route::get('/khoa-hoc', [SiteController::class, 'showCourse'])->name('site.cours
 Route::get('/ung-dung', [SiteController::class, 'showApp'])->name('site.app');
 Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 Route::resource('support', SupportController::class);
-Route::get('/candidate_cv/{id}', [JobPostingController::class, 'showCv'])->name('candidates.show.cv');
+
 
 
 
@@ -185,6 +186,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/slug-choose', [SlugController::class, 'slug_choose'])->name('slug-choose');
     Route::get('/media-choose', [MediaController::class, 'media_choose'])->name('media-choose');
     Route::resource('employers', EmployerManageController::class);
+
+    Route::get('employers/{id}/job-postings', [EmployerManageController::class, 'showJobPostings'])->name('employers.job-postings');
+Route::get('admin/job-postings/{id}/applications', [EmployerManageController::class, 'showApplications'])->name('job-postings.applications');
+Route::patch('/applications/{id}/update-cv-hidden-info', [EmployerManageController::class, 'updateCvHiddenInfo'])->name('applications.updateCvHiddenInfo');
+
     Route::get('employers/{employer}/add-cart', [EmployerManageController::class, 'addCart'])->name('employers.add-cart');
     Route::post('employers/{employer}/store-cart', [EmployerManageController::class, 'storeCart'])->name('employers.store-cart');
     Route::get('employers/{employer}/carts', [EmployerManageController::class, 'indexCart'])->name('employers.carts.index');
@@ -200,6 +206,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/jobPosting-choose', [JobsManageController::class, 'jobPosting_choose'])->name('jobPosting-choose');
     Route::get('/isHot-choose', [JobsManageController::class, 'isHot_choose'])->name('isHot-choose');
 
+    Route::get('carts/{cartId}/employers', [CartManageController::class, 'showEmployer'])->name('carts.showEmployer');
 
     Route::get('/tin-nhan-da-gui', [ContactController::class, 'sent'])->name('about.sent');
     Route::delete('sent/{id}', [ContactController::class, 'destroy_sent'])->name('about.destroy_sent');
@@ -342,7 +349,7 @@ Route::get('/recruitment', [SiteController::class, 'recruitment'])->name('recrui
 Route::middleware(['employer'])->group(function () {
     Route::delete('/saved-profiles/{candidate}', [JobPostingController::class, 'removeSavedProfile'])
         ->name('job_postings.remove_saved_profile');
-
+    Route::get('/candidate_cv/{id}', [JobPostingController::class, 'showCv'])->name('candidates.show.cv');
     Route::get('/saved-profiles', [JobPostingController::class, 'savedProfiles'])->name('job_postings.saved_profiles');
 
     Route::post('/save-profile/{candidate}', [JobPostingController::class, 'saveProfile'])->name('job_postings.save_profile');

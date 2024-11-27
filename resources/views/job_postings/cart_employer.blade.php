@@ -12,10 +12,10 @@
     <table class="table table-striped" id="cart-table">
         <thead>
             <tr>
-                <th>Cart ID</th>
-                <th>Cart Title</th>
-                <th>Start Date</th>
-                <th>End Date</th>
+                <th>ID</th>
+                <th>Nội dung</th>
+                <th>Ngày bắt đầu</th>
+                <th>Ngày hết hạn</th>
             </tr>
         </thead>
         <tbody>

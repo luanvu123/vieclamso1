@@ -24,6 +24,14 @@ class CartManageController extends Controller
         $carts = Cart::with(['planCurrency', 'planFeatures', 'typeCart'])->get();
         return view('admin.carts.index', compact('carts'));
     }
+public function showEmployer($cartId)
+{
+    // Lấy cart cùng với các employers liên kết
+    $cart = Cart::with(['employers'])->findOrFail($cartId);
+
+    // Trả về view hiển thị danh sách employer của cart
+    return view('admin.carts.show_employer', compact('cart'));
+}
 
     public function create()
     {

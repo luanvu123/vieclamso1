@@ -41,6 +41,7 @@
                                 <th></th>
                                 <th>Tên</th>
                                 <th>Email</th>
+                                <th>Xem CV</th>
                                 <th></th>
                                 <th>Giới tính</th>
                                 <th>Điểm xét hạng</th>
@@ -65,6 +66,13 @@
                                     </td>
                                     <td>{{ $employer->name }}</td>
                                     <td>{{ $employer->email }}</td>
+                                    <td>
+                                        @if ($employer->isInfomation == 1)
+                                            <span class="badge bg-success">Đã mua</span>
+                                        @else
+                                            <span class="badge bg-warning">Chưa mua</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <button
                                             onclick="redirectToEmailPage('{{ $employer->id }}', '{{ $employer->email }}')"
@@ -117,6 +125,10 @@
                                             class="btn btn-success">Add Service</a>
                                         <a href="{{ route('employers.carts.index', $employer->id) }}"
                                             class="btn btn-info">Services</a>
+                                        <a href="{{ route('employers.job-postings', $employer->id) }}"
+                                            class="btn btn-primary">
+                                            Xem Tin Tuyển Dụng
+                                        </a>
                                     </td>
                                     <td>
                                         @if ($employer->created_at > \Carbon\Carbon::now()->subHour())

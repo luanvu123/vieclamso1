@@ -78,7 +78,7 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'slug' => 'required|string|max:255|unique:categories,slug',
+           'slug' => 'required|string|max:255|unique:categories,slug,' . $category->id,
         ]);
 
         $categoryData = [
@@ -87,7 +87,6 @@ class CategoryController extends Controller
         ];
 
         if ($request->hasFile('image')) {
-            // Delete old image if exists
             if ($category->image && Storage::disk('public')->exists($category->image)) {
                 Storage::disk('public')->delete($category->image);
             }

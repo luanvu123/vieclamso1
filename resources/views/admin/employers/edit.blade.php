@@ -45,8 +45,6 @@
                                 <input type="checkbox" id="isInfomation" name="isInfomation" value="1"
                                     {{ $employer->isInfomation ? 'checked' : '' }}>
                             </div>
-
-
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>
                     </div>

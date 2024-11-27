@@ -1,35 +1,16 @@
  @extends('dashboard-employer')
 
  @section('content')
-     <!-- Titlebar -->
      <div id="titlebar">
          <div class="row">
              <div class="col-md-12">
-                 <h2>Manage Applications</h2>
-                 <!-- Breadcrumbs -->
-                 <nav id="breadcrumbs">
-                     <ul>
-                         <li><a href="#">Home</a></li>
-                         <li><a href="#">Dashboard</a></li>
-                         <li>Manage Applications</li>
-                     </ul>
-                 </nav>
+                 <h2>Ứng viên ứng tuyển cho vị trí này</h2>
              </div>
          </div>
      </div>
 
 
      <div class="row">
-
-         <!-- Table-->
-         <div class="col-lg-12 col-md-12">
-
-             <div class="notification notice">
-                 The job applications for <strong><a href="#">Power Systems User Experience Designer</a></strong> are
-                 listed below.
-             </div>
-         </div>
-
          <form method="GET" action="{{ route('job-postings.show', $jobPosting->id) }}">
              <div class="col-md-6">
                  <select name="status" class="chosen-select-no-singl " onchange="this.form.submit()">
@@ -72,11 +53,23 @@
                                          </a>
                                      </li>
                                  @else
-                                     <li>
-                                         <a href="{{ route('job-postings.cart') }}">
+                                  <li>
+                                         <a href="{{ asset('storage/' . $application->cv_hidden_info) }}">
                                              <i class="fa fa-file-text"></i> CV
                                          </a>
                                      </li>
+                                     {{-- <a href="#small-dialog" class="popup-with-zoom-anim button2"><i class="fa fa-text"></i>
+                                         CV</a>
+
+                                     <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup">
+                                         <div class="small-dialog-headline">
+                                             <h2>Xem thông tin ứng viên.</h2>
+                                             <div class="modal-body">
+                                                 <p>Vui lòng liên hệ với chúng tôi qua số điện thoại:
+                                                     <strong>0123456789</strong> để được hỗ trợ.</p>
+                                             </div>
+                                         </div>
+                                     </div> --}}
                                  @endif
 
                                  <li><a href="{{ route('candidates.show.cv', $application->candidate->id) }}"><i
@@ -250,4 +243,35 @@
          @endforeach
      </div>
      </div>
+     <!-- Modal -->
+     <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h5 class="modal-title" id="contactModalLabel">Vui lòng liên hệ hỗ trợ</h5>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                 </div>
+                 <div class="modal-body">
+                     <p>Vui lòng liên hệ với chúng tôi qua số điện thoại: <strong>0123456789</strong> để được hỗ trợ.</p>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <script>
+         document.addEventListener("DOMContentLoaded", function() {
+             const contactLink = document.getElementById('contactLink');
+
+             if (contactLink) {
+                 contactLink.addEventListener('click', function(event) {
+                     event.preventDefault(); // Ngừng hành động mặc định (chuyển hướng)
+                     // Mở modal
+                     var myModal = new bootstrap.Modal(document.getElementById('contactModal'));
+                     myModal.show();
+                 });
+             }
+         });
+     </script>
  @endsection

@@ -17,7 +17,8 @@ class Application extends Model
         'status',
         'rating',
         'note',
-        'hidden'  // hidden
+        'hidden',  // hidden
+        'cv_hidden_info'
     ];
 
     public function jobPosting()

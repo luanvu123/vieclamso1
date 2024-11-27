@@ -73,48 +73,49 @@
             color: #dc3545;
         }
     </style>
-    <div class="container">
-        <h1>Order Details - Order #{{ $order->id }}</h1>
+   <div class="container">
+    <h1>Chi tiết đơn hàng - Mã đơn #{{ $order->id }}</h1>
 
-        <table class="table table-striped">
-            <thead>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Dịch vụ</th>
+                <th>Chi tiết</th>
+                <th>Số điểm</th>
+                <th>Giá tiền</th>
+                <th>Số lượng</th>
+                <th>Tổng tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($order->orderDetails as $detail)
                 <tr>
-                    <th>Product</th>
-                    <th>Detail</th>
-                     <th>Point</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
+                    <td>{{ $detail->cart->title }}</td>
+                    <td>
+                        @foreach ($detail->cart->planFeatures as $feature)
+                            <li>{{ $feature->feature }}</li>
+                        @endforeach
+                    </td>
+                    <td>
+                        @if ($detail->cart->top_point != 0)
+                            <li>Quà tặng: {{ number_format($detail->cart->top_point, 0, ',', '.') }} Credits</li>
+                        @endif
+                    </td>
+                    <td>{{ number_format($detail->price, 0, ',', '.') }} {{ $detail->cart->planCurrency->currency }}</td>
+                    <td>{{ $detail->quantity }}</td>
+                    <td>{{ number_format($detail->price * $detail->quantity, 0, ',', '.') }} {{ $detail->cart->planCurrency->currency }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($order->orderDetails as $detail)
-                    <tr>
-                        <td>{{ $detail->cart->title }}</td>
-                        <td>
-                            @foreach ($detail->cart->planFeatures as $feature)
-                                <li>{{ $feature->feature }}</li>
-                            @endforeach
-                        </td>
-                        <td>
-                             @if ($detail->cart->top_point != 0)
-                                <li>Quà tặng: {{ $detail->cart->top_point }} Credits</li>
-                            @endif
-                        </td>
-                        <td>{{ $detail->price }} {{ $detail->cart->planCurrency->currency }}</td>
-                        <td>{{ $detail->quantity }}</td>
-                        <td>{{ $detail->price * $detail->quantity }} {{ $detail->cart->planCurrency->currency }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+            @endforeach
+        </tbody>
+    </table>
 
-        <div class="cart-summary">
-            <h3>Order Summary</h3>
-            <p>VAT: {{ $order->vat }}%</p>
-            <p>Total Amount: {{ $order->total_amount }} {{ $order->orderDetails->first()->cart->planCurrency->currency }}
-            </p>
-            <p>Status: {{ ucfirst($order->status) }}</p>
-        </div>
+    <div class="cart-summary">
+        <h3>Thông tin thanh toán</h3>
+        <p>VAT: {{ $order->vat }}%</p>
+        <p>Tổng tiền: {{ number_format($order->total_amount, 0, ',', '.') }} {{ $order->orderDetails->first()->cart->planCurrency->currency }}</p>
+        <p>Trạng thái: {{ ucfirst($order->status) }}</p>
     </div>
+</div>
+
+
 @endsection

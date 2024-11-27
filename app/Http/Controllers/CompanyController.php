@@ -16,7 +16,7 @@ class CompanyController extends Controller
     {
         $categories = Category::where('status', 1)->get();
         $employer = Auth::guard('employer')->user();
-         $recentMessagesCount = $employer->messages()
+        $recentMessagesCount = $employer->messages()
             ->where('created_at', '>=', Carbon::now()->subHours(5))
             ->count();
         $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
@@ -33,7 +33,7 @@ class CompanyController extends Controller
     public function create()
     {
         $employer = Auth::guard('employer')->user();
- $recentMessagesCount = $employer->messages()
+        $recentMessagesCount = $employer->messages()
             ->where('created_at', '>=', Carbon::now()->subHours(5))
             ->count();
         $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
@@ -119,8 +119,8 @@ class CompanyController extends Controller
     public function show($id)
     {
         $company = Company::findOrFail($id);
-         $employer = Auth::guard('employer')->user();
- $recentMessagesCount = $employer->messages()
+        $employer = Auth::guard('employer')->user();
+        $recentMessagesCount = $employer->messages()
             ->where('created_at', '>=', Carbon::now()->subHours(5))
             ->count();
         $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
@@ -131,22 +131,34 @@ class CompanyController extends Controller
         return view('companies.show', compact('company', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
-    public function edit($id)
-    {
-         $employer = Auth::guard('employer')->user();
- $recentMessagesCount = $employer->messages()
-            ->where('created_at', '>=', Carbon::now()->subHours(5))
-            ->count();
-        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+  public function edit($id)
+{
+    $employer = Auth::guard('employer')->user();
+
+    // Kiểm tra quyền sở hữu công ty
+    $company = Company::findOrFail($id);
+    if ($company->employer_id != $employer->id) {
+        return redirect()->route('companies.index')->with('error', 'Unauthorized access.');
+    }
+
+    // Đếm tin nhắn gần đây
+    $recentMessagesCount = $employer->messages()
+        ->where('created_at', '>=', Carbon::now()->subHours(5))
+        ->count();
+
+    // Đếm ứng tuyển gần đây
+    $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
             $query->where('employer_id', $employer->id);
         })
-            ->where('created_at', '>=', Carbon::now()->subHours(5))
-            ->count();
-        $company = Company::findOrFail($id);
-        $categories = Category::where('status', 1)->get();
-        $selectedCategories = $company->categories->pluck('id')->toArray();
-        return view('companies.edit', compact('company', 'categories', 'selectedCategories', 'recentMessagesCount', 'recentApplicationsCount'));
-    }
+        ->where('created_at', '>=', Carbon::now()->subHours(5))
+        ->count();
+
+    // Lấy danh mục
+    $categories = Category::where('status', 1)->get();
+    $selectedCategories = $company->categories->pluck('id')->toArray();
+
+    return view('companies.edit', compact('company', 'categories', 'selectedCategories', 'recentMessagesCount', 'recentApplicationsCount'));
+}
 
 
     public function update(Request $request, $id)

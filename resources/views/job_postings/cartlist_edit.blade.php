@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Edit Quantity</h1>
+        <h1>Thêm số lượng</h1>
 
         <form action="{{ route('cartlist.update', $cartlist->id) }}" method="POST">
             @csrf

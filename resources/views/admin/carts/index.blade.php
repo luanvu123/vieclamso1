@@ -44,7 +44,7 @@
                                     <td>{{ $cart->planCurrency->currency }}</td>
                                     <td>{{ $cart->value }}</td>
                                     <td>
-                                      {{$cart->description_home}}
+                                        {{ $cart->description_home }}
                                     </td>
                                     <td>
                                         @if ($cart->top_point != 0)
@@ -66,6 +66,10 @@
                                         <a href="{{ route('carts.show', $cart->id) }}"><i class="fa fa-eye"></i> View</a>
                                         <a href="{{ route('carts.edit', $cart->id) }}"><i class="fa fa-pencil"></i>
                                             Edit</a>
+
+                                        <a href="{{ route('carts.showEmployer', $cart->id) }}"
+                                            class="btn btn-primary btn-sm">NTD đã mua DV</a>
+
                                         <form action="{{ route('carts.destroy', $cart->id) }}" method="POST"
                                             style="display:inline-block;">
                                             @csrf

@@ -42,6 +42,13 @@ class CandidateController extends Controller
             'fullname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:candidates',
             'password' => 'required|string|min:6|confirmed',
+        ], [
+            'fullname.required' => 'Họ và tên không được để trống.',
+            'email.required' => 'Email không được để trống.',
+            'password.required' => 'Mật khẩu không được để trống.',
+            'email.email' => 'Email phải là địa chỉ email hợp lệ.',
+            'password.min' => 'Mật khẩu phải có ít nhất :min ký tự.',
+            'password.confirmed' => 'Xác nhận mật khẩu không khớp.',
         ]);
 
         if ($validator->fails()) {
@@ -56,7 +63,7 @@ class CandidateController extends Controller
             'fullname_candidate' => $request->input('fullname'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
-            'status' => 0,  // trạng thái chưa kích hoạt
+            'status' => 0,
             'verification_token' => $verificationToken,
         ]);
 
@@ -179,7 +186,19 @@ class CandidateController extends Controller
         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
             ->orderBy('created_at', 'desc')
             ->get();
-        return view('pages.change-password', 'notifications');
+        return view('pages.change-password', compact('notifications'));
+    }
+    public function showPersonalProfile()
+    {
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Lấy danh sách tất cả ngành nghề
+        $categories = Category::where('status', 1)->get();
+        $cities = City::where('status', 1)->get();
+
+        return view('pages.personal-profile', compact('notifications', 'categories', 'cities'));
     }
 
     public function changePassword(Request $request)
@@ -200,18 +219,7 @@ class CandidateController extends Controller
         return back()->with('success', 'Mật khẩu đã được thay đổi thành công');
     }
 
-    public function showPersonalProfile()
-    {
-        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
-            ->orderBy('created_at', 'desc')
-            ->get();
 
-        // Lấy danh sách tất cả ngành nghề
-        $categories = Category::where('status', 1)->get();
-          $cities = City::where('status', 1)->get();
-
-        return view('pages.personal-profile', compact('notifications', 'categories', 'cities'));
-    }
 
     public function updatePersonalProfile(Request $request)
     {
@@ -219,29 +227,29 @@ class CandidateController extends Controller
         $candidate = Auth::guard('candidate')->user();
 
         $request->validate([
-        'fullname' => 'required|string|max:255',
-        'phone' => 'required|string|max:15',
-        'categories' => 'required|array',
-        'categories.*' => 'required|exists:categories,id',
-        'dob' => 'required|date',
-        'gender' => 'required|string|max:10',
-        'address' => 'required|string|max:255',
-        'favorite_skills' => 'required|string|max:255',
-        'favorite_tags' => 'required|string|max:255',
-        'is_public_profile' => 'nullable|boolean',
-        'hide_cv' => 'nullable|boolean',
-        'description' => 'required|string|max:1000',
-        'linkedin' => 'nullable|string|max:255',
-        'resume' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-        'cover_letter' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-        'cover_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'level' => 'required|string|max:255',
-        'desired_level' => 'required|string|max:255',
-        'desired_salary' => 'required|string|max:255',
-        'education_level' => 'required|string|max:255',
-        'years_of_experience' => 'required|integer|min:0',
-        'working_form' => 'required|string|max:255',
-    ]);
+            'fullname' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'categories' => 'required|array',
+            'categories.*' => 'required|exists:categories,id',
+            'dob' => 'required|date',
+            'gender' => 'required|string|max:10',
+            'address' => 'required|string|max:255',
+            'favorite_skills' => 'required|string|max:255',
+            'favorite_tags' => 'required|string|max:255',
+            'is_public_profile' => 'nullable|boolean',
+            'hide_cv' => 'nullable|boolean',
+            'description' => 'required|string|max:1000',
+            'linkedin' => 'nullable|string|max:255',
+            'resume' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'cover_letter' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'cover_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'level' => 'required|string|max:255',
+            'desired_level' => 'required|string|max:255',
+            'desired_salary' => 'required|string|max:255',
+            'education_level' => 'required|string|max:255',
+            'years_of_experience' => 'required|integer|min:0',
+            'working_form' => 'required|string|max:255',
+        ]);
 
         // Cập nhật thông tin cá nhân
         $candidate->update([
@@ -263,7 +271,7 @@ class CandidateController extends Controller
             'years_of_experience' => $request->input('years_of_experience'),
             'working_form' => $request->input('working_form'),
         ]);
-         $candidate->cities()->sync($request->input('cities', []));
+        $candidate->cities()->sync($request->input('cities', []));
         $candidate->categories()->sync($request->input('categories', []));
         // Cập nhật avatar nếu có upload
         if ($request->hasFile('avatar')) {
