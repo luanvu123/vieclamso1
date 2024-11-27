@@ -53,23 +53,33 @@
                                          </a>
                                      </li>
                                  @else
-                                  <li>
-                                         <a href="{{ asset('storage/' . $application->cv_hidden_info) }}">
-                                             <i class="fa fa-file-text"></i> CV
-                                         </a>
-                                     </li>
-                                     {{-- <a href="#small-dialog" class="popup-with-zoom-anim button2"><i class="fa fa-text"></i>
-                                         CV</a>
+                                     @if ($application->cv_hidden_info)
+                                         <!-- Nếu có cv_hidden_info, hiển thị liên kết tải file CV -->
+                                         <li>
+                                             <a href="{{ asset('storage/' . $application->cv_hidden_info) }}">
+                                                 <i class="fa fa-file-text"></i> CV
+                                             </a>
+                                         </li>
+                                     @else
+                                         <!-- Nếu không có cv_hidden_info, hiển thị nút popup -->
+                                         <li>
+                                             <a href="#small-dialog" class="popup-with-zoom-anim button2">
+                                                 <i class="fa fa-text"></i> CV
+                                             </a>
+                                         </li>
 
-                                     <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup">
-                                         <div class="small-dialog-headline">
-                                             <h2>Xem thông tin ứng viên.</h2>
-                                             <div class="modal-body">
-                                                 <p>Vui lòng liên hệ với chúng tôi qua số điện thoại:
-                                                     <strong>0123456789</strong> để được hỗ trợ.</p>
+                                         <!-- Popup thông tin liên hệ khi không có cv_hidden_info -->
+                                         <div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup">
+                                             <div class="small-dialog-headline">
+                                                 <h2>Xem thông tin ứng viên.</h2>
+                                                 <div class="modal-body">
+                                                     <p>Vui lòng liên hệ với chúng tôi qua số điện thoại:
+                                                         <strong>0123456789</strong> để được hỗ trợ.
+                                                     </p>
+                                                 </div>
                                              </div>
                                          </div>
-                                     </div> --}}
+                                     @endif
                                  @endif
 
                                  <li><a href="{{ route('candidates.show.cv', $application->candidate->id) }}"><i
