@@ -26,7 +26,7 @@
 
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Name:</strong>
+                            <strong>Họ và tên:</strong>
                             {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
                         </div>
                     </div>
@@ -38,19 +38,19 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Password:</strong>
+                            <strong>Mật khẩu:</strong>
                             {!! Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Confirm Password:</strong>
+                            <strong>Nhập lại mật khẩu:</strong>
                             {!! Form::password('confirm-password', ['placeholder' => 'Confirm Password', 'class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2">
                         <div class="form-group">
-                            <strong>Gender:</strong>
+                            <strong>giới tính:</strong>
                             {!! Form::select('gender', ['Nam' => 'Nam', 'Nữ' => 'Nữ', 'Khác' => 'Khác'], $user->gender, [
                                 'placeholder' => 'Chọn giới tính',
                                 'class' => 'form-control',
@@ -59,19 +59,19 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Address:</strong>
+                            <strong>Đia chỉ:</strong>
                             {!! Form::text('address', null, ['placeholder' => 'Address', 'class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2">
                         <div class="form-group">
-                            <strong>Favorite Color:</strong>
+                            <strong>Màu yêu thích:</strong>
                             {!! Form::color('favorite_color', null, ['class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Avatar:</strong>
+                            <strong>ẢNh đại diện:</strong>
                             @if ($user->avatar)
                                 <img src="{{ asset('storage/' . $user->avatar) }}" alt="Avatar" style="max-width: 100px;">
                             @endif
@@ -80,19 +80,19 @@
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2">
                         <div class="form-group">
-                            <strong>Date:</strong>
+                            <strong>Ngày sinh:</strong>
                             {!! Form::date('date', null, ['class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2">
                         <div class="form-group">
-                            <strong>Phone:</strong>
+                            <strong>Số điện thoại:</strong>
                             {!! Form::text('phone', null, ['placeholder' => 'Phone', 'class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2">
                         <div class="form-group">
-                            <strong>Language:</strong>
+                            <strong>ngôn ngữ:</strong>
                             {!! Form::text('language', null, ['placeholder' => 'Language', 'class' => 'form-control']) !!}
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
                     </div>
                     {!! Form::close() !!}
                 </div>

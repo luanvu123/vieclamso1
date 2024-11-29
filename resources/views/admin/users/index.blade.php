@@ -6,18 +6,18 @@
             <div class="col-md-12">
                 <div class="table-responsive">
 
-                    <a href="{{ route('users.create') }}" class="button margin-top-30">Add User</a>
+                    <a href="{{ route('users.create') }}" class="button margin-top-30">Thêm tài khoản quản trị</a>
                     <!-- Table -->
                     <table id="user-table" class="display">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th><i class="fa fa-user"></i> Name</th>
+                                <th><i class="fa fa-user"></i> Họ và tên</th>
                                 <th><i class="fa fa-file-text"></i> Email</th>
-                                <th><i class="fa fa-phone"></i> Phone</th>
-                                <th><i class="fa fa-user-edit"></i> Roles</th>
-                                <th><i class="fa fa-calendar"></i> Registered At</th>
-                                <th><i class="fa fa-toggle-on"></i> Status</th>
+                                <th><i class="fa fa-phone"></i> Số điện thoại</th>
+                                <th><i class="fa fa-user-edit"></i> Phân quyền</th>
+                                <th><i class="fa fa-calendar"></i> Ngày tạo</th>
+                                <th><i class="fa fa-toggle-on"></i> Trạng thái</th>
 
                                 <th></th>
                             </tr>

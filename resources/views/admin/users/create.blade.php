@@ -10,7 +10,7 @@
     <div id="titlebar">
         <div class="row">
             <div class="col-md-12">
-                <h2>Create User</h2>
+                <h2>Tạo tài khoản quản trị </h2>
             </div>
         </div>
     </div>
@@ -21,7 +21,7 @@
                 <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3 row">
-                        <label for="name" class="col-sm-3 col-form-label">Name</label>
+                        <label for="name" class="col-sm-3 col-form-label">Họ và Tên</label>
                         <div class="col-sm-9">
                             <div class="position-relative input-icon">
                                 <input type="text" class="form-control" id="name" name="name"
@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="password" class="col-sm-3 col-form-label">Password</label>
+                        <label for="password" class="col-sm-3 col-form-label">Mật khẩu</label>
                         <div class="col-sm-9">
                             <div class="position-relative input-icon">
                                 <input type="password" class="form-control" id="password" name="password"
@@ -53,7 +53,7 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="confirm-password" class="col-sm-3 col-form-label">Confirm Password</label>
+                        <label for="confirm-password" class="col-sm-3 col-form-label">Nhập lại mật khẩu</label>
                         <div class="col-sm-9">
                             <div class="position-relative input-icon">
                                 <input type="password" class="form-control" id="confirm-password" name="confirm-password"
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="roles" class="col-sm-3 col-form-label">Roles</label>
+                        <label for="roles" class="col-sm-3 col-form-label">Phân quyền</label>
                         <div class="col-sm-9">
                             <select class="form-select" id="roles" name="roles[]" multiple>
                                 @foreach ($roles as $key => $role)
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="gender" class="col-sm-3 col-form-label">Gender</label>
+                        <label for="gender" class="col-sm-3 col-form-label">Giới tính</label>
                         <div class="col-sm-9">
                             <select class="form-select" id="gender" name="gender">
                                 <option value="Nam">Nam</option>
@@ -83,20 +83,20 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="avatar" class="col-sm-3 col-form-label">Avatar</label>
+                        <label for="avatar" class="col-sm-3 col-form-label">Ảnh đại diện</label>
                         <div class="col-sm-9">
                             <input type="file" class="form-control" id="avatar" name="avatar">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="favorite_color" class="col-sm-3 col-form-label">Favorite Color</label>
+                        <label for="favorite_color" class="col-sm-3 col-form-label">Màu yêu thích</label>
                         <div class="col-sm-9">
                             <input type="color" class="form-control" id="favorite_color" name="favorite_color">
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="address" class="col-sm-3 col-form-label">Address</label>
+                        <label for="address" class="col-sm-3 col-form-label">Địa chỉ</label>
                         <div class="col-sm-9">
                             <div class="position-relative input-icon">
                                 <input type="text" class="form-control" id="address" name="address"
@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="address" class="col-sm-3 col-form-label">Date</label>
+                        <label for="address" class="col-sm-3 col-form-label">Ngày tháng năm sinh</label>
                         <div class="col-sm-9">
                             <div class="position-relative input-icon">
                                 <input type="date" class="form-control" id="date" name="date"
@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="language" class="col-sm-3 col-form-label">Language</label>
+                        <label for="language" class="col-sm-3 col-form-label">Ngôn ngữ </label>
                         <div class="col-sm-9">
                             <div class="position-relative input-icon">
                                 <input type="text" class="form-control" id="language" name="language"
@@ -170,8 +170,8 @@
 
                     <div class="mb-3 row">
                         <div class="col-sm-9 offset-sm-3">
-                            <button type="submit" class="btn btn-primary px-4">Submit</button>
-                            <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary px-4">Tạo</button>
+                            <a href="{{ route('users.index') }}" class="btn btn-secondary">Quay lại</a>
                         </div>
                     </div>
                 </form>
