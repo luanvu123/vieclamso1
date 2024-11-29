@@ -149,7 +149,7 @@ class EmployerManageController extends Controller
         'IsDarkredeffect' => 'nullable|boolean',
         'IsFramingeffect' => 'nullable|boolean',
         'IsHoteffect' => 'nullable|boolean',
-    ]);
+    ]); 
 
     $employer = Employer::findOrFail($id);
     $user = Auth::user();

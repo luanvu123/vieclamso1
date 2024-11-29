@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="table-responsive">
 
-                    <a href="{{ route('users.create') }}" class="button margin-top-30">Thêm tài khoản quản trị</a>
+                    <a href="{{ route('users.create') }}" class="button margin-top-30">Thêm tài khoản</a>
                     <!-- Table -->
                     <table id="user-table" class="display">
                         <thead>
