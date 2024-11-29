@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Public Link Details</h1>
-    <p><strong>User:</strong> {{ $publicLink->user->name }}</p>
+    <h1>Chi tiết Footer MXH</h1>
+    <p><strong>Admin tạo:</strong> {{ $publicLink->user->name }}</p>
     <p><strong>Image:</strong></p>
     @if ($publicLink->image)
         <img src="{{ asset('storage/' . $publicLink->image) }}" alt="Image" style="max-width: 100px;">

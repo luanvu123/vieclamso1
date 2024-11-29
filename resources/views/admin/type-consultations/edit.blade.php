@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Edit Type Consultation</h1>
+    <h1>Cập nhật Nhu cầu tư vấn</h1>
 
     <!-- Display Validation Errors -->
     @if ($errors->any())

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Edit Type Employer</h1>
+        <h1>Sửa Hạng khách hàng</h1>
         <form action="{{ route('type-employer.update', $typeEmployer->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -26,7 +26,7 @@
                     <option value="inactive" {{ $typeEmployer->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-success">Update</button>
+            <button type="submit" class="btn btn-success">Lưu</button>
         </form>
     </div>
 @endsection

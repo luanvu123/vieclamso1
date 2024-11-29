@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Edit Type Partner</h1>
+    <h1>Khách hàng tiêu biểu - Đối tác truyền thông</h1>
     <form action="{{ route('type-partners.update', $typePartner->id) }}" method="POST">
         @csrf
         @method('PUT')

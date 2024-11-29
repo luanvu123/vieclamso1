@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Create New Ecosystem</h1>
+        <h1>Quản lý footer</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -18,7 +18,7 @@
             @csrf
 
             <div class="form-group">
-                <label for="name">Ecosystem Name</label>
+                <label for="name">Tên hệ sinh thái</label>
                 <input type="text" name="name" class="form-control" value="{{ old('name') }}">
                 @error('name')
                     <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -26,7 +26,7 @@
             </div>
 
             <div class="form-group">
-                <label for="detail">Detail (optional)</label>
+                <label for="detail">Chi tiết</label>
                 <textarea name="detail" class="form-control">{{ old('detail') }}</textarea>
                 @error('detail')
                     <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -34,7 +34,7 @@
             </div>
 
             <div class="form-group">
-                <label for="image">Ecosystem Image (optional)</label>
+                <label for="image">Ảnh</label>
                 <input type="file" name="image" id="image" class="form-control">
                 @error('image')
                     <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -42,14 +42,14 @@
             </div>
 
             <div class="form-group">
-                <label for="website">Website (optional)</label>
+                <label for="website">Website</label>
                 <input type="text" name="website" class="form-control" value="{{ old('website') }}">
                 @error('website')
                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                 @enderror
             </div>
   <div class="form-group">
-                <label for="name_link_website">Color (optional)</label>
+                <label for="name_link_website">Mã màu</label>
                 <input type="text" name="name_link_website" class="form-control" value="{{ old('name_link_website') }}">
                 @error('name_link_website')
                     <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -57,24 +57,24 @@
             </div>
 
             <div class="form-group">
-                <label for="image_footer">Footer Image (optional)</label>
+                <label for="image_footer"> Ảnh hệ sinh thái chân trang</label>
                 <input type="file" name="image_footer" class="form-control">
                 @error('image_footer')
                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
-                <label for="status">Status</label>
+                <label for="status">ẨN</label>
                 <select name="status" id="status" class="form-control">
-                    <option value="1" {{ old('status', 1) == 1 ? 'selected' : '' }}>Active</option>
-                    <option value="0" {{ old('status') === '0' ? 'selected' : '' }}>Inactive</option>
+                    <option value="1" {{ old('status', 1) == 1 ? 'selected' : '' }}>Hiển thị</option>
+                    <option value="0" {{ old('status') === '0' ? 'selected' : '' }}>Ẩn</option>
                 </select>
                 @error('status')
                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">Tạo</button>
         </form>
     </div>
 @endsection

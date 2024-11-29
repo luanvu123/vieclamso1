@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2>Create Value</h2>
+    <h2>Đối với Doanh nghiệp - Đối với Nhà tuyển dụng</h2>
     <form action="{{ route('values.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">

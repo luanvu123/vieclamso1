@@ -2,19 +2,20 @@
 
 @section('content')
     <div class="container">
-        <h1>Support Requests</h1>
+        <h1> Trung tâm hỗ trợ ứng viên</h1>
+          <a href="{{ route('type_support.index') }}">Thêm Gói dịch vụ hỗ trợ</a>
         <table class="table mt-3" id="user-table">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th><i class="fa-duotone fa-solid fa-phone"></i> Phone</th>
+                    <th><i class="fa-duotone fa-solid fa-phone"></i> Số điện thoại</th>
                     <th><i class="fa-regular fa-envelope"></i> Email</th>
-                    <th><i class="fa-solid fa-table"></i> Type of Support</th>
-                    <th><i class="fa-solid fa-audio-description"> </i> Description</th>
+                    <th><i class="fa-solid fa-table"></i> Gói dịch vụ</th>
+                    <th><i class="fa-solid fa-audio-description"> </i> Nội dung</th>
                     <th><i class="fa-solid fa-toggle-off"> </i>Status</th>
                     <th scope="col"><i class="fa-solid fa-envelope"></i> Gửi email</th>
-                    <th scope="col"><i class="fa-solid fa-date"></i> Date</th>
-                    <th><i class="fa-solid fa-pen-to-square"></i>Actions</th>
+                    <th scope="col"><i class="fa-solid fa-date"></i> Ngày tạo</th>
+                    <th><i class="fa-solid fa-pen-to-square"></i>Hành động</th>
                     <th></th>
                 </tr>
             </thead>
@@ -25,7 +26,7 @@
                         <td>{{ $support->phone }}</td>
                         <td>{{ $support->email }}</td>
                         <td>{{ $support->typeSupport->name }}
-                            <a href="{{ route('type_support.index') }}">Manage Type Support</a>
+
                         </td>
                         <td>{{ $support->description }}</td>
                         <td>

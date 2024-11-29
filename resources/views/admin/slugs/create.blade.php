@@ -1,10 +1,8 @@
-<!-- resources/views/admin/slugs/create.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
     <div class="container">
-        <h1>Create New Slug</h1>
+        <h1>Tags chân trang</h1>
 
         <form action="{{ route('slugs.store') }}" method="POST">
             @csrf
@@ -36,7 +34,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">Tạo Tags</button>
         </form>
     </div>
 @endsection

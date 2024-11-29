@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Type Consultations</h1>
+        <h1>Danh sách Nhu cầu tư vấn</h1>
         <a href="{{ route('type-consultations.create') }}" class="btn btn-primary">Add New Type Consultation</a>
         <table class="table" id="user-table">
             <thead>

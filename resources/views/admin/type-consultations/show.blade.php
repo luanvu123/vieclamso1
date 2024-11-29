@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Type Consultation Details</h1>
+    <h1>Chi tiết Nhu cầu tư vấn</h1>
     <p><strong>ID:</strong> {{ $typeConsultation->id }}</p>
     <p><strong>Name:</strong> {{ $typeConsultation->name }}</p>
     <p><strong>Status:</strong> {{ $typeConsultation->status ? 'Active' : 'Inactive' }}</p>

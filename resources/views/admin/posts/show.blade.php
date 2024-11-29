@@ -1,22 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Post Details</h1>
+    <h1>Chi tiết Bài viết</h1>
 
     <div>
         <strong>ID:</strong> {{ $post->id }}
     </div>
     <div>
-        <strong>User ID:</strong> {{ $post->user_id }}
+        <strong>Tiêu đề:</strong> {{ $post->title }}
     </div>
     <div>
-        <strong>Genre Post ID:</strong> {{ $post->genre_post_id }}
-    </div>
-    <div>
-        <strong>Title:</strong> {{ $post->title }}
-    </div>
-    <div>
-        <strong>Detail:</strong> {{ $post->detail }}
+        <strong>Chi tiết:</strong> {{ $post->detail }}
     </div>
     <div>
         <strong>Website:</strong> {{ $post->website }}
@@ -25,7 +19,7 @@
         <strong>Status:</strong> {{ $post->status ? 'Active' : 'Inactive' }}
     </div>
     <div>
-        <strong>Featured:</strong> {{ $post->featured ? 'Yes' : 'No' }}
+        <strong>Bài viết nổi bật:</strong> {{ $post->featured ? 'Yes' : 'No' }}
     </div>
 
     <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
@@ -34,5 +28,5 @@
         @method('DELETE')
         <button type="submit">Delete</button>
     </form>
-    <a href="{{ route('posts.index') }}">Back to Posts</a>
+    <a href="{{ route('posts.index') }}">Quay lại</a>
 @endsection

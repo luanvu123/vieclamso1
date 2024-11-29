@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2>Edit Value</h2>
+    <h2>Đối với Doanh nghiệp - Đối với Nhà tuyển dụng</h2>
     <form action="{{ route('values.update', $value->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')

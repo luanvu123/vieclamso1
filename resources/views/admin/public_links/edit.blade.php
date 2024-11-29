@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Edit Public Link</h1>
+    <h1>Sửa Footer MXH</h1>
     <form action="{{ route('public_links.update', $publicLink->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -23,6 +23,6 @@
                 <option value="inactive" {{ $publicLink->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Lưu</button>
     </form>
 @endsection

@@ -1,5 +1,3 @@
-<!-- resources/views/admin/slugs/index.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -8,8 +6,8 @@
             <div class="col-md-12">
                 <div class="table-responsive">
 
-                    <h1>Slugs</h1>
-                    <a href="{{ route('slugs.create') }}" class="btn btn-primary mb-3">Create New Slug</a>
+                    <h1>Danh sách Tags chân trang</h1>
+                    <a href="{{ route('slugs.create') }}" class="btn btn-primary mb-3">Tạo tags chân trang</a>
                     <table class="table table-bordered" id="user-table">
                         <thead>
                             <tr>

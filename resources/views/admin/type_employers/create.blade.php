@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Create Type Employer</h1>
+        <h1>Hạng khách hàng</h1>
         <form action="{{ route('type-employer.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
@@ -24,7 +24,7 @@
                     <option value="inactive">Inactive</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-success">Create</button>
+            <button type="submit" class="btn btn-success">Tạo</button>
         </form>
     </div>
 @endsection

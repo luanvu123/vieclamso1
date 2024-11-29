@@ -6,13 +6,13 @@
             <div class="col-md-12">
                 <div class="table-responsive">
 
-                    <h1>Public Links</h1>
-                    <a href="{{ route('public_links.create') }}" class="btn btn-primary">Create New Public Link</a>
+                    <h1>Footer MXH</h1>
+                    <a href="{{ route('public_links.create') }}" class="btn btn-primary">Tạo Footer MXH</a>
                     <table class="table" id="user-table">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>User</th>
+                                <th>Admin tạo</th>
                                 <th>Image</th>
                                 <th>Link</th>
                                 <th>Status</th>

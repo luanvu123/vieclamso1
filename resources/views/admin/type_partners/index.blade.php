@@ -1,10 +1,10 @@
-<!-- resources/views/type_partners/index.blade.php -->
+
 @extends('layouts.app')
 
 @section('content')
 <div class="container">
-    <h1>Type Partners</h1>
-    <a href="{{ route('type-partners.create') }}" class="btn btn-primary">Add New Type Partner</a>
+    <h1>Khách hàng tiêu biểu - Đối tác truyền thông</h1>
+    <a href="{{ route('type-partners.create') }}" class="btn btn-primary">Thêm</a>
 
     @if(session('success'))
         <div class="alert alert-success">

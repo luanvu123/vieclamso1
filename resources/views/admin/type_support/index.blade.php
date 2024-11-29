@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h1>Type Supports</h1>
-    <a href="{{ route('type_support.create') }}" class="btn btn-primary">Create New Type Support</a>
+    <h1>Danh sách gói dịch vụ hỗ trợ</h1>
+    <a href="{{ route('type_support.create') }}" class="btn btn-primary">Tạo gói dịch vụ hỗ trợ</a>
 
     <table class="table mt-3" id="user-table">
         <thead>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>TypeCart Details</h1>
+    <h1>Chi tiết Thể loại dịch vụ</h1>
     <div>
         <strong>Name:</strong> {{ $typeCart->name }}
     </div>

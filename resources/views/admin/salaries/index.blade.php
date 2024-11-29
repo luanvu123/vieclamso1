@@ -5,16 +5,16 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <h1>Salary List</h1>
-                    <a href="{{ route('salaries.create') }}" class="btn btn-primary">Add New Salary</a>
+                    <h1>Danh sách khoảng lương</h1>
+                    <a href="{{ route('salaries.create') }}" class="btn btn-primary">Tạo khoảng lương</a>
                     <table class="table" id="user-table">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Status</th>
-                                <th>Count</th>
-                                <th>Actions</th>
+                                <th>Tên</th>
+                                <th>Trạng thái</th>
+                                <th>Số chiến dịch tuyển dụng</th>
+                                <th>hành động</th>
                             </tr>
                         </thead>
                         <tbody>

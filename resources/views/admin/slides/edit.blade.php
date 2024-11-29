@@ -1,9 +1,7 @@
-<!-- resources/views/admin/sliders/edit.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
-    <h1>Edit Slider</h1>
+    <h1>Sửa slide</h1>
 
     <form action="{{ route('slides.update', $slide->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -32,6 +30,6 @@
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
             @enderror
         </div>
-        <button type="submit">Update Slider</button>
+        <button type="submit">Lưu</button>
     </form>
 @endsection

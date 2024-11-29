@@ -1,4 +1,3 @@
-<!-- resources/views/partners/index.blade.php -->
 @extends('layouts.app')
 
 @section('content')
@@ -7,8 +6,8 @@
             <div class="col-md-12">
                 <div class="table-responsive">
 
-                    <h1>Partners</h1>
-                    <a href="{{ route('partners.create') }}" class="btn btn-primary">Add New Partner</a>
+                    <h1>Khách hàng tiêu biểu và đối tác truyền thông của Vieclamso1</h1>
+                    <a href="{{ route('partners.create') }}" class="btn btn-primary">Thêm</a>
 
                     @if (session('success'))
                         <div class="alert alert-success">
@@ -20,11 +19,11 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Image</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <th>Tên</th>
+                                <th>Loại</th>
+                                <th>ẢNh</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,14 +40,14 @@
                                     </td>
                                     <td>{{ $partner->status ? 'Active' : 'Inactive' }}</td>
                                     <td>
-                                        <a href="{{ route('partners.show', $partner->id) }}" class="btn btn-info">View</a>
+                                        <a href="{{ route('partners.show', $partner->id) }}" class="btn btn-info">Xem</a>
                                         <a href="{{ route('partners.edit', $partner->id) }}"
                                             class="btn btn-warning">Edit</a>
                                         <form action="{{ route('partners.destroy', $partner->id) }}" method="POST"
                                             style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-danger">Xóa</button>
                                         </form>
                                     </td>
                                 </tr>

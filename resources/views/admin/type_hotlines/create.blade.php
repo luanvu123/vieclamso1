@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create Type of Hotline</h1>
+    <h1>Loại Hotline</h1>
     <form action="{{ route('type_hotlines.store') }}" method="POST">
         @csrf
         <div class="form-group">

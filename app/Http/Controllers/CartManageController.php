@@ -54,27 +54,8 @@ public function showEmployer($cartId)
             'title' => 'nullable|string|max:255',
             'background_image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
             'plan_features' => 'array',
-            // Validate các cột mới
             'description_home' => 'nullable|string',
             'Pricing' => 'boolean',
-            'Time_to_display' => 'nullable|string',
-            'Featured_job' => 'nullable|string',
-            'job_suggestions' => 'nullable|string',
-            'job_suggestion_cv' => 'nullable|string',
-            'job_suggestion_related' => 'nullable|string',
-            'job_suggestion_top' => 'nullable|string',
-            'Top_Job_Alert' => 'boolean',
-            'prime_time' => 'nullable|string',
-            'regular_time' => 'nullable|string',
-            'AI_powered_CV' => 'boolean',
-            'Top_Add_ons' => 'boolean',
-            'Advanced_news_headline' => 'boolean',
-            'Add_on_visual' => 'boolean',
-            'Service_Warranty' => 'nullable|string',
-            'search_results' => 'boolean',
-            'Top_Add_ons_in_2' => 'boolean',
-            'Activate_CV_proposal' => 'boolean',
-            'Give_350_Credits' => 'boolean',
         ]);
 
         $cartData = $request->only([
@@ -88,24 +69,6 @@ public function showEmployer($cartId)
             'title',
             'description_home',
             'Pricing',
-            'Time_to_display',
-            'Featured_job',
-            'job_suggestions',
-            'job_suggestion_cv',
-            'job_suggestion_related',
-            'job_suggestion_top',
-            'Top_Job_Alert',
-            'prime_time',
-            'regular_time',
-            'AI_powered_CV',
-            'Top_Add_ons',
-            'Advanced_news_headline',
-            'Add_on_visual',
-            'Service_Warranty',
-            'search_results',
-            'Top_Add_ons_in_2',
-            'Activate_CV_proposal',
-            'Give_350_Credits'
         ]);
 
         $cartData['user_id'] = Auth::id();
@@ -154,24 +117,7 @@ public function showEmployer($cartId)
             'plan_features' => 'nullable|array',
             'description_home' => 'nullable|string',
             'Pricing' => 'boolean',
-            'Time_to_display' => 'nullable|string',
-            'Featured_job' => 'nullable|string',
-            'job_suggestions' => 'nullable|string',
-            'job_suggestion_cv' => 'nullable|string',
-            'job_suggestion_related' => 'nullable|string',
-            'job_suggestion_top' => 'nullable|string',
-            'Top_Job_Alert' => 'boolean',
-            'prime_time' => 'nullable|string',
-            'regular_time' => 'nullable|string',
-            'AI_powered_CV' => 'boolean',
-            'Top_Add_ons' => 'boolean',
-            'Advanced_news_headline' => 'boolean',
-            'Add_on_visual' => 'boolean',
-            'Service_Warranty' => 'nullable|string',
-            'search_results' => 'boolean',
-            'Top_Add_ons_in_2' => 'boolean',
-            'Activate_CV_proposal' => 'boolean',
-            'Give_350_Credits' => 'boolean',
+
         ]);
 
         $cartData = $request->only([
@@ -185,24 +131,7 @@ public function showEmployer($cartId)
             'title',
             'description_home',
             'Pricing',
-            'Time_to_display',
-            'Featured_job',
-            'job_suggestions',
-            'job_suggestion_cv',
-            'job_suggestion_related',
-            'job_suggestion_top',
-            'Top_Job_Alert',
-            'prime_time',
-            'regular_time',
-            'AI_powered_CV',
-            'Top_Add_ons',
-            'Advanced_news_headline',
-            'Add_on_visual',
-            'Service_Warranty',
-            'search_results',
-            'Top_Add_ons_in_2',
-            'Activate_CV_proposal',
-            'Give_350_Credits'
+
         ]);
 
         if ($request->hasFile('background_image')) {

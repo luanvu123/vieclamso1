@@ -7,15 +7,15 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <h1>Cities</h1>
-                    <a href="{{ route('cities.create') }}"class="button margin-top-30">Add New City</a>
+                    <h1>Tỉnh thành</h1>
+                    <a href="{{ route('cities.create') }}"class="button margin-top-30">Thêm tỉnh thành</a>
                     <table class="table" id="user-table">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <th>Tên tỉnh thành</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,9 +26,9 @@
                                     <td>{{ $city->status ? 'Active' : 'Inactive' }}</td>
                                     <td>
                                         <a href="{{ route('cities.show', $city) }}" class="btn btn-info"><i
-                                                class="fa fa-eye"></i> View</a>
+                                                class="fa fa-eye"></i> Xem</a>
                                         <a href="{{ route('cities.edit', $city) }}" class="btn btn-warning"><i
-                                                class="fa fa-pencil"></i> Edit</a>
+                                                class="fa fa-pencil"></i> Sửa</a>
                                         {{-- <form action="{{ route('cities.destroy', $city) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')

@@ -7,8 +7,8 @@
                 <div class="table-responsive">
 
                     <div class="d-flex justify-content-between mb-3">
-                        <h2>Values</h2>
-                        <a href="{{ route('values.create') }}" class="btn btn-primary">Create Value</a>
+                        <h2>Đối với Doanh nghiệp - Đối với Nhà tuyển dụng</h2>
+                        <a href="{{ route('values.create') }}" class="btn btn-primary">Tạo mới </a>
                     </div>
                     @if (session('success'))
                         <div class="alert alert-success">

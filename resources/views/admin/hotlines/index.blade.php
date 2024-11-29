@@ -7,16 +7,17 @@
                 <div class="table-responsive">
 
                     <h1>Hotlines</h1>
-                    <a href="{{ route('hotlines.create') }}" class="button margin-top-30">Add Hotline</a>
+                        <a href="{{ route('hotlines.create') }}" class="button margin-top-30">Thêm Hotline</a>
+                         <a href="{{ route('type_hotlines.index') }}" class="button margin-top-30">Danh sách vùng</a>
                     <table class="table" id="user-table">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Phone Number</th>
-                                <th>Contact Name</th>
-                                <th>Type</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <th>SDT</th>
+                                <th>Tên liên hệ </th>
+                                <th>Vùng</th>
+                                <th>Trạng thái</th>
+                                <th>hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,9 +27,6 @@
                                     <td>{{ $hotline->phone_number }}</td>
                                     <td>{{ $hotline->contact_name }}</td>
                                     <td>{{ $hotline->typeHotline->name }}
-
-                                        <a href="{{ route('type_hotlines.index') }}">Edit
-                                        </a>
                                     </td>
                                     <td>{{ $hotline->status ? 'Active' : 'Inactive' }}</td>
                                     <td>

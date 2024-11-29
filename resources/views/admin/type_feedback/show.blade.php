@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Type Feedback Details</h1>
+        <h1>Chi tiết Chủ đề cần góp ý</h1>
         <div class="card">
             <div class="card-header">
                 {{ $typeFeedback->name }}

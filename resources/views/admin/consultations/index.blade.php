@@ -7,18 +7,18 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <h1>Consultations</h1>
+                    <h1>Đăng ký nhận tư vấn</h1>
                     <table class="table" id="user-table">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
+                                <th>Tên</th>
                                 <th>Email</th>
-                                <th>Phone</th>
-                                <th>City</th>
-                                <th>Consultation Type</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th>Nhu cầu tư vấn</th>
+                                <th>Trạng thái</th>
+                                <th>hành động</th>
                                 <th></th>
                             </tr>
                         </thead>

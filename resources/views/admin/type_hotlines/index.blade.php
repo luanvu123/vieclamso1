@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Type of Hotlines</h1>
+    <h1>Danh sách Loại Hotlines</h1>
     <a href="{{ route('type_hotlines.create') }}" class="btn btn-primary">Add Type of Hotline</a>
     <table class="table" id="user-table">
         <thead>

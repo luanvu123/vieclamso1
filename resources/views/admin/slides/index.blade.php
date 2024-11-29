@@ -75,8 +75,8 @@
             <div class="col-md-12">
                 <div class="table-responsive">
 
-                    <h1>All Sliders</h1>
-                    <a href="{{ route('slides.create') }}">Create New Slider</a>
+                    <h1>Danh sách slide</h1>
+                    <a href="{{ route('slides.create') }}">tạo mới slide</a>
 
                     <table id="user-table">
                         <thead>

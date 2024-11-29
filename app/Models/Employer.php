@@ -31,7 +31,15 @@ class Employer extends Authenticatable implements CanResetPassword
         'isVerifyCompany',
         'level',
         'isVerifyEmail',
-        'isInfomation'
+        'isInfomation',
+         'IsBasicnews',
+        'isUrgentrecruitment',
+        'IsPrioritize',
+        'IsRefresheveryhour',
+        'IsRefresheveryday',
+        'IsDarkredeffect',
+        'IsFramingeffect',
+        'IsHoteffect',
     ];
 
     public function user()

@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-        <h1>Type Feedbacks</h1>
-        <a href="{{ route('type_feedback.create') }}" class="btn btn-primary">Create New Type Feedback</a>
+        <h1>Danh sách Chủ đề cần góp ý</h1>
+        <a href="{{ route('type_feedback.create') }}" class="btn btn-primary">Tạo mới Chủ đề cần góp ý</a>
         <table class="table" id="user-table">
             <thead>
                 <tr>

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Type Support Details</h1>
+    <h1>Trung tâm hỗ trợ ứng viên</h1>
 
     <p><strong>ID:</strong> {{ $typeSupport->id }}</p>
     <p><strong>Name:</strong> {{ $typeSupport->name }}</p>

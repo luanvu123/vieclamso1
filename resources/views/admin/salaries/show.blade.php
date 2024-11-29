@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Salary Details</h1>
+        <h1>Xem khoảng lương</h1>
 
         <div class="card">
             <div class="card-body">
@@ -17,7 +17,7 @@
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
-                <a href="{{ route('salaries.index') }}" class="btn btn-secondary">Back to List</a>
+                <a href="{{ route('salaries.index') }}" class="btn btn-secondary">Quay lại</a>
             </div>
         </div>
     </div>

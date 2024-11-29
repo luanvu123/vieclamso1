@@ -23,37 +23,37 @@
             @csrf
             <!-- Các trường hiện tại -->
             <div class="form-group">
-                <label for="company_name">Company Name</label>
+                <label for="company_name">Tên công ty</label>
                 <input type="text" class="form-control" id="company_name" name="company_name"
                     value="{{ $info->company_name }}" required>
             </div>
 
             <div class="form-group">
-                <label for="business_license_number">Business License Number</label>
+                <label for="business_license_number">Giấy phép kinh doanh</label>
                 <input type="text" class="form-control" id="business_license_number" name="business_license_number"
                     value="{{ $info->business_license_number }}" required>
             </div>
 
             <div class="form-group">
-                <label for="service_license_number">Service License Number</label>
+                <label for="service_license_number">Giấy phép hoạt động dịch vụ việc làm số</label>
                 <input type="text" class="form-control" id="service_license_number" name="service_license_number"
                     value="{{ $info->service_license_number }}" required>
             </div>
 
             <div class="form-group">
-                <label for="headquarter_address">Headquarter Address</label>
+                <label for="headquarter_address">Trụ sở</label>
                 <input type="text" class="form-control" id="headquarter_address" name="headquarter_address"
                     value="{{ $info->headquarter_address }}" required>
             </div>
 
             <div class="form-group">
-                <label for="branch_address">Branch Address</label>
+                <label for="branch_address">Chi nhánh</label>
                 <input type="text" class="form-control" id="branch_address" name="branch_address"
                     value="{{ $info->branch_address }}" required>
             </div>
 
             <div class="form-group">
-                <label for="qr_code_image">QR Code Image</label>
+                <label for="qr_code_image">QR </label>
                 @if ($info->qr_code_image)
                     <img src="{{ asset('storage/' . $info->qr_code_image) }}" alt="QR Code" style="max-width: 100px;">
                 @endif
@@ -68,7 +68,7 @@
             </div>
 
             <div class="form-group">
-                <label for="name_website">Name Website</label>
+                <label for="name_website">Tên Website</label>
                 <input type="text" class="form-control" id="name_website" name="name_website"
                     value="{{ $info->name_website }}">
             </div>
@@ -79,7 +79,7 @@
             </div>
 
             <div class="form-group">
-                <label for="supporter">Supporter</label>
+                <label for="supporter">Trung tâm hỗ trợ ứng viên</label>
                 @if ($info->supporter)
                     <img src="{{ asset('storage/' . $info->supporter) }}" alt="Supporter" style="max-width: 100px;">
                 @endif
@@ -88,13 +88,13 @@
 
 
             <div class="form-group">
-                <label for="name_supporter">Name Supporter</label>
+                <label for="name_supporter">Tên chatbox hỗ trợ ứng viên</label>
                 <input type="text" class="form-control" id="name_supporter" name="name_supporter"
                     value="{{ $info->name_supporter }}">
             </div>
 
             <div class="form-group">
-                <label for="title_supporter">Title Supporter</label>
+                <label for="title_supporter">Mô tả chatbox hỗ trợ ứng viên</label>
                 <input type="text" class="form-control" id="title_supporter" name="title_supporter"
                     value="{{ $info->title_supporter }}">
             </div>

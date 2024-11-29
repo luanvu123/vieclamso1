@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Edit Type Support</h1>
+    <h1>Sửa gói dịch vụ hỗ trợ</h1>
 
     <form action="{{ route('type_support.update', $typeSupport) }}" method="POST">
         @csrf

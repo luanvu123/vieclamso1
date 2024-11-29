@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Edit TypeCart</h1>
+    <h1>Chỉnh sửa Thể loại dịch vụ</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -34,6 +34,6 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Lưu</button>
     </form>
 @endsection

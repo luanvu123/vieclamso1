@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Create Type Support</h1>
+    <h1>Tạo gói dịch vụ hỗ trợ</h1>
 
     <form action="{{ route('type_support.store') }}" method="POST">
         @csrf

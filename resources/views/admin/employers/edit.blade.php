@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Edit Employer</h3>
+                        <h3>Cập nhật NTD</h3>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('employers.update', $employer->id) }}" method="POST">
@@ -32,7 +32,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="level">Level</label>
+                                <label for="level">Cấp độ</label>
                                 <select id="level" name="level" class="form-control">
                                     <option value="">Select Level</option>
                                     <option value="1" {{ $employer->level == 1 ? 'selected' : '' }}>Level 1</option>
@@ -45,7 +45,55 @@
                                 <input type="checkbox" id="isInfomation" name="isInfomation" value="1"
                                     {{ $employer->isInfomation ? 'checked' : '' }}>
                             </div>
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <div class="form-group">
+                                <label for="IsBasicnews">Tin cơ bản</label>
+                                <input type="checkbox" id="IsBasicnews" name="IsBasicnews" value="1"
+                                    {{ $employer->IsBasicnews ? 'checked' : '' }}>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="isUrgentrecruitment">Tuyển gấp</label>
+                                <input type="checkbox" id="isUrgentrecruitment" name="isUrgentrecruitment" value="1"
+                                    {{ $employer->isUrgentrecruitment ? 'checked' : '' }}>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="IsPrioritize">Ưu tiên trang ngành</label>
+                                <input type="checkbox" id="IsPrioritize" name="IsPrioritize" value="1"
+                                    {{ $employer->IsPrioritize ? 'checked' : '' }}>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="IsRefresheveryhour">Làm mới mỗi giờ </label>
+                                <input type="checkbox" id="IsRefresheveryhour" name="IsRefresheveryhour" value="1"
+                                    {{ $employer->IsRefresheveryhour ? 'checked' : '' }}>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="IsRefresheveryday">Làm mới mỗi ngày</label>
+                                <input type="checkbox" id="IsRefresheveryday" name="IsRefresheveryday" value="1"
+                                    {{ $employer->IsRefresheveryday ? 'checked' : '' }}>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="IsDarkredeffect">Hiệu ứng đỏ đậm</label>
+                                <input type="checkbox" id="IsDarkredeffect" name="IsDarkredeffect" value="1"
+                                    {{ $employer->IsDarkredeffect ? 'checked' : '' }}>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="IsFramingeffect">Hiệu ứng đóng khung</label>
+                                <input type="checkbox" id="IsFramingeffect" name="IsFramingeffect" value="1"
+                                    {{ $employer->IsFramingeffect ? 'checked' : '' }}>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="IsHoteffect">Hiệu ứng Hot</label>
+                                <input type="checkbox" id="IsHoteffect" name="IsHoteffect" value="1"
+                                    {{ $employer->IsHoteffect ? 'checked' : '' }}>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Lưu</button>
                         </form>
                     </div>
                 </div>

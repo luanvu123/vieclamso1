@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create New Post</h1>
+    <h1>Tạo Bài viết</h1>
 
     <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div>
-            <label for="genre_post_id">Genre Post:</label>
+            <label for="genre_post_id">Cẩm nang nghề nghiệp:</label>
             <select name="genre_post_id" id="genre_post_id" class="form-control" required>
                 @foreach ($genrePosts as $genrePost)
                     <option value="{{ $genrePost->id }}" {{ old('genre_post_id') == $genrePost->id ? 'selected' : '' }}>
@@ -19,11 +19,11 @@
             @enderror
         </div>
         <div>
-            <label for="title">Title:</label>
+            <label for="title">Tiêu đề :</label>
             <input type="text" id="title" name="title" value="{{ old('title') }}" required>
         </div>
         <div>
-            <label for="detail">Detail:</label>
+            <label for="detail">CHi tiết:</label>
             <textarea id="detail" name="detail">{{ old('detail') }}</textarea>
         </div>
         <div>
@@ -41,7 +41,7 @@
             @enderror
         </div>
         <div>
-            <label for="featured">Featured:</label>
+            <label for="featured">Bài viết nổi bật?:</label>
             <select name="featured" id="featured" class="form-control">
                 <option value="1" {{ old('featured', 1) == 1 ? 'selected' : '' }}>Yes</option>
                 <option value="0" {{ old('featured') === '0' ? 'selected' : '' }}>No</option>
@@ -51,13 +51,13 @@
             @enderror
         </div>
         <div>
-            <label for="image">Image:</label>
+            <label for="image">Ảnh:</label>
             <input type="file" id="image" name="image">
             @error('image')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
             @enderror
         </div>
-        <button type="submit">Create Post</button>
+        <button type="submit">Tạo</button>
     </form>
 @endsection
 

@@ -74,17 +74,17 @@
         }
     </style>
     <div class="container">
-        <h1>Order Details - Order #{{ $order->id }}</h1>
+        <h1>Mã đơn hàng #{{ $order->id }}</h1>
 
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Product</th>
-                    <th>Detail</th>
-                    <th>Point</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
+                    <th>Dịch vụ</th>
+                    <th>Mô tả dịch vụ</th>
+                    <th>Điểm</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Tổng</th>
                 </tr>
             </thead>
             <tbody>
@@ -110,11 +110,11 @@
         </table>
 
         <div class="cart-summary">
-            <h3>Order Summary</h3>
+            <h3>Thông tin thanh toán</h3>
             <p>VAT: {{ $order->vat }}%</p>
-            <p>Total Amount: {{ $order->total_amount }} {{ $order->orderDetails->first()->cart->planCurrency->currency }}
+            <p>Tổng tiền: {{ $order->total_amount }} {{ $order->orderDetails->first()->cart->planCurrency->currency }}
             </p>
-            <p>Status: {{ ucfirst($order->status) }}</p>
+            <p>Trạng thái: {{ ucfirst($order->status) }}</p>
         </div>
     </div>
 @endsection

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Create Type Consultation</h1>
+    <h1>Nhu cầu tư vấn</h1>
     <form action="{{ route('type-consultations.store') }}" method="POST">
         @csrf
         <div class="form-group">

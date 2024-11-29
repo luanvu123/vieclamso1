@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Edit Type of Hotline</h1>
+    <h1>Chỉnh sửa Loại Hotline</h1>
     <form action="{{ route('type_hotlines.update', $typeHotline->id) }}" method="POST">
         @csrf
         @method('PUT')

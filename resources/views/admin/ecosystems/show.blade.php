@@ -4,31 +4,31 @@
 
 @section('content')
     <div class="container">
-        <h1>View Ecosystem</h1>
+        <h1>HST</h1>
 
         <div class="mb-3">
-            <strong>Name:</strong> {{ $ecosystem->name }}
+            <strong>Tên:</strong> {{ $ecosystem->name }}
         </div>
         <div class="mb-3">
-            <strong>Detail:</strong> {{ $ecosystem->detail }}
+            <strong>CHi tiết:</strong> {{ $ecosystem->detail }}
         </div>
         <div class="mb-3">
             <strong>Website:</strong> <a href="{{ $ecosystem->website }}" target="_blank">{{ $ecosystem->website }}</a>
         </div>
         <div class="mb-3">
-            <strong>Name Link Color:</strong> {{ $ecosystem->name_link_website }}
+            <strong>MÃ màu:</strong> {{ $ecosystem->name_link_website }}
         </div>
         <div class="mb-3">
-            <strong>Status:</strong> {{ $ecosystem->status ? 'Active' : 'Inactive' }}
+            <strong>Trạng thái:</strong> {{ $ecosystem->status ? 'Active' : 'Inactive' }}
         </div>
         <div class="mb-3">
-            <strong>Image:</strong><br>
+            <strong>ẢNh:</strong><br>
             @if($ecosystem->image)
                 <img src="{{ asset('storage/' . $ecosystem->image) }}" alt="Image" style="width: 200px;">
             @endif
         </div>
         <div class="mb-3">
-            <strong>Footer Image:</strong><br>
+            <strong>ảnh Footer :</strong><br>
             @if($ecosystem->image_footer)
                 <img src="{{ asset('storage/' . $ecosystem->image_footer) }}" alt="Footer Image" style="width: 200px;">
             @endif

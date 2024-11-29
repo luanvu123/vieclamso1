@@ -5,24 +5,24 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <h1>All Ecosystems</h1>
+                    <h1>Danh sách HST footer</h1>
 
 
-                    <a href="{{ route('ecosystems.create') }}" class="btn btn-primary mb-3">Create New Ecosystem</a>
+                    <a href="{{ route('ecosystems.create') }}" class="btn btn-primary mb-3">Tạo mới</a>
 
 
 
                     <table class="table" id="user-table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Detail</th>
+                                <th>Tên</th>
+                                <th>Chi tiết</th>
                                 <th>Website</th>
-                                <th>Color</th>
-                                <th>Status</th>
-                                <th>Image</th>
-                                <th>Footer Image</th>
-                                <th>Actions</th>
+                                <th>Mã màu</th>
+                                <th>Trạng thái</th>
+                                <th>Ảnh</th>
+                                <th>Ảnh dưới footer</th>
+                                <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,14 +46,14 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('ecosystems.show', $ecosystem) }}" class="btn btn-info">View</a>
+                                        <a href="{{ route('ecosystems.show', $ecosystem) }}" class="btn btn-info">Xem</a>
                                         <a href="{{ route('ecosystems.edit', $ecosystem) }}"
-                                            class="btn btn-warning">Edit</a>
+                                            class="btn btn-warning">Sửa</a>
                                         <form action="{{ route('ecosystems.destroy', $ecosystem) }}" method="POST"
                                             style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-danger">Xóa</button>
                                         </form>
                                     </td>
                                 </tr>

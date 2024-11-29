@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Edit Salary</h1>
+        <h1>Sửa khoảng lươnga</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -18,7 +18,7 @@
             @csrf
             @method('PUT')
             <div class="form-group">
-                <label for="name">Salary Range Name:</label>
+                <label for="name">khoảng lương:</label>
                 <input type="text" name="name" class="form-control" value="{{ old('name', $salary->name) }}" required>
             </div>
 
@@ -31,11 +31,11 @@
             </div>
 
             <div class="form-group">
-                <label for="count">Job Count:</label>
+                <label for="count">Số chiến dịch:</label>
                 <input type="number" name="count" class="form-control" value="{{ old('count', $salary->count) }}" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Update Salary</button>
+            <button type="submit" class="btn btn-primary">Lưu</button>
         </form>
     </div>
 @endsection

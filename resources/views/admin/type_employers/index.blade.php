@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-        <h1>Type Employers</h1>
-        <a href="{{ route('type-employer.create') }}" class="btn btn-primary">Create New Type Employer</a>
+        <h1>Danh sách Hạng khách hàng</h1>
+        <a href="{{ route('type-employer.create') }}" class="btn btn-primary">Tạo mới Hạng khách hàng</a>
         <table class="table" id="user-table">
             <thead>
                 <tr>

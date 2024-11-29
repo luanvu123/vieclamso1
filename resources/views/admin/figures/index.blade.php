@@ -6,16 +6,16 @@
             <div class="col-md-12">
                 <div class="table-responsive">
 
-                    <h1>Figures</h1>
-                    <a href="{{ route('figures.create') }}" class="btn btn-primary">Add New Figure</a>
+                    <h1>Những con số tuyển dụng</h1>
+                    <a href="{{ route('figures.create') }}" class="btn btn-primary">Tạo những con số tuyển dụng</a>
                     <table class="table mt-4" id="user-table">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Title</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <th>Tên những con số tuyển dụng</th>
+                                <th>Tiêu đề những con số tuyển dụng</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,12 +27,12 @@
                                     <td>{{ $figure->status ? 'Active' : 'Inactive' }}</td>
                                     <td>
                                         <a href="{{ route('figures.edit', $figure->id) }}"
-                                            class="btn btn-sm btn-warning">Edit</a>
+                                            class="btn btn-sm btn-warning">SỬa</a>
                                         <form action="{{ route('figures.destroy', $figure->id) }}" method="POST"
                                             style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
                                         </form>
                                     </td>
                                 </tr>

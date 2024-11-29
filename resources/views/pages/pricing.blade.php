@@ -803,8 +803,6 @@
                                 <div class="top-job-item item-job">
                                     <div class="header-item border-item-max">
                                         <span>{{ $cart->title }}</span>
-                                        <img class="badge-vip" src="{{asset('static.topcv.vn/images/badge/vip.png')}}"
-                                            alt="badge" />
                                     </div>
                                     <div class="item-content">
                                         <div>
@@ -815,15 +813,15 @@
                                         <div class="text-vat">* Giá trên chưa bao gồm VAT</div>
                                         <div class="btn-contact"
                                             data-url="{{ route('job-postings.cart.detail', $cart->id) }}">
-                                            {{ $tableHeaders['Liên hệ tư vấn']}}
+                                            {{ $tableHeaders['Liên hệ tư vấn'] }}
                                         </div>
 
                                         <div class="benefit-content">
-                                            <div class="label-benefit"> {{ $tableHeaders['Quyền lợi đặc biệt']}}</div>
+                                            <div class="label-benefit"> {{ $tableHeaders['Quyền lợi đặc biệt'] }}</div>
                                             @foreach ($cart->planFeatures as $feature)
                                                 <div class="d-flex" style="margin-top: 12px">
                                                     <img class="img-benefit"
-                                                        src="{{asset('static.topcv.vn/images/icons/check.png')}}"
+                                                        src="{{ asset('static.topcv.vn/images/icons/check.png') }}"
                                                         alt="icon" />
                                                     <span class="ml-2 text-benefit"> {{ $feature->feature }}</span>
                                                 </div>
@@ -836,294 +834,10 @@
                     </div>
                 </div>
             @endforeach
-            <div class="text-center mt-[40px] mx-[20px]">
-                <div id="btn-compare-benefit" class="md:inline-block md:w-[268px] hover:bg-[#E5F7ED]">{{$compare_benefits}} <i id="icon-compare-benefit" class="fas fa-chevron-down ml-1"></i></div>
-            </div>
-            <div id="compare-benefits">
-                <div class="compare-benefits bg-white md:py-10 pl-[20px] pr-0 lg:px-0 py-5">
-                    <div class="w-container mx-auto ">
-                        <div class="mb-[40px] text-[24px] border-l-4 border-primary px-2 compare-benefits-name">
-                            <span class="font-semibold">{{$compare_benefits}} </span>
-                        </div>
-                        <table class="font-semibold w-full text-left hidden md:block text-[14px] shadow-xs">
-                            <thead>
-                                <tr>
-                                    <td scope="col" class="px-5 py-4"></td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td scope="col" class="px-[12px] w-[160px] pb-[16px]">
-                                            <div class="text-center">
-                                                <div class="relative my-[8px] overflow-hidden">
-                                                    <div class="top-max-plus relative rounded-[8px] h-[56px] flex items-center justify-center"
-                                                        style="background-color: #212F3F;border-top: 4px solid #0BD261;border-bottom: none;border-left: none;border-right: none;">
-                                                        <span class="text-[14px] leading-[22px]"
-                                                            style="color: #FFFFFF">{{ $cart->title }} </span>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="text-[16px] mt-[8px] h-[56px] flex items-center justify-center font-bold font-Inter">
-                                                    <span
-                                                        style="color: #00B14F">{{ number_format($cart->value, 0, ',', '.') }}
-                                                        {{ $cart->planCurrency->currency }}</span></div>
-                                                <button type="button"
-                                                    class="contact-now bg-primary text-[14px] py-[9px] text-[#FFF] border-solid border-[1px] border-transparent rounded-[5px] w-full hover:bg-[#19B961]">
-                                                    Liên hệ ngay
-                                                </button>
-                                            </div>
-                                        </td>
-                                    @endforeach
-                                </tr>
-                            </thead>
-                            <tbody>
-                               <tr>
-        <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Thời gian hiển thị tin'] }}</td>
-        @foreach ($cart_benefit as $cart)
-            <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                {{ $cart->Time_to_display ?? 'N/A' }}</td>
-        @endforeach
-    </tr>
-    <tr>
-        <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Thời gian hiệu lực của dịch vụ'] }}</td>
-        @foreach ($cart_benefit as $cart)
-            <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                {{ $cart->validity }} ngày</td>
-        @endforeach
-    </tr>
-    <tr>
-        <td class="text-primary font-semibold leading-[22px]">{{ $tableHeaders['Quyền lợi'] }}</td>
-        @foreach ($cart_benefit as $cart)
-            <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium"></td>
-        @endforeach
-    </tr>
 
-
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Box việc làm nổi bật']}}</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                            {{ $cart->Featured_job }}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="text-primary font-semibold leading-[22px]">{{ $tableHeaders['Vị trí hiển thị ưu tiên/ Top Impression']}}</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Hiển thị trong TOP đề xuất việc làm phù hợp']}}</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                            {{ $cart->job_suggestions }}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Hiển thị trong TOP đề xuất việc làm theo CV']}}</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                            {{ $cart->job_suggestion_cv }}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Hiển thị trong TOP đề xuất việc làm liên quan']}}
-                                    </td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                            {{ $cart->job_suggestion_related }}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Hiển thị trong TOP kết quả tìm kiếm việc làm có nền nổi bật']}}</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                            {{ $cart->job_suggestion_top }}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="text-primary font-semibold leading-[22px]">{{ $tableHeaders['Đẩy top tự động hàng tuần/ Re-Top']}}
-                                    </td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Đẩy top khung giờ vàng']}}</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                            {{ $cart->prime_time }}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Đẩy top khung giờ thường']}}</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                            {{ $cart->regular_time }}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Thông báo việc làm/ Top Job Alert']}}</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                            {!! $cart->Top_Job_Alert
-                                                ? '<i class="fas fa-check text-green-500"></i>'
-                                                : '<i class="fas fa-times text-red-500"></i>' !!}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="text-primary font-semibold leading-[22px]">{{ $tableHeaders['Tính năng']}}</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['AI Powered CV']}}</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                            {!! $cart->AI_powered_CV
-                                                ? '<i class="fas fa-check text-green-500"></i>'
-                                                : '<i class="fas fa-times text-red-500"></i>' !!}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Kích hoạt dịch vụ cộng thêm Top Add-ons']}}</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-
-                                            {!! $cart->Top_Add_ons
-                                                ? '<i class="fas fa-check text-green-500"></i>'
-                                                : '<i class="fas fa-times text-red-500"></i>' !!}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Tiêu đề tin nâng cao']}}</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-
-                                            {!! $cart->Advanced_news_headline
-                                                ? '<i class="fas fa-check text-green-500"></i>'
-                                                : '<i class="fas fa-times text-red-500"></i>' !!}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Add-on visual']}} </td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-
-                                            {!! $cart->Add_on_visual
-                                                ? '<i class="fas fa-check text-green-500"></i>'
-                                                : '<i class="fas fa-times text-red-500"></i>' !!}
-                                        </td>
-                                    @endforeach
-                                </tr>
-
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Điều kiện: Tin đăng chạy dịch vụ có dưới X lượt ứng tuyển trong thời gian chạy dịch vụ']}} </td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-
-                                            {{ $cart->Service_Warranty }}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Hiển thị trong TOP kết quả tìm kiếm việc làm có nền xanh và hình ảnh nổi bật trong 2 tuần']}} </td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-
-                                            {!! $cart->search_results
-                                                ? '<i class="fas fa-check text-green-500"></i>'
-                                                : '<i class="fas fa-times text-red-500"></i>' !!}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Kích hoạt Top Add-on trong 2 tuần (nếu tin đăng có sử dụng Top Add-on ngay trước đó)']}} </td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-
-                                            {!! $cart->Top_Add_ons_in_2
-                                                ? '<i class="fas fa-check text-green-500"></i>'
-                                                : '<i class="fas fa-times text-red-500"></i>' !!}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['Kích hoạt CV đề xuất trong 1 tuần']}} </td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-
-                                            {!! $cart->Activate_CV_proposal
-                                                ? '<i class="fas fa-check text-green-500"></i>'
-                                                : '<i class="fas fa-times text-red-500"></i>' !!}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                                <tr>
-                                    <td class="d-flex py-[12px] px-[16px]">{{ $tableHeaders['350 Credits']}}</td>
-                                    @foreach ($cart_benefit as $cart)
-                                        <td class="text-center px-[16px] py-[8px] text-[#A8AFB6] font-medium">
-                                            {!! $cart->Give_350_Credits
-                                                ? '<i class="fas fa-check text-green-500"></i>'
-                                                : '<i class="fas fa-times text-red-500"></i>' !!}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function() {
-            $('.btn-contact').click(function(event) {
-                event.preventDefault();
-                const url = $(this).data('url'); // Get the URL from the data attribute
-                window.open(url, '_blank'); // Open the URL in a new tab
-            });
 
-            $('#btn-compare-benefit').click(function(event) {
-                event.preventDefault();
-                const isHidden = $('#icon-compare-benefit').hasClass('fas fa-chevron-down ml-1');
-                if (isHidden) {
-                    $('#icon-compare-benefit').attr('class', 'fas fa-chevron-up ml-1');
-                    $('.compare-benefits').show();
-                    slickContent.slick('refresh');
-                } else {
-                    $('#icon-compare-benefit').attr('class', 'fas fa-chevron-down ml-1');
-                    $('.compare-benefits').hide();
-                }
-            });
-        });
-
-        $(document).ready(function() {
-            const hash = window.location.hash;
-
-            if (hash.includes('#compare-benefits')) {
-                $('#icon-compare-benefit').attr('class', 'fas fa-chevron-up ml-1');
-                $('.compare-benefits').show();
-                slickContent.slick('refresh');
-                $('#compare-benefits')[0].scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    </script>
 
     <style>
         .box-image img {
@@ -1507,5 +1221,4 @@
             nextArrow: false,
         })
     </script>
-
 @endsection

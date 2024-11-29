@@ -3,7 +3,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Slider Details</h1>
+    <h1>Chi tiết slide</h1>
 
     <div>
         <strong>Status:</strong> {{ $slider->status }}
@@ -25,5 +25,5 @@
         @method('DELETE')
         <button type="submit">Delete</button>
     </form>
-    <a href="{{ route('slides.index') }}">Back to List</a>
+    <a href="{{ route('slides.index') }}">Quay lại</a>
 @endsection

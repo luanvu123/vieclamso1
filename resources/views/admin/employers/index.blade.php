@@ -42,6 +42,14 @@
                                 <th>Tên</th>
                                 <th>Email</th>
                                 <th>Xem CV</th>
+                                <th>Tin cơ bản</th>
+                                <th>Tuyển gấp</th>
+                                <th>Ưu tiên trang ngành</th>
+                                <th>Làm mới mỗi giờ</th>
+                                <th>Làm mới mỗi ngày</th>
+                                <th>Hiệu ứng đỏ đậm</th>
+                                <th>Hiệu ứng đóng khung</th>
+                                <th>Hiệu ứng Hot</th>
                                 <th></th>
                                 <th>Giới tính</th>
                                 <th>Điểm xét hạng</th>
@@ -68,6 +76,69 @@
                                     <td>{{ $employer->email }}</td>
                                     <td>
                                         @if ($employer->isInfomation == 1)
+                                            <span class="badge bg-success">Đã mua</span>
+                                        @else
+                                            <span class="badge bg-warning">Chưa mua</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($employer->IsBasicnews == 1)
+                                            <span class="badge bg-success">Đã mua</span>
+                                        @else
+                                            <span class="badge bg-warning">Chưa mua</span>
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        @if ($employer->isUrgentrecruitment == 1)
+                                            <span class="badge bg-success">Đã mua</span>
+                                        @else
+                                            <span class="badge bg-warning">Chưa mua</span>
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        @if ($employer->IsPrioritize == 1)
+                                            <span class="badge bg-success">Đã mua</span>
+                                        @else
+                                            <span class="badge bg-warning">Chưa mua</span>
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        @if ($employer->IsRefresheveryhour == 1)
+                                            <span class="badge bg-success">Đã mua</span>
+                                        @else
+                                            <span class="badge bg-warning">Chưa mua</span>
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        @if ($employer->IsRefresheveryday == 1)
+                                            <span class="badge bg-success">Đã mua</span>
+                                        @else
+                                            <span class="badge bg-warning">Chưa mua</span>
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        @if ($employer->IsDarkredeffect == 1)
+                                            <span class="badge bg-success">Đã mua</span>
+                                        @else
+                                            <span class="badge bg-warning">Chưa mua</span>
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        @if ($employer->IsFramingeffect == 1)
+                                            <span class="badge bg-success">Đã mua</span>
+                                        @else
+                                            <span class="badge bg-warning">Chưa mua</span>
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        @if ($employer->IsHoteffect == 1)
                                             <span class="badge bg-success">Đã mua</span>
                                         @else
                                             <span class="badge bg-warning">Chưa mua</span>

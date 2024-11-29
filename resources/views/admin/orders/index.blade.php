@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="table-responsive">
 
-                    <h1>Orders</h1>
+                    <h1>Đơn hàng</h1>
 
                     @if ($orders->isEmpty())
                         <p>No orders found.</p>
@@ -14,18 +14,18 @@
                         <table class="table table-striped" id="user-table">
                             <thead>
                                 <tr>
-                                    <th>Order ID</th>
-                                    <th>Total Amount</th>
-                                    <th>Status</th>
-                                    <th>Employer</th>
-                                    <th>Details</th>
-                                    <th>Actions</th>
+                                    <th>Mã đơn hàng</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái</th>
+                                    <th>Nhà tuyển dụng đã mua</th>
+                                    <th>Chi tiết</th>
+                                    <th>hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($orders as $order)
                                     @php
-                                        // Kiểm tra nếu created_at của đơn hàng chưa tới 2 giờ kể từ hiện tại
+
                                         $isNew = $order->created_at->diffInHours(now()) < 2;
                                     @endphp
                                     <tr>
@@ -40,12 +40,11 @@
                                         <td @if ($isNew) style="font-weight: bold;" @endif>
                                             {{ $order->employer->name }}</td>
                                         <td>
-                                            <a href="{{ route('ordermanages.show', $order->id) }}" class="btn btn-info">View
-                                                Details</a>
+                                            <a href="{{ route('ordermanages.show', $order->id) }}" class="btn btn-info">Xem</a>
                                         </td>
                                         <td>
                                             <a href="{{ route('ordermanages.edit', $order->id) }}"><i
-                                                    class="fa fa-pencil"></i>Edit
+                                                    class="fa fa-pencil"></i>Cập nhật
                                                 Status</a>
                                             {{-- <form action="{{ route('ordermanages.destroy', $order->id) }}" method="POST" style="display:inline-block;">
                                     @csrf

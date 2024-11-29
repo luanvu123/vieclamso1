@@ -1,10 +1,8 @@
-<!-- resources/views/admin/medias/show.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
     <div class="container">
-        <h1>Media Details</h1>
+        <h1>Báo chí nói về Vieclamso1</h1>
 
         <div class="card">
             <div class="card-body">
@@ -15,7 +13,7 @@
                     <p>No image available.</p>
                 @endif
                 <p>Status: {{ $media->status ? 'Active' : 'Inactive' }}</p>
-                <a href="{{ route('medias.index') }}" class="btn btn-secondary">Back to List</a>
+                <a href="{{ route('medias.index') }}" class="btn btn-secondary">Quay lại</a>
             </div>
         </div>
     </div>

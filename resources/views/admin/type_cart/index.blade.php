@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>TypeCart List</h1>
-    <a href="{{ route('type_cart.create') }}" class="button margin-top-30">Create New</a>
+    <h1>Danh sách Thể loại dịch vụ</h1>
+    <a href="{{ route('type_cart.create') }}" class="button margin-top-30">Tạo mới</a>
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">

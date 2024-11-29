@@ -2,20 +2,20 @@
 
 @section('content')
     <div class="container">
-        <h1>Feedback List</h1>
-
+        <h1>Danh sách đã góp ý</h1>
+         <a href="{{ route('type_feedback.index') }}">Thêm Chủ đề cần góp ý</a>
         <table class="table" id="user-table">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th><i class="fa fa-comment"></i>Type Feedback</th>
-                    <th><i class="fa fa-align-left"></i>Content</th>
-                    <th><i class="fa fa-phone"></i>Phone</th>
+                    <th><i class="fa fa-comment"></i>Chủ đề cần góp ý</th>
+                    <th><i class="fa fa-align-left"></i>Nội dung</th>
+                    <th><i class="fa fa-phone"></i>Số điện thoại</th>
                     <th><i class="fa fa-envelope"></i>Email</th>
-                    <th><i class="fa-regular fa-face-smile"></i>Satisfaction</th>
+                    <th><i class="fa-regular fa-face-smile"></i>Trạng thái</th>
                     <th><i class="fa fa-toggle-on"></i> Status</th>
-                    <th><i class="fa fa-calendar"></i> Created At</th>
-                    <th><i class="fa fa-cog"></i> Action</th>
+                    <th><i class="fa fa-calendar"></i> Ngày tạo</th>
+                    <th><i class="fa fa-cog"></i> Hành động</th>
                     <th></th>
                 </tr>
             </thead>
@@ -25,7 +25,7 @@
                     <tr>
                         <td scope="row">{{ $key }}</td>
                         <td>{{ $feedback->typeFeedback->name }}
-                            <a href="{{ route('type_feedback.index') }}">Manage Type feedback</a>
+
                         </td>
                         <td>{{ $feedback->content }}</td>
                         <td>{{ $feedback->phone }}</td>
@@ -51,11 +51,11 @@
                                 <i class="fa fa-trash"></i> Delete
                             </a>
                         </td>
-                         <td>
-                                        @if ($feedback->created_at > \Carbon\Carbon::now()->subHour())
-                                            <span class="label label-primary pull-right">new</span>
-                                        @endif
-                                    </td>
+                        <td>
+                            @if ($feedback->created_at > \Carbon\Carbon::now()->subHour())
+                                <span class="label label-primary pull-right">new</span>
+                            @endif
+                        </td>
 
                         <script>
                             function deleteFeedback(feedbackId) {

@@ -6,7 +6,7 @@
             <div class="col-md-12">
                   <div class="table-responsive">
 
-                <h1>All Posts</h1>
+                <h1>Danh sách Bài viết</h1>
                 <style>
                     .table-container {
                         overflow-x: auto;
@@ -21,22 +21,22 @@
                         text-overflow: ellipsis;
                     }
                 </style>
-                <a href="{{ route('posts.create') }}" class="btn btn-primary mb-3">Create New Post</a>
+                <a href="{{ route('posts.create') }}" class="btn btn-primary mb-3">Tạo Bài viết</a>
 
 
                     <table class="table table-bordered" id="user-table">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th class="detail">Title</th>
-                                <th class="detail">Detail</th>
+                                <th class="detail">Tiêu đề</th>
+                                <th class="detail">Chi tiết</th>
                                 <th class="detail">Website</th>
                                 <th class="detail">Status</th>
-                                <th>Featured</th>
-                                <th class="detail">Genre</th>
+                                <th>Bài viết nổi bật?</th>
+                                <th class="detail">Cẩm nang nghề nghiệp</th>
                                 <th>Image</th>
-                                <th>Created At</th>
-                                <th>Updated At</th>
+                                <th>Ngày tạo</th>
+                                <th>Ngày cập nhật</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>

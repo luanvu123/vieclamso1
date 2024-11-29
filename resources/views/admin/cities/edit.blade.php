@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Edit City</h1>
+    <h1>Cập nhật tỉnh thành</h1>
 
     <!-- Display Validation Errors -->
     @if ($errors->any())
@@ -22,16 +22,16 @@
         @method('PUT')
 
         <div class="form-group">
-            <label for="name">City Name</label>
+            <label for="name">Tên tỉnh thành</label>
             <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $city->name) }}" required>
         </div>
 
         <div class="form-group">
-            <label for="status">Status</label>
+            <label for="status">Trạng thái</label>
             <select name="status" id="status" class="form-control" required>
                 <option value="" disabled>Select Status</option>
-                <option value="1" {{ old('status', $city->status) === 1 ? 'selected' : '' }}>Active</option>
-                <option value="0" {{ old('status', $city->status) === 0 ? 'selected' : '' }}>Inactive</option>
+                <option value="1" {{ old('status', $city->status) === 1 ? 'selected' : '' }}>Hiện</option>
+                <option value="0" {{ old('status', $city->status) === 0 ? 'selected' : '' }}>Ẩn</option>
             </select>
         </div>
 

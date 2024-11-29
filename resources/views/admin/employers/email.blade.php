@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="main-page compose">
-        <h2 class="title1">Compose Mail Page</h2>
+        <h2 class="title1">Email</h2>
         <div class="col-md-4 compose-left">
             <div class="folder widget-shadow">
                 <ul>

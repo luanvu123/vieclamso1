@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-        <h1>CV Templates</h1>
-        <a href="{{ route('cv_templates.create') }}" class="btn btn-primary">Create New Template</a>
+        <h1>CV mẫu</h1>
+        <a href="{{ route('cv_templates.create') }}" class="btn btn-primary">Tạo mẫu CV</a>
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
@@ -12,11 +12,11 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
+                    <th>Tên</th>
                     <th>URL</th>
-                    <th>Image</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+                    <th>Ảnh</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
                 </tr>
             </thead>
             <tbody>

@@ -1,10 +1,8 @@
-<!-- resources/views/admin/slugs/edit.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
     <div class="container">
-        <h1>Edit Slug</h1>
+        <h1>Sửa Tags chân trang</h1>
 
         <form action="{{ route('slugs.update', $slug) }}" method="POST">
             @csrf
@@ -37,7 +35,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary">Lưu</button>
         </form>
     </div>
 @endsection
