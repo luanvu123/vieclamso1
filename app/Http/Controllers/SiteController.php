@@ -44,12 +44,12 @@ class SiteController extends Controller
 
         $jobPostings = JobPosting::with(['company', 'employer', 'cities'])
             ->where('status', 0)
-           ->where('isHot', '1')
+            ->where('isHot', '1')
             ->where('closing_date', '>=', Carbon::now()) // Lấy các jobPostings còn hạn
             ->paginate(12);
-      $categories = Category::withCount('jobPostings')
-    ->where('status', 1)
-    ->paginate(8);
+        $categories = Category::withCount('jobPostings')
+            ->where('status', 1)
+            ->paginate(8);
 
         $salaries = Salary::where('status', 'active')->withCount('jobPostings')->get();
 
@@ -88,17 +88,15 @@ class SiteController extends Controller
 
     public function filter(Request $request)
     {
-        // Get filter inputs
         $city = $request->input('city');
         $salary = $request->input('salary');
         $experience = $request->input('experience');
         $category = $request->input('category');
-
-        // Query the job postings with filtering conditions
         $jobPostings = JobPosting::with('employer', 'company', 'cities', 'categories')
             ->where('status', 0)
             ->where('isHot', '1')
             ->where('closing_date', '>=', Carbon::now());
+
 
         // Apply filters based on the user's input
         if ($city) {
@@ -120,12 +118,10 @@ class SiteController extends Controller
                 $query->where('name', 'like', '%' . $category . '%');
             });
         }
-
-        // Paginate the results
         $jobPostings = $jobPostings->paginate(12);
 
-        // Retrieve other necessary data
-        $categories = Category::withCount('jobPostings')->where('status', 1)->get();
+
+        $categories = Category::withCount('jobPostings')->where('status', 1)->paginate(8);
         $salaries = Salary::where('status', 'active')->withCount('jobPostings')->get();
         $companies = Company::select('name', 'logo', 'slug')->take(12)->get();
         $awards = Award::where('status', 1)->take(5)->get();
@@ -134,8 +130,6 @@ class SiteController extends Controller
         $totalCompanyCount = Company::count();
         $totalApplicationCount = Application::count();
         $cities = City::where('status', 1)->pluck('name', 'id');
-
-        // Prepare data for categories and salaries
         $jobData = $categories->map(function ($category) {
             return [
                 'name' => $category->name,

@@ -10,7 +10,7 @@
                margin-top: 10px;
            }
        </style>
-     
+
        <div id="main">
            <div id="breadcrumb" class="breadcrumb">
                <div class="container">
@@ -143,13 +143,26 @@
                                        <!-- Display Job Postings -->
                                        <div class="job-list-default">
                                            @foreach ($jobPostings as $job)
-                                               <div class="job-item-default bg-highlight job-ta">
+
+                                                  @if ($job->employer->IsFramingeffect == 1)
+                                                    <div class="job-item-default bg-highlight job-ta bg-flash-job   ">
+                                                     @else
+                                                         <div class="job-item-default bg-highlight job-ta">
+                                                 @endif
                                                    <div class="avatar">
                                                        <a target="_blank" href="{{ route('job.show', $job->slug) }}">
                                                            <img src="{{ $job->company->logo ? asset('storage/' . $job->company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
                                                                class="w-100" alt="{{ $job->title }}"
                                                                title="{{ $job->title }}">
                                                        </a>
+                                                         @if ($job->employer->IsFramingeffect == 1)
+                                                                 <div class="tag-job-flash">
+                                                                     <img data-src="{{ asset('static.topcv.vn/v4/image/job-list/icon-flash.png') }}"
+                                                                         alt="icon-flash" class="lazy entered loaded"
+                                                                         data-ll-status="loaded"
+                                                                         src="{{ asset('static.topcv.vn/v4/image/job-list/icon-flash.png') }}">
+                                                                 </div>
+                                                             @endif
                                                    </div>
                                                    <div class="body">
                                                        <div class="body-content">
@@ -157,13 +170,27 @@
                                                                <div>
                                                                    <h3 class="title ">
                                                                        <div class="box-label-top"></div>
-                                                                       <a target="_blank"
-                                                                           href="{{ route('job.show', $job->slug) }}">
-                                                                           <span
-                                                                               title="{{ $job->title }}">{{ $job->title }}</span>
-                                                                           <span class="icon-verified-employer level-five">
-                                                                               <i
-                                                                                   class="fa-solid fa-circle-check icon-verified-employer-tooltip"></i></span>
+                                                                       <a href="{{ route('job.show', $job->slug) }}"
+                                                                           target="_blank"
+                                                                           class="title quickview-job text_ellipsis">
+                                                                           @if ($job->employer->isUrgentrecruitment == 1)
+                                                                               <span
+                                                                                   class="label label-warning urgent">Gấp</span>
+                                                                           @endif
+                                                                           @if ($job->employer->IsHoteffect == 1)
+                                                                               <span
+                                                                                   class="label label-danger urgent">Hot</span>
+                                                                           @endif
+
+                                                                           @if ($job->employer->IsPrioritize == 1)
+                                                                               <strong
+                                                                                   class="job_title highlight">{{ $job->title }}</strong>
+                                                                           @else
+                                                                               <strong
+                                                                                   class="job_title">{{ $job->title }}</strong>
+                                                                           @endif
+
+
                                                                        </a>
                                                                    </h3>
                                                                    <a rel="nofollow" class="company"
@@ -279,13 +306,13 @@
                                    <p>Chia sẻ qua mạng xã hội</p>
                                    <div class="box-share">
                                        <a href="{{ $company->facebook }}" target="_blank"><img
-                                               src="{{ asset('static.topcv.vn/v4/image/normal-company/share/facebook.png')}}"
+                                               src="{{ asset('static.topcv.vn/v4/image/normal-company/share/facebook.png') }}"
                                                alt></a>
                                        <a href="{{ $company->twitter }}" target="_blank"><img
-                                               src="{{ asset('static.topcv.vn/v4/image/normal-company/share/twitter.png')}}"
+                                               src="{{ asset('static.topcv.vn/v4/image/normal-company/share/twitter.png') }}"
                                                alt></a>
                                        <a href="{{ $company->linkedin }}" target="_blank"><img
-                                               src="{{ asset('static.topcv.vn/v4/image/normal-company/share/linked.png')}}"
+                                               src="{{ asset('static.topcv.vn/v4/image/normal-company/share/linked.png') }}"
                                                alt></a>
                                    </div>
                                </div>

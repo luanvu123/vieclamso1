@@ -5,17 +5,12 @@
              <div class="box-search-job">
                  <div class="container">
                      <style>
-                         /* CSS cho form */
                          .search-form {
                              display: flex;
-                             /* Sử dụng Flexbox để bố trí các phần tử */
                              align-items: center;
-                             /* Căn chỉnh các phần tử theo chiều dọc */
                              gap: 10px;
-                             /* Khoảng cách giữa các phần tử */
                          }
 
-                         /* CSS cho các item bên trong form */
                          .search-form .item {
                              flex: 1;
                              /* Đảm bảo rằng các item có thể mở rộng để lấp đầy không gian */
@@ -133,101 +128,128 @@
                                              @else
                                                  <div class="job-list">
                                                      @foreach ($jobPostings as $jobPosting)
-                                                         <div class="job-item-search-result job-ta"
-                                                             data-job-id="{{ $jobPosting->id }}"
-                                                             data-job-position="{{ $jobPosting->id }}">
-                                                             <div class="avatar">
-                                                                 <a target="_blank"
-                                                                     href="{{ route('job.show', $jobPosting->slug) }}"
-                                                                     rel="nooppener noreferrer">
-                                                                     <img src="{{ $jobPosting->company->logo ? asset('storage/' . $jobPosting->company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
-                                                                         class="w-100 lazy"
-                                                                         alt="{{ $jobPosting->company->name }}"
-                                                                         title="{{ $jobPosting->title }}">
-                                                                 </a>
-                                                             </div>
-                                                             <div class="body">
-                                                                 <div class="body-content">
-                                                                     <div class="title-block">
-                                                                         <div>
-                                                                             <h3 class="title ">
-                                                                                 <div class="box-label-top">
-                                                                                 </div>
-                                                                                 <a target="_blank"
-                                                                                     href="{{ route('job.show', $jobPosting->slug) }}"
-                                                                                     rel="nooppener noreferrer">
-                                                                                     <span data-toggle="tooltip"
-                                                                                         data-container="body"
-                                                                                         data-placement="top" title=""
-                                                                                         data-original-title="{{ $jobPosting->title }}">
-                                                                                         {{ $jobPosting->title }}
-                                                                                     </span>
-                                                                                 </a>
-                                                                             </h3>
-                                                                             <a class="company"
-                                                                                 href="{{ route('job.show', $jobPosting->slug) }}"
-                                                                                 data-toggle="tooltip" title=""
-                                                                                 data-placement="top" target="_blank"
-                                                                                 rel="nooppener noreferrer"
-                                                                                 data-original-title="{{ $jobPosting->company->name }}">
-                                                                                 {{ $jobPosting->company->name }}
-                                                                             </a>
-                                                                         </div>
-                                                                         <div class="box-right">
-                                                                             <label class="title-salary">
-                                                                                 {{ $jobPosting->salary }}
-                                                                             </label>
-                                                                             <p class="quick-view-job-detail">Xem <span
-                                                                                     class="speed">nhanh</span> <i
-                                                                                     class="fa-solid fa-chevrons-right"></i>
-                                                                             </p>
-                                                                         </div>
-                                                                     </div>
+                                                         @if ($jobPosting->employer->IsFramingeffect == 1)
+                                                             <div class="job-item-search-result job-ta bg-flash-job"
+                                                                 data-job-id="{{ $jobPosting->id }}"
+                                                                 data-job-position="{{ $jobPosting->id }}">
+                                                             @else
+                                                                 <div class="job-item-search-result job-ta"
+                                                                     data-job-id="{{ $jobPosting->id }}"
+                                                                     data-job-position="{{ $jobPosting->id }}">
+                                                         @endif
+                                                         <div class="avatar">
+                                                             <a target="_blank"
+                                                                 href="{{ route('job.show', $jobPosting->slug) }}"
+                                                                 rel="nooppener noreferrer">
+                                                                 <img src="{{ $jobPosting->company->logo ? asset('storage/' . $jobPosting->company->logo) : asset('storage/avatar/avatar-default.jpg') }}"
+                                                                     class="w-100 lazy"
+                                                                     alt="{{ $jobPosting->company->name }}"
+                                                                     title="{{ $jobPosting->title }}">
+                                                             </a>
+                                                             @if ($jobPosting->employer->IsFramingeffect == 1)
+                                                                 <div class="tag-job-flash">
+                                                                     <img data-src="{{ asset('static.topcv.vn/v4/image/job-list/icon-flash.png') }}"
+                                                                         alt="icon-flash" class="lazy entered loaded"
+                                                                         data-ll-status="loaded"
+                                                                         src="{{ asset('static.topcv.vn/v4/image/job-list/icon-flash.png') }}">
                                                                  </div>
-                                                                 <div class="info">
-                                                                     <div class="label-content">
-                                                                         <label class="address" data-toggle="tooltip"
-                                                                             data-html="true" title=""
-                                                                             data-placement="top"
-                                                                             data-original-title="{{ $jobPosting->area }}">
-                                                                             @foreach ($jobPosting->cities as $city)
-                                                                                 {{ $city->name }}@if (!$loop->last)
-                                                                                     ,
+                                                             @endif
+                                                         </div>
+
+                                                         <div class="body">
+                                                             <div class="body-content">
+                                                                 <div class="title-block">
+                                                                     <div>
+                                                                         <h3 class="title ">
+                                                                             <div class="box-label-top">
+                                                                             </div>
+                                                                             <a href="{{ route('job.show', $jobPosting->slug) }}"
+                                                                                 target="_blank"
+                                                                                 class="title quickview-job text_ellipsis">
+                                                                                 @if ($jobPosting->employer->isUrgentrecruitment == 1)
+                                                                                     <span
+                                                                                         class="label label-warning urgent">Gấp</span>
                                                                                  @endif
-                                                                             @endforeach
+                                                                                 @if ($jobPosting->employer->IsHoteffect == 1)
+                                                                                     <span
+                                                                                         class="label label-danger urgent">Hot</span>
+                                                                                 @endif
+
+                                                                                 @if ($jobPosting->employer->IsPrioritize == 1)
+                                                                                     <strong
+                                                                                         class="job_title highlight">{{ $jobPosting->title }}</strong>
+                                                                                 @else
+                                                                                     <strong
+                                                                                         class="job_title">{{ $jobPosting->title }}</strong>
+                                                                                 @endif
+
+
+                                                                             </a>
+                                                                         </h3>
+                                                                         <a class="company"
+                                                                             href="{{ route('job.show', $jobPosting->slug) }}"
+                                                                             data-toggle="tooltip" title=""
+                                                                             data-placement="top" target="_blank"
+                                                                             rel="nooppener noreferrer"
+                                                                             data-original-title="{{ $jobPosting->company->name }}">
+                                                                             {{ $jobPosting->company->name }}
+                                                                         </a>
+                                                                     </div>
+                                                                     <div class="box-right">
+                                                                         <label class="title-salary">
+                                                                             {{ $jobPosting->salary }}
                                                                          </label>
-                                                                         <label class="time mobile-hidden">
-                                                                             Còn
-                                                                             <strong>{{ \Carbon\Carbon::parse($jobPosting->closing_date)->diffInDays() }}</strong>
-                                                                             ngày để ứng tuyển
-                                                                         </label>
-                                                                         <label class="address mobile-hidden"
-                                                                             data-container="body">
-                                                                             Cập nhật
-                                                                             {{ \Carbon\Carbon::parse($jobPosting->updated_at)->diffForHumans() }}
-                                                                         </label>
+                                                                         <p class="quick-view-job-detail">Xem <span
+                                                                                 class="speed">nhanh</span> <i
+                                                                                 class="fa-solid fa-chevrons-right"></i>
+                                                                         </p>
                                                                      </div>
                                                                  </div>
                                                              </div>
-                                                             <div class="overlay-ignore">
+                                                             <div class="info">
+                                                                 <div class="label-content">
+                                                                     <label class="address" data-toggle="tooltip"
+                                                                         data-html="true" title=""
+                                                                         data-placement="top"
+                                                                         data-original-title="{{ $jobPosting->area }}">
+                                                                         @foreach ($jobPosting->cities as $city)
+                                                                             {{ $city->name }}@if (!$loop->last)
+                                                                                 ,
+                                                                             @endif
+                                                                         @endforeach
+                                                                     </label>
+                                                                     <label class="time mobile-hidden">
+                                                                         Còn
+                                                                         <strong>{{ \Carbon\Carbon::parse($jobPosting->closing_date)->diffInDays() }}</strong>
+                                                                         ngày để ứng tuyển
+                                                                     </label>
+                                                                     <label class="address mobile-hidden"
+                                                                         data-container="body">
+                                                                         Cập nhật
+                                                                         {{ \Carbon\Carbon::parse($jobPosting->updated_at)->diffForHumans() }}
+                                                                     </label>
+                                                                 </div>
                                                              </div>
                                                          </div>
-                                                     @endforeach
+                                                         <div class="overlay-ignore">
+                                                         </div>
                                                  </div>
-                                             @endif
-
+                                             @endforeach
                                          </div>
-                                         <script></script>
-                                     </div>
-                                 </div>
-                                 <div class="job-list-detail"></div>
-                             </div>
+                                         @endif
 
+                                     </div>
+                                     <script></script>
+                                 </div>
+                             </div>
+                             <div class="job-list-detail"></div>
                          </div>
+
                      </div>
                  </div>
              </div>
          </div>
+     </div>
      </div>
      </div>
 
@@ -236,6 +258,7 @@
              await window.loadScript('https://static.topcv.vn/v4/plugins/lottie-player/lottie-player.js');
          }
      </script>
-     <link rel="stylesheet" href="https://static.topcv.vn/v4/css/components/job-notification-setting.bea5fa3f03028ed1K.css">
+     <link rel="stylesheet"
+         href="https://static.topcv.vn/v4/css/components/job-notification-setting.bea5fa3f03028ed1K.css">
      <script data-type="lazy" data-src="https://static.topcv.vn/v4/js/common/job-notification-setting/popup-job-notification-setting.min.b66ea965f6d6b5ba.js" src="https://static.topcv.vn/v4/js/common/job-notification-setting/popup-job-notification-setting.min.b66ea965f6d6b5ba.js"></script>
  @endsection
