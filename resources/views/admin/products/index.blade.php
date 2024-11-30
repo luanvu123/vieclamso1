@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -10,6 +9,7 @@
                     <h1>Đổi quà</h1>
 
                     <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Tạo quà mới</a>
+                    <a href="{{ route('type-employer.index') }}">Cập nhật điểm Point</a>
 
                     @if ($products->count())
                         <table class="table table-bordered" id="user-table">
@@ -40,8 +40,8 @@
                                         <td>{{ ucfirst($product->status) }}</td>
                                         <td>
                                             @if ($product->image)
-                                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
-                                                    style="width: 70px;">
+                                                <img src="{{ asset('storage/' . $product->image) }}"
+                                                    alt="{{ $product->name }}" style="width: 70px;">
                                             @endif
                                         </td>
                                         <td>

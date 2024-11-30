@@ -45,7 +45,8 @@ class SiteController extends Controller
         $jobPostings = JobPosting::with(['company', 'employer', 'cities'])
             ->where('status', 0)
             ->where('isHot', '1')
-            ->where('closing_date', '>=', Carbon::now()) // Lấy các jobPostings còn hạn
+            ->where('closing_date', '>=', Carbon::now())
+             ->orderBy('updated_at', 'desc')
             ->paginate(12);
         $categories = Category::withCount('jobPostings')
             ->where('status', 1)

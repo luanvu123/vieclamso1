@@ -32,15 +32,15 @@
                                         <td @if ($isNew) style="font-weight: bold;" @endif>
                                             {{ $order->id }}</td>
                                         <td @if ($isNew) style="font-weight: bold;" @endif>
-                                            {{ $order->total_amount }}
-                                            {{ $order->orderDetails->first()->cart->planCurrency->currency }}
+                                            {{ number_format($order->total_amount, 0, ',', '.') }} VND
                                         </td>
                                         <td @if ($isNew) style="font-weight: bold;" @endif>
                                             {{ ucfirst($order->status) }}</td>
                                         <td @if ($isNew) style="font-weight: bold;" @endif>
                                             {{ $order->employer->name }}</td>
                                         <td>
-                                            <a href="{{ route('ordermanages.show', $order->id) }}" class="btn btn-info">Xem</a>
+                                            <a href="{{ route('ordermanages.show', $order->id) }}"
+                                                class="btn btn-info">Xem</a>
                                         </td>
                                         <td>
                                             <a href="{{ route('ordermanages.edit', $order->id) }}"><i

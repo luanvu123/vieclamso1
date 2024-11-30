@@ -152,8 +152,7 @@
                                         </button>
                                     </td>
                                     <td>{{ ucfirst($employer->gender) }}</td>
-                                    <td><span class="point">{{ $employer->credit }}</span> <a
-                                            href="{{ route('type-employer.index') }}">Edit</a></td>
+                                    <td><span class="point">{{ $employer->credit }}</span> </td>
                                     <td>{{ $employer->phone }}</td>
                                     <td>
                                         <select id="{{ $employer->id }}" class="employer_choose">
