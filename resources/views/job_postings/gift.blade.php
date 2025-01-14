@@ -8,11 +8,12 @@
     </div>
     <div data-v-7240e68e="" class="container-fluid page-content">
         <div data-v-03d2f0de="" data-v-7240e68e="" class="banner-gift"><img data-v-03d2f0de=""
-                src="https://tuyendung.topcv.vn/app/_nuxt/img/banner_gift.ce6eb61.webp" alt="banner">
+                src="{{ asset('images/giai_nhat_-dem_sai_gon.jpg') }}" alt="banner">
             <div data-v-03d2f0de="" class="wrap-point">
                 <div data-v-03d2f0de="" class="title-point">Điểm đổi quà</div>
-                <div data-v-03d2f0de="" class="total-point"><span data-v-03d2f0de="">{{ $employer->top_point }}</span> <img data-v-03d2f0de=""
-                        src="https://tuyendung.topcv.vn/app/_nuxt/img/top_point.49313b4.png" alt="point"></div>
+                <div data-v-03d2f0de="" class="total-point"><span data-v-03d2f0de="">{{ $employer->top_point }}</span> <img
+                        data-v-03d2f0de="" src="https://tuyendung.topcv.vn/app/_nuxt/img/top_point.49313b4.png"
+                        alt="point"></div>
                 <!---->
             </div>
             <div data-v-03d2f0de="" class="wrap-tab">
@@ -84,7 +85,8 @@
                                                     src="https://tuyendung.topcv.vn/app/_nuxt/img/top_point.49313b4.png">
                                             </div>
                                         </div>
-                                        <a href="{{ route('buy-gift.detail', $product->id) }}" class="btn min-width btn btn-primary font-weight-600">Đổi quà</a>
+                                        <a href="{{ route('buy-gift.detail', $product->id) }}"
+                                            class="btn min-width btn btn-primary font-weight-600">Đổi quà</a>
                                     </div>
                                 </div>
                             </div>

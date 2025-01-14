@@ -18,7 +18,7 @@
     @endif
     <div class="container-fluid page-content">
         <div class="bg-white shadow-sm rounded">
-            <div class="box-image"><img src="{{ asset('images/phone_verify_image_v2.fa72191.png') }}" alt=""
+            <div class="box-image"><img src="{{ asset('images/giai_nhat_-dem_sai_gon.jpg') }}" alt=""
                     class="img-fluid"></div>
             <h4 class="pt-3 px-4">Cập nhật và xác thực số điện thoại</h4>
             <div class="form-phone-verify px-4">
