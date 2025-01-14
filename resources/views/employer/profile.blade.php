@@ -256,18 +256,130 @@
                                 </div>
                             </div>
                             <div data-v-179375b4="" class="row">
-                                <div data-v-179375b4="" class="form-group col-md-6">
-                                    <div data-v-179375b4="" class="d-flex justify-content-between"><label
-                                            data-v-179375b4="">Số điện thoại</label>
-                                        <div data-v-179375b4="">
+                                <!-- Form group điện thoại -->
+                                <div class="form-group col-md-6">
+    <div class="d-flex justify-content-between align-items-center">
+        <label>Số điện thoại</label>
+        <div>
+            @if ($employer->isVerify == 1)
+                <span class="verify-badge">
+                    <i class="fas fa-check-circle"></i> Đã xác thực
+                </span>
+            @else
+                <a href="javascript:void(0)" onclick="openZaloModal()" class="verify-link">
+                    <i class="fas fa-shield-alt"></i> Xác thực
+                </a>
+            @endif
+        </div>
+    </div>
+    <div class="mask-input">
+        <input id="phone" name="phone" value="{{ $employer->phone }}"
+               type="text"
+               class="{{ $employer->isVerify == 1 ? 'verified' : '' }}"
+               {{ $employer->isVerify == 1 ? 'readonly' : '' }}>
+    </div>
+</div>
 
-                                            <a data-v-179375b4="" href="{{ route('employer.phone') }}"
-                                                class="pl-2 text-primary">Xác thực </a>
-                                        </div>
-                                    </div>
-                                    <div data-v-4c25145f="" data-v-179375b4="" class="mask-input"> <input id="phone"
-                                            name="phone" value="{{ $employer->phone }}" type="text"></div>
-                                </div>
+<!-- Modal Xác thực Zalo -->
+<div id="zaloModal" class="zalo-modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-body">
+            <h3>Xác thực qua Zalo</h3>
+            <div class="qr-container">
+                <img src="{{ asset('frontend/QR zalo.jpg') }}" alt="QR Code Zalo">
+            </div>
+            <div class="instruction-box">
+                <p>Vui lòng ghi rõ tên công ty và mã số thuế qua zalo bên dưới hoặc liên hệ: 0846565815</p>
+            </div>
+        </div>
+    </div>
+</div>
+<style>.zalo-modal {
+    display: none; /* Ẩn modal ban đầu */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Nền mờ */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 40%;
+    position: relative;
+}
+
+.close-modal {
+    color: #333;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #ff0000;
+}
+
+.qr-container img {
+    width: 100%;
+    max-width: 250px;
+    margin: 20px auto;
+    display: block;
+}
+
+.instruction-box {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+}
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const zaloModal = document.getElementById('zaloModal');
+    const closeModalBtn = document.querySelector('.close-modal');
+
+    // Mở modal Zalo
+    window.openZaloModal = function () {
+        zaloModal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Ngăn cuộn khi modal mở
+    };
+
+    // Đóng modal Zalo
+    window.closeZaloModal = function () {
+        zaloModal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Cho phép cuộn lại
+    };
+
+    // Sự kiện đóng modal khi click ngoài modal
+    window.onclick = function (event) {
+        if (event.target == zaloModal) {
+            closeZaloModal();
+        }
+    };
+
+    // Sự kiện đóng modal khi click nút &times;
+    closeModalBtn.addEventListener('click', closeZaloModal);
+
+    // Ngăn đóng modal khi click vào nội dung modal
+    document.querySelector('.modal-content').addEventListener('click', function (e) {
+        e.stopPropagation();
+    });
+});
+
+</script>
+
+
+
                                 <div data-v-179375b4="" class="form-group col-md-6"><label
                                         data-v-179375b4="">Email:</label>
                                     <div data-v-0ec03045="" data-v-179375b4="" class="">
@@ -294,4 +406,5 @@
             </div>
         </div>
     </main>
+
 @endsection

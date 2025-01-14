@@ -121,6 +121,8 @@ class EmployerManageController extends Controller
    public function update(Request $request, $id)
 {
     $request->merge([
+         'isVerify' => $request->has('isVerify') ? 1 : 0,
+          'isVerify_license' => $request->has('isVerify_license') ? 1 : 0,
         'isVerifyCompany' => $request->has('isVerifyCompany') ? 1 : 0,
         'isVerifyEmail' => $request->has('isVerifyEmail') ? 1 : 0,
         'isInfomation' => $request->has('isInfomation') ? 1 : 0,
@@ -149,7 +151,7 @@ class EmployerManageController extends Controller
         'IsDarkredeffect' => 'nullable|boolean',
         'IsFramingeffect' => 'nullable|boolean',
         'IsHoteffect' => 'nullable|boolean',
-    ]); 
+    ]);
 
     $employer = Employer::findOrFail($id);
     $user = Auth::user();
