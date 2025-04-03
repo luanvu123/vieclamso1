@@ -812,12 +812,12 @@
                                         </div>
                                         <div class="text-vat">* Giá trên chưa bao gồm VAT</div>
                                         <div class="btn-contact"
-                                            data-url="{{ route('job-postings.cart.detail', $cart->id) }}">
-                                            {{ $tableHeaders['Liên hệ tư vấn'] }}
+                                            data-url="">
+                                            Liên hệ tư vấn
                                         </div>
 
                                         <div class="benefit-content">
-                                            <div class="label-benefit"> {{ $tableHeaders['Quyền lợi đặc biệt'] }}</div>
+                                            <div class="label-benefit">Quyền lợi đặc biệt</div>
                                             @foreach ($cart->planFeatures as $feature)
                                                 <div class="d-flex" style="margin-top: 12px">
                                                     <img class="img-benefit"

@@ -8,7 +8,7 @@
             <div style="position: relative; margin-top: 5px">
                 <a href="{{ route('job-postings.index') }}" target="_blank"
                     class="bg-primary py-2.5 px-4 rounded text-white text-center font-[14px] font-semibold leading-[3rem] btn-post-job-free">
-                    {{ $post_job_free }}
+                   Đăng tin miễn phí
                     <i class="fa-solid fa-arrow-right ml-1"></i>
                 </a>
             </div>
@@ -34,7 +34,7 @@
                 <div class="text-center md:text-left mt-2">
                     <a href="#"
                         class="bg-primary py-2.5 px-4 rounded text-white text-center font-[14px] font-semibold leading-[3rem] show-modal-create-lead">
-                        {{ $free_recruitment_advice }}
+                       Tư vấn tuyển dụng miễn phí
                         <i class="fa-solid fa-arrow-right ml-1"></i>
                     </a>
                 </div>
@@ -49,7 +49,7 @@
     <div class="bg-white py-[40px] md:py-[80px]">
         <div class="w-container px-[20px]">
             <h2 class="text-[30px] font-bold text-center mb-[32px] md:mb-[40px]">
-                {{ $new_technology }}
+              Công nghệ đăng tin tuyển dụng mới. Tính năng mới. Trải nghiệm mới.
             </h2>
             <div class="bg-[#F4F5F5] rounded-[10px] p-[16px] md:flex md:items-center md:flex-row-reverse">
                 <div class="md:w-1/2">
@@ -65,7 +65,7 @@
                     <div class="text-center md:text-left mt-4">
                         <a href="#"
                             class="bg-primary py-2.5 px-4 rounded text-white text-center font-[14px] font-semibold leading-[3rem] show-modal-create-lead">
-                            {{ $free_recruitment_advice }}
+                            Tư vấn miễn phí
                             <i class="fa-solid fa-arrow-right ml-1"></i>
                         </a>
                     </div>
@@ -105,7 +105,7 @@
                         </p>
                         <div class="text-center mt-3">
                             <a href="{{ $recruitment->url }}" target="_blank" style="color: #00B14F">
-                                {{ $learn_more }}
+                               Tìm hiểu thêm
                             </a>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                                 RECRUITMENT SERVICES
                             </div>
                             <h2 class="text-[24px] md:text-[30px] mt-2 font-bold">
-                                {{ $Recruitment_posting_service }}
+                                Dịch vụ đăng tuyển tuyển dụng.
                             </h2>
                         </div>
                         @foreach ($service_lg as $service)
@@ -146,7 +146,7 @@
                                                 <div class="text-center md:text-left">
                                                     <a href="#"
                                                         class="bg-primary py-2.5 px-4 rounded text-white text-center font-[14px] font-semibold leading-[3rem] show-modal-create-lead">
-                                                        {{ $free_recruitment_advice }}
+                                                        Tư vấn miễn phí
                                                         <i class="fa-solid fa-arrow-right ml-1"></i>
                                                     </a>
                                                 </div>
@@ -166,7 +166,7 @@
                                                 <div class="text-center md:text-left">
                                                     <a href="#"
                                                         class="bg-primary py-2.5 px-4 rounded text-white text-center font-[14px] font-semibold leading-[3rem] show-modal-create-lead">
-                                                        {{ $free_recruitment_advice }}
+                                                        Tư vấn miễn phí
                                                         <i class="fa-solid fa-arrow-right ml-1"></i>
                                                     </a>
                                                 </div>
@@ -191,7 +191,7 @@
                     Figures
                 </div>
                 <h2 class="text-[24px] md:text-[30px] mt-2 font-bold">
-                    {{ $The_numbers_of_the_recruitment }}
+Những con số của trang tuyển dụng của Vieclamso1
                 </h2>
             </div>
             <div class="px-[20px]">
@@ -211,10 +211,10 @@
         </div>
         <div class="w-container py-[40px] banner-form" id="banner-form">
             <div class="form-banner-title">
-              {{$question_1_lg}}
+           Đâu là giải pháp phù hợp cho doanh nghiệp của bạn?
             </div>
             <div class="form-banner-subtitle">
-               {{$question_2_lg}}
+              Hãy để lại thông tin và các chuyên viên tư vấn tuyển dụng của Vieclamso1 sẽ liên hệ ngay với bạn
             </div>
             <div class="md:flex md:items-start md:justify-between mr-[118px] center-form">
                 <div class="md:w-1/2 left-banner-form" id="left-banner-form">
@@ -229,38 +229,38 @@
                     <div class="form-lead-container">
                         <div class="icon-top-form-lead"><span class="btn-close-form-lead"><i
                                     class="fa-regular fa-xmark"></i></span></div>
-                        <div class="form-lead-title">{{ $register_for_consultation_lg}}</div>
+                        <div class="form-lead-title">Đăng ký nhận tư vấn</div>
                         <form action="{{ route('consultations.store') }}" method="POST">
                             @csrf
                             <div class="d-flex form-lead-scroll" id="form-lead-scroll-">
-                                <div class="form-lead-label">{{ $full_name_lg}}</div>
+                                <div class="form-lead-label">Họ và tên</div>
                                 <div class="form-lead-item form-item-name">
                                     <i class="fa-regular fa-user"></i>
                                     <input type="text" name="fullname" required id="fullname-"
-                                        placeholder="{{ $full_name_lg}}" />
+                                        placeholder="Họ và tên" />
                                 </div>
                                 <div class="form-lead-msg msg-name"></div>
 
-                                <div class="form-lead-label">{{ $email_lg}}</div>
+                                <div class="form-lead-label">Email</div>
                                 <div class="form-lead-item form-item-email">
                                     <i class="fa-regular fa-envelope"></i>
-                                    <input type="email" name="email" required id="email-" placeholder="{{ $email_lg}}" />
+                                    <input type="email" name="email" required id="email-" placeholder="email" />
                                 </div>
                                 <div class="form-lead-msg msg-email"></div>
 
-                                <div class="form-lead-label">{{$phone_number_lg}}</div>
+                                <div class="form-lead-label">Số điện thoại</div>
                                 <div class="form-lead-item form-item-phone">
                                     <i class="fa-regular fa-mobile-notch"></i>
                                     <input type="text" name="phone" maxlength="10" id="phone-" required
-                                        placeholder="{{$phone_number_lg}}" />
+                                        placeholder="Số điện thoại" />
                                 </div>
                                 <div class="form-lead-msg msg-phone"></div>
 
-                                <div class="form-lead-label">{{$city_lg}}</div>
+                                <div class="form-lead-label">Tỉnh thành</div>
                                 <div class="form-lead-item form-item-city">
                                     <i class="fa-regular fa-building"></i>
                                     <select name="city_id" id="city-id-" class="place_holder dropdown_select" required>
-                                        <option value="" disabled selected>{{  $select_city_lg}}</option>
+                                        <option value="" disabled selected>Chọn tỉnh thành</option>
                                         @foreach ($cities as $id => $name)
                                             <option value="{{ $id }}">{{ $name }}</option>
                                         @endforeach
@@ -268,12 +268,12 @@
                                 </div>
                                 <div class="form-lead-msg msg-city"></div>
 
-                                <div class="form-lead-label">{{$consultation_needs_lg}}</div>
+                                <div class="form-lead-label">Nhu cầu tư vấn</div>
                                 <div class="form-lead-item form-item-consulting">
                                     <i class="fa-regular fa-square-question"></i>
                                     <select name="type_consulting_id" id="consulting-type-"
                                         class="place_holder dropdown_select" required>
-                                        <option value="" disabled selected>{{$select_consultation_needs_lg}}</option>
+                                        <option value="" disabled selected>Chọn nhu cầu tư vấn</option>
                                         @foreach ($typeConsultations as $id => $name)
                                             <option value="{{ $id }}">{{ $name }}</option>
                                         @endforeach
@@ -286,7 +286,7 @@
 
                                 <div class="form-footer-lead">
                                     <button type="submit" id="created-lead-"><i
-                                            class="fa-solid fa-paper-plane-top"></i>{{ $submit_request_lg}}</button>
+                                            class="fa-solid fa-paper-plane-top"></i>Gửi yêu cầu </button>
                                 </div>
                         </form>
                         <div class="suggest-post-job">
@@ -312,7 +312,7 @@
                     Values
                 </div>
                 <h2 class="text-[24px] md:text-[30px] mt-2 font-bold" style="color: white">
-                    {{ $Smart_recruitment_platform }}
+                   Giá trị khi sử dụng Vieclamso1 Smart Recruitment Platform
                 </h2>
             </div>
             <div class="px-[20px]">
@@ -343,7 +343,7 @@
                     {{ $info_lg->about_us }}
                 </div>
                 <h2 class="text-[24px] md:text-[30px] font-bold">
-                    {{ $About_us_lg }}
+                   Về chúng tôi
                 </h2>
             </div>
             <div class="bg-[#F4F5F5] rounded-[10px] p-[16px] md:flex md:items-center md:p-[40px]">
@@ -371,7 +371,7 @@
                     Our Awards
                 </div>
                 <h2 class="text-[24px] md:text-[30px] font-bold">
-                   {{$Awardlg_lg}}
+                  Giải thưởng
                 </h2>
             </div>
             <div class="grid grid-cols-1 gap-[20px] md:grid-cols-4 md:gap-[40px]">
@@ -406,7 +406,7 @@
                     Our Partners
                 </div>
                 <h2 class="text-[24px] md:text-[30px] font-bold">
-                   {{$Typical_customers}}
+                   Khách hàng tiêu biểu và đối tác truyền thông của Vieclamso1
                 </h2>
             </div>
             <div class="grid grid-rows-2 md:grid-rows-1 grid-flow-col gap-[20px] md:gap-[40px]">
@@ -432,10 +432,10 @@
         <div class="w-container px-[20px]">
             <div class="mb-[24px]">
                 <div class="border-l-4 border-primary text-[18px] md:text-[24px] font-semibold px-4">
-                    {{ $cooperation_lg}}
+                 Vieclamso1 Việt Nam mong muốn được hợp tác cùng Doanh nghiệp
                 </div>
                 <div class="md:text-[14px] font-light mt-[10px] text-color-light">
-                   {{  $support_team_ready_lg}}
+               Đội ngũ hỗ trợ của Vieclamso1 luôn sẵn sàng để tư vấn giải pháp tuyển dụng và đồng hành cùng các Quý nhà tuyển dụng
                 </div>
             </div>
             <div class="grid grid-cols-1 gap-[20px] md:grid-cols-3 md:gap-[40px]">

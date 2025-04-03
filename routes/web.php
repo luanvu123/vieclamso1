@@ -88,6 +88,9 @@ use Illuminate\Support\Facades\Session;
 
 Auth::routes();
 Route::get('/', [SiteController::class, 'index'])->name('/');
+Route::get('/terms-of-service', [SiteController::class, 'termsService'])->name('terms-of-service');
+Route::get('/faqs', [SiteController::class, 'faqs'])->name('faqs');
+Route::get('/gioi-thieu', [SiteController::class, 'tutorial'])->name('tutorial');
 Route::get('/pricing', [SiteController::class, 'pricing'])->name('pricing');
 Route::get('job/{slug}', [SiteController::class, 'show'])->name('job.show');
 Route::get('/jobs/filter', [SiteController::class, 'filter'])->name('job.filter');

@@ -86,75 +86,12 @@ class AppServiceProvider extends ServiceProvider
         $orderpurchasedCountTwoHour = Purchased::where('created_at', '>=', $twoHoursAgo)->count();
 
         View::composer('layout-recruitment', function ($view) {
-            $lang = session('app_locale', 'vi');
-            $tr = new GoogleTranslate($lang);
-            $menu_1 = $tr->translate('Giới thiệu');
-            $menu_2 = $tr->translate('Dịch vụ');
-            $menu_3 = $tr->translate('Báo giá');
-            $menu_4 = $tr->translate('Hỗ trợ');
-            $menu_5 = $tr->translate('Blog tuyển dụng');
-            $login = $tr->translate('Đăng nhập');
-            $register = $tr->translate('Đăng ký');
-            $about_vieclamso1_lg = $tr->translate('Về Vieclamso1');
-            $introduction_lg = $tr->translate('Giới thiệu');
-            $recruitmentlg_lg = $tr->translate('Tuyển dụng');
-            $contact_lg = $tr->translate('Liên hệ');
-            $press_corner_lg = $tr->translate('Góc báo chí');
-            $privacy_policy_lg = $tr->translate('Chính sách bảo mật');
-            $terms_of_service_lg = $tr->translate('Điều khoản dịch vụ');
-            $operating_regulations_lg = $tr->translate('Quy chế hoạt động');
-            $rewards_program_lg = $tr->translate('Chương trình Vieclamso1 Rewards');
-            $candidates_lg = $tr->translate('Ứng viên');
-            $find_jobs_lg = $tr->translate('Tìm việc làm');
-            $courses_lg = $tr->translate('Khoá học');
-            $partners_lg = $tr->translate('Đối tác');
-            $companies_lg = $tr->translate('Doanh nghiệp');
-            $vieclamso1_corp_lg = $tr->translate('Công ty Cổ phần Vieclamso1 Việt Nam');
-            $business_license_lg = $tr->translate('Giấy phép đăng ký kinh doanh số');
-            $employment_service_license_lg = $tr->translate('Giấy phép hoạt động dịch vụ việc làm số');
-            $headquarters_lg = $tr->translate('Trụ sở');
-            $hcm_branch_lg = $tr->translate('Chi nhánh HCM');
-            $hr_tech_ecosystem_lg = $tr->translate('Hệ sinh thái HR Tech của Vieclamso1');
-            $download_app = $tr->translate('Ứng dụng tải xuống');
-
             $infolglg = Info::find(1);
-            $infolglg->company_name = $tr->translate($infolglg->company_name);
             $ecosystems_layout_lg = Ecosystem::where('status', 1)->get();
-            foreach ($ecosystems_layout_lg as $ecosystems_layout) {
-                $ecosystems_layout->detail = $tr->translate($ecosystems_layout->detail);
-            }
-
             $view->with(compact(
                 'ecosystems_layout_lg',
-                'download_app',
                 'infolglg',
-                'menu_1',
-                'menu_2',
-                'menu_3',
-                'menu_4',
-                'menu_5',
-                'login',
-                'register',
-                'about_vieclamso1_lg',
-                'introduction_lg',
-                'recruitmentlg_lg',
-                'contact_lg',
-                'press_corner_lg',
-                'privacy_policy_lg',
-                'terms_of_service_lg',
-                'operating_regulations_lg',
-                'rewards_program_lg',
-                'candidates_lg',
-                'find_jobs_lg',
-                'courses_lg',
-                'partners_lg',
-                'companies_lg',
-                'vieclamso1_corp_lg',
-                'business_license_lg',
-                'employment_service_license_lg',
-                'headquarters_lg',
-                'hcm_branch_lg',
-                'hr_tech_ecosystem_lg'
+
             ));
         });
 

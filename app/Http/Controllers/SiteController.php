@@ -38,6 +38,27 @@ use Stichoza\GoogleTranslate\GoogleTranslate;
 class SiteController extends Controller
 {
 
+    public function tutorial(){
+        return view('pages.tutorial');
+    }
+     public function termsService(Request $request)
+    {
+
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('pages.terms', compact('notifications'));
+    }
+  public function faqs(Request $request)
+    {
+
+        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('pages.faqs', compact('notifications'));
+    }
     public function index(Request $request)
     {
         $this->trackVisitor($request->ip(), OnlineVisitor::class);
@@ -46,11 +67,16 @@ class SiteController extends Controller
             ->where('status', 0)
             ->where('isHot', '1')
             ->where('closing_date', '>=', Carbon::now())
-             ->orderBy('updated_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->paginate(12);
-        $categories = Category::withCount('jobPostings')
-            ->where('status', 1)
-            ->paginate(8);
+      $categories = Category::withCount('jobPostings')
+    ->where('status', 1)
+    ->get(); // Không phân trang
+$category_slider = Category::withCount('jobPostings')
+    ->where('status', 1)
+    ->get()
+    ->chunk(8);
+
 
         $salaries = Salary::where('status', 'active')->withCount('jobPostings')->get();
 
@@ -84,7 +110,7 @@ class SiteController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities', 'data', 'type', 'notifications'));
+        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities', 'data', 'type', 'notifications','category_slider'));
     }
 
     public function filter(Request $request)
@@ -320,12 +346,6 @@ class SiteController extends Controller
     public function recruitment(Request $request)
     {
         $this->trackVisitor($request->ip(), OnlineVisitorRecruitment::class);
-
-        // Lấy ngôn ngữ từ session hoặc mặc định là 'vi'
-        $lang = session('app_locale', 'vi');
-        $tr = new GoogleTranslate($lang);
-
-        // Lấy dữ liệu từ các bảng
         $info_lg = Info::first();
         $recruitment_lg = SmartRecruitment::where('status', true)->get();
         $service_lg = RecruitmentService::where('status', true)->get();
@@ -334,86 +354,10 @@ class SiteController extends Controller
         $award_lg = Award::where('status', 1)->get();
         $typePartner_lg = TypePartner::with('partners')->get();
         $typeHotline_lg = TypeHotline::where('status', true)->get();
-
-        // Dịch các chuỗi từ $info_lg
-        $info_lg->recruitment_title_1 = $tr->translate($info_lg->recruitment_title_1);
-        $info_lg->big_update_title_1 = $tr->translate($info_lg->big_update_title_1);
-        $info_lg->big_update_description = $tr->translate($info_lg->big_update_description);
-        $info_lg->ai_in_recruitment_h1 = $tr->translate($info_lg->ai_in_recruitment_h1);
-        $info_lg->ai_in_recruitment_h2 = $tr->translate($info_lg->ai_in_recruitment_h2);
-        $info_lg->smart_recruitment = $tr->translate($info_lg->smart_recruitment);
-        $info_lg->smart_recruitment_description = $tr->translate($info_lg->smart_recruitment_description);
-        $info_lg->about_us_h1 = $tr->translate($info_lg->about_us_h1);
-        $info_lg->about_us = $tr->translate($info_lg->about_us);
-
-
-        // Dịch các chuỗi của $recruitment_lg
-        foreach ($recruitment_lg as $recruitment) {
-            $recruitment->title = $tr->translate($recruitment->title);
-            $recruitment->description = $tr->translate($recruitment->description);
-        }
-
-        // Dịch các chuỗi của $service_lg
-        foreach ($service_lg as $service) {
-            $service->title = $tr->translate($service->title);
-            $service->description = $tr->translate($service->description);
-        }
-
-        // Dịch các chuỗi của $figure_lg
-        foreach ($figure_lg as $figure) {
-            $figure->title = $tr->translate($figure->title);
-            $figure->name = $tr->translate($figure->name);
-        }
-
-        // Dịch các chuỗi của $value_lg
-        foreach ($value_lg as $value) {
-            $value->name = $tr->translate($value->name);
-            $value->description = $tr->translate($value->description);
-        }
-
-        // Dịch các chuỗi của $award_lg
-        foreach ($award_lg as $award) {
-            $award->name = $tr->translate($award->name);
-            $award->category = $tr->translate($award->category);
-        }
-
-        // Dịch các chuỗi của $typePartner_lg
-        foreach ($typePartner_lg as $typePartner) {
-            $typePartner->name = $tr->translate($typePartner->name);
-        }
-        // Dịch các chuỗi của $typeHotline_lg
-        foreach ($typeHotline_lg as $typeHotline) {
-            $typeHotline->name = $tr->translate($typeHotline->name);
-        }
-        $post_job_free = $tr->translate('Đăng tin miễn phí');
-        $free_recruitment_advice = $tr->translate('Tư vấn tuyển dụng miễn phí');
-        $new_technology = $tr->translate('Công nghệ đăng tin tuyển dụng mới. Tính năng mới. Trải nghiệm mới.');
-        $learn_more = $tr->translate('Tìm hiểu thêm');
-        $Recruitment_posting_service = $tr->translate('Dịch vụ đăng tuyển tuyển dụng.');
-        $The_numbers_of_the_recruitment = $tr->translate('Những con số của trang tuyển dụng của Vieclamso1');
-        $Smart_recruitment_platform = $tr->translate('Giá trị khi sử dụng Vieclamso1 Smart Recruitment Platform');
-        $About_us_lg = $tr->translate('Về chúng tôi');
-        $Typical_customers = $tr->translate('Khách hàng tiêu biểu và đối tác truyền thông của Vieclamso1');
         // Lấy dữ liệu hotlines, cities, và type consultations
         $hotlines = Hotline::with('typeHotline')->where('status', true)->get();
         $cities = City::where('status', 1)->pluck('name', 'id');
         $typeConsultations = TypeConsultation::where('status', 1)->pluck('name', 'id');
-        // Dịch các chuỗi khác
-        $question_1_lg = $tr->translate('Đâu là giải pháp phù hợp cho doanh nghiệp của bạn?');
-        $question_2_lg = $tr->translate('Hãy để lại thông tin và các chuyên viên tư vấn tuyển dụng của Vieclamso1 sẽ liên hệ ngay với bạn');
-        $register_for_consultation_lg = $tr->translate('Đăng ký nhận tư vấn');
-        $full_name_lg = $tr->translate('Họ và tên');
-        $email_lg = $tr->translate('Email');
-        $phone_number_lg = $tr->translate('Số điện thoại');
-        $city_lg = $tr->translate('Tỉnh/Thành phố');
-        $select_city_lg = $tr->translate('Chọn Tỉnh/Thành phố');
-        $consultation_needs_lg = $tr->translate('Nhu cầu tư vấn');
-        $select_consultation_needs_lg = $tr->translate('Chọn nhu cầu tư vấn');
-        $submit_request_lg = $tr->translate('Gửi yêu cầu tư vấn');
-        $Awardlg_lg = $tr->translate('Giải thưởng tiêu biểu');
-
-        $cooperation_lg = $tr->translate('Vieclamso1 Việt Nam mong muốn được hợp tác cùng Doanh nghiệp');
-        $support_team_ready_lg = $tr->translate('Đội ngũ hỗ trợ của Vieclamso1 luôn sẵn sàng để tư vấn giải pháp tuyển dụng và đồng hành cùng các Quý nhà tuyển dụng');
         return view('pages.recruitment', compact(
             'hotlines',
             'cities',
@@ -426,35 +370,10 @@ class SiteController extends Controller
             'award_lg',
             'typePartner_lg',
             'typeHotline_lg',
-            'post_job_free',
-            'free_recruitment_advice',
-            'new_technology',
-            'learn_more',
-            'Recruitment_posting_service',
-            'The_numbers_of_the_recruitment',
-            'Smart_recruitment_platform',
-            'About_us_lg',
-            'Typical_customers',
-            'question_1_lg',
-            'question_2_lg',
-            'register_for_consultation_lg',
-            'full_name_lg',
-            'email_lg',
-            'phone_number_lg',
-            'city_lg',
-            'select_city_lg',
-            'consultation_needs_lg',
-            'select_consultation_needs_lg',
-            'submit_request_lg',
-            'cooperation_lg',
-            'support_team_ready_lg',
-            'Awardlg_lg',
         ));
     }
     public function pricing()
     {
-        $lang = session('app_locale', 'vi');
-        $tr = new GoogleTranslate($lang);
 
         // Retrieve carts and cart benefits
         $carts = Cart::with(['typeCart', 'planCurrency', 'planFeatures'])
@@ -465,90 +384,17 @@ class SiteController extends Controller
             ->where('Pricing', 1)
             ->take(6)
             ->get();
-
-        // Translate fields in carts
-        foreach ($carts as $cart) {
-            $cart->title = $tr->translate($cart->title);
-
-            // Translate typeCart fields
-            if ($cart->typeCart) {
-                $cart->typeCart->name = $tr->translate($cart->typeCart->name);
-                $cart->typeCart->detail = $tr->translate($cart->typeCart->detail);
-            }
-
-            // Translate each feature within planFeatures
-            foreach ($cart->planFeatures as $feature) {
-                $feature->feature = $tr->translate($feature->feature);
-            }
-        }
-        // Translate fields in cart_benefit
-        foreach ($cart_benefit as $cart) {
-            $cart->title = $tr->translate($cart->title);
-
-            // Translate typeCart fields
-            if ($cart->typeCart) {
-                $cart->typeCart->name = $tr->translate($cart->typeCart->name);
-                $cart->typeCart->detail = $tr->translate($cart->typeCart->detail);
-            }
-
-            // Translate each feature within planFeatures
-            foreach ($cart->planFeatures as $feature) {
-                $feature->feature = $tr->translate($feature->feature);
-            }
-            $cart->Time_to_display = !empty($cart->Time_to_display) ? $tr->translate($cart->Time_to_display) : '';
-            $cart->validity = !empty($cart->validity) ? $tr->translate($cart->validity) : '';
-            $cart->top_point = !empty($cart->top_point) ? $tr->translate($cart->top_point) : '';
-            $cart->Featured_job = !empty($cart->Featured_job) ? $tr->translate($cart->Featured_job) : '';
-            $cart->job_suggestions = !empty($cart->job_suggestions) ? $tr->translate($cart->job_suggestions) : '';
-            $cart->job_suggestion_cv = !empty($cart->job_suggestion_cv) ? $tr->translate($cart->job_suggestion_cv) : '';
-            $cart->job_suggestion_related = !empty($cart->job_suggestion_related) ? $tr->translate($cart->job_suggestion_related) : '';
-            $cart->job_suggestion_top = !empty($cart->job_suggestion_top) ? $tr->translate($cart->job_suggestion_top) : '';
-            $cart->prime_time = !empty($cart->prime_time) ? $tr->translate($cart->prime_time) : '';
-            $cart->regular_time = !empty($cart->regular_time) ? $tr->translate($cart->regular_time) : '';
-            $cart->Top_Job_Alert = !empty($cart->Top_Job_Alert) ? $tr->translate($cart->Top_Job_Alert) : '';
-            $cart->AI_powered_CV = !empty($cart->AI_powered_CV) ? $tr->translate($cart->AI_powered_CV) : '';
-            $cart->Top_Add_ons = !empty($cart->Top_Add_ons) ? $tr->translate($cart->Top_Add_ons) : '';
-            $cart->Advanced_news_headline = !empty($cart->Advanced_news_headline) ? $tr->translate($cart->Advanced_news_headline) : '';
-            $cart->Add_on_visual = !empty($cart->Add_on_visual) ? $tr->translate($cart->Add_on_visual) : '';
-            $cart->Service_Warranty = !empty($cart->Service_Warranty) ? $tr->translate($cart->Service_Warranty) : '';
-            $cart->search_results = !empty($cart->search_results) ? $tr->translate($cart->search_results) : '';
-        }
-
-
-        $compare_benefits = $tr->translate(' So sánh quyền lợi');
-        $tableHeaders = [
-            'Thời gian hiển thị tin' => $tr->translate('Thời gian hiển thị tin'),
-            'Thời gian hiệu lực của dịch vụ' => $tr->translate('Thời gian hiệu lực của dịch vụ'),
-            'Quyền lợi' => $tr->translate('Quyền lợi'),
-            'Tặng Credits' => $tr->translate('Tặng Credits'),
-            'Box việc làm nổi bật' => $tr->translate('Box việc làm nổi bật'),
-            'Vị trí hiển thị ưu tiên/ Top Impression' => $tr->translate('Vị trí hiển thị ưu tiên/ Top Impression'),
-            'Hiển thị trong TOP đề xuất việc làm phù hợp' => $tr->translate('Hiển thị trong TOP đề xuất việc làm phù hợp'),
-            'Hiển thị trong TOP đề xuất việc làm theo CV' => $tr->translate('Hiển thị trong TOP đề xuất việc làm theo CV'),
-            'Hiển thị trong TOP đề xuất việc làm liên quan' => $tr->translate('Hiển thị trong TOP đề xuất việc làm liên quan'),
-            'Hiển thị trong TOP kết quả tìm kiếm việc làm có nền nổi bật' => $tr->translate('Hiển thị trong TOP kết quả tìm kiếm việc làm có nền nổi bật'),
-            'Đẩy top tự động hàng tuần/ Re-Top' => $tr->translate('Đẩy top tự động hàng tuần/ Re-Top'),
-            'Đẩy top khung giờ vàng' => $tr->translate('Đẩy top khung giờ vàng'),
-            'Đẩy top khung giờ thường' => $tr->translate('Đẩy top khung giờ thường'),
-            'Thông báo việc làm/ Top Job Alert' => $tr->translate('Thông báo việc làm/ Top Job Alert'),
-            'Tính năng' => $tr->translate('Tính năng'),
-            'AI Powered CV' => $tr->translate('AI Powered CV'),
-            'Kích hoạt dịch vụ cộng thêm Top Add-ons' => $tr->translate('Kích hoạt dịch vụ cộng thêm Top Add-ons'),
-            'Tiêu đề tin nâng cao' => $tr->translate('Tiêu đề tin nâng cao'),
-            'Add-on visual' => $tr->translate('Add-on visual'),
-            'Điều kiện: Tin đăng chạy dịch vụ có dưới X lượt ứng tuyển trong thời gian chạy dịch vụ' => $tr->translate('Điều kiện: Tin đăng chạy dịch vụ có dưới X lượt ứng tuyển trong thời gian chạy dịch vụ'),
-            'Hiển thị trong TOP kết quả tìm kiếm việc làm có nền xanh và hình ảnh nổi bật trong 2 tuần' => $tr->translate('Hiển thị trong TOP kết quả tìm kiếm việc làm có nền xanh và hình ảnh nổi bật trong 2 tuần'),
-            'Kích hoạt Top Add-on trong 2 tuần (nếu tin đăng có sử dụng Top Add-on ngay trước đó)' => $tr->translate('Kích hoạt Top Add-on trong 2 tuần (nếu tin đăng có sử dụng Top Add-on ngay trước đó)'),
-            'Kích hoạt CV đề xuất trong 1 tuần' => $tr->translate('Kích hoạt CV đề xuất trong 1 tuần'),
-            '350 Credits' => $tr->translate('350 Credits'),
-            'Liên hệ tư vấn' => $tr->translate('Liên hệ tư vấn'),
-            'Quyền lợi đặc biệt' => $tr->translate('Quyền lợi đặc biệt')
-        ];
-
-
-
+        $hotlines = Hotline::with('typeHotline')->where('status', true)->get();
+        $cities = City::where('status', 1)->pluck('name', 'id');
+        $typeConsultations = TypeConsultation::where('status', 1)->pluck('name', 'id');
         // Return view with translated data
-        return view('pages.pricing', compact('carts', 'cart_benefit', 'compare_benefits', 'tableHeaders'));
+        return view('pages.pricing', compact(
+            'carts',
+            'cart_benefit',
+            'hotlines',
+            'cities',
+            'typeConsultations',
+        ));
     }
 
 

@@ -1029,6 +1029,15 @@
             </div>
             <div class="box-item-child cvo-hidden" id="menu-item-job">
                 <div class="cvo-flex cvo-items-center item-child tag-border">
+                <span class="cvo-flex cvo-items-center cvo-justify-content icon-child">
+                    <i class="fa-regular fa-magnifying-glass"></i>
+                </span>
+				<a href="{{route('/')}}" class="
+                 active                 ">
+					Tìm việc làm
+				</a>
+			</div>
+                <div class="cvo-flex cvo-items-center item-child tag-border">
                     <span class="cvo-flex cvo-items-center cvo-justify-content icon-child">
                         <i class="fa-regular fa-magnifying-glass"></i>
                     </span>
@@ -1047,6 +1056,32 @@
                         Việc làm đã lưu
                     </a>
                 </div>
+                <div class="cvo-flex cvo-items-center item-child">
+				<span class="cvo-flex cvo-items-center cvo-justify-content icon-child"><i
+							class="fa-regular fa-check-to-slot"></i></span>
+				<a href="https://vieclamso1.vn/search-jobs?keyword=it&city="
+				   class=" ">
+					Việc làm phù hợp
+				</a>
+			</div>
+			<div class="cvo-flex cvo-items-center item-child">
+                <span class="cvo-flex cvo-items-center cvo-justify-content icon-child">
+                    <i class="fa-light fa-laptop-code font-sm"></i>
+                </span>
+				<a href="https://vieclamso1.vn/search-jobs?keyword=it&city=" class="cvo-flex cvo-items-center
+                                ">
+					Việc làm IT
+				</a>
+			</div>
+			<div class="cvo-flex cvo-items-center item-child tag-border">
+                <span class="cvo-flex cvo-items-center cvo-justify-content icon-child">
+                    <i class="font-sm fa-light fa-medal"></i>
+                </span>
+				<a href="https://vieclamso1.vn/search-jobs?keyword=senior&city=" class="cvo-flex cvo-items-center
+                                ">
+					Việc làm Senior
+				</a>
+			</div>
             </div>
         </div>
         <div class="menu-item">
@@ -1224,6 +1259,12 @@
                     </a>
                     <div class="group-hover:menu navbar__item__dropdown-menu">
                         <ul class="nav navbar-menu">
+                             <li class="navbar-menu__item  active  tag-border">
+                            <a href="{{route('/')}}" class="text-sm">
+                                <i class="icon fa-regular fa-magnifying-glass"></i>
+                                Tìm việc làm
+                            </a>
+                        </li>
                             <li class="navbar-menu__item tag-border">
                                 <a href="{{ route('applications.showAppliedJobs') }}" class="text-sm">
                                     <i class="icon fa-regular fa-magnifying-glass"></i>
@@ -1236,6 +1277,24 @@
                                     Việc làm đã lưu
                                 </a>
                             </li>
+                              <li class="navbar-menu__item ">
+                            <a href="https://vieclamso1.vn/search-jobs?keyword=it&city=" class="text-sm">
+                                <i class="icon fa-regular fa-check-to-slot"></i>
+                                Việc làm phù hợp
+                            </a>
+                        </li>
+                        <li class="navbar-menu__item ">
+                            <a href="https://vieclamso1.vn/search-jobs?keyword=it&city=" class="text-sm">
+                                <i class="fa-regular fa-laptop-code icon"></i>
+                                Việc làm IT
+                            </a>
+                        </li>
+                        <li class="navbar-menu__item   tag-border">
+                            <a href="https://vieclamso1.vn/search-jobs?keyword=senior&city=" class="text-sm">
+                                <i class="icon fa-regular fa-medal"></i>
+                                Việc làm Senior
+                            </a>
+                        </li>
                         </ul>
                     </div>
                 </li>
@@ -1578,16 +1637,13 @@
                                 Về Vieclamso1
                             </div>
                             <div class="box-menu-child">
-                                <a target="_blank" href="#">Giới thiệu</a>
-                                <a target="_blank" href="#">Góc báo chí</a>
-                                <a target="_blank" href="#">Tuyển
-                                    dụng</a>
-                                <a target="_blank" href="#">Liên hệ</a>
-                                <a target="_blank" href="#">Hỏi đáp</a>
-                                <a target="_blank" href="#">Chính sách bảo mật</a>
-                                <a target="_blank" href="#">Điều khoản dịch vụ</a>
-                                <a href="#" target="_blank">Quy
-                                    chế hoạt động</a>
+                                <a target="_blank" href="{{route('tutorial')}}">Giới thiệu</a>
+                                <a target="_blank" href="{{route('tutorial')}}">Góc báo chí</a>
+                                <a target="_blank" href="{{route('tutorial')}}">Liên hệ</a>
+                                <a target="_blank" href="{{route('tutorial')}}">Hỏi đáp</a>
+                                <a target="_blank" href="{{route('faqs')}}">Chính sách bảo mật</a>
+                                <a target="_blank" href="{{route('terms-of-service')}}">Điều khoản dịch vụ</a>
+
                             </div>
                         </div>
                         <div class="box-menu-item">
@@ -1627,14 +1683,9 @@
                             </div>
                             <div class="box-menu-child">
                                 <a href="{{ route('site.app') }}" target="_blank">Ứng dụng di động Vieclamso1</a>
-                                <a href="#" target="_blank">Tính lương Gross - Net</a>
-                                <a href="#" target="_blank">Tính lãi suất kép</a>
-                                <a href="#" target="_blank">Lập kế hoạch tiết kiệm</a>
-                                <a href="#" target="_blank">Tính bảo hiểm thất nghiệp</a>
-                                <a href="#" target="_blank">Tính bảo hiểm xã hội
+
                                     một lần</a>
-                                <a href="#" target="_blank">Trắc nghiệm MBTI</a>
-                                <a href="#" target="_blank">Trắc nghiệm MI</a>
+
                             </div>
                         </div>
                     </div>

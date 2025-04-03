@@ -102,77 +102,78 @@
                                 <li>
                                     <a class="{{ Request::routeIs('recruitment') ? 'text-primary' : '' }} hover:text-primary block pd-12 md:py-5 text-center font-medium"
                                         href="{{ route('recruitment') }}">
-                                        {{ $menu_1 }}
+                                      Giới thiệu
                                     </a>
                                 </li>
                                 <li>
                                     <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
                                         href="#">
-                                        {{ $menu_2 }}
+                                        Dịch vụ
                                     </a>
                                 </li>
                                 <li>
                                     <a class="{{ Request::routeIs('pricing') ? 'text-primary' : '' }} hover:text-primary block pd-12 md:py-5 text-center font-medium"
                                         href="{{ route('pricing') }}">
-                                        {{ $menu_3 }}
+                                       Báo giá
                                     </a>
                                 </li>
 
                                 <li>
                                     <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
                                         href="#">
-                                        {{ $menu_5 }}
+                                        Hỗ trợ
                                     </a>
                                 </li>
                             </ul>
+<div class="py-[40px] md:flex md:items-center md:justify-end md:py-0 md:!ml-auto">
+    <div class="mb-[35px] p-0 flex justify-center md:mb-0 md:mr-[30px]">
+        <div class="ml-1 border border-gray-100">
+            <a href="javascript:void(0)" onclick="translateLanguage('en')">
+                <img style="width: 27px; height: 16px"
+                     src="{{ asset('static.topcv.vn/srp/website/images/flags/uk.jpg') }}"
+                     alt="us flag">
+            </a>
+        </div>
+        <div class="ml-1 border border-gray-100">
+            <a href="javascript:void(0)" onclick="translateLanguage('vi')">
+                <img style="width: 27px; height: 16px"
+                     src="{{ asset('static.topcv.vn/srp/website/images/flags/vietnam.png') }}"
+                     alt="vi flag">
+            </a>
+        </div>
+        <div class="ml-1 border border-gray-100">
+            <a href="javascript:void(0)" onclick="translateLanguage('ja')">
+                <img style="width: 27px; height: 16px"
+                     src="{{ asset('static.topcv.vn/srp/website/images/flags/japan.png') }}"
+                     alt="jp flag">
+            </a>
+        </div>
+        <div class="ml-1 border border-gray-100">
+            <a href="javascript:void(0)" onclick="translateLanguage('zh-CN')">
+                <img style="width: 27px; height: 16px"
+                     src="{{ asset('static.topcv.vn/srp/website/images/flags/china.png') }}"
+                     alt="cn flag">
+            </a>
+        </div>
+        <div class="ml-1 border border-gray-100">
+            <a href="javascript:void(0)" onclick="translateLanguage('ko')">
+                <img style="width: 27px; height: 16px"
+                     src="{{ asset('static.topcv.vn/srp/website/images/flags/korea.png') }}"
+                     alt="kr flag">
+            </a>
+        </div>
+    </div>
+</div>
+ <!-- Google Translate Element -->
+<div id="google_translate_element" style="display: none;"></div>
 
-                            <div class="py-[40px] md:flex md:items-center md:justify-end md:py-0 md:!ml-auto">
-                                <div class="mb-[35px] p-0 flex justify-center md:mb-0 md:mr-[30px]">
-                                    <div class="ml-1 border border-gray-100">
-                                        <a href="{{ route('change.language', ['lang' => 'en']) }}">
-                                            <img style="width: 27px; height: 16px"
-                                                src="{{ asset('static.topcv.vn/srp/website/images/flags/uk.jpg') }}"
-                                                alt="us flag">
-                                        </a>
-                                    </div>
-                                    <div class="ml-1 border border-gray-100">
-                                        <a href="{{ route('change.language', ['lang' => 'vi']) }}">
-                                            <img style="width: 27px; height: 16px"
-                                                src="{{ asset('static.topcv.vn/srp/website/images/flags/vietnam.png') }}"
-                                                alt="vi flag">
-                                        </a>
-                                    </div>
-                                    <div class="ml-1 border border-gray-100">
-                                        <a href="{{ route('change.language', ['lang' => 'ja']) }}">
-                                            <img style="width: 27px; height: 16px"
-                                                src="{{ asset('static.topcv.vn/srp/website/images/flags/japan.png') }}"
-                                                alt="jp flag">
-                                        </a>
-                                    </div>
 
-                                    <div class="ml-1 border border-gray-100">
-                                        <a href="{{ route('change.language', ['lang' => 'zh']) }}">
-                                            <img style="width: 27px; height: 16px"
-                                                src="{{ asset('static.topcv.vn/srp/website/images/flags/china.png') }}"
-                                                alt="cn flag">
-                                        </a>
-                                    </div>
-                                    <!-- Thêm cờ Hàn Quốc -->
-                                    <div class="ml-1 border border-gray-100">
-                                        <a href="{{ route('change.language', ['lang' => 'ko']) }}">
-                                            <img style="width: 27px; height: 16px"
-                                                src="{{ asset('static.topcv.vn/srp/website/images/flags/korea.png') }}"
-                                                alt="kr flag">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
                             <div id="login-box" class="flex items-center justify-center">
                                 <div class="grid grid-cols-2 gap-[12px]">
                                     <a href="{{ route('employer.login') }}"
-                                        class="bg-white border border-primary py-[14px] px-[13px] rounded block  text-primary text-center min-w-[104px]">{{ $login }}</a>
+                                        class="bg-white border border-primary py-[14px] px-[13px] rounded block  text-primary text-center min-w-[104px]">Đăng nhập</a>
                                     <a href="{{ route('employer.register') }}"
-                                        class="bg-primary border border-primary py-[14px] px-[13px] rounded block text-white text-center min-w-[104px]">{{ $register }}</a>
+                                        class="bg-primary border border-primary py-[14px] px-[13px] rounded block text-white text-center min-w-[104px]">Đăng ký</a>
                                 </div>
                             </div>
                         </div>
@@ -224,7 +225,7 @@
                                             class="logo max-h-[41px]" alt="bct confirmation">
                                     </a>
                                 </div>
-                                <h5 class="font-medium text-color-default mb-[24px] text-[18px]">{{ $download_app }}
+                                <h5 class="font-medium text-color-default mb-[24px] text-[18px]">Tải xuống
                                 </h5>
                                 <p class="flex items-center justify-start mb-[36px]">
                                     <a class="block mr-[16px]" target="_blank" href="{{ $info->link_appstore }}">
@@ -244,46 +245,40 @@
                                 <div class="grid grid-cols-2 gap-[16px]">
                                     <div>
                                         <h5 class="font-semibold text-[18px] text-color-default mb-[16px]">
-                                            {{ $about_vieclamso1_lg }}
+                                          Về Vieclamso1
                                         </h5>
                                         <ul>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">{{ $introduction_lg }}</a>
+                                                    href="{{route('tutorial')}}" target="_blank">Giới thiệu</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">{{ $recruitmentlg_lg }}</a>
+                                                    href="{{route('/')}}" target="_blank">Tuyển dụng</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target>{{ $contact_lg }}</a>
+                                                    href="{{route('recruitment')}}" target>Liên hệ</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">{{ $press_corner_lg }}</a>
+                                                    href="{{route('tutorial')}}" target="_blank">Góc báo chí</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">{{ $privacy_policy_lg }}</a>
+                                                    href="{{route('faqs')}}" target="_blank">Chính sách bảo mật</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">{{ $terms_of_service_lg }}</a>
+                                                    href="{{route('terms-of-service')}}" target="_blank">Điều khoản dịch vụ</a>
                                             </li>
-                                            <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#"
-                                                    target="_blank">{{ $operating_regulations_lg }}</a>
-                                            </li>
-                                            <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">{{ $rewards_program_lg }}</a>
-                                            </li>
+
                                         </ul>
                                     </div>
                                     <div>
                                         <h5 class="font-semibold text-[18px] text-color-default mb-[16px]">
-                                            {{ $candidates_lg }}
+                                           Ứng viên
                                         </h5>
                                         <ul>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">{{ $find_jobs_lg }}</a>
+                                                    href="{{route('site.app')}}" target="_blank">Tìm việc làm</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">{{ $courses_lg }}</a>
+                                                    href="{{route('site.courses')}}" target="_blank">Khoá học</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -291,10 +286,10 @@
                                 <div class="grid grid-cols-2 gap-[16px] md:grid-cols-1">
                                     <div>
                                         <h5 class="font-semibold text-[18px] text-color-default mb-[16px]">
-                                            {{ $partners_lg }}</h5>
+                                          Đối tác</h5>
                                         <ul>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="#" target="_blank">{{ $companies_lg }}</a>
+                                                    href="#" target="_blank">Doanh nghiệp</a>
                                             </li>
 
                                         </ul>
@@ -329,7 +324,7 @@
                                         <img class="inline" src="{{ asset('images/icons/tax.svg') }}"
                                             style="vertical-align: text-bottom !important;" alt="Item icon" />
                                         <span
-                                            class="text-[12px] md:text-[14px] text-color-light font-light">{{ $business_license_lg }}:</span>
+                                            class="text-[12px] md:text-[14px] text-color-light font-light">Giấy phép đăng ký kinh doanh số:</span>
                                         <span
                                             class="text-[12px] md:text-[14px] font-medium text-color-default">{{ $info->business_license_number }}</span>
                                     </li>
@@ -337,7 +332,7 @@
                                         <img class="inline" src="{{ asset('images/icons/paper.svg') }}"
                                             style="vertical-align: text-bottom !important;" alt="Item icon" />
                                         <span
-                                            class="text-[12px] md:text-[14px] text-color-light font-light">{{ $employment_service_license_lg }}:</span>
+                                            class="text-[12px] md:text-[14px] text-color-light font-light">Giấy phép hoạt động dịch vụ việc làm số:</span>
                                         <span
                                             class="text-[12px] md:text-[14px] font-medium text-color-default">{{ $info->service_license_number }}
                                         </span>
@@ -346,16 +341,16 @@
                                         <img class="inline" src="{{ asset('images/icons/location.svg') }}"
                                             style="vertical-align: text-bottom !important;" alt="Item icon" />
                                         <span
-                                            class="text-[12px] md:text-[14px] text-color-light font-light">{{ $headquarters_lg }}
+                                            class="text-[12px] md:text-[14px] text-color-light font-light">Trụ sở
                                         </span>
                                         <span
-                                            class="text-[12px] md:text-[14px] font-medium text-color-default">{{ $info->headquarter_address }}</span>
+                                            class="text-[12px] md:text-[14px] font-medium text-color-default">Trụ sở</span>
                                     </li>
                                     <li class=" mt-2.5 mr-1">
                                         <img class="inline" src="{{ asset('images/icons/location.svg') }}"
                                             style="vertical-align: text-bottom !important;" alt="Item icon" />
                                         <span
-                                            class="text-[12px] md:text-[14px] text-color-light font-light">{{ $hcm_branch_lg }}:</span>
+                                            class="text-[12px] md:text-[14px] text-color-light font-light">Chi nhánh HCM:</span>
                                         <span
                                             class="text-[12px] md:text-[14px] font-medium text-color-default">{{ $info->branch_address }}</span>
                                     </li>
@@ -373,7 +368,7 @@
                         </div>
                         <div>
                             <h3 class="text-[14px] font-medium text-color-default text-center md:text-left mb-[17px]">
-                                {{ $hr_tech_ecosystem_lg }}
+                               Hệ sinh thái HR Tech của Vieclamso1
                             </h3>
                             <div class="flex justify-center md:justify-between flex-row my-2">
                                 @foreach ($ecosystems_layout_lg as $ecosystem_layout)
@@ -427,6 +422,25 @@
             }
         });
     </script>
+<!-- Google Translate Script -->
+<script>
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',  // Ngôn ngữ mặc định của trang (Ví dụ: 'en' - tiếng Anh, 'vi' - tiếng Việt)
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+
+    function translateLanguage(languageCode) {
+        const selectField = document.querySelector("select.goog-te-combo");
+        if (selectField) {
+            selectField.value = languageCode;
+            selectField.dispatchEvent(new Event('change'));
+        }
+    }
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 
 </html>
