@@ -41,15 +41,6 @@
                                 <th></th>
                                 <th>Tên</th>
                                 <th>Email</th>
-                                <th>Xem CV</th>
-                                <th>Tin cơ bản</th>
-                                <th>Tuyển gấp</th>
-                                <th>Ưu tiên trang ngành</th>
-                                <th>Làm mới mỗi giờ</th>
-                                <th>Làm mới mỗi ngày</th>
-                                <th>Hiệu ứng đỏ đậm</th>
-                                <th>Hiệu ứng đóng khung</th>
-                                <th>Hiệu ứng Hot</th>
                                 <th></th>
                                 <th>Giới tính</th>
                                 <th>Điểm xét hạng</th>
@@ -62,10 +53,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($employers as $employer)
+                            @foreach ($employers as $key=> $employer)
                                 <tr data-created="{{ $employer->created_at->format('Y-m-d') }}"
                                     data-status="{{ $employer->status == 0 ? 'inactive' : 'active' }}">
-                                    <td>{{ $employer->id }}</td>
+                                    <td>{{ $key +1 }}</td>
                                     <td>
                                         <div class="message-avatar">
                                             <img src="{{ $employer->avatar ? asset('storage/' . $employer->avatar) : asset('storage/avatar/avatar-default.jpg') }}"
@@ -74,81 +65,12 @@
                                     </td>
                                     <td>{{ $employer->name }}</td>
                                     <td>{{ $employer->email }}</td>
-                                    <td>
-                                        @if ($employer->isInfomation == 1)
-                                            <span class="badge bg-success">Đã mua</span>
-                                        @else
-                                            <span class="badge bg-warning">Chưa mua</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($employer->IsBasicnews == 1)
-                                            <span class="badge bg-success">Đã mua</span>
-                                        @else
-                                            <span class="badge bg-warning">Chưa mua</span>
-                                        @endif
-                                    </td>
 
-                                    <td>
-                                        @if ($employer->isUrgentrecruitment == 1)
-                                            <span class="badge bg-success">Đã mua</span>
-                                        @else
-                                            <span class="badge bg-warning">Chưa mua</span>
-                                        @endif
-                                    </td>
-
-                                    <td>
-                                        @if ($employer->IsPrioritize == 1)
-                                            <span class="badge bg-success">Đã mua</span>
-                                        @else
-                                            <span class="badge bg-warning">Chưa mua</span>
-                                        @endif
-                                    </td>
-
-                                    <td>
-                                        @if ($employer->IsRefresheveryhour == 1)
-                                            <span class="badge bg-success">Đã mua</span>
-                                        @else
-                                            <span class="badge bg-warning">Chưa mua</span>
-                                        @endif
-                                    </td>
-
-                                    <td>
-                                        @if ($employer->IsRefresheveryday == 1)
-                                            <span class="badge bg-success">Đã mua</span>
-                                        @else
-                                            <span class="badge bg-warning">Chưa mua</span>
-                                        @endif
-                                    </td>
-
-                                    <td>
-                                        @if ($employer->IsDarkredeffect == 1)
-                                            <span class="badge bg-success">Đã mua</span>
-                                        @else
-                                            <span class="badge bg-warning">Chưa mua</span>
-                                        @endif
-                                    </td>
-
-                                    <td>
-                                        @if ($employer->IsFramingeffect == 1)
-                                            <span class="badge bg-success">Đã mua</span>
-                                        @else
-                                            <span class="badge bg-warning">Chưa mua</span>
-                                        @endif
-                                    </td>
-
-                                    <td>
-                                        @if ($employer->IsHoteffect == 1)
-                                            <span class="badge bg-success">Đã mua</span>
-                                        @else
-                                            <span class="badge bg-warning">Chưa mua</span>
-                                        @endif
-                                    </td>
                                     <td>
                                         <button
                                             onclick="redirectToEmailPage('{{ $employer->id }}', '{{ $employer->email }}')"
                                             class="btn btn-primary">
-                                            Send Email <i class="fa-solid fa-envelope" style="color: #ffffff;"></i>
+                                           <i class="fa-solid fa-envelope" style="color: #ffffff;"></i>
                                         </button>
                                     </td>
                                     <td>{{ ucfirst($employer->gender) }}</td>
@@ -191,10 +113,6 @@
                                                 class="fa fa-eye"></i> View</a>
                                         <a href="{{ route('employers.edit', $employer->id) }}" class="btn btn-warning"><i
                                                 class="fa fa-pencil"></i> Level</a>
-                                        <a href="{{ route('employers.add-cart', $employer->id) }}"
-                                            class="btn btn-success">Add Service</a>
-                                        <a href="{{ route('employers.carts.index', $employer->id) }}"
-                                            class="btn btn-info">Services</a>
                                         <a href="{{ route('employers.job-postings', $employer->id) }}"
                                             class="btn btn-primary">
                                             Xem Tin Tuyển Dụng

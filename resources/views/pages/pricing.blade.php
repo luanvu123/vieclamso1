@@ -750,7 +750,7 @@
 
 
     <script>
-        document.getElementById("mb-menu-btn").addEventListener("click", function() {
+        document.getElementById("mb-menu-btn").addEventListener("click", function () {
             const isShow = document.getElementById("mb-menu").classList.contains('block');
 
             if (isShow) {
@@ -789,41 +789,44 @@
     </style>
     <div class="bg-white md:py-10 lg:px-0 py-5">
         <div class="w-container mx-auto">
-            @foreach ($carts->groupBy('type_cart_id') as $typeCartId => $cartsByType)
+            @foreach($typeservices as $typeservice)
                 <div class="px-[20px] lg:px-0">
-                    <div class="uppercase mb-3 text-gray-600"><span
-                            class="text-primary font-normal md:font-light">{{ $cartsByType->first()->typeCart->name ?? 'Unknown Type' }}</span>
+                    <div class="uppercase mb-3 text-gray-600">
+                        <span class="text-primary font-normal md:font-light">{{ $typeservice->name }}</span>
                     </div>
-                    <div class="md:text-[14px] font-light mb-[28px] text-color-light">{!! $cartsByType->first()->typeCart->detail ?? 'Unknown Type' !!}</div>
+                    <div class="md:text-[14px] font-light mb-[28px] text-color-light">
+                        <p>{{ $typeservice->description }}</p>
+                    </div>
                 </div>
+
                 <div class="container-service">
                     <div class="container-service-right">
                         <div class="top-job">
-                            @foreach ($cartsByType as $cart)
+                            @foreach($typeservice->services as $service)
                                 <div class="top-job-item item-job">
                                     <div class="header-item border-item-max">
-                                        <span>{{ $cart->title }}</span>
+                                        <span>{{ $service->name }}</span>
                                     </div>
                                     <div class="item-content">
                                         <div>
-                                            <span class="text-price"> {{ number_format($cart->value, 0, ',', '.') }}</span>
-                                            <span class="text-primary font-weight-700">
-                                                {{ $cart->planCurrency->currency }}</span>
+                                            <span class="text-price">{{ number_format($service->price, 0, ',', '.') }}</span>
+                                            <span class="text-primary font-weight-700">VND</span>
                                         </div>
                                         <div class="text-vat">* Giá trên chưa bao gồm VAT</div>
-                                        <div class="btn-contact"
-                                            data-url="">
-                                            Liên hệ tư vấn
-                                        </div>
+                                        <div class="btn-contact" data-url="">Liên hệ tư vấn</div>
 
                                         <div class="benefit-content">
-                                            <div class="label-benefit">Quyền lợi đặc biệt</div>
-                                            @foreach ($cart->planFeatures as $feature)
+                                            <div class="md:text-[14px] font-light mb-[28px] text-color-light">
+                                                <p>{{ $service->description }}</p>
+                                            </div>
+                                            <div class="label-benefit">Số tuần hiển thị </div>
+
+                                            @foreach($service->weeks as $week)
                                                 <div class="d-flex" style="margin-top: 12px">
                                                     <img class="img-benefit"
-                                                        src="{{ asset('static.topcv.vn/images/icons/check.png') }}"
-                                                        alt="icon" />
-                                                    <span class="ml-2 text-benefit"> {{ $feature->feature }}</span>
+                                                        src="https://vieclamso1.vn/public/static.topcv.vn/images/icons/check.png"
+                                                        alt="icon">
+                                                    <span class="ml-2 text-benefit">{{ $week->number_of_weeks }}</span>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -834,6 +837,7 @@
                     </div>
                 </div>
             @endforeach
+
 
         </div>
     </div>

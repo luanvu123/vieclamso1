@@ -10,6 +10,7 @@
     <!-- Mobile Specific Metas
 ================================================== -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- CSS
 ================================================== -->
@@ -116,14 +117,10 @@
                             <a href="{{ route('job-postings.cart') }}"><span class="ln ln-icon-Film-Cartridge"></span>
                                 Dịch vụ </a>
                         </li>
-                        <li class="{{ Route::is('cartlist.index') ? 'active' : '' }}">
-                            <a href="{{ route('cartlist.index') }}"><span class="ln ln-icon-Add-Cart"></span>
-                                Giỏ hàng
-                                của tôi </a>
-                        </li>
+
                         <li
-                            class="{{ Route::is('cartlist.listOrder') || Route::is('cartlist.showOrder') ? 'active' : '' }}">
-                            <a href="{{ route('cartlist.listOrder') }}"><span class="ln ln-icon-Full-Cart"></span> Theo
+                            class="">
+                            <a href="{{route('employer.orders.index')}}"><span class="ln ln-icon-Full-Cart"></span> Theo
                                 dõi đơn hàng </a>
                         </li>
                         <li class="{{ Route::is('job_postings.cart') ? 'active' : '' }}">

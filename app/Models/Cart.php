@@ -2,65 +2,112 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
+    use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'user_id',
-        'plan_currency_id',
-        'value',
-        'description',
-        'status',
-        'top_point',
-        'validity',
-        'title',
-        'background_image',
-        'type_cart_id',
-         'description_home',
-        'Pricing',
-        'Time_to_display',
-        'Featured_job',
-        'job_suggestions',
-        'job_suggestion_cv',
-        'job_suggestion_related',
-        'job_suggestion_top',
-        'Top_Job_Alert',
-        'prime_time',
-        'regular_time',
-        'AI_powered_CV',
-        'Top_Add_ons',
-        'Advanced_news_headline',
-        'Add_on_visual',
-        'Service_Warranty',
-        'search_results',
-        'Top_Add_ons_in_2',
-        'Activate_CV_proposal',
-        'Give_350_Credits',
+        'employer_id',
+        'service_id',
+        'quantity',
+        'number_of_weeks',
+        'total_price',
     ];
 
-    public function user()
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'quantity' => 'integer',
+        'number_of_weeks' => 'integer',
+        'total_price' => 'decimal:2',
+    ];
+
+    /**
+     * Get the employer that owns the cart item.
+     */
+    public function employer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Employer::class);
     }
 
-    public function planCurrency()
+    /**
+     * Get the service for this cart item.
+     */
+    public function service()
     {
-        return $this->belongsTo(PlanCurrency::class, 'plan_currency_id');
+        return $this->belongsTo(Service::class);
     }
 
-    public function planFeatures()
+    /**
+     * Calculate the total price based on service price, quantity, and weeks.
+     *
+     * @return float
+     */
+    public function calculateTotalPrice()
     {
-        return $this->belongsToMany(PlanFeature::class, 'cart_plan_feature');
+        $service = $this->service;
+        if (!$service) {
+            return 0;
+        }
+
+        return $service->price * $this->quantity * $this->number_of_weeks;
     }
-    public function typeCart()
+
+    /**
+     * Update the total price for this cart item.
+     *
+     * @return void
+     */
+    public function updateTotalPrice()
     {
-        return $this->belongsTo(TypeCart::class, 'type_cart_id');
+        $this->total_price = $this->calculateTotalPrice();
+        $this->save();
     }
-    public function employers()
+
+    /**
+     * Get all cart items for a specific employer.
+     *
+     * @param int $employerId
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function getEmployerCart($employerId)
     {
-        return $this->belongsToMany(Employer::class, 'cart_employer')
-            ->withPivot('start_date', 'end_date')
-            ->withTimestamps();
+        return self::with('service')
+            ->where('employer_id', $employerId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+    }
+
+    /**
+     * Get total cart count for a specific employer.
+     *
+     * @param int $employerId
+     * @return int
+     */
+    public static function getEmployerCartCount($employerId)
+    {
+        return self::where('employer_id', $employerId)->sum('quantity');
+    }
+
+    /**
+     * Get total cart value for a specific employer.
+     *
+     * @param int $employerId
+     * @return float
+     */
+    public static function getEmployerCartTotal($employerId)
+    {
+        return self::where('employer_id', $employerId)->sum('total_price');
     }
 }

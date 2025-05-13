@@ -14,6 +14,7 @@ use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\FigureController;
 use App\Http\Controllers\JobPostingController;
 use App\Http\Controllers\JobsManageController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SmartRecruitmentController;
 use App\Http\Controllers\ValueController;
@@ -63,6 +64,7 @@ use App\Http\Controllers\PublicLinkController;
 use App\Http\Controllers\RecruitmentServiceController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\SavedJobController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\SupportController;
@@ -73,6 +75,7 @@ use App\Http\Controllers\TypeEmployerController;
 use App\Http\Controllers\TypeFeedbackController;
 use App\Http\Controllers\TypeHotlineController;
 use App\Http\Controllers\TypePartnerController;
+use App\Http\Controllers\TypeserviceController;
 use App\Http\Controllers\TypeSupportController;
 use Illuminate\Support\Facades\Session;
 /*
@@ -123,6 +126,8 @@ Route::prefix('candidate')->group(function () {
 Route::get('/search-jobs', [SiteController::class, 'searchJobs'])->name('search-jobs');
 
 Route::group(['middleware' => ['auth']], function () {
+        Route::resource('typeservice', TypeserviceController::class);
+      Route::resource('services', ServiceController::class);
     Route::resource('banks', BankController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('cv_templates', CVTemplateController::class);
@@ -130,11 +135,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('products', ProductController::class);
     Route::resource('type-employer', TypeEmployerController::class);
     Route::resource('slides', SlideController::class);
-    Route::resource('carts', CartManageController::class);
-    Route::resource('type_cart', TypeCartController::class);
-    Route::resource('ordermanages', OrderManageController::class);
-    Route::resource('plan-currencies', PlanCurrencyController::class);
-    Route::resource('plan-features', PlanFeatureController::class);
     Route::resource('consultations', ConsultationController::class)
         ->only(['index', 'edit', 'update', 'destroy']);
     Route::resource('cities', CityController::class);
@@ -208,8 +208,6 @@ Route::patch('/applications/{id}/update-cv-hidden-info', [EmployerManageControll
     Route::resource('job-postings-manage', JobsManageController::class);
     Route::get('/jobPosting-choose', [JobsManageController::class, 'jobPosting_choose'])->name('jobPosting-choose');
     Route::get('/isHot-choose', [JobsManageController::class, 'isHot_choose'])->name('isHot-choose');
-
-    Route::get('carts/{cartId}/employers', [CartManageController::class, 'showEmployer'])->name('carts.showEmployer');
 
     Route::get('/tin-nhan-da-gui', [ContactController::class, 'sent'])->name('about.sent');
     Route::delete('sent/{id}', [ContactController::class, 'destroy_sent'])->name('about.destroy_sent');
@@ -364,12 +362,6 @@ Route::middleware(['employer'])->group(function () {
 
 
     Route::get('job-postings/cart/detail/{id}', [JobPostingController::class, 'showCartDetail'])->name('job-postings.cart.detail');
-    Route::post('add-to-cart/{cartId}', [CartListController::class, 'addToCart'])->name('cartlist.add');
-    Route::post('cartlist/storeOrder', [CartListController::class, 'storeOrder'])->name('cartlist.storeOrder');
-    Route::get('/orders', [CartListController::class, 'listOrder'])->name('cartlist.listOrder');
-    Route::get('/orders/{orderId}', [CartListController::class, 'showOrder'])->name('cartlist.showOrder');
-
-    Route::resource('cartlist', CartListController::class);
     Route::get('/employer/messages', [MessageController::class, 'receiveMessages'])->name('messages.receive');
     Route::get('/employer/messages/{candidate}', [MessageController::class, 'showMessages'])->name('messages.show');
     Route::post('/employer/messages/{candidate}/reply', [MessageController::class, 'sendReply'])->name('messages.reply');
@@ -401,4 +393,13 @@ Route::middleware(['employer'])->group(function () {
     Route::post('employer/gpkd', [EmployerLoginController::class, 'updateCertificate'])->name('employer.updateCertificate');
     Route::post('employer/send-otp', [EmployerLoginController::class, 'sendOtp'])->name('employer.send-otp');
     Route::post('employer/verify-otp', [EmployerLoginController::class, 'verifyOtp'])->name('employer.verify-otp');
+    Route::post('employer/orders/checkout', [OrderController::class, 'checkout'])->name('employer.orders.checkout');
+    Route::get('employer/orders', [OrderController::class, 'index'])->name('employer.orders.index');
+    Route::get('employer/orders/{id}', [OrderController::class, 'show'])->name('employer.orders.show');
+    Route::post('employer/orders/{id}/mark-as-paid', [OrderController::class, 'markAsPaid'])->name('employer.orders.markAsPaid');
+     Route::post('/employer/add-to-cart', [JobPostingController::class, 'addToCart'])->name('employer.addToCart');
+    // web.php
+    Route::delete('employer/cart/{id}', [JobPostingController::class, 'removeFromCart'])->name('employer.removeFromCart');
+
+    Route::get('employer/get-cart-count', [JobPostingController::class, 'getCartCount'])->name('employer.getCartCount');
 });

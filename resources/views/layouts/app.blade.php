@@ -9,8 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="keywords"
-        content="Glance Design Dashboard Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+    <meta name="keywords" content="Glance Design Dashboard Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
     <script type="application/x-javascript">
         addEventListener("load", function() {
@@ -58,7 +57,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <link rel="stylesheet" href="{{ asset('backend_admin/css/dropzone.min.css') }}">
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#owl-demo').owlCarousel({
                 items: 3,
                 lazyLoad: true,
@@ -106,8 +105,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <span class="icon-bar"></span>
                             </button>
                             <h1>
-                                <a class="navbar-brand" href="{{ url('/') }}"><span
-                                        class="fa fa-area-chart"></span> HOME<span class="dashboard_text">Vieclamso1
+                                <a class="navbar-brand" href="{{ url('/') }}"><span class="fa fa-area-chart"></span>
+                                    HOME<span class="dashboard_text">Vieclamso1
                                         Admin</span></a>
                             </h1>
                         </div>
@@ -218,16 +217,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <li
                                     class="treeview {{ Request::is('employers*', 'job-postings-manage*', 'admin/companies*', 'ordermanages*', 'products*', 'employers/purchasedManage*') ? 'active' : '' }}">
                                     <a href="#">
-                                        <img src="{{ asset('backend_admin/images/company-svgrepo-com.svg') }}"
-                                            alt="Google" width="20" height="20">
+                                        <img src="{{ asset('backend_admin/images/company-svgrepo-com.svg') }}" alt="Google"
+                                            width="20" height="20">
                                         <span> Nhà tuyẻn dụng
                                             @if (
-                                                $jobPostingCountTwoHour > 0 ||
+                                                    $jobPostingCountTwoHour > 0 ||
                                                     $employerCountTwoHour > 0 ||
-                                                    $companyCountTwoHour > 0 ||
-                                                    $ordermanagesCountTwoHour > 0 ||
-                                                    $ordermanagesCountTwoHour > 0 ||
-                                                    $ordermanagesCountTwoHour > 0)
+                                                    $companyCountTwoHour > 0
+                                                )
                                                 <span class="label label-primary pull-right">new</span>
                                             @endif
                                         </span>
@@ -267,16 +264,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                             </a>
                                         </li>
 
-                                        <li class="{{ Request::is('ordermanages') ? 'active' : '' }}">
-                                            <a href="{{ route('ordermanages.index') }}">
-                                                <img src="{{ asset('backend_admin/images/order-1-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Mua tin
-                                                @if ($ordermanagesCountTwoHour > 0)
-                                                    <span
-                                                        class="label label-primary pull-right">{{ $ordermanagesCountTwoHour }}</span>
-                                                @endif
-                                            </a>
-                                        </li>
+
 
                                         <li class="{{ Request::is('products') ? 'active' : '' }}">
                                             <a href="{{ route('products.index') }}">
@@ -289,24 +277,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                             <a href="{{ route('employers.purchasedManage') }}">
                                                 <img src="{{ asset('backend_admin/images/purchase-buy-pay-transaction-svgrepo-com.svg') }}"
                                                     alt="Google" width="20" height="20"> Danh sách đổi quà
-                                                @if ($ordermanagesCountTwoHour > 0)
-                                                    <span
-                                                        class="label label-primary pull-right">{{ $ordermanagesCountTwoHour }}</span>
-                                                @endif
+
                                             </a>
                                         </li>
-                                        <li class="{{ Request::is('service') ? 'active' : '' }}">
-                                            <a href="{{ route('employers.carts.list') }}">
-                                                <img src="{{ asset('backend_admin/images/usd-square-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Danh sách dịch vụ
-                                            </a>
-                                        </li>
+
                                     </ul>
                                 </li>
 
 
-                                <li
-                                    class="treeview {{ Request::is('plan-currencies*', 'plan-features*', 'carts*') ? 'active' : '' }}">
+                                <li class="treeview {{ Request::is('typeservice*', 'services*') ? 'active' : '' }}">
                                     <a href="#">
                                         <img src="{{ asset('backend_admin/images/shopping-cart-reversed-svgrepo-com.svg') }}"
                                             alt="Google" width="20" height="20">
@@ -314,21 +293,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </a>
                                     <ul class="treeview-menu">
-                                        <li class="{{ Request::is('plan-currencies*') ? 'active' : '' }}">
-                                            <a href="{{ route('plan-currencies.index') }}">
-                                                <img src="{{ asset('backend_admin/images/usd-square-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Đơn vị tiền tệ
+
+                                        <li class="{{ Request::is('typeservice*') ? 'active' : '' }}">
+                                            <a href="{{ route('typeservice.index') }}">
+                                                <i class="fa fa-list-alt"></i> Danh sách thể loại dịch vụ
                                             </a>
                                         </li>
-                                        <li class="{{ Request::is('plan-features*') ? 'active' : '' }}">
-                                            <a href="{{ route('plan-features.index') }}">
-                                                <img src="{{ asset('backend_admin/images/content-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Quyền lợi đặc biệt
-                                                (Báo giá)
-                                            </a>
-                                        </li>
-                                        <li class="{{ Request::is('carts*') ? 'active' : '' }}">
-                                            <a href="{{ route('carts.index') }}">
+                                        <li class="{{ Request::is('services*') ? 'active' : '' }}">
+                                            <a href="{{ route('services.index') }}">
                                                 <img src="{{ asset('backend_admin/images/shopping-cart-reversed-svgrepo-com.svg') }}"
                                                     alt="Google" width="20" height="20"> Danh sách dịch vụ
                                             </a>
@@ -401,8 +373,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <li
                                     class="treeview {{ Request::is('tin-nhan-da-gui*', 'candidate-sent-emails*', 'employer-sent-emails*') ? 'active' : '' }}">
                                     <a href="#">
-                                        <img src="{{ asset('backend_admin/images/email-svgrepo-com.svg') }}"
-                                            alt="Email" width="20" height="20">
+                                        <img src="{{ asset('backend_admin/images/email-svgrepo-com.svg') }}" alt="Email"
+                                            width="20" height="20">
                                         <span>Email</span>
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </a>
@@ -431,12 +403,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 </li>
                                 <li class="treeview {{ Request::is('consultations*') ? 'active' : '' }}">
                                     <a href="{{ route('consultations.index') }}">
-                                        <img src="{{ asset('backend_admin/images/register-svgrepo-com.svg') }}"
-                                            alt="Google" width="20" height="20">
+                                        <img src="{{ asset('backend_admin/images/register-svgrepo-com.svg') }}" alt="Google"
+                                            width="20" height="20">
                                         <span> Đăng kí nhận tư vấn </span>
                                         @if ($consultationCountTwoHour > 0)
-                                            <span
-                                                class="label label-primary pull-right">{{ $consultationCountTwoHour }}</span>
+                                            <span class="label label-primary pull-right">{{ $consultationCountTwoHour }}</span>
                                         @endif
                                     </a>
                                 </li>
@@ -446,19 +417,17 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <img src="{{ asset('backend_admin/images/feedback-positive-svgrepo-com.svg') }}"
                                             alt="Google" width="20" height="20"> Phản hồi ứng viên
                                         @if ($feedbackCountTwoHour > 0)
-                                            <span
-                                                class="label label-primary pull-right">{{ $feedbackCountTwoHour }}</span>
+                                            <span class="label label-primary pull-right">{{ $feedbackCountTwoHour }}</span>
                                         @endif
                                     </a>
                                 </li>
 
                                 <li class="treeview {{ Request::is('supports*') ? 'active' : '' }}">
                                     <a href="{{ route('supports.index.list') }}">
-                                        <img src="{{ asset('backend_admin/images/support-svgrepo-com.svg') }}"
-                                            alt="Google" width="20" height="20"> Hỗ trợ ứng viên
+                                        <img src="{{ asset('backend_admin/images/support-svgrepo-com.svg') }}" alt="Google"
+                                            width="20" height="20"> Hỗ trợ ứng viên
                                         @if ($supportCountTwoHour > 0)
-                                            <span
-                                                class="label label-primary pull-right">{{ $supportCountTwoHour }}</span>
+                                            <span class="label label-primary pull-right">{{ $supportCountTwoHour }}</span>
                                         @endif
                                     </a>
                                 </li>
@@ -468,8 +437,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <img src="{{ asset('backend_admin/images/report-comment-svgrepo-com.svg') }}"
                                             alt="Google" width="20" height="20"> Tố cáo tin tuyển dụng
                                         @if ($reportCountTwoHour > 0)
-                                            <span
-                                                class="label label-primary pull-right">{{ $reportCountTwoHour }}</span>
+                                            <span class="label label-primary pull-right">{{ $reportCountTwoHour }}</span>
                                         @endif
                                     </a>
                                 </li>
@@ -510,8 +478,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <div class="profile_img">
                                             <span class="prfil-img">
                                                 @if (Auth::user()->avatar)
-                                                    <img style="width: 40px;height: 40px;border-radius: 50%;object-fit: cover;"src="{{ asset('storage/' . Auth::user()->avatar) }}"
-                                                        alt="">
+                                                    <img style="width: 40px;height: 40px;border-radius: 50%;object-fit: cover;"
+                                                        src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="">
                                                 @else
                                                     <img style="width: 40px;height: 40px;border-radius: 50%;object-fit: cover;"
                                                         src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=300"
@@ -529,14 +497,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     </a>
                                     <ul class="dropdown-menu drp-mnu">
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
                                                 <i class="fa fa-sign-out"></i> Đăng xuất
                                             </a>
 
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                class="d-none">
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                                 @csrf
                                             </form>
                                         </li>
@@ -601,7 +567,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <div class="r3_counter_box">
                                 <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
                                 <div class="stats">
-                                    <h5><strong>{{ $totalCartEmployerCount }}</strong></h5>
+                                    <h5><strong></strong></h5>
                                     <span>Dịch vụ đang chạy</span>
                                 </div>
                             </div>
@@ -617,8 +583,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     <script src="{{ asset('backend_admin/js/amcharts.js') }}"></script>
                     <script src="{{ asset('backend_admin/js/serial.js') }}"></script>
                     <script src="{{ asset('backend_admin/js/export.min.js') }}"></script>
-                    <link rel="stylesheet" href="{{ asset('backend_admin/css/export.css') }}" type="text/css"
-                        media="all" />
+                    <link rel="stylesheet" href="{{ asset('backend_admin/css/export.css') }}" type="text/css" media="all" />
                     <script src="{{ asset('backend_admin/js/light.js') }}"></script>
                     <!-- for amcharts js -->
                     <script src="{{ asset('backend_admin/js/index1.js') }}"></script>
@@ -663,7 +628,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             showLeftPush = document.getElementById('showLeftPush'),
             body = document.body;
 
-        showLeftPush.onclick = function() {
+        showLeftPush.onclick = function () {
             classie.toggle(this, 'active');
             classie.toggle(body, 'cbp-spmenu-push-toright');
             classie.toggle(menuLeft, 'cbp-spmenu-open');
@@ -689,7 +654,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <!-- //Bootstrap Core JavaScript -->
 
 
-   
+
     <script>
         function ChangeToSlug() {
 
@@ -725,19 +690,20 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     </script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 
     <!-- Include DataTables JavaScript -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#user-table').DataTable();
         });
     </script>
     <script>
-        $('.jobPosting_choose').change(function() {
+        $('.jobPosting_choose').change(function () {
             var trangthai_val = $(this).val();
             var id = $(this).attr('id');
             $.ajax({
@@ -747,13 +713,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     trangthai_val: trangthai_val,
                     id: id
                 },
-                success: function(data) {
+                success: function (data) {
                     alert('Thay đổi thành công!');
                 }
             });
         })
 
-        $('.isHot_choose').change(function() {
+        $('.isHot_choose').change(function () {
             var isHot_val = $(this).val();
             var id = $(this).attr('id').split('_')[1];
             $.ajax({
@@ -763,7 +729,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     isHot_val: isHot_val,
                     id: id
                 },
-                success: function(data) {
+                success: function (data) {
                     alert('Thay đổi isHot thành công!');
                 }
             });
@@ -771,7 +737,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     </script>
 
     <script>
-        $('.user_choose').change(function() {
+        $('.user_choose').change(function () {
             var trangthai_val = $(this).val();
             var id = $(this).attr('id');
             $.ajax({
@@ -781,14 +747,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     trangthai_val: trangthai_val,
                     id: id
                 },
-                success: function(data) {
+                success: function (data) {
                     alert('Thay đổi trạng thái user thành công!');
                 }
             });
         })
     </script>
     <script>
-        $('.media_choose').change(function() {
+        $('.media_choose').change(function () {
             var trangthai_val = $(this).val();
             var id = $(this).attr('id');
             $.ajax({
@@ -798,12 +764,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     trangthai_val: trangthai_val,
                     id: id
                 },
-                success: function(data) {
+                success: function (data) {
                     alert('Thay đổi trạng thái media thành công!');
                 }
             });
         })
-        $('.slug_choose').change(function() {
+        $('.slug_choose').change(function () {
             var trangthai_val = $(this).val();
             var id = $(this).attr('id');
             $.ajax({
@@ -813,12 +779,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     trangthai_val: trangthai_val,
                     id: id
                 },
-                success: function(data) {
+                success: function (data) {
                     alert('Thay đổi trạng thái tag thành công!');
                 }
             });
         })
-        $('.post_choose').change(function() {
+        $('.post_choose').change(function () {
             var trangthai_val = $(this).val();
             var id = $(this).attr('id');
             $.ajax({
@@ -828,14 +794,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     trangthai_val: trangthai_val,
                     id: id
                 },
-                success: function(data) {
+                success: function (data) {
                     alert('Thay đổi trạng thái bài viết thành công!');
                 }
             });
         })
     </script>
     <script>
-        $('.support_choose').change(function() {
+        $('.support_choose').change(function () {
             var trangthai_val = $(this).val();
             var id = $(this).attr('id');
             $.ajax({
@@ -845,14 +811,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     trangthai_val: trangthai_val,
                     id: id
                 },
-                success: function(data) {
+                success: function (data) {
                     alert('Thay đổi trạng thái support thành công!');
                 }
             });
         })
     </script>
     <script>
-        $('.feedback_choose').change(function() {
+        $('.feedback_choose').change(function () {
             var trangthai_val = $(this).val();
             var id = $(this).attr('id');
             $.ajax({
@@ -862,14 +828,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     trangthai_val: trangthai_val,
                     id: id
                 },
-                success: function(data) {
+                success: function (data) {
                     alert('Thay đổi trạng thái feedback thành công!');
                 }
             });
         })
     </script>
     <script>
-        $('.employer_choose').change(function() {
+        $('.employer_choose').change(function () {
             var trangthai_val = $(this).val();
             var id = $(this).attr('id');
             $.ajax({
@@ -879,7 +845,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     trangthai_val: trangthai_val,
                     id: id
                 },
-                success: function(data) {
+                success: function (data) {
                     alert('Thay đổi trạng thái nhà tuyển dụng thành công!');
                 }
             });

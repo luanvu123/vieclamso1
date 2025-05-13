@@ -1,121 +1,99 @@
 @extends('dashboard-employer')
 
 @section('content')
-    <style>
-        .table {
-            width: 100%;
-            margin-bottom: 1.5rem;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-collapse: collapse;
-        }
+ <main data-v-48257136="" class="page-container service-page position-relative">
+        <div data-v-48257136="" class="breadcrumb-box">
+            <h6 class="breadcrumb-title d-flex">
+                <div><span>Mua dịch vụ</span></div>
+            </h6>
+        </div>
+        <div data-v-48257136="" class="container-fluid page-content">
+            <div data-v-1eb6ef20="" data-v-48257136="">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h2>Chi tiết đơn hàng #{{ $order->order_key }}</h2>
+            <div>
+                @if($order->status == 'Đã thanh toán')
+                    <span class="badge bg-success">{{ $order->status }}</span>
+                @else
+                    <span class="badge bg-warning">{{ $order->status }}</span>
+                @endif
+            </div>
+        </div>
 
-        .table th,
-        .table td {
-            padding: 15px;
-            vertical-align: middle;
-            border: 1px solid #ddd;
-            text-align: center;
-            color: #555;
-        }
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h5>Thông tin đơn hàng</h5>
+                    <p><strong>Mã đơn hàng:</strong> {{ $order->order_key }}</p>
+                    <p><strong>Ngày đặt:</strong> {{ $order->created_at->format('d/m/Y H:i') }}</p>
+                    <p><strong>Trạng thái:</strong> {{ $order->status }}</p>
+                </div>
+            </div>
 
-        .table thead th {
-            background-color: #f8f9fa;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.95em;
-        }
-
-        .table tbody tr:nth-of-type(even) {
-            background-color: #f2f2f2;
-        }
-
-        .table tbody tr:hover {
-            background-color: #e9ecef;
-        }
-
-        .cart-summary {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .cart-summary h3 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .cart-summary p {
-            font-size: 1.2em;
-            color: #555;
-            margin-bottom: 10px;
-            text-align: left;
-        }
-
-        p {
-            text-align: center;
-            font-size: 1.2em;
-            color: #777;
-        }
-
-        .status-pending {
-            color: #ffc107;
-        }
-
-        .status-completed {
-            color: #28a745;
-        }
-
-        .status-cancelled {
-            color: #dc3545;
-        }
-    </style>
-   <div class="container">
-    <h1>Chi tiết đơn hàng - Mã đơn #{{ $order->id }}</h1>
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Dịch vụ</th>
-                <th>Chi tiết</th>
-                <th>Số điểm</th>
-                <th>Giá tiền</th>
-                <th>Số lượng</th>
-                <th>Tổng tiền</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($order->orderDetails as $detail)
-                <tr>
-                    <td>{{ $detail->cart->title }}</td>
-                    <td>
-                        @foreach ($detail->cart->planFeatures as $feature)
-                            <li>{{ $feature->feature }}</li>
+            <h5>Chi tiết dịch vụ</h5>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Dịch vụ</th>
+                            <th>Số lượng</th>
+                            <th>Thời gian</th>
+                            <th>Đơn giá</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($order->orderDetails as $detail)
+                            <tr>
+                                <td>{{ $detail->service->name }}</td>
+                                <td>{{ $detail->quantity }}</td>
+                                <td>{{ $detail->number_of_weeks }} tuần</td>
+                                <td>₫{{ number_format($detail->price, 0) }}</td>
+                                <td>₫{{ number_format($detail->total_price, 0) }}</td>
+                            </tr>
                         @endforeach
-                    </td>
-                    <td>
-                        @if ($detail->cart->top_point != 0)
-                            <li>Quà tặng: {{ number_format($detail->cart->top_point, 0, ',', '.') }} Credits</li>
-                        @endif
-                    </td>
-                    <td>{{ number_format($detail->price, 0, ',', '.') }} {{ $detail->cart->planCurrency->currency }}</td>
-                    <td>{{ $detail->quantity }}</td>
-                    <td>{{ number_format($detail->price * $detail->quantity, 0, ',', '.') }} {{ $detail->cart->planCurrency->currency }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" class="text-end"><strong>Tổng cộng (Chưa bao gồm thuế VAT):</strong></td>
+                            <td><strong>₫{{ number_format($order->total_price, 0) }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="text-end"><strong>Giá trị quy đổi (USD):</strong></td>
+                            <td><strong>${{ number_format($usdTotal, 2) }}</strong></td>
+                        </tr>
+                    </tfoot>
 
-    <div class="cart-summary">
-        <h3>Thông tin thanh toán</h3>
-        <p>VAT: {{ $order->vat }}%</p>
-        <p>Tổng tiền: {{ number_format($order->total_amount, 0, ',', '.') }} {{ $order->orderDetails->first()->cart->planCurrency->currency }}</p>
-        <p>Trạng thái: {{ ucfirst($order->status) }}</p>
+                </table>
+            </div>
+
+            @if($order->status == 'Chưa thanh toán')
+                <div class="alert alert-info">
+                    <h5>Hướng dẫn thanh toán</h5>
+                    <p>Vui lòng thực hiện chuyển khoản theo một trong các tài khoản dưới đây:</p>
+
+                    @foreach($banks as $bank)
+                        <div class="border p-3 mb-3 rounded bg-light">
+                            <p><strong>Ngân hàng:</strong> {{ $bank->name }} - {{ $bank->branch }}</p>
+                            <p><strong>Chủ tài khoản:</strong> {{ $bank->account_name }}</p>
+                            <p><strong>Số tài khoản:</strong> {{ $bank->account_number }}</p>
+                            <p><strong>Nội dung chuyển khoản:</strong> {{ $order->order_key }}</p>
+                            <p><strong>Số tiền:</strong> ₫{{ number_format($order->total_price, 0) }}</p>
+
+                            @if($bank->logo_bank)
+                                <img src="{{ asset('storage/' . $bank->image) }}" alt="Logo Ngân hàng" style="height: 200px;">
+                            @endif
+                        </div>
+                    @endforeach
+
+                    <p>Sau khi chuyển khoản, vui lòng liên hệ với chúng tôi qua số điện thoại [SỐ ĐIỆN THOẠI] hoặc email
+                        [EMAIL] để xác nhận thanh toán.</p>
+                </div>
+
+            @endif
+        </div>
     </div>
 </div>
-
-
+    </div>
 @endsection

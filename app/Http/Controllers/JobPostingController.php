@@ -22,6 +22,8 @@ use App\Mail\ApplicationStatusUpdate;
 use App\Models\Bank;
 use App\Models\Notification;
 use App\Models\SavedProfile;
+use App\Models\Service;
+use App\Models\Typeservice;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -545,9 +547,16 @@ class JobPostingController extends Controller
 
     public function showCart()
     {
-        // Lấy các carts có status = 1
-        $carts = Cart::where('status', 1)->get();
+
         $employer = Auth::guard('employer')->user();
+         $employerId = $employer->id;
+        $carts = Cart::getEmployerCart($employerId);
+
+        $exchangeRate = 0.000042;
+        $typeservices = Typeservice::with(['services.weeks'])
+            ->where('status', true)
+            ->get();
+
         $recentMessagesCount = $employer->messages()
             ->where('created_at', '>=', Carbon::now()->subHours(5))
             ->count();
@@ -557,7 +566,68 @@ class JobPostingController extends Controller
             ->where('created_at', '>=', Carbon::now()->subHours(5))
             ->count();
         // Truyền dữ liệu carts sang view
-        return view('job_postings.cart', compact('carts', 'recentMessagesCount', 'recentApplicationsCount'));
+        return view('job_postings.cart', compact('carts', 'recentMessagesCount', 'recentApplicationsCount', 'typeservices', 'exchangeRate'));
+    }
+    public function removeFromCart($id)
+    {
+        $cart = Cart::where('id', $id)
+            ->where('employer_id', Auth::guard('employer')->id())
+            ->firstOrFail();
+
+        $cart->delete();
+
+        return response()->json(['success' => true, 'message' => 'Đã xoá dịch vụ khỏi giỏ hàng.']);
+    }
+
+    public function getCartCount()
+    {
+        $employerId = Auth::guard('employer')->user()->id;
+        $cartCount = Cart::where('employer_id', $employerId)->sum('quantity');
+
+        return response()->json([
+            'cart_count' => $cartCount
+        ]);
+    }
+    public function addToCart(Request $request)
+    {
+        $validated = $request->validate([
+            'service_id' => 'required|exists:services,id',
+            'quantity' => 'required|integer|min:1',
+            'number_of_weeks' => 'required|in:1,2,4',
+        ]);
+
+        $service = Service::findOrFail($validated['service_id']);
+          $employerId = Auth::guard('employer')->user()->id;
+
+        // Kiểm tra xem có cart giống service_id và number_of_weeks hay không
+        $cart = Cart::where('employer_id', $employerId)
+            ->where('service_id', $validated['service_id'])
+            ->where('number_of_weeks', $validated['number_of_weeks'])
+            ->first();
+
+        if ($cart) {
+            // Nếu trùng cả service_id và number_of_weeks => gộp quantity
+            $cart->quantity += $validated['quantity'];
+            $cart->total_price = $service->price * $cart->quantity * $cart->number_of_weeks;
+            $cart->save();
+        } else {
+            // Nếu number_of_weeks khác => tạo mới
+            Cart::create([
+                'employer_id' => $employerId,
+                'service_id' => $validated['service_id'],
+                'quantity' => $validated['quantity'],
+                'number_of_weeks' => $validated['number_of_weeks'],
+                'total_price' => $service->price * $validated['quantity'] * $validated['number_of_weeks'],
+            ]);
+        }
+
+        $cartCount = Cart::where('employer_id', $employerId)->sum('quantity');
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Dịch vụ đã được thêm vào giỏ hàng',
+            'cart_count' => $cartCount
+        ]);
     }
     public function showCartDetail($id)
     {

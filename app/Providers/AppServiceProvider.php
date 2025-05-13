@@ -9,7 +9,7 @@ use Stichoza\GoogleTranslate\GoogleTranslate;
 use App\Models\JobPosting;
 use App\Models\Employer;
 use App\Models\Candidate;
-use App\Models\Cart;
+
 use App\Models\Company;
 use App\Models\Consultation;
 use App\Models\Ecosystem;
@@ -18,7 +18,7 @@ use App\Models\Figure;
 use App\Models\GenrePost;
 use App\Models\Info;
 use App\Models\JobReport;
-use App\Models\Order;
+
 use App\Models\Partner;
 use App\Models\PublicLink;
 use App\Models\Purchased;
@@ -49,7 +49,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $info = Info::find(1);
-         $totalCartEmployerCount = Cart::with('employers')->count();
         // Đếm số lượng Job Listings active
         $activeJobListingsCount = JobPosting::where('status', 0)->count();
         $activeJobListingsCountToday = JobPosting::whereDate('created_at', today())->where('status', 0)->count();
@@ -82,7 +81,7 @@ class AppServiceProvider extends ServiceProvider
         $feedbackCountTwoHour = Feedback::where('created_at', '>=', $twoHoursAgo)->count();
         $supportCountTwoHour = Support::where('created_at', '>=', $twoHoursAgo)->count();
         $publiclink_layout = PublicLink::where('status', 'active')->get();
-        $ordermanagesCountTwoHour = Order::where('created_at', '>=', $twoHoursAgo)->count();
+
         $orderpurchasedCountTwoHour = Purchased::where('created_at', '>=', $twoHoursAgo)->count();
 
         View::composer('layout-recruitment', function ($view) {
@@ -118,9 +117,8 @@ class AppServiceProvider extends ServiceProvider
             'supportCountTwoHour' => $supportCountTwoHour,
             'reportCountTwoHour' => $reportCountTwoHour,
             'consultationCountTwoHour' => $consultationCountTwoHour,
-            'ordermanagesCountTwoHour' => $ordermanagesCountTwoHour,
             'orderpurchasedCountTwoHour' => $orderpurchasedCountTwoHour,
-            'totalCartEmployerCount'=> $totalCartEmployerCount,
+
         ]);
     }
 }

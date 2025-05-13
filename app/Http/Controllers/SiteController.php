@@ -27,6 +27,7 @@ use App\Models\SmartRecruitment;
 use App\Models\TypeConsultation;
 use App\Models\TypeHotline;
 use App\Models\TypePartner;
+use App\Models\Typeservice;
 use App\Models\Value;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -375,25 +376,19 @@ $category_slider = Category::withCount('jobPostings')
     public function pricing()
     {
 
-        // Retrieve carts and cart benefits
-        $carts = Cart::with(['typeCart', 'planCurrency', 'planFeatures'])
-            ->where('status', 1)
+       $typeservices = Typeservice::with(['services.weeks'])
+            ->where('status', true)
             ->get();
-        $cart_benefit = Cart::with(['typeCart', 'planCurrency', 'planFeatures'])
-            ->where('status', 1)
-            ->where('Pricing', 1)
-            ->take(6)
-            ->get();
+
         $hotlines = Hotline::with('typeHotline')->where('status', true)->get();
         $cities = City::where('status', 1)->pluck('name', 'id');
         $typeConsultations = TypeConsultation::where('status', 1)->pluck('name', 'id');
         // Return view with translated data
         return view('pages.pricing', compact(
-            'carts',
-            'cart_benefit',
             'hotlines',
             'cities',
             'typeConsultations',
+            'typeservices',
         ));
     }
 
