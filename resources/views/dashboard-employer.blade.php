@@ -113,8 +113,8 @@
                         </li>
 
 
-                        <li class="{{ Route::is('job-postings.cart') ? 'active' : '' }}">
-                            <a href="{{ route('job-postings.cart') }}"><span class="ln ln-icon-Film-Cartridge"></span>
+                        <li class="{{ Route::is('employer.services') ? 'active' : '' }}">
+                            <a href="{{ route('employer.services') }}"><span class="ln ln-icon-Film-Cartridge"></span>
                                 Dịch vụ </a>
                         </li>
 
@@ -123,8 +123,8 @@
                             <a href="{{route('employer.orders.index')}}"><span class="ln ln-icon-Full-Cart"></span> Theo
                                 dõi đơn hàng </a>
                         </li>
-                        <li class="{{ Route::is('job_postings.cart') ? 'active' : '' }}">
-                            <a href="{{ route('job_postings.cart') }}"><span class="ln ln-icon-Align-Left"></span> Dịch
+                        <li class="{{ Route::is('employer.service-active') ? 'active' : '' }}">
+                            <a href="{{ route('employer.service-active') }}"><span class="ln ln-icon-Align-Left"></span> Dịch
                                 vụ đang mở </a>
                         </li>
                         <li class="{{ Route::is('job_postings.checkout') ? 'active' : '' }}">

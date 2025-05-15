@@ -192,10 +192,14 @@ $category_slider = Category::withCount('jobPostings')
         $closingDate = Carbon::parse($jobPosting->closing_date);
         $isExpired = $closingDate->isPast();
         $candidate = Auth::guard('candidate')->user();
+
         $applied = false;
         $appliedDate = null;
         if ($candidate) {
-            $applied = $candidate->applications()->where('job_posting_id', $jobPosting->id)->exists();
+          $applied = Application::where('candidate_id', $candidate->id)
+                      ->where('job_posting_id', $jobPosting->id)
+                      ->exists();
+
             if ($applied) {
                 $application = $candidate->applications()->where('job_posting_id', $jobPosting->id)->first();
                 $appliedDate = Carbon::parse($application->created_at)->format('d/m/Y');

@@ -26,13 +26,13 @@
                              <p class="name-file"></p>
                              <p>Chọn tệp khác</p>
                          </div>
-                         <form id="formUploadCv" action="{{ route('cv.upload.post') }}" method="POST"
-                             enctype="multipart/form-data">
-                             @csrf
-                             <input type="hidden" name="ta_source" value="UploadCVInManagerCV">
-                             <input type="file" name="file_upload_cv" class="file-upload-cv" id="file-upload-cv"
-                                 style="display: none;" onchange="document.getElementById('formUploadCv').submit();">
-                         </form>
+                       <form id="formUploadCv" action="{{ route('cv.upload') }}" method="POST"
+      enctype="multipart/form-data">
+    @csrf
+    <input type="file" name="file_upload_cv" id="file-upload-cv"
+           style="display: none;" onchange="document.getElementById('formUploadCv').submit();">
+</form>
+
                      </div>
                      <div class="box-btn-upload">
                          <button class="btn btn-primary-hover btn-upload"

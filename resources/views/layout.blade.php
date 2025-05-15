@@ -23,7 +23,7 @@
     <meta name="twitter:title" content="Vieclamso1 - CV xịn việc làm chất - Tạo CV & Tìm việc miễn phí">
     <meta name="twitter:description"
         content="Sở hữu ngay cv xịn cùng việc làm mơ ước. 30.000+ cơ hội việc làm được kết nối thành công qua Vieclamso1 mỗi ngày.">
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
     <meta property="og:locale" content="vi_VN" />
     <meta property="og:locale:alternate" content="en_US" />
     <meta name="og:title" content="Vieclamso1 - CV xịn việc làm chất - Tạo CV & Tìm việc miễn phí">

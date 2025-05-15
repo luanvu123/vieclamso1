@@ -66,7 +66,9 @@ class Candidate extends Authenticatable
     ];
     public function cvs()
     {
-        return $this->hasMany(Cv::class);
+        return $this->belongsToMany(CV::class, 'candidate_cv', 'candidate_id', 'cv_id')
+            ->withPivot('is_primary', 'is_active')
+            ->withTimestamps();
     }
     public function cities()
     {

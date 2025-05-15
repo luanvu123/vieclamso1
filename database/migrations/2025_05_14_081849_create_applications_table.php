@@ -15,7 +15,7 @@ return new class extends Migration
 
             $table->foreignId('candidate_id')->constrained('candidates')->onDelete('cascade');
             $table->foreignId('job_posting_id')->constrained('job_postings')->onDelete('cascade');
-            $table->foreignId('cv_id')->nullable()->constrained('c_v_s')->onDelete('set null'); // Bảng CV viết đúng như tên model
+            $table->foreignId('cv_id')->nullable()->constrained('cvs')->onDelete('set null'); // Bảng CV viết đúng như tên model
             $table->string('cv_path')->nullable();
             $table->string('cv_path_hidden_info')->nullable();
             $table->text('introduction')->nullable();
@@ -44,5 +44,6 @@ return new class extends Migration
         Schema::dropIfExists('applications');
     }
 };
+
 
 

@@ -34,7 +34,13 @@ class JobPosting extends Model
         'status',
         'city',
         'isHot',
+        'order_id',
     ];
+    public function order()
+{
+    return $this->belongsTo(Order::class);
+}
+
 
     public function employer()
     {

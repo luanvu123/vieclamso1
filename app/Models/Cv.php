@@ -11,8 +11,10 @@ class Cv extends Model
 
     protected $fillable = ['candidate_id', 'cv_path','cv_name',];
 
-    public function candidate()
+  public function candidates()
     {
-        return $this->belongsTo(Candidate::class);
+        return $this->belongsToMany(Candidate::class, 'candidate_cv')
+                    ->withPivot('is_primary', 'is_active')
+                    ->withTimestamps();
     }
 }

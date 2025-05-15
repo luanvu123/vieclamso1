@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Bank;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -79,30 +81,31 @@ class OrderController extends Controller
         }
     }
 
-    /**
-     * Display a listing of the orders.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $employerId = Auth::guard('employer')->id();
+         $employer = Auth::guard('employer')->user();
         $orders = Order::with('orderDetails.service')
             ->where('employer_id', $employerId)
             ->orderBy('created_at', 'desc')
             ->get();
+              $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
 
-        return view('job-postings.cartlist-orders', compact('orders'));
+        return view('job_postings.cartlist_orders', compact('orders', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
-    /**
-     * Display the specified order.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+
  public function show($id)
 {
+      $employer = Auth::guard('employer')->user();
     $employerId = Auth::guard('employer')->id();
     $order = Order::with('orderDetails.service')
         ->where('id', $id)
@@ -111,7 +114,14 @@ class OrderController extends Controller
     if ($order->employer_id != $employerId) {
         throw new AccessDeniedHttpException('Bạn không có quyền truy cập đơn hàng này.');
     }
-
+ $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
     // Lấy danh sách ngân hàng đang hoạt động
     $banks = Bank::where('status', '1')->get();
 
@@ -119,7 +129,7 @@ class OrderController extends Controller
     $exchangeRate = 25000;
     $usdTotal = $order->total_price / $exchangeRate;
 
-    return view('employer.orders.show', compact('order', 'banks', 'usdTotal'));
+    return view('job_postings.cartlist_order-details', compact('order', 'banks', 'usdTotal', 'recentMessagesCount', 'recentApplicationsCount'));
 }
 
 

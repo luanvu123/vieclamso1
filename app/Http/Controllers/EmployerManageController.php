@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Employer;
+use App\Models\OrderDetail;
 use App\Models\Purchased;
 use Carbon\Carbon;
 use App\Mail\SendEmailEmployer;
@@ -11,8 +12,10 @@ use App\Models\Application;
 use App\Models\Cart;
 use App\Models\EmailReplyEmployer;
 use App\Models\JobPosting;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -56,7 +59,163 @@ class EmployerManageController extends Controller
         $jobPostings = $employer->jobPostings;
         return view('admin.employers.job_postings', compact('employer', 'jobPostings'));
     }
+public function indexBasic()
+{
+    $user = Auth::user();
 
+    $jobPostings = JobPosting::with(['employer', 'categories', 'genres', 'countries'])
+        ->where('service_type', 'Tin cơ bản')
+        ->when(!$user->roles()->where('id', 1)->exists(), function ($query) use ($user) {
+            $query->whereHas('employer', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            });
+        })
+        ->get();
+
+    return view('admin.employers.index-job-basic', compact('jobPostings'));
+}
+
+
+public function indexOutstanding()
+{
+    $user = Auth::user();
+
+    $jobPostings = JobPosting::with(['employer', 'categories', 'genres', 'countries'])
+        ->where('service_type', 'Tin nổi bật')
+        ->when(!$user->roles()->where('id', 1)->exists(), function ($query) use ($user) {
+            $query->whereHas('employer', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            });
+        })
+        ->get();
+
+    return view('admin.employers.index-job-outstanding', compact('jobPostings'));
+}
+
+
+public function indexSpecial()
+{
+    $user = Auth::user();
+
+    $jobPostings = JobPosting::with(['employer', 'categories', 'genres', 'countries'])
+        ->where('service_type', 'Tin đặc biệt')
+        ->when(!$user->roles()->where('id', 1)->exists(), function ($query) use ($user) {
+            $query->whereHas('employer', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            });
+        })
+        ->get();
+
+    return view('admin.employers.index-job-special', compact('jobPostings'));
+}
+public function orders()
+{
+    $user = Auth::user();
+
+    $orders = Order::with(['employer', 'orderDetails.service'])
+        ->when(!$user->roles()->where('id', 1)->exists(), function ($query) use ($user) {
+            $query->whereHas('employer', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            });
+        })
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
+
+    return view('admin.orders.index', compact('orders'));
+}
+
+
+   public function showOrder($id)
+{
+    $user = Auth::user();
+
+    $order = Order::with(['employer', 'orderDetails.service'])
+        ->when(!$user->roles()->where('id', 1)->exists(), function ($query) use ($user) {
+            $query->whereHas('employer', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            });
+        })
+        ->findOrFail($id);
+
+    return view('admin.orders.show', compact('order'));
+}
+public function updateOrderStatus(Request $request, $id)
+{
+    $request->validate([
+        'status' => 'required|in:Đã thanh toán,Chưa thanh toán',
+    ]);
+
+    $user = Auth::user();
+
+    DB::beginTransaction();
+    try {
+        $order = Order::with('employer')->findOrFail($id);
+
+        // Chỉ cho phép nếu là admin hoặc chủ sở hữu
+        if (!$user->roles()->where('id', 1)->exists() && $order->employer->user_id !== $user->id) {
+            abort(403, 'Bạn không có quyền cập nhật đơn hàng này.');
+        }
+
+        $order->status = $request->status;
+        $order->save();
+
+        // Nếu trạng thái là "Đã thanh toán", cập nhật ngày hết hạn
+        if ($request->status == 'Đã thanh toán') {
+            $orderDate = Carbon::now();
+            foreach ($order->orderDetails as $detail) {
+                $expiringDate = $orderDate->copy()->addWeeks($detail->number_of_weeks);
+                $detail->expiring_date = $expiringDate;
+                $detail->save();
+            }
+        }
+
+        DB::commit();
+        return redirect()->back()->with('success', 'Trạng thái đơn hàng đã được cập nhật.');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->back()->with('error', 'Đã xảy ra lỗi: ' . $e->getMessage());
+    }
+}
+
+
+
+    public function updateOrderDetailActive(Request $request, $id)
+    {
+        $request->validate([
+            'number_of_active' => 'required|integer|min:0',
+        ]);
+
+        try {
+            $orderDetail = OrderDetail::findOrFail($id);
+
+            // Ensure number_of_active doesn't exceed quantity
+            $numberActive = min($request->number_of_active, $orderDetail->quantity);
+
+            $orderDetail->number_of_active = $numberActive;
+            $orderDetail->save();
+
+            return redirect()->back()->with('success', 'Số lượng tin đang hoạt động đã được cập nhật.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Đã xảy ra lỗi: ' . $e->getMessage());
+        }
+    }
+
+
+  public function orderDetails()
+{
+    $user = Auth::user();
+
+    $orderDetails = OrderDetail::with(['order.employer', 'service'])
+        ->when(!$user->roles()->where('id', 1)->exists(), function ($query) use ($user) {
+            $query->whereHas('order.employer', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            });
+        })
+        ->orderBy('created_at', 'desc')
+        ->paginate(15);
+
+    return view('admin.order_details.index', compact('orderDetails'));
+}
     public function showApplications($id)
     {
         // Tìm tin tuyển dụng theo ID
@@ -126,14 +285,6 @@ class EmployerManageController extends Controller
         'isVerifyCompany' => $request->has('isVerifyCompany') ? 1 : 0,
         'isVerifyEmail' => $request->has('isVerifyEmail') ? 1 : 0,
         'isInfomation' => $request->has('isInfomation') ? 1 : 0,
-        'IsBasicnews' => $request->has('IsBasicnews') ? 1 : 0,
-        'isUrgentrecruitment' => $request->has('isUrgentrecruitment') ? 1 : 0,
-        'IsPrioritize' => $request->has('IsPrioritize') ? 1 : 0,
-        'IsRefresheveryhour' => $request->has('IsRefresheveryhour') ? 1 : 0,
-        'IsRefresheveryday' => $request->has('IsRefresheveryday') ? 1 : 0,
-        'IsDarkredeffect' => $request->has('IsDarkredeffect') ? 1 : 0,
-        'IsFramingeffect' => $request->has('IsFramingeffect') ? 1 : 0,
-        'IsHoteffect' => $request->has('IsHoteffect') ? 1 : 0,
     ]);
 
     $request->validate([
@@ -142,15 +293,7 @@ class EmployerManageController extends Controller
         'isVerifyCompany' => 'nullable|boolean',
         'isInfomation' => 'required|boolean',
         'level' => 'nullable|integer|in:1,2,3',
-        // Validation mới
-        'IsBasicnews' => 'nullable|boolean',
-        'isUrgentrecruitment' => 'nullable|boolean',
-        'IsPrioritize' => 'nullable|boolean',
-        'IsRefresheveryhour' => 'nullable|boolean',
-        'IsRefresheveryday' => 'nullable|boolean',
-        'IsDarkredeffect' => 'nullable|boolean',
-        'IsFramingeffect' => 'nullable|boolean',
-        'IsHoteffect' => 'nullable|boolean',
+
     ]);
 
     $employer = Employer::findOrFail($id);
@@ -162,15 +305,6 @@ class EmployerManageController extends Controller
             'isVerifyCompany',
             'isInfomation',
             'level',
-            // Thêm cột mới
-            'IsBasicnews',
-            'isUrgentrecruitment',
-            'IsPrioritize',
-            'IsRefresheveryhour',
-            'IsRefresheveryday',
-            'IsDarkredeffect',
-            'IsFramingeffect',
-            'IsHoteffect',
         ]);
         $employer->update($data);
 

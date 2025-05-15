@@ -26,6 +26,17 @@
             }
         </style>
         <!-- Recent Jobs -->
+          @if($validOrderDetails->count())
+                <h3>Các gói "Tìm ứng viên" còn hiệu lực:</h3>
+                <ul>
+                    @foreach($validOrderDetails as $detail)
+                        <li>
+                            Gói: {{ $detail->service->name }} |
+                            Số lượng còn lại: {{ $detail->number_of_active }} |
+                            Hết hạn: {{ \Carbon\Carbon::parse($detail->expiring_date)->format('d/m/Y') }}
+                        </li>
+                    @endforeach
+                </ul>
         <div class="eleven columns">
             <div class="padding-right">
                 <div class="listings-container">
@@ -130,5 +141,9 @@
             </form>
 
         </div>
+         
+            @else
+                <p>Không có gói "Tìm ứng viên" nào còn hiệu lực.</p>
+            @endif
     </div>
 @endsection

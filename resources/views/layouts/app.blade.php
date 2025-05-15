@@ -206,16 +206,77 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     </ul>
                                 </li>
 
-                                <li class="treeview {{ Request::is('candidates*') ? 'active' : '' }}">
-                                    <a href="{{ route('candidates.index') }}">
+                                <li
+                                    class="treeview {{ Request::is('candidates*') || Request::is('application-manage*') || Request::is('feedbacks*') || Request::is('supports*') || Request::is('job-reports*') ? 'active' : '' }}">
+                                    <a href="#">
                                         <img src="{{ asset('backend_admin/images/candidate-for-elections-svgrepo-com.svg') }}"
                                             alt="Google" width="20" height="20">
                                         <span> Ứng viên</span>
+                                        @if ($candidateCountTwoHour > 0)
+                                            <span class="label label-primary pull-right">{{ $candidateCountTwoHour }}
+                                            </span>
+                                        @endif
+                                        <i class="fa fa-angle-left pull-right"></i>
                                     </a>
+                                    <ul class="treeview-menu">
+                                        <li class="{{ Request::is('candidates*') ? 'active' : '' }}">
+                                            <a href="{{ route('candidates.index') }}">
+                                                <i class="fa fa-user"></i>
+                                                <span> Ứng viên</span>
+                                                @if ($candidateCountTwoHour > 0)
+                                                    <span class="label label-primary pull-right">{{ $candidateCountTwoHour }}
+                                                    </span>
+                                                @endif
+                                            </a>
+                                        </li>
+                                        <li class="treeview {{ Request::is('feedbacks*') ? 'active' : '' }}">
+                                            <a href="{{ route('feedbacks.index.list') }}">
+                                                <img src="{{ asset('backend_admin/images/feedback-positive-svgrepo-com.svg') }}"
+                                                    alt="Google" width="20" height="20"> Phản hồi ứng viên
+                                                @if ($feedbackCountTwoHour > 0)
+                                                    <span
+                                                        class="label label-primary pull-right">{{ $feedbackCountTwoHour }}</span>
+                                                @endif
+                                            </a>
+                                        </li>
+
+                                        <li class="treeview {{ Request::is('supports*') ? 'active' : '' }}">
+                                            <a href="{{ route('supports.index.list') }}">
+                                                <img src="{{ asset('backend_admin/images/support-svgrepo-com.svg') }}"
+                                                    alt="Google" width="20" height="20"> Hỗ trợ ứng viên
+                                                @if ($supportCountTwoHour > 0)
+                                                    <span
+                                                        class="label label-primary pull-right">{{ $supportCountTwoHour }}</span>
+                                                @endif
+                                            </a>
+                                        </li>
+
+                                        <li class="treeview {{ Request::is('job-reports*') ? 'active' : '' }}">
+                                            <a href="{{ route('job-reports.index') }}">
+                                                <img src="{{ asset('backend_admin/images/report-comment-svgrepo-com.svg') }}"
+                                                    alt="Google" width="20" height="20"> Tố cáo tin tuyển dụng
+                                                @if ($reportCountTwoHour > 0)
+                                                    <span
+                                                        class="label label-primary pull-right">{{ $reportCountTwoHour }}</span>
+                                                @endif
+                                            </a>
+                                        </li>
+                                        <li class="{{ Request::is('application-manage*') ? 'active' : '' }}">
+                                            <a href="{{ route('application-manage.index') }}">
+                                                <i class="fa fa-file-text-o"></i>
+                                                <span>Duyệt đơn ứng viên</span>
+                                                @if ($applicationlayout > 0)
+                                                    <span class="badge badge-danger">{{ $applicationlayout }}</span>
+                                                @endif
+                                            </a>
+                                        </li>
+
+
+                                    </ul>
                                 </li>
 
                                 <li
-                                    class="treeview {{ Request::is('employers*', 'job-postings-manage*', 'admin/companies*', 'ordermanages*', 'products*', 'employers/purchasedManage*') ? 'active' : '' }}">
+                                    class="treeview {{ Request::is('employers*','consultations*', 'job-postings-manage*', 'admin/companies*', 'ordermanages*', 'products*', 'employers/purchasedManage*') ? 'active' : '' }}">
                                     <a href="#">
                                         <img src="{{ asset('backend_admin/images/company-svgrepo-com.svg') }}" alt="Google"
                                             width="20" height="20">
@@ -223,7 +284,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                             @if (
                                                     $jobPostingCountTwoHour > 0 ||
                                                     $employerCountTwoHour > 0 ||
-                                                    $companyCountTwoHour > 0
+                                                    $companyCountTwoHour > 0||
+                                                    $consultationCountTwoHour > 0 
                                                 )
                                                 <span class="label label-primary pull-right">new</span>
                                             @endif
@@ -263,7 +325,16 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                                 @endif
                                             </a>
                                         </li>
-
+ <li class="treeview {{ Request::is('consultations*') ? 'active' : '' }}">
+                                    <a href="{{ route('consultations.index') }}">
+                                        <img src="{{ asset('backend_admin/images/register-svgrepo-com.svg') }}" alt="Google"
+                                            width="20" height="20">
+                                        <span> Đăng kí nhận tư vấn </span>
+                                        @if ($consultationCountTwoHour > 0)
+                                            <span class="label label-primary pull-right">{{ $consultationCountTwoHour }}</span>
+                                        @endif
+                                    </a>
+                                </li>
 
 
                                         <li class="{{ Request::is('products') ? 'active' : '' }}">
@@ -401,45 +472,49 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="treeview {{ Request::is('consultations*') ? 'active' : '' }}">
-                                    <a href="{{ route('consultations.index') }}">
-                                        <img src="{{ asset('backend_admin/images/register-svgrepo-com.svg') }}" alt="Google"
-                                            width="20" height="20">
-                                        <span> Đăng kí nhận tư vấn </span>
-                                        @if ($consultationCountTwoHour > 0)
-                                            <span class="label label-primary pull-right">{{ $consultationCountTwoHour }}</span>
-                                        @endif
-                                    </a>
-                                </li>
 
-                                <li class="treeview {{ Request::is('feedbacks*') ? 'active' : '' }}">
-                                    <a href="{{ route('feedbacks.index.list') }}">
-                                        <img src="{{ asset('backend_admin/images/feedback-positive-svgrepo-com.svg') }}"
-                                            alt="Google" width="20" height="20"> Phản hồi ứng viên
-                                        @if ($feedbackCountTwoHour > 0)
-                                            <span class="label label-primary pull-right">{{ $feedbackCountTwoHour }}</span>
-                                        @endif
-                                    </a>
-                                </li>
 
-                                <li class="treeview {{ Request::is('supports*') ? 'active' : '' }}">
-                                    <a href="{{ route('supports.index.list') }}">
-                                        <img src="{{ asset('backend_admin/images/support-svgrepo-com.svg') }}" alt="Google"
-                                            width="20" height="20"> Hỗ trợ ứng viên
-                                        @if ($supportCountTwoHour > 0)
-                                            <span class="label label-primary pull-right">{{ $supportCountTwoHour }}</span>
-                                        @endif
-                                    </a>
-                                </li>
 
-                                <li class="treeview {{ Request::is('job-reports*') ? 'active' : '' }}">
-                                    <a href="{{ route('job-reports.index') }}">
-                                        <img src="{{ asset('backend_admin/images/report-comment-svgrepo-com.svg') }}"
-                                            alt="Google" width="20" height="20"> Tố cáo tin tuyển dụng
-                                        @if ($reportCountTwoHour > 0)
-                                            <span class="label label-primary pull-right">{{ $reportCountTwoHour }}</span>
+                                <li
+                                    class="treeview {{ Request::is('manage/job-postings/*') || Request::is('employer/admin/employers*') ? 'active' : '' }}">
+                                    <a href="{{ route('manage.employers.indexJobPosting') }}">
+                                        <i class="fa fa-briefcase"></i> <span>Quản lý Đăng tin</span>
+                                        @if ($basicJobCountTwoHour > 0 || $outstandingJobCountTwoHour > 0 || $specialJobCountTwoHour > 0)
+                                            <span class="label label-primary pull-right">
+                                                {{ $basicJobCountTwoHour + $outstandingJobCountTwoHour + $specialJobCountTwoHour }}
+                                            </span>
                                         @endif
+                                        <i class="fa fa-angle-left pull-right"></i>
                                     </a>
+                                    <ul class="treeview-menu">
+                                        <li class="{{ Request::is('manage/job-postings/basic') ? 'active' : '' }}">
+                                            <a href="{{ route('manage.employers.indexBasic') }}">
+                                                <i class="fa fa-circle-o"></i> Tin cơ bản
+                                                @if ($basicJobCountTwoHour > 0)
+                                                    <span
+                                                        class="label label-primary pull-right">{{ $basicJobCountTwoHour }}</span>
+                                                @endif
+                                            </a>
+                                        </li>
+                                        <li class="{{ Request::is('manage/job-postings/outstanding') ? 'active' : '' }}">
+                                            <a href="{{ route('manage.employers.indexOutstanding') }}">
+                                                <i class="fa fa-star-o"></i> Tin nổi bật
+                                                @if ($outstandingJobCountTwoHour > 0)
+                                                    <span
+                                                        class="label label-primary pull-right">{{ $outstandingJobCountTwoHour }}</span>
+                                                @endif
+                                            </a>
+                                        </li>
+                                        <li class="{{ Request::is('manage/job-postings/special') ? 'active' : '' }}">
+                                            <a href="{{ route('manage.employers.indexSpecial') }}">
+                                                <i class="fa fa-star"></i> Tin đặc biệt
+                                                @if ($specialJobCountTwoHour > 0)
+                                                    <span
+                                                        class="label label-primary pull-right">{{ $specialJobCountTwoHour }}</span>
+                                                @endif
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
@@ -498,7 +573,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <ul class="dropdown-menu drp-mnu">
                                         <li>
                                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
+                                                                             document.getElementById('logout-form').submit();">
                                                 <i class="fa fa-sign-out"></i> Đăng xuất
                                             </a>
 

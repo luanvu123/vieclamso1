@@ -2,38 +2,39 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'job_posting_id',
         'candidate_id',
-        'cv_id',
-        'application_letter',
+        'job_posting_id',
+        'cv_path',
+        'introduction',
         'status',
-        'rating',
-        'note',
-        'hidden',  // hidden
-        'cv_hidden_info'
+        'saved',
+        'cv_path_hidden_info',
+        'approve_application',
+        'cv_path_resubmit',
+        'summary',
+        'order_id',
     ];
-
-    public function jobPosting()
-    {
-        return $this->belongsTo(JobPosting::class);
-    }
-
+    protected $casts = [
+        'saved' => 'boolean'
+    ];
     public function candidate()
     {
         return $this->belongsTo(Candidate::class);
     }
 
+    public function jobPosting()
+    {
+        return $this->belongsTo(JobPosting::class);
+    }
     public function cv()
     {
-        return $this->belongsTo(Cv::class);
+        return $this->belongsTo(CV::class);
     }
 }
+
 

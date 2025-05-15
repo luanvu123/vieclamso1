@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AdviserController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\ApplicationManageController;
 use App\Http\Controllers\Auth\CandidateForgotPasswordController;
 use App\Http\Controllers\Auth\EmployerForgotPasswordController;
 use App\Http\Controllers\Auth\EmployerLoginController;
@@ -126,6 +127,24 @@ Route::prefix('candidate')->group(function () {
 Route::get('/search-jobs', [SiteController::class, 'searchJobs'])->name('search-jobs');
 
 Route::group(['middleware' => ['auth']], function () {
+     Route::resource('application-manage', ApplicationManageController::class);
+    Route::post('application-manage/{id}/add-hidden-cv', [ApplicationManageController::class, 'addHiddenCv'])
+        ->name('application-manage.add-hidden-cv');
+    Route::post('application-manage/{id}/update-cv-path', [ApplicationManageController::class, 'updateCvPath'])
+        ->name('application-manage.update-cv-path');
+    Route::post('application-manage/{id}/delete-hidden-cv', [ApplicationManageController::class, 'deleteHiddenCv'])
+        ->name('application-manage.delete-hidden-cv');
+      Route::get('manage/orders', [EmployerManageController::class, 'orders'])->name('manage.orders.index');
+    Route::get('manage/orders/{id}', [EmployerManageController::class, 'showOrder'])->name('manage.orders.show');
+    Route::post('manage/orders/{id}/status', [EmployerManageController::class, 'updateOrderStatus'])->name('manage.orders.updateStatus');
+Route::get('manage/job-postings/basic', [EmployerManageController::class, 'indexBasic'])->name('manage.employers.indexBasic');
+    Route::get('manage/job-postings/outstanding', [EmployerManageController::class, 'indexOutstanding'])->name('manage.employers.indexOutstanding');
+    Route::get('manage/job-postings/special', [EmployerManageController::class, 'indexSpecial'])->name('manage.employers.indexSpecial');
+    // Routes for order details
+    Route::get('manage/order-details', [EmployerManageController::class, 'orderDetails'])->name('manage.orderDetails.index');
+    Route::post('manage/order-details/{id}/active', [EmployerManageController::class, 'updateOrderDetailActive'])->name('manage.orderDetails.updateActive');
+
+    Route::get('manage/job-postings', [EmployerManageController::class, 'indexJobPosting'])->name('manage.employers.indexJobPosting');
         Route::resource('typeservice', TypeserviceController::class);
       Route::resource('services', ServiceController::class);
     Route::resource('banks', BankController::class);
@@ -254,7 +273,8 @@ Route::get('auth/facebook/callback', [CandidateController::class, 'handleFaceboo
 
 
 Route::middleware(['candidate'])->group(function () {
-
+  Route::post('candidate/apply', [ApplicationController::class, 'store'])->name('applications.store');
+  Route::get('/candidate/check-application/{jobPostingId}', [ApplicationController::class, 'checkApplicationStatus'])->name('candidate.check-application')->middleware('candidate');
     Route::get('/cv-coffee', [CvController::class, 'cvCoffee'])->name('cv.coffee');
     Route::get('/cv-template', [CvController::class, 'show'])->name('cv.template');
     Route::get('/cv-minimalism', [CvController::class, 'cvMinimalism'])->name('cv.minimalism');
@@ -314,7 +334,7 @@ Route::middleware(['candidate'])->group(function () {
 
     Route::post('company/{id}/follow', [CompanyFollowerController::class, 'follow'])->name('company.follow');
     Route::post('company/{id}/unfollow', [CompanyFollowerController::class, 'unfollow'])->name('company.unfollow');
-    Route::post('applications', [ApplicationController::class, 'store'])->name('applications.store');
+
     Route::post('save-job', [SavedJobController::class, 'store'])->name('save-job');
     Route::get('saved-jobs', [SavedJobController::class, 'index'])->name('saved-jobs');
     Route::post('unsave-job', [SavedJobController::class, 'unsave'])->name('unsave-job');
@@ -400,6 +420,8 @@ Route::middleware(['employer'])->group(function () {
      Route::post('/employer/add-to-cart', [JobPostingController::class, 'addToCart'])->name('employer.addToCart');
     // web.php
     Route::delete('employer/cart/{id}', [JobPostingController::class, 'removeFromCart'])->name('employer.removeFromCart');
-
+   Route::get('/employer/services', [JobPostingController::class, 'services'])->name('employer.services');
     Route::get('employer/get-cart-count', [JobPostingController::class, 'getCartCount'])->name('employer.getCartCount');
+    Route::get('dich-vu-da-mua', [JobPostingController::class, 'serviceActive'])
+        ->name('employer.service-active')->middleware('employer');
 });

@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\Company;
 use App\Models\JobPosting;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Purchased;
 use App\Models\Salary;
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Mail\ApplicationStatusUpdate;
 use App\Models\Bank;
 use App\Models\Notification;
+use App\Models\Order;
 use App\Models\SavedProfile;
 use App\Models\Service;
 use App\Models\Typeservice;
@@ -127,9 +129,19 @@ class JobPostingController extends Controller
             });
         }
         $candidates = $query->paginate(10);
+
         $categories = Category::all();
 
         $employer = Auth::guard('employer')->user();
+        $validOrderDetails = OrderDetail::whereHas('order', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id)
+                ->where('status', 'Đã thanh toán');
+        })
+            ->whereHas('service', function ($query) {
+                $query->where('name', 'Tìm ứng viên');
+            })
+            ->whereDate('expiring_date', '>=', Carbon::today())
+            ->get();
         $recentMessagesCount = $employer->messages()
             ->where('created_at', '>=', Carbon::now()->subHours(5))
             ->count();
@@ -272,13 +284,45 @@ class JobPostingController extends Controller
         if ($employer->level != 3) {
             return redirect()->back()->with('error', 'Bạn cần có cấp độ 3 để tạo việc làm.');
         }
-
+ $basicServiceDetails = OrderDetail::whereHas('order', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id)
+                ->where('status', 'Đã thanh toán');
+        })
+            ->whereHas('service', function ($query) {
+                $query->where('name', 'Tin cơ bản');
+            })
+            ->whereDate('expiring_date', '>=', Carbon::today())
+            ->where('number_of_active', '>', 0)
+            ->with(['service'])
+            ->get();
+        $hotServiceDetails = OrderDetail::whereHas('order', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id)
+                ->where('status', 'Đã thanh toán');
+        })
+            ->whereHas('service', function ($query) {
+                $query->where('name', 'Tin nổi bật');
+            })
+            ->whereDate('expiring_date', '>=', Carbon::today())
+            ->where('number_of_active', '>', 0)
+            ->with(['service'])
+            ->get();
+        $specialServiceDetails = OrderDetail::whereHas('order', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id)
+                ->where('status', 'Đã thanh toán');
+        })
+            ->whereHas('service', function ($query) {
+                $query->where('name', 'Tin đặc biệt');
+            })
+            ->whereDate('expiring_date', '>=', Carbon::today())
+            ->where('number_of_active', '>', 0)
+            ->with(['service'])
+            ->get();
         $email = $employer->email;
         $categories = Category::all();
         $cities = City::all();
         $company = $employer->company;
         $salaries = Salary::where('status', 'active')->get();
-        return view('job_postings.create', compact('email', 'categories', 'company', 'cities', 'salaries', 'recentMessagesCount', 'recentApplicationsCount'));
+        return view('job_postings.create', compact('email', 'categories', 'company', 'cities', 'salaries', 'recentMessagesCount', 'recentApplicationsCount','basicServiceDetails', 'hotServiceDetails', 'specialServiceDetails'));
     }
 
 
@@ -545,7 +589,7 @@ class JobPostingController extends Controller
     }
 
 
-    public function showCart()
+    public function services()
     {
 
         $employer = Auth::guard('employer')->user();
@@ -566,7 +610,26 @@ class JobPostingController extends Controller
             ->where('created_at', '>=', Carbon::now()->subHours(5))
             ->count();
         // Truyền dữ liệu carts sang view
-        return view('job_postings.cart', compact('carts', 'recentMessagesCount', 'recentApplicationsCount', 'typeservices', 'exchangeRate'));
+        return view('job_postings.services', compact('carts', 'recentMessagesCount', 'recentApplicationsCount', 'typeservices', 'exchangeRate'));
+    }
+      public function serviceActive()
+    {
+        $employer = Auth::guard('employer')->user();
+ $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $orders = Order::with(['orderDetails.cart'])
+            ->where('employer_id', $employer->id)
+            ->where('status', 'Đã thanh toán')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('job_postings.service-active', compact('employer', 'orders', 'recentMessagesCount', 'recentApplicationsCount'));
     }
     public function removeFromCart($id)
     {
@@ -764,11 +827,14 @@ class JobPostingController extends Controller
         })
             ->where('created_at', '>=', Carbon::now()->subHours(5))
             ->count();
-        // Lấy danh sách cart của employer từ bảng pivot cart_employer
-        $cartEmployers = $employer->carts()->withPivot('start_date', 'end_date', 'user_id')->get();
 
+  $orders = Order::with(['orderDetails.cart'])
+            ->where('employer_id', $employer->id)
+            ->where('status', 'Đã thanh toán')
+            ->orderBy('created_at', 'desc')
+            ->get();
         // Truyền dữ liệu sang view để hiển thị
-        return view('job_postings.cart_employer', compact('employer', 'cartEmployers', 'recentMessagesCount', 'recentApplicationsCount'));
+        return view('job_postings.cart_employer', compact('employer', 'recentMessagesCount', 'recentApplicationsCount','orders'));
     }
     public function showCheckout()
     {

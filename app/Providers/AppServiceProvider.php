@@ -83,7 +83,19 @@ class AppServiceProvider extends ServiceProvider
         $publiclink_layout = PublicLink::where('status', 'active')->get();
 
         $orderpurchasedCountTwoHour = Purchased::where('created_at', '>=', $twoHoursAgo)->count();
+  $basicJobCountTwoHour = JobPosting::where('created_at', '>=', Carbon::now()->subHours(2))
+                ->where('service_type', 'Tin cơ bản')
 
+                ->count();
+
+            $outstandingJobCountTwoHour = JobPosting::where('created_at', '>=', Carbon::now()->subHours(2))
+                ->where('service_type', 'Tin nổi bật')
+                ->count();
+
+            $specialJobCountTwoHour = JobPosting::where('created_at', '>=', Carbon::now()->subHours(2))
+                ->where('service_type', 'Tin đặc biệt')
+
+                ->count();
         View::composer('layout-recruitment', function ($view) {
             $infolglg = Info::find(1);
             $ecosystems_layout_lg = Ecosystem::where('status', 1)->get();
@@ -118,6 +130,9 @@ class AppServiceProvider extends ServiceProvider
             'reportCountTwoHour' => $reportCountTwoHour,
             'consultationCountTwoHour' => $consultationCountTwoHour,
             'orderpurchasedCountTwoHour' => $orderpurchasedCountTwoHour,
+            'basicJobCountTwoHour'=> $basicJobCountTwoHour,
+                'outstandingJobCountTwoHour'=> $outstandingJobCountTwoHour,
+                'specialJobCountTwoHour'=> $specialJobCountTwoHour,
 
         ]);
     }

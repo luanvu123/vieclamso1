@@ -4,6 +4,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ApplicationNotification;
 use App\Models\Application;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,39 +15,114 @@ use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
 {
-  public function store(Request $request)
-{
-    $candidate = Auth::guard('candidate')->user();
+    public function __construct()
+    {
+        $this->middleware('candidate');
+    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'job_posting_id' => 'required|exists:job_postings,id',
+            'cv' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'cv_id' => 'nullable|exists:cvs,id',
+            'introduction' => 'nullable|string|max:1000'
+        ]);
 
-    // Kiểm tra trạng thái của ứng viên
-    if ($candidate->status != 1) {
-        // Nếu trạng thái không phải 1, hiển thị thông báo lỗi
-        return redirect()->back()->with('error', 'Hồ sơ của bạn đang chờ duyệt.');
+        $candidate = auth('candidate')->user();
+
+        $existing = Application::where('candidate_id', $candidate->id)
+            ->where('job_posting_id', $request->job_posting_id)
+            ->latest()
+            ->first();
+
+        $cvPath = null;
+
+        // Trường hợp chọn CV có sẵn
+        if ($request->cv_id) {
+            $cv = $candidate->cvs()->where('cvs.id', $request->cv_id)->first();
+            if (!$cv)
+                return response()->json(['status' => 'error', 'message' => 'CV không hợp lệ'], 422);
+          $cvPath = $cv->cv_path;
+
+        }
+
+        // Trường hợp upload CV mới
+        if ($request->hasFile('cv')) {
+            $cvPath = $request->file('cv')->store('cv', 'public');
+        }
+
+        if (!$cvPath) {
+            return response()->json(['status' => 'error', 'message' => 'Vui lòng chọn hoặc tải lên CV'], 422);
+        }
+
+        if ($existing && $existing->created_at->diffInHours(now()) < 24) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Bạn chỉ có thể cập nhật CV sau 24 giờ kể từ lần nộp trước.'
+            ], 422);
+        }
+
+        if ($existing) {
+            if ($existing->created_at->diffInHours(now()) < 24) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Bạn chỉ có thể nộp lại hồ sơ sau 24 giờ kể từ lần nộp trước.'
+                ], 422);
+            }
+
+            // Nếu nộp lại sau 24h -> Lưu CV mới vào cv_path_resubmit
+            $existing->update([
+                'cv_path_resubmit' => $cvPath,
+                'introduction' => $request->introduction,
+                'updated_at' => now(),
+            ]);
+
+            $application = $existing;
+        } else {
+            // Tạo mới
+            $application = Application::create([
+                'candidate_id' => $candidate->id,
+                'job_posting_id' => $request->job_posting_id,
+                'cv_path' => $cvPath,
+                'introduction' => $request->introduction,
+            ]);
+        }
+
+
+        $jobPosting = $application->jobPosting;
+        if ($jobPosting->employer->email) {
+            Mail::to($jobPosting->employer->email)->send(new ApplicationNotification($application));
+        }
+        // Gửi email thông báo
+        Mail::to($application->candidate->email)->send(new ApplicationSuccess($application));
+        return response()->json([
+            'status' => 'success',
+            'message' => $existing ? 'Nộp lại hồ sơ thành công' : 'Nộp hồ sơ thành công'
+        ]);
     }
 
-    // Xóa ứng tuyển hiện tại nếu tồn tại
-    $existingApplication = Application::where('job_posting_id', $request->job_posting_id)
-        ->where('candidate_id', $candidate->id)
-        ->first();
+    public function checkApplication($jobPostingId)
+    {
+        $candidateId = Auth::guard('candidate')->id();
 
-    if ($existingApplication) {
-        $existingApplication->delete();
+        $application = Application::where('candidate_id', $candidateId)
+            ->where('job_posting_id', $jobPostingId)
+            ->latest()
+            ->first();
+
+        if ($application) {
+            return response()->json([
+                'hasApplied' => true,
+                'applicationDate' => $application->created_at,
+                'lastUpdateDate' => $application->updated_at,
+            ]);
+        }
+
+        return response()->json(['hasApplied' => false]);
     }
 
-    // Tạo ứng tuyển mới
-    $application = new Application();
-    $application->job_posting_id = $request->job_posting_id;
-    $application->candidate_id = $candidate->id;
-    $application->cv_id = $request->cv_id;
-    $application->application_letter = $request->application_letter;
-    $application->save();
 
-    // Gửi email thông báo
-    Mail::to($application->candidate->email)->send(new ApplicationSuccess($application));
 
-    session()->flash('success', 'Ứng tuyển thành công!');
-    return redirect()->back();
-}
 
 
     public function showAppliedJobs()
@@ -62,3 +138,4 @@ class ApplicationController extends Controller
         return view('pages.history', compact('applications', 'notifications'));
     }
 }
+

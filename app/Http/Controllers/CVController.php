@@ -39,31 +39,37 @@ class CVController extends Controller
             ->get();
         return view('pages.upload-cv', compact('notifications'));
     }
-    public function uploadCv(Request $request)
-    {
-        $request->validate([
-            'file_upload_cv' => 'required|file|mimes:pdf|max:5120', // chỉ chấp nhận file PDF và tối đa 5MB
+   public function uploadCv(Request $request)
+{
+    $request->validate([
+        'file_upload_cv' => 'required|file|mimes:pdf|max:5120',
+    ]);
+
+    $candidate = Auth::guard('candidate')->user();
+
+    if ($request->hasFile('file_upload_cv')) {
+        $pdfFile = $request->file('file_upload_cv');
+        $pdfPath = $pdfFile->store('cvs', 'public');
+
+        // Chuyển đổi PDF thành hình ảnh
+        $imagePath = $this->convertPdfToImage($pdfFile);
+
+        // Lưu vào bảng cvs
+        $cv = new Cv();
+        $cv->cv_path = $pdfPath;
+        $cv->image_path = $imagePath;
+        $cv->save();
+
+        // Gắn vào bảng candidate_cv
+        $candidate->cvs()->attach($cv->id, [
+            'is_primary' => false,
+            'is_active' => true,
         ]);
-
-        $candidate = Auth::guard('candidate')->user();
-
-        if ($request->hasFile('file_upload_cv')) {
-            $pdfFile = $request->file('file_upload_cv');
-            $pdfPath = $pdfFile->store('cvs', 'public');
-
-            // Chuyển đổi PDF thành hình ảnh đầu tiên
-            $imagePath = $this->convertPdfToImage($pdfFile);
-
-            // Lưu thông tin CV vào database
-            $cv = new Cv();
-            $cv->candidate_id = $candidate->id;
-            $cv->cv_path = $pdfPath;
-            $cv->image_path = $imagePath;
-            $cv->save();
-        }
-
-        return redirect()->back()->with('success', 'CV đã được tải lên.');
     }
+
+    return redirect()->back()->with('success', 'CV đã được tải lên.');
+}
+
 
     private function convertPdfToImage($pdfFile)
     {
