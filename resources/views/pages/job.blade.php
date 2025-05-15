@@ -142,7 +142,7 @@
                                                 {{-- Ứng tuyển thành công --}}
                                                 <div class="job-detail__info--actions box-apply-success">
                                                     <a class="job-detail__info--actions-button button-primary open-apply-modal" href="#"
-                                                        data-target="#applyModal" data-toggle="modal">
+                                                        data-target="#applyModal" data-toggle="modal"  data-job-id="{{ $jobPosting->id }}">
                                                         <span class="button-icon">
                                                             <i class="fa-solid fa-arrow-rotate-right"></i>
                                                         </span>
@@ -166,7 +166,7 @@
                                             @else
                                                 <a href="#"
                                                     class="job-detail__info--actions-button button-primary open-apply-modal btn-apply-job"
-                                                    data-toggle="modal" data-target="#applyModal">
+                                                    data-toggle="modal" data-target="#applyModal" data-job-id="{{ $jobPosting->id }}">
                                                     <span class="button-icon">
                                                         <i class="fa-light fa-paper-plane"></i>
                                                     </span>
@@ -177,7 +177,7 @@
                                     @else
                                         <a href="#"
                                             class="job-detail__info--actions-button button-primary open-apply-modal btn-apply-job"
-                                            data-toggle="modal" data-target="#applyModal">
+                                            data-toggle="modal" data-target="#applyModal" data-job-id="{{ $jobPosting->id }}">
                                             <span class="button-icon">
                                                 <i class="fa-light fa-paper-plane"></i>
                                             </span>
@@ -254,7 +254,7 @@
                                         <div class="job-detail__information-detail--actions-button box-apply-current">
                                             <button type="submit"
                                                 class="job-detail__info--actions-button button-primary open-apply-modal btn-apply-job"
-                                                data-toggle="modal" data-target="#applyModal">
+                                                data-toggle="modal" data-target="#applyModal" data-job-id="{{ $jobPosting->id }}">
                                                 <span class="button-icon">
                                                     <i class="fa-light fa-paper-plane"></i>
                                                 </span>
@@ -698,7 +698,7 @@
                                                                     </div>
                                                                     <div class="icon">
                                                                         <button data-toggle="modal" data-target="#applyModal"
-                                                                            class="btn btn-apply-now">
+                                                                            class="btn btn-apply-now" data-job-id="{{ $relatedJob->id }}">
                                                                             <span>Ứng tuyển</span>
                                                                         </button>
                                                                         <div class="box-save-job">
@@ -1295,13 +1295,6 @@
                 </div>
             </div>
         </div>
-
-        <script>
-            function submitApplyForm() {
-                document.getElementById('applyForm').submit();
-            }
-        </script>
-
 
         <script>
             function submitApplyForm() {
