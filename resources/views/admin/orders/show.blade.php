@@ -43,7 +43,7 @@
                                 <tr>
                                     <th>Nhà tuyển dụng</th>
                                     <td>
-                                        <a href="{{ route('manage.employers.show', $order->employer_id) }}">
+                                        <a href="{{ route('employers.show', $order->employer_id) }}">
                                             {{ $order->employer->name }}
                                         </a>
                                     </td>

@@ -20,86 +20,95 @@ class ApplicationController extends Controller
         $this->middleware('candidate');
     }
     public function store(Request $request)
-    {
-        $request->validate([
-            'job_posting_id' => 'required|exists:job_postings,id',
-            'cv' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'cv_id' => 'nullable|exists:cvs,id',
-            'introduction' => 'nullable|string|max:1000'
-        ]);
+{
+    // Log the incoming request data for debugging
+    \Log::info('Application submission data:', $request->all());
 
-        $candidate = auth('candidate')->user();
+    $request->validate([
+        'job_posting_id' => 'required|exists:job_postings,id',
+        'cv' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'cv_id' => 'nullable|exists:cvs,id',
+        'introduction' => 'nullable|string|max:1000'
+    ]);
 
-        $existing = Application::where('candidate_id', $candidate->id)
-            ->where('job_posting_id', $request->job_posting_id)
-            ->latest()
-            ->first();
+    $candidate = auth('candidate')->user();
 
-        $cvPath = null;
+    // Verify the job_posting_id is correct
+    $jobPosting = \App\Models\JobPosting::find($request->job_posting_id);
+    if (!$jobPosting) {
+        \Log::error('Job posting not found with ID: ' . $request->job_posting_id);
+        return response()->json(['status' => 'error', 'message' => 'Công việc không tồn tại'], 422);
+    }
 
-        // Trường hợp chọn CV có sẵn
-        if ($request->cv_id) {
-            $cv = $candidate->cvs()->where('cvs.id', $request->cv_id)->first();
-            if (!$cv)
-                return response()->json(['status' => 'error', 'message' => 'CV không hợp lệ'], 422);
-          $cvPath = $cv->cv_path;
+    $existing = Application::where('candidate_id', $candidate->id)
+        ->where('job_posting_id', $request->job_posting_id)
+        ->latest()
+        ->first();
 
-        }
+    $cvPath = null;
 
-        // Trường hợp upload CV mới
-        if ($request->hasFile('cv')) {
-            $cvPath = $request->file('cv')->store('cv', 'public');
-        }
+    // Trường hợp chọn CV có sẵn
+    if ($request->cv_id) {
+        $cv = $candidate->cvs()->where('cvs.id', $request->cv_id)->first();
+        if (!$cv)
+            return response()->json(['status' => 'error', 'message' => 'CV không hợp lệ'], 422);
+        $cvPath = $cv->cv_path;
+    }
 
-        if (!$cvPath) {
-            return response()->json(['status' => 'error', 'message' => 'Vui lòng chọn hoặc tải lên CV'], 422);
-        }
+    // Trường hợp upload CV mới
+    if ($request->hasFile('cv')) {
+        $cvPath = $request->file('cv')->store('cv', 'public');
+    }
 
-        if ($existing && $existing->created_at->diffInHours(now()) < 24) {
+    if (!$cvPath) {
+        return response()->json(['status' => 'error', 'message' => 'Vui lòng chọn hoặc tải lên CV'], 422);
+    }
+
+    if ($existing && $existing->created_at->diffInHours(now()) < 24) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Bạn chỉ có thể cập nhật CV sau 24 giờ kể từ lần nộp trước.'
+        ], 422);
+    }
+
+    if ($existing) {
+        if ($existing->created_at->diffInHours(now()) < 24) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Bạn chỉ có thể cập nhật CV sau 24 giờ kể từ lần nộp trước.'
+                'message' => 'Bạn chỉ có thể nộp lại hồ sơ sau 24 giờ kể từ lần nộp trước.'
             ], 422);
         }
 
-        if ($existing) {
-            if ($existing->created_at->diffInHours(now()) < 24) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Bạn chỉ có thể nộp lại hồ sơ sau 24 giờ kể từ lần nộp trước.'
-                ], 422);
-            }
+        // Nếu nộp lại sau 24h -> Lưu CV mới vào cv_path_resubmit
+        $existing->update([
+            'cv_path_resubmit' => $cvPath,
+            'introduction' => $request->introduction,
+            'updated_at' => now(),
+        ]);
 
-            // Nếu nộp lại sau 24h -> Lưu CV mới vào cv_path_resubmit
-            $existing->update([
-                'cv_path_resubmit' => $cvPath,
-                'introduction' => $request->introduction,
-                'updated_at' => now(),
-            ]);
-
-            $application = $existing;
-        } else {
-            // Tạo mới
-            $application = Application::create([
-                'candidate_id' => $candidate->id,
-                'job_posting_id' => $request->job_posting_id,
-                'cv_path' => $cvPath,
-                'introduction' => $request->introduction,
-            ]);
-        }
-
-
-        $jobPosting = $application->jobPosting;
-        if ($jobPosting->employer->email) {
-            Mail::to($jobPosting->employer->email)->send(new ApplicationNotification($application));
-        }
-        // Gửi email thông báo
-        Mail::to($application->candidate->email)->send(new ApplicationSuccess($application));
-        return response()->json([
-            'status' => 'success',
-            'message' => $existing ? 'Nộp lại hồ sơ thành công' : 'Nộp hồ sơ thành công'
+        $application = $existing;
+    } else {
+        // Tạo mới
+        $application = Application::create([
+            'candidate_id' => $candidate->id,
+            'job_posting_id' => $request->job_posting_id,
+            'cv_path' => $cvPath,
+            'introduction' => $request->introduction,
         ]);
     }
+
+    $jobPosting = $application->jobPosting;
+    if ($jobPosting->employer->email) {
+        Mail::to($jobPosting->employer->email)->send(new ApplicationNotification($application));
+    }
+    // Gửi email thông báo
+    Mail::to($application->candidate->email)->send(new ApplicationSuccess($application));
+
+    return response()->json([
+        'status' => 'success',
+        'message' => $existing ? 'Nộp lại hồ sơ thành công' : 'Nộp hồ sơ thành công'
+    ]);
+}
 
     public function checkApplication($jobPostingId)
     {

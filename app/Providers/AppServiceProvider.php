@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Application;
 use App\Models\Award;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -18,7 +19,7 @@ use App\Models\Figure;
 use App\Models\GenrePost;
 use App\Models\Info;
 use App\Models\JobReport;
-
+use App\Models\Order;
 use App\Models\Partner;
 use App\Models\PublicLink;
 use App\Models\Purchased;
@@ -81,7 +82,9 @@ class AppServiceProvider extends ServiceProvider
         $feedbackCountTwoHour = Feedback::where('created_at', '>=', $twoHoursAgo)->count();
         $supportCountTwoHour = Support::where('created_at', '>=', $twoHoursAgo)->count();
         $publiclink_layout = PublicLink::where('status', 'active')->get();
-
+  $applicationlayout = Application::where('approve_application', 'Chờ duyệt')
+                ->where('created_at', '>=', Carbon::now()->subHours(24))
+                ->count();
         $orderpurchasedCountTwoHour = Purchased::where('created_at', '>=', $twoHoursAgo)->count();
   $basicJobCountTwoHour = JobPosting::where('created_at', '>=', Carbon::now()->subHours(2))
                 ->where('service_type', 'Tin cơ bản')
@@ -96,6 +99,8 @@ class AppServiceProvider extends ServiceProvider
                 ->where('service_type', 'Tin đặc biệt')
 
                 ->count();
+                 $orderCountTwoHour = Order::where('created_at', '>=', Carbon::now()->subHours(2))->count();
+
         View::composer('layout-recruitment', function ($view) {
             $infolglg = Info::find(1);
             $ecosystems_layout_lg = Ecosystem::where('status', 1)->get();
@@ -119,7 +124,7 @@ class AppServiceProvider extends ServiceProvider
             'typeFeedbacks' => $typeFeedbacks,
             'typeSupports' => $typeSupports,
             'publiclink_layout' => $publiclink_layout,
-
+             'orderCountTwoHour' => $orderCountTwoHour,
             'info' => $info,
             'candidateCountTwoHour' => $candidateCountTwoHour,
             'employerCountTwoHour' => $employerCountTwoHour,
@@ -133,6 +138,7 @@ class AppServiceProvider extends ServiceProvider
             'basicJobCountTwoHour'=> $basicJobCountTwoHour,
                 'outstandingJobCountTwoHour'=> $outstandingJobCountTwoHour,
                 'specialJobCountTwoHour'=> $specialJobCountTwoHour,
+            'applicationlayout' => $applicationlayout,
 
         ]);
     }

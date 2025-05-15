@@ -276,16 +276,16 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 </li>
 
                                 <li
-                                    class="treeview {{ Request::is('employers*','consultations*', 'job-postings-manage*', 'admin/companies*', 'ordermanages*', 'products*', 'employers/purchasedManage*') ? 'active' : '' }}">
+                                    class="treeview {{ Request::is('employers*','consultations*', 'job-postings-manage*', 'admin/companies*','manage/orders*', 'ordermanages*', 'products*', 'employers/purchasedManage*') ? 'active' : '' }}">
                                     <a href="#">
                                         <img src="{{ asset('backend_admin/images/company-svgrepo-com.svg') }}" alt="Google"
                                             width="20" height="20">
-                                        <span> Nhà tuyẻn dụng
+                                        <span> Nhà tuyển dụng
                                             @if (
                                                     $jobPostingCountTwoHour > 0 ||
                                                     $employerCountTwoHour > 0 ||
                                                     $companyCountTwoHour > 0||
-                                                    $consultationCountTwoHour > 0 
+                                                    $consultationCountTwoHour > 0
                                                 )
                                                 <span class="label label-primary pull-right">new</span>
                                             @endif
@@ -311,6 +311,16 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                                 @if ($jobPostingCountTwoHour > 0)
                                                     <span
                                                         class="label label-primary pull-right">{{ $jobPostingCountTwoHour }}</span>
+                                                @endif
+                                            </a>
+                                        </li>
+  <li class="{{ Request::is('manage/orders*') ? 'active' : '' }}">
+                                            <a href="{{ route('manage.orders.index') }}">
+                                                <img src="{{ asset('backend_admin/images/order-1-svgrepo-com.svg') }}"
+                                                    alt="Google" width="20" height="20"> Mua tin
+                                                @if ($orderCountTwoHour > 0)
+                                                    <span class="label label-primary pull-right">{{ $orderCountTwoHour }}
+                                                        New</span>
                                                 @endif
                                             </a>
                                         </li>

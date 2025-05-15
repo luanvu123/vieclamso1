@@ -23,11 +23,11 @@
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>
-    {{ $application->candidate->name ?? 'N/A' }}
-    @if($application->approve_application === 'Chờ duyệt' && $application->created_at >= now()->subHours(24))
-        <span class="badge badge-success">New</span>
-    @endif
-</td>
+                            {{ $application->candidate->email ?? 'N/A' }}
+                            @if($application->approve_application === 'Chờ duyệt' && $application->created_at >= now()->subHours(24))
+                                <span class="badge badge-success">New</span>
+                            @endif
+                        </td>
 
                         <td>
                             @if($application->cv_path)
