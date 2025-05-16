@@ -82,6 +82,14 @@
                                     <td>
                                         <a href="{{ route('job-postings-manage.show', $jobPosting->id) }}"><i
                                                 class="fa fa-eye"></i> View</a>
+                                                <a href="{{ route('job-postings-manage.edit', $jobPosting->id) }}" class="btn btn-sm btn-warning">Edit</a>
+
+<form action="{{ route('job-postings-manage.destroy', $jobPosting->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure?')">
+    @csrf
+    @method('DELETE')
+    <button class="btn btn-sm btn-danger">Delete</button>
+</form>
+
                                     </td>
                                 </tr>
                             @endforeach

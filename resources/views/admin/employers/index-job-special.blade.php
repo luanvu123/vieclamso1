@@ -29,19 +29,25 @@
                             </td>
                             <td>{{ $jobPosting->employer->email }}</td>
                             <td>{{ $jobPosting->created_at->format('M d, Y') }}</td>
+                           <td>
+    @if($jobPosting->status == 0)
+        <span class="badge badge-success">Đã duyệt</span>
+    @elseif($jobPosting->status == 1)
+        <span class="badge badge-warning">Chưa duyệt</span>
+    @else
+        <span class="badge badge-danger">Từ chối</span>
+    @endif
+</td>
+
                             <td>
-                                @if($jobPosting->status == 'active')
-                                    <span class="badge badge-success">Active</span>
-                                @elseif($jobPosting->status == 'inactive')
-                                    <span class="badge badge-secondary">Inactive</span>
-                                @elseif($jobPosting->status == 'pending')
-                                    <span class="badge badge-warning">Pending</span>
-                                @else
-                                    <span class="badge badge-danger">Rejected</span>
-                                @endif
-                            </td>
-                            <td>
-                                <a href="{{ route('employer.admin.job-postings.edit', ['employerId' => $jobPosting->employer->id, 'jobPostingId' => $jobPosting->id]) }}" class="btn btn-primary btn-sm">Sửa</a>
+                                <a href="{{ route('job-postings-manage.edit', $jobPosting->id) }}" class="btn btn-sm btn-warning">Edit</a>
+
+<form action="{{ route('job-postings-manage.destroy', $jobPosting->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure?')">
+    @csrf
+    @method('DELETE')
+    <button class="btn btn-sm btn-danger">Delete</button>
+</form>
+
                             </td>
                         </tr>
                     @endforeach

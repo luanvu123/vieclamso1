@@ -63,7 +63,7 @@ public function indexBasic()
 {
     $user = Auth::user();
 
-    $jobPostings = JobPosting::with(['employer', 'categories', 'genres', 'countries'])
+    $jobPostings = JobPosting::with(['employer', 'categories', 'cities'])
         ->where('service_type', 'Tin cơ bản')
         ->when(!$user->roles()->where('id', 1)->exists(), function ($query) use ($user) {
             $query->whereHas('employer', function ($q) use ($user) {
@@ -80,7 +80,7 @@ public function indexOutstanding()
 {
     $user = Auth::user();
 
-    $jobPostings = JobPosting::with(['employer', 'categories', 'genres', 'countries'])
+    $jobPostings = JobPosting::with(['employer', 'categories', 'cities'])
         ->where('service_type', 'Tin nổi bật')
         ->when(!$user->roles()->where('id', 1)->exists(), function ($query) use ($user) {
             $query->whereHas('employer', function ($q) use ($user) {
@@ -97,7 +97,7 @@ public function indexSpecial()
 {
     $user = Auth::user();
 
-    $jobPostings = JobPosting::with(['employer', 'categories', 'genres', 'countries'])
+    $jobPostings = JobPosting::with(['employer', 'categories', 'cities'])
         ->where('service_type', 'Tin đặc biệt')
         ->when(!$user->roles()->where('id', 1)->exists(), function ($query) use ($user) {
             $query->whereHas('employer', function ($q) use ($user) {

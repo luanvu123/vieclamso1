@@ -127,17 +127,17 @@ Route::prefix('candidate')->group(function () {
 Route::get('/search-jobs', [SiteController::class, 'searchJobs'])->name('search-jobs');
 
 Route::group(['middleware' => ['auth']], function () {
-     Route::resource('application-manage', ApplicationManageController::class);
+    Route::resource('application-manage', ApplicationManageController::class);
     Route::post('application-manage/{id}/add-hidden-cv', [ApplicationManageController::class, 'addHiddenCv'])
         ->name('application-manage.add-hidden-cv');
     Route::post('application-manage/{id}/update-cv-path', [ApplicationManageController::class, 'updateCvPath'])
         ->name('application-manage.update-cv-path');
     Route::post('application-manage/{id}/delete-hidden-cv', [ApplicationManageController::class, 'deleteHiddenCv'])
         ->name('application-manage.delete-hidden-cv');
-      Route::get('manage/orders', [EmployerManageController::class, 'orders'])->name('manage.orders.index');
+    Route::get('manage/orders', [EmployerManageController::class, 'orders'])->name('manage.orders.index');
     Route::get('manage/orders/{id}', [EmployerManageController::class, 'showOrder'])->name('manage.orders.show');
     Route::post('manage/orders/{id}/status', [EmployerManageController::class, 'updateOrderStatus'])->name('manage.orders.updateStatus');
-Route::get('manage/job-postings/basic', [EmployerManageController::class, 'indexBasic'])->name('manage.employers.indexBasic');
+    Route::get('manage/job-postings/basic', [EmployerManageController::class, 'indexBasic'])->name('manage.employers.indexBasic');
     Route::get('manage/job-postings/outstanding', [EmployerManageController::class, 'indexOutstanding'])->name('manage.employers.indexOutstanding');
     Route::get('manage/job-postings/special', [EmployerManageController::class, 'indexSpecial'])->name('manage.employers.indexSpecial');
     // Routes for order details
@@ -145,8 +145,8 @@ Route::get('manage/job-postings/basic', [EmployerManageController::class, 'index
     Route::post('manage/order-details/{id}/active', [EmployerManageController::class, 'updateOrderDetailActive'])->name('manage.orderDetails.updateActive');
 
     Route::get('manage/job-postings', [EmployerManageController::class, 'indexJobPosting'])->name('manage.employers.indexJobPosting');
-        Route::resource('typeservice', TypeserviceController::class);
-      Route::resource('services', ServiceController::class);
+    Route::resource('typeservice', TypeserviceController::class);
+    Route::resource('services', ServiceController::class);
     Route::resource('banks', BankController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('cv_templates', CVTemplateController::class);
@@ -210,8 +210,8 @@ Route::get('manage/job-postings/basic', [EmployerManageController::class, 'index
     Route::resource('employers', EmployerManageController::class);
 
     Route::get('employers/{id}/job-postings', [EmployerManageController::class, 'showJobPostings'])->name('employers.job-postings');
-Route::get('admin/job-postings/{id}/applications', [EmployerManageController::class, 'showApplications'])->name('job-postings.applications');
-Route::patch('/applications/{id}/update-cv-hidden-info', [EmployerManageController::class, 'updateCvHiddenInfo'])->name('applications.updateCvHiddenInfo');
+    Route::get('admin/job-postings/{id}/applications', [EmployerManageController::class, 'showApplications'])->name('job-postings.applications');
+    Route::patch('/applications/{id}/update-cv-hidden-info', [EmployerManageController::class, 'updateCvHiddenInfo'])->name('applications.updateCvHiddenInfo');
 
     Route::get('employers/{employer}/add-cart', [EmployerManageController::class, 'addCart'])->name('employers.add-cart');
     Route::post('employers/{employer}/store-cart', [EmployerManageController::class, 'storeCart'])->name('employers.store-cart');
@@ -273,8 +273,8 @@ Route::get('auth/facebook/callback', [CandidateController::class, 'handleFaceboo
 
 
 Route::middleware(['candidate'])->group(function () {
-  Route::post('candidate/apply', [ApplicationController::class, 'store'])->name('applications.store');
-  Route::get('/candidate/check-application/{jobPostingId}', [ApplicationController::class, 'checkApplicationStatus'])->name('candidate.check-application')->middleware('candidate');
+    Route::post('candidate/apply', [ApplicationController::class, 'store'])->name('applications.store');
+    Route::get('/candidate/check-application/{jobPostingId}', [ApplicationController::class, 'checkApplicationStatus'])->name('candidate.check-application')->middleware('candidate');
     Route::get('/cv-coffee', [CvController::class, 'cvCoffee'])->name('cv.coffee');
     Route::get('/cv-template', [CvController::class, 'show'])->name('cv.template');
     Route::get('/cv-minimalism', [CvController::class, 'cvMinimalism'])->name('cv.minimalism');
@@ -417,10 +417,10 @@ Route::middleware(['employer'])->group(function () {
     Route::get('employer/orders', [OrderController::class, 'index'])->name('employer.orders.index');
     Route::get('employer/orders/{id}', [OrderController::class, 'show'])->name('employer.orders.show');
     Route::post('employer/orders/{id}/mark-as-paid', [OrderController::class, 'markAsPaid'])->name('employer.orders.markAsPaid');
-     Route::post('/employer/add-to-cart', [JobPostingController::class, 'addToCart'])->name('employer.addToCart');
+    Route::post('/employer/add-to-cart', [JobPostingController::class, 'addToCart'])->name('employer.addToCart');
     // web.php
     Route::delete('employer/cart/{id}', [JobPostingController::class, 'removeFromCart'])->name('employer.removeFromCart');
-   Route::get('/employer/services', [JobPostingController::class, 'services'])->name('employer.services');
+    Route::get('/employer/services', [JobPostingController::class, 'services'])->name('employer.services');
     Route::get('employer/get-cart-count', [JobPostingController::class, 'getCartCount'])->name('employer.getCartCount');
     Route::get('dich-vu-da-mua', [JobPostingController::class, 'serviceActive'])
         ->name('employer.service-active')->middleware('employer');
