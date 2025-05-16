@@ -39,10 +39,11 @@ use Stichoza\GoogleTranslate\GoogleTranslate;
 class SiteController extends Controller
 {
 
-    public function tutorial(){
+    public function tutorial()
+    {
         return view('pages.tutorial');
     }
-     public function termsService(Request $request)
+    public function termsService(Request $request)
     {
 
         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
@@ -51,7 +52,7 @@ class SiteController extends Controller
 
         return view('pages.terms', compact('notifications'));
     }
-  public function faqs(Request $request)
+    public function faqs(Request $request)
     {
 
         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
@@ -66,17 +67,17 @@ class SiteController extends Controller
 
         $jobPostings = JobPosting::with(['company', 'employer', 'cities'])
             ->where('status', 0)
-            ->where('isHot', '1')
             ->where('closing_date', '>=', Carbon::now())
             ->orderBy('updated_at', 'desc')
+            ->whereIn('service_type', ['Tin nổi bật', 'Tin đặc biệt'])
             ->paginate(12);
-      $categories = Category::withCount('jobPostings')
-    ->where('status', 1)
-    ->get(); // Không phân trang
-$category_slider = Category::withCount('jobPostings')
-    ->where('status', 1)
-    ->get()
-    ->chunk(8);
+        $categories = Category::withCount('jobPostings')
+            ->where('status', 1)
+            ->get(); // Không phân trang
+        $category_slider = Category::withCount('jobPostings')
+            ->where('status', 1)
+            ->get()
+            ->chunk(8);
 
 
         $salaries = Salary::where('status', 'active')->withCount('jobPostings')->get();
@@ -111,7 +112,7 @@ $category_slider = Category::withCount('jobPostings')
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities', 'data', 'type', 'notifications','category_slider'));
+        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities', 'data', 'type', 'notifications', 'category_slider'));
     }
 
     public function filter(Request $request)
@@ -122,7 +123,7 @@ $category_slider = Category::withCount('jobPostings')
         $category = $request->input('category');
         $jobPostings = JobPosting::with('employer', 'company', 'cities', 'categories')
             ->where('status', 0)
-            ->where('isHot', '1')
+            ->whereIn('service_type', ['Tin cơ bản', 'Tin nổi bật', 'Tin đặc biệt'])
             ->where('closing_date', '>=', Carbon::now());
 
 
@@ -196,9 +197,9 @@ $category_slider = Category::withCount('jobPostings')
         $applied = false;
         $appliedDate = null;
         if ($candidate) {
-          $applied = Application::where('candidate_id', $candidate->id)
-                      ->where('job_posting_id', $jobPosting->id)
-                      ->exists();
+            $applied = Application::where('candidate_id', $candidate->id)
+                ->where('job_posting_id', $jobPosting->id)
+                ->exists();
 
             if ($applied) {
                 $application = $candidate->applications()->where('job_posting_id', $jobPosting->id)->first();
@@ -209,6 +210,7 @@ $category_slider = Category::withCount('jobPostings')
         $relatedJobs = JobPosting::with(['company', 'cities'])
             ->where('closing_date', '>=', Carbon::now()) // Công việc còn hạn ứng tuyển
             ->where('status', 0) // Công việc đang mở
+             ->whereIn('service_type', ['Tin nổi bật', 'Tin đặc biệt'])
             ->where('id', '!=', $jobPosting->id) // Loại trừ công việc hiện tại
             ->whereHas('cities', function ($query) use ($jobPosting) {
                 $query->whereIn('cities.id', $jobPosting->cities->pluck('id'));
@@ -238,7 +240,7 @@ $category_slider = Category::withCount('jobPostings')
 
     public function searchJobs(Request $request)
     {
-        $query = JobPosting::with('cities')->where('closing_date', '>=', Carbon::now())->where('status', 0);
+        $query = JobPosting::with('cities')->where('closing_date', '>=', Carbon::now())->whereIn('service_type', ['Tin nổi bật', 'Tin đặc biệt'])->where('status', 0);
         $cities = City::where('status', 1)->pluck('name', 'id');
         if ($request->filled('keyword')) {
             $query->where('title', 'like', '%' . $request->keyword . '%');
@@ -276,7 +278,7 @@ $category_slider = Category::withCount('jobPostings')
         // Lấy các công việc thuộc danh mục với trạng thái = 0
         $jobPostings = JobPosting::whereHas('categories', function ($query) use ($category) {
             $query->where('category_id', $category->id);
-        })->with('employer', 'company')->where('closing_date', '>=', Carbon::now())->where('status', 0)->paginate(12);
+        })->with('employer', 'company')->whereIn('service_type', ['Tin cơ bản','Tin nổi bật', 'Tin đặc biệt'])->where('closing_date', '>=', Carbon::now())->where('status', 0)->paginate(12);
         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
             ->orderBy('created_at', 'desc')
             ->get();
@@ -380,7 +382,7 @@ $category_slider = Category::withCount('jobPostings')
     public function pricing()
     {
 
-       $typeservices = Typeservice::with(['services.weeks'])
+        $typeservices = Typeservice::with(['services.weeks'])
             ->where('status', true)
             ->get();
 

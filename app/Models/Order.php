@@ -59,4 +59,11 @@ class Order extends Model
 
         return $prefix . '-' . $timestamp . '-' . $random;
     }
+        public function jobPostings()
+    {
+        return $this->belongsToMany(JobPosting::class, 'job_posting_order')
+                    ->withPivot('order_detail_id')
+                    ->withTimestamps();
+    }
+
 }

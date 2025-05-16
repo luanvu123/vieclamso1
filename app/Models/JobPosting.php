@@ -34,13 +34,23 @@ class JobPosting extends Model
         'status',
         'city',
         'isHot',
-        'order_id',
     ];
-    public function order()
-{
-    return $this->belongsTo(Order::class);
-}
 
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'job_posting_order')
+                    ->withPivot('order_detail_id')
+                    ->withTimestamps();
+    }
+
+    // Add a relationship to access order details directly
+    public function orderDetails()
+    {
+        return $this->belongsToMany(OrderDetail::class, 'job_posting_order', 'job_posting_id', 'order_detail_id');
+    }
+
+    // Add a method to get the service type of the job posting
+ 
 
     public function employer()
     {

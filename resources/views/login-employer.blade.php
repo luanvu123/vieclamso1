@@ -20,6 +20,7 @@
     <meta name="twitter:site" content=" Vieclamso1">
     <meta name="twitter:title" content="Đăng nhập tài khoản CV Online">
     <meta name="twitter:description" content="Đăng nhập tài khoản cá nhân để nhận thêm nhiều hỗ trợ từ  Vieclamso1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- FB -->
     <meta property="og:locale" content="vi_VN" />

@@ -170,7 +170,7 @@
                                                                                      <span
                                                                                          class="label label-warning urgent">Gấp</span>
                                                                                  @endif
-                                                                                 @if ($jobPosting->employer->IsHoteffect == 1)
+                                                                                 @if ($jobPosting->service_type === 'Tin đặc biệt')
                                                                                      <span
                                                                                          class="label label-danger urgent">Hot</span>
                                                                                  @endif

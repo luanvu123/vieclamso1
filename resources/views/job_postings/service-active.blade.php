@@ -27,54 +27,19 @@
                 <td>{{ $order->order_key }}</td>
                 <td>₫{{ number_format($order->total_price, 0, ',', '.') }}</td>
                 <td>{{ $order->created_at->format('d/m/Y H:i') }}</td>
-                <td>
-                    @php
-                        $languageTrainings = \App\Models\LanguageTraining::where('order_id', $order->id)->get();
-                        $studyAbroads = \App\Models\StudyAbroad::where('order_id', $order->id)->get();
-                        $jobPostings = \App\Models\JobPosting::where('order_id', $order->id)->get();
-                        $newsItems = \App\Models\News::where('order_id', $order->id)->get();
-                        $advertisements = \App\Models\Advertise::where('order_id', $order->id)->get();
-                    @endphp
+               @php
+    $jobPostings = \App\Models\JobPosting::where('order_id', $order->id)->get();
+@endphp
 
-                    @if ($languageTrainings->isNotEmpty())
-                        <strong>Khóa học tiếng:</strong>
-                        <ul class="mb-0 pl-3">
-                            @foreach ($languageTrainings as $lt)
-                                <li>{{ $lt->name }}</li>
-                            @endforeach
-                        </ul>
-                    @elseif ($studyAbroads->isNotEmpty())
-                        <strong>Du học:</strong>
-                        <ul class="mb-0 pl-3">
-                            @foreach ($studyAbroads as $sa)
-                                <li>{{ $sa->name }}</li>
-                            @endforeach
-                        </ul>
-                    @elseif ($jobPostings->isNotEmpty())
-                        <strong>Tin tuyển dụng:</strong>
-                        <ul class="mb-0 pl-3">
-                            @foreach ($jobPostings as $jp)
-                                <li>{{ $jp->title }}</li>
-                            @endforeach
-                        </ul>
-                    @elseif ($newsItems->isNotEmpty())
-                        <strong>Bài viết:</strong>
-                        <ul class="mb-0 pl-3">
-                            @foreach ($newsItems as $news)
-                                <li>{{ $news->title }}</li>
-                            @endforeach
-                        </ul>
-                    @elseif ($advertisements->isNotEmpty())
-                        <strong>Quảng cáo:</strong>
-                        <ul class="mb-0 pl-3">
-                            @foreach ($advertisements as $ad)
-                                <li>{{ $ad->title }}</li>
-                            @endforeach
-                        </ul>
-                    @else
-                        -
-                    @endif
-                </td>
+<td>
+    <ul class="mb-0 pl-3">
+        @forelse ($order->jobPostings as $jp)
+            <li>{{ $jp->title }}</li>
+        @empty
+            <li>Không có tin tuyển dụng</li>
+        @endforelse
+    </ul>
+</td>
             </tr>
         @empty
             <tr>

@@ -27,6 +27,7 @@ use App\Models\SavedProfile;
 use App\Models\Service;
 use App\Models\Typeservice;
 use Illuminate\Support\Facades\Mail;
+use Str;
 
 
 class JobPostingController extends Controller
@@ -151,14 +152,14 @@ class JobPostingController extends Controller
             ->where('created_at', '>=', Carbon::now()->subHours(5))
             ->count();
 
-        return view('job_postings.search_candidate', compact('candidates', 'categories', 'recentMessagesCount', 'recentApplicationsCount'));
+        return view('job_postings.search_candidate', compact('candidates', 'categories', 'recentMessagesCount', 'recentApplicationsCount', 'validOrderDetails'));
     }
 
 
     public function updateNote(Request $request, Application $application)
     {
         $validatedData = $request->validate([
-            'note' => 'nullable|string',
+            'note' => 'required|string',
         ]);
 
         $application->update([
@@ -171,7 +172,7 @@ class JobPostingController extends Controller
     {
         // Xác thực dữ liệu
         $validatedData = $request->validate([
-            'rating' => 'nullable|integer|min:1|max:5',
+            'rating' => 'required|integer|min:1|max:5',
             'status' => 'required|integer|in:1,2,3,4',  // Xác thực giá trị status
         ]);
 
@@ -284,7 +285,7 @@ class JobPostingController extends Controller
         if ($employer->level != 3) {
             return redirect()->back()->with('error', 'Bạn cần có cấp độ 3 để tạo việc làm.');
         }
- $basicServiceDetails = OrderDetail::whereHas('order', function ($query) use ($employer) {
+        $basicServiceDetails = OrderDetail::whereHas('order', function ($query) use ($employer) {
             $query->where('employer_id', $employer->id)
                 ->where('status', 'Đã thanh toán');
         })
@@ -322,7 +323,7 @@ class JobPostingController extends Controller
         $cities = City::all();
         $company = $employer->company;
         $salaries = Salary::where('status', 'active')->get();
-        return view('job_postings.create', compact('email', 'categories', 'company', 'cities', 'salaries', 'recentMessagesCount', 'recentApplicationsCount','basicServiceDetails', 'hotServiceDetails', 'specialServiceDetails'));
+        return view('job_postings.create', compact('email', 'categories', 'company', 'cities', 'salaries', 'recentMessagesCount', 'recentApplicationsCount', 'basicServiceDetails', 'hotServiceDetails', 'specialServiceDetails'));
     }
 
 
@@ -338,7 +339,20 @@ class JobPostingController extends Controller
         })
             ->where('created_at', '>=', Carbon::now()->subHours(5))
             ->count();
-        $jobPosting = JobPosting::findOrFail($id);
+         $jobPosting = JobPosting::where('employer_id', $employer->id)
+            ->findOrFail($id);
+ // Lấy gói "Xem thông tin ứng viên" của employer
+        $orderDetail = OrderDetail::whereHas('order', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id)
+                ->where('status', 'Đã thanh toán');
+        })
+            ->whereHas('service', function ($query) {
+                $query->where('name', 'Xem thông tin ứng viên');
+            })
+            ->where('number_of_active', '>', 0)
+            ->whereDate('expiring_date', '>=', now())
+            ->first();
+              $hasViewInfoPackage = $orderDetail ? true : false;
         if ($employer->id != $jobPosting->employer_id) {
             return redirect()->back()->with('error', 'Bạn không có quyền xem tin tuyển dụng này.');
         }
@@ -347,7 +361,7 @@ class JobPostingController extends Controller
 
         $applications = $jobPosting->applications()
             ->when($status, function ($query, $status) {
-                return $query->where('applications.status', $status);
+                return $query->where('applications.status', $status)->whereIn('approve_application', ['Đã duyệt', 'Nộp lại']);
             })
             ->when($sort === 'name', function ($query) {
                 return $query->join('candidates', 'applications.candidate_id', '=', 'candidates.id')
@@ -359,30 +373,32 @@ class JobPostingController extends Controller
             ->with('candidate')
             ->get();
         $isInfomation = $employer->isInfomation ?? false;
-        return view('job_postings.show', compact('jobPosting', 'applications', 'isInfomation', 'recentMessagesCount', 'recentApplicationsCount'));
+        return view('job_postings.show', compact('jobPosting', 'applications', 'isInfomation', 'recentMessagesCount', 'recentApplicationsCount', 'hasViewInfoPackage'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255',
             'type' => 'required|string',
             'category' => 'required|array',
             'description' => 'required|string',
             'application_email_url' => 'required|string',
             'company_id' => 'required|exists:companies,id',
             'email' => 'required|email',
-            'salary' => 'nullable|string|max:255',
-            'location' => 'nullable|string|max:255',
-            'experience' => 'nullable|string|max:255',
-            'rank' => 'nullable|string|max:255',
-            'number_of_recruits' => 'nullable|integer',
-            'sex' => 'nullable|string|max:255',
-            'skills_required' => 'nullable|string|max:255',
-            'area' => 'nullable|string|max:255',
+            'salary' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'experience' => 'required|string|max:255',
+            'rank' => 'required|string|max:255',
+            'number_of_recruits' => 'required|integer',
+            'sex' => 'required|string|max:255',
+            'skills_required' => 'required|string|max:255',
+            'area' => 'required|string|max:255',
             'city' => 'required|array',
             'salaries' => 'required|array|min:1',
             'salaries.*' => 'exists:salaries,id',
+            'service_type' => 'required|in:Tin cơ bản,Tin nổi bật,Tin đặc biệt',
         ], [
             'title.required' => 'Job title is required.',
             'type.required' => 'Job type is required.',
@@ -394,6 +410,12 @@ class JobPostingController extends Controller
             'email.email' => 'Please enter a valid email address.',
             'city.required' => 'At least one city is required.',
         ]);
+        $slug = $request->slug ?? Str::slug($request->title);
+
+        // Kiểm tra trùng slug
+        if (JobPosting::where('slug', $slug)->exists()) {
+            return back()->withInput()->withErrors(['slug' => 'Tên đã tồn tại, vui lòng chọn tiêu đề khác.']);
+        }
 
         $jobPosting = new JobPosting();
         $jobPosting->employer_id = Auth::guard('employer')->id();
@@ -416,6 +438,7 @@ class JobPostingController extends Controller
         $jobPosting->skills_required = $request->skills_required;
         $jobPosting->area = $request->area;
         // Proceed with saving the job posting
+        $jobPosting->service_type = $request->service_type;
 
 
         // Handle logo
@@ -434,7 +457,61 @@ class JobPostingController extends Controller
         $jobPosting->salaries()->sync($request->input('salaries'));
         // Lấy công ty đăng bài
         $company = Company::find($jobPosting->company_id);
+        if ($request->has('service_type')) {
+            $serviceType = $request->service_type;
+            $orderDetailId = null;
 
+            switch ($serviceType) {
+                case 'Tin cơ bản':
+                    $orderDetail = OrderDetail::whereHas('order', function ($query) {
+                        $query->where('employer_id', Auth::guard('employer')->user()->id)
+                            ->where('status', 'Đã thanh toán');
+                    })
+                        ->whereHas('service', function ($query) {
+                            $query->where('name', 'Tin cơ bản');
+                        })
+                        ->whereDate('expiring_date', '>=', Carbon::today())
+                        ->where('number_of_active', '>', 0)
+                        ->first();
+                    break;
+
+                case 'Tin nổi bật':
+                    $orderDetail = OrderDetail::whereHas('order', function ($query) {
+                        $query->where('employer_id', Auth::guard('employer')->user()->id)
+                            ->where('status', 'Đã thanh toán');
+                    })
+                        ->whereHas('service', function ($query) {
+                            $query->where('name', 'Tin nổi bật');
+                        })
+                        ->whereDate('expiring_date', '>=', Carbon::today())
+                        ->where('number_of_active', '>', 0)
+                        ->first();
+                    break;
+
+                case 'Tin đặc biệt':
+                    $orderDetail = OrderDetail::whereHas('order', function ($query) {
+                        $query->where('employer_id', Auth::guard('employer')->user()->id)
+                            ->where('status', 'Đã thanh toán');
+                    })
+                        ->whereHas('service', function ($query) {
+                            $query->where('name', 'Tin đặc biệt');
+                        })
+                        ->whereDate('expiring_date', '>=', Carbon::today())
+                        ->where('number_of_active', '>', 0)
+                        ->first();
+                    break;
+            }
+
+            if ($orderDetail) {
+                // Decrement the usage count
+                $orderDetail->decrement('number_of_active');
+
+                // Create the relationship in the pivot table
+                $jobPosting->orders()->attach($orderDetail->order_id, [
+                    'order_detail_id' => $orderDetail->id
+                ]);
+            }
+        }
         // Gửi thông báo đến các candidate theo dõi công ty
         $followers = $company->followers;
         foreach ($followers as $follower) {
@@ -501,14 +578,14 @@ class JobPostingController extends Controller
             'application_email_url' => 'required|string',
             'company_id' => 'required|exists:companies,id',
             'email' => 'required|email',
-            'salary' => 'nullable|string|max:255',
-            'location' => 'nullable|string|max:255',
-            'experience' => 'nullable|string|max:255',
-            'rank' => 'nullable|string|max:255',
-            'number_of_recruits' => 'nullable|integer',
-            'sex' => 'nullable|string|max:255',
-            'skills_required' => 'nullable|string|max:255',
-            'area' => 'nullable|string|max:255',
+            'salary' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'experience' => 'required|string|max:255',
+            'rank' => 'required|string|max:255',
+            'number_of_recruits' => 'required|integer',
+            'sex' => 'required|string|max:255',
+            'skills_required' => 'required|string|max:255',
+            'area' => 'required|string|max:255',
             'salaries' => 'required|array|min:1', // Salaries are required and must be an array with at least one item
             'salaries.*' => 'exists:salaries,id', // Each item in the salaries array must exist in the salaries table
             'city' => 'required|array',
@@ -525,6 +602,9 @@ class JobPostingController extends Controller
         ]);
 
         $jobPosting = JobPosting::findOrFail($id);
+        if ($jobPosting->status == 0) {
+            return redirect()->route('job-postings.index')->with('error', 'Tin đã duyệt không thể chỉnh sửa.');
+        }
         $jobPosting->email = $request->email;
         $jobPosting->title = $request->title;
         $jobPosting->slug = $request->slug;
@@ -593,7 +673,7 @@ class JobPostingController extends Controller
     {
 
         $employer = Auth::guard('employer')->user();
-         $employerId = $employer->id;
+        $employerId = $employer->id;
         $carts = Cart::getEmployerCart($employerId);
 
         $exchangeRate = 0.000042;
@@ -612,25 +692,36 @@ class JobPostingController extends Controller
         // Truyền dữ liệu carts sang view
         return view('job_postings.services', compact('carts', 'recentMessagesCount', 'recentApplicationsCount', 'typeservices', 'exchangeRate'));
     }
-      public function serviceActive()
-    {
-        $employer = Auth::guard('employer')->user();
- $recentMessagesCount = $employer->messages()
-            ->where('created_at', '>=', Carbon::now()->subHours(5))
-            ->count();
-        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
-            $query->where('employer_id', $employer->id);
-        })
-            ->where('created_at', '>=', Carbon::now()->subHours(5))
-            ->count();
-        $orders = Order::with(['orderDetails.cart'])
-            ->where('employer_id', $employer->id)
-            ->where('status', 'Đã thanh toán')
-            ->orderBy('created_at', 'desc')
-            ->get();
+  public function serviceActive()
+{
+    $employer = Auth::guard('employer')->user();
 
-        return view('job_postings.service-active', compact('employer', 'orders', 'recentMessagesCount', 'recentApplicationsCount'));
-    }
+    // Eager load all necessary relationships to prevent N+1 queries
+    $orders = Order::with(['orderDetails.cart', 'jobPostings'])
+        ->where('employer_id', $employer->id)
+        ->where('status', 'Đã thanh toán')
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    $recentTimeframe = Carbon::now()->subHours(5);
+
+    $recentMessagesCount = $employer->messages()
+        ->where('created_at', '>=', $recentTimeframe)
+        ->count();
+
+    $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+        $query->where('employer_id', $employer->id);
+    })
+        ->where('created_at', '>=', $recentTimeframe)
+        ->count();
+
+    return view('job_postings.service-active', compact(
+        'employer',
+        'orders',
+        'recentMessagesCount',
+        'recentApplicationsCount'
+    ));
+}
     public function removeFromCart($id)
     {
         $cart = Cart::where('id', $id)
@@ -660,7 +751,7 @@ class JobPostingController extends Controller
         ]);
 
         $service = Service::findOrFail($validated['service_id']);
-          $employerId = Auth::guard('employer')->user()->id;
+        $employerId = Auth::guard('employer')->user()->id;
 
         // Kiểm tra xem có cart giống service_id và number_of_weeks hay không
         $cart = Cart::where('employer_id', $employerId)
@@ -828,13 +919,13 @@ class JobPostingController extends Controller
             ->where('created_at', '>=', Carbon::now()->subHours(5))
             ->count();
 
-  $orders = Order::with(['orderDetails.cart'])
+        $orders = Order::with(['orderDetails.cart'])
             ->where('employer_id', $employer->id)
             ->where('status', 'Đã thanh toán')
             ->orderBy('created_at', 'desc')
             ->get();
         // Truyền dữ liệu sang view để hiển thị
-        return view('job_postings.cart_employer', compact('employer', 'recentMessagesCount', 'recentApplicationsCount','orders'));
+        return view('job_postings.cart_employer', compact('employer', 'recentMessagesCount', 'recentApplicationsCount', 'orders'));
     }
     public function showCheckout()
     {

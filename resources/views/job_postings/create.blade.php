@@ -5,13 +5,13 @@
     <div id="titlebar">
         <div class="row">
             <div class="col-md-12">
-                <h2>Add Job</h2>
+                <h2>Tạo Tin Tuyển Dụng</h2>
                 <!-- Breadcrumbs -->
                 <nav id="breadcrumbs">
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Dashboard</a></li>
-                        <li>Add Job</li>
+                        <li>Tạo Tin Tuyển Dụng</li>
                     </ul>
                 </nav>
             </div>
@@ -70,43 +70,46 @@
 
                                     </ul>
 
-                                    {{-- Radio chọn gói sử dụng --}}
-                                    <div class="mt-3">
-                                        <label><strong>Chọn loại tin đăng:</strong></label><br>
-                                        @if ($basicServiceDetails->count())
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="service_type" id="basic_service"
-                                                    value="Tin cơ bản" required>
-                                                <label class="form-check-label" for="basic_service">Tin cơ bản</label>
-                                            </div>
-                                        @endif
-                                        @if ($hotServiceDetails->count())
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="service_type" id="hot_service"
-                                                    value="Tin nổi bật" required>
-                                                <label class="form-check-label" for="hot_service">Tin nổi bật</label>
-                                            </div>
-                                        @endif
-                                        @if ($specialServiceDetails->count())
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="service_type"
-                                                    id="special_service" value="Tin đặc biệt" required>
-                                                <label class="form-check-label" for="special_service">Tin đặc biệt</label>
-                                            </div>
-                                        @endif
+                                   <div class="form-group">
+    <label>Loại tin đăng</label><br>
 
-                                        @error('service_type')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
+    @if($basicServiceDetails->count() > 0)
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="service_type" id="service_basic" value="Tin cơ bản">
+            <label class="form-check-label" for="service_basic">
+                Tin cơ bản (còn {{ $basicServiceDetails->sum('number_of_active') }} lượt)
+            </label>
+        </div>
+    @endif
+
+    @if($hotServiceDetails->count() > 0)
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="service_type" id="service_hot" value="Tin nổi bật">
+            <label class="form-check-label" for="service_hot">
+                Tin nổi bật (còn {{ $hotServiceDetails->sum('number_of_active') }} lượt)
+            </label>
+        </div>
+    @endif
+
+    @if($specialServiceDetails->count() > 0)
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="service_type" id="service_special" value="Tin đặc biệt">
+            <label class="form-check-label" for="service_special">
+                Tin đặc biệt (còn {{ $specialServiceDetails->sum('number_of_active') }} lượt)
+            </label>
+        </div>
+    @endif
+</div>
+
+
                                 </div>
                                 <div class="form">
-                                    <h5>Your Email</h5>
+                                    <h5> Email</h5>
                                     <input class="search-field" type="text" name="email" value="{{ $email }}" readonly>
                                 </div>
                                 <!-- Job Title -->
                                 <div class="form">
-                                    <h5>Job Title</h5>
+                                    <h5>Tiêu đề công việc</h5>
                                     <input class="search-field" type="text" name="title" id="slug" onkeyup="ChangeToSlug()"
                                         placeholder="">
                                 </div>
@@ -118,7 +121,7 @@
                                 </div>
                                 <!-- Job Type -->
                                 <div class="form">
-                                    <h5>Job Type</h5>
+                                    <h5>Loại công việc</h5>
                                     <select name="type" class="chosen-select-no-single">
                                         <option value="Full-Time">Full-Time</option>
                                         <option value="Part-Time">Part-Time</option>
@@ -129,7 +132,7 @@
                                 <!-- Choose City -->
                                 <div class="form">
                                     <div class="select">
-                                        <h5>City</h5>
+                                        <h5>Thành phố</h5>
                                         <select name="city[]" class="chosen-select" multiple>
                                             @foreach ($cities as $city)
                                                 <option value="{{ $city->id }}">{{ $city->name }}</option>
@@ -140,7 +143,7 @@
                                 <!-- Categories -->
                                 <div class="form">
                                     <div class="select">
-                                        <h5>Category</h5>
+                                        <h5>Danh mục</h5>
                                         <select name="category[]" class="chosen-select" multiple>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -150,13 +153,13 @@
                                 </div>
                                 <!-- Location -->
                                 <div class="form">
-                                    <h5>Location <span>(optional)</span></h5>
+                                    <h5>Địa điểm <span>(optional)</span></h5>
                                     <input class="search-field" type="text" name="location" placeholder="e.g. London">
                                     <p class="note">Leave this blank if the location is not important</p>
                                 </div>
                                 <!-- Salary -->
                                 <div class="form">
-                                    <h5>Salary <span>(optional)</span></h5>
+                                    <h5>Mức lương <span>(optional)</span></h5>
                                     <input type="text" name="salary" placeholder="Enter salary">
                                 </div>
 
@@ -180,41 +183,41 @@
 
                                 <!-- Experience -->
                                 <div class="form">
-                                    <h5>Experience <span>(optional)</span></h5>
-                                    <input type="text" name="experience" placeholder="Enter experience required">
+                                    <h5>Kinh nghiệm <span>(optional)</span></h5>
+                                    <input type="text" name="experience" placeholder="Nhập kinh nghiệm yêu cầu">
                                 </div>
                                 <!-- Rank -->
                                 <div class="form">
-                                    <h5>Rank <span>(optional)</span></h5>
-                                    <input type="text" name="rank" placeholder="Enter rank">
+                                    <h5>Thứ hạng <span>(optional)</span></h5>
+                                    <input type="text" name="rank" placeholder="Nhập thứ hạng">
                                 </div>
                                 <!-- Number of recruits -->
                                 <div class="form">
-                                    <h5>Number of recruits <span>(optional)</span></h5>
-                                    <input type="number" name="number_of_recruits" placeholder="Enter number of recruits">
+                                    <h5>Số lượng tuyển dụng <span>(optional)</span></h5>
+                                    <input type="number" name="number_of_recruits" placeholder="Nhập số lượng tuyển dụng" min="1">
                                 </div>
                                 <!-- Sex -->
                                 <div class="form">
-                                    <h5>Sex <span>(optional)</span></h5>
+                                    <h5>Giới tính <span>(optional)</span></h5>
                                     <select name="sex" class="chosen-select-no-single">
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                        <option value="Not required">Not required</option>
+                                        <option value="Male">Nam</option>
+                                        <option value="Female">Nữ</option>
+                                        <option value="Not required">Không yêu cầu</option>
                                     </select>
                                 </div>
                                 <!-- Skills required -->
                                 <div class="form">
-                                    <h5>Skills required <span>(optional)</span></h5>
-                                    <input type="text" name="skills_required" placeholder="Enter required skills">
+                                    <h5>Kỹ năng yêu cầu <span>(optional)</span></h5>
+                                    <input type="text" name="skills_required" placeholder="Nhập kỹ năng yêu cầu">
                                 </div>
                                 <!-- Area -->
                                 <div class="form">
-                                    <h5>Area <span>(optional)</span></h5>
-                                    <input type="text" name="area" placeholder="Enter area">
+                                    <h5>Khu vực <span>(optional)</span></h5>
+                                    <input type="text" name="area" placeholder="Nhập khu vực">
                                 </div>
                                 <!-- Tags -->
                                 <div class="form">
-                                    <h5>Job Tags <span>(optional)</span></h5>
+                                    <h5>Tags <span>(optional)</span></h5>
                                     <input class="search-field" type="text" name="tags"
                                         placeholder="e.g. PHP, Social Media, Management">
                                     <p class="note">Comma separate tags, such as required skills or technologies, for this
@@ -222,19 +225,19 @@
                                 </div>
                                 <!-- Description -->
                                 <div class="form" style="width: 100%;">
-                                    <h5>Description</h5>
+                                    <h5>Mô tả</h5>
                                     <textarea class="WYSIWYG" name="description" cols="40" rows="3" id="summary"
                                         spellcheck="true"></textarea>
                                 </div>
                                 <!-- Application email/url -->
                                 <div class="form">
-                                    <h5>Application email / URL</h5>
+                                    <h5>Email / URL ứng tuyển</h5>
                                     <input type="text" name="application_email_url"
                                         placeholder="Enter an email address or website URL">
                                 </div>
                                 <!-- Closing Date -->
                                 <div class="form">
-                                    <h5>Closing Date <span>(optional)</span></h5>
+                                    <h5>Ngày kết thúc <span>(optional)</span></h5>
                                     <input data-role="date" type="date" name="closing_date" placeholder="yyyy-mm-dd">
                                     <p class="note">Deadline for new applicants.</p>
                                 </div>
@@ -248,7 +251,7 @@
                     </div>
                 </div>
                 <div class="dashboard-list-box margin-top-30">
-                    <h4>Choose Your Company</h4>
+                    <h4>Chọn công ty của bạn</h4>
                     <div class="form">
                         @if ($company)
                             <select name="company_id" class="chosen-select">
@@ -260,7 +263,7 @@
                         @endif
                     </div>
                 </div>
-                <button type="submit" class="button margin-top-30">Submit <i class="fa fa-arrow-circle-right"></i></button>
+                <button type="submit" class="button margin-top-30">Gửi <i class="fa fa-arrow-circle-right"></i></button>
             </form>
         </div>
     </div>
