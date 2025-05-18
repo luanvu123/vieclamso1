@@ -29,7 +29,6 @@ class BankController extends Controller
    public function store(Request $request)
 {
     $request->validate([
-        'area' => 'required|in:Khu vực miền bắc,Khu vực miền nam',
         'name' => 'required|string|max:255',
         'branch' => 'required|string|max:255',
         'account_number' => 'required|string|max:255',
@@ -37,6 +36,9 @@ class BankController extends Controller
         'image' => 'nullable|image|max:2048',
         'logo_bank' => 'nullable|image|max:2048',
         'status' => 'nullable|in:0,1',
+        'account_name' => 'required|string|max:255',
+          'swift_code' => 'nullable|string|max:255',
+
     ]);
 
     $bank = new Bank($request->all());
@@ -61,7 +63,7 @@ class BankController extends Controller
 
     public function edit(Bank $bank)
     {
-        if ($bank->user_id !== Auth::id()) {
+        if ($bank->user_id != Auth::id()) {
         abort(403, 'Unauthorized action.');
     }
 
@@ -70,12 +72,11 @@ class BankController extends Controller
 
    public function update(Request $request, Bank $bank)
 {
-    if ($bank->user_id !== Auth::id()) {
+    if ($bank->user_id != Auth::id()) {
         abort(403, 'Unauthorized action.');
     }
 
     $request->validate([
-        'area' => 'required|in:Khu vực miền bắc,Khu vực miền nam',
         'name' => 'required|string|max:255',
         'branch' => 'required|string|max:255',
         'account_number' => 'required|string|max:255',
@@ -83,6 +84,9 @@ class BankController extends Controller
         'image' => 'nullable|image|max:2048',
         'logo_bank' => 'nullable|image|max:2048',
         'status' => 'nullable|in:0,1',
+        'account_name' => 'required|string|max:255',
+          'swift_code' => 'nullable|string|max:255',
+
     ]);
 
     $bank->fill($request->all());
@@ -116,7 +120,7 @@ class BankController extends Controller
 
     public function destroy(Bank $bank)
     {
-       if ($bank->user_id !== Auth::id()) {
+       if ($bank->user_id != Auth::id()) {
         abort(403, 'Unauthorized action.');
     }
         $bank->delete();

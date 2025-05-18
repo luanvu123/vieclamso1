@@ -107,7 +107,7 @@
                                 </li>
                                 <li>
                                     <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="#">
+                                        href="{{ route('recruitment') }}#service">
                                         Dịch vụ
                                     </a>
                                 </li>
@@ -119,10 +119,11 @@
                                 </li>
 
                                 <li>
-                                    <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
-                                        href="#">
-                                        Hỗ trợ
-                                    </a>
+                                  <a class="hover:text-primary block pd-12 md:py-5 text-center font-medium"
+   href="{{ route('recruitment') }}#contact">
+    Hỗ trợ
+</a>
+
                                 </li>
                             </ul>
 <div class="py-[40px] md:flex md:items-center md:justify-end md:py-0 md:!ml-auto">
@@ -255,7 +256,7 @@
                                                     href="{{route('/')}}" target="_blank">Tuyển dụng</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
-                                                    href="{{route('recruitment')}}" target>Liên hệ</a>
+                                                    href="{{ route('recruitment') }}#contact" target>Liên hệ</a>
                                             </li>
                                             <li class="mb-[8px] text-[16px] text-color-light hover:text-primary"><a
                                                     href="{{route('tutorial')}}" target="_blank">Góc báo chí</a>

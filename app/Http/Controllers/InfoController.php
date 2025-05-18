@@ -74,6 +74,9 @@ class InfoController extends Controller
             'upload_cv_subtitle' => 'nullable|string|max:255',
             'upload_cv_desc' => 'nullable|string',
             'profile_banner_image' => 'nullable|image|max:2048',
+            'regulation' => 'nullable|string',
+
+
         ]);
 
         $info = Info::findOrFail($id);
@@ -82,7 +85,7 @@ class InfoController extends Controller
         $info->service_license_number = $request->service_license_number;
         $info->headquarter_address = $request->headquarter_address;
         $info->branch_address = $request->branch_address;
-
+        $info->regulation = $request->regulation;
         // Xử lý các tệp hình ảnh
         if ($request->hasFile('qr_code_image')) {
             $path = $request->file('qr_code_image')->store('images', 'public');
@@ -163,7 +166,7 @@ class InfoController extends Controller
             $path = $request->file('logo_home')->store('images', 'public');
             $info->logo_home = $path;
         }
-       
+
 
         if ($request->hasFile('about_image_mobile')) {
             $path = $request->file('about_image_mobile')->store('images', 'public');

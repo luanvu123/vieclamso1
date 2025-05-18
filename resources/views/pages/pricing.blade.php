@@ -813,7 +813,7 @@
                                             <span class="text-primary font-weight-700">VND</span>
                                         </div>
                                         <div class="text-vat">* Giá trên chưa bao gồm VAT</div>
-                                        <div class="btn-contact" data-url="">Liên hệ tư vấn</div>
+                                        <div class="btn-contact" data-url="{{route('recruitment')}}#banner-form">Liên hệ tư vấn</div>
 
                                         <div class="benefit-content">
                                             <div class="md:text-[14px] font-light mb-[28px] text-color-light">
@@ -838,6 +838,19 @@
                 </div>
             @endforeach
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const contactBtn = document.querySelector('.btn-contact');
+        if (contactBtn) {
+            contactBtn.addEventListener('click', function () {
+                const url = contactBtn.getAttribute('data-url');
+                if (url) {
+                    window.location.href = url;
+                }
+            });
+        }
+    });
+</script>
 
         </div>
     </div>

@@ -46,7 +46,7 @@
                                 <th>Điểm xét hạng</th>
                                 <th>SDT</th>
                                 <th>Trạng thái</th>
-                                <th>Quản trị</th>
+                                <th>Nhân viên chăm sóc khách hàng</th>
                                 <th>Ngày tạo</th>
                                 <th>Hành động</th>
                                 <th></th>

@@ -9,8 +9,9 @@ class Bank extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'area', 'name', 'branch', 'account_number',
-        'content', 'image', 'logo_bank', 'status'
+        'user_id', 'name', 'branch', 'account_number',
+        'content', 'image', 'logo_bank', 'status', 'account_name',
+        'swift_code',
     ];
 
     // Liên kết với User

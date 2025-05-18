@@ -33,6 +33,11 @@
                 <input type="text" class="form-control" id="business_license_number" name="business_license_number"
                     value="{{ $info->business_license_number }}" required>
             </div>
+            <div class="form-group">
+                <label for="regulation">Quy định:</label>
+                <textarea name="regulation" id="regulation" rows="6"
+                    class="form-control">{{ old('regulation', $info->regulation ?? '') }}</textarea>
+            </div>
 
             <div class="form-group">
                 <label for="service_license_number">Giấy phép hoạt động dịch vụ việc làm số</label>
@@ -128,8 +133,7 @@
             <div class="form-group">
                 <label for="image_section">Image Section</label>
                 @if ($info->image_section)
-                    <img src="{{ asset('storage/' . $info->image_section) }}" alt="Image Section"
-                        style="max-width: 100px;">
+                    <img src="{{ asset('storage/' . $info->image_section) }}" alt="Image Section" style="max-width: 100px;">
                 @endif
                 <input type="file" class="form-control" id="image_section" name="image_section">
             </div>
@@ -170,8 +174,7 @@
             <div class="form-group">
                 <label for="image_appstore">Image App Store</label>
                 @if ($info->image_appstore)
-                    <img src="{{ asset('storage/' . $info->image_appstore) }}" alt="Image App Store"
-                        style="max-width: 100px;">
+                    <img src="{{ asset('storage/' . $info->image_appstore) }}" alt="Image App Store" style="max-width: 100px;">
                 @endif
                 <input type="file" class="form-control" id="image_appstore" name="image_appstore">
             </div>
@@ -220,7 +223,8 @@
 
             <div class="form-group">
                 <label for="big_update_description">Big Update Description</label>
-                <textarea class="form-control" id="big_update_description" name="big_update_description">{{ $info->big_update_description }}</textarea>
+                <textarea class="form-control" id="big_update_description"
+                    name="big_update_description">{{ $info->big_update_description }}</textarea>
             </div>
 
             <div class="form-group">
@@ -273,13 +277,13 @@
 
             <div class="form-group">
                 <label for="smart_recruitment_description">Smart Recruitment Description</label>
-                <textarea class="form-control" id="smart_recruitment_description" name="smart_recruitment_description">{{ $info->smart_recruitment_description }}</textarea>
+                <textarea class="form-control" id="smart_recruitment_description"
+                    name="smart_recruitment_description">{{ $info->smart_recruitment_description }}</textarea>
             </div>
 
             <div class="form-group">
                 <label for="about_us">About Us</label>
-                <input type="text" class="form-control" id="about_us" name="about_us"
-                    value="{{ $info->about_us }}">
+                <input type="text" class="form-control" id="about_us" name="about_us" value="{{ $info->about_us }}">
             </div>
 
             <div class="form-group">
@@ -290,8 +294,7 @@
             <div class="form-group">
                 <label for="about_us_image">About Us Image</label>
                 @if ($info->about_us_image)
-                    <img src="{{ asset('storage/' . $info->about_us_image) }}" alt="About Us Image"
-                        style="max-width: 100px;">
+                    <img src="{{ asset('storage/' . $info->about_us_image) }}" alt="About Us Image" style="max-width: 100px;">
                 @endif
                 <input type="file" class="form-control" id="about_us_image" name="about_us_image">
             </div>
@@ -310,8 +313,7 @@
             </div>
             <div class="form-group">
                 <label for="vat">VAT</label>
-                <input type="number" step="0.01" class="form-control" id="vat" name="vat"
-                    value="{{ $info->vat }}" required>
+                <input type="number" step="0.01" class="form-control" id="vat" name="vat" value="{{ $info->vat }}" required>
             </div>
             <div class="form-group">
                 <label for="logo_recruitment">Logo Recruitment</label>
@@ -405,7 +407,8 @@
 
             <div class="form-group">
                 <label for="upload_cv_desc">Upload CV Description</label>
-                <textarea class="form-control" id="upload_cv_desc" name="upload_cv_desc">{{ $info->upload_cv_desc }}</textarea>
+                <textarea class="form-control" id="upload_cv_desc"
+                    name="upload_cv_desc">{{ $info->upload_cv_desc }}</textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Update</button>

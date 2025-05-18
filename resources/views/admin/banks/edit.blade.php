@@ -8,18 +8,20 @@
         @csrf
         @method('PUT')
 
-        <div class="form-group">
-            <label for="area">Khu vực:</label>
-            <select name="area" id="area" class="form-control">
-                <option value="Khu vực miền bắc" {{ $bank->area == 'Khu vực miền bắc' ? 'selected' : '' }}>Khu vực miền bắc</option>
-                <option value="Khu vực miền nam" {{ $bank->area == 'Khu vực miền nam' ? 'selected' : '' }}>Khu vực miền nam</option>
-            </select>
-        </div>
+
 
         <div class="form-group">
             <label for="name">Tên ngân hàng:</label>
             <input type="text" name="name" id="name" class="form-control" value="{{ $bank->name }}" required>
         </div>
+<div class="form-group">
+    <label for="account_name">Chủ tài khoản:</label>
+    <input type="text" name="account_name" id="account_name" class="form-control" value="{{ old('account_name', $bank->account_name) }}" required>
+</div>
+<div class="form-group">
+    <label for="swift_code">Mã SWIFT:</label>
+    <input type="text" name="swift_code" id="swift_code" class="form-control" value="{{ old('swift_code', $bank->swift_code) }}">
+</div>
 
         <div class="form-group">
             <label for="branch">Chi nhánh:</label>
@@ -38,7 +40,7 @@
         </div>
 
         <div class="form-group">
-            <label for="image">Ảnh hiện tại:</label><br>
+            <label for="image">QR code:</label><br>
             @if ($bank->image)
                 <img src="{{ asset('storage/' . $bank->image) }}" alt="Bank Image" width="100"><br>
             @endif
@@ -46,14 +48,7 @@
             <input type="file" name="image" id="image" class="form-control">
         </div>
 
-        <div class="form-group">
-            <label for="logo_bank">Logo hiện tại:</label><br>
-            @if ($bank->logo_bank)
-                <img src="{{ asset('storage/' . $bank->logo_bank) }}" alt="Bank Logo" width="100"><br>
-            @endif
-            <label for="logo_bank">Cập nhật logo:</label>
-            <input type="file" name="logo_bank" id="logo_bank" class="form-control">
-        </div>
+
 
         <div class="form-group">
             <label for="status">Trạng thái:</label>

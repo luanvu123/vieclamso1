@@ -74,44 +74,36 @@
             dụng
             sâu AI & Hiring Funnel.</div>
     </div>
-
+@if ($info->regulation)
     <div class="regulations" id="regulations">
         <div class="regulations-header" onclick="toggleRegulations()">
             <h6 class="title">Quy định</h6>
             <span id="toggle-icon">▼</span>
         </div>
         <div class="regulations-content" style="display: none;">
-            <p>Để đảm bảo chất lượng dịch vụ, Vieclamso1 không cho phép một người dùng tạo nhiều tài khoản khác nhau.</p>
-            <p>Nếu phát hiện vi phạm, Vieclamso1 sẽ ngừng cung cấp dịch vụ tới tất cả các tài khoản trùng lập hoặc chắn toàn
-                bộ
-                truy cập tới hệ thống website của Vieclamso1. Đối với trường hợp khách hàng đã sử dụng hết 3 tin tuyển dụng
-                miễn
-                phí, Vieclamso1 hỗ trợ kích hoạt đăng tin tuyển dụng giới hạn sau khi doanh nghiệp cung cấp thông tin giấy
-                phép
-                kinh doanh.</p>
-            <p>Mọi thắc mắc vui lòng liên hệ Hotline CSKH:</p>
-            <p>
-                <a href="tel:(024)71079799">📞 (024) 71079799</a><br>
-                <a href="tel:0862691929">📞 0862 691929</a>
-            </p>
+            {!! $info->regulation !!}
         </div>
     </div>
-
-
+@endif
 
     <script>
-        function toggleRegulations() {
-            var content = document.querySelector('.regulations-content');
-            var icon = document.getElementById('toggle-icon');
-            if (content.style.display === "none") {
-                content.style.display = "block";
-                icon.innerHTML = "▲";
-            } else {
-                content.style.display = "none";
-                icon.innerHTML = "▼";
-            }
-        }
-    </script>
+function toggleRegulations() {
+    const content = document.querySelector('.regulations-content');
+    const icon = document.getElementById('toggle-icon');
+    if (content.style.display === 'none') {
+        content.style.display = 'block';
+        icon.textContent = '▲';
+    } else {
+        content.style.display = 'none';
+        icon.textContent = '▼';
+    }
+}
+</script>
+
+
+
+
+
     </br>
     <h2 class="title">Tài khoản</h2>
     <form method="POST" action="{{ route('employer.register.submit') }}" id="form-register">

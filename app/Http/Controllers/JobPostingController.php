@@ -930,7 +930,6 @@ class JobPostingController extends Controller
     public function showCheckout()
     {
         $banks = Bank::where('status', '1')->get();
-        $groupedBanks = $banks->groupBy('area');
         $employer = Auth::guard('employer')->user();
         $recentMessagesCount = $employer->messages()
             ->where('created_at', '>=', Carbon::now()->subHours(5))
@@ -940,6 +939,6 @@ class JobPostingController extends Controller
         })
             ->where('created_at', '>=', Carbon::now()->subHours(5))
             ->count();
-        return view('job_postings.checkout', compact('groupedBanks', 'recentMessagesCount', 'recentApplicationsCount'));
+        return view('job_postings.checkout', compact('banks', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 }

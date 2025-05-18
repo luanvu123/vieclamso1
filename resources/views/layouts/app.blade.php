@@ -943,6 +943,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         CKEDITOR.replace('summary4');
         CKEDITOR.replace('summary5');
         CKEDITOR.replace('summary6');
+        CKEDITOR.replace('regulation');
         CKEDITOR.replace('description');
     </script>
 
