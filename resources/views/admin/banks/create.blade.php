@@ -14,10 +14,7 @@
                 <label for="account_name">Chủ tài khoản:</label>
                 <input type="text" name="account_name" id="account_name" class="form-control" required>
             </div>
-            <div class="form-group">
-                <label for="swift_code">Mã SWIFT:</label>
-                <input type="text" name="swift_code" id="swift_code" class="form-control">
-            </div>
+           
 
 
 

@@ -19,11 +19,10 @@ class ApplicationController extends Controller
     {
         $this->middleware('candidate');
     }
-    public function store(Request $request)
+   public function store(Request $request)
 {
     // Log the incoming request data for debugging
     \Log::info('Application submission data:', $request->all());
-
     $request->validate([
         'job_posting_id' => 'required|exists:job_postings,id',
         'cv' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
@@ -37,7 +36,7 @@ class ApplicationController extends Controller
     $jobPosting = \App\Models\JobPosting::find($request->job_posting_id);
     if (!$jobPosting) {
         \Log::error('Job posting not found with ID: ' . $request->job_posting_id);
-        return response()->json(['status' => 'error', 'message' => 'Công việc không tồn tại'], 422);
+        return redirect()->back()->with('error', 'Công việc không tồn tại');
     }
 
     $existing = Application::where('candidate_id', $candidate->id)
@@ -51,7 +50,7 @@ class ApplicationController extends Controller
     if ($request->cv_id) {
         $cv = $candidate->cvs()->where('cvs.id', $request->cv_id)->first();
         if (!$cv)
-            return response()->json(['status' => 'error', 'message' => 'CV không hợp lệ'], 422);
+            return redirect()->back()->with('error', 'CV không hợp lệ');
         $cvPath = $cv->cv_path;
     }
 
@@ -61,31 +60,23 @@ class ApplicationController extends Controller
     }
 
     if (!$cvPath) {
-        return response()->json(['status' => 'error', 'message' => 'Vui lòng chọn hoặc tải lên CV'], 422);
+        return redirect()->back()->with('error', 'Vui lòng chọn hoặc tải lên CV');
     }
 
     if ($existing && $existing->created_at->diffInHours(now()) < 24) {
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Bạn chỉ có thể cập nhật CV sau 24 giờ kể từ lần nộp trước.'
-        ], 422);
+        return redirect()->back()->with('error', 'Bạn chỉ có thể cập nhật CV sau 24 giờ kể từ lần nộp trước.');
     }
 
     if ($existing) {
         if ($existing->created_at->diffInHours(now()) < 24) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Bạn chỉ có thể nộp lại hồ sơ sau 24 giờ kể từ lần nộp trước.'
-            ], 422);
+            return redirect()->back()->with('error', 'Bạn chỉ có thể nộp lại hồ sơ sau 24 giờ kể từ lần nộp trước.');
         }
-
         // Nếu nộp lại sau 24h -> Lưu CV mới vào cv_path_resubmit
         $existing->update([
             'cv_path_resubmit' => $cvPath,
             'introduction' => $request->introduction,
             'updated_at' => now(),
         ]);
-
         $application = $existing;
     } else {
         // Tạo mới
@@ -101,13 +92,20 @@ class ApplicationController extends Controller
     if ($jobPosting->employer->email) {
         Mail::to($jobPosting->employer->email)->send(new ApplicationNotification($application));
     }
+
     // Gửi email thông báo
     Mail::to($application->candidate->email)->send(new ApplicationSuccess($application));
 
-    return response()->json([
-        'status' => 'success',
-        'message' => $existing ? 'Nộp lại hồ sơ thành công' : 'Nộp hồ sơ thành công'
-    ]);
+    $message = $existing ? 'Nộp lại hồ sơ thành công' : 'Nộp hồ sơ thành công';
+
+    if ($request->ajax() || $request->wantsJson()) {
+        return response()->json([
+            'status' => 'success',
+            'message' => $message
+        ]);
+    }
+
+    return redirect()->back()->with('success', $message);
 }
 
     public function checkApplication($jobPostingId)

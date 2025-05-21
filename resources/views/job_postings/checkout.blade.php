@@ -74,8 +74,6 @@
                                 <th>Chi nhánh</th>
                                 <th>Số tài khoản</th>
                                 <th>Tên tài khoản</th>
-                                <th>Swift Code</th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -94,7 +92,7 @@
                                     <td>{{ $bank->branch }}</td>
                                     <td>{{ $bank->account_number }}</td>
                                     <td>{{ $bank->account_name }}</td>
-                                    <td>{{ $bank->swift_code }}</td>
+
 
                                 </tr>
                             @endforeach

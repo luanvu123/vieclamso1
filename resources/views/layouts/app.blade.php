@@ -123,48 +123,54 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 @php
                                     $segment = Request::segment(1);
                                 @endphp
-                                <li
-                                    class="treeview {{ Request::is('users*') || Request::is('cv_templates*') || Request::is('roles*') || Request::is('categories*') ? 'active' : '' }}">
-                                    <a href="#">
-                                        <img src="{{ asset('backend_admin/images/9165478_unbox_package_icon.svg') }}"
-                                            alt="Google" width="20" height="20">
-                                        <span>Quản lý hệ thống</span>
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </a>
-                                    <ul class="treeview-menu">
-                                        <li class="{{ Request::is('users*') ? 'active' : '' }}">
-                                            <a href="{{ route('users.index') }}">
-                                                <img src="{{ asset('backend_admin/images/9989338_rating_evaluation_grade_ranking_rate_icon.svg') }}"
-                                                    alt="Google" width="20" height="20"> Tài khoản quản trị
-                                            </a>
-                                        </li>
-                                        <li class="{{ Request::is('roles*') ? 'active' : '' }}">
-                                            <a href="{{ route('roles.index') }}">
-                                                <img src="{{ asset('backend_admin/images/3018587_admin_administrator_ajax_options_permission_icon.svg') }}"
-                                                    alt="Google" width="20" height="20"> Phân quyền quản trị
-                                            </a>
-                                        </li>
-                                        <li class="{{ Request::is('banks*') ? 'active' : '' }}">
-                                            <a href="{{ route('banks.index') }}">
-                                                <img src="{{ asset('backend_admin/images/3018587_admin_administrator_ajax_options_permission_icon.svg') }}"
-                                                    alt="Google" width="20" height="20"> Thông tin thanh
-                                                toán
-                                            </a>
-                                        </li>
-                                        <li class="{{ Request::is('categories*') ? 'active' : '' }}">
-                                            <a href="{{ route('categories.index') }}">
-                                                <img src="{{ asset('backend_admin/images/8673763_ic_fluent_slide_size_filled_icon.svg') }}"
-                                                    alt="Google" width="20" height="20"> Thể loại ngành nghề
-                                            </a>
-                                        </li>
-                                        <li class="{{ Request::is('cv_templates*') ? 'active' : '' }}">
-                                            <a href="{{ route('cv_templates.index') }}">
-                                                <img src="{{ asset('backend_admin/images/file-cv-svgrepo-com.svg') }}"
-                                                    alt="Google" width="20" height="20"> Mẫu CV
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                               @php
+    $user = Auth::user();
+    $hasCSKHRole = $user && $user->roles->contains('name', 'CSKH');
+@endphp
+
+@if (!$hasCSKHRole)
+    <li class="treeview {{ Request::is('users*') || Request::is('cv_templates*') || Request::is('roles*') || Request::is('categories*') ? 'active' : '' }}">
+        <a href="#">
+            <img src="{{ asset('backend_admin/images/9165478_unbox_package_icon.svg') }}"
+                alt="Google" width="20" height="20">
+            <span>Quản lý hệ thống</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li class="{{ Request::is('users*') ? 'active' : '' }}">
+                <a href="{{ route('users.index') }}">
+                    <img src="{{ asset('backend_admin/images/9989338_rating_evaluation_grade_ranking_rate_icon.svg') }}"
+                        alt="Google" width="20" height="20"> Tài khoản quản trị
+                </a>
+            </li>
+            <li class="{{ Request::is('roles*') ? 'active' : '' }}">
+                <a href="{{ route('roles.index') }}">
+                    <img src="{{ asset('backend_admin/images/3018587_admin_administrator_ajax_options_permission_icon.svg') }}"
+                        alt="Google" width="20" height="20"> Phân quyền quản trị
+                </a>
+            </li>
+            <li class="{{ Request::is('banks*') ? 'active' : '' }}">
+                <a href="{{ route('banks.index') }}">
+                    <img src="{{ asset('backend_admin/images/3018587_admin_administrator_ajax_options_permission_icon.svg') }}"
+                        alt="Google" width="20" height="20"> Thông tin thanh toán
+                </a>
+            </li>
+            <li class="{{ Request::is('categories*') ? 'active' : '' }}">
+                <a href="{{ route('categories.index') }}">
+                    <img src="{{ asset('backend_admin/images/8673763_ic_fluent_slide_size_filled_icon.svg') }}"
+                        alt="Google" width="20" height="20"> Thể loại ngành nghề
+                </a>
+            </li>
+            <li class="{{ Request::is('cv_templates*') ? 'active' : '' }}">
+                <a href="{{ route('cv_templates.index') }}">
+                    <img src="{{ asset('backend_admin/images/file-cv-svgrepo-com.svg') }}"
+                        alt="Google" width="20" height="20"> Mẫu CV
+                </a>
+            </li>
+        </ul>
+    </li>
+@endif
+
 
                                 <li
                                     class="treeview {{ Request::is('posts*') || Request::is('genre-posts*') || Request::is('slugs*') || Request::is('courses*') ? 'active' : '' }}">
@@ -216,6 +222,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                             <span class="label label-primary pull-right">{{ $candidateCountTwoHour }}
                                             </span>
                                         @endif
+                                                                                        @if ($applicationlayout > 0)
+                                                    <span class="badge badge-danger">{{ $applicationlayout }}</span>
+                                                @endif
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </a>
                                     <ul class="treeview-menu">
@@ -648,15 +657,16 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 widget">
-                            <div class="r3_counter_box">
-                                <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
-                                <div class="stats">
-                                    <h5><strong></strong></h5>
-                                    <span>Dịch vụ đang chạy</span>
-                                </div>
-                            </div>
-                        </div>
+<div class="col-md-3 widget">
+    <div class="r3_counter_box">
+        <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
+        <div class="stats">
+            <h5><strong>{{ $paidOrderCount }}</strong></h5>
+            <span>Đơn hàng</span>
+        </div>
+    </div>
+</div>
+
                         <div class="clearfix"></div>
                     </div>
                     <br>

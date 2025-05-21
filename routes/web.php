@@ -91,6 +91,7 @@ use Illuminate\Support\Facades\Session;
 */
 
 Auth::routes();
+// Route::domain('vieclamso1.vn')->group(function () {
 Route::get('/', [SiteController::class, 'index'])->name('/');
 Route::get('/terms-of-service', [SiteController::class, 'termsService'])->name('terms-of-service');
 Route::get('/faqs', [SiteController::class, 'faqs'])->name('faqs');
@@ -225,6 +226,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::resource('job-postings-manage', JobsManageController::class);
+    Route::patch('job-postings-manage/{id}/refresh', [JobsManageController::class, 'refresh'])->name('job-postings-manage.refresh');
+
     Route::get('/jobPosting-choose', [JobsManageController::class, 'jobPosting_choose'])->name('jobPosting-choose');
     Route::get('/isHot-choose', [JobsManageController::class, 'isHot_choose'])->name('isHot-choose');
 
@@ -345,6 +348,9 @@ Route::middleware(['candidate'])->group(function () {
 
 
 // route tuyendung
+// });
+
+// Route::domain('tuyendungso1.vn')->group(function () {
 
 
 Route::post('/employer/verify-otp/email', [EmployerLoginController::class, 'verifyEmail'])->name('employer.verify.otp');
@@ -425,3 +431,4 @@ Route::middleware(['employer'])->group(function () {
     Route::get('dich-vu-da-mua', [JobPostingController::class, 'serviceActive'])
         ->name('employer.service-active')->middleware('employer');
 });
+// });

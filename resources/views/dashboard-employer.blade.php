@@ -150,9 +150,13 @@
  ================================================== -->
             <div class="dashboard-content">
                     <div class="support-info d-flex justify-content-around align-items-center mt-4 p-3 border-top">
-        <span><strong>Hotline:</strong> <a href="tel:{{ Auth::guard('employer')->user()->user->phone }}">{{ Auth::guard('employer')->user()->user->phone }}</a></span>
-        <span><strong>Email CSKH:</strong> <a href="mailto:{{ Auth::guard('employer')->user()->user->email }}">{{ Auth::guard('employer')->user()->user->email }}</a></span>
-        <span><strong>Giờ làm việc:</strong> 08:00 - 17:30 (T2 - T7)</span>
+      <span><strong>Chuyên viên CSKH:</strong> <a
+                            href="tel:{{ Auth::guard('employer')->user()->user->phone }}">{{ Auth::guard('employer')->user()->user->name }}</a></span>
+                    <span><strong>Điện thoại:</strong> <a
+                            href="tel:{{ Auth::guard('employer')->user()->user->phone }}">{{ Auth::guard('employer')->user()->user->phone }}</a></span>
+                    <span><strong>Email:</strong> <a
+                            href="mailto:{{ Auth::guard('employer')->user()->user->email }}">{{ Auth::guard('employer')->user()->user->email }}</a></span>
+                    <span><strong>Giờ làm việc:</strong> 08:00 - 17:30 (T2 - T7)</span>
     </div>
                 @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>

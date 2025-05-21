@@ -21,7 +21,6 @@
         <th>Chủ tài khoản</th>
         <th>Số tài khoản</th>
         <th>Chi nhánh</th>
-        <th>Mã SWIFT</th>
         <th>Trạng thái</th>
         <th>Hành động</th>
     </tr>
@@ -41,7 +40,6 @@
             <td>{{ $bank->account_name }}</td>
             <td>{{ $bank->account_number }}</td>
             <td>{{ $bank->branch }}</td>
-            <td>{{ $bank->swift_code ?? 'Chưa có' }}</td>
             <td>
                 @if ($bank->status == 1)
                     <span class="badge badge-success">Hoạt động</span>

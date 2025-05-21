@@ -363,7 +363,7 @@ class JobPostingController extends Controller
             ->when($status, function ($query, $status) {
                 return $query->where('applications.status', $status)->whereIn('approve_application', ['Đã duyệt', 'Nộp lại']);
             })
-            ->when($sort === 'name', function ($query) {
+            ->when($sort == 'name', function ($query) {
                 return $query->join('candidates', 'applications.candidate_id', '=', 'candidates.id')
                     ->orderBy('candidates.fullname_candidate', 'asc')
                     ->select('applications.*');
@@ -813,7 +813,7 @@ class JobPostingController extends Controller
             ->where('created_at', '>=', Carbon::now()->subHours(5))
             ->count();
         $typeProduct = $request->get('type_product', 'all');
-        if ($typeProduct === 'all') {
+        if ($typeProduct == 'all') {
             $products = Product::active()->get();
         } else {
             $products = Product::active()->where('type_product', $typeProduct)->get();

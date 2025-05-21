@@ -4,26 +4,28 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="table-responsive">
-                    <h2>Job Postings</h2>
+               <div class="table-responsive">
+    <h2>Danh sách tin tuyển dụng</h2>
 
-                    <!-- Date and Status Filter Controls -->
-                    <div class="filter-controls mb-3">
-                        <label for="dateFilter">Filter by Date:</label>
-                        <select id="dateFilter" class="form-select" style="width: auto; display: inline-block;">
-                            <option value="">All</option>
-                            <option value="today">Today</option>
-                            <option value="yesterday">Yesterday</option>
-                            <option value="this_week">This Week</option>
-                        </select>
+    <!-- Bộ lọc ngày và trạng thái -->
+    <div class="filter-controls mb-3">
+        <label for="dateFilter">Lọc theo ngày:</label>
+        <select id="dateFilter" class="form-select" style="width: auto; display: inline-block;">
+            <option value="">Tất cả</option>
+            <option value="today">Hôm nay</option>
+            <option value="yesterday">Hôm qua</option>
+            <option value="this_week">Tuần này</option>
+        </select>
 
-                        <label for="statusFilter" class="ml-3">Filter by Status:</label>
-                        <select id="statusFilter" class="form-select" style="width: auto; display: inline-block;">
-                            <option value="">All</option>
-                            <option value="active">Active</option>
-                            <option value="no_active">No Active</option>
-                        </select>
-                    </div>
+        <label for="statusFilter" class="ml-3">Lọc theo trạng thái:</label>
+        <select id="statusFilter" class="form-select" style="width: auto; display: inline-block;">
+            <option value="">Tất cả</option>
+            <option value="active">Đã duyệt</option>
+            <option value="no_active">Chưa duyệt</option>
+        </select>
+    </div>
+</div>
+
 
                     <table class="table table-bordered" id="user-table">
                         <thead>
@@ -34,8 +36,8 @@
                                 <th>SDT</th>
                                 <th>Địa điểm</th>
                                 <th>Ngày tạo</th>
+                                <th>Ngày cập nhật</th>
                                 <th>Trạng thái</th>
-                                <th>Hiển thị trang chủ</th>
                                 <th>Hành động</th>
                             </tr>
                         </thead>
@@ -52,45 +54,61 @@
                                     <td @if ($isNew) style="font-weight: bold;" @endif>
                                         {{ $jobPosting->title }}</td>
                                     <td @if ($isNew) style="font-weight: bold;" @endif>
-                                        {{ $jobPosting->employer->name }}</td>
+                                        {{ $jobPosting->employer->email }}</td>
                                     <td @if ($isNew) style="font-weight: bold;" @endif>
                                         {{ $jobPosting->employer->phone }}</td>
                                     <td @if ($isNew) style="font-weight: bold;" @endif>
                                         {{ $jobPosting->location }}</td>
-                                    <td @if ($isNew) style="font-weight: bold;" @endif>
-                                        {{ $jobPosting->created_at }}</td>
+                                  <td @if ($isNew) style="font-weight: bold;" @endif>
+    {{ $jobPosting->created_at->format('d/m/Y') }}
+</td>
+<td>
+    {{ $jobPosting->updated_at->format('d/m/Y') }}
+</td>
+
                                     <td>
                                         <select id="{{ $jobPosting->id }}" class="jobPosting_choose">
                                             @if ($jobPosting->status == 0)
-                                                <option value="1">No active</option>
-                                                <option selected value="0">Active</option>
+                                                <option value="1">Chưa duyệt</option>
+                                                <option selected value="0">Đã duyệt</option>
                                             @else
-                                                <option selected value="1">No Active</option>
-                                                <option value="0">Active</option>
+                                                <option selected value="1">Chưa duyệt</option>
+                                                <option value="0">Đã duyệt</option>
                                             @endif
                                         </select>
                                     </td>
-                                    <td>
-                                        <select id="isHot_{{ $jobPosting->id }}" class="isHot_choose">
-                                            <option value="1" {{ $jobPosting->isHot == '1' ? 'selected' : '' }}>Hot
-                                            </option>
-                                            <option value="0" {{ $jobPosting->isHot == '0' ? 'selected' : '' }}>Not
-                                                Hot</option>
-                                        </select>
-                                    </td>
 
-                                    <td>
-                                        <a href="{{ route('job-postings-manage.show', $jobPosting->id) }}"><i
-                                                class="fa fa-eye"></i> View</a>
-                                                <a href="{{ route('job-postings-manage.edit', $jobPosting->id) }}" class="btn btn-sm btn-warning">Edit</a>
 
-<form action="{{ route('job-postings-manage.destroy', $jobPosting->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure?')">
-    @csrf
-    @method('DELETE')
-    <button class="btn btn-sm btn-danger">Delete</button>
-</form>
+                                  <td>
+    <!-- Xem chi tiết -->
+    <a href="{{ route('job-postings-manage.show', $jobPosting->id) }}" class="btn btn-sm btn-primary" title="Xem chi tiết">
+        <i class="fa fa-eye"></i>
+    </a>
 
-                                    </td>
+    <!-- Chỉnh sửa -->
+    <a href="{{ route('job-postings-manage.edit', $jobPosting->id) }}" class="btn btn-sm btn-warning" title="Chỉnh sửa">
+        <i class="fa fa-edit"></i>
+    </a>
+
+    <!-- Làm mới tin (cập nhật updated_at) -->
+    <form action="{{ route('job-postings-manage.refresh', $jobPosting->id) }}" method="POST" style="display:inline-block;">
+        @csrf
+        @method('PATCH')
+        <button class="btn btn-sm btn-info" title="Làm mới tin">
+            <i class="fa fa-sync-alt"></i>
+        </button>
+    </form>
+
+    <!-- Xoá -->
+    <form action="{{ route('job-postings-manage.destroy', $jobPosting->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Bạn có chắc chắn muốn xoá?')">
+        @csrf
+        @method('DELETE')
+        <button class="btn btn-sm btn-danger" title="Xoá">
+            <i class="fa fa-trash"></i>
+        </button>
+    </form>
+</td>
+
                                 </tr>
                             @endforeach
                         </tbody>
@@ -98,7 +116,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

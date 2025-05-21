@@ -126,10 +126,19 @@ public function deleteHiddenCv($id)
         return redirect()->route('application-manage.index')->with('success', 'Cập nhật đơn ứng tuyển thành công.');
     }
 
-    protected function authorizeEmployer($application)
-    {
-        if ($application->jobPosting->employer->user_id != Auth::id()) {
-            abort(403, 'Bạn không có quyền truy cập đơn ứng tuyển này.');
-        }
+   protected function authorizeEmployer($application)
+{
+    $user = Auth::user();
+
+    // Nếu là admin thì cho phép bỏ qua kiểm tra
+    if ($user->roles()->where('id', 1)->exists()) {
+        return;
     }
+
+    // Nếu không phải admin, chỉ cho phép nếu employer là của user
+    if ($application->jobPosting->employer->user_id != $user->id) {
+        abort(403, 'Bạn không có quyền truy cập đơn ứng tuyển này.');
+    }
+}
+
 }

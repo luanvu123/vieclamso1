@@ -17,7 +17,7 @@ class BankController extends Controller
     }
     public function index()
     {
-        $banks = Bank::where('user_id', Auth::id())->get();
+        $banks = Bank::all();
         return view('admin.banks.index', compact('banks'));
     }
 
@@ -37,7 +37,6 @@ class BankController extends Controller
         'logo_bank' => 'nullable|image|max:2048',
         'status' => 'nullable|in:0,1',
         'account_name' => 'required|string|max:255',
-          'swift_code' => 'nullable|string|max:255',
 
     ]);
 
@@ -63,18 +62,18 @@ class BankController extends Controller
 
     public function edit(Bank $bank)
     {
-        if ($bank->user_id != Auth::id()) {
-        abort(403, 'Unauthorized action.');
-    }
+    //     if ($bank->user_id != Auth::id()) {
+    //     abort(403, 'Unauthorized action.');
+    // }
 
         return view('admin.banks.edit', compact('bank'));
     }
 
    public function update(Request $request, Bank $bank)
 {
-    if ($bank->user_id != Auth::id()) {
-        abort(403, 'Unauthorized action.');
-    }
+    // if ($bank->user_id != Auth::id()) {
+    //     abort(403, 'Unauthorized action.');
+    // }
 
     $request->validate([
         'name' => 'required|string|max:255',
@@ -120,9 +119,9 @@ class BankController extends Controller
 
     public function destroy(Bank $bank)
     {
-       if ($bank->user_id != Auth::id()) {
-        abort(403, 'Unauthorized action.');
-    }
+    //    if ($bank->user_id != Auth::id()) {
+    //     abort(403, 'Unauthorized action.');
+    // }
         $bank->delete();
 
         return redirect()->route('banks.index')->with('success', 'Ngân hàng đã được xóa.');

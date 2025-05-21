@@ -40,18 +40,25 @@ class EmployerManageController extends Controller
         $this->middleware('permission:employer-sentEmails-view', ['only' => ['sentEmails']]);
         $this->middleware('permission:employer-sentEmails-delete', ['only' => ['destroySentEmail']]);
     }
-    public function index()
-    {
-        $userId = Auth::id();
-        $user = Auth::user();
-        if ($user->roles()->where('id', 1)->exists()) {
-            $employers = Employer::with('user')->get();
-        } else {
-            $employers = Employer::with('user')->where('user_id', $userId)->get();
-        }
-        $users = User::all();
-        return view('admin.employers.index', compact('employers', 'users'));
+  public function index()
+{
+    $user = Auth::user();
+
+    if ($user->roles()->where('id', 1)->exists()) {
+        // Nếu là admin, lấy tất cả applications
+        $applications = Application::with(['candidate', 'jobPosting'])->latest()->get();
+    } else {
+        // Nếu không phải admin, chỉ lấy các applications thuộc employer hiện tại
+        $userId = $user->id;
+
+        $applications = Application::whereHas('jobPosting.employer.user', function ($query) use ($userId) {
+            $query->where('id', $userId);
+        })->with(['candidate', 'jobPosting'])->latest()->get();
     }
+
+    return view('admin.applications.index', compact('applications'));
+}
+
     // Trong EmployerManageController.php
     public function showJobPostings($id)
     {
@@ -152,7 +159,7 @@ public function updateOrderStatus(Request $request, $id)
         $order = Order::with('employer')->findOrFail($id);
 
         // Chỉ cho phép nếu là admin hoặc chủ sở hữu
-        if (!$user->roles()->where('id', 1)->exists() && $order->employer->user_id !== $user->id) {
+        if (!$user->roles()->where('id', 1)->exists() && $order->employer->user_id != $user->id) {
             abort(403, 'Bạn không có quyền cập nhật đơn hàng này.');
         }
 
@@ -257,7 +264,7 @@ public function updateOrderStatus(Request $request, $id)
         $user = Auth::user();
 
         // Skip ownership check if user has Admin role
-        if ($user->roles()->where('id', 1)->exists() || $employer->user_id === $user->id) {
+        if ($user->roles()->where('id', 1)->exists() || $employer->user_id == $user->id) {
             return view('admin.employers.show', compact('employer'));
         }
 
@@ -269,7 +276,7 @@ public function updateOrderStatus(Request $request, $id)
         $employer = Employer::findOrFail($id);
         $user = Auth::user();
 
-        if ($user->roles()->where('id', 1)->exists() || $employer->user_id === $user->id) {
+        if ($user->roles()->where('id', 1)->exists() || $employer->user_id == $user->id) {
             return view('admin.employers.edit', compact('employer'));
         }
 
@@ -298,7 +305,7 @@ public function updateOrderStatus(Request $request, $id)
 
     $employer = Employer::findOrFail($id);
     $user = Auth::user();
-    if ($user->roles()->where('id', 1)->exists() || $employer->user_id === $user->id) {
+    if ($user->roles()->where('id', 1)->exists() || $employer->user_id == $user->id) {
         $data = $request->only([
             'isVerify',
             'isVerify_license',
@@ -343,7 +350,7 @@ public function updateOrderStatus(Request $request, $id)
         $company = Company::with('employer')->findOrFail($id);
 
         // Kiểm tra nếu người dùng là Admin hoặc là chủ sở hữu của công ty thông qua user_id
-        if ($user->roles()->where('id', 1)->exists() || $company->employer->user_id === $userId) {
+        if ($user->roles()->where('id', 1)->exists() || $company->employer->user_id == $userId) {
             return view('admin.companies.show', compact('company'));
         }
 
@@ -462,7 +469,7 @@ public function updateOrderStatus(Request $request, $id)
         $user = Auth::user();
 
         // Kiểm tra quyền truy cập của người dùng
-        if ($user->roles()->where('id', 1)->exists() || $employer->user_id === $user->id) {
+        if ($user->roles()->where('id', 1)->exists() || $employer->user_id == $user->id) {
             $carts = Cart::all(); // Fetch available carts
             return view('admin.employers.cart_employer', compact('carts', 'employer'));
         }
@@ -477,7 +484,7 @@ public function updateOrderStatus(Request $request, $id)
         $user = Auth::user();
 
         // Kiểm tra quyền truy cập của người dùng
-        if ($user->roles()->where('id', 1)->exists() || $employer->user_id === $user->id) {
+        if ($user->roles()->where('id', 1)->exists() || $employer->user_id == $user->id) {
             $request->validate([
                 'cart_id' => 'required|exists:carts,id',
             ]);
@@ -528,7 +535,7 @@ public function updateOrderStatus(Request $request, $id)
         $userId = $user->id;
 
         // Kiểm tra quyền truy cập của người dùng để hiển thị các giỏ hàng
-        if ($user->roles()->where('id', 1)->exists() || $employer->user_id === $userId) {
+        if ($user->roles()->where('id', 1)->exists() || $employer->user_id == $userId) {
             $cartEmployers = $employer->carts()->withPivot('start_date', 'end_date', 'user_id')->get();
             foreach ($cartEmployers as $cart) {
                 $cart->user = User::find($cart->pivot->user_id);

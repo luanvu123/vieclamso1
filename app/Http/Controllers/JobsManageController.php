@@ -42,6 +42,14 @@ class JobsManageController extends Controller
 
         return view('admin.jobs_manage.index', compact('jobPostings'));
     }
+public function refresh($id)
+{
+    $jobPosting = JobPosting::findOrFail($id);
+    $jobPosting->updated_at = Carbon::now();
+    $jobPosting->save();
+
+    return redirect()->back()->with('success', 'Tin đã được làm mới thành công.');
+}
 
     public function show($id)
     {

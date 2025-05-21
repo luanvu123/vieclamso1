@@ -53,7 +53,7 @@ class AppServiceProvider extends ServiceProvider
         // Đếm số lượng Job Listings active
         $activeJobListingsCount = JobPosting::where('status', 0)->count();
         $activeJobListingsCountToday = JobPosting::whereDate('created_at', today())->where('status', 0)->count();
-
+ $paidOrderCount = Order::where('status', 'Đã thanh toán')->count();
         // Đếm tổng số Job Listings
         $totalJobCount = JobPosting::count();
 
@@ -139,7 +139,7 @@ class AppServiceProvider extends ServiceProvider
                 'outstandingJobCountTwoHour'=> $outstandingJobCountTwoHour,
                 'specialJobCountTwoHour'=> $specialJobCountTwoHour,
             'applicationlayout' => $applicationlayout,
-
+  'paidOrderCount' => $paidOrderCount,
         ]);
     }
 }

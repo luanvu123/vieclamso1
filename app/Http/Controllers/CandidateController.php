@@ -104,7 +104,7 @@ class CandidateController extends Controller
             $candidate = Auth::guard('candidate')->user();
 
             // Kiểm tra nếu tài khoản chưa xác thực
-            if ($candidate->verification_token !== null) {
+            if ($candidate->verification_token != null) {
                 Auth::guard('candidate')->logout(); // Đăng xuất ngay lập tức nếu chưa xác thực
                 return redirect()->back()->withInput()->withErrors(['email' => 'Bạn chưa xác thực tài khoản. Vui lòng kiểm tra email.']);
             }
