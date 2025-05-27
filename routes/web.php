@@ -293,7 +293,7 @@ Route::middleware(['candidate'])->group(function () {
     Route::post('/cv-coffee/download', [CvController::class, 'downloadCvCoffee'])->name('cvCoffee.download');
     Route::post('/cv-template/download', [CvController::class, 'downloadPdf'])->name('cv.template.download');
     Route::post('/cv-minimalism/download', [CVController::class, 'downloadCvMinimalism'])->name('cvMinimalism.download');
-    Route::post('/cv-chrome/download', [CVController::class, 'downloadCvChrome'])->name('cvChrome.download');
+Route::post('/cv-chrome/download', [CVController::class, 'downloadChrome'])->name('cvChrome.download');
 
 
 

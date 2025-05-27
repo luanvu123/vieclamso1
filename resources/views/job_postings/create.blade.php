@@ -27,7 +27,7 @@
             <form action="{{ route('job-postings.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="dashboard-list-box margin-top-0">
-                    <h4>Job Details</h4>
+                    <h4>Thêm chiến dịch </h4>
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -70,36 +70,39 @@
 
                                     </ul>
 
-                                   <div class="form-group">
-    <label>Loại tin đăng</label><br>
+                                    <div class="form-group">
+                                        <label>Loại tin đăng</label><br>
 
-    @if($basicServiceDetails->count() > 0)
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="service_type" id="service_basic" value="Tin cơ bản">
-            <label class="form-check-label" for="service_basic">
-                Tin cơ bản (còn {{ $basicServiceDetails->sum('number_of_active') }} lượt)
-            </label>
-        </div>
-    @endif
+                                        @if($basicServiceDetails->count() > 0)
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="service_type" id="service_basic"
+                                                    value="Tin cơ bản">
+                                                <label class="form-check-label" for="service_basic">
+                                                    Tin cơ bản (còn {{ $basicServiceDetails->sum('number_of_active') }} lượt)
+                                                </label>
+                                            </div>
+                                        @endif
 
-    @if($hotServiceDetails->count() > 0)
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="service_type" id="service_hot" value="Tin nổi bật">
-            <label class="form-check-label" for="service_hot">
-                Tin nổi bật (còn {{ $hotServiceDetails->sum('number_of_active') }} lượt)
-            </label>
-        </div>
-    @endif
+                                        @if($hotServiceDetails->count() > 0)
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="service_type" id="service_hot"
+                                                    value="Tin nổi bật">
+                                                <label class="form-check-label" for="service_hot">
+                                                    Tin nổi bật (còn {{ $hotServiceDetails->sum('number_of_active') }} lượt)
+                                                </label>
+                                            </div>
+                                        @endif
 
-    @if($specialServiceDetails->count() > 0)
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="service_type" id="service_special" value="Tin đặc biệt">
-            <label class="form-check-label" for="service_special">
-                Tin đặc biệt (còn {{ $specialServiceDetails->sum('number_of_active') }} lượt)
-            </label>
-        </div>
-    @endif
-</div>
+                                        @if($specialServiceDetails->count() > 0)
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="service_type"
+                                                    id="service_special" value="Tin đặc biệt">
+                                                <label class="form-check-label" for="service_special">
+                                                    Tin đặc biệt (còn {{ $specialServiceDetails->sum('number_of_active') }} lượt)
+                                                </label>
+                                            </div>
+                                        @endif
+                                    </div>
 
 
                                 </div>
@@ -113,12 +116,8 @@
                                     <input class="search-field" type="text" name="title" id="slug" onkeyup="ChangeToSlug()"
                                         placeholder="">
                                 </div>
-                                <!-- Slug -->
-                                <div class="form">
-                                    <h5>Slug</h5>
-                                    <input class="search-field" type="text" name="slug" id="convert_slug"
-                                        placeholder="Đường dẫn">
-                                </div>
+
+
                                 <!-- Job Type -->
                                 <div class="form">
                                     <h5>Loại công việc</h5>
@@ -129,76 +128,65 @@
                                         <option value="Freelance">Freelance</option>
                                     </select>
                                 </div>
-                                <!-- Choose City -->
+                                <!-- Thành phố -->
                                 <div class="form">
                                     <div class="select">
                                         <h5>Thành phố</h5>
-                                        <select name="city[]" class="chosen-select" multiple>
+                                        <select name="city[]" class="chosen-select" multiple data-placeholder="Chọn thành phố">
                                             @foreach ($cities as $city)
                                                 <option value="{{ $city->id }}">{{ $city->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <!-- Categories -->
+
+                                <!-- Danh mục -->
                                 <div class="form">
                                     <div class="select">
                                         <h5>Danh mục</h5>
-                                        <select name="category[]" class="chosen-select" multiple>
+                                        <select name="category[]" class="chosen-select" multiple
+                                            data-placeholder="Chọn danh mục">
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
+
                                 <!-- Location -->
                                 <div class="form">
-                                    <h5>Địa điểm <span>(optional)</span></h5>
+                                    <h5>Địa điểm</h5>
                                     <input class="search-field" type="text" name="location" placeholder="e.g. London">
                                     <p class="note">Leave this blank if the location is not important</p>
                                 </div>
                                 <!-- Salary -->
                                 <div class="form">
-                                    <h5>Mức lương <span>(optional)</span></h5>
-                                    <input type="text" name="salary" placeholder="Enter salary">
+                                    <h5>Mức lương</h5>
+                                    <input type="text" name="salary" placeholder="Nhập mức lương">
                                 </div>
 
-                                <div class="form">
-                                    <div class="select">
-                                        <label for="salaries">Select Salaries(Mức lương để Vieclamso1 thống kê hệ thống)<span
-                                                class="text-danger">*</span></label>
-                                        <select name="salaries[]" id="salaries" class="form-control" multiple required>
-                                            @foreach ($salaries as $salary)
-                                                <option value="{{ $salary->id }}">
-                                                    {{ $salary->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('salaries')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
+
 
 
                                 <!-- Experience -->
                                 <div class="form">
-                                    <h5>Kinh nghiệm <span>(optional)</span></h5>
+                                    <h5>Kinh nghiệm</h5>
                                     <input type="text" name="experience" placeholder="Nhập kinh nghiệm yêu cầu">
                                 </div>
                                 <!-- Rank -->
                                 <div class="form">
-                                    <h5>Thứ hạng <span>(optional)</span></h5>
+                                    <h5>Cấp bậc</h5>
                                     <input type="text" name="rank" placeholder="Nhập thứ hạng">
                                 </div>
                                 <!-- Number of recruits -->
                                 <div class="form">
-                                    <h5>Số lượng tuyển dụng <span>(optional)</span></h5>
-                                    <input type="number" name="number_of_recruits" placeholder="Nhập số lượng tuyển dụng" min="1">
+                                    <h5>Số lượng tuyển dụng</h5>
+                                    <input type="number" name="number_of_recruits" placeholder="Nhập số lượng tuyển dụng"
+                                        min="1">
                                 </div>
                                 <!-- Sex -->
                                 <div class="form">
-                                    <h5>Giới tính <span>(optional)</span></h5>
+                                    <h5>Giới tính</h5>
                                     <select name="sex" class="chosen-select-no-single">
                                         <option value="Male">Nam</option>
                                         <option value="Female">Nữ</option>
@@ -207,39 +195,50 @@
                                 </div>
                                 <!-- Skills required -->
                                 <div class="form">
-                                    <h5>Kỹ năng yêu cầu <span>(optional)</span></h5>
+                                    <h5>Kỹ năng yêu cầu</h5>
                                     <input type="text" name="skills_required" placeholder="Nhập kỹ năng yêu cầu">
                                 </div>
-                                <!-- Area -->
-                                <div class="form">
-                                    <h5>Khu vực <span>(optional)</span></h5>
-                                    <input type="text" name="area" placeholder="Nhập khu vực">
-                                </div>
-                                <!-- Tags -->
-                                <div class="form">
-                                    <h5>Tags <span>(optional)</span></h5>
-                                    <input class="search-field" type="text" name="tags"
-                                        placeholder="e.g. PHP, Social Media, Management">
-                                    <p class="note">Comma separate tags, such as required skills or technologies, for this
-                                        job.</p>
-                                </div>
-                                <!-- Description -->
                                 <div class="form" style="width: 100%;">
                                     <h5>Mô tả</h5>
                                     <textarea class="WYSIWYG" name="description" cols="40" rows="3" id="summary"
                                         spellcheck="true"></textarea>
                                 </div>
+
+                                <!-- Job Skills -->
+                                <div class="form" style="width: 100%;">
+                                    <h5>Kỹ năng công việc</h5>
+                                    <textarea class="WYSIWYG" name="job_skills" cols="40" rows="3" spellcheck="true"></textarea>
+                                </div>
+
+                                <!-- Benefits -->
+                                <div class="form" style="width: 100%;">
+                                    <h5>Phúc lợi</h5>
+                                    <textarea class="WYSIWYG" name="benefits" cols="40" rows="3" spellcheck="true"></textarea>
+                                </div>
+
+                                <!-- Education -->
+                                <div class="form">
+                                    <h5>Trình độ học vấn</h5>
+                                    <select name="education" class="form-control">
+                                        <option value="">-- Chọn học vấn --</option>
+                                        <option value="Không yêu cầu">Không yêu cầu</option>
+                                        <option value="Trung cấp">Trung cấp</option>
+                                        <option value="Cao đẳng">Cao đẳng</option>
+                                        <option value="Đại học">Đại học</option>
+                                        <option value="Thạc sĩ">Thạc sĩ</option>
+                                        <option value="Tiến sĩ">Tiến sĩ</option>
+                                    </select>
+                                </div>
                                 <!-- Application email/url -->
                                 <div class="form">
-                                    <h5>Email / URL ứng tuyển</h5>
-                                    <input type="text" name="application_email_url"
-                                        placeholder="Enter an email address or website URL">
+                                    <h5>Email nhận hồ sơ</h5>
+                                    <input type="text" name="application_email_url" value="{{ $employer->email }}" readonly>
                                 </div>
                                 <!-- Closing Date -->
                                 <div class="form">
-                                    <h5>Ngày kết thúc <span>(optional)</span></h5>
+                                    <h5>Ngày kết thúc</h5>
                                     <input data-role="date" type="date" name="closing_date" placeholder="yyyy-mm-dd">
-                                    <p class="note">Deadline for new applicants.</p>
+
                                 </div>
                             @else
                                 <div class="alert alert-warning">

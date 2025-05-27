@@ -39,36 +39,36 @@ class CVController extends Controller
             ->get();
         return view('pages.upload-cv', compact('notifications'));
     }
-   public function uploadCv(Request $request)
-{
-    $request->validate([
-        'file_upload_cv' => 'required|file|mimes:pdf|max:5120',
-    ]);
-
-    $candidate = Auth::guard('candidate')->user();
-
-    if ($request->hasFile('file_upload_cv')) {
-        $pdfFile = $request->file('file_upload_cv');
-        $pdfPath = $pdfFile->store('cvs', 'public');
-
-        // Chuyển đổi PDF thành hình ảnh
-        $imagePath = $this->convertPdfToImage($pdfFile);
-
-        // Lưu vào bảng cvs
-        $cv = new Cv();
-        $cv->cv_path = $pdfPath;
-        $cv->image_path = $imagePath;
-        $cv->save();
-
-        // Gắn vào bảng candidate_cv
-        $candidate->cvs()->attach($cv->id, [
-            'is_primary' => false,
-            'is_active' => true,
+    public function uploadCv(Request $request)
+    {
+        $request->validate([
+            'file_upload_cv' => 'required|file|mimes:pdf|max:5120',
         ]);
-    }
 
-    return redirect()->back()->with('success', 'CV đã được tải lên.');
-}
+        $candidate = Auth::guard('candidate')->user();
+
+        if ($request->hasFile('file_upload_cv')) {
+            $pdfFile = $request->file('file_upload_cv');
+            $pdfPath = $pdfFile->store('cvs', 'public');
+
+            // Chuyển đổi PDF thành hình ảnh
+            $imagePath = $this->convertPdfToImage($pdfFile);
+
+            // Lưu vào bảng cvs
+            $cv = new Cv();
+            $cv->cv_path = $pdfPath;
+            $cv->image_path = $imagePath;
+            $cv->save();
+
+            // Gắn vào bảng candidate_cv
+            $candidate->cvs()->attach($cv->id, [
+                'is_primary' => false,
+                'is_active' => true,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'CV đã được tải lên.');
+    }
 
 
     private function convertPdfToImage($pdfFile)
@@ -141,19 +141,14 @@ class CVController extends Controller
 
         return $pdf->download('cv_' . Str::slug($candidate->fullname_candidate) . '.pdf');
     }
-    public function downloadCvChrome(Request $request)
+    public function downloadChrome(Request $request)
     {
-        $candidate = auth()->guard('candidate')->user();
-        $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $cvData = json_decode($request->cv_data, true);
+        $htmlContent = $request->cv_html;
 
-        $pdf = PDF::loadView('pages.cv_chrome_download', compact('candidate', 'notifications'));
-
-        // Optional: Adjust PDF options like page size (A4)
-        $pdf->setPaper('A4', 'portrait');
-
-        return $pdf->download('cv_chrome_' . Str::slug($candidate->fullname_candidate) . '.pdf');
+        // Generate PDF from HTML
+        $pdf = PDF::loadHTML($htmlContent);
+        return $pdf->download('cv-' . ($cvData['fullname'] ?? 'document') . '.pdf');
     }
 
 
@@ -241,7 +236,7 @@ class CVController extends Controller
         // Trả về file PDF để tải xuống
         return $pdf->download('cv_coffee_' . Str::slug($candidate->fullname_candidate) . '.pdf');
     }
-    public function  downloadCvOutstanding()
+    public function downloadCvOutstanding()
     {
         $candidate = auth()->guard('candidate')->user();
         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
@@ -258,7 +253,7 @@ class CVController extends Controller
         return $pdf->download('cv_outstanding_' . Str::slug($candidate->fullname_candidate) . '.pdf');
     }
 
-    public function  downloadCvGithub()
+    public function downloadCvGithub()
     {
         $candidate = auth()->guard('candidate')->user();
         $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())

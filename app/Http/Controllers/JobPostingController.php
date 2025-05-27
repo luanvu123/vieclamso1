@@ -27,7 +27,8 @@ use App\Models\SavedProfile;
 use App\Models\Service;
 use App\Models\Typeservice;
 use Illuminate\Support\Facades\Mail;
-use Str;
+use Illuminate\Support\Str;
+
 
 
 class JobPostingController extends Controller
@@ -271,7 +272,58 @@ class JobPostingController extends Controller
 
 
 
-    public function create()
+
+
+
+    public function show(Request $request, $id)
+    {
+        $employer = Auth::guard('employer')->user();
+
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+        $jobPosting = JobPosting::where('employer_id', $employer->id)
+            ->findOrFail($id);
+        // Lấy gói "Xem thông tin ứng viên" của employer
+        $orderDetail = OrderDetail::whereHas('order', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id)
+                ->where('status', 'Đã thanh toán');
+        })
+            ->whereHas('service', function ($query) {
+                $query->where('name', 'Xem thông tin ứng viên');
+            })
+            ->where('number_of_active', '>', 0)
+            ->whereDate('expiring_date', '>=', now())
+            ->first();
+        $hasViewInfoPackage = $orderDetail ? true : false;
+        if ($employer->id != $jobPosting->employer_id) {
+            return redirect()->back()->with('error', 'Bạn không có quyền xem tin tuyển dụng này.');
+        }
+        $status = $request->input('status');
+        $sort = $request->input('sort', 'created_at');
+
+        $applications = $jobPosting->applications()
+            ->when($status, function ($query, $status) {
+                return $query->where('applications.status', $status)->whereIn('approve_application', ['Đã duyệt', 'Nộp lại']);
+            })
+            ->when($sort == 'name', function ($query) {
+                return $query->join('candidates', 'applications.candidate_id', '=', 'candidates.id')
+                    ->orderBy('candidates.fullname_candidate', 'asc')
+                    ->select('applications.*');
+            }, function ($query) use ($sort) {
+                return $query->orderBy($sort, 'desc');
+            })
+            ->with('candidate')
+            ->get();
+        $isInfomation = $employer->isInfomation ?? false;
+        return view('job_postings.show', compact('jobPosting', 'applications', 'isInfomation', 'recentMessagesCount', 'recentApplicationsCount', 'hasViewInfoPackage'));
+    }
+ public function create()
     {
         $employer = Auth::guard('employer')->user();
         $recentMessagesCount = $employer->messages()
@@ -323,64 +375,12 @@ class JobPostingController extends Controller
         $cities = City::all();
         $company = $employer->company;
         $salaries = Salary::where('status', 'active')->get();
-        return view('job_postings.create', compact('email', 'categories', 'company', 'cities', 'salaries', 'recentMessagesCount', 'recentApplicationsCount', 'basicServiceDetails', 'hotServiceDetails', 'specialServiceDetails'));
+        return view('job_postings.create', compact('email', 'categories', 'company', 'cities', 'salaries', 'recentMessagesCount', 'recentApplicationsCount', 'basicServiceDetails', 'hotServiceDetails', 'specialServiceDetails', 'employer'));
     }
-
-
-    public function show(Request $request, $id)
-    {
-        $employer = Auth::guard('employer')->user();
-
-        $recentMessagesCount = $employer->messages()
-            ->where('created_at', '>=', Carbon::now()->subHours(5))
-            ->count();
-        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
-            $query->where('employer_id', $employer->id);
-        })
-            ->where('created_at', '>=', Carbon::now()->subHours(5))
-            ->count();
-         $jobPosting = JobPosting::where('employer_id', $employer->id)
-            ->findOrFail($id);
- // Lấy gói "Xem thông tin ứng viên" của employer
-        $orderDetail = OrderDetail::whereHas('order', function ($query) use ($employer) {
-            $query->where('employer_id', $employer->id)
-                ->where('status', 'Đã thanh toán');
-        })
-            ->whereHas('service', function ($query) {
-                $query->where('name', 'Xem thông tin ứng viên');
-            })
-            ->where('number_of_active', '>', 0)
-            ->whereDate('expiring_date', '>=', now())
-            ->first();
-              $hasViewInfoPackage = $orderDetail ? true : false;
-        if ($employer->id != $jobPosting->employer_id) {
-            return redirect()->back()->with('error', 'Bạn không có quyền xem tin tuyển dụng này.');
-        }
-        $status = $request->input('status');
-        $sort = $request->input('sort', 'created_at');
-
-        $applications = $jobPosting->applications()
-            ->when($status, function ($query, $status) {
-                return $query->where('applications.status', $status)->whereIn('approve_application', ['Đã duyệt', 'Nộp lại']);
-            })
-            ->when($sort == 'name', function ($query) {
-                return $query->join('candidates', 'applications.candidate_id', '=', 'candidates.id')
-                    ->orderBy('candidates.fullname_candidate', 'asc')
-                    ->select('applications.*');
-            }, function ($query) use ($sort) {
-                return $query->orderBy($sort, 'desc');
-            })
-            ->with('candidate')
-            ->get();
-        $isInfomation = $employer->isInfomation ?? false;
-        return view('job_postings.show', compact('jobPosting', 'applications', 'isInfomation', 'recentMessagesCount', 'recentApplicationsCount', 'hasViewInfoPackage'));
-    }
-
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255',
             'type' => 'required|string',
             'category' => 'required|array',
             'description' => 'required|string',
@@ -393,11 +393,10 @@ class JobPostingController extends Controller
             'rank' => 'required|string|max:255',
             'number_of_recruits' => 'required|integer',
             'sex' => 'required|string|max:255',
-            'skills_required' => 'required|string|max:255',
-            'area' => 'required|string|max:255',
+'job_skills' => 'nullable|string',
+    'benefits' => 'nullable|string',
+    'education' => 'nullable|string',
             'city' => 'required|array',
-            'salaries' => 'required|array|min:1',
-            'salaries.*' => 'exists:salaries,id',
             'service_type' => 'required|in:Tin cơ bản,Tin nổi bật,Tin đặc biệt',
         ], [
             'title.required' => 'Job title is required.',
@@ -410,19 +409,19 @@ class JobPostingController extends Controller
             'email.email' => 'Please enter a valid email address.',
             'city.required' => 'At least one city is required.',
         ]);
-        $slug = $request->slug ?? Str::slug($request->title);
+        $slug = Str::slug($request->title);
+        $originalSlug = $slug;
+        $count = 1;
 
-        // Kiểm tra trùng slug
-        if (JobPosting::where('slug', $slug)->exists()) {
-            return back()->withInput()->withErrors(['slug' => 'Tên đã tồn tại, vui lòng chọn tiêu đề khác.']);
+        while (JobPosting::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $count++;
         }
-
         $jobPosting = new JobPosting();
         $jobPosting->employer_id = Auth::guard('employer')->id();
         $jobPosting->company_id = $request->company_id;
         $jobPosting->email = $request->email;
         $jobPosting->title = $request->title;
-        $jobPosting->slug = $request->slug;
+        $jobPosting->slug = $slug;
         $jobPosting->type = $request->type;
         $jobPosting->location = $request->location;
         $jobPosting->tags = $request->tags;
@@ -435,10 +434,10 @@ class JobPostingController extends Controller
         $jobPosting->number_of_recruits = $request->number_of_recruits;
         $jobPosting->sex = $request->sex;
         $jobPosting->status = 1;
-        $jobPosting->skills_required = $request->skills_required;
-        $jobPosting->area = $request->area;
-        // Proceed with saving the job posting
         $jobPosting->service_type = $request->service_type;
+$jobPosting->job_skills = $request->job_skills;
+$jobPosting->benefits = $request->benefits;
+$jobPosting->education = $request->education;
 
 
         // Handle logo
@@ -454,8 +453,6 @@ class JobPostingController extends Controller
         // Sync categories
         $jobPosting->categories()->sync($request->category);
         $jobPosting->cities()->sync($request->city);
-        $jobPosting->salaries()->sync($request->input('salaries'));
-        // Lấy công ty đăng bài
         $company = Company::find($jobPosting->company_id);
         if ($request->has('service_type')) {
             $serviceType = $request->service_type;
@@ -584,11 +581,10 @@ class JobPostingController extends Controller
             'rank' => 'required|string|max:255',
             'number_of_recruits' => 'required|integer',
             'sex' => 'required|string|max:255',
-            'skills_required' => 'required|string|max:255',
-            'area' => 'required|string|max:255',
-            'salaries' => 'required|array|min:1', // Salaries are required and must be an array with at least one item
-            'salaries.*' => 'exists:salaries,id', // Each item in the salaries array must exist in the salaries table
             'city' => 'required|array',
+             'job_skills' => 'nullable|string',
+    'benefits' => 'nullable|string',
+    'education' => 'nullable|string|max:255',
         ], [
             'title.required' => 'Job title is required.',
             'type.required' => 'Job type is required.',
@@ -599,6 +595,9 @@ class JobPostingController extends Controller
             'email.required' => 'Your email is required.',
             'email.email' => 'Please enter a valid email address.',
             'city.required' => 'At least one city is required.',
+             'job_skills.string' => 'Kỹ năng yêu cầu phải là chuỗi.',
+    'benefits.string' => 'Phúc lợi phải là chuỗi.',
+    'education.string' => 'Học vấn phải là chuỗi.',
         ]);
 
         $jobPosting = JobPosting::findOrFail($id);
@@ -607,7 +606,6 @@ class JobPostingController extends Controller
         }
         $jobPosting->email = $request->email;
         $jobPosting->title = $request->title;
-        $jobPosting->slug = $request->slug;
         $jobPosting->type = $request->type;
         $jobPosting->location = $request->location;
         $jobPosting->tags = $request->tags;
@@ -619,16 +617,15 @@ class JobPostingController extends Controller
         $jobPosting->rank = $request->rank;
         $jobPosting->number_of_recruits = $request->number_of_recruits;
         $jobPosting->sex = $request->sex;
-        $jobPosting->skills_required = $request->skills_required;
-        $jobPosting->area = $request->area;
         $jobPosting->company_id = $request->company_id;
-
+$jobPosting->job_skills = $request->job_skills;
+$jobPosting->benefits = $request->benefits;
+$jobPosting->education = $request->education;
         $jobPosting->save();
 
         // Sync categories
         $jobPosting->categories()->sync($request->category);
         $jobPosting->cities()->sync($request->city);
-        $jobPosting->salaries()->sync($request->input('salaries'));
 
 
         // Redirect with success message
@@ -692,36 +689,36 @@ class JobPostingController extends Controller
         // Truyền dữ liệu carts sang view
         return view('job_postings.services', compact('carts', 'recentMessagesCount', 'recentApplicationsCount', 'typeservices', 'exchangeRate'));
     }
-  public function serviceActive()
-{
-    $employer = Auth::guard('employer')->user();
+    public function serviceActive()
+    {
+        $employer = Auth::guard('employer')->user();
 
-    // Eager load all necessary relationships to prevent N+1 queries
-    $orders = Order::with(['orderDetails.cart', 'jobPostings'])
-        ->where('employer_id', $employer->id)
-        ->where('status', 'Đã thanh toán')
-        ->orderBy('created_at', 'desc')
-        ->get();
+        // Eager load all necessary relationships to prevent N+1 queries
+        $orders = Order::with(['orderDetails.cart', 'jobPostings'])
+            ->where('employer_id', $employer->id)
+            ->where('status', 'Đã thanh toán')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-    $recentTimeframe = Carbon::now()->subHours(5);
+        $recentTimeframe = Carbon::now()->subHours(5);
 
-    $recentMessagesCount = $employer->messages()
-        ->where('created_at', '>=', $recentTimeframe)
-        ->count();
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', $recentTimeframe)
+            ->count();
 
-    $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
-        $query->where('employer_id', $employer->id);
-    })
-        ->where('created_at', '>=', $recentTimeframe)
-        ->count();
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', $recentTimeframe)
+            ->count();
 
-    return view('job_postings.service-active', compact(
-        'employer',
-        'orders',
-        'recentMessagesCount',
-        'recentApplicationsCount'
-    ));
-}
+        return view('job_postings.service-active', compact(
+            'employer',
+            'orders',
+            'recentMessagesCount',
+            'recentApplicationsCount'
+        ));
+    }
     public function removeFromCart($id)
     {
         $cart = Cart::where('id', $id)

@@ -164,9 +164,8 @@
                                                     </p>
                                                 </div>
                                             @else
-                                                <a href="#"
-                                                     class="btn btn-apply-now"
-                                                    data-toggle="modal" data-target="#applyModal" data-job-id="{{ $jobPosting->id }}">
+                                                <a href="#" class="btn btn-apply-now" data-toggle="modal" data-target="#applyModal"
+                                                    data-job-id="{{ $jobPosting->id }}">
                                                     <span class="button-icon">
                                                         <i class="fa-light fa-paper-plane"></i>
                                                     </span>
@@ -225,11 +224,25 @@
                                     <div class="job-description">
                                         <div class="job-descriptn__item">
                                             <div class="job-description__item--content">
-                                                {!! $jobPosting->description !!}
+                                                @if (!empty($jobPosting->description))
+                                                    <h3><strong>Mô tả công việc</strong></h3>
+                                                    {!! $jobPosting->description !!}
+                                                @endif
+
+                                                @if (!empty($jobPosting->job_skills))
+                                                    <h4><strong>Kỹ năng yêu cầu</strong></h4>
+                                                    {!! $jobPosting->job_skills !!}
+                                                @endif
+
+                                                @if (!empty($jobPosting->benefits))
+                                                    <h4><strong>Phúc lợi</strong></h4>
+                                                    {!! $jobPosting->benefits !!}
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="job-detail__information-detail--actions">
                                     <div class="job-detail__information-detail--actions-button box-apply-success"
                                         style="display: none">
@@ -1239,82 +1252,81 @@
         </script>
         <!-- Apply Modal -->
         <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="applyModalLabel">Chọn CV của bạn và viết thư ứng tuyển</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            @auth('candidate')
-                                <form id="applyForm" action="{{ route('applications.store') }}" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <!-- Empty value that will be filled by JavaScript -->
-                                    <input type="hidden" name="job_posting_id" id="job_posting_id" value="">
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applyModalLabel">Chọn CV của bạn và viết thư ứng tuyển</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @auth('candidate')
+                            <form id="applyForm" action="{{ route('applications.store') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <!-- Empty value that will be filled by JavaScript -->
+                                <input type="hidden" name="job_posting_id" id="job_posting_id" value="">
 
-                                    <div class="form-group">
-                                        <label for="cv_id">Chọn CV</label>
-                                        <select class="form-control" id="cv_id" name="cv_id">
-                                            <option value="">-- Chọn CV sẵn có hoặc tải lên mới --</option>
-                                            @foreach(auth('candidate')->user()->cvs as $cv)
-                                                <option value="{{ $cv->id }}">{{ $cv->cv_name }} - {{ $cv->cv_path }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group" id="new-cv-upload">
-                                        <label for="cv">CV mới (PDF, DOC, DOCX)*</label>
-                                        <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="application_letter">Thư ứng tuyển</label>
-                                        <textarea class="form-control" id="introduction" name="introduction"
-                                            rows="4"></textarea>
-                                    </div>
-                                </form>
-                            @else
-                                <p>Bạn cần đăng nhập để ứng tuyển.</p>
-                            @endauth
-                        </div>
+                                <div class="form-group">
+                                    <label for="cv_id">Chọn CV</label>
+                                    <select class="form-control" id="cv_id" name="cv_id">
+                                        <option value="">-- Chọn CV sẵn có hoặc tải lên mới --</option>
+                                        @foreach(auth('candidate')->user()->cvs as $cv)
+                                            <option value="{{ $cv->id }}">{{ $cv->cv_name }} - {{ $cv->cv_path }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group" id="new-cv-upload">
+                                    <label for="cv">CV mới (PDF, DOC, DOCX)*</label>
+                                    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx">
+                                </div>
+                                <div class="form-group">
+                                    <label for="application_letter">Thư ứng tuyển</label>
+                                    <textarea class="form-control" id="introduction" name="introduction" rows="4"></textarea>
+                                </div>
+                            </form>
+                        @else
+                            <p>Bạn cần đăng nhập để ứng tuyển.</p>
+                        @endauth
+                    </div>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                            @auth('candidate')
-                                <button type="button" class="btn btn-primary" onclick="submitApplyForm()">Ứng tuyển
-                                    ngay</button>
-                            @endauth
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        @auth('candidate')
+                            <button type="button" class="btn btn-primary" onclick="submitApplyForm()">Ứng tuyển
+                                ngay</button>
+                        @endauth
                     </div>
                 </div>
             </div>
-            <script>
-                $(document).ready(function () {
-                    // Fixed selector to target all buttons that should open apply modal
-                    $('.btn-apply-now').on('click', function () {
-                        var jobId = $(this).data('job-id');
-                        console.log("Setting job_posting_id to:", jobId); // For debugging
-                        $('#job_posting_id').val(jobId);
-                    });
-
-                    // Single submitApplyForm function
-                    window.submitApplyForm = function () {
-                        console.log("Form submission started"); // For debugging
-                        console.log("job_posting_id value:", $('#job_posting_id').val()); // For debugging
-                        document.getElementById('applyForm').submit();
-                    };
-
-                    // CV selection logic
-                    $('#cv_id').on('change', function () {
-                        $('#new-cv-upload').css('display', $(this).val() ? 'none' : 'block');
-                    });
-
-                    // Initialize display state
-                    $('#new-cv-upload').css('display', $('#cv_id').val() ? 'none' : 'block');
+        </div>
+        <script>
+            $(document).ready(function () {
+                // Fixed selector to target all buttons that should open apply modal
+                $('.btn-apply-now').on('click', function () {
+                    var jobId = $(this).data('job-id');
+                    console.log("Setting job_posting_id to:", jobId); // For debugging
+                    $('#job_posting_id').val(jobId);
                 });
-            </script>
+
+                // Single submitApplyForm function
+                window.submitApplyForm = function () {
+                    console.log("Form submission started"); // For debugging
+                    console.log("job_posting_id value:", $('#job_posting_id').val()); // For debugging
+                    document.getElementById('applyForm').submit();
+                };
+
+                // CV selection logic
+                $('#cv_id').on('change', function () {
+                    $('#new-cv-upload').css('display', $(this).val() ? 'none' : 'block');
+                });
+
+                // Initialize display state
+                $('#new-cv-upload').css('display', $('#cv_id').val() ? 'none' : 'block');
+            });
+        </script>
         <script>
             var search = new URLSearchParams(location.search);
             ta('pageview', Object.assign(topcvJob, {

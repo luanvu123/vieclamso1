@@ -10,7 +10,7 @@
     <!-- Mobile Specific Metas
 ================================================== -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- CSS
 ================================================== -->
@@ -87,8 +87,8 @@
                                     class="ln ln-icon-Align-JustifyAll"></span> Bảng tin</a>
                         </li>
                         <li class="{{ Route::is('loyal-customer') ? 'active' : '' }}">
-                            <a href="{{ route('loyal-customer') }}"><span class="ln ln-icon-Gift-Box"></span> TopCV
-                                Rewards </a>
+                            <a href="{{ route('loyal-customer') }}"><span class="ln ln-icon-Gift-Box"></span>
+                                Phần thưởng </a>
                         </li>
                         <li class="{{ Route::is('buy-gift') ? 'active' : '' }}">
                             <a href="{{ route('buy-gift') }}"><span class="ln ln-icon-Sled-withGifts"></span> Đổi quà
@@ -103,42 +103,49 @@
                                 @endif
                             </a>
                         </li>
-                        <li class="{{ Route::is('messages.receive') || Route::is('messages.show') ? 'active' : '' }}">
-                            <a href="{{ route('messages.receive') }}"><span
-                                    class="ln ln-icon-Bird-DeliveringLetter"></span> Tin nhắn
-                                @if ($recentMessagesCount > 0)
-                                    <span class="nav-tag">{{ $recentMessagesCount }}</span>
-                                @endif
-                            </a>
-                        </li>
-
-
                         <li class="{{ Route::is('employer.services') ? 'active' : '' }}">
                             <a href="{{ route('employer.services') }}"><span class="ln ln-icon-Film-Cartridge"></span>
                                 Dịch vụ </a>
                         </li>
-
                         <li
-                            class="">
+                            class="has-submenu {{  Route::is('messages.receive') || Route::is('messages.show') || Route::is('job_postings.search_candidate') || Route::is('job_postings.saved_profiles') ? 'active' : '' }}">
+                            <a href="#"><span class="ln ln-icon-Add-User"></span> Ứng viên <i
+                                    class="ln ln-icon-Chevron-Down"></i></a>
+                            <ul class="submenu">
+
+                                <li
+                                    class="{{ Route::is('messages.receive') || Route::is('messages.show') ? 'active' : '' }}">
+                                    <a href="{{ route('messages.receive') }}">
+                                        <span class="ln ln-icon-Bird-DeliveringLetter"></span> Tin nhắn
+                                        @if ($recentMessagesCount > 0)
+                                            <span class="nav-tag">{{ $recentMessagesCount }}</span>
+                                        @endif
+                                    </a>
+                                </li>
+                                <li class="{{ Route::is('job_postings.search_candidate') ? 'active' : '' }}">
+                                    <a href="{{ route('job_postings.search_candidate') }}">
+                                        <span class="ln ln-icon-Film-Cartridge"></span> Tìm kiếm ứng viên
+                                    </a>
+                                </li>
+                                <li class="{{ Route::is('job_postings.saved_profiles') ? 'active' : '' }}">
+                                    <a href="{{ route('job_postings.saved_profiles') }}">
+                                        <span class="ln ln-icon-Heart"></span> Hồ sơ đã lưu
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="">
                             <a href="{{route('employer.orders.index')}}"><span class="ln ln-icon-Full-Cart"></span> Theo
                                 dõi đơn hàng </a>
                         </li>
                         <li class="{{ Route::is('employer.service-active') ? 'active' : '' }}">
-                            <a href="{{ route('employer.service-active') }}"><span class="ln ln-icon-Align-Left"></span> Dịch
+                            <a href="{{ route('employer.service-active') }}"><span class="ln ln-icon-Align-Left"></span>
+                                Dịch
                                 vụ đang mở </a>
                         </li>
                         <li class="{{ Route::is('job_postings.checkout') ? 'active' : '' }}">
-                            <a href="{{ route('job_postings.checkout') }}"><span
-                                    class="ln ln-icon-Arrow-Inside"></span>
+                            <a href="{{ route('job_postings.checkout') }}"><span class="ln ln-icon-Arrow-Inside"></span>
                                 Thông tin thanh toán </a>
-                        </li>
-                        <li class="{{ Route::is('job_postings.search_candidate') ? 'active' : '' }}">
-                            <a href="{{ route('job_postings.search_candidate') }}"><span
-                                    class="ln ln-icon-Film-Cartridge"></span> Tìm kiếm ứng viên </a>
-                        </li>
-                        <li class="{{ Route::is('job_postings.saved_profiles') ? 'active' : '' }}">
-                            <a href="{{ route('job_postings.saved_profiles') }}"><span
-                                    class="ln ln-icon-Film-Cartridge"></span> Hồ sơ đã lưu </a>
                         </li>
                     </ul>
                 </div>
@@ -149,15 +156,15 @@
             <!-- Content
  ================================================== -->
             <div class="dashboard-content">
-                    <div class="support-info d-flex justify-content-around align-items-center mt-4 p-3 border-top">
-      <span><strong>Chuyên viên CSKH:</strong> <a
+                <div class="support-info d-flex justify-content-around align-items-center mt-4 p-3 border-top">
+                    <span><strong>Chuyên viên CSKH:</strong> <a
                             href="tel:{{ Auth::guard('employer')->user()->user->phone }}">{{ Auth::guard('employer')->user()->user->name }}</a></span>
                     <span><strong>Điện thoại:</strong> <a
                             href="tel:{{ Auth::guard('employer')->user()->user->phone }}">{{ Auth::guard('employer')->user()->user->phone }}</a></span>
                     <span><strong>Email:</strong> <a
                             href="mailto:{{ Auth::guard('employer')->user()->user->email }}">{{ Auth::guard('employer')->user()->user->email }}</a></span>
                     <span><strong>Giờ làm việc:</strong> 08:00 - 17:30 (T2 - T7)</span>
-    </div>
+                </div>
                 @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
@@ -206,6 +213,8 @@
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('summary');
+        CKEDITOR.replace('job_skills');
+        CKEDITOR.replace('benefits');
     </script>
     <script>
         function ChangeToSlug() {
@@ -246,7 +255,7 @@
 
     <!-- Initialize the slider -->
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.VueCarousel-inner').slick({
                 slidesToShow: 2,
                 slidesToScroll: 2,
@@ -265,7 +274,7 @@
     <!-- Include DataTables JavaScript -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#user-table').DataTable();
         });
     </script>
