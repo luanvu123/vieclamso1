@@ -51,7 +51,7 @@
                                                         <p class="cv-apply-caption">
                                                             CV đã ứng tuyển:
                                                             <a target="_blank"
-                                                                href="{{ asset('storage/' . $application->cv->cv_path) }}"
+                                                                href="{{ asset('storage/' . $application->cv_path) }}"
                                                                 class="text-highlight">CV tải lên</a>
                                                         </p>
                                                         <div class="action-job">
@@ -62,7 +62,7 @@
                                                                         <i class="fa-solid fa-message"></i> Nhắn tin
                                                                     </a>
                                                                     <a target="_blank"
-                                                                        href="{{ asset('storage/' . $application->cv->cv_path) }}"
+                                                                        href="{{ asset('storage/' . $application->cv_path) }}"
                                                                         class="btn-sm btn-topcv-primary">
                                                                         <i class="fa-solid fa-eye"></i> Xem CV
                                                                     </a>
@@ -72,21 +72,27 @@
                                                     </div>
                                                     <div class="box-cv-apply-status">
                                                         <div class="cv-apply-status-text">
-                                                            Trạng thái:
-                                                            <span class="applied">
-                                                                @if ($application->status == 1)
-                                                                    Đã ứng tuyển
-                                                                @elseif ($application->status == 2)
-                                                                    NTD đã xem hồ sơ
-                                                                @elseif ($application->status == 3)
-                                                                    Hồ sơ phù hợp
-                                                                @elseif ($application->status == 4)
-                                                                    Hồ sơ chưa phù hợp
-                                                                @else
-                                                                    Không xác định
-                                                                @endif
-                                                            </span>
-                                                        </div>
+    Trạng thái:
+    <span class="applied">
+        @switch($application->status)
+            @case('pending')
+                Đã ứng tuyển
+                @break
+            @case('reviewed')
+                NTD đã xem hồ sơ
+                @break
+            @case('accepted')
+                Hồ sơ phù hợp
+                @break
+            @case('rejected')
+                Hồ sơ chưa phù hợp
+                @break
+            @default
+                Không xác định
+        @endswitch
+    </span>
+</div>
+
                                                         <div class="cv-apply-status-time">
                                                             Vào lúc: {{ $application->created_at->format('d-m-Y H:i A') }}
                                                         </div>

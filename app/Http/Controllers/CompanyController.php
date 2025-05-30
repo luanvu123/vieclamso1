@@ -51,69 +51,79 @@ class CompanyController extends Controller
         return view('companies.create', compact('employer', 'categories', 'recentMessagesCount', 'recentApplicationsCount'));
     }
 
-    public function store(Request $request)
-    {
-        $employer = Auth::guard('employer')->user();
+   public function store(Request $request)
+{
+    $employer = Auth::guard('employer')->user();
 
-        // Kiểm tra nếu employer đã có công ty
-        if ($employer->company) {
-            return redirect()->route('companies.index')
-                ->with('error', 'You can only create one company.');
-        }
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
-            'logo' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
-            'scale' => 'nullable|string|max:255',
-            'address' => 'nullable|string|max:255',
-            'map' => 'nullable|string',
-            'detail' => 'nullable|string',
-            'url' => 'nullable|url',
-            'website' => 'nullable|url',
-            'facebook' => 'nullable|url',
-            'twitter' => 'nullable|url',
-            'linkedin' => 'nullable|url',
-            'mst' => 'nullable|string|max:255',
-        ]);
-
-        $companyData = $request->only([
-            'name',
-            'scale',
-            'address',
-            'map',
-            'detail',
-            'url',
-            'website',
-            'facebook',
-            'twitter',
-            'linkedin',
-            'mst'
-        ]);
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imagePath = $image->store('logo_company', 'public');
-            $companyData['image'] = $imagePath;
-        }
-
-        if ($request->hasFile('logo')) {
-            $logo = $request->file('logo');
-            $logoPath = $logo->store('logo_company', 'public');
-            $companyData['logo'] = $logoPath;
-        }
-
-        $companyData['employer_id'] = $employer->id; // Set employer_id
-        $companyData['slug'] = Str::slug($request->name); // Tạo slug từ tên công ty
-        $companyData['top'] = 0; // Đặt giá trị mặc định cho cột top
-        $company = Company::create($companyData);
-
-        if ($request->has('category')) {
-            $company->categories()->sync($request->category);
-        }
-
-        return redirect()->route('companies.index')->with('success', 'Company created successfully.');
+    if ($employer->company) {
+        return redirect()->route('companies.index')
+            ->with('error', 'You can only create one company.');
     }
+
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        'logo' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        'scale' => 'nullable|string|max:255',
+        'address' => 'nullable|string|max:255',
+        'map' => 'nullable|string',
+        'detail' => 'nullable|string',
+        'url' => 'nullable|url',
+        'website' => 'nullable|url',
+        'facebook' => 'nullable|url',
+        'twitter' => 'nullable|url',
+        'linkedin' => 'nullable|url',
+        'mst' => 'nullable|string|max:255',
+    ]);
+
+    $slug = Str::slug($request->name);
+
+    // ✅ Kiểm tra trùng slug
+    if (Company::where('slug', $slug)->exists()) {
+        return redirect()->back()
+            ->withInput()
+            ->with('error', 'Công ty đã tồn tại vui lòng nhập tên khác');
+    }
+
+    $companyData = $request->only([
+        'name',
+        'scale',
+        'address',
+        'map',
+        'detail',
+        'url',
+        'website',
+        'facebook',
+        'twitter',
+        'linkedin',
+        'mst'
+    ]);
+
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imagePath = $image->store('logo_company', 'public');
+        $companyData['image'] = $imagePath;
+    }
+
+    if ($request->hasFile('logo')) {
+        $logo = $request->file('logo');
+        $logoPath = $logo->store('logo_company', 'public');
+        $companyData['logo'] = $logoPath;
+    }
+
+    $companyData['employer_id'] = $employer->id;
+    $companyData['slug'] = $slug;
+    $companyData['top'] = 0;
+
+    $company = Company::create($companyData);
+
+    if ($request->has('category')) {
+        $company->categories()->sync($request->category);
+    }
+
+    return redirect()->route('companies.index')->with('success', 'Company created successfully.');
+}
+
 
 
     public function show($id)

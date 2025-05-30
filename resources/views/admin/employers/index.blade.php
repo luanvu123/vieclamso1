@@ -108,16 +108,29 @@
 
 
                                     <td>{{ $employer->created_at }}</td>
-                                    <td>
-                                        <a href="{{ route('employers.show', $employer->id) }}" class="btn btn-danger"><i
-                                                class="fa fa-eye"></i> View</a>
-                                        <a href="{{ route('employers.edit', $employer->id) }}" class="btn btn-warning"><i
-                                                class="fa fa-pencil"></i> Level</a>
-                                        <a href="{{ route('employers.job-postings', $employer->id) }}"
-                                            class="btn btn-primary">
-                                            Xem Tin Tuyển Dụng
-                                        </a>
-                                    </td>
+                                   <td class="text-center">
+    <a href="{{ route('employers.show', $employer->id) }}" class="btn btn-sm btn-info" title="Xem chi tiết">
+        <i class="fa fa-eye"></i>
+    </a>
+
+    <a href="{{ route('employers.edit', $employer->id) }}" class="btn btn-sm btn-warning" title="Chỉnh sửa cấp độ">
+        <i class="fa fa-pencil"></i>
+    </a>
+
+    <a href="{{ route('employers.job-postings', $employer->id) }}" class="btn btn-sm btn-primary" title="Tin tuyển dụng">
+        <i class="fa fa-briefcase"></i>
+    </a>
+
+    <form action="{{ route('employers.destroy', $employer->id) }}" method="POST" class="d-inline"
+        onsubmit="return confirm('Bạn có chắc chắn muốn xóa nhà tuyển dụng này?')">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-sm btn-danger" title="Xóa">
+            <i class="fa fa-trash"></i>
+        </button>
+    </form>
+</td>
+
                                     <td>
                                         @if ($employer->created_at > \Carbon\Carbon::now()->subHour())
                                             <span class="label label-primary pull-right">new</span>

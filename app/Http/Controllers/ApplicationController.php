@@ -88,10 +88,7 @@ class ApplicationController extends Controller
         ]);
     }
 
-    $jobPosting = $application->jobPosting;
-    if ($jobPosting->employer->email) {
-        Mail::to($jobPosting->employer->email)->send(new ApplicationNotification($application));
-    }
+   
 
     // Gửi email thông báo
     Mail::to($application->candidate->email)->send(new ApplicationSuccess($application));

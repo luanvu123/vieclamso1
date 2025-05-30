@@ -120,6 +120,9 @@ public function refresh($id)
             'city' => 'array',
             'category' => 'array',
             'salaries' => 'array',
+                'job_skills' => 'nullable|string',
+    'benefits' => 'nullable|string',
+    'education' => 'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -139,6 +142,9 @@ public function refresh($id)
                 'number_of_recruits' => $request->number_of_recruits,
                 'sex' => $request->sex,
                 'skills_required' => $request->skills_required,
+                'job_skills' => $request->job_skills,
+                'benefits' => $request->benefits,
+                'education' => $request->education,
             ]);
 
             // Đồng bộ bảng pivot
@@ -147,7 +153,7 @@ public function refresh($id)
             $jobPosting->salaries()->sync($request->salaries ?? []);
 
             DB::commit();
-            return redirect()->route('job-postings-manage.index')->with('success', 'Job updated successfully.');
+            return redirect()->route('job-postings-manage.index')->with('success', 'Công việc đã được cập nhật thành công.');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Failed to update job: ' . $e->getMessage());

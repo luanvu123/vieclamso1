@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ApplicationNotification;
 use Illuminate\Http\Request;
 use App\Models\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 
 class ApplicationManageController extends Controller
 {
@@ -49,28 +51,28 @@ class ApplicationManageController extends Controller
 
         return redirect()->route('application-manage.index')->with('error', 'Không có file CV được chọn.');
     }
-// Phương thức xóa CV che thông tin
-public function deleteHiddenCv($id)
-{
-    $application = Application::with('jobPosting.employer')->findOrFail($id);
-    $this->authorizeEmployer($application);
+    // Phương thức xóa CV che thông tin
+    public function deleteHiddenCv($id)
+    {
+        $application = Application::with('jobPosting.employer')->findOrFail($id);
+        $this->authorizeEmployer($application);
 
-    if ($application->cv_path_hidden_info) {
-        // Xóa file từ storage
-        if (Storage::disk('public')->exists($application->cv_path_hidden_info)) {
-            Storage::disk('public')->delete($application->cv_path_hidden_info);
+        if ($application->cv_path_hidden_info) {
+            // Xóa file từ storage
+            if (Storage::disk('public')->exists($application->cv_path_hidden_info)) {
+                Storage::disk('public')->delete($application->cv_path_hidden_info);
+            }
+
+            // Cập nhật database
+            $application->update([
+                'cv_path_hidden_info' => null
+            ]);
+
+            return redirect()->route('application-manage.index')->with('success', 'Đã xóa CV che thông tin.');
         }
 
-        // Cập nhật database
-        $application->update([
-            'cv_path_hidden_info' => null
-        ]);
-
-        return redirect()->route('application-manage.index')->with('success', 'Đã xóa CV che thông tin.');
+        return redirect()->route('application-manage.index')->with('error', 'Không tìm thấy CV che thông tin.');
     }
-
-    return redirect()->route('application-manage.index')->with('error', 'Không tìm thấy CV che thông tin.');
-}
     // Phương thức cập nhật CV path từ CV nộp lại
     public function updateCvPath($id)
     {
@@ -100,10 +102,33 @@ public function deleteHiddenCv($id)
         return view('admin.applications.show', compact('application'));
     }
 
+
     public function edit($id)
     {
         $application = Application::with(['candidate', 'jobPosting.employer'])->findOrFail($id);
         $this->authorizeEmployer($application);
+        $jobPosting = $application->jobPosting;
+
+        // Tạo mảng chứa các email cần gửi
+        $emailRecipients = [];
+
+        // Thêm email của employer nếu có
+        if ($jobPosting->employer->email) {
+            $emailRecipients[] = $jobPosting->employer->email;
+        }
+
+        // Thêm application_email_url nếu có và khác với email employer
+        if (
+            $jobPosting->application_email_url &&
+            !in_array($jobPosting->application_email_url, $emailRecipients)
+        ) {
+            $emailRecipients[] = $jobPosting->application_email_url;
+        }
+
+        // Gửi email tới tất cả recipients (loại bỏ trùng lặp)
+        if (!empty($emailRecipients)) {
+            Mail::to($emailRecipients)->send(new ApplicationNotification($application));
+        }
 
         return view('admin.applications.edit', compact('application'));
     }
@@ -126,19 +151,19 @@ public function deleteHiddenCv($id)
         return redirect()->route('application-manage.index')->with('success', 'Cập nhật đơn ứng tuyển thành công.');
     }
 
-   protected function authorizeEmployer($application)
-{
-    $user = Auth::user();
+    protected function authorizeEmployer($application)
+    {
+        $user = Auth::user();
 
-    // Nếu là admin thì cho phép bỏ qua kiểm tra
-    if ($user->roles()->where('id', 1)->exists()) {
-        return;
-    }
+        // Nếu là admin thì cho phép bỏ qua kiểm tra
+        if ($user->roles()->where('id', 1)->exists()) {
+            return;
+        }
 
-    // Nếu không phải admin, chỉ cho phép nếu employer là của user
-    if ($application->jobPosting->employer->user_id != $user->id) {
-        abort(403, 'Bạn không có quyền truy cập đơn ứng tuyển này.');
+        // Nếu không phải admin, chỉ cho phép nếu employer là của user
+        if ($application->jobPosting->employer->user_id != $user->id) {
+            abort(403, 'Bạn không có quyền truy cập đơn ứng tuyển này.');
+        }
     }
-}
 
 }

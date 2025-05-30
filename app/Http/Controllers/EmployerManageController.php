@@ -41,22 +41,23 @@ class EmployerManageController extends Controller
         $this->middleware('permission:employer-sentEmails-delete', ['only' => ['destroySentEmail']]);
     }
   public function index()
-{
-    $user = Auth::user();
-
-    if ($user->roles()->where('id', 1)->exists()) {
-        // Nếu là admin, lấy tất cả applications
-        $applications = Application::with(['candidate', 'jobPosting'])->latest()->get();
-    } else {
-        // Nếu không phải admin, chỉ lấy các applications thuộc employer hiện tại
-        $userId = $user->id;
-
-        $applications = Application::whereHas('jobPosting.employer.user', function ($query) use ($userId) {
-            $query->where('id', $userId);
-        })->with(['candidate', 'jobPosting'])->latest()->get();
+    {
+        $userId = Auth::id();
+        $user = Auth::user();
+        if ($user->roles()->where('id', 1)->exists()) {
+            $employers = Employer::with('user')->get();
+        } else {
+            $employers = Employer::with('user')->where('user_id', $userId)->get();
+        }
+        $users = User::all();
+        return view('admin.employers.index', compact('employers', 'users'));
     }
+    public function destroy($id)
+{
+    $employer = Employer::findOrFail($id);
+    $employer->delete();
 
-    return view('admin.applications.index', compact('applications'));
+    return redirect()->route('employers.index')->with('success', 'Đã xóa nhà tuyển dụng thành công.');
 }
 
     // Trong EmployerManageController.php

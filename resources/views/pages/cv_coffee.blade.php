@@ -1,777 +1,780 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CV Coffee Frame</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Maker Chuyên Nghiệp</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #f7ede2;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             padding: 20px;
-            color: #50443b;
         }
 
-        .browser-frame {
-            background: #fff8f0;
-            border-radius: 12px;
-            box-shadow: 0 10px 20px rgba(154, 82, 10, 0.25);
-            max-width: 900px;
+        .container {
+            max-width: 1400px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             overflow: hidden;
-            border: 4px solid #d99a1c;
         }
 
-        .browser-header {
-            background: #a36309;
-            color: #fff2cc;
-            padding: 12px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .editor-section {
+            padding: 30px;
+            background: #fcfcfc;
+            max-height: 100vh;
+            overflow-y: auto;
         }
 
-        .window-controls {
-            display: flex;
-            gap: 10px;
+        .preview-section {
+            background: white;
+            padding: 0;
+            position: relative;
         }
 
-        .control-btn {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.15s ease;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        .section-title {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
         }
 
-        .control-btn.close {
-            background: #d72631;
+        .form-group {
+            margin-bottom: 20px;
         }
 
-        .control-btn.close:hover {
-            transform: scale(1.1);
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
         }
 
-        .control-btn.minimize {
-            background: #f4bf4f;
-        }
-
-        .control-btn.minimize:hover {
-            transform: scale(1.1);
-        }
-
-        .control-btn.maximize {
-            background: #54a24b;
-        }
-
-        .control-btn.maximize:hover {
-            transform: scale(1.1);
-        }
-
-        .address-bar {
-            flex-grow: 1;
-            margin-left: 12px;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 0.9rem;
-            user-select: none;
-        }
-
-        .toolbar {
-            background: #fbeabb;
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 16px;
-            border-bottom: 2px solid #d99a1c;
-        }
-
-        .edit-mode-toggle,
-        .download-btn {
-            background: #d99a1c;
-            border: none;
-            padding: 8px 14px;
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
             border-radius: 8px;
-            color: #fff8f0;
-            font-weight: bold;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1rem;
-            box-shadow: 0 3px 7px rgba(217, 154, 28, 0.7);
-            transition: background-color 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+            margin: 5px;
         }
 
-        .edit-mode-toggle:hover,
-        .download-btn:hover {
-            background-color: #b57b00;
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .cv-container {
-            padding: 25px 40px 40px 40px;
+        .btn-secondary {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+        }
+
+        .dynamic-section {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .file-input-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .file-input-container:hover {
+            transform: translateY(-2px);
+        }
+
+        .file-input-container input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        /* CV Preview Styles */
+        .cv-preview {
+            padding: 40px;
+            background: white;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            min-height: 100vh;
         }
 
         .cv-header {
             display: flex;
             align-items: center;
-            gap: 30px;
-            border-bottom: 2px solid #d99a1c;
+            margin-bottom: 30px;
             padding-bottom: 20px;
+            border-bottom: 3px solid #2c3e50;
         }
 
-        .profile-photo {
-            width: 110px;
-            height: 110px;
+        .cv-photo {
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            border: 3px solid #d99a1c;
-            background: #f5e1a4;
-            position: relative;
-            cursor: pointer;
-            overflow: hidden;
-            flex-shrink: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 3rem;
-            color: #a36309;
-            transition: box-shadow 0.2s ease;
+            object-fit: cover;
+            border: 4px solid #2c3e50;
+            margin-right: 30px;
         }
 
-        .profile-photo:hover .photo-upload-overlay {
-            opacity: 0.7;
+        .cv-personal-info h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
         }
 
-        .photo-upload input {
-            display: none;
-        }
-
-        .photo-upload-overlay {
-            position: absolute;
-            inset: 0;
-            background: #d99a1c;
-            color: white;
-            opacity: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
-            user-select: none;
-            transition: opacity 0.3s ease;
-        }
-
-        h1.editable {
-            margin: 0;
-            font-size: 2.2rem;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            color: #7f5600;
-        }
-
-        .job-title.editable {
-            font-style: italic;
-            font-weight: 600;
-            color: #b57b00;
-            margin-top: 4px;
+        .cv-personal-info h2 {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            font-weight: 400;
+            margin-bottom: 15px;
         }
 
         .contact-info {
-            margin-top: 12px;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: #7f6000;
-        }
-
-        .contact-item {
-            margin-bottom: 4px;
-        }
-
-        .cv-section {
-            margin-top: 30px;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .section-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #9a6f03;
-            border-bottom: 2px solid #d99a1c;
-            padding-bottom: 6px;
-            margin: 0;
-        }
-
-        .section-content.editable {
-            margin-top: 10px;
-            font-size: 1rem;
-            color: #5a4816;
-            border-bottom: 1px dashed transparent;
-            padding-bottom: 6px;
-        }
-
-        .skill-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-            margin-top: 12px;
         }
 
-        .skill-item {
-            background: #fff3c4;
-            padding: 13px 15px;
-            border-radius: 12px;
-            width: calc(50% - 10px);
-            box-shadow: inset 0 0 8px #d1b562;
+        .contact-info span {
+            color: #34495e;
+            font-size: 0.9rem;
         }
 
-        .skill-item strong {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 700;
-            color: #a76700;
+        .cv-section {
+            margin-bottom: 30px;
         }
 
-        .skill-item-controls {
+        .cv-section h3 {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .experience-item, .education-item, .project-item {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid #3498db;
+            position: relative;
+        }
+
+        .experience-item::before, .education-item::before, .project-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            background: #3498db;
+            border-radius: 50%;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .item-title {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .item-company {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .item-date {
+            color: #95a5a6;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .item-description {
+            color: #555;
             margin-top: 8px;
         }
 
-        .control-btn-small {
-            background: #cc7b00;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 7px;
-            color: #fff8f0;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 600;
-            box-shadow: 0 2px 6px rgba(204, 123, 0, 0.7);
-            transition: background-color 0.3s ease;
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
         }
 
-        .control-btn-small:hover {
-            background-color: #a05c00;
+        .skill-item {
+            background: #ecf0f1;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-align: center;
+            color: #2c3e50;
+            font-weight: 500;
         }
 
-        .experience-item,
-        .education-item {
-            background: #fff3c4;
-            box-shadow: inset 0 0 10px #d1b562;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
+        .download-section {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
         }
 
-        .item-title.editable,
-        .item-company.editable,
-        .item-date.editable {
-            font-weight: 600;
-            margin-bottom: 4px;
-            color: #a76900;
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .download-section {
+                position: relative;
+                top: auto;
+                right: auto;
+                text-align: center;
+                margin: 20px 0;
+            }
         }
 
-        .item-controls {
-            margin-top: 10px;
-            text-align: right;
-        }
-
-        .editable {
-            border-bottom: 1px dashed transparent;
-        }
-
-        .edit-mode .editable {
-            border-bottom: 1px dashed #a76700;
-            cursor: text;
-        }
-
-        /* Scrollbar for containers */
-        .cv-container {
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-
-        /* For print */
         @media print {
-            body {
-                background: white;
-                margin: 0;
-                padding: 0;
-                color: black;
+            body * {
+                visibility: hidden;
             }
-
-            .browser-header,
-            .toolbar {
-                display: none !important;
+            .cv-preview, .cv-preview * {
+                visibility: visible;
             }
-
-            .browser-frame {
-                border: none;
-                box-shadow: none;
-                max-width: 100%;
-                margin: 0;
-                border-radius: 0;
-            }
-
-            .cv-container {
-                max-height: none;
-                overflow: visible;
-                padding: 0;
+            .cv-preview {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100% !important;
+                height: auto !important;
+                padding: 20px !important;
             }
         }
     </style>
 </head>
-
 <body>
-    <div class="browser-frame">
-        <div class="browser-header">
-            <div class="window-controls">
-                <button class="control-btn close"></button>
-                <button class="control-btn minimize"></button>
-                <button class="control-btn maximize"></button>
-            </div>
-            <div class="address-bar">chrome://cv-editor/my-resume</div>
-        </div>
+    <div class="download-section">
+        <button class="btn" onclick="downloadPDF()">📄 Tải xuống PDF</button>
+        <button class="btn btn-secondary" onclick="printCV()">🖨️ In CV</button>
+    </div>
 
-        <div class="toolbar">
-            <button class="edit-mode-toggle" onclick="toggleEditMode()">
-                Chế độ chỉnh sửa
-            </button>
-            <button class="download-btn" onclick="downloadCV()">
-                💾 Tải xuống PDF
-            </button>
-        </div>
+    <div class="container">
+        <div class="editor-section">
+            <h2 class="section-title">📝 Chỉnh sửa thông tin CV</h2>
 
-        <div class="cv-container" id="cvContainer">
-            <div class="cv-header">
-                <div class="profile-photo photo-upload" title="Click để thay đổi ảnh đại diện">
-                    <input type="file" accept="image/*" onchange="handlePhotoUpload(event)">
-                    <div id="photoPreview">👤</div>
-                    <div class="photo-upload-overlay">📷</div>
-                </div>
-                <div>
-                    <h1 class="editable" contenteditable="false">Nguyễn Văn A</h1>
-                    <div class="job-title editable" contenteditable="false">Lập trình viên Full-stack</div>
-                    <div class="contact-info">
-                        <div class="contact-item editable" contenteditable="false">📧 email@example.com</div>
-                        <div class="contact-item editable" contenteditable="false">📱 0123 456 789</div>
-                        <div class="contact-item editable" contenteditable="false">📍 TP. Hồ Chí Minh</div>
-                        <div class="contact-item editable" contenteditable="false">🔗 linkedin.com/in/profile</div>
-                    </div>
+            <!-- Thông tin cá nhân -->
+            <div class="form-group">
+                <label>Ảnh đại diện:</label>
+                <div class="file-input-container">
+                    <input type="file" id="photo" accept="image/*" onchange="handlePhotoUpload(event)">
+                    📷 Chọn ảnh
                 </div>
             </div>
 
-            <!-- Giới thiệu -->
-            <div class="cv-section">
-                <h2 class="section-title">Giới thiệu</h2>
-                <div class="section-content editable" contenteditable="false">
-                    Lập trình viên với 3+ năm kinh nghiệm phát triển ứng dụng web và mobile. Có kinh nghiệm làm việc với
-                    React, Node.js, và các công nghệ hiện đại. Đam mê học hỏi công nghệ mới và giải quyết các vấn đề
-                    phức tạp.
-                </div>
+            <div class="form-group">
+                <label>Họ và tên:</label>
+                <input type="text" id="fullName" placeholder="Nguyễn Văn A" oninput="updateCV()">
             </div>
 
-            <!-- Kỹ năng -->
-            <div class="cv-section">
-                <div class="section-header">
-                    <h2 class="section-title">Kỹ năng</h2>
-                    <button class="add-skill-btn" onclick="addSkill()">+ Thêm kỹ năng</button>
-                </div>
-                <div class="skill-grid" id="skillGrid">
-                    <div class="skill-item">
-                        <strong>Frontend:</strong>
-                        <div class="editable" contenteditable="false">React, Vue.js, HTML5, CSS3, JavaScript</div>
-                        <div class="skill-item-controls">
-                            <button class="control-btn-small delete-btn" onclick="deleteSkill(this)">🗑️ Xóa</button>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <strong>Backend:</strong>
-                        <div class="editable" contenteditable="false">Node.js, Python, PHP, MySQL, MongoDB</div>
-                        <div class="skill-item-controls">
-                            <button class="control-btn-small delete-btn" onclick="deleteSkill(this)">🗑️ Xóa</button>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <strong>Tools:</strong>
-                        <div class="editable" contenteditable="false">Git, Docker, AWS, Figma, VS Code</div>
-                        <div class="skill-item-controls">
-                            <button class="control-btn-small delete-btn" onclick="deleteSkill(this)">🗑️ Xóa</button>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <strong>Soft Skills:</strong>
-                        <div class="editable" contenteditable="false">Teamwork, Communication, Problem Solving</div>
-                        <div class="skill-item-controls">
-                            <button class="control-btn-small delete-btn" onclick="deleteSkill(this)">🗑️ Xóa</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label>Chức danh mong muốn:</label>
+                <input type="text" id="jobTitle" placeholder="Frontend Developer" oninput="updateCV()">
+            </div>
+
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" id="email" placeholder="email@example.com" oninput="updateCV()">
+            </div>
+
+            <div class="form-group">
+                <label>Số điện thoại:</label>
+                <input type="tel" id="phone" placeholder="0123456789" oninput="updateCV()">
+            </div>
+
+            <div class="form-group">
+                <label>Địa chỉ:</label>
+                <input type="text" id="address" placeholder="123 Đường ABC, Quận XYZ, TP.HCM" oninput="updateCV()">
+            </div>
+
+            <div class="form-group">
+                <label>Giới thiệu bản thân:</label>
+                <textarea id="summary" placeholder="Mô tả ngắn gọn về bản thân và mục tiêu nghề nghiệp..." oninput="updateCV()"></textarea>
             </div>
 
             <!-- Kinh nghiệm làm việc -->
-            <div class="cv-section">
-                <div class="section-header">
-                    <h2 class="section-title">Kinh nghiệm làm việc</h2>
-                    <button class="add-section-btn" onclick="addExperience()">+ Thêm kinh nghiệm</button>
-                </div>
-                <div id="experienceContainer">
-                    <div class="experience-item">
-                        <div class="item-title editable" contenteditable="false">Senior Frontend Developer</div>
-                        <div class="item-company editable" contenteditable="false">Công ty ABC Technology</div>
-                        <div class="item-date editable" contenteditable="false">01/2022 - Hiện tại</div>
-                        <div class="editable" contenteditable="false">
-                            • Phát triển và duy trì các ứng dụng web sử dụng React và TypeScript<br />
-                            • Làm việc trong team Agile, tham gia vào việc planning và review code<br />
-                            • Tối ưu hiệu suất ứng dụng, giảm loading time 40%
-                        </div>
-                        <div class="item-controls">
-                            <button class="control-btn-small delete-btn" onclick="deleteItem(this)">🗑️ Xóa</button>
-                        </div>
-                    </div>
-                    <div class="experience-item">
-                        <div class="item-title editable" contenteditable="false">Junior Full-stack Developer</div>
-                        <div class="item-company editable" contenteditable="false">Startup XYZ</div>
-                        <div class="item-date editable" contenteditable="false">06/2020 - 12/2021</div>
-                        <div class="editable" contenteditable="false">
-                            • Xây dựng API backend với Node.js và Express<br />
-                            • Phát triển giao diện người dùng với React<br />
-                            • Tham gia thiết kế database và tối ưu queries
-                        </div>
-                        <div class="item-controls">
-                            <button class="control-btn-small delete-btn" onclick="deleteItem(this)">🗑️ Xóa</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h3 class="section-title">💼 Kinh nghiệm làm việc</h3>
+            <div id="experienceContainer"></div>
+            <button class="btn btn-secondary" onclick="addExperience()">+ Thêm kinh nghiệm</button>
 
             <!-- Học vấn -->
-            <div class="cv-section">
-                <div class="section-header">
-                    <h2 class="section-title">Học vấn</h2>
-                    <button class="add-section-btn" onclick="addEducation()">+ Thêm học vấn</button>
-                </div>
-                <div id="educationContainer">
-                    <div class="education-item">
-                        <div class="item-title editable" contenteditable="false">Cử nhân Công nghệ Thông tin</div>
-                        <div class="item-school editable" contenteditable="false">Đại học Bách Khoa TP.HCM</div>
-                        <div class="item-date editable" contenteditable="false">2016 - 2020</div>
-                        <div class="editable" contenteditable="false">GPA: 3.5/4.0 - Tốt nghiệp Loại Khá</div>
-                        <div class="item-controls">
-                            <button class="control-btn-small delete-btn" onclick="deleteItem(this)">🗑️ Xóa</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h3 class="section-title">🎓 Học vấn</h3>
+            <div id="educationContainer"></div>
+            <button class="btn btn-secondary" onclick="addEducation()">+ Thêm học vấn</button>
 
-            <!-- Dự án nổi bật -->
-            <div class="cv-section">
-                <div class="section-header">
-                    <h2 class="section-title">Dự án nổi bật</h2>
-                    <button class="add-section-btn" onclick="addProject()">+ Thêm dự án</button>
-                </div>
-                <div class="section-content" id="projectContainer">
-                    <div class="experience-item">
-                        <div class="item-title editable" contenteditable="false">E-commerce Platform</div>
-                        <div class="item-date editable" contenteditable="false">2023</div>
-                        <div class="editable" contenteditable="false">
-                            Xây dựng platform thương mại điện tử hoàn chỉnh với React, Node.js, MongoDB.
-                            Tích hợp thanh toán online, quản lý kho hàng và hệ thống admin.
-                        </div>
-                        <div class="item-controls">
-                            <button class="control-btn-small delete-btn" onclick="deleteItem(this)">🗑️ Xóa</button>
+            <!-- Dự án -->
+            <h3 class="section-title">🚀 Dự án</h3>
+            <div id="projectContainer"></div>
+            <button class="btn btn-secondary" onclick="addProject()">+ Thêm dự án</button>
+
+            <!-- Kỹ năng -->
+            <h3 class="section-title">⚡ Kỹ năng</h3>
+            <div class="form-group">
+                <label>Kỹ năng (phân cách bằng dấu phẩy):</label>
+                <textarea id="skills" placeholder="JavaScript, React, Node.js, Python, SQL..." oninput="updateCV()"></textarea>
+            </div>
+        </div>
+
+        <div class="preview-section">
+            <div class="cv-preview" id="cvPreview">
+                <div class="cv-header">
+                    <img id="previewPhoto" class="cv-photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%23e1e5e9'/%3E%3Ctext x='60' y='60' text-anchor='middle' dy='0.3em' font-size='14' fill='%23999'%3EẢnh%3C/text%3E%3C/svg%3E" alt="Ảnh đại diện">
+                    <div class="cv-personal-info">
+                        <h1 id="previewName">Họ và tên</h1>
+                        <h2 id="previewJobTitle">Chức danh mong muốn</h2>
+                        <div class="contact-info">
+                            <span id="previewEmail">📧 email@example.com</span>
+                            <span id="previewPhone">📱 0123456789</span>
+                            <span id="previewAddress">📍 Địa chỉ</span>
                         </div>
                     </div>
+                </div>
+
+                <div class="cv-section" id="summarySection">
+                    <h3>Giới thiệu</h3>
+                    <p id="previewSummary">Mô tả ngắn gọn về bản thân và mục tiêu nghề nghiệp...</p>
+                </div>
+
+                <div class="cv-section" id="experienceSection">
+                    <h3>Kinh nghiệm làm việc</h3>
+                    <div id="previewExperience"></div>
+                </div>
+
+                <div class="cv-section" id="educationSection">
+                    <h3>Học vấn</h3>
+                    <div id="previewEducation"></div>
+                </div>
+
+                <div class="cv-section" id="projectSection">
+                    <h3>Dự án</h3>
+                    <div id="previewProject"></div>
+                </div>
+
+                <div class="cv-section" id="skillsSection">
+                    <h3>Kỹ năng</h3>
+                    <div class="skills-grid" id="previewSkills"></div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let isEditMode = false;
-        let cvData = {};
+        // Data storage
+        let cvData = {
+            experiences: [],
+            education: [],
+            projects: [],
+            photo: null
+        };
 
-        // Load saved data
-        function loadData() {
-            const saved = sessionStorage.getItem('cvData');
-            if (saved) {
-                cvData = JSON.parse(saved);
-                restoreData();
+        // Initialize CV with sample data
+        function initializeCV() {
+            // Load from session storage if available
+            const savedData = sessionStorage.getItem('cvData');
+            if (savedData) {
+                cvData = JSON.parse(savedData);
+                loadDataToForm();
+            } else {
+                // Add sample data
+                addExperience();
+                addEducation();
+                addProject();
             }
+            updateCV();
         }
 
-        // Save data to session storage
-        function saveData() {
-            const editables = document.querySelectorAll('.editable');
-            editables.forEach(el => {
-                const id = getElementId(el);
-                cvData[id] = el.innerHTML || el.textContent;
-            });
-
-            // Save photo
-            const photoImg = document.querySelector('#photoPreview img');
-            if (photoImg) {
-                cvData.photo = photoImg.src;
-            }
-
+        function saveToSession() {
             sessionStorage.setItem('cvData', JSON.stringify(cvData));
         }
 
-        // Restore data from session storage
-        function restoreData() {
-            Object.keys(cvData).forEach(id => {
-                if (id === 'photo') {
-                    const photoPreview = document.getElementById('photoPreview');
-                    if (photoPreview && cvData.photo) {
-                        photoPreview.innerHTML = `<img src="${cvData.photo}" alt="Profile" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
-                    }
-                } else {
-                    const element = document.querySelector(`[data-id="${id}"]`);
-                    if (element && cvData[id]) {
-                        element.innerHTML = cvData[id];
-                    }
-                }
-            });
-        }
+        function loadDataToForm() {
+            // Load basic info
+            document.getElementById('fullName').value = cvData.fullName || '';
+            document.getElementById('jobTitle').value = cvData.jobTitle || '';
+            document.getElementById('email').value = cvData.email || '';
+            document.getElementById('phone').value = cvData.phone || '';
+            document.getElementById('address').value = cvData.address || '';
+            document.getElementById('summary').value = cvData.summary || '';
+            document.getElementById('skills').value = cvData.skills || '';
 
-        // Generate unique ID for elements
-        function getElementId(element) {
-            if (!element.dataset.id) {
-                element.dataset.id = 'el_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            // Load photo
+            if (cvData.photo) {
+                document.getElementById('previewPhoto').src = cvData.photo;
             }
-            return element.dataset.id;
-        }
 
-        // Toggle edit mode
-        function toggleEditMode() {
-            isEditMode = !isEditMode;
-            const container = document.getElementById('cvContainer');
-            const button = document.querySelector('.edit-mode-toggle');
+            // Load experiences
+            cvData.experiences.forEach((exp, index) => {
+                addExperience();
+                const container = document.getElementById('experienceContainer');
+                const lastItem = container.children[container.children.length - 1];
+                lastItem.querySelector('.exp-title').value = exp.title || '';
+                lastItem.querySelector('.exp-company').value = exp.company || '';
+                lastItem.querySelector('.exp-duration').value = exp.duration || '';
+                lastItem.querySelector('.exp-description').value = exp.description || '';
+            });
 
-            if (isEditMode) {
-                container.classList.add('edit-mode');
-                button.textContent = 'Lưu & Thoát';
-                enableEditing();
-            } else {
-                container.classList.remove('edit-mode');
-                button.textContent = 'Chế độ chỉnh sửa';
-                disableEditing();
-                saveData();
-            }
-        }
+            // Load education
+            cvData.education.forEach((edu, index) => {
+                addEducation();
+                const container = document.getElementById('educationContainer');
+                const lastItem = container.children[container.children.length - 1];
+                lastItem.querySelector('.edu-degree').value = edu.degree || '';
+                lastItem.querySelector('.edu-school').value = edu.school || '';
+                lastItem.querySelector('.edu-duration').value = edu.duration || '';
+                lastItem.querySelector('.edu-description').value = edu.description || '';
+            });
 
-        // Enable editing
-        function enableEditing() {
-            const editables = document.querySelectorAll('.editable');
-            editables.forEach(el => {
-                el.contentEditable = true;
-                getElementId(el); // Assign ID if not exists
-
-                // Auto-save on blur
-                el.addEventListener('blur', saveData);
+            // Load projects
+            cvData.projects.forEach((project, index) => {
+                addProject();
+                const container = document.getElementById('projectContainer');
+                const lastItem = container.children[container.children.length - 1];
+                lastItem.querySelector('.proj-title').value = project.title || '';
+                lastItem.querySelector('.proj-tech').value = project.tech || '';
+                lastItem.querySelector('.proj-duration').value = project.duration || '';
+                lastItem.querySelector('.proj-description').value = project.description || '';
             });
         }
 
-        // Disable editing
-        function disableEditing() {
-            const editables = document.querySelectorAll('.editable');
-            editables.forEach(el => {
-                el.contentEditable = false;
-                el.removeEventListener('blur', saveData);
-            });
-        }
-
-        // Handle photo upload
         function handlePhotoUpload(event) {
             const file = event.target.files[0];
             if (file) {
-                if (file.size > 5 * 1024 * 1024) {
-                    alert('File ảnh quá lớn! Vui lòng chọn ảnh dưới 5MB.');
-                    return;
-                }
-                const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
-                if (!allowedTypes.includes(file.type)) {
-                    alert('Định dạng file không được hỗ trợ! Vui lòng chọn file JPG, PNG, GIF hoặc WebP.');
-                    return;
-                }
                 const reader = new FileReader();
-                reader.onload = function (e) {
-                    try {
-                        const photoPreview = document.getElementById('photoPreview');
-                        photoPreview.innerHTML = `<img src="${e.target.result}" alt="Profile" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
-                        cvData.photo = e.target.result;
-                        sessionStorage.setItem('cvData', JSON.stringify(cvData));
-                    } catch (error) {
-                        alert('Có lỗi xảy ra khi tải ảnh. Vui lòng thử lại!');
-                    }
-                };
-                reader.onerror = function () {
-                    alert('Có lỗi xảy ra khi đọc file ảnh!');
+                reader.onload = function(e) {
+                    cvData.photo = e.target.result;
+                    document.getElementById('previewPhoto').src = e.target.result;
+                    saveToSession();
                 };
                 reader.readAsDataURL(file);
             }
         }
 
-        // Download CV as PDF (print)
-        function downloadCV() {
-            const originalTitle = document.title;
-            document.title = 'CV - ' + document.querySelector('h1').textContent;
-            const toolbar = document.querySelector('.toolbar');
-            const browserHeader = document.querySelector('.browser-header');
-            toolbar.style.display = 'none';
-            browserHeader.style.display = 'none';
-            window.print();
-            setTimeout(() => {
-                toolbar.style.display = 'flex';
-                browserHeader.style.display = 'flex';
-                document.title = originalTitle;
-            }, 100);
-        }
-
-        // Add new skill
-        function addSkill() {
-            const skillGrid = document.getElementById('skillGrid');
-            const newSkill = document.createElement('div');
-            newSkill.className = 'skill-item';
-            newSkill.innerHTML = `
-    <strong class="editable" contenteditable="${isEditMode}">Kỹ năng mới:</strong>
-    <div class="editable" contenteditable="${isEditMode}">Nhập kỹ năng của bạn</div>
-    <div class="skill-item-controls">
-      <button class="control-btn-small delete-btn" onclick="deleteSkill(this)">🗑️ Xóa</button>
-    </div>
-  `;
-            skillGrid.appendChild(newSkill);
-            if (isEditMode) {
-                const editables = newSkill.querySelectorAll('.editable');
-                editables.forEach(el => {
-                    getElementId(el);
-                    el.addEventListener('blur', saveData);
-                });
-            }
-            saveData();
-        }
-
-        // Delete skill
-        function deleteSkill(button) {
-            if (confirm('Bạn có chắc muốn xóa kỹ năng này?')) {
-                button.closest('.skill-item').remove();
-                saveData();
-            }
-        }
-
-        // Add new experience
         function addExperience() {
-            const container = document.getElementById('experienceContainer');
-            const newExperience = document.createElement('div');
-            newExperience.className = 'experience-item';
-            newExperience.innerHTML = `
-    <div class="item-title editable" contenteditable="${isEditMode}">Vị trí công việc</div>
-    <div class="item-company editable" contenteditable="${isEditMode}">Tên công ty</div>
-    <div class="item-date editable" contenteditable="${isEditMode}">Thời gian làm việc</div>
-    <div class="editable" contenteditable="${isEditMode}">
-      Mô tả công việc và thành tích...
-    </div>
-    <div class="item-controls">
-      <button class="control-btn-small delete-btn" onclick="deleteItem(this)">🗑️ Xóa</button>
-    </div>
-  `;
-            container.appendChild(newExperience);
-            if (isEditMode) {
-                const editables = newExperience.querySelectorAll('.editable');
-                editables.forEach(el => {
-                    getElementId(el);
-                    el.addEventListener('blur', saveData);
-                });
-            }
-            saveData();
+            const experienceHtml = `
+                <div class="dynamic-section">
+                    <div class="form-group">
+                        <label>Chức danh:</label>
+                        <input type="text" class="exp-title" placeholder="Frontend Developer" oninput="updateCV()">
+                    </div>
+                    <div class="form-group">
+                        <label>Công ty:</label>
+                        <input type="text" class="exp-company" placeholder="Công ty ABC" oninput="updateCV()">
+                    </div>
+                    <div class="form-group">
+                        <label>Thời gian:</label>
+                        <input type="text" class="exp-duration" placeholder="01/2020 - 12/2022" oninput="updateCV()">
+                    </div>
+                    <div class="form-group">
+                        <label>Mô tả công việc:</label>
+                        <textarea class="exp-description" placeholder="Mô tả chi tiết về công việc và thành tích..." oninput="updateCV()"></textarea>
+                    </div>
+                    <button class="btn btn-danger" onclick="removeSection(this, 'experiences')">Xóa</button>
+                </div>
+            `;
+            document.getElementById('experienceContainer').insertAdjacentHTML('beforeend', experienceHtml);
         }
 
-        // Add new education
         function addEducation() {
-            const container = document.getElementById('educationContainer');
-            const newEducation = document.createElement('div');
-            newEducation.className = 'education-item';
-            newEducation.innerHTML = `
-    <div class="item-title editable" contenteditable="${isEditMode}">Bằng cấp/Chứng chỉ</div>
-    <div class="item-school editable" contenteditable="${isEditMode}">Tên trường/Tổ chức</div>
-    <div class="item-date editable" contenteditable="${isEditMode}">Thời gian học</div>
-    <div class="editable" contenteditable="${isEditMode}">Mô tả thêm (GPA, thành tích...)</div>
-    <div class="item-controls">
-      <button class="control-btn-small delete-btn" onclick="deleteItem(this)">🗑️ Xóa</button>
-    </div>
-  `;
-            container.appendChild(newEducation);
-            if (isEditMode) {
-                const editables = newEducation.querySelectorAll('.editable');
-                editables.forEach(el => {
-                    getElementId(el);
-                    el.addEventListener('blur', saveData);
-                });
-            }
-            saveData();
+            const educationHtml = `
+                <div class="dynamic-section">
+                    <div class="form-group">
+                        <label>Bằng cấp:</label>
+                        <input type="text" class="edu-degree" placeholder="Cử nhân Công nghệ thông tin" oninput="updateCV()">
+                    </div>
+                    <div class="form-group">
+                        <label>Trường học:</label>
+                        <input type="text" class="edu-school" placeholder="Đại học Bách Khoa" oninput="updateCV()">
+                    </div>
+                    <div class="form-group">
+                        <label>Thời gian:</label>
+                        <input type="text" class="edu-duration" placeholder="2016 - 2020" oninput="updateCV()">
+                    </div>
+                    <div class="form-group">
+                        <label>Mô tả:</label>
+                        <textarea class="edu-description" placeholder="GPA: 3.5/4.0, Tốt nghiệp loại Khá..." oninput="updateCV()"></textarea>
+                    </div>
+                    <button class="btn btn-danger" onclick="removeSection(this, 'education')">Xóa</button>
+                </div>
+            `;
+            document.getElementById('educationContainer').insertAdjacentHTML('beforeend', educationHtml);
         }
 
-        // Add new project
         function addProject() {
-            const container = document.getElementById('projectContainer');
-            const newProject = document.createElement('div');
-            newProject.className = 'experience-item';
-            newProject.innerHTML = `
-    <div class="item-title editable" contenteditable="${isEditMode}">Tên dự án</div>
-    <div class="item-date editable" contenteditable="${isEditMode}">Thời gian thực hiện</div>
-    <div class="editable" contenteditable="${isEditMode}">
-      Mô tả dự án, công nghệ sử dụng và kết quả đạt được...
-    </div>
-    <div class="item-controls">
-      <button class="control-btn-small delete-btn" onclick="deleteItem(this)">🗑️ Xóa</button>
-    </div>
-  `;
-            container.appendChild(newProject);
-            if (isEditMode) {
-                const editables = newProject.querySelectorAll('.editable');
-                editables.forEach(el => {
-                    getElementId(el);
-                    el.addEventListener('blur', saveData);
+            const projectHtml = `
+                <div class="dynamic-section">
+                    <div class="form-group">
+                        <label>Tên dự án:</label>
+                        <input type="text" class="proj-title" placeholder="Website thương mại điện tử" oninput="updateCV()">
+                    </div>
+                    <div class="form-group">
+                        <label>Công nghệ sử dụng:</label>
+                        <input type="text" class="proj-tech" placeholder="React, Node.js, MongoDB" oninput="updateCV()">
+                    </div>
+                    <div class="form-group">
+                        <label>Thời gian thực hiện:</label>
+                        <input type="text" class="proj-duration" placeholder="3 tháng" oninput="updateCV()">
+                    </div>
+                    <div class="form-group">
+                        <label>Mô tả dự án:</label>
+                        <textarea class="proj-description" placeholder="Mô tả chi tiết về dự án và vai trò của bạn..." oninput="updateCV()"></textarea>
+                    </div>
+                    <button class="btn btn-danger" onclick="removeSection(this, 'projects')">Xóa</button>
+                </div>
+            `;
+            document.getElementById('projectContainer').insertAdjacentHTML('beforeend', projectHtml);
+        }
+
+        function removeSection(button, dataType) {
+            button.parentElement.remove();
+            updateCV();
+        }
+
+        function updateCV() {
+            // Update basic info
+            cvData.fullName = document.getElementById('fullName').value;
+            cvData.jobTitle = document.getElementById('jobTitle').value;
+            cvData.email = document.getElementById('email').value;
+            cvData.phone = document.getElementById('phone').value;
+            cvData.address = document.getElementById('address').value;
+            cvData.summary = document.getElementById('summary').value;
+            cvData.skills = document.getElementById('skills').value;
+
+            // Update preview
+            document.getElementById('previewName').textContent = cvData.fullName || 'Họ và tên';
+            document.getElementById('previewJobTitle').textContent = cvData.jobTitle || 'Chức danh mong muốn';
+            document.getElementById('previewEmail').textContent = '📧 ' + (cvData.email || 'email@example.com');
+            document.getElementById('previewPhone').textContent = '📱 ' + (cvData.phone || '0123456789');
+            document.getElementById('previewAddress').textContent = '📍 ' + (cvData.address || 'Địa chỉ');
+            document.getElementById('previewSummary').textContent = cvData.summary || 'Mô tả ngắn gọn về bản thân và mục tiêu nghề nghiệp...';
+
+            // Update experiences
+            updateExperiences();
+            updateEducation();
+            updateProjects();
+            updateSkills();
+
+            // Save to session
+            saveToSession();
+        }
+
+        function updateExperiences() {
+            const experienceItems = document.querySelectorAll('#experienceContainer .dynamic-section');
+            const previewContainer = document.getElementById('previewExperience');
+            previewContainer.innerHTML = '';
+            cvData.experiences = [];
+
+            experienceItems.forEach(item => {
+                const title = item.querySelector('.exp-title').value;
+                const company = item.querySelector('.exp-company').value;
+                const duration = item.querySelector('.exp-duration').value;
+                const description = item.querySelector('.exp-description').value;
+
+                cvData.experiences.push({ title, company, duration, description });
+
+                if (title || company) {
+                    const expHtml = `
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <div>
+                                    <div class="item-title">${title || 'Chức danh'}</div>
+                                    <div class="item-company">${company || 'Công ty'}</div>
+                                </div>
+                                <div class="item-date">${duration || 'Thời gian'}</div>
+                            </div>
+                            <div class="item-description">${description || ''}</div>
+                        </div>
+                    `;
+                    previewContainer.insertAdjacentHTML('beforeend', expHtml);
+                }
+            });
+        }
+
+        function updateEducation() {
+            const educationItems = document.querySelectorAll('#educationContainer .dynamic-section');
+            const previewContainer = document.getElementById('previewEducation');
+            previewContainer.innerHTML = '';
+            cvData.education = [];
+
+            educationItems.forEach(item => {
+                const degree = item.querySelector('.edu-degree').value;
+                const school = item.querySelector('.edu-school').value;
+                const duration = item.querySelector('.edu-duration').value;
+                const description = item.querySelector('.edu-description').value;
+
+                cvData.education.push({ degree, school, duration, description });
+
+                if (degree || school) {
+                    const eduHtml = `
+                        <div class="education-item">
+                            <div class="item-header">
+                                <div>
+                                    <div class="item-title">${degree || 'Bằng cấp'}</div>
+                                    <div class="item-company">${school || 'Trường học'}</div>
+                                </div>
+                                <div class="item-date">${duration || 'Thời gian'}</div>
+                            </div>
+                            <div class="item-description">${description || ''}</div>
+                        </div>
+                    `;
+                    previewContainer.insertAdjacentHTML('beforeend', eduHtml);
+                }
+            });
+        }
+
+        function updateProjects() {
+            const projectItems = document.querySelectorAll('#projectContainer .dynamic-section');
+            const previewContainer = document.getElementById('previewProject');
+            previewContainer.innerHTML = '';
+            cvData.projects = [];
+
+            projectItems.forEach(item => {
+                const title = item.querySelector('.proj-title').value;
+                const tech = item.querySelector('.proj-tech').value;
+                const duration = item.querySelector('.proj-duration').value;
+                const description = item.querySelector('.proj-description').value;
+
+                cvData.projects.push({ title, tech, duration, description });
+
+                if (title) {
+                    const projHtml = `
+                        <div class="project-item">
+                            <div class="item-header">
+                                <div>
+                                    <div class="item-title">${title}</div>
+                                    <div class="item-company">${tech || 'Công nghệ sử dụng'}</div>
+                                </div>
+                                <div class="item-date">${duration || 'Thời gian'}</div>
+                            </div>
+                            <div class="item-description">${description || ''}</div>
+                        </div>
+                    `;
+                    previewContainer.insertAdjacentHTML('beforeend', projHtml);
+                }
+            });
+        }
+
+        function updateSkills() {
+            const skillsText = document.getElementById('skills').value;
+            const previewContainer = document.getElementById('previewSkills');
+            previewContainer.innerHTML = '';
+
+            if (skillsText) {
+                const skills = skillsText.split(',').map(skill => skill.trim()).filter(skill => skill);
+                skills.forEach(skill => {
+                    const skillHtml = `<div class="skill-item">${skill}</div>`;
+                    previewContainer.insertAdjacentHTML('beforeend', skillHtml);
                 });
             }
-            saveData();
         }
 
-        // Delete item (experience, education, project)
-        function deleteItem(button) {
-            if (confirm('Bạn có chắc muốn xóa mục này?')) {
-                const parent = button.closest('.experience-item, .education-item');
-                if (parent) {
-                    parent.remove();
-                    saveData();
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const element = document.getElementById('cvPreview');
+
+            html2canvas(element, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: true,
+                height: element.scrollHeight,
+                width: element.scrollWidth
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+
+                const imgWidth = 210;
+                const pageHeight = 295;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
                 }
-            }
+
+                const fileName = (cvData.fullName || 'CV') + '_CV.pdf';
+                pdf.save(fileName);
+            });
         }
 
-        setInterval(() => {
-            if (isEditMode) {
-                saveData();
-            }
-        }, 30000);
+        function printCV() {
+            window.print();
+        }
 
-        // Load data on page load
-        window.addEventListener('load', loadData);
-
-        // Save data before page unload
-        window.addEventListener('beforeunload', () => {
-            if (isEditMode) {
-                saveData();
-            }
-        });
-
-        // Initialize element IDs
-        document.addEventListener('DOMContentLoaded', () => {
-            const editables = document.querySelectorAll('.editable');
-            editables.forEach(getElementId);
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCV();
         });
     </script>
-
 </body>
-
 </html>

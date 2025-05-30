@@ -24,17 +24,17 @@
 
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Edit Job Details</h3>
+                <h3 class="card-title">Sửa thông tin công việc</h3>
             </div>
             <div class="card-body">
 
                 <div class="form-group">
-                    <label>Your Email</label>
+                    <label>Email</label>
                     <input type="text" name="email" class="form-control" value="{{ $jobPosting->email }}" readonly>
                 </div>
 
                 <div class="form-group">
-                    <label>Job Title</label>
+                    <label>Tiêu đề công việc</label>
                     <input type="text" name="title" class="form-control" value="{{ $jobPosting->title }}" id="slug" onkeyup="ChangeToSlug()">
                 </div>
 
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>City</label>
+                    <label>Thành phố</label>
                     <select name="city[]" class="form-control select2" id="cities" multiple>
                         @foreach ($cities as $city)
                             <option value="{{ $city->id }}" {{ in_array($city->id, $selectedCities) ? 'selected' : '' }}>
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Job Type</label>
+                    <label>Loại công việc</label>
                     <select name="type" class="form-control">
                         <option value="Full-Time" {{ $jobPosting->type == 'Full-Time' ? 'selected' : '' }}>Full-Time</option>
                         <option value="Part-Time" {{ $jobPosting->type == 'Part-Time' ? 'selected' : '' }}>Part-Time</option>
@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Category</label>
+                    <label>Danh mục</label>
                     <select name="category[]" class="form-control select2" id="categories" multiple>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}" {{ in_array($category->id, $selectedCategories) ? 'selected' : '' }}>
@@ -76,17 +76,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Location (optional)</label>
+                    <label>Địa điểm (tùy chọn)</label>
                     <input type="text" name="location" class="form-control" value="{{ $jobPosting->location }}">
                 </div>
 
                 <div class="form-group">
-                    <label>Salary (optional)</label>
+                    <label>Mức lương (tùy chọn)</label>
                     <input type="text" name="salary" class="form-control" value="{{ $jobPosting->salary }}">
                 </div>
 
                 <div class="form-group">
-                    <label>Select Salaries</label>
+                    <label>Chọn mức lương</label>
                     <select name="salaries[]" class="form-control select2" id="salaries" multiple>
                         @foreach ($salaries as $salary)
                             <option value="{{ $salary->id }}"
@@ -98,77 +98,80 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Experience</label>
+                    <label>Kinh nghiệm</label>
                     <input type="text" name="experience" class="form-control" value="{{ $jobPosting->experience }}">
                 </div>
 
                 <div class="form-group">
-                    <label>Rank</label>
+                    <label>Cấp bậc</label>
                     <input type="text" name="rank" class="form-control" value="{{ $jobPosting->rank }}">
                 </div>
 
                 <div class="form-group">
-                    <label>Number of Recruits</label>
+                    <label>Số lượng tuyển dụng</label>
                     <input type="number" name="number_of_recruits" class="form-control" value="{{ $jobPosting->number_of_recruits }}">
                 </div>
 
                 <div class="form-group">
-                    <label>Sex</label>
+                    <label>Giới tính</label>
                     <select name="sex" class="form-control">
-                        <option value="Male" {{ $jobPosting->sex == 'Male' ? 'selected' : '' }}>Male</option>
-                        <option value="Female" {{ $jobPosting->sex == 'Female' ? 'selected' : '' }}>Female</option>
-                        <option value="Not required" {{ $jobPosting->sex == 'Not required' ? 'selected' : '' }}>Not required</option>
+                        <option value="Male" {{ $jobPosting->sex == 'Male' ? 'selected' : '' }}>Nam</option>
+                        <option value="Female" {{ $jobPosting->sex == 'Female' ? 'selected' : '' }}>Nữ</option>
+                        <option value="Not required" {{ $jobPosting->sex == 'Not required' ? 'selected' : '' }}>Không yêu cầu</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label>Status</label>
-                    <select name="status" class="form-control" disabled>
-                        <option value="1" {{ $jobPosting->status == 1 ? 'selected' : '' }}>Visible</option>
-                        <option value="2" {{ $jobPosting->status == 2 ? 'selected' : '' }}>Not Visible</option>
+                    <label>Trạng thái</label>
+                    <select name="status" class="form-control">
+                        <option value="0" {{ $jobPosting->status == 0 ? 'selected' : '' }}>Đã duyệt </option>
+                        <option value="1" {{ $jobPosting->status == 1 ? 'selected' : '' }}>Đang đợi duyệt</option>
                     </select>
                 </div>
-
                 <div class="form-group">
-                    <label>Skills Required</label>
-                    <input type="text" name="skills_required" class="form-control" value="{{ $jobPosting->skills_required }}">
-                </div>
-
-                <div class="form-group">
-                    <label>Area</label>
-                    <input type="text" name="area" class="form-control" value="{{ $jobPosting->area }}">
-                </div>
-
-                <div class="form-group">
-                    <label>Tags</label>
-                    <input type="text" name="tags" class="form-control" value="{{ $jobPosting->tags }}">
-                    <small class="form-text text-muted">Comma separate tags for required skills or technologies.</small>
-                </div>
-
-                <div class="form-group">
-                    <label>Description</label>
+                    <label>Mô tả</label>
                     <textarea name="description" class="form-control summernote" id="description" rows="5">{!! $jobPosting->description !!}</textarea>
                 </div>
+<div class="form" style="width: 100%;">
+    <h5>Kỹ năng yêu cầu</h5>
+    <textarea class="WYSIWYG" name="job_skills" cols="40" rows="3" spellcheck="true">{{ old('job_skills', $jobPosting->job_skills) }}</textarea>
+</div>
+
+                              <div class="form" style="width: 100%;">
+    <h5>Phúc lợi</h5>
+    <textarea class="WYSIWYG" name="benefits" cols="40" rows="3" spellcheck="true">{{ old('benefits', $jobPosting->benefits) }}</textarea>
+</div>
+<div class="form">
+    <h5>Trình độ học vấn</h5>
+    <select name="education" class="form-control">
+        <option value="">-- Chọn trình độ học vấn --</option>
+        <option value="Cao đẳng" {{ $jobPosting->education == 'Cao đẳng' ? 'selected' : '' }}>Cao đẳng</option>
+        <option value="Đại học" {{ $jobPosting->education == 'Đại học' ? 'selected' : '' }}>Đại học</option>
+        <option value="Thạc sĩ" {{ $jobPosting->education == 'Thạc sĩ' ? 'selected' : '' }}>Thạc sĩ</option>
+        <option value="Tiến sĩ" {{ $jobPosting->education == 'Tiến sĩ' ? 'selected' : '' }}>Tiến sĩ</option>
+        <option value="Không yêu cầu" {{ $jobPosting->education == 'Không yêu cầu' ? 'selected' : '' }}>Không yêu cầu</option>
+    </select>
+</div>
 
                 <div class="form-group">
-                    <label>Application Email / URL</label>
+                    <label>Email / URL nộp đơn</label>
                     <input type="text" name="application_email_url" class="form-control" value="{{ $jobPosting->application_email_url }}">
                 </div>
 
                 <div class="form-group">
-                    <label>Closing Date</label>
+                    <label>Ngày hết hạn</label>
                     <input type="date" name="closing_date" class="form-control" value="{{ $jobPosting->closing_date }}">
                 </div>
 
                 <div class="form-group">
-                    <label>Company</label>
+                    <label>Công ty</label>
                     <select name="company_id" class="form-control">
                         <option value="{{ $jobPosting->company->id ?? '' }}">{{ $jobPosting->company->name ?? 'No Company' }}</option>
                     </select>
                 </div>
             </div>
             <div class="card-footer text-right">
-                <button type="submit" class="btn btn-primary">Save Changes <i class="fas fa-save ml-1"></i></button>
+                <button type="submit" class="btn btn-primary">Lưu <i class="fas fa-save ml-1"></i></button>
             </div>
         </div>
     </form>

@@ -955,6 +955,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         CKEDITOR.replace('summary6');
         CKEDITOR.replace('regulation');
         CKEDITOR.replace('description');
+        CKEDITOR.replace('summary');
+        CKEDITOR.replace('job_skills');
+        CKEDITOR.replace('benefits');
     </script>
 
     <script src="{{ asset('backend_admin/js/utils.js') }}"></script>
