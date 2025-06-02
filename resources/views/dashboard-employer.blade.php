@@ -108,7 +108,7 @@
                                 Dịch vụ </a>
                         </li>
                         <li
-                            class="has-submenu {{  Route::is('messages.receive') || Route::is('messages.show') || Route::is('job_postings.search_candidate') || Route::is('job_postings.saved_profiles') ? 'active' : '' }}">
+                            class="has-submenu {{  Route::is('messages.receive') || Route::is('messages.show') || Route::is('job_postings.search_candidate') ||Route::is('job_postings.all_applications') || Route::is('job_postings.saved_profiles') ? 'active' : '' }}">
                             <a href="#"><span class="ln ln-icon-Add-User"></span> Ứng viên <i
                                     class="ln ln-icon-Chevron-Down"></i></a>
                             <ul class="submenu">
@@ -132,6 +132,12 @@
                                         <span class="ln ln-icon-Heart"></span> Hồ sơ đã lưu
                                     </a>
                                 </li>
+                                <li class="{{ Route::is('job_postings.all_applications') ? 'active' : '' }}">
+    <a href="{{ route('job_postings.all_applications') }}">
+        <span class="ln ln-icon-Add-User"></span> Tất cả ứng viên
+    </a>
+</li>
+
                             </ul>
                         </li>
                         <li class="">

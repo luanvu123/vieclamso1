@@ -18,6 +18,7 @@ class Application extends Model
         'cv_path_resubmit',
         'summary',
         'order_id',
+         'rating',
     ];
     protected $casts = [
         'saved' => 'boolean'

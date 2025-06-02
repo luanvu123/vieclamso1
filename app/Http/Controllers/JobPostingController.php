@@ -51,7 +51,83 @@ class JobPostingController extends Controller
 
         return view('job_postings.saved_profiles', compact('savedProfiles', 'recentMessagesCount', 'recentApplicationsCount'));
     }
+   public function showAllApplications(Request $request)
+    {
+        $employer = Auth::guard('employer')->user();
 
+        // Đếm tin nhắn và ứng tuyển gần đây
+        $recentMessagesCount = $employer->messages()
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+
+        $recentApplicationsCount = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+            ->where('created_at', '>=', Carbon::now()->subHours(5))
+            ->count();
+
+        // Lấy gói "Xem thông tin ứng viên" của employer
+        $orderDetail = OrderDetail::whereHas('order', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id)
+                ->where('status', 'Đã thanh toán');
+        })
+            ->whereHas('service', function ($query) {
+                $query->where('name', 'Xem thông tin ứng viên');
+            })
+            ->where('number_of_active', '>', 0)
+            ->whereDate('expiring_date', '>=', now())
+            ->first();
+
+        $hasViewInfoPackage = $orderDetail ? true : false;
+
+        // Lấy các tham số filter và sort
+        $status = $request->input('status');
+        $sort = $request->input('sort', 'created_at');
+        $jobPostingId = $request->input('job_posting');
+
+        // Query tất cả applications của employer
+        $applicationsQuery = Application::whereHas('jobPosting', function ($query) use ($employer) {
+            $query->where('employer_id', $employer->id);
+        })
+        ->whereIn('approve_application', ['Đã duyệt', 'Nộp lại']);
+
+        // Filter theo trạng thái
+        if ($status && in_array($status, ['pending', 'reviewed', 'accepted', 'rejected'])) {
+            $applicationsQuery->where('applications.status', $status);
+        }
+
+        // Filter theo job posting cụ thể
+        if ($jobPostingId) {
+            $applicationsQuery->where('job_posting_id', $jobPostingId);
+        }
+
+        // Sorting
+        if ($sort == 'name') {
+            $applicationsQuery->join('candidates', 'applications.candidate_id', '=', 'candidates.id')
+                ->orderBy('candidates.fullname_candidate', 'asc')
+                ->select('applications.*');
+        } else {
+            $applicationsQuery->orderBy('applications.' . $sort, 'desc');
+        }
+
+        $applications = $applicationsQuery->with(['candidate', 'jobPosting'])->paginate(10);
+
+        // Lấy danh sách job postings của employer để filter
+        $jobPostings = JobPosting::where('employer_id', $employer->id)
+            ->orderBy('title', 'asc')
+            ->get();
+
+        $isInfomation = $employer->isInfomation ?? false;
+
+        return view('job_postings.all_applications', compact(
+            'applications',
+            'jobPostings',
+            'isInfomation',
+            'recentMessagesCount',
+            'recentApplicationsCount',
+            'hasViewInfoPackage'
+        ));
+    }
 
     public function removeSavedProfile($candidateId)
     {
@@ -171,48 +247,43 @@ class JobPostingController extends Controller
     }
     public function updateRating(Request $request, Application $application)
     {
-        // Xác thực dữ liệu
+        // Nếu đã ở trạng thái 'accepted' hoặc 'rejected' thì không cho cập nhật nữa
+        if (in_array($application->status, ['accepted', 'rejected'])) {
+            return redirect()->back()->with('error', 'Không thể cập nhật hồ sơ đã được xử lý.');
+        }
+
+        // Validate dữ liệu
         $validatedData = $request->validate([
             'rating' => 'required|integer|min:1|max:5',
-            'status' => 'required|integer|in:1,2,3,4',  // Xác thực giá trị status
+            'status' => 'required|string|in:pending,reviewed,accepted,rejected',
         ]);
 
-        // Cập nhật cả rating và status
+        // Cập nhật
         $application->update([
             'rating' => $validatedData['rating'],
             'status' => $validatedData['status'],
             'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
         ]);
 
-        // Xác định thông điệp trạng thái
-        $statusMessage = '';
-        switch ($application->status) {
-            case 1:
-                $statusMessage = 'Đã ứng tuyển';
-                break;
-            case 2:
-                $statusMessage = 'Nhà tuyển dụng đã xem hồ sơ';
-                break;
-            case 3:
-                $statusMessage = 'Hồ sơ phù hợp';
-                break;
-            case 4:
-                $statusMessage = 'Hồ sơ chưa phù hợp';
-                break;
-            default:
-                $statusMessage = 'Trạng thái không xác định';
-                break;
-        }
+        // Gán tên trạng thái để hiển thị
+        $statusLabels = [
+            'pending' => 'Đã ứng tuyển',
+            'reviewed' => 'Nhà tuyển dụng đã xem hồ sơ',
+            'accepted' => 'Hồ sơ phù hợp',
+            'rejected' => 'Hồ sơ chưa phù hợp',
+        ];
 
-        // Gửi email với rating
+        $statusMessage = $statusLabels[$application->status] ?? 'Trạng thái không xác định';
+
+
         if ($application->candidate && $application->candidate->email) {
             Mail::to($application->candidate->email)
                 ->send(new ApplicationStatusUpdate($application, $statusMessage, $validatedData['rating']));
         }
 
-        // Trả về kết quả sau khi cập nhật
         return redirect()->back()->with('success', 'CV và đánh giá đã được cập nhật thành công!');
     }
+
 
     public function index()
     {
@@ -308,22 +379,27 @@ class JobPostingController extends Controller
         $sort = $request->input('sort', 'created_at');
 
         $applications = $jobPosting->applications()
-            ->when($status, function ($query, $status) {
-                return $query->where('applications.status', $status)->whereIn('approve_application', ['Đã duyệt', 'Nộp lại']);
+            ->whereIn('approve_application', ['Đã duyệt', 'Nộp lại'])
+
+            ->when($status && in_array($status, ['pending', 'reviewed', 'accepted', 'rejected']), function ($query) use ($status) {
+                return $query->where('applications.status', $status); // fix ambiguity here
             })
+
             ->when($sort == 'name', function ($query) {
                 return $query->join('candidates', 'applications.candidate_id', '=', 'candidates.id')
                     ->orderBy('candidates.fullname_candidate', 'asc')
                     ->select('applications.*');
             }, function ($query) use ($sort) {
-                return $query->orderBy($sort, 'desc');
+                return $query->orderBy('applications.' . $sort, 'desc'); // add table prefix to avoid future ambiguity
             })
+
             ->with('candidate')
             ->get();
+
         $isInfomation = $employer->isInfomation ?? false;
         return view('job_postings.show', compact('jobPosting', 'applications', 'isInfomation', 'recentMessagesCount', 'recentApplicationsCount', 'hasViewInfoPackage'));
     }
- public function create()
+    public function create()
     {
         $employer = Auth::guard('employer')->user();
         $recentMessagesCount = $employer->messages()
@@ -384,7 +460,7 @@ class JobPostingController extends Controller
             'type' => 'required|string',
             'category' => 'required|array',
             'description' => 'required|string',
-            'application_email_url' => 'required|string',
+            'application_email_url' => 'required|email',
             'company_id' => 'required|exists:companies,id',
             'email' => 'required|email',
             'salary' => 'required|string|max:255',
@@ -393,9 +469,9 @@ class JobPostingController extends Controller
             'rank' => 'required|string|max:255',
             'number_of_recruits' => 'required|integer',
             'sex' => 'required|string|max:255',
-'job_skills' => 'nullable|string',
-    'benefits' => 'nullable|string',
-    'education' => 'nullable|string',
+            'job_skills' => 'nullable|string',
+            'benefits' => 'nullable|string',
+            'education' => 'nullable|string',
             'city' => 'required|array',
             'service_type' => 'required|in:Tin cơ bản,Tin nổi bật,Tin đặc biệt',
         ], [
@@ -435,9 +511,9 @@ class JobPostingController extends Controller
         $jobPosting->sex = $request->sex;
         $jobPosting->status = 1;
         $jobPosting->service_type = $request->service_type;
-$jobPosting->job_skills = $request->job_skills;
-$jobPosting->benefits = $request->benefits;
-$jobPosting->education = $request->education;
+        $jobPosting->job_skills = $request->job_skills;
+        $jobPosting->benefits = $request->benefits;
+        $jobPosting->education = $request->education;
 
 
         // Handle logo
@@ -572,7 +648,7 @@ $jobPosting->education = $request->education;
             'type' => 'required|string',
             'category' => 'required|array',
             'description' => 'required|string',
-            'application_email_url' => 'required|string',
+            'application_email_url' => 'required|email',
             'company_id' => 'required|exists:companies,id',
             'email' => 'required|email',
             'salary' => 'required|string|max:255',
@@ -582,9 +658,9 @@ $jobPosting->education = $request->education;
             'number_of_recruits' => 'required|integer',
             'sex' => 'required|string|max:255',
             'city' => 'required|array',
-             'job_skills' => 'nullable|string',
-    'benefits' => 'nullable|string',
-    'education' => 'nullable|string|max:255',
+            'job_skills' => 'nullable|string',
+            'benefits' => 'nullable|string',
+            'education' => 'nullable|string|max:255',
         ], [
             'title.required' => 'Job title is required.',
             'type.required' => 'Job type is required.',
@@ -595,9 +671,9 @@ $jobPosting->education = $request->education;
             'email.required' => 'Your email is required.',
             'email.email' => 'Please enter a valid email address.',
             'city.required' => 'At least one city is required.',
-             'job_skills.string' => 'Kỹ năng yêu cầu phải là chuỗi.',
-    'benefits.string' => 'Phúc lợi phải là chuỗi.',
-    'education.string' => 'Học vấn phải là chuỗi.',
+            'job_skills.string' => 'Kỹ năng yêu cầu phải là chuỗi.',
+            'benefits.string' => 'Phúc lợi phải là chuỗi.',
+            'education.string' => 'Học vấn phải là chuỗi.',
         ]);
 
         $jobPosting = JobPosting::findOrFail($id);
@@ -618,9 +694,9 @@ $jobPosting->education = $request->education;
         $jobPosting->number_of_recruits = $request->number_of_recruits;
         $jobPosting->sex = $request->sex;
         $jobPosting->company_id = $request->company_id;
-$jobPosting->job_skills = $request->job_skills;
-$jobPosting->benefits = $request->benefits;
-$jobPosting->education = $request->education;
+        $jobPosting->job_skills = $request->job_skills;
+        $jobPosting->benefits = $request->benefits;
+        $jobPosting->education = $request->education;
         $jobPosting->save();
 
         // Sync categories

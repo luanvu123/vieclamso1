@@ -113,7 +113,7 @@
 
         @if(isset($candidateDesiredSalary))
         <div class="info-row">
-            <span class="info-label">Mức lương mong muốn:</span> {{ number_format($candidateDesiredSalary) }} VNĐ
+            <span class="info-label">Mức lương mong muốn:</span> {{$candidateDesiredSalary }}
         </div>
         @endif
 

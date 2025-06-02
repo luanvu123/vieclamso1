@@ -430,5 +430,7 @@ Route::middleware(['employer'])->group(function () {
     Route::get('employer/get-cart-count', [JobPostingController::class, 'getCartCount'])->name('employer.getCartCount');
     Route::get('dich-vu-da-mua', [JobPostingController::class, 'serviceActive'])
         ->name('employer.service-active')->middleware('employer');
+         Route::get('/danh-sach-ung-vien-da-nop', [JobPostingController::class, 'showAllApplications'])->name('job_postings.all_applications');
+
 });
 // });

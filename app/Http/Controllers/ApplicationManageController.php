@@ -11,14 +11,20 @@ use Illuminate\Support\Facades\Mail;
 
 class ApplicationManageController extends Controller
 {
-    public function index()
+   public function index()
     {
-        $userId = Auth::id();
+        $user = Auth::user();
 
-        // Lấy tất cả applications mà job_posting.employer.user_id = Auth::id()
-        $applications = Application::whereHas('jobPosting.employer.user', function ($query) use ($userId) {
-            $query->where('id', $userId);
-        })->with(['candidate', 'jobPosting'])->latest()->get();
+        // Nếu người dùng là Admin (id = 1 hoặc name = 'Admin') => hiển thị tất cả
+        if ($user->roles()->where('id', 1)->orWhere('name', 'Admin')->exists()) {
+            $applications = Application::with(['candidate', 'jobPosting'])->latest()->get();
+        } else {
+            // Nếu không phải admin => chỉ hiển thị theo user_id
+            $userId = $user->id;
+            $applications = Application::whereHas('jobPosting.employer.user', function ($query) use ($userId) {
+                $query->where('id', $userId);
+            })->with(['candidate', 'jobPosting'])->latest()->get();
+        }
 
         return view('admin.applications.index', compact('applications'));
     }
@@ -155,12 +161,12 @@ class ApplicationManageController extends Controller
     {
         $user = Auth::user();
 
-        // Nếu là admin thì cho phép bỏ qua kiểm tra
-        if ($user->roles()->where('id', 1)->exists()) {
+        // Bỏ qua kiểm tra nếu là Admin
+        if ($user->roles()->where('id', 1)->orWhere('name', 'Admin')->exists()) {
             return;
         }
 
-        // Nếu không phải admin, chỉ cho phép nếu employer là của user
+        // Kiểm tra quyền truy cập theo user_id
         if ($application->jobPosting->employer->user_id != $user->id) {
             abort(403, 'Bạn không có quyền truy cập đơn ứng tuyển này.');
         }

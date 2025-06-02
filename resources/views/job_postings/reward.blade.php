@@ -3,7 +3,7 @@
  @section('content')
      <div data-v-3438675c="" class="breadcrumb-box">
          <h6 class="breadcrumb-title d-flex">
-             <div><span>Chương trình TopCV Rewards</span> </div>
+             <div><span>Đổi thưởng</span> </div>
          </h6>
      </div>
      <div data-v-3438675c="" class="container-fluid page-content page-post-job-public__page-content pt-4">
