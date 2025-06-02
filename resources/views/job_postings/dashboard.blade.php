@@ -22,19 +22,20 @@
               </div> <!---->
           </div>
           <h4 data-v-b9ee596a="" class="mb-4">Bảng tin</h4>
-          <div class="VueCarousel">
-              <div class="VueCarousel-wrapper">
-                  <div class="VueCarousel-inner">
-                      @foreach ($slides as $slide)
-                          <div class="VueCarousel-slide banner col-6">
-                              <a href="{{ $slide->link }}" target="_blank">
-                                  <img alt="Slide Image" src="{{ asset('storage/' . $slide->image) }}">
-                              </a>
-                          </div>
-                      @endforeach
-                  </div>
-              </div>
-          </div>
+          <div class="VueCarousel mx-auto" style="max-width: 1000px;">
+    <div class="VueCarousel-wrapper">
+        <div class="VueCarousel-inner row">
+            @foreach ($slides as $slide)
+                <div class="VueCarousel-slide banner col-6">
+                    <a href="{{ $slide->link }}" target="_blank">
+                        <img alt="Slide Image" src="{{ asset('storage/' . $slide->image) }}">
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+
           <div data-v-b9ee596a="" class="row mt-3">
               <div data-v-b9ee596a="" class="col-6 pr-0"><!---->
                   <div data-v-66fd7bea="" data-v-b9ee596a="" class="card border-0 shadow-sm rounded">
