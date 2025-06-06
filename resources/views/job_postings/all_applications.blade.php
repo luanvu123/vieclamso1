@@ -153,16 +153,16 @@
                                 <i>Full Name:</i>
                                 <span>{{ $application->candidate->fullname_candidate }}</span>
 
-                                @if($hasViewInfoPackage)
+                               @if($hasViewInfoPackage)
                                     <i>Email:</i>
                                     <span>{{ $application->candidate->email }}</span>
                                     <i>Phone:</i>
                                     <span>{{ $application->candidate->phone_number_candidate }}</span>
                                 @else
                                     <i>Email:</i>
-                                    <span><a href="{{ route('employer.services') }}">Nhấn để xem</a></span>
+                                    <span><a href="#" class="show-support-modal">Nhấn để xem</a></span>
                                     <i>Phone:</i>
-                                    <span><a href="{{ route('employer.services') }}">Nhấn để xem</a></span>
+                                    <span><a href="#" class="show-support-modal">Nhấn để xem</a></span>
                                 @endif
 
                                 <i>Tin tuyển dụng:</i>
@@ -251,6 +251,32 @@
         </div>
     </div>
 
+    <!-- Support Modal -->
+    <div class="modal fade" id="supportModal" tabindex="-1" role="dialog" aria-labelledby="supportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-white">
+                    <h5 class="modal-title" id="supportModalLabel">Thông báo</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Đóng">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <p><strong>Vui lòng liên hệ CSKH để được hỗ trợ!</strong></p>
+                    <div class="support-info mt-3">
+                        <p><strong>Chuyên viên CSKH:</strong> {{ Auth::guard('employer')->user()->user->name }}</p>
+                        <p><strong>Điện thoại:</strong> <a href="tel:{{ Auth::guard('employer')->user()->user->phone }}">{{ Auth::guard('employer')->user()->user->phone }}</a></p>
+                        <p><strong>Email:</strong> <a href="mailto:{{ Auth::guard('employer')->user()->user->email }}">{{ Auth::guard('employer')->user()->user->email }}</a></p>
+                        <p><strong>Giờ làm việc:</strong> 08:00 - 17:30 (T2 - T7)</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <style>
         .new-badge {
             background-color: red;
@@ -299,5 +325,235 @@
         .app-footer ul li span:hover {
             color: #333;
         }
+
+        /* Modal fixes - Force high z-index */
+        .modal-backdrop {
+            z-index: 999999 !important;
+            opacity: 0.5 !important;
+        }
+
+        .modal {
+            z-index: 1000000 !important;
+            display: none;
+        }
+
+        .modal.show {
+            display: block !important;
+        }
+
+        .modal-dialog {
+            z-index: 1000001 !important;
+            position: relative;
+        }
+
+        .modal-content {
+            z-index: 1000002 !important;
+            position: relative;
+            background: white !important;
+            border: 1px solid #ccc !important;
+            border-radius: 6px !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        /* Ensure modal can be closed */
+        .modal.fade .modal-dialog {
+            transition: transform 0.3s ease-out;
+            transform: translate(0, -50px);
+        }
+
+        .modal.show .modal-dialog {
+            transform: none !important;
+        }
+
+        /* Fix for Bootstrap modal */
+        body.modal-open {
+            overflow: hidden !important;
+            padding-right: 0 !important;
+        }
+
+        .show-support-modal {
+            cursor: pointer;
+            color: #007bff;
+            text-decoration: underline;
+        }
+
+        .show-support-modal:hover {
+            color: #0056b3;
+        }
+
+        /* Override any existing modal styles */
+        .modal-header {
+            background-color: #f39c12 !important;
+            color: white !important;
+            border-bottom: 1px solid #e0e0e0 !important;
+        }
+
+        .modal-title {
+            color: white !important;
+        }
+
+        .modal-header .close {
+            color: white !important;
+            opacity: 1 !important;
+        }
+
+        .modal-body {
+            background: white !important;
+            color: #333 !important;
+        }
+
+        .modal-footer {
+            background: white !important;
+            border-top: 1px solid #e0e0e0 !important;
+        }
     </style>
+
+    <!-- jQuery and Bootstrap JS - Ensure proper order -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Force remove any existing modals and backdrops
+            $('.modal-backdrop').remove();
+            $('body').removeClass('modal-open');
+
+            // Show modal when clicking on support links
+            $('.show-support-modal').on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Force clean slate
+                $('.modal-backdrop').remove();
+                $('body').removeClass('modal-open');
+                $('#supportModal').removeClass('show').hide();
+
+                // Show modal with timeout to ensure clean state
+                setTimeout(function() {
+                    $('#supportModal').modal({
+                        backdrop: true,
+                        keyboard: true,
+                        focus: true,
+                        show: true
+                    });
+                }, 50);
+            });
+
+            // Multiple ways to close modal
+            function closeModal() {
+                $('#supportModal').modal('hide');
+                setTimeout(function() {
+                    $('.modal-backdrop').remove();
+                    $('body').removeClass('modal-open');
+                    $('#supportModal').removeClass('show').hide();
+                }, 150);
+            }
+
+            // Handle close button clicks
+            $(document).on('click', '[data-dismiss="modal"], .close', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeModal();
+            });
+
+            // Close modal when clicking backdrop
+            $(document).on('click', '.modal', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+
+            // Handle ESC key
+            $(document).on('keyup', function(e) {
+                if (e.keyCode === 27 && $('#supportModal').hasClass('show')) {
+                    closeModal();
+                }
+            });
+
+            // Clean up on modal events
+            $('#supportModal').on('hidden.bs.modal', function () {
+                $('.modal-backdrop').remove();
+                $('body').removeClass('modal-open').css('padding-right', '');
+            });
+
+            // Force cleanup any stuck modals on page load
+            setTimeout(function() {
+                $('.modal-backdrop').remove();
+                $('body').removeClass('modal-open');
+            }, 100);
+        });
+    </script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Additional fix for modal issues -->
+    <style>
+        /* Force override any conflicting styles */
+        .modal#supportModal {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            z-index: 2000000 !important;
+            background: rgba(0,0,0,0.5) !important;
+        }
+
+        .modal#supportModal .modal-dialog {
+            position: relative !important;
+            width: auto !important;
+            margin: 1.75rem auto !important;
+            pointer-events: none !important;
+        }
+
+        .modal#supportModal .modal-content {
+            position: relative !important;
+            pointer-events: all !important;
+            background-color: #fff !important;
+            border: 1px solid rgba(0,0,0,.2) !important;
+            border-radius: 0.3rem !important;
+            outline: 0 !important;
+        }
+
+        /* Remove any backdrop conflicts */
+        .modal-backdrop.show {
+            display: none !important;
+        }
+    </style>
+
+    <script>
+        // Emergency fallback if Bootstrap modal doesn't work
+        function forceShowModal() {
+            $('#supportModal').css({
+                'display': 'block',
+                'position': 'fixed',
+                'top': '0',
+                'left': '0',
+                'width': '100%',
+                'height': '100%',
+                'z-index': '2000000',
+                'background': 'rgba(0,0,0,0.5)'
+            }).addClass('show');
+        }
+
+        function forceHideModal() {
+            $('#supportModal').css('display', 'none').removeClass('show');
+            $('.modal-backdrop').remove();
+            $('body').removeClass('modal-open');
+        }
+
+        // Alternative click handler if the above doesn't work
+        $(document).on('click', '.show-support-modal', function(e) {
+            e.preventDefault();
+            forceShowModal();
+        });
+
+        // Alternative close handlers
+        $(document).on('click', '#supportModal .close, #supportModal [data-dismiss="modal"]', function(e) {
+            e.preventDefault();
+            forceHideModal();
+        });
+    </script>
 @endsection

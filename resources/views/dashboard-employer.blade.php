@@ -11,7 +11,7 @@
 ================================================== -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- CSS
 ================================================== -->
     <link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
@@ -255,8 +255,7 @@
             document.getElementById('convert_slug').value = slug;
         }
     </script>
-    <!-- Include jQuery and Slick JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
 
     <!-- Initialize the slider -->
@@ -284,6 +283,9 @@
             $('#user-table').DataTable();
         });
     </script>
+<!-- Bootstrap CSS -->
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 

@@ -156,6 +156,9 @@
     </div>
     @endif
 
+<p>
+    <a href="{{ route('job_postings.all_applications') }}" class="btn">Xem danh sách ứng viên đã ứng tuyển</a>
+</p>
 
 
     <p><strong>Chuyên viên tư vấn đang chăm sóc tài khoản của quý khách:</strong></p>

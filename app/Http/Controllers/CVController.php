@@ -39,52 +39,146 @@ class CVController extends Controller
             ->get();
         return view('pages.upload-cv', compact('notifications'));
     }
-    public function uploadCv(Request $request)
-    {
-        $request->validate([
-            'file_upload_cv' => 'required|file|mimes:pdf|max:5120',
+public function uploadCv(Request $request)
+{
+    $request->validate([
+        'file_upload_cv' => 'required|file|mimes:pdf|max:5120',
+    ]);
+
+    $candidate = Auth::guard('candidate')->user();
+
+    if ($request->hasFile('file_upload_cv')) {
+        $pdfFile = $request->file('file_upload_cv');
+
+        // Lưu PDF file
+        $pdfPath = $pdfFile->store('cvs', 'public');
+
+        // Thử chuyển đổi PDF thành ảnh
+        $imagePath = $this->convertPdfToImage($pdfFile);
+
+        // Lưu vào database
+        $cv = new Cv();
+        $cv->cv_path = $pdfPath;
+        $cv->image_path = $imagePath; // Có thể là null nếu không convert được
+        $cv->save();
+
+        // Gắn vào candidate
+        $candidate->cvs()->attach($cv->id, [
+            'is_primary' => false,
+            'is_active' => true,
         ]);
 
-        $candidate = Auth::guard('candidate')->user();
+        $message = $imagePath ? 'CV đã được tải lên và tạo thumbnail thành công.' : 'CV đã được tải lên (không thể tạo thumbnail).';
 
-        if ($request->hasFile('file_upload_cv')) {
-            $pdfFile = $request->file('file_upload_cv');
-            $pdfPath = $pdfFile->store('cvs', 'public');
+        return redirect()->back()->with('success', $message);
+    }
 
-            // Chuyển đổi PDF thành hình ảnh
-            $imagePath = $this->convertPdfToImage($pdfFile);
+    return redirect()->back()->with('error', 'Không thể tải lên file CV.');
+}
 
-            // Lưu vào bảng cvs
-            $cv = new Cv();
-            $cv->cv_path = $pdfPath;
-            $cv->image_path = $imagePath;
-            $cv->save();
 
-            // Gắn vào bảng candidate_cv
-            $candidate->cvs()->attach($cv->id, [
-                'is_primary' => false,
-                'is_active' => true,
-            ]);
+   private function convertPdfToImage($pdfFile)
+{
+    try {
+        // Tạo file tạm thời với extension đúng
+        $tempPdfPath = tempnam(sys_get_temp_dir(), 'pdf_') . '.pdf';
+
+        // Copy file upload vào temp file với extension
+        copy($pdfFile->getPathname(), $tempPdfPath);
+
+        $imagick = new Imagick();
+
+        // Kiểm tra xem có hỗ trợ PDF không
+        $formats = $imagick->queryFormats();
+        if (!in_array('PDF', $formats)) {
+            throw new Exception('PDF format not supported');
         }
 
-        return redirect()->back()->with('success', 'CV đã được tải lên.');
-    }
+        // Đọc file PDF
+        $imagick->readImage($tempPdfPath . '[0]'); // Chỉ lấy trang đầu tiên
+        $imagick->setImageFormat('jpg');
+        $imagick->setImageResolution(150, 150); // Giảm resolution
+        $imagick->setImageCompressionQuality(80);
 
-
-    private function convertPdfToImage($pdfFile)
-    {
-        $imagick = new Imagick();
-        $imagick->readImage($pdfFile->getPathname() . '[0]'); // Chỉ lấy trang đầu tiên
-        $imagick->setImageFormat('jpg'); // Đổi định dạng thành JPG
-
-        // Lưu hình ảnh vào thư mục 'thumbnails'
+        // Tạo tên file ảnh
         $imageName = pathinfo($pdfFile->hashName(), PATHINFO_FILENAME) . '.jpg';
         $imagePath = 'thumbnails/' . $imageName;
+
+        // Lưu ảnh
         Storage::disk('public')->put($imagePath, $imagick->getImageBlob());
 
-        return $imagePath;
-    }
+        // Dọn dẹp
+        $imagick->clear();
+        $imagick->destroy();
+        unlink($tempPdfPath); // Xóa file tạm
 
+        return $imagePath;
+
+    } catch (Exception $e) {
+        // Log lỗi
+        \Log::error('PDF to Image conversion failed: ' . $e->getMessage());
+
+        // Xóa file tạm nếu có
+        if (isset($tempPdfPath) && file_exists($tempPdfPath)) {
+            unlink($tempPdfPath);
+        }
+
+        // Tạo placeholder image
+        return $this->createPlaceholderImage($pdfFile);
+    }
+}
+private function createPlaceholderImage($pdfFile)
+{
+    try {
+        $imageName = pathinfo($pdfFile->hashName(), PATHINFO_FILENAME) . '.jpg';
+        $imagePath = 'thumbnails/' . $imageName;
+
+        // Tạo ảnh placeholder
+        $width = 200;
+        $height = 260;
+        $image = imagecreate($width, $height);
+
+        // Màu sắc
+        $white = imagecolorallocate($image, 255, 255, 255);
+        $gray = imagecolorallocate($image, 128, 128, 128);
+        $black = imagecolorallocate($image, 0, 0, 0);
+
+        // Nền trắng
+        imagefill($image, 0, 0, $white);
+
+        // Viền
+        imagerectangle($image, 0, 0, $width-1, $height-1, $gray);
+
+        // Text
+        $fontSize = 5;
+        $text1 = 'PDF';
+        $text2 = 'Document';
+
+        // Tính toán vị trí center
+        $textWidth1 = imagefontwidth($fontSize) * strlen($text1);
+        $textWidth2 = imagefontwidth($fontSize) * strlen($text2);
+        $x1 = ($width - $textWidth1) / 2;
+        $x2 = ($width - $textWidth2) / 2;
+
+        imagestring($image, $fontSize, $x1, 100, $text1, $black);
+        imagestring($image, 3, $x2, 130, $text2, $gray);
+
+        // Lưu ảnh
+        ob_start();
+        imagejpeg($image, null, 80);
+        $imageData = ob_get_contents();
+        ob_end_clean();
+
+        Storage::disk('public')->put($imagePath, $imageData);
+        imagedestroy($image);
+
+        return $imagePath;
+
+    } catch (Exception $e) {
+        \Log::error('Placeholder image creation failed: ' . $e->getMessage());
+        return null;
+    }
+}
     public function updateCvName(Request $request)
     {
         $request->validate([
