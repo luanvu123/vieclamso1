@@ -4,6 +4,57 @@
     <div class="container">
         <h2 class="mb-4">Danh sách đơn ứng tuyển</h2>
 
+        <!-- Process Description Section -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Quy trình xử lý đơn ứng tuyển</h4>
+            </div>
+            <div class="card-body">
+                <p class="mb-3"><strong>Các bước xử lý đơn ứng tuyển:</strong></p>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <ol class="list-group list-group-numbered">
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Xem CV gốc</div>
+                                    Kiểm tra CV ban đầu của ứng viên
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Thêm CV che thông tin</div>
+                                    Upload CV đã ẩn thông tin liên hệ cá nhân
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Sửa/Cập nhật</div>
+                                    Chỉnh sửa thông tin đơn và trạng thái
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Chờ duyệt → Đã duyệt</div>
+                                    Quy trình phê duyệt đơn
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="alert alert-info">
+                            <h5 class="alert-heading">Trường hợp CV nộp lại:</h5>
+                            <ul class="mb-0">
+                                <li>Quy trình tương tự như trên</li>
+                                <li>Có thể giữ nguyên trạng thái "Đã duyệt" nếu không cần duyệt lại</li>
+                                <li>Có thể cập nhật CV nộp lại thành CV chính</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <table class="table table-bordered" id="user-table">
             <thead>
                 <tr>
@@ -172,6 +223,34 @@
             max-height: 200px;
             overflow-y: auto;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .list-group-numbered {
+            counter-reset: section;
+        }
+
+        .list-group-numbered .list-group-item::before {
+            counter-increment: section;
+            content: counter(section);
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .list-group-numbered .list-group-item {
+            padding-left: 50px;
+            position: relative;
         }
     </style>
 @endsection

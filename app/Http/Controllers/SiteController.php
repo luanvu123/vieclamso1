@@ -125,7 +125,10 @@ class SiteController extends Controller
             ->where('status', 0)
             ->whereIn('service_type', ['Tin cơ bản', 'Tin nổi bật', 'Tin đặc biệt'])
             ->where('closing_date', '>=', Carbon::now());
-
+   $category_slider = Category::withCount('jobPostings')
+            ->where('status', 1)
+            ->get()
+            ->chunk(8);
 
         // Apply filters based on the user's input
         if ($city) {
@@ -181,7 +184,7 @@ class SiteController extends Controller
             ->get();
 
         // Return view with filtered job postings and other data
-        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities', 'data', 'type', 'notifications'));
+        return view('pages.home', compact('jobPostings', 'categories', 'companies', 'awards', 'ecosystems', 'medias', 'totalCompanyCount', 'totalApplicationCount', 'cities', 'data', 'type', 'notifications','category_slider'));
     }
 
 

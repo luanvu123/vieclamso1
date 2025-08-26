@@ -240,9 +240,10 @@
                             <div class="feature-job-page">
                                 <div class="content">
                                     <div class="feature-job-page__text">
-                                        <p class="slick-pagination">
-                                            <span class="highlight">{{ $jobPostings->links() }}</span>
-                                        </p>
+                                       <p class="slick-pagination">
+    {{ $jobPostings->onEachSide(1)->links('pagination::bootstrap-4') }}
+</p>
+
                                     </div>
                                 </div>
                             </div>

@@ -34,6 +34,7 @@ class JobPosting extends Model
         'status',
         'city',
         'isHot',
+        'service_type'
     ];
 
     public function orders()
