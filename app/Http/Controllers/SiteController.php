@@ -21,6 +21,7 @@ use App\Models\Notification;
 use App\Models\OnlineVisitor;
 use App\Models\OnlineVisitorRecruitment;
 use App\Models\Partner;
+use App\Models\Post;
 use App\Models\RecruitmentService;
 use App\Models\Salary;
 use App\Models\SmartRecruitment;
@@ -434,5 +435,101 @@ class SiteController extends Controller
             ['ip_address' => $ip],
             ['last_activity' => Carbon::now()]
         );
+    }
+
+     public function detailPost($slug, $id)
+    {
+        // Tìm bài viết theo ID và đảm bảo đã được xuất bản
+        $post = Post::with(['user', 'genrePost'])
+            ->where('id', $id)
+            ->where('status', 1) // Chỉ hiển thị bài viết đã xuất bản
+            ->firstOrFail();
+
+        // Kiểm tra slug có đúng không (optional, để SEO tốt hơn)
+        $genrePost = $post->genrePost;
+        if ($genrePost->slug !== $slug) {
+            abort(404);
+        }
+
+        // Lấy các bài viết liên quan trong cùng thể loại (trừ bài viết hiện tại)
+        $relatedPosts = Post::where('genre_post_id', $post->genre_post_id)
+            ->where('id', '!=', $post->id)
+            ->where('status', 1)
+            ->latest()
+            ->take(4)
+            ->get();
+
+        // Lấy bài viết nổi bật trong cùng thể loại
+        $featuredPosts = Post::where('genre_post_id', $post->genre_post_id)
+            ->where('featured', 1)
+            ->where('status', 1)
+            ->where('id', '!=', $post->id)
+            ->latest()
+            ->take(3)
+            ->get();
+
+        // Lấy thông báo cho user (nếu có)
+        $notifications = [];
+        if (Auth::guard('candidate')->check()) {
+            $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
+
+        // Tăng lượt xem (optional)
+        // $post->increment('views'); // Nếu có cột views
+
+        return view('pages.blog_detail', compact(
+            'post',
+            'genrePost',
+            'relatedPosts',
+            'featuredPosts',
+            'notifications'
+        ));
+    }
+
+    // Thêm hàm tạo slug cho bài viết (optional)
+    public function detailPostBySlug($genreSlug, $postSlug)
+    {
+        // Nếu muốn dùng slug cho bài viết thay vì ID
+        $post = Post::with(['user', 'genrePost'])
+            ->whereHas('genrePost', function($query) use ($genreSlug) {
+                $query->where('slug', $genreSlug);
+            })
+            ->where('slug', $postSlug) // Cần thêm cột slug vào bảng posts
+            ->where('status', 1)
+            ->firstOrFail();
+
+        // Logic tương tự như detailPost...
+        $genrePost = $post->genrePost;
+        $relatedPosts = Post::where('genre_post_id', $post->genre_post_id)
+            ->where('id', '!=', $post->id)
+            ->where('status', 1)
+            ->latest()
+            ->take(4)
+            ->get();
+
+        $featuredPosts = Post::where('genre_post_id', $post->genre_post_id)
+            ->where('featured', 1)
+            ->where('status', 1)
+            ->where('id', '!=', $post->id)
+            ->latest()
+            ->take(3)
+            ->get();
+
+        $notifications = [];
+        if (Auth::guard('candidate')->check()) {
+            $notifications = Notification::where('candidate_id', Auth::guard('candidate')->id())
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
+
+        return view('pages.blog_detail', compact(
+            'post',
+            'genrePost',
+            'relatedPosts',
+            'featuredPosts',
+            'notifications'
+        ));
     }
 }

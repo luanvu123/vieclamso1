@@ -108,7 +108,13 @@ Route::get('/khoa-hoc', [SiteController::class, 'showCourse'])->name('site.cours
 Route::get('/ung-dung', [SiteController::class, 'showApp'])->name('site.app');
 Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 Route::resource('support', SupportController::class);
+Route::get('cam-nang-nghe-nghiep/{slug}/{id}', [SiteController::class, 'detailPost'])
+    ->name('post.detail')
+    ->where(['id' => '[0-9]+']);
 
+// Hoặc nếu muốn dùng slug cho bài viết (cần thêm cột slug vào posts table)
+Route::get('cam-nang-nghe-nghiep/{genreSlug}/{postSlug}', [SiteController::class, 'detailPostBySlug'])
+    ->name('post.detail.slug');
 
 
 

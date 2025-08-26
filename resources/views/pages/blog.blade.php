@@ -57,7 +57,7 @@
             @foreach ($featuredPosts as $post)
                 <div class="list-articles_item">
                     <div class="list-articles_item-thumbnail">
-                        <a href="{{ $post->website }}" target="_blank">
+                        <a href="{{ route('post.detail', ['slug' => $genrePost->slug, 'id' => $post->id]) }}" target="_blank">
                             <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
                         </a>
                     </div>
@@ -68,7 +68,7 @@
                             </p>
                             <div class="content_title">
                                 <h3 class="title">
-                                    <a href="{{ $post->website }}" target="_blank" data-toggle="tooltip" data-container="body" data-placement="top" title="{{ $post->title }}">
+                                    <a href="{{ route('post.detail', ['slug' => $genrePost->slug, 'id' => $post->id]) }}" target="_blank" data-toggle="tooltip" data-container="body" data-placement="top" title="{{ $post->title }}">
                                         {{ $post->title }}
                                     </a>
                                 </h3>
@@ -85,7 +85,7 @@
                             </div>
                         </div>
                         <div class="see-more">
-                            <a href="{{ $post->website }}" target="_blank">
+                            <a href="{{ route('post.detail', ['slug' => $genrePost->slug, 'id' => $post->id]) }}" target="_blank">
                                 Xem thêm
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
@@ -106,7 +106,7 @@
                 @foreach ($genrePost->posts as $post)
                     <div class="list-post__content--item item">
                         <div class="item__image">
-                            <a href="{{ $post->website }}" target="_blank">
+                            <a href="{{ route('post.detail', ['slug' => $genrePost->slug, 'id' => $post->id]) }}" target="_blank">
                                 <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
                             </a>
                         </div>
@@ -115,7 +115,7 @@
                                 {{ $genrePost->title }}
                             </div>
                             <h3 class="item__content--title">
-                                <a target="_blank" href="{{ $post->website }}" data-toggle="tooltip" data-placement="top" title="{{ $post->title }}">
+                                <a target="_blank" href="{{ route('post.detail', ['slug' => $genrePost->slug, 'id' => $post->id]) }}" data-toggle="tooltip" data-placement="top" title="{{ $post->title }}">
                                     {{ $post->title }}
                                 </a>
                             </h3>

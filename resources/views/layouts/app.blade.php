@@ -946,19 +946,20 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             });
         })
     </script>
-    <script>
-        CKEDITOR.replace('summary2');
-        CKEDITOR.replace('summary3');
-        CKEDITOR.replace('summary1');
-        CKEDITOR.replace('summary4');
-        CKEDITOR.replace('summary5');
-        CKEDITOR.replace('summary6');
-        CKEDITOR.replace('regulation');
-        CKEDITOR.replace('description');
-        CKEDITOR.replace('summary');
-        CKEDITOR.replace('job_skills');
-        CKEDITOR.replace('benefits');
-    </script>
+    <script src="https://cdn.ckeditor.com/4.25.1-lts/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('summary2');
+    CKEDITOR.replace('summary3');
+    CKEDITOR.replace('summary1');
+    CKEDITOR.replace('summary4');
+    CKEDITOR.replace('summary5');
+    CKEDITOR.replace('summary6');
+    CKEDITOR.replace('regulation');
+    CKEDITOR.replace('description');
+    CKEDITOR.replace('summary');
+    CKEDITOR.replace('job_skills');
+    CKEDITOR.replace('benefits');
+</script>
 
     <script src="{{ asset('backend_admin/js/utils.js') }}"></script>
 
