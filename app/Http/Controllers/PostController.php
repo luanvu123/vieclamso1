@@ -20,88 +20,135 @@ class PostController extends Controller
     }
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::with(['user', 'genrePost'])->latest()->paginate(10);
         return view('admin.posts.index', compact('posts'));
     }
 
-    public function show($id)
-    {
-        $post = Post::findOrFail($id);
-        return view('admin.posts.show', compact('post'));
-    }
-
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        $genrePosts = GenrePost::where('status', 1)->get(); // Lấy tất cả các genre_posts
+        $genrePosts = GenrePost::where('status', 1)->get();
         return view('admin.posts.create', compact('genrePosts'));
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'genre_post_id' => 'required|exists:genre_posts,id',
             'title' => 'required|string|max:255',
+            'genre_post_id' => 'required|exists:genre_posts,id',
             'detail' => 'nullable|string',
+            'content' => 'nullable|string',
             'website' => 'nullable|url',
-            'status' => 'required|boolean',
-            'featured' => 'required|boolean',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'status' => 'boolean',
+            'featured' => 'boolean'
         ]);
 
-        $postData = $request->only(['genre_post_id', 'title', 'detail', 'website', 'status', 'featured']);
+        $data = $request->all();
+        $data['user_id'] = auth()->id();
 
+        // Handle image upload if present
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imagePath = $image->store('posts', 'public');
-            $postData['image'] = $imagePath;
+            $imagePath = $request->file('image')->store('posts', 'public');
+            $data['image'] = $imagePath;
         }
 
-        $postData['user_id'] = Auth::id(); // Set user_id
+        Post::create($data);
 
-        Post::create($postData);
-
-        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
+        return redirect()->route('posts.index')
+                         ->with('success', 'Bài viết đã được tạo thành công.');
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Post $post)
+    {
+        $post->load(['user', 'genrePost']);
+        return view('admin.posts.show', compact('post'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Post $post)
     {
         $genrePosts = GenrePost::where('status', 1)->get();
         return view('admin.posts.edit', compact('post', 'genrePosts'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, Post $post)
     {
         $request->validate([
-            'genre_post_id' => 'required|exists:genre_posts,id',
             'title' => 'required|string|max:255',
+            'genre_post_id' => 'required|exists:genre_posts,id',
             'detail' => 'nullable|string',
+            'content' => 'nullable|string',
             'website' => 'nullable|url',
-            'status' => 'required|boolean',
-            'featured' => 'required|boolean',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'status' => 'boolean',
+            'featured' => 'boolean'
         ]);
 
-        $postData = $request->only(['genre_post_id', 'title', 'detail', 'website', 'status', 'featured']);
+        $data = $request->all();
 
+        // Handle image upload if present
         if ($request->hasFile('image')) {
-            // Xóa ảnh cũ nếu có
-            if ($post->image) {
+            // Delete old image if exists
+            if ($post->image && \Storage::disk('public')->exists($post->image)) {
                 \Storage::disk('public')->delete($post->image);
             }
 
-            $image = $request->file('image');
-            $imagePath = $image->store('posts', 'public');
-            $postData['image'] = $imagePath;
+            $imagePath = $request->file('image')->store('posts', 'public');
+            $data['image'] = $imagePath;
         }
 
-        $post->update($postData);
+        $post->update($data);
 
-        return redirect()->route('posts.index')->with('success', 'Post updated successfully.');
+        return redirect()->route('posts.index')
+                         ->with('success', 'Bài viết đã được cập nhật thành công.');
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
+        // Delete image if exists
+        if ($post->image && \Storage::disk('public')->exists($post->image)) {
+            \Storage::disk('public')->delete($post->image);
+        }
+
         $post->delete();
-        return redirect()->route('posts.index');
+
+        return redirect()->route('posts.index')
+                         ->with('success', 'Bài viết đã được xóa thành công.');
     }
      public function post_choose(Request $request)
     {
